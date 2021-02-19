@@ -177,12 +177,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbMetricTargetPreset.Enabled = true;
                 cmbMeasurementDevice.Enabled = true;
                 cmbValidationChart.Enabled = true;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
-                {
-                    cmbMetricTargetPreset.SelectedValue = "11";
-                    cmbMetricTargetPreset.Enabled = false;
-                    cmbMetricTargetPreset_SelectedIndexChanged(null, null);
-                }
+                //if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                //{
+                //    cmbMetricTargetPreset.SelectedValue = "11";
+                //    cmbMetricTargetPreset.Enabled = false;
+                //    cmbMetricTargetPreset_SelectedIndexChanged(null, null);
+                //}
 
 
             }
@@ -254,11 +254,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     cmbMetricTargetPreset.Enabled = true;
                     cmbMeasurementDevice.Enabled = true;
                     cmbValidationChart.Enabled = true;
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
-                    {
-                        cmbMetricTargetPreset.SelectedValue = "11";
-                        cmbMetricTargetPreset.Enabled = false;
-                    }
+                    //if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                    //{
+                    //    cmbMetricTargetPreset.SelectedValue = "11";
+                    //    cmbMetricTargetPreset.Enabled = false;
+                    //}
                 }
 
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key > 0)

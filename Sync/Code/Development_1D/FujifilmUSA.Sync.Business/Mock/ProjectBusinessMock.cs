@@ -110,7 +110,7 @@ public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
             return new Dictionary<string, string>();
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, short PrintingTypeId, bool isVarification = false)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, short PrintingTypeId, bool isVarification = false, int LicenseTypeID = 0)
         {
             return new List<Entity.CPSyncV.MetricTargetPreset>();
         }

@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID, _viewMeasurementSetting.PrintingTypeId, true);
+            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID, _viewMeasurementSetting.PrintingTypeId, true,(int)_viewMeasurementSetting.LicenseType);
         }
 
         public void GetReferenceChartTypeImage()
