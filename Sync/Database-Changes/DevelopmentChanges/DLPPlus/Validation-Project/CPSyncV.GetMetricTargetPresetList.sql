@@ -59,7 +59,7 @@ BEGIN
 	END
 	ELSE ----Sync4D Projects
 	BEGIN
-		IF (@LicenseTypeID = 11) 
+		IF (@LicenseTypeID = 11) -------This condition is for DLPPlus Validation
 		BEGIN
 			 SELECT  
 				MTP.MetricTargetPresetID

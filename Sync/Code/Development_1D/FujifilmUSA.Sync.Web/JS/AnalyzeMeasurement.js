@@ -397,7 +397,8 @@ $(document).ready(function () {
             apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
             //End:
         }
-
+        apiParameter.ProjectLicenseType = $hdnCurrentProjectLicenseType;
+       
         var ajaxParameter = {
             type: "POST",
             url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',

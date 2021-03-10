@@ -157,6 +157,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             else
                             {
                                 objReportPDF.ReportName = "DLP Optimization Report";
+                                if (chart.ProjectLicenseType == ELicenseType.InkOptimization.ToString())
+                                {
+                                    objReportPDF.ReportName = "Ink Optimization Report";
+                                }
+                                else if (chart.ProjectLicenseType == ELicenseType.Sync4DCertification.ToString())
+                                {
+                                    objReportPDF.ReportName = "Color Certification Report";
+                                }
                                 objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement; //Only in 4D Optimization part
                             }
 
@@ -176,7 +184,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                                 }
                             }                            
                         }
-
                         objReportPDF.GenerateClientReportPDF();
                         string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
                         ReportPath = HttpUtility.UrlEncode(ReportPath);
