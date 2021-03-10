@@ -1207,6 +1207,8 @@
     <Content Include="Images\SpotL_Bg.jpg" />
     <Content Include="Images\SpotProject.png" />
     <Content Include="Images\SpotProject_Certified.png" />
+    <Content Include="Images\Sync DLP Report_preview.jpg" />
+    <Content Include="Images\Sync DLP Report_preview_Old.jpg" />
     <Content Include="Images\Sync DLP Scoring Report_preview.jpg" />
     <Content Include="Images\Sync1D CMYK Density Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
@@ -1265,7 +1267,7 @@
     <Content Include="Images\spacer.gif" />
     <Content Include="Images\summary-icon.png" />
     <Content Include="Images\summary-title-bg.gif" />
-    <Content Include="Images\Sync DLP Report_preview.jpg" />
+    <Content Include="Images\Sync4DReportTitle.png" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\tick-mark.png" />
     <Content Include="Images\Title-Bg-Black.gif" />
@@ -9263,7 +9265,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
