@@ -281,6 +281,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvOptionPreset.Visible = true;
                     }
 
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                    {
+                        lblMSelectedPresets.Text = Data["metricTargetPresetName"];
+                        lblMPresetDescription.Text = Data["metricTargetPresetDesc"];
+                        if (Data["ReTargetProject"] != "") //---Only display ReTarget Project details when it is Sync1D project with ReTarget enabled
+                        {
+                            lblReTargetProject.Text = Data["ReTargetProject"];
+                        }
+                        else
+                        {
+                            lblReTargetProject.Text = "";
+                            locReTargetProj.Visible = false;
+
+                        }
+                        dvMetricPreset.Visible = true;
+                        dvOptionPreset.Visible = true;
+                    }
+
                     imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
                     lblVali_MeaDevice.Text = Data["V_MeasurementDeviceId"];
                     if (Opt_ReferenceChartTypeId != 0)
