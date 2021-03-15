@@ -155,11 +155,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             };
             if (chkSync1D.Checked)
                 License.LicenseType.Add(ELicenseType.Sync1D);
-            if (chkDlp.Checked)
-            { 
-                License.LicenseType.Add(ELicenseType.DLP);
-                License.LicenseType.Add(ELicenseType.DLPPlus);
-            }
+            if (chkDlp.Checked)            
+                License.LicenseType.Add(ELicenseType.DLP);               
             if (chkInk.Checked)
                 License.LicenseType.Add(ELicenseType.InkOptimization);
             if (chkInk_Source.Checked)
@@ -176,6 +173,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.MultiColorCustomSource);
             if (chkSpotLibrary.Checked)
                 License.LicenseType.Add(ELicenseType.SpotLibrary);
+            if (chkDLPPlus.Checked)
+                License.LicenseType.Add(ELicenseType.DLPPlus);
             if (chkMultiColorCustomSource.Checked)
                 License.LicenseType.Add(ELicenseType.DLPMultiColor);
 
@@ -210,12 +209,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.Sync1D:
                             chkSync1D.Checked = true;
                             break;
-                        case ELicenseType.DLP:
-                            {
-                                chkDlp.Checked = true;
-                                chkDLPPlus.Checked = true;
-                            }
-                            
+                        case ELicenseType.DLP:                           
+                            chkDlp.Checked = true;                                                            
                             break;
                         case ELicenseType.InkOptimization:
                             chkInk.Checked = true;

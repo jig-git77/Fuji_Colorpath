@@ -357,7 +357,7 @@
                                                     <%=ELicenseDLpPlusText%> &nbsp;</span></td>
                                             <td>
                                                 <div style="float: left;">
-                                                    <asp:TextBox ID="txtDlpPlus" runat="server" Height="19px" Width="50px" MaxLength="4" Enabled="false"
+                                                    <asp:TextBox ID="txtDlpPlus" runat="server" Height="19px" Width="50px" MaxLength="4" 
                                                         onkeypress="return CheckNumeric(event)"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">

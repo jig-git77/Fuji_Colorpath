@@ -153,7 +153,7 @@ jQuery.browser.version = RegExp.$1;
                                                     <asp:CheckBox runat="server" ID="chkSync1D" CssClass="checkListBox" meta:resourcekey="chkSync1DResource1" />
                                                 </td>
                                                 <td style="width:30%">
-                                                    <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox" meta:resourcekey="chkDlpResource1" Onchange="javascript:CopyDLPPlusChecked()"/>
+                                                    <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox" meta:resourcekey="chkDlpResource1" />
                                                 </td>
                                                 <td style="width:35%">
                                                     <asp:CheckBox runat="server" ID="chkInk" CssClass="checkListBox" meta:resourcekey="chkInkResource1"/>
@@ -188,7 +188,7 @@ jQuery.browser.version = RegExp.$1;
                                                     <asp:CheckBox runat="server" ID="chkSpotLibrary" CssClass="checkListBox" Visible="true"/>                  
                                                 </td>   
                                                 <td>
-                                                    <asp:CheckBox runat="server" ID="chkDLPPlus" CssClass="checkListBox" Visible="true" Enabled="false"/>                  
+                                                    <asp:CheckBox runat="server" ID="chkDLPPlus" CssClass="checkListBox" Visible="true"/>                  
                                                 </td> 
                                             </tr>
                                         </table>
