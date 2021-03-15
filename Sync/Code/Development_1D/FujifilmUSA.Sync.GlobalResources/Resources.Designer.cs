@@ -817,6 +817,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DLP Multi Color.
+        /// </summary>
+        internal static string ELicenseType_DLP_MULTI_COLOR {
+            get {
+                return ResourceManager.GetString("ELicenseType_DLP_MULTI_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DLP Plus.
         /// </summary>
         internal static string ELicenseType_DLP_PLUS {

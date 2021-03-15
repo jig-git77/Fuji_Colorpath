@@ -247,6 +247,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.DropDownList cmbSync4DPlus;
         
         /// <summary>
+        /// cmbSync4DMultiColor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbSync4DMultiColor;
+        
+        /// <summary>
         /// chklist_Validation control.
         /// </summary>
         /// <remarks>
@@ -281,6 +290,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbValidation4DPlus;
+        
+        /// <summary>
+        /// cmbValidation_4D_Multi_Color control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbValidation_4D_Multi_Color;
         
         /// <summary>
         /// locHowManyColors control.

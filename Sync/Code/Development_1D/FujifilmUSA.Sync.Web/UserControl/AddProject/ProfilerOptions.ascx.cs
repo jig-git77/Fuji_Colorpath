@@ -272,6 +272,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         trPresetoptionType.Visible = true;
                     }
                 }
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor) //If only DLPMultiColor project and selected branch has license allowed for custom presets, then only display option for custom
+                {
+                    if (SessionManager.Instance.CurrentDevice.License.IsCustomProfOptions == true)
+                    {
+                        trPresetoptionType.Visible = true;
+                    }
+                }
                 if (SessionManager.Instance.CurrentProject.PrintCondition != null)
                 {
                     rdBtnPresetType.SelectedValue = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption.ToString();

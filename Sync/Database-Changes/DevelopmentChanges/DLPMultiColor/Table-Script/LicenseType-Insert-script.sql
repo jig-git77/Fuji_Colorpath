@@ -1,0 +1,1 @@
+INSERT INTO CP.LicenseType(LicenseType) VALUES('DLP MULTI COLOR')

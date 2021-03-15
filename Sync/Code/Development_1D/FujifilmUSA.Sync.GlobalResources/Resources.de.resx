@@ -1360,4 +1360,7 @@ erwünschten Format überein.</value>
   <data name="ELicenseType_DLP_PLUS" xml:space="preserve">
     <value>DLP Plus</value>
   </data>
+  <data name="ELicenseType_DLP_MULTI_COLOR" xml:space="preserve">
+    <value>DLP Multi Color</value>
+  </data>
 </root>
