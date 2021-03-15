@@ -192,7 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtMultiColorCustomSource.Enabled = (License.LicenseType.Where(x => x == ELicenseType.MultiColorCustomSource).Count() > 0);
                         txtSpotLibrary.Enabled = (License.LicenseType.Where(x => x == ELicenseType.SpotLibrary).Count() > 0);
                         txtDlpPlus.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPPlus).Count() > 0);
-                        txtDlpPlus.Enabled = false;
+                        
                     }
                 }
             }
@@ -227,7 +227,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsValidation = chkIsValidation.Checked,
                 IsFlexo = chkIsFlexo.Checked
             };
-            txtDlpPlus.Text = txtDlp.Text;
+           
             if (txtSync1D.Enabled)
             {
                 Device.LicenseTypeProject.Add(ELicenseType.Sync1D, Convert.ToInt32(txtSync1D.Text));
@@ -277,9 +277,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Device.LicenseTypeProject.Add(ELicenseType.SpotLibrary, Convert.ToInt32(txtSpotLibrary.Text));
             }
-            // if (txtDlpPlus.Enabled)
-            Device.LicenseTypeProject.Add(ELicenseType.DLPPlus, Convert.ToInt32(txtDlpPlus.Text));
-
+            if (txtDlpPlus.Enabled)
+            {
+                Device.LicenseTypeProject.Add(ELicenseType.DLPPlus, Convert.ToInt32(txtDlpPlus.Text));
+            }
             if (DId == 0) // Add New company
             {
                 _presenterDeviceManagement.InsertDevice();
@@ -329,13 +330,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.Sync1D:
                             txtSync1D.Text = val.ToString();
                             break;
-                        case ELicenseType.DLP:
-                            {
-                                txtDlp.Text = val.ToString();
-                                txtDlpPlus.Text = val.ToString();
-                            }
-
-                            break;
+                        case ELicenseType.DLP:                            
+                            txtDlp.Text = val.ToString();
+                             break;
                         case ELicenseType.InkOptimization:
                             txtInkOpt.Text = val.ToString();
                             break;

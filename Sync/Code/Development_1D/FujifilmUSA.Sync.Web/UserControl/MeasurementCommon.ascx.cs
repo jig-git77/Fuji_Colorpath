@@ -53,7 +53,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || 
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D ||
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) && 
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus) && 
                     SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
@@ -80,7 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 //----------------"Import Measurements" button only available for "Sync4D", "Ink Optimization" and "Sync1D" Project Type and only for initial 1st run (Not shown in any type of Validation)--------------//
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                 {
                     if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                     {
