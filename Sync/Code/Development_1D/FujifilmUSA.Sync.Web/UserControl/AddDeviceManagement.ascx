@@ -197,7 +197,7 @@
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtDlp" runat="server" Height="19px" Width="50px" MaxLength="4"
-                                                        onkeypress="return CheckNumeric(event)" onChange="javascript:CopyDLPPlus();" meta:resourcekey="txtDlpResource1"></asp:TextBox>
+                                                        onkeypress="return CheckNumeric(event)" meta:resourcekey="txtDlpResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvDlp" runat="server" Display="Dynamic" ControlToValidate="txtDlp"

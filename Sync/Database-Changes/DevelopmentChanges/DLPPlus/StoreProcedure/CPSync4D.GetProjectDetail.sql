@@ -1,10 +1,7 @@
 
-GO
-
-/****** Object:  StoredProcedure [CPSync4D].[GetProjectDetail]    Script Date: 12/30/2020 5:40:09 PM ******/
+/****** Object:  StoredProcedure [CPSync4D].[GetProjectDetail]    Script Date: 3/23/2021 10:09:17 AM ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -38,8 +35,9 @@ AS
 			CASE ISNULL(PRJ.MetricTargetPresetID,0)
 				WHEN 0 THEN 0
 				ELSE (CASE 
-						WHEN PRJ.LicenseTypeID = 1 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID)
-						ELSE 3
+						WHEN PRJ.LicenseTypeID = 1 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID) --For Sync1D projects only
+						WHEN PRJ.LicenseTypeID = 11 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID) --For DLPPlus projects only
+						ELSE 3 ------ For Sync4D or rest of projects
 						END)
 			END
 			) 'ProjectTypeId',
@@ -285,31 +283,5 @@ AS
 	END CATCH
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-GO
 
 

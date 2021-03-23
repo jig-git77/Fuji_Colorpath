@@ -203,7 +203,7 @@
                                         <td style="width: 130px">
                                             <span id="spanMetricSetting" runat="server" visible="false">
                                              <div id="MSimgHeader" class="expanded" style="width: 20px !important;background-image:none !important;" >
-                                                   ▲ &nbsp;
+                                                   ⓘ &nbsp;
                                                 </div>
                                                 <label class="collapsibleContainerTitle">
                                                     Metric Setting</label>
