@@ -39,6 +39,7 @@ AS
 				WHEN 0 THEN 0
 				ELSE (CASE 
 						WHEN PRJ.LicenseTypeID = 1 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID)
+						WHEN PRJ.LicenseTypeID = 11 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID) --Add for DLPPLUS Condition
 						ELSE 3
 						END)
 			END

@@ -59,7 +59,7 @@ BEGIN
 	END
 	ELSE ----Sync4D Projects
 	BEGIN
-		IF (@LicenseTypeID = 11) 
+		IF (@LicenseTypeID = 11)  -- DLPPLus PROJECT 
 		BEGIN
 			 --SELECT  
 				--MTP.MetricTargetPresetID
@@ -101,7 +101,7 @@ BEGIN
 					)
 		END
 		ELSE
-		BEGIN
+		BEGIN --- 4D Projects
 		 SELECT  
 				MTP.MetricTargetPresetID
 				,MTP.MetricTargetPresetName	
