@@ -628,21 +628,21 @@ namespace FujifilmUSA.Sync.Common
                         #region "AverageDE"
                         if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]))
                         {
-                            SBstrDeltaValue.Append("<tr style='height: 27px' class = 'Metadata-Table _idGenTableRowColumn-4'>");
-                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='Metadata-Table Green'>&nbsp;</td>");
-                            SBstrDeltaValue.Append("<td valign='middle' class='Metadata-Table Green' style='width: 160px;'><p class='Body-Text-Bold'>Average &Delta;" + From_ΔE + "</p></td>");
-                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'>&nbsp;</td>");
-                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<tr style='height: 27px' class = 'BottomBorder'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' class='BottomBorder' style='width: 160px;'><p class='Body-Text-Bold'>Average &Delta;" + From_ΔE + "</p></td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
                             SBstrDeltaValue.Append("</tr>");
                         }
                         else
                         {
-                            //SBstrDeltaValue.Append("<tr style='height: 27px' class = 'Metadata-Table _idGenTableRowColumn-4'>");
-                            //SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='Metadata-Table Green'>" + strStatusImg + "</td>");
-                            //SBstrDeltaValue.Append("<td valign='middle' align='left' class='Metadata-Table Green' style='width: 160px;'><p class='Body-Text-Bold'>Average &Delta;" + From_ΔE + "</p></td>");
-                            //SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'>&nbsp;</td>");
-                            //SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'><p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Avg_ΔE"])) + "&nbsp;</p></td>");
-                            //SBstrDeltaValue.Append("</tr>");
+                            SBstrDeltaValue.Append("<tr style='height: 27px' class = 'BottomBorder'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'><p class='Body-Text-Bold'>Average &Delta;" + From_ΔE + "</p></td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'><p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Avg_ΔE"])) + "&nbsp;</p></td>");
+                            SBstrDeltaValue.Append("</tr>");
                         }
                         #endregion
 
