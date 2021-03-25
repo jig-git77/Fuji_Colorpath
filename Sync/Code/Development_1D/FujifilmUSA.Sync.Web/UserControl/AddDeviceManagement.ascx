@@ -368,6 +368,23 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                         <tr>
+                                            <td>
+                                                 <span>
+                                                    <%=ELicenseDLPMultiColorText%> &nbsp;</span></td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtDLPMultiColor" runat="server" Height="19px" Width="50px" MaxLength="4"
+                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvtxtDLPMultiColor" runat="server" Display="Dynamic" ControlToValidate="txtDLPMultiColor"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer11" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </table>
                                     </div>
                                 </td>

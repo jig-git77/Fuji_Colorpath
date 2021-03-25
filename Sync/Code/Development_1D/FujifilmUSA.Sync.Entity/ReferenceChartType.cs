@@ -19,7 +19,9 @@ namespace FujifilmUSA.Sync.Entity
         public short? IsSync4D { get; set; }        
         public short? Validation_4D { get; set; }
         public short? IsSync4D_Plus { get; set; }
+        public short? IsDLPMultiColor { get; set; }
         public short? Validation_4DPlus { get; set; }
+        public short? Validation_4D_Mutli_Color { get; set; }
         public bool? IsUsed { get; set; }
         public string ChartSettingXML { get; set; }
 

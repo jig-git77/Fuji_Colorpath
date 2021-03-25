@@ -56,6 +56,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.Validation_4D ,
                                                                                     referenceChartType.IsSync4D_Plus,
                                                                                     referenceChartType.Validation_4DPlus,
+                                                                                    referenceChartType.IsDLPMultiColor,
+                                                                                    referenceChartType.Validation_4D_Mutli_Color,
                                                                                     referenceChartType.ChartSettingXML
                                                                                 });
                     if (returnValue == -1)
@@ -187,7 +189,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Validation_4D = DataReader.ReadShort(x, "Validation_4D"),
                                 ChartSettingXML = DataReader.ReadString(x, "ChartSetting"),
                                 IsSync4D_Plus = DataReader.ReadShort(x, "IsSync4D_Plus"),
-                                Validation_4DPlus = DataReader.ReadShort(x, "Validation_4DPlus")
+                                Validation_4DPlus = DataReader.ReadShort(x, "Validation_4DPlus"),
+                                IsDLPMultiColor = DataReader.ReadShort(x, "IsDLPMultiColor"),
+                                Validation_4D_Mutli_Color = DataReader.ReadShort(x, "Validation_4D_Mutli_Color")
 
                             }).ToList();
                     }
@@ -223,6 +227,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.Validation_4D,
                                         referenceChartType.IsSync4D_Plus,
                                         referenceChartType.Validation_4DPlus,
+                                        referenceChartType.IsDLPMultiColor,
+                                        referenceChartType.Validation_4D_Mutli_Color,
                                         referenceChartType.ChartSettingXML
                                     });
                     if (returnValue == -1)

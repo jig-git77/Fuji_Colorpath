@@ -61,6 +61,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     trPaperScaling_4D.Visible = true;
                 }
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor )
+                {
+                    trPaperScaling_4D.Visible = true;
+                }
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                 {
@@ -138,10 +142,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
                 {
-                    if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
                         SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
 
                     //------If 4D project then pass NewPaperScaling LAB values--------//
+                    SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
+                    SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(txtPaper_b_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_L = Convert.ToDecimal(txtPaper_L_4D_Black.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_a_4D_Black.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_b_4D_Black.Text);
+                }
+                else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
+                {
+                   SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+                    //------If DLPMultiColor project then pass NewPaperScaling LAB values--------//
                     SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
                     SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L_4D_White.Text);
                     SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a_4D_White.Text);
@@ -293,6 +309,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPaper_Black_b.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //-----If it is projecttype SYnc4D or 4D Certification, then display New Paper scaling L,a,b values---//
+            {
+                chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                if (chk_IsPaperScaling4D.Checked)
+                {
+                    Panel_PaperLAB4D_White.Enabled = true;
+                    Panel_PaperLAB4D_Black.Enabled = true;
+                }
+                txtPaper_L_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString();
+                txtPaper_a_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString();
+                txtPaper_b_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString();
+                txtPaper_L_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString();
+                txtPaper_a_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
+                txtPaper_b_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
+
+                if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Paper Scaling L,a,b selection is disable
+                {
+                    chk_IsPaperScaling4D.Enabled = false;
+                    Panel_PaperLAB4D_White.Enabled = false;
+                    Panel_PaperLAB4D_Black.Enabled = false;
+                }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ) //-----If it is projecttype SYnc4D or 4D Certification, then display New Paper scaling L,a,b values---//
             {
                 chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                 if (chk_IsPaperScaling4D.Checked)
@@ -507,7 +545,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization
-                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimizationSource)
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimizationSource
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLPMultiColor)
                 cmbTargetPrintCategory.Items.FindByValue("4").Enabled = false;
         }
 
