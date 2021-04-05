@@ -22,6 +22,12 @@ namespace FujifilmUSA.Sync.Entity
         public short? IsDLPMultiColor { get; set; }
         public short? Validation_4DPlus { get; set; }
         public short? Validation_4D_Mutli_Color { get; set; }
+        public bool? IsSupportMulticolor { get; set; }
+        public short? Channel_5 { get; set; }
+        public short? Channel_6 { get; set; }
+        public short? Channel_7 { get; set; }
+        public short? Channel_8 { get; set; }
+        public short? Channel_9 { get; set; }
         public bool? IsUsed { get; set; }
         public string ChartSettingXML { get; set; }
 

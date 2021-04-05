@@ -898,7 +898,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
                                        CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
                                        PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
-                                       HtmlColor = DataReader.ReadString(x, "HTMLColor")
+                                       HtmlColor = DataReader.ReadString(x, "HTMLColor"),
+                                       Channel_5 = DataReader.ReadShort(x, "Channel_5"),
+                                       Channel_6 = DataReader.ReadShort(x, "Channel_6"),
+                                       Channel_7 = DataReader.ReadShort(x, "Channel_7"),
+                                       Channel_8 = DataReader.ReadShort(x, "Channel_8"),
+                                       Channel_9 = DataReader.ReadShort(x, "Channel_9"),
                                    }).ToList();
 
                         var reader = DataAccessFactory.Instance.GetXmlResult("CPSync4D.GetChartSettings", new object[] { chartData.ReferenceChartTypeId });

@@ -4,15 +4,14 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
-<style type="text/css">    
-     .breakWord50
-     {
-            max-width: 50px !important;
-            word-break: break-all !important;
-            word-wrap: break-word !important;
-            vertical-align: top;
-            line-height: 15px;
-     }  
+<style type="text/css">
+    .breakWord50 {
+        max-width: 50px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        vertical-align: top;
+        line-height: 15px;
+    }
 </style>
 
 <script type="text/javascript">
@@ -23,10 +22,12 @@
 </script>
 
 <div class="admin_top">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1><asp:Localize runat="server" Text="Reference Chart Management" 
+        <h1>
+            <asp:Localize runat="server" Text="Reference Chart Management"
                 ID="locReferenceChartMgmt" meta:resourcekey="locReferenceChartMgmtResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
@@ -247,70 +248,75 @@
                                
                             </td>
                         </tr>       
-                           
-
-
-
-                         <tr>
-                            <td align="right">
-                                <span style="font-weight: bold;"><asp:Localize Text="How many Colors" 
-                                    runat="server" ID="locHowManyColors" 
-                                    meta:resourcekey="locHowManyColorsResource1"></asp:Localize><span style="color: Red;">*</span>
-                                </span>
-                            </td>
-                            <td>
-                                <b>&nbsp;: &nbsp;</b>
-                            </td>
-                            <td align="left">
-                                <div style="float: left;">
-                                    <asp:DropDownList ID="cmbHowManyColors" runat="server" Width="400px" CssClass="select" OnSelectedIndexChanged="cmbHowManyColors_SelectedIndexChanged" AutoPostBack="true"
-                                        DataValueField="Key" DataTextField="Value" 
-                                        meta:resourcekey="cmbHowManyColorResource1">
-                                        <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="5" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="6" Value="2"></asp:ListItem>
-                                        <asp:ListItem Text="7" Value="3"></asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
-                                <div style="float: left">
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic"
-                                        ControlToValidate="cmbHowManyColors" ForeColor="Red" 
-                                        ValidationGroup="vgAddRefChart">
-                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                            ValidationMsg="Please select How Many Colors." Size="200"  ResourceValidationMsg="NumberOfColorsRequiredResource"/>
-                                    </asp:RequiredFieldValidator>
-                                </div>
-                                <div class="clear">
-                                </div>
-                            </td>
-                        </tr>   
-
-                         <tr id="Tr_NameOfColors" runat="server" visible="false">
-                            <td align="right">
-                                <span style="font-weight: bold;"><asp:Localize Text="Name of Colors" 
-                                    runat="server" ID="locNameOfColors" 
-                                    meta:resourcekey="locNameOfColorsResource1"></asp:Localize><span style="color: Red;">*</span>
-                                </span>
-                            </td>
-                            <td>
-                                <b>&nbsp;: &nbsp;</b>
-                            </td>
-                            <td align="left">
-                                <div style="float: left;">
-                                    <asp:TextBox ID="txtColor5" runat="server"></asp:TextBox>
-                                    <asp:TextBox ID="txtColor6" runat="server"></asp:TextBox>
-                                    <asp:TextBox ID="txtColor7" runat="server"></asp:TextBox>
-                                </div>
-                                <div style="float: left">
-                                   
-                                </div>
-                                <div class="clear">
-                                </div>
-                            </td>
-                        </tr>   
-
-
-
+                       <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                     IsSupportMulticolor
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsSupportMulticolor" runat="server" AutoPostBack="True" OnCheckedChanged="chkIsSupportMulticolor_CheckedChanged" />
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                      
+                         <tr id="trChannel" runat="server">
+                               <td>
+                                     &nbsp;:&nbsp;
+                               </td>
+                               <td colspan="2" style="vertical-align:top;">
+                                   <table style="width:100%;margin-left:51px;">
+                                       <tr>
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_5<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel5" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr>
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_6<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel6" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr>
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_7<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel7" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr>
+                                           <td style="vertical-align:top;">
+                                                <span style="font-weight: bold;">Channel_8<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel8" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr>
+                                           <td style="vertical-align:top;">
+                                                <span style="font-weight: bold;">Channel_9<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel9" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                   </table>
+                               </td>
+                          
+                         </tr>
+                       
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize runat="server" 
@@ -364,7 +370,7 @@
                             <td>
                                 <b>&nbsp;: &nbsp;</b>
                             </td>
-                            <td>
+                            <td align="left">
                                 <table cellpadding="0" cellspacing="0" style="width:100%;">
                                     <tr>
                                         <td>
@@ -374,7 +380,7 @@
                                              </telerik:RadAsyncUpload>
                                         </td>
                                         <td>
-                                           
+                                           <b>&nbsp;: &nbsp;</b>
                                         </td>
                                         <td align="right" style="width:200px;">
                                              <asp:LinkButton ID="lbtnUploadChartData" runat="server" CssClass="gray_bt" 
@@ -544,6 +550,7 @@
     </div>
 </div>
 <div class="admin_bottom">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="clear">
 </div>

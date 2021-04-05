@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Interface
@@ -19,5 +20,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> GetSecurityQuestions();
         List<Activity> GetPrintActivities(int RegionID);
         Dictionary<int, string> GetTemplate(int templateID);
+        DataSet GetMultiColorChannelList();
     }
 }

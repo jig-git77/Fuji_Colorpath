@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using FujifilmUSA.Sync.Business.CustomExceptions;
 using FujifilmUSA.Sync.Business.Interface;
-using FujifilmUSA.Sync.Entity;
-using System.Data;
-using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Business.CustomExceptions;
+using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Entity;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
@@ -97,7 +97,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        {
                                            LicenseId = DataReader.ReadInt(x, "LicenseId"),
                                            IsCustomProfOptions = DataReader.ReadBoolean(x, "IsCustomProfOptions"),
-                                           MeasureTool =(EMeasureTool)DataReader.ReadShort(x, "IsCustomPlugin"),
+                                           MeasureTool = (EMeasureTool)DataReader.ReadShort(x, "IsCustomPlugin"),
                                            Branch = new Branch()
                                            {
                                                BranchId = DataReader.ReadInt(x, "BranchId"),
@@ -108,7 +108,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                    CompanyName = DataReader.ReadString(x, "CompanyName")
                                                }
                                            }
-                                       }
+                                       },
+                                       IsSupportMulticolor = DataReader.ReadBoolean(x, "IsSupportMulticolor"),                                       
+                                       TotalNoColor = DataReader.ReadShort(x, "TotalNoColor"),
+                                       Channel_5 = DataReader.ReadShort(x, "Channel_5"),
+                                       Channel_6 = DataReader.ReadShort(x, "Channel_6"),
+                                       Channel_7 = DataReader.ReadShort(x, "Channel_7"),
+                                       Channel_8 = DataReader.ReadShort(x, "Channel_8"),
+                                       Channel_9 = DataReader.ReadShort(x, "Channel_9"),
+
                                    }).ToList();
 
                         if (dsDeviceList.Tables[1].Rows.Count > 0)
@@ -120,7 +128,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     DeviceId = DataReader.ReadInt(x, "DeviceID"),
                                     licenseTypeId = DataReader.ReadShort(x, "LicenseTypeID"),
                                     NumOfProject = DataReader.ReadInt(x, "NumOfProject")
-                                }).ToList();                            
+                                }).ToList();
                             objDeviceList.ForEach(x =>
                             {
                                 if (licenseDetails.Where(y => y.DeviceId == x.DeviceId).Count() > 0)
@@ -165,7 +173,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.IsActive,
                                         device.IsValidation,
                                         licenseDetails.ToString(),
-                                        device.IsFlexo
+                                        device.IsFlexo,
+                                        device.IsSupportMulticolor,
+                                        device.TotalNoColor,
+                                        device.Channel_5,
+                                        device.Channel_6,
+                                        device.Channel_7,
+                                        device.Channel_8,
+                                        device.Channel_9
                                     });
                         if (returnValue == -1)
                         {
@@ -203,7 +218,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.IsActive,
                                         device.IsValidation,
                                         licenseDetails.ToString(),
-                                        device.IsFlexo
+                                        device.IsFlexo,
+                                        device.IsSupportMulticolor,
+                                        device.TotalNoColor,
+                                        device.Channel_5,
+                                        device.Channel_6,
+                                        device.Channel_7,
+                                        device.Channel_8,
+                                        device.Channel_9
                                     });
                         if (returnValue == -1)
                         {
@@ -314,7 +336,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         UserID,
                                         profilerOptionPresets.ToString()
 
-                                    });                    
+                                    });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamilyProfilerOption"));
             return returnValue;

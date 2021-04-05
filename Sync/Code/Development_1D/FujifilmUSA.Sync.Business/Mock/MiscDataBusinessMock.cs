@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using FujifilmUSA.Sync.Business.Interface;
+﻿using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
+using System.Collections.Generic;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -37,11 +37,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public  Dictionary<int, string> GetUserRoleList(int currentUserId)
+        public Dictionary<int, string> GetUserRoleList(int currentUserId)
         {
             return new Dictionary<int, string>();
         }
-        
+
         public Dictionary<int, string> GetDeviceFamilyList()
         {
             return new Dictionary<int, string>();
@@ -51,7 +51,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public  Dictionary<int, string> GetCompaniesByRegion(int regionId,int currentUserId)
+        public Dictionary<int, string> GetCompaniesByRegion(int regionId, int currentUserId)
         {
             return new Dictionary<int, string>();
         }
@@ -87,6 +87,13 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         public event ErrorHandler ErrorOccured;
 
+        #endregion
+
+        #region CP.MulticolorChannel
+        public DataSet GetMultiColorChannelList()
+        {
+            return new DataSet();
+        }
         #endregion
     }
 }

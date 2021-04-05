@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
 using System.Linq;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -60,6 +61,12 @@ namespace FujifilmUSA.Sync.Presenter
             var referenceChartBusiness = BusinessFactory<IReferenceChartBusiness>.CreateObject();
             referenceChartBusiness.ErrorOccured += _viewAddReferenceChart.ErrorOccured;
             referenceChartBusiness.UpdateReferenceChart(_viewAddReferenceChart.ReferenceChartType);
+        }
+        public DataSet GetMultiColorChannelList()
+        {
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddReferenceChart.ErrorOccured;
+            return miscDataBusiness.GetMultiColorChannelList();
         }
     }
 }
