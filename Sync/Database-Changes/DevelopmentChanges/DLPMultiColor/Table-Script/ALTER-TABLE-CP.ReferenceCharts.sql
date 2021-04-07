@@ -1,4 +1,12 @@
-
+IF NOT EXISTS(SELECT *
+          FROM   INFORMATION_SCHEMA.COLUMNS
+          WHERE  TABLE_NAME = 'CP.ReferenceChart'
+                 AND COLUMN_NAME = 'IsSupportMulticolor') 
+BEGIN
+	ALTER TABLE CP.ReferenceChart
+	ADD IsSupportMulticolor BIT NULL;
+END
+GO
 IF NOT EXISTS(SELECT *
           FROM   INFORMATION_SCHEMA.COLUMNS
           WHERE  TABLE_NAME = 'CP.ReferenceChart'
@@ -7,6 +15,7 @@ BEGIN
 	ALTER TABLE CP.ReferenceChart
 	ADD Channel_5 tinyint NULL;
 END
+GO
 IF NOT EXISTS(SELECT *
           FROM   INFORMATION_SCHEMA.COLUMNS
           WHERE  TABLE_NAME = 'CP.ReferenceChart'
@@ -15,6 +24,7 @@ BEGIN
 	ALTER TABLE CP.ReferenceChart
 	ADD Channel_6 tinyint NULL;
 END
+GO
 IF NOT EXISTS(SELECT *
           FROM   INFORMATION_SCHEMA.COLUMNS
           WHERE  TABLE_NAME = 'CP.ReferenceChart'
@@ -23,6 +33,7 @@ BEGIN
 	ALTER TABLE CP.ReferenceChart
 	ADD Channel_7 tinyint NULL;
 END
+GO
 IF NOT EXISTS(SELECT *
           FROM   INFORMATION_SCHEMA.COLUMNS
           WHERE  TABLE_NAME = 'CP.ReferenceChart'
@@ -31,6 +42,7 @@ BEGIN
 	ALTER TABLE CP.ReferenceChart
 	ADD Channel_8 tinyint NULL;
 END
+GO
 IF NOT EXISTS(SELECT *
           FROM   INFORMATION_SCHEMA.COLUMNS
           WHERE  TABLE_NAME = 'CP.ReferenceChart'

@@ -34,7 +34,7 @@
     </div>
     <div style="margin-left: 0px;">
         <center>
-            <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+          <%--  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>--%>
             <center>
                 <fieldset style="width: 92%;">
@@ -168,8 +168,8 @@
                             <td align="left">
                                 <table style="width: 100%;">
                                     <tr>
-                                        <td>
-                                             <div style="float: left;">                                   
+                                        <td style="vertical-align:top;width:25%">
+                                                        <div style="float: left;">                                   
                                                 <asp:CheckBoxList ID="chklist_ProjectType" runat="server" 
                                                      CssClass="checkListBox">
                                                     <asp:ListItem Value="0">Sync1D_ISO: </asp:ListItem>
@@ -179,7 +179,10 @@
                                                     <asp:ListItem Value="4">DLP Multi Color: </asp:ListItem>
                                                 </asp:CheckBoxList>                                   
                                             </div>
-                                            <div style="float: left;">  
+
+                                         </td>
+                                        <td style="vertical-align:top;">
+                                                        <div style="float: left;">  
                                                 <asp:DropDownList ID="cmbSync1D_ISO" runat="server">
                                                     <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
                                                     <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
@@ -204,14 +207,12 @@
                                                     <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
                                                     <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
                                                 </asp:DropDownList>
-                                            </div>                              
-                                           
+                                                  <br />
                                               
-
-                                          
-                                        </td>
-                                        <td valign="top">
-                                            <div style="float: left;">  
+                                            </div>
+                                                    </td>
+                                        <td style="vertical-align:top;">
+                                                           <div style="float: left;">  
                                                 <asp:CheckBoxList ID="chklist_Validation" runat="server" 
                                                      CssClass="checkListBox">
                                                     <asp:ListItem Value="0">Validation 1D: </asp:ListItem>
@@ -220,7 +221,9 @@
                                                      <asp:ListItem Value="3">Validation 4D_Mutli_Color: </asp:ListItem>
                                                 </asp:CheckBoxList>   
                                             </div>
-                                            <div style="float: left;">  
+                                                           </td>
+                                        <td style="vertical-align:top;">
+                                                        <div style="float: left;">  
                                                   <asp:DropDownList ID="cmbValidation_1D" runat="server">
                                                     <asp:ListItem Selected="True" Value="1">G7</asp:ListItem>
                                                     <asp:ListItem Value="2">ISO</asp:ListItem>
@@ -240,10 +243,8 @@
                                                     <asp:ListItem Value="2">ISO</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
-                                        </td>
-                                       
+                                                           </td>   
                                     </tr>
-                                    
                                 </table>
                                
                             </td>
@@ -265,22 +266,46 @@
                                     </div>
                                 </td>
                             </tr>
-                      
-                         <tr id="trChannel" runat="server">
+                      <tr id="trTotalNoColor" runat="server">
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                     TotalNoColor<span style="color: Red;">*</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                      <asp:DropDownList ID="drpTotalNoColor" runat="server" AutoPostBack="true" OnSelectedIndexChanged="drpTotalNoColor_SelectedIndexChanged" Width="370px">
+                                          <asp:ListItem Text="------SELECT ANY------" Value="0"></asp:ListItem>
+                                          <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                          <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                          <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                          <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                          <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                      </asp:DropDownList>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+
+                      <tr id="trChannel" runat="server">
                                <td>
                                      &nbsp;:&nbsp;
                                </td>
                                <td colspan="2" style="vertical-align:top;">
-                                   <table style="width:100%;margin-left:51px;">
-                                       <tr>
+                                   <table style="width:100%;margin-left:-62px;">
+                                      <tr id="trChannel5" runat="server">
                                            <td style="vertical-align:top;">
                                                <span style="font-weight: bold;"> Channel_5<span style="color: Red;">*</span>:</span>
                                            </td>
                                             <td style="vertical-align:top;">
-                                               <asp:DropDownList ID="drpChannel5" runat="server"  Width="370px"></asp:DropDownList>
+                                               <asp:DropDownList ID="drpChannel5" runat="server"  Width="370px" ></asp:DropDownList>
                                            </td>
                                        </tr>
-                                        <tr>
+                                       <tr id="trChannel6" runat="server">
                                            <td style="vertical-align:top;">
                                                <span style="font-weight: bold;"> Channel_6<span style="color: Red;">*</span>:</span>
                                            </td>
@@ -288,23 +313,23 @@
                                                <asp:DropDownList ID="drpChannel6" runat="server"  Width="370px"></asp:DropDownList>
                                            </td>
                                        </tr>
-                                        <tr>
+                                        <tr id="trChannel7" runat="server">
                                            <td style="vertical-align:top;">
                                                <span style="font-weight: bold;"> Channel_7<span style="color: Red;">*</span>:</span>
                                            </td>
                                             <td style="vertical-align:top;">
-                                               <asp:DropDownList ID="drpChannel7" runat="server"  Width="370px"></asp:DropDownList>
+                                               <asp:DropDownList ID="drpChannel7" runat="server"  Width="370px" ></asp:DropDownList>
                                            </td>
                                        </tr>
-                                        <tr>
+                                        <tr id="trChannel8" runat="server">
                                            <td style="vertical-align:top;">
                                                 <span style="font-weight: bold;">Channel_8<span style="color: Red;">*</span>:</span>
                                            </td>
                                             <td style="vertical-align:top;">
-                                               <asp:DropDownList ID="drpChannel8" runat="server"  Width="370px"></asp:DropDownList>
+                                               <asp:DropDownList ID="drpChannel8" runat="server"  Width="370px" ></asp:DropDownList>
                                            </td>
                                        </tr>
-                                        <tr>
+                                        <tr id="trChannel9" runat="server">
                                            <td style="vertical-align:top;">
                                                 <span style="font-weight: bold;">Channel_9<span style="color: Red;">*</span>:</span>
                                            </td>
@@ -431,10 +456,13 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
+                                   <table style="width:100%;overflow:scroll;">
+                                       <tr>
+                                           <td style="vertical-align:top;width:100%;">
+                                               <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
                                     AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
                                     EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true" 
-                                    OnNeedDataSource="rgChartData_OnNeedDataSource" 
+                                    OnNeedDataSource="rgChartData_OnNeedDataSource" ClientSettings-Resizing-AllowColumnResize="true"
                                     GridLines="None">
 
                                     <HeaderStyle Font-Bold="True"></HeaderStyle>
@@ -507,10 +535,49 @@
                                                         meta:resourcekey="lblHTMLColorResource1" />
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>                                        
+                                            <telerik:GridTemplateColumn DataField="Channel_5" AllowFiltering="true" HeaderText="Channel_5"
+                                                UniqueName="Channel_5" SortExpression="Channel_5" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_5" runat="server" Text='<%# Eval("Channel_5") %>' />
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>   
+                                            <telerik:GridTemplateColumn DataField="Channel_6" AllowFiltering="true" HeaderText="Channel_6"
+                                                UniqueName="Channel_6" SortExpression="Channel_6" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_6" runat="server" Text='<%# Eval("Channel_6") %>'/>
+                                                </ItemTemplate>
+                                                      </telerik:GridTemplateColumn>   
+                                            <telerik:GridTemplateColumn DataField="Channel_7" AllowFiltering="true" HeaderText="Channel_7"
+                                                UniqueName="Channel_7" SortExpression="Channel_7" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_7" runat="server" Text='<%# Eval("Channel_7") %>'/>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn> 
+                                            <telerik:GridTemplateColumn DataField="Channel_8" AllowFiltering="true" HeaderText="Channel_8"
+                                                UniqueName="Channel_8" SortExpression="Channel_8" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_8" runat="server" Text='<%# Eval("Channel_8") %>' />
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn> 
+                                            <telerik:GridTemplateColumn DataField="Channel_9" AllowFiltering="true" HeaderText="Channel_9"
+                                                UniqueName="Channel_9" SortExpression="Channel_9" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_9" runat="server" Text='<%# Eval("Channel_9") %>' />
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
                                         </Columns>
 
                                     </MasterTableView>
                                 </telerik:RadGrid>
+                                           </td>
+                                       </tr>
+                                   </table>
+                              
                             </td>
                         </tr>
                         <tr>

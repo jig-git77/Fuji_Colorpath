@@ -471,10 +471,10 @@
                            <tr id="trChannel" runat="server">
                                 
                                <td colspan="3" style="vertical-align:top;text-align:left;">
-                                   <table style="width:100%;margin-left:51px;">
+                                   <table style="width:100%;margin-left:44px;">
                                        <tr id="trChannel5" runat="server">
                                            <td style="vertical-align:top;">
-                                               <span style="font-weight: bold;"> Channel_5<span style="color: Red;">*</span>:</span>
+                                               <span style="font-weight: bold;"> Channel_5<span style="color: Red;">*</span></span>&nbsp;:
                                            </td>
                                             <td style="vertical-align:top;">
                                                <asp:DropDownList ID="drpChannel5" runat="server"  Width="370px"></asp:DropDownList>
@@ -482,7 +482,7 @@
                                        </tr>
                                         <tr id="trChannel6" runat="server">
                                            <td style="vertical-align:top;">
-                                               <span style="font-weight: bold;"> Channel_6<span style="color: Red;">*</span>:</span>
+                                               <span style="font-weight: bold;"> Channel_6<span style="color: Red;">*</span></span>&nbsp;:
                                            </td>
                                             <td style="vertical-align:top;">
                                                <asp:DropDownList ID="drpChannel6" runat="server"  Width="370px"></asp:DropDownList>
@@ -490,7 +490,7 @@
                                        </tr>
                                         <tr id="trChannel7" runat="server">
                                            <td style="vertical-align:top;">
-                                               <span style="font-weight: bold;"> Channel_7<span style="color: Red;">*</span>:</span>
+                                               <span style="font-weight: bold;"> Channel_7<span style="color: Red;">*</span></span>&nbsp;:
                                            </td>
                                             <td style="vertical-align:top;">
                                                <asp:DropDownList ID="drpChannel7" runat="server"  Width="370px"></asp:DropDownList>
@@ -498,7 +498,7 @@
                                        </tr>
                                         <tr id="trChannel8" runat="server">
                                            <td style="vertical-align:top;">
-                                                <span style="font-weight: bold;">Channel_8<span style="color: Red;">*</span>:</span>
+                                                <span style="font-weight: bold;">Channel_8<span style="color: Red;">*</span></span>&nbsp;:
                                            </td>
                                             <td style="vertical-align:top;">
                                                <asp:DropDownList ID="drpChannel8" runat="server"  Width="370px"></asp:DropDownList>
@@ -506,7 +506,7 @@
                                        </tr>
                                         <tr id="trChannel9" runat="server">
                                            <td style="vertical-align:top;">
-                                                <span style="font-weight: bold;">Channel_9<span style="color: Red;">*</span>:</span>
+                                                <span style="font-weight: bold;">Channel_9<span style="color: Red;">*</span></span>&nbsp;:
                                            </td>
                                             <td style="vertical-align:top;">
                                                <asp:DropDownList ID="drpChannel9" runat="server"  Width="370px"></asp:DropDownList>
