@@ -37,14 +37,14 @@
           <%--  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>--%>
             <center>
-                <fieldset style="width: 92%;">
+                <fieldset>
                     <legend>
                         <asp:Label ID="lblHeader" runat="server" Text="Add Reference Chart" 
                             meta:resourcekey="lblHeaderResource1"></asp:Label>
                     </legend>
                     <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
                         Visible="False" />
-                    <table width="98%">                       
+                    <table>                       
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize Text="Chart Name" runat="server" 
@@ -166,7 +166,7 @@
                                 <b>&nbsp;: &nbsp;</b>
                             </td>
                             <td align="left">
-                                <table style="width: 100%;">
+                                <table style="width:100%;">
                                     <tr>
                                         <td style="vertical-align:top;width:25%">
                                                         <div style="float: left;">                                   
@@ -182,7 +182,7 @@
 
                                          </td>
                                         <td style="vertical-align:top;">
-                                                        <div style="float: left;">  
+                                          <div style="float: left;">  
                                                 <asp:DropDownList ID="cmbSync1D_ISO" runat="server">
                                                     <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
                                                     <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
@@ -249,7 +249,8 @@
                                
                             </td>
                         </tr>       
-                       <tr>
+                      
+                                <tr>
                                 <td align="right">
                                     <span style="font-weight: bold;">
                                      IsSupportMulticolor
@@ -266,7 +267,7 @@
                                     </div>
                                 </td>
                             </tr>
-                      <tr id="trTotalNoColor" runat="server">
+                                <tr id="trTotalNoColor" runat="server">
                                 <td align="right">
                                     <span style="font-weight: bold;">
                                      TotalNoColor<span style="color: Red;">*</span>
@@ -290,14 +291,11 @@
                                     </div>
                                 </td>
                             </tr>
-
-                      <tr id="trChannel" runat="server">
-                               <td>
-                                     &nbsp;:&nbsp;
-                               </td>
-                               <td colspan="2" style="vertical-align:top;">
-                                   <table style="width:100%;margin-left:-62px;">
-                                      <tr id="trChannel5" runat="server">
+                                <tr id="trChannel" runat="server">                               
+                               <td colspan="3" style="vertical-align:top;">
+                                   <div style="margin-left:199px;">
+                                     <table>
+                                        <tr id="trChannel5" runat="server">
                                            <td style="vertical-align:top;">
                                                <span style="font-weight: bold;"> Channel_5<span style="color: Red;">*</span>:</span>
                                            </td>
@@ -305,7 +303,7 @@
                                                <asp:DropDownList ID="drpChannel5" runat="server"  Width="370px" ></asp:DropDownList>
                                            </td>
                                        </tr>
-                                       <tr id="trChannel6" runat="server">
+                                        <tr id="trChannel6" runat="server">
                                            <td style="vertical-align:top;">
                                                <span style="font-weight: bold;"> Channel_6<span style="color: Red;">*</span>:</span>
                                            </td>
@@ -338,10 +336,11 @@
                                            </td>
                                        </tr>
                                    </table>
-                               </td>
+                                    </div>
+                              </td>
                           
                          </tr>
-                       
+                   
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize runat="server" 
@@ -385,7 +384,7 @@
                             </td>
                         </tr>
                         <tr id="Tr_UploadData" runat="server">
-                            <td align="right" style="width:350px;">
+                            <td align="right" style="width:250px;">
                                 <span style="font-weight: bold;">
                                 <asp:Localize runat="server" 
                                     Text="Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)" ID="locUploadChartData" 
@@ -396,7 +395,7 @@
                                 <b>&nbsp;: &nbsp;</b>
                             </td>
                             <td align="left">
-                                <table cellpadding="0" cellspacing="0" style="width:100%;">
+                                <table cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td>
                                               <telerik:RadAsyncUpload runat="server" ID="fucUploadChartData"
@@ -456,14 +455,13 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                   <table style="width:100%;overflow:scroll;">
+
+                                  <table>
                                        <tr>
-                                           <td style="vertical-align:top;width:100%;">
-                                               <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
-                                    AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
-                                    EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true" 
-                                    OnNeedDataSource="rgChartData_OnNeedDataSource" ClientSettings-Resizing-AllowColumnResize="true"
-                                    GridLines="None">
+                                           <td style="vertical-align:top;">
+                                             <div style="overflow:scroll;width:850px;">
+                                                  <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True" AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
+                                    EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true" OnNeedDataSource="rgChartData_OnNeedDataSource" GridLines="None">
 
                                     <HeaderStyle Font-Bold="True"></HeaderStyle>
 
@@ -474,7 +472,7 @@
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="SampleID" AllowFiltering="true" HeaderText="SampleID"
                                                 UniqueName="SampleID" SortExpression="SampleID" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="10%"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  
                                                 meta:resourcekey="GridTemplateColumnResource1">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblSampleID" runat="server" Text='<%# Eval("SampleID") %>' 
@@ -483,7 +481,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="SampleName" AllowFiltering="true" HeaderText="Sample Name"
                                                 UniqueName="SampleName" SortExpression="SampleName" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true" ItemStyle-Width="15%"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true" 
                                                 meta:resourcekey="GridTemplateColumnResource2">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblSampleName" runat="server" Text='<%# Eval("SampleName") %>' 
@@ -492,8 +490,8 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKC" AllowFiltering="true" HeaderText="CMYK_C"
                                                 UniqueName="CMYKC" SortExpression="CMYKC" 
-                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" ItemStyle-Width="15%"
-                                                ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource3">
+                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" 
+                                                ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource3">                                                
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKC" runat="server" Text='<%# Eval("CMYKC") %>' 
                                                         meta:resourcekey="lblCMYKCResource1" />
@@ -501,7 +499,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKM" AllowFiltering="true" HeaderText="CMYK_M"
                                                 UniqueName="CMYKM" SortExpression="CMYKM" 
-                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true"  ItemStyle-Width="15%"
+                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true"  
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource4">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKM" runat="server" Text='<%# Eval("CMYKM") %>' 
@@ -510,7 +508,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKY" AllowFiltering="true" HeaderText="CMYK_Y"
                                                 UniqueName="CMYKY" SortExpression="CMYKY" 
-                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" ItemStyle-Width="15%"
+                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" 
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource5">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKY" runat="server" Text='<%# Eval("CMYKY") %>' 
@@ -519,7 +517,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKK" AllowFiltering="true" HeaderText="CMYK_K"
                                                 UniqueName="CMYKK" SortExpression="CMYKK" 
-                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" ItemStyle-Width="15%"
+                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true"
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource6">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKK" runat="server" Text='<%# Eval("CMYKK") %>' 
@@ -528,7 +526,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="HTMLColor" AllowFiltering="true" HeaderText="HTML RGB"
                                                 UniqueName="HTMLColor" SortExpression="HTMLColor" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  
                                                 meta:resourcekey="GridTemplateColumnResource7">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblHTMLColor" runat="server" Text='<%# Eval("HTMLColor") %>' 
@@ -537,35 +535,35 @@
                                             </telerik:GridTemplateColumn>                                        
                                             <telerik:GridTemplateColumn DataField="Channel_5" AllowFiltering="true" HeaderText="Channel_5"
                                                 UniqueName="Channel_5" SortExpression="Channel_5" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_5" runat="server" Text='<%# Eval("Channel_5") %>' />
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>   
                                             <telerik:GridTemplateColumn DataField="Channel_6" AllowFiltering="true" HeaderText="Channel_6"
                                                 UniqueName="Channel_6" SortExpression="Channel_6" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_6" runat="server" Text='<%# Eval("Channel_6") %>'/>
                                                 </ItemTemplate>
                                                       </telerik:GridTemplateColumn>   
                                             <telerik:GridTemplateColumn DataField="Channel_7" AllowFiltering="true" HeaderText="Channel_7"
                                                 UniqueName="Channel_7" SortExpression="Channel_7" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true" >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_7" runat="server" Text='<%# Eval("Channel_7") %>'/>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn> 
                                             <telerik:GridTemplateColumn DataField="Channel_8" AllowFiltering="true" HeaderText="Channel_8"
                                                 UniqueName="Channel_8" SortExpression="Channel_8" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_8" runat="server" Text='<%# Eval("Channel_8") %>' />
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn> 
                                             <telerik:GridTemplateColumn DataField="Channel_9" AllowFiltering="true" HeaderText="Channel_9"
                                                 UniqueName="Channel_9" SortExpression="Channel_9" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%">
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true" >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_9" runat="server" Text='<%# Eval("Channel_9") %>' />
                                                 </ItemTemplate>
@@ -574,6 +572,7 @@
 
                                     </MasterTableView>
                                 </telerik:RadGrid>
+                                          </div>
                                            </td>
                                        </tr>
                                    </table>

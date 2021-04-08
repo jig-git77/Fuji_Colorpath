@@ -411,12 +411,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             }
                             if (chkIsSupportMulticolor.Checked)
                             {
-                                trChannel.Visible = true;                                
+                                trChannel.Visible = true;
                                 if (Convert.ToInt16(drpTotalNoColor.SelectedValue) >= 0)
                                 {
                                     trTotalNoColor.Visible = true;
                                 }
-                                if(drpTotalNoColor.SelectedValue == "5")
+                                if (drpTotalNoColor.SelectedValue == "5")
                                 {
                                     columns.ToList().ForEach(x => x = x.Trim());
                                     if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
@@ -442,7 +442,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                         !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
                                         !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase) ||
                                         !columns[7].Equals("CHANNEL_5", StringComparison.CurrentCultureIgnoreCase) ||
-                                        !columns[8].Equals("CHANNEL_6", StringComparison.CurrentCultureIgnoreCase) )
+                                        !columns[8].Equals("CHANNEL_6", StringComparison.CurrentCultureIgnoreCase))
                                     {
                                         throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
                                     }
@@ -459,7 +459,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                         !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase) ||
                                         !columns[7].Equals("CHANNEL_5", StringComparison.CurrentCultureIgnoreCase) ||
                                         !columns[8].Equals("CHANNEL_6", StringComparison.CurrentCultureIgnoreCase) ||
-                                        !columns[9].Equals("CHANNEL_7", StringComparison.CurrentCultureIgnoreCase) )
+                                        !columns[9].Equals("CHANNEL_7", StringComparison.CurrentCultureIgnoreCase))
                                     {
                                         throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
                                     }
@@ -663,7 +663,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                         throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
                                     }
 
-                                    
+
                                 }
                                 else if (drpTotalNoColor.SelectedValue == "6")
                                 {
@@ -686,7 +686,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                         throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
                                     }
 
-                                   
+
                                 }
                                 else if (drpTotalNoColor.SelectedValue == "7")
                                 {
@@ -717,7 +717,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     {
                                         throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
                                     }
-                                    
+
                                 }
                                 else if (drpTotalNoColor.SelectedValue == "8")
                                 {
@@ -757,7 +757,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     {
                                         throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
                                     }
-                                    
+
                                 }
                                 else if (drpTotalNoColor.SelectedValue == "9")
                                 {
@@ -829,13 +829,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void rgChartData_OnNeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
         {
+            if (chkIsSupportMulticolor.Checked)
+            {
+
+                trTotalNoColor.Visible = true;
+                if (Convert.ToInt16(drpTotalNoColor.SelectedValue) > 0)
+                {
+                    trChannel.Visible = true;
+                    SetMultiColorChannel();
+                }
+            }
             if (ViewState[vsChartData] != null)
             {
+
                 rgChartData.DataSource = ViewState[vsChartData];
                 if (chkIsSupportMulticolor.Checked)
                 {
                     if (drpTotalNoColor.SelectedValue == "5")
                     {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(10);
+
                         rgChartData.Columns[7].Visible = true;
                         rgChartData.Columns[8].Visible = false;
                         rgChartData.Columns[9].Visible = false;
@@ -844,6 +864,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (drpTotalNoColor.SelectedValue == "6")
                     {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[8].HeaderStyle.Width = Unit.Percentage(10);
+
                         rgChartData.Columns[7].Visible = true;
                         rgChartData.Columns[8].Visible = true;
                         rgChartData.Columns[9].Visible = false;
@@ -852,6 +882,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (drpTotalNoColor.SelectedValue == "7")
                     {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[8].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[9].HeaderStyle.Width = Unit.Percentage(10);
+
                         rgChartData.Columns[7].Visible = true;
                         rgChartData.Columns[8].Visible = true;
                         rgChartData.Columns[9].Visible = true;
@@ -860,6 +901,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (drpTotalNoColor.SelectedValue == "8")
                     {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[8].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[9].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[10].HeaderStyle.Width = Unit.Percentage(8);
+
                         rgChartData.Columns[7].Visible = true;
                         rgChartData.Columns[8].Visible = true;
                         rgChartData.Columns[9].Visible = true;
@@ -868,12 +921,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (drpTotalNoColor.SelectedValue == "9")
                     {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[8].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[9].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[10].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[11].HeaderStyle.Width = Unit.Percentage(8);
+
                         rgChartData.Columns[7].Visible = true;
                         rgChartData.Columns[8].Visible = true;
                         rgChartData.Columns[9].Visible = true;
                         rgChartData.Columns[10].Visible = true;
                         rgChartData.Columns[11].Visible = true;
                     }
+                }
+                else
+                {
+                    rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                    rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(15);
                 }
             }
         }
@@ -1089,13 +1165,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     trChannel.Visible = true;
                     trTotalNoColor.Visible = true;
-                    drpTotalNoColor.SelectedValue = ReferenceChartType.TotalNoColor.ToString();                   
-                    drpChannel5.SelectedValue = ReferenceChartType.Channel_5.ToString();                    
-                    drpChannel6.SelectedValue = ReferenceChartType.Channel_6.ToString();                    
-                    drpChannel7.SelectedValue = ReferenceChartType.Channel_7.ToString();                    
-                    drpChannel8.SelectedValue = ReferenceChartType.Channel_8.ToString();                    
+                    drpTotalNoColor.SelectedValue = ReferenceChartType.TotalNoColor.ToString();
+                    drpChannel5.SelectedValue = ReferenceChartType.Channel_5.ToString();
+                    drpChannel6.SelectedValue = ReferenceChartType.Channel_6.ToString();
+                    drpChannel7.SelectedValue = ReferenceChartType.Channel_7.ToString();
+                    drpChannel8.SelectedValue = ReferenceChartType.Channel_8.ToString();
                     drpChannel9.SelectedValue = ReferenceChartType.Channel_9.ToString();
-                    
+
                     drpTotalNoColor.Enabled = false;
                     drpChannel5.Enabled = false;
                     drpChannel6.Enabled = false;
@@ -1183,6 +1259,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> InstrumentTypeList { get; set; }
 
         public ReferenceChartType ReferenceChartType { get; set; }
+
+
 
 
 
