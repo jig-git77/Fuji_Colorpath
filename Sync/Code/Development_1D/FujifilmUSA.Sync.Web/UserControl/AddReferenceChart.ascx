@@ -385,7 +385,7 @@
                         </tr>
                         <tr id="Tr_UploadData" runat="server">
                             <td align="right" style="width:250px;">
-                                <span style="font-weight: bold;">
+                                <span style="font-weight: bold;word-break:break-all;">
                                 <asp:Localize runat="server" 
                                     Text="Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)" ID="locUploadChartData" 
                                     meta:resourcekey="locUploadChartDataResource1"></asp:Localize><span style="color: Red;">*</span>
