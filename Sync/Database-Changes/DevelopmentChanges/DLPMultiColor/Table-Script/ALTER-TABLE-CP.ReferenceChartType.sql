@@ -28,6 +28,15 @@ GO
 IF NOT EXISTS(SELECT *
           FROM   INFORMATION_SCHEMA.COLUMNS
           WHERE  TABLE_NAME = 'CP.ReferenceChartType'
+                 AND COLUMN_NAME = 'TotalNoColor') 
+BEGIN
+	ALTER TABLE CP.ReferenceChartType
+	ADD TotalNoColor TINYINT NULL;
+END
+GO
+IF NOT EXISTS(SELECT *
+          FROM   INFORMATION_SCHEMA.COLUMNS
+          WHERE  TABLE_NAME = 'CP.ReferenceChartType'
                  AND COLUMN_NAME = 'Channel_5') 
 BEGIN
 	ALTER TABLE CP.ReferenceChartType
