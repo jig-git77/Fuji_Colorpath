@@ -175,7 +175,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.SpotLibrary);
             if (chkDLPPlus.Checked)
                 License.LicenseType.Add(ELicenseType.DLPPlus);
-            if (chkMultiColorCustomSource.Checked)
+            if (chkDLPMutliColor.Checked)
                 License.LicenseType.Add(ELicenseType.DLPMultiColor);
 
 
