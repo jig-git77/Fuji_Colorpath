@@ -256,8 +256,8 @@
                                      IsSupportMulticolor
                                     </span>
                                 </td>
-                                <td>
-                                    &nbsp;:&nbsp;
+                                <td> <span style="font-weight: bold;">
+                                    &nbsp;:&nbsp;</span>
                                 </td>
                                 <td>
                                     <div style="float: left;">
@@ -274,7 +274,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    &nbsp;:&nbsp;
+                                   <span style="font-weight: bold;"> &nbsp;:&nbsp;</span>
                                 </td>
                                 <td>
                                     <div style="float: left;">
@@ -533,35 +533,35 @@
                                                         meta:resourcekey="lblHTMLColorResource1" />
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>                                        
-                                            <telerik:GridTemplateColumn DataField="Channel_5" AllowFiltering="true" HeaderText="Channel_5"
+                                            <telerik:GridTemplateColumn DataField="Channel_5" AllowFiltering="true" HeaderText="CHANNEL_5"
                                                 UniqueName="Channel_5" SortExpression="Channel_5" ItemStyle-CssClass="breakWord50"
                                                 ItemStyle-Wrap="true" ShowFilterIcon="true"  >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_5" runat="server" Text='<%# Eval("Channel_5") %>' />
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>   
-                                            <telerik:GridTemplateColumn DataField="Channel_6" AllowFiltering="true" HeaderText="Channel_6"
+                                            <telerik:GridTemplateColumn DataField="Channel_6" AllowFiltering="true" HeaderText="CHANNEL_6"
                                                 UniqueName="Channel_6" SortExpression="Channel_6" ItemStyle-CssClass="breakWord50"
                                                 ItemStyle-Wrap="true" ShowFilterIcon="true"  >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_6" runat="server" Text='<%# Eval("Channel_6") %>'/>
                                                 </ItemTemplate>
                                                       </telerik:GridTemplateColumn>   
-                                            <telerik:GridTemplateColumn DataField="Channel_7" AllowFiltering="true" HeaderText="Channel_7"
+                                            <telerik:GridTemplateColumn DataField="Channel_7" AllowFiltering="true" HeaderText="CHANNEL_7"
                                                 UniqueName="Channel_7" SortExpression="Channel_7" ItemStyle-CssClass="breakWord50"
                                                 ItemStyle-Wrap="true" ShowFilterIcon="true" >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_7" runat="server" Text='<%# Eval("Channel_7") %>'/>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn> 
-                                            <telerik:GridTemplateColumn DataField="Channel_8" AllowFiltering="true" HeaderText="Channel_8"
+                                            <telerik:GridTemplateColumn DataField="Channel_8" AllowFiltering="true" HeaderText="CHANNEL_8"
                                                 UniqueName="Channel_8" SortExpression="Channel_8" ItemStyle-CssClass="breakWord50"
                                                 ItemStyle-Wrap="true" ShowFilterIcon="true"  >
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblChannel_8" runat="server" Text='<%# Eval("Channel_8") %>' />
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn> 
-                                            <telerik:GridTemplateColumn DataField="Channel_9" AllowFiltering="true" HeaderText="Channel_9"
+                                            <telerik:GridTemplateColumn DataField="Channel_9" AllowFiltering="true" HeaderText="CHANNEL_9"
                                                 UniqueName="Channel_9" SortExpression="Channel_9" ItemStyle-CssClass="breakWord50"
                                                 ItemStyle-Wrap="true" ShowFilterIcon="true" >
                                                 <ItemTemplate>
