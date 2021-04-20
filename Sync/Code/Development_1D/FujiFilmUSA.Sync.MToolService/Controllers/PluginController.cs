@@ -686,19 +686,19 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult ProjectListByDeviceLAB_Xmf(string deviceSerialNo, string instrumentTypeID)
+        public IHttpActionResult ProjectListByDeviceLAB_Xmf(string SerialNumber, short? InstrumentType)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
             try
             {
 
-                if (string.IsNullOrEmpty(deviceSerialNo))
+                if (string.IsNullOrEmpty(SerialNumber))
                 {
                     validationMessage = "Invalid DeviceSerialNo";
                 }
 
-                if (string.IsNullOrEmpty(instrumentTypeID))
+                if (InstrumentType == null)
                 {
                     validationMessage = "Invalid InstrumentType";
                 }
@@ -715,8 +715,8 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
                 }
 
 
-                MeaDeviceSerialNo = deviceSerialNo;
-                OSPlatformId = Convert.ToInt32(instrumentTypeID);               
+                MeaDeviceSerialNo = SerialNumber;
+                OSPlatformId = Convert.ToInt32(InstrumentType);               
                 var presenter = new PresenterPluginDataService(this);
                 presenter.ProjectListByDeviceLAB_Xmf();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, dtMeasurementValidation));
