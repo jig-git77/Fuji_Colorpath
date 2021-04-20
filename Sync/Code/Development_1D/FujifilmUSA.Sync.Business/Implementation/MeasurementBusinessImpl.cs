@@ -2822,6 +2822,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurementErrorFile"));
         }
+
+        public DataTable ProjectListByDeviceLAB_Xmf(string deviceSerialNo,short instrumentTypeID)
+        {
+            var measurements = new DataSet();
+            string storedProc = "CP.GetProjectListBySerial_LAB_Xmf";
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                             new object[] { deviceSerialNo, instrumentTypeID });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_ProjectListByDeviceLAB_Xmf"));
+            return dtPatchDetails;
+        }
         #endregion
 
         #region ITaskBase Members

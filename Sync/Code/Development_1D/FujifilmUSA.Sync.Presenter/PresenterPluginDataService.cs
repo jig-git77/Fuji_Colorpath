@@ -1,5 +1,6 @@
 ﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
+using System;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -150,8 +151,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectMeasurement = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             projectMeasurement.ErrorOccured += _viewPluginDataService.ErrorOccured;
-            _viewPluginDataService.MTVersion= projectMeasurement.CheckMToolVersionUpdate(_viewPluginDataService.OSPlatformId);
+            _viewPluginDataService.MTVersion = projectMeasurement.CheckMToolVersionUpdate(_viewPluginDataService.OSPlatformId);
 
+        }
+        public void ProjectListByDeviceLAB_Xmf()
+        {
+            var projectMeasurement = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            projectMeasurement.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.dtMeasurementValidation = projectMeasurement.ProjectListByDeviceLAB_Xmf(_viewPluginDataService.MeaDeviceSerialNo,Convert.ToInt16(_viewPluginDataService.OSPlatformId));
         }
 
     }

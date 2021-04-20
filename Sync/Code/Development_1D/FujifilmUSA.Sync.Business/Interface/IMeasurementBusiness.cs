@@ -74,5 +74,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataTable ValidateApplicationMeasurement(int optimizationRunId, int projectId, string SerialNo, string entryDate);
         void SaveMeasurementErrorFile(int optimizeRunId, int projectid, string requestMeasurement);       
         MToolVersion CheckMToolVersionUpdate(int oSPlatformID);
+        DataTable ProjectListByDeviceLAB_Xmf(string deviceSerialNo, short instrumentTypeID);        
     }
 }

@@ -112,6 +112,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public ReferenceChartApp UserLogInByDeviceLAB_Xmf(string serial, short InstrumentTypeId,int projectId)
+        {
+            return new ReferenceChartApp();
+        }
+       
         #endregion
 
         #region ITaskBase Members

@@ -271,6 +271,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             throw new NotImplementedException();
         }
+        public DataTable ProjectListByDeviceLAB_Xmf(string deviceSerialNo, short instrumentTypeID)
+        {
+            return new DataTable();
+        }
         #endregion
 
         #region ITaskBase Members

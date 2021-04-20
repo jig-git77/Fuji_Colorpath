@@ -684,7 +684,52 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
             return actionResult;
 
         }
-        
+
+        [HttpGet]
+        public IHttpActionResult ProjectListByDeviceLAB_Xmf(string deviceSerialNo, string instrumentTypeID)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+            try
+            {
+
+                if (string.IsNullOrEmpty(deviceSerialNo))
+                {
+                    validationMessage = "Invalid DeviceSerialNo";
+                }
+
+                if (string.IsNullOrEmpty(instrumentTypeID))
+                {
+                    validationMessage = "Invalid InstrumentType";
+                }
+
+                
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+                    return actionResult;
+                }
+
+
+                MeaDeviceSerialNo = deviceSerialNo;
+                OSPlatformId = Convert.ToInt32(instrumentTypeID);               
+                var presenter = new PresenterPluginDataService(this);
+                presenter.ProjectListByDeviceLAB_Xmf();
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, dtMeasurementValidation));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
         #endregion
 
         #region MToolVersionCheckService
