@@ -111,6 +111,7 @@
     <Compile Include="Models\Helper\ICCFile.cs" />
     <Compile Include="Models\Helper\ICCHelper.cs" />
     <Compile Include="Models\Interface\IProfiler.cs" />
+    <Compile Include="Models\Request\CreateDestinationAndDeviceLinkProfileMultiColorRequest.cs" />
     <Compile Include="Models\Request\CreateDestinationAndDeviceLinkProfileRequest.cs" />
     <Compile Include="Models\Request\CreateG7AlignmentCurveRequest.cs" />
     <Compile Include="Models\Request\CreateISOAlignmentCurveRequest.cs" />

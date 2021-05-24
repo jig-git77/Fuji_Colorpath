@@ -25,6 +25,7 @@ public class CrossXColor {
     public const int clRemission = 0x7265666C;
    
 
+
     public const int clDensityCMYK = 0x44454E53;
 
     // CLErr values
@@ -66,6 +67,7 @@ public class CrossXColor {
 	public const int CLTrafoCreationErr = 36;
 	public const int CLICCProfileClassErr = 37;
 	public const int CLInvalidFileSpec = 38;
+
 
     public enum CLErrorType
     {
@@ -116,7 +118,16 @@ public class CrossXColor {
 
     }
 
-  public static TYPE_p_void CLNewCLProfilerRef() {
+    /// <summary>
+    /// MultiColor Channel Data Constant
+    /// </summary>
+    public const int icSig5colorData = 0x35434C52;  /* '5CLR' */
+    public const int icSig6colorData = 0x36434C52;  /* '6CLR' */
+    public const int icSig7colorData = 0x37434C52;  /* '7CLR' */
+    public const int icSig8colorData = 0x38434C52;  /* '8CLR' */
+    public const int icSig9colorData = 0x39434C52;  /* '9CLR' */
+
+    public static TYPE_p_void CLNewCLProfilerRef() {
     IntPtr cPtr = CrossXColorPINVOKE.CLNewCLProfilerRef();
     TYPE_p_void ret = (cPtr == IntPtr.Zero) ? null : new TYPE_p_void(cPtr, false);
     return ret;
