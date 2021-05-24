@@ -1049,7 +1049,14 @@ namespace CPProfilerService.Business
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
                 err = CrossXColor.CLSetProfilerOption(profiler, "SaveProfilerData", "1");
 
-                CrossXColor.CLSetProfilerData(profiler, request.DcsData.Length / 4, dcsDataSet, pcsDataSet);
+                if (request.TotalNoColors > 4)
+                {
+                    CrossXColor.CLSetProfilerData(profiler, request.DcsData.Length / request.TotalNoColors, dcsDataSet, pcsDataSet);
+                }
+                else
+                {
+                    CrossXColor.CLSetProfilerData(profiler, request.DcsData.Length / 4, dcsDataSet, pcsDataSet);
+                }
 
                 // calc profile in memory
                 err = CrossXColor.CLCalcProfile(profiler, destProf);
