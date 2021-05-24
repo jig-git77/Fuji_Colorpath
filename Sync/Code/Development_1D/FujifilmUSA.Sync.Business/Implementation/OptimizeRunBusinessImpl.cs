@@ -281,7 +281,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     var measurementDataResponse =
                         BusinessFactory<IMeasurementBusiness>.
-                            CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
+                            CreateObject().GetMultiColorMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
 
                     request.PcsData = measurementDataResponse.PcsData;
                     request.DcsData = measurementDataResponse.DcsData;
@@ -322,7 +322,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     Name=ChanelDataResponse.Tables[0].Rows[i]["ChannelName"].ToString().Replace("\r\n",""),
                                     Value = ChanelDataResponse.Tables[0].Rows[i]["ChannelValue"].ToString(),
                                 };
-                                request.DcsData.Add(Convert.ToDouble(ChanelDataResponse.Tables[0].Rows[i]["ChannelValue"].ToString()));
+                          //      request.DcsData.Add(Convert.ToDouble(ChanelDataResponse.Tables[0].Rows[i]["ChannelValue"].ToString()));
                                 request.ChannelOptions.Add(parameter);
                             }
                         }
@@ -335,7 +335,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
                     {
                         //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
-                        throw new Exception("Destination and Device link profile has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + response.Message);
+                        throw new Exception("Destination and Device link profile MultiColor has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + response.Message);
                     }
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call invoked."), null, false);
                     DataAccessFactory.

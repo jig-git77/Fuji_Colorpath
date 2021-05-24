@@ -76,5 +76,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         MToolVersion CheckMToolVersionUpdate(int oSPlatformID);
         DataTable ProjectListByDeviceLAB_Xmf(string deviceSerialNo, short instrumentTypeID);
         DataSet GetChannelMeasurementData(List<int> measurementIds);
+        MeasurementDataResponse GetMultiColorMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType);
     }
 }

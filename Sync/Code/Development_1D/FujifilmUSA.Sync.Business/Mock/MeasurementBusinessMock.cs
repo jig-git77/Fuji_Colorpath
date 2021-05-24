@@ -280,6 +280,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new DataSet();
 
         }
+        public MeasurementDataResponse GetMultiColorMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType)
+        {
+            return new MeasurementDataResponse();
+
+        }
         #endregion
 
         #region ITaskBase Members
