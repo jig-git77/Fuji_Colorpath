@@ -43,6 +43,20 @@ namespace FujifilmUSA.Sync.Presenter
                     Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
         }
+        public void CreateDestinationAndDlpMultiColor()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.
+                CreateInitialDestinationAndDeviceLinkProfilesMultiColor(
+                    _viewAnalyze.ProjectId,
+                    _viewAnalyze.OptimizeRunId,
+                    _viewAnalyze.MeasurementIds,
+                    _viewAnalyze.DestinationProfileDescription,
+                    _viewAnalyze.DlpDescription,
+                    Convert.ToInt32(EOptimizeRunStatus.Closed),
+                    DateTime.Now);
+        }
 
         public void GetMeasurementsOnRunId()
         {

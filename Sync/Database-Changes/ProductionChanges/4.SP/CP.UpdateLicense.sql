@@ -1,4 +1,4 @@
-USE [ColorPathSync]
+
 GO
 /****** Object:  StoredProcedure [CP].[UpdateLicense]    Script Date: 5/14/2021 11:04:10 AM ******/
 SET ANSI_NULLS ON

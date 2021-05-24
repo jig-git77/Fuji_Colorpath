@@ -275,6 +275,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
+        public DataSet GetChannelMeasurementData(List<int> measurementIds)
+        {
+            return new DataSet();
+
+        }
         #endregion
 
         #region ITaskBase Members

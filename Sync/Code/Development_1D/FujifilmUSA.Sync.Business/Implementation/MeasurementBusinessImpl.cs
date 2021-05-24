@@ -2845,6 +2845,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_ProjectListByDeviceLAB_Xmf"));
             return dtPatchDetails;
         }
+
+        public DataSet GetChannelMeasurementData(List<int> measurementIds)
+        {
+            DataSet dtResult = new DataSet();
+          
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    dtResult = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "CPSync4D.GetChannelMeasurementData",
+                            new object[]
+                                    {
+                                        String.Join(",", measurementIds),
+                                        
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "GetChannelMeasurementData"));
+            return dtResult;
+        }
         #endregion
 
         #region ITaskBase Members

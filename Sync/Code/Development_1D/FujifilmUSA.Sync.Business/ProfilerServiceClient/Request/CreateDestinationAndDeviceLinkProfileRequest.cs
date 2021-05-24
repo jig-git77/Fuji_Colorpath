@@ -17,5 +17,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerServiceClient.Request
         public List<Parameter> ProfileOptions { get; set; }
         public IccProfile SourceProfile { get; set; }
         public PCSDataType PCSDataType { get; set; }
+        public List<Parameter> ChannelOptions { get; set; }
+        public int TotalNoColors { get; set; }
     }
 }

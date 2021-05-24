@@ -47,5 +47,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         void OptimizeSpotNamedColorProfile(int OptimizeRunID, int Status, DateTime EndDate);
 
         void CreateInitialDestinationAndDeviceLinkProfilesPlus(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
+        void CreateInitialDestinationAndDeviceLinkProfilesMultiColor(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
     }
 }
