@@ -318,12 +318,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             for (int i = 0; i < ChanelDataResponse.Tables[0].Rows.Count; i++)
                             {
                                 request.TotalNoColors =Convert.ToInt32(ChanelDataResponse.Tables[0].Rows[i]["TotalNoColor"].ToString());
-                                Parameter parameter = new Parameter() {
-                                    Name=ChanelDataResponse.Tables[0].Rows[i]["ChannelName"].ToString().Replace("\r\n",""),
-                                    Value = ChanelDataResponse.Tables[0].Rows[i]["ChannelValue"].ToString(),
-                                };
+                                break;
+                                //Parameter parameter = new Parameter() {
+                                //    Name=ChanelDataResponse.Tables[0].Rows[i]["ChannelName"].ToString().Replace("\r\n",""),
+                                //    Value = ChanelDataResponse.Tables[0].Rows[i]["ChannelValue"].ToString(),
+                                //};
                           //      request.DcsData.Add(Convert.ToDouble(ChanelDataResponse.Tables[0].Rows[i]["ChannelValue"].ToString()));
-                                request.ChannelOptions.Add(parameter);
+                                //request.ChannelOptions.Add(parameter);
                             }
                         }
                     }
