@@ -3015,6 +3015,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
                             if (!string.IsNullOrEmpty(Convert.ToString(row["TotalNoColor"])))
                             {
+                                response.TotalNoColors = Convert.ToInt32(row["TotalNoColor"]);
                                 if (Convert.ToInt32(row["TotalNoColor"]) == 5)
                                 {
                                     response.DcsData.Add(DataReader.ReadDouble(row, "Channel_5"));

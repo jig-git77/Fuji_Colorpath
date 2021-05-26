@@ -275,8 +275,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DcsData = new List<double>(),
                         SourceProfile = new IccProfile() { ProfileData = sourceProfile },
                         DestinationProfileOptions = new List<Parameter>(),
-                        ProfileOptions = new List<Parameter>(),
-                        ChannelOptions = new List<Parameter>() // for MultiColor Channel options
+                        ProfileOptions = new List<Parameter>()
                     };
 
                     var measurementDataResponse =
@@ -285,7 +284,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     request.PcsData = measurementDataResponse.PcsData;
                     request.DcsData = measurementDataResponse.DcsData;
-
+                    request.TotalNoColors = measurementDataResponse.TotalNoColors;
 
                     var profilerOptionBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
                     var destinationOptions =
@@ -308,26 +307,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     request.PCSDataType = (Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
-                    var ChanelDataResponse =
-                      BusinessFactory<IMeasurementBusiness>.
-                          CreateObject().GetChannelMeasurementData(measurementIds);
-                    if (ChanelDataResponse.Tables.Count > 0)
-                    {
-                        if (ChanelDataResponse.Tables[0].Rows.Count > 0)
-                        {
-                            for (int i = 0; i < ChanelDataResponse.Tables[0].Rows.Count; i++)
-                            {
-                                request.TotalNoColors =Convert.ToInt32(ChanelDataResponse.Tables[0].Rows[i]["TotalNoColor"].ToString());
-                                break;
-                                //Parameter parameter = new Parameter() {
-                                //    Name=ChanelDataResponse.Tables[0].Rows[i]["ChannelName"].ToString().Replace("\r\n",""),
-                                //    Value = ChanelDataResponse.Tables[0].Rows[i]["ChannelValue"].ToString(),
-                                //};
-                          //      request.DcsData.Add(Convert.ToDouble(ChanelDataResponse.Tables[0].Rows[i]["ChannelValue"].ToString()));
-                                //request.ChannelOptions.Add(parameter);
-                            }
-                        }
-                    }
+                  
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
