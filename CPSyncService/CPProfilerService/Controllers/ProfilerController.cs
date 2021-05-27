@@ -103,5 +103,12 @@ namespace CPProfilerService.Controllers
             return ProfilerApiBusiness.CreateDestinationAndDeviceLinkMultiColorProfile(request);
 
         }
+        [HttpPost]
+        [Route("api/Profiler/OptimizeDLPMultiColor")]
+        [CustomAuthentication]
+        public OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfileMultiColor(OptimizeDeviceLinkProfileMultiColorRequest request)
+        {
+            return ProfilerApiBusiness.OptimizeDeviceLinkMultiColorProfile(request);
+        }
     }
 }

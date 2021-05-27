@@ -119,6 +119,7 @@
     <Compile Include="Models\Request\CreateSourceToSourceDeviceLinkProfileRequest.cs" />
     <Compile Include="Models\Request\CreateSpotLibraryRequest.cs" />
     <Compile Include="Models\Request\ExtractProfileValuesRequest.cs" />
+    <Compile Include="Models\Request\OptimizeDeviceLinkProfileMultiColorRequest.cs" />
     <Compile Include="Models\Request\OptimizeDeviceLinkProfileRequest.cs" />
     <Compile Include="Models\Request\OptimizeSpotLibraryRequest.cs" />
     <Compile Include="Models\Response\BaseResponse.cs" />
