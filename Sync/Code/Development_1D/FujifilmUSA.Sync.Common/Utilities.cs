@@ -526,6 +526,7 @@ namespace FujifilmUSA.Sync.Common
             CreateSpotLibrary,
             OptimizeSpotLibrary,
             CreateDLPMultiColor,
+            OptimizeDLPMultiColor
 
         }
         public enum ProfilerRequestCall

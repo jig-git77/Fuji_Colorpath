@@ -180,6 +180,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             throw new NotImplementedException();
         }
+        public void OptimizeDeviceLinkProfileMultiColor(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region ITaskBase Members

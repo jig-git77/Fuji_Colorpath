@@ -21,6 +21,13 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.OptimizeDeviceLinkProfile(_viewConfirmSave.ProjectId, _viewConfirmSave.OptimizeRunId, _viewConfirmSave.MeasurementIds,
                                                           _viewConfirmSave.ProfileDescription, Convert.ToInt32(EOptimizeRunStatus.Closed), DateTime.Now);
         }
+        public void OptimizeDlpMultiColor()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            optimizeRunBusiness.OptimizeDeviceLinkProfileMultiColor(_viewConfirmSave.ProjectId, _viewConfirmSave.OptimizeRunId, _viewConfirmSave.MeasurementIds,
+                                                          _viewConfirmSave.ProfileDescription, Convert.ToInt32(EOptimizeRunStatus.Closed), DateTime.Now);
+        }
 
         public void GetMeasurementsOnRunId()
         {
