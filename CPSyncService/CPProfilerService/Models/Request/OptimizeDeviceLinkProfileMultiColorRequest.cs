@@ -13,6 +13,6 @@ namespace CPProfilerService.Models.Request
         public double[] PCSData { get; set; }
         public double[] DCSData { get; set; }
         public PCSDataType PCSDataType { get; set; }
-        public int TotalNoColors { get; set; }
+        
     }
 }
