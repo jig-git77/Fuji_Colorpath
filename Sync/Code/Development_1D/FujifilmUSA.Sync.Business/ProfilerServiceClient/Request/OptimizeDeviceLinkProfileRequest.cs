@@ -13,6 +13,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerServiceClient.Request
         public List<double> PCSData { get; set; }
         public List<double> DCSData { get; set; }
         public PCSDataType PCSDataType { get; set; }
-        public int TotalNoColors { get; set; }
+       
     }
 }

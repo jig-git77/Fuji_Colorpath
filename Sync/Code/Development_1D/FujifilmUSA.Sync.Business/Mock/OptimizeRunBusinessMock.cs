@@ -179,11 +179,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         public void CreateInitialDestinationAndDeviceLinkProfilesMultiColor(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
         {
             throw new NotImplementedException();
-        }
-        public void OptimizeDeviceLinkProfileMultiColor(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime)
-        {
-            throw new NotImplementedException();
-        }
+        }       
         #endregion
 
         #region ITaskBase Members

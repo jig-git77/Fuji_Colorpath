@@ -198,14 +198,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             _presenterConfirmSave.CreateG7AlignmentCurve();
                         else//ISO                                                    
                             _presenterConfirmSave.CreateISOAlignmentCurve();
-                    }
-                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
-                    {
-                        EndDate = System.DateTime.Now;
-                        ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-
-                        _presenterConfirmSave.OptimizeDlpMultiColor();
-                    }
+                    }                   
                     else
                     {
 
