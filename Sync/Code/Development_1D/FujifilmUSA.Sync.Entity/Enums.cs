@@ -643,4 +643,17 @@ namespace FujifilmUSA.Sync.Entity
         SYNCMeasureApp = 2
 
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum MultiColorChannelName
+    {
+        Red=1,
+        Green = 2,
+        Blue = 3,
+        Orange = 4,
+        Violet = 5
+    }
+
 }
