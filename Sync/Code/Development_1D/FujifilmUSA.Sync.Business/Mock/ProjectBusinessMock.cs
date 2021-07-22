@@ -100,7 +100,7 @@ public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
             return new List<MeasurementDevice>();
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0,bool IsDLPPlus=false,short LicenseTypeId=0)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0,bool IsDLPPlus=false,short LicenseTypeId=0, int deviceId = 0)
         {
             return new List<ReferenceChartType>();
         }

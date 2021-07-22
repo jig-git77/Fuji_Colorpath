@@ -578,6 +578,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trChannel7.Visible = false;
                 trChannel8.Visible = false;
                 trChannel9.Visible = false;
+                drpChannel6.SelectedValue = "0";
+                drpChannel7.SelectedValue = "0";
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
+
             }
             else if (drpTotalNoColor.SelectedValue == "6")
             {
@@ -586,6 +591,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trChannel7.Visible = false;
                 trChannel8.Visible = false;
                 trChannel9.Visible = false;
+                drpChannel7.SelectedValue = "0";
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
             }
             else if (drpTotalNoColor.SelectedValue == "7")
             {
@@ -594,6 +602,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trChannel7.Visible = true;
                 trChannel8.Visible = false;
                 trChannel9.Visible = false;
+                
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
             }
             else if (drpTotalNoColor.SelectedValue == "8")
             {
@@ -602,6 +613,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trChannel7.Visible = true;
                 trChannel8.Visible = true;
                 trChannel9.Visible = false;
+                drpChannel9.SelectedValue = "0";
             }
             else if (drpTotalNoColor.SelectedValue == "9")
             {
