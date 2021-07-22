@@ -523,6 +523,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);
             LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
+            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)
