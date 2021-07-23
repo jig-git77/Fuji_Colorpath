@@ -110,6 +110,7 @@ var $lnk_L_GrayBalanceLargeChart;
 var $hdnCurrentUserRole;
 var AUTH_TOKEN = '';
 var $hdnSyncDlpPlusType;
+var $hdnIsDlpMultiColor;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -280,6 +281,7 @@ $(document).ready(function () {
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
     AUTH_TOKEN = $("#hdfAuthToken").val();
     $hdnSyncDlpPlusType = $('#hdnSyncDlpPlusType').val();
+    $hdnIsDlpMultiColor = $('#hdnIsDlpMultiColor').val();
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
         if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -2052,6 +2054,7 @@ function BindGrayCharts() {
         IsAverageOfMeasurements: $isAverageOfMeasurements,
         IsVerificationProject: $hdnVerification,
         IsSync1DTypeProject: $hdnSync1DType,
+        IsDlpMultiColor: $hdnIsDlpMultiColor,
     };
 
     var ajaxParameter = {

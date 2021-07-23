@@ -57,7 +57,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             throw new NotImplementedException();
         }
 
-        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsDlpMultiColor = false)
         {
             throw new NotImplementedException();
         }

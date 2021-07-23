@@ -723,7 +723,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         #region Get common Gamut chart data
-        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsDlpMultiColor = false)
         {
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
             var GamutChartData = new List<AnalyzeChart_Gray>[3];
@@ -740,7 +740,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "CPSyncV.GetVChartData_Gray";
             }
-
+            if (IsDlpMultiColor)
+            {
+                storedProc = "CPSync4DMultiColor.GetChartData_Gray";
+            }
+            
             Common.ImplementBusinessLogic(
                 () =>
                 {

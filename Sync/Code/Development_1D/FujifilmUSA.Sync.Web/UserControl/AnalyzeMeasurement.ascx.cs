@@ -221,6 +221,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnCurrentDlpSubOperation.Value = ((int)SessionManager.Instance.CurrentDlpSubOperation).ToString();
                 hdnSync1DType.Value = IsSync1DType.ToString();
                 hdnSyncDlpPlusType.Value = IsSyncDLPPlusType.ToString();
+                hdnIsDlpMultiColor.Value = Convert.ToString(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ? true : false);
+
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
@@ -533,6 +535,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLPPlus);
             }
         }
+        public bool IsDlpMultiColor { get; set; }
         #endregion
     }
 }
