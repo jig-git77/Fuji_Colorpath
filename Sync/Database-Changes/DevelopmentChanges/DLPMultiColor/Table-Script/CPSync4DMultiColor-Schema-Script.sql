@@ -1,4 +1,4 @@
-CREATE SCHEMA CPSync4DMultiColor;;
+CREATE SCHEMA CPSync4DMultiColor;
 	
 
 
