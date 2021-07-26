@@ -1,20 +1,15 @@
-﻿using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Entity;
+﻿using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujiFilmUSA.Sync.Service.Models;
 //using FujiFilmUSA.Sync.Service.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
@@ -144,10 +139,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
 
                 if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+                }
 
                 if (IsSync1DTypeProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -159,8 +158,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     DetermineCulture();
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
-                    this.From_ΔE = Convert.ToString(fromDeltaE);
+                    IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    From_ΔE = Convert.ToString(fromDeltaE);
                     //this.MeasurementId = Convert.ToInt32(MeasurementId);
                     if (ProjectType == (int)ELicenseType.Validation)
                     {
@@ -200,7 +199,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
+        public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsDlpMultiColor)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -209,16 +208,24 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (IsAverageOfMeasurements == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                }
 
                 if (IsVerificationProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                }
 
                 if (IsSync1DTypeProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -234,10 +241,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //temp code end
                     //IsVerification = true;
                     DetermineCulture();
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
+                    this.IsDlpMultiColor = IsDlpMultiColor == null ? false : Convert.ToBoolean(IsDlpMultiColor);
                     _presenterAnalyze.GetGrayChart();
                     GenerateResources();
 
@@ -376,20 +384,29 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (IsAverageOfMeasurements == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                }
 
                 if (IsVerificationProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                }
 
                 if (IsSync1DTypeProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                }
 
                 if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
-
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -402,10 +419,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
                     DetermineCulture();
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
-                    this.From_ΔE = fromDeltaE;
+                    From_ΔE = fromDeltaE;
 
                     _presenterAnalyze.GetInkPaperChart();
                     GenerateResources();
@@ -444,13 +461,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (IsAverageOfMeasurements == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                }
 
                 if (IsVerificationProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                }
 
                 //if (string.IsNullOrEmpty(Convert.ToString(validationType)))
                 //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
@@ -465,10 +488,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     DetermineCulture();
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
-                    this.IsSyncDLPPlusType = IsSyncDlpPlusTypeProject == null ? false : Convert.ToBoolean(IsSyncDlpPlusTypeProject);
+                    IsSyncDLPPlusType = IsSyncDlpPlusTypeProject == null ? false : Convert.ToBoolean(IsSyncDlpPlusTypeProject);
                     //-------------Only call G7 tab data if it is G7 type of Validation / Sync 1D / Sync 4D Project
                     _presenterAnalyze.GetG7Chart();
 
@@ -515,16 +538,24 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (IsAverageOfMeasurements == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                }
 
                 if (IsVerificationProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                }
 
                 if (IsSync1DTypeProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -538,8 +569,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     DetermineCulture();
 
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
 
                     //-------------G7 type for validation type 1
@@ -580,16 +611,24 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (IsAverageOfMeasurements == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                }
 
                 if (IsVerificationProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                }
 
                 if (IsSync1DTypeProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -603,8 +642,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     DetermineCulture();
 
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
 
                     //-------------G7 type for validation type 1
@@ -641,22 +680,30 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
             string validationMessage = "";
+            int totalNoColor = 0;
+            bool isSupportMulticolor = false;
             List<Dictionary<string, object>> patchDetails = new List<Dictionary<string, object>>();
             try
             {
                 if (MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (IsSync1DTypeProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                }
 
                 if (IsVerificationProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -669,14 +716,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
                     DetermineCulture();
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    IsDlpMultiColor = IsDLPMultiColor == null ? false : Convert.ToBoolean(IsDLPMultiColor);
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
 
                     if (!string.IsNullOrEmpty(metricSumID) && Convert.ToInt32(metricSumID) != -1)
+                    {
                         dtFilteredPatchDetails = FilteredPatchDetailsTable(metricSumID, dtPatchDetails);
+                    }
                     else
+                    {
                         dtFilteredPatchDetails = dtPatchDetails;
+                    }
 
                     if (dtFilteredPatchDetails.Rows.Count > 0)
                     {
@@ -692,10 +744,27 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         }
                     }
                     GenerateResources();
+                    if (IsDlpMultiColor)
+                    {
+                        if (dtPatchDetails.Rows.Count > 0)
+                        {
+
+                            _globalResourceValues.Add("Channel_5", Convert.ToString(dtPatchDetails.Rows[0]["Channel5Name"]));
+                            _globalResourceValues.Add("Channel_6", Convert.ToString(dtPatchDetails.Rows[0]["Channel6Name"]));
+                            _globalResourceValues.Add("Channel_7", Convert.ToString(dtPatchDetails.Rows[0]["Channel7Name"]));
+                            _globalResourceValues.Add("Channel_8", Convert.ToString(dtPatchDetails.Rows[0]["Channel8Name"]));
+                            _globalResourceValues.Add("Channel_9", Convert.ToString(dtPatchDetails.Rows[0]["Channel9Name"]));
+                            totalNoColor = Convert.ToInt32(dtPatchDetails.Rows[0]["TotalNoColor"]);
+                            isSupportMulticolor = Convert.ToBoolean(dtPatchDetails.Rows[0]["IsSupportMulticolor"]);
+                        }
+
+                    }
                     var objGroup = new
                     {
                         measurementPatchDetails = patchDetails,
-                        GlobalResources = _globalResourceValues
+                        GlobalResources = _globalResourceValues,
+                        TotalNoColors = totalNoColor,
+                        IsSupportMulticolor=isSupportMulticolor
                     };
                     httpResponse.Data = objGroup;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
@@ -719,10 +788,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             ValidationMetrics[] matricsArray = null;
             try
             {
-                this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                 this.MeasurementId = Convert.ToInt32(MeasurementId);
-                this.From_ΔE = fromDeltaE;
+                From_ΔE = fromDeltaE;
                 this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
 
                 //Get Ink gray chart details
@@ -749,18 +818,24 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (IsSync1DTypeProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                }
 
                 if (IsVerificationProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                }
 
                 this.MeasurementId = Convert.ToInt32(MeasurementId);
-                this.IsUsed = isMeasurementUsed == null ? false : Convert.ToBoolean(isMeasurementUsed); ;
-                this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                IsUsed = isMeasurementUsed == null ? false : Convert.ToBoolean(isMeasurementUsed); ;
+                IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                 _presenterAnalyze.UpdateMeasurementByAnalyzeChartFromService();
                 isSuccess = true;
 
@@ -789,7 +864,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (OptimizationRunId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -806,7 +883,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     DSDensity_Y = new DataTable();
                     DSDensity_K = new DataTable();
 
-                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    OptimizeRunId = Convert.ToInt32(OptimizationRunId);
                     _presenterReportCMYKDensity.GetDensityData_C();
 
                     colorDensity.CyanList = GetColorDensityDetails(DSDensity_C);
@@ -847,11 +924,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (OptimizationRunId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+                }
 
                 if (CurveType == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidCurveType);
-
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -863,8 +943,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     DetermineCulture();
-                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
-                    this.CurveTypeId = Convert.ToInt16(CurveType);
+                    OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    CurveTypeId = Convert.ToInt16(CurveType);
                     _presenterExport.GetCurveData();
                     GenerateResources();
                     httpResponse.Data = new
@@ -904,7 +984,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             List<ColorDensity> list = new List<ColorDensity>();
             if (dt != null && dt.Rows.Count > 0)
+            {
                 for (int index = 0; index < dt.Rows.Count; index++)
+                {
                     list.Add(new ColorDensity()
                     {
                         MeasurementID = Convert.ToInt32(dt.Rows[index]["MeasurementID"]),
@@ -913,6 +995,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         ΔE = Convert.ToDecimal(dt.Rows[index]["ΔE"]),
                         ΔElimit = Convert.ToDecimal(dt.Rows[index]["ΔElimit"])
                     });
+                }
+            }
 
             return list;
         }
@@ -1049,7 +1133,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         .Where(r => r.Field<byte>("PatchTypeID") == 121 || r.Field<byte>("PatchTypeID") == 132 || r.Field<byte>("PatchTypeID") == 143 || r.Field<byte>("PatchTypeID") == 154)
                         .CopyToDataTable();
             }
-           
+
             else if (MetricSumID == "43")    //----For 'CMY ΔE Max'
             {
                 DT = dtPatchDetails.AsEnumerable()
@@ -1178,7 +1262,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int SpotProjectId { get; set; }
         public bool IsUsed { get; set; }
         public bool IsSyncDLPPlusType { get; set; }
-        
+        public bool IsDlpMultiColor { get; set; }
+
         #endregion
 
         #region IViewReportCMYKDensity Members
