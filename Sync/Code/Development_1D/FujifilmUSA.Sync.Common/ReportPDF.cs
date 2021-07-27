@@ -2208,7 +2208,10 @@ namespace FujifilmUSA.Sync.Common
                             PatchStr.Append("<td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
                         PatchStr.Append("</tr>");
                     }
-                    PatchStr.Append("</table></br></br></br>");
+
+                    PatchStr.Append("</table></br>");
+
+                    //PatchStr.Append("</table></br><span style=\"padding-bottom:50px;\">&nbsp;&nbsp;&nbsp;</span>");
 
                     FileStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
 
