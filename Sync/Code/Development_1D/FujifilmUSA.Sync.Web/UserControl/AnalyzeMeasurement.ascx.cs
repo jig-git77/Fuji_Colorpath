@@ -357,6 +357,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //Pass use DLP as false for initial call
                         useDLP = false;
                         DeviceLinkProfile = null;
+                        DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
 
                         if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
                             _presenterAnalyze.CreateG7AlignmentCurve();

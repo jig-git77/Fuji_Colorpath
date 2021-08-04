@@ -95,7 +95,8 @@ namespace FujifilmUSA.Sync.Presenter
                 true,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                 DateTime.Now,
-                _viewConfirmSave.Is1DMeasurementSmoothing);
+                _viewConfirmSave.Is1DMeasurementSmoothing,
+                _viewConfirmSave.ProfileDescription);
 
         }
 
@@ -110,7 +111,8 @@ namespace FujifilmUSA.Sync.Presenter
                 true,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                 DateTime.Now,
-                _viewConfirmSave.Is1DMeasurementSmoothing);
+                _viewConfirmSave.Is1DMeasurementSmoothing,
+                _viewConfirmSave.ProfileDescription);
 
         }
 

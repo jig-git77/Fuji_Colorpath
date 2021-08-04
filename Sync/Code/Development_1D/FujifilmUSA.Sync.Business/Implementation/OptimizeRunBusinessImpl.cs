@@ -601,7 +601,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         //to-do set return type
-        public void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing)
+        public void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing, string description)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -641,6 +641,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
+                    alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
 
                     //alignmentCurveRequest.PCSDataType = PCSDataType.XYZ;//(PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());                    
                     alignmentCurveRequest.PCSDataType = (ProfilerServiceClient.Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
@@ -675,7 +676,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateG7AlignmentCurve"));
         }
 
-        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing)
+        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing, string description)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -715,6 +716,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
+                    alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
 
                     //alignmentCurveRequest.PCSDataType = PCSDataType.Density; // (PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());
                     alignmentCurveRequest.PCSDataType = (Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;

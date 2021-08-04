@@ -194,6 +194,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         PCSDataTypes = SessionManager.Instance.CurrentProject.PCSDataTypes;
                         DensityType = SessionManager.Instance.CurrentProject.DensityType;
+
+                        EndDate = System.DateTime.Now;
+                        ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+
                         if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
                             _presenterConfirmSave.CreateG7AlignmentCurve();
                         else//ISO                                                    
