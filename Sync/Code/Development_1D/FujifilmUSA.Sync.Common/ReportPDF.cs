@@ -2195,7 +2195,7 @@ namespace FujifilmUSA.Sync.Common
                     if (measurementID == 0)
                         PatchStr.Append("<th style='text-align: right;'>Predicted ∆L*</th><th style='text-align: right;'>Predicted ∆a*</th><th style='text-align: right;'>Predicted ∆b*</th><th style='text-align: right;'>Predicted ∆E</th></tr>");
                     else
-                        PatchStr.Append("<th style='text-align: right;'>∆E Target-Prediction</th><th style='text-align: right;'>∆E Measured-Target</th><th style='text-align: right;'>∆E Measured-Prediction</th></tr>");
+                        PatchStr.Append("<th style='text-align: right;'>∆E T-P</th><th style='text-align: right;'>∆E M-T</th><th style='text-align: right;'>∆E M-P</th></tr>");
                     //foreach (DataRow row in dtPatchDetails.AsEnumerable().fi(5).CopyToDataTable())
                     for (int j = currentIndex; j < rowLimit; j++)
                     {
