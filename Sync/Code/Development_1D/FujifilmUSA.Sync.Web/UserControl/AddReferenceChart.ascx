@@ -4,15 +4,14 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
-<style type="text/css">    
-     .breakWord50
-     {
-            max-width: 50px !important;
-            word-break: break-all !important;
-            word-wrap: break-word !important;
-            vertical-align: top;
-            line-height: 15px;
-     }  
+<style type="text/css">
+    .breakWord50 {
+        max-width: 50px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        vertical-align: top;
+        line-height: 15px;
+    }
 </style>
 
 <script type="text/javascript">
@@ -23,27 +22,29 @@
 </script>
 
 <div class="admin_top">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1><asp:Localize runat="server" Text="Reference Chart Management" 
+        <h1>
+            <asp:Localize runat="server" Text="Reference Chart Management"
                 ID="locReferenceChartMgmt" meta:resourcekey="locReferenceChartMgmtResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
     <div style="margin-left: 0px;">
         <center>
-            <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+          <%--  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>--%>
             <center>
-                <fieldset style="width: 92%;">
+                <fieldset>
                     <legend>
                         <asp:Label ID="lblHeader" runat="server" Text="Add Reference Chart" 
                             meta:resourcekey="lblHeaderResource1"></asp:Label>
                     </legend>
                     <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
                         Visible="False" />
-                    <table width="98%">                       
+                    <table>                       
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize Text="Chart Name" runat="server" 
@@ -165,10 +166,10 @@
                                 <b>&nbsp;: &nbsp;</b>
                             </td>
                             <td align="left">
-                                <table style="width: 100%;">
+                                <table style="width:100%;">
                                     <tr>
-                                        <td>
-                                             <div style="float: left;">                                   
+                                        <td style="vertical-align:top;width:25%">
+                                                        <div style="float: left;">                                   
                                                 <asp:CheckBoxList ID="chklist_ProjectType" runat="server" 
                                                      CssClass="checkListBox">
                                                     <asp:ListItem Value="0">Sync1D_ISO: </asp:ListItem>
@@ -178,7 +179,10 @@
                                                     <asp:ListItem Value="4">DLP Multi Color: </asp:ListItem>
                                                 </asp:CheckBoxList>                                   
                                             </div>
-                                            <div style="float: left;">  
+
+                                         </td>
+                                        <td style="vertical-align:top;">
+                                          <div style="float: left;">  
                                                 <asp:DropDownList ID="cmbSync1D_ISO" runat="server">
                                                     <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
                                                     <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
@@ -203,14 +207,12 @@
                                                     <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
                                                     <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
                                                 </asp:DropDownList>
-                                            </div>                              
-                                           
+                                                  <br />
                                               
-
-                                          
-                                        </td>
-                                        <td valign="top">
-                                            <div style="float: left;">  
+                                            </div>
+                                                    </td>
+                                        <td style="vertical-align:top;">
+                                                           <div style="float: left;">  
                                                 <asp:CheckBoxList ID="chklist_Validation" runat="server" 
                                                      CssClass="checkListBox">
                                                     <asp:ListItem Value="0">Validation 1D: </asp:ListItem>
@@ -219,7 +221,9 @@
                                                      <asp:ListItem Value="3">Validation 4D_Mutli_Color: </asp:ListItem>
                                                 </asp:CheckBoxList>   
                                             </div>
-                                            <div style="float: left;">  
+                                                           </td>
+                                        <td style="vertical-align:top;">
+                                                        <div style="float: left;">  
                                                   <asp:DropDownList ID="cmbValidation_1D" runat="server">
                                                     <asp:ListItem Selected="True" Value="1">G7</asp:ListItem>
                                                     <asp:ListItem Value="2">ISO</asp:ListItem>
@@ -239,78 +243,104 @@
                                                     <asp:ListItem Value="2">ISO</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
-                                        </td>
-                                       
+                                                           </td>   
                                     </tr>
-                                    
                                 </table>
                                
                             </td>
                         </tr>       
-                           
-
-
-
-                         <tr>
-                            <td align="right">
-                                <span style="font-weight: bold;"><asp:Localize Text="How many Colors" 
-                                    runat="server" ID="locHowManyColors" 
-                                    meta:resourcekey="locHowManyColorsResource1"></asp:Localize><span style="color: Red;">*</span>
-                                </span>
-                            </td>
-                            <td>
-                                <b>&nbsp;: &nbsp;</b>
-                            </td>
-                            <td align="left">
-                                <div style="float: left;">
-                                    <asp:DropDownList ID="cmbHowManyColors" runat="server" Width="400px" CssClass="select" OnSelectedIndexChanged="cmbHowManyColors_SelectedIndexChanged" AutoPostBack="true"
-                                        DataValueField="Key" DataTextField="Value" 
-                                        meta:resourcekey="cmbHowManyColorResource1">
-                                        <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="5" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="6" Value="2"></asp:ListItem>
-                                        <asp:ListItem Text="7" Value="3"></asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
-                                <div style="float: left">
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic"
-                                        ControlToValidate="cmbHowManyColors" ForeColor="Red" 
-                                        ValidationGroup="vgAddRefChart">
-                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                            ValidationMsg="Please select How Many Colors." Size="200"  ResourceValidationMsg="NumberOfColorsRequiredResource"/>
-                                    </asp:RequiredFieldValidator>
-                                </div>
-                                <div class="clear">
-                                </div>
-                            </td>
-                        </tr>   
-
-                         <tr id="Tr_NameOfColors" runat="server" visible="false">
-                            <td align="right">
-                                <span style="font-weight: bold;"><asp:Localize Text="Name of Colors" 
-                                    runat="server" ID="locNameOfColors" 
-                                    meta:resourcekey="locNameOfColorsResource1"></asp:Localize><span style="color: Red;">*</span>
-                                </span>
-                            </td>
-                            <td>
-                                <b>&nbsp;: &nbsp;</b>
-                            </td>
-                            <td align="left">
-                                <div style="float: left;">
-                                    <asp:TextBox ID="txtColor5" runat="server"></asp:TextBox>
-                                    <asp:TextBox ID="txtColor6" runat="server"></asp:TextBox>
-                                    <asp:TextBox ID="txtColor7" runat="server"></asp:TextBox>
-                                </div>
-                                <div style="float: left">
-                                   
-                                </div>
-                                <div class="clear">
-                                </div>
-                            </td>
-                        </tr>   
-
-
-
+                      
+                                <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                     IsSupportMulticolor
+                                    </span>
+                                </td>
+                                <td> <span style="font-weight: bold;">
+                                    &nbsp;:&nbsp;</span>
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsSupportMulticolor" runat="server" AutoPostBack="True" OnCheckedChanged="chkIsSupportMulticolor_CheckedChanged" />
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                                <tr id="trTotalNoColor" runat="server">
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                     TotalNoColor<span style="color: Red;">*</span>
+                                    </span>
+                                </td>
+                                <td>
+                                   <span style="font-weight: bold;"> &nbsp;:&nbsp;</span>
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                      <asp:DropDownList ID="drpTotalNoColor" runat="server" AutoPostBack="true" OnSelectedIndexChanged="drpTotalNoColor_SelectedIndexChanged" Width="370px">
+                                          <asp:ListItem Text="------SELECT ANY------" Value="0"></asp:ListItem>
+                                          <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                          <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                          <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                          <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                          <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                      </asp:DropDownList>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                                <tr id="trChannel" runat="server">                               
+                               <td colspan="3" style="vertical-align:top;">
+                                   <div style="margin-left:199px;">
+                                     <table>
+                                        <tr id="trChannel5" runat="server">
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_5<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel5" runat="server"  Width="370px" ></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr id="trChannel6" runat="server">
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_6<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel6" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr id="trChannel7" runat="server">
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_7<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel7" runat="server"  Width="370px" ></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr id="trChannel8" runat="server">
+                                           <td style="vertical-align:top;">
+                                                <span style="font-weight: bold;">Channel_8<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel8" runat="server"  Width="370px" ></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr id="trChannel9" runat="server">
+                                           <td style="vertical-align:top;">
+                                                <span style="font-weight: bold;">Channel_9<span style="color: Red;">*</span>:</span>
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel9" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                   </table>
+                                    </div>
+                              </td>
+                          
+                         </tr>
+                   
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize runat="server" 
@@ -354,8 +384,8 @@
                             </td>
                         </tr>
                         <tr id="Tr_UploadData" runat="server">
-                            <td align="right" style="width:350px;">
-                                <span style="font-weight: bold;">
+                            <td align="right" style="width:250px;">
+                                <span style="font-weight: bold;word-break:break-all;">
                                 <asp:Localize runat="server" 
                                     Text="Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)" ID="locUploadChartData" 
                                     meta:resourcekey="locUploadChartDataResource1"></asp:Localize><span style="color: Red;">*</span>
@@ -364,8 +394,8 @@
                             <td>
                                 <b>&nbsp;: &nbsp;</b>
                             </td>
-                            <td>
-                                <table cellpadding="0" cellspacing="0" style="width:100%;">
+                            <td align="left">
+                                <table cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td>
                                               <telerik:RadAsyncUpload runat="server" ID="fucUploadChartData"
@@ -374,7 +404,7 @@
                                              </telerik:RadAsyncUpload>
                                         </td>
                                         <td>
-                                           
+                                           <b>&nbsp;: &nbsp;</b>
                                         </td>
                                         <td align="right" style="width:200px;">
                                              <asp:LinkButton ID="lbtnUploadChartData" runat="server" CssClass="gray_bt" 
@@ -425,11 +455,13 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
-                                    AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
-                                    EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true" 
-                                    OnNeedDataSource="rgChartData_OnNeedDataSource" 
-                                    GridLines="None">
+
+                                  <table>
+                                       <tr>
+                                           <td style="vertical-align:top;">
+                                             <div style="overflow:scroll;width:850px;">
+                                                  <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True" AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
+                                    EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true" OnNeedDataSource="rgChartData_OnNeedDataSource" GridLines="None">
 
                                     <HeaderStyle Font-Bold="True"></HeaderStyle>
 
@@ -440,7 +472,7 @@
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="SampleID" AllowFiltering="true" HeaderText="SampleID"
                                                 UniqueName="SampleID" SortExpression="SampleID" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="10%"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  
                                                 meta:resourcekey="GridTemplateColumnResource1">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblSampleID" runat="server" Text='<%# Eval("SampleID") %>' 
@@ -449,7 +481,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="SampleName" AllowFiltering="true" HeaderText="Sample Name"
                                                 UniqueName="SampleName" SortExpression="SampleName" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true" ItemStyle-Width="15%"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true" 
                                                 meta:resourcekey="GridTemplateColumnResource2">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblSampleName" runat="server" Text='<%# Eval("SampleName") %>' 
@@ -458,8 +490,8 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKC" AllowFiltering="true" HeaderText="CMYK_C"
                                                 UniqueName="CMYKC" SortExpression="CMYKC" 
-                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" ItemStyle-Width="15%"
-                                                ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource3">
+                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" 
+                                                ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource3">                                                
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKC" runat="server" Text='<%# Eval("CMYKC") %>' 
                                                         meta:resourcekey="lblCMYKCResource1" />
@@ -467,7 +499,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKM" AllowFiltering="true" HeaderText="CMYK_M"
                                                 UniqueName="CMYKM" SortExpression="CMYKM" 
-                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true"  ItemStyle-Width="15%"
+                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true"  
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource4">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKM" runat="server" Text='<%# Eval("CMYKM") %>' 
@@ -476,7 +508,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKY" AllowFiltering="true" HeaderText="CMYK_Y"
                                                 UniqueName="CMYKY" SortExpression="CMYKY" 
-                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" ItemStyle-Width="15%"
+                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" 
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource5">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKY" runat="server" Text='<%# Eval("CMYKY") %>' 
@@ -485,7 +517,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKK" AllowFiltering="true" HeaderText="CMYK_K"
                                                 UniqueName="CMYKK" SortExpression="CMYKK" 
-                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true" ItemStyle-Width="15%"
+                                                ItemStyle-CssClass="breakWord50" ItemStyle-Wrap="true"
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource6">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKK" runat="server" Text='<%# Eval("CMYKK") %>' 
@@ -494,17 +526,57 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="HTMLColor" AllowFiltering="true" HeaderText="HTML RGB"
                                                 UniqueName="HTMLColor" SortExpression="HTMLColor" ItemStyle-CssClass="breakWord50"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  ItemStyle-Width="15%"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  
                                                 meta:resourcekey="GridTemplateColumnResource7">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblHTMLColor" runat="server" Text='<%# Eval("HTMLColor") %>' 
                                                         meta:resourcekey="lblHTMLColorResource1" />
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>                                        
+                                            <telerik:GridTemplateColumn DataField="Channel_5" AllowFiltering="true" HeaderText="CHANNEL_5"
+                                                UniqueName="Channel_5" SortExpression="Channel_5" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  >
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_5" runat="server" Text='<%# Eval("Channel_5") %>' />
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>   
+                                            <telerik:GridTemplateColumn DataField="Channel_6" AllowFiltering="true" HeaderText="CHANNEL_6"
+                                                UniqueName="Channel_6" SortExpression="Channel_6" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  >
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_6" runat="server" Text='<%# Eval("Channel_6") %>'/>
+                                                </ItemTemplate>
+                                                      </telerik:GridTemplateColumn>   
+                                            <telerik:GridTemplateColumn DataField="Channel_7" AllowFiltering="true" HeaderText="CHANNEL_7"
+                                                UniqueName="Channel_7" SortExpression="Channel_7" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true" >
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_7" runat="server" Text='<%# Eval("Channel_7") %>'/>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn> 
+                                            <telerik:GridTemplateColumn DataField="Channel_8" AllowFiltering="true" HeaderText="CHANNEL_8"
+                                                UniqueName="Channel_8" SortExpression="Channel_8" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true"  >
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_8" runat="server" Text='<%# Eval("Channel_8") %>' />
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn> 
+                                            <telerik:GridTemplateColumn DataField="Channel_9" AllowFiltering="true" HeaderText="CHANNEL_9"
+                                                UniqueName="Channel_9" SortExpression="Channel_9" ItemStyle-CssClass="breakWord50"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true" >
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblChannel_9" runat="server" Text='<%# Eval("Channel_9") %>' />
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
                                         </Columns>
 
                                     </MasterTableView>
                                 </telerik:RadGrid>
+                                          </div>
+                                           </td>
+                                       </tr>
+                                   </table>
+                              
                             </td>
                         </tr>
                         <tr>
@@ -544,6 +616,7 @@
     </div>
 </div>
 <div class="admin_bottom">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="clear">
 </div>

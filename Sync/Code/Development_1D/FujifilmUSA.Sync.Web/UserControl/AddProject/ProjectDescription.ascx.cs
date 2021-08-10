@@ -1,10 +1,10 @@
-﻿using System;
-using FujifilmUSA.Sync.Common;
+﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-using System.Collections.Generic;
-using System.Linq;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -31,7 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public ProjectDescription()
         {
-            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            Load += (sender, e) => ExceptionHandling(Page_Load, sender, e);
         }
 
         protected override void OnInit(EventArgs e)
@@ -80,7 +80,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //if (Common.Utilities.GetEnumDescriptionAttributeValue(item.Key) != Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary))
                     //{
                     if (((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) || (ELicenseType.SpotLibrary != item.Key)))
+                    {
                         ddlLicenseType.Items.Add(new System.Web.UI.WebControls.ListItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
+                    }
                     //}
                 }
                 ddlLicenseType.Items.Insert(0, new System.Web.UI.WebControls.ListItem() { Text = GetResourceString(_recoperationSelectText), Value = "-1" });
@@ -102,7 +104,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void LoadInkOrder()
         {
-            if (cmbInkOrder.DataSource != null) return;
+            if (cmbInkOrder.DataSource != null)
+            {
+                return;
+            }
 
             cmbInkOrder.DataValueField = "Key";
             cmbInkOrder.DataTextField = "Value";
@@ -114,7 +119,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void LoadPrintingTypes()
         {
-            if (cmbPrintingType.DataSource != null) return;
+            if (cmbPrintingType.DataSource != null)
+            {
+                return;
+            }
 
             cmbPrintingType.DataValueField = "Key";
             cmbPrintingType.DataTextField = "Value";
@@ -122,9 +130,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbPrintingType.DataBind();
 
             if (!SessionManager.Instance.CurrentDevice.IsFlexo)
-                cmbPrintingType.Items.FindByText("Flexo").Enabled = (SessionManager.Instance.CurrentProject != null && 
+            {
+                cmbPrintingType.Items.FindByText("Flexo").Enabled = (SessionManager.Instance.CurrentProject != null &&
                     SessionManager.Instance.CurrentProject.PrintCondition != null &&
                     SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId != 0);
+            }
 
             cmbPrintingType.SelectedIndex = 0;
         }
@@ -160,7 +170,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbPrintingType.Enabled = SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId == 0 ? true : false;
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                {
                     Tr_OffsetPrintData.Visible = true;
+                }
 
                 cmbPrintingType.SelectedIndex = cmbPrintingType.Items.IndexOf(cmbPrintingType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.PrintingType)));
                 SetProjectTypeVisisbility();
@@ -170,7 +182,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtBlanketAge.Text = SessionManager.Instance.CurrentProject.PrintCondition.BlanketAge;
                 txtScreening.Text = SessionManager.Instance.CurrentProject.PrintCondition.Screening;
                 txtCoating.Text = SessionManager.Instance.CurrentProject.PrintCondition.Coating;
-                
+
 
                 if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit) //If project is in Edit mode display Description tab for editing everytime and pop up Next button to move to next page
                 {
@@ -212,7 +224,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 int maxProjectLimit = 0;
                 if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
+                {
                     maxProjectLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Where(p => p.Key == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.Value).FirstOrDefault();
+                }
 
                 if (currentProjectLimit >= maxProjectLimit)
                 {
@@ -223,7 +237,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Response.Redirect("ProjectMaxLimit.aspx");
                 }
             }
-            
+
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
             {
                 ProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectId;
@@ -312,7 +326,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnNext_Click(object sender, EventArgs e)
         {
+            //This called when edit time so here IsCustomPlugin value set while we edit project from CPSync4D.PrintCondition table
+            //but when we come to description page and click on "Next" button on that time here we create new object for PrintCondition
+            //so IsCustomPlugin value is removed which we set at time of edit the project so we keep this value on edit time we added below 
+            //condition and code.
+            bool IsCustomPluginV = SessionManager.Instance.CurrentDevice.License.MeasureTool == EMeasureTool.SYNCMeasureApp ? true : false;
+            if (SessionManager.Instance.CurrentProject.ProjectId != 0)
+            {
+                if (SessionManager.Instance.CurrentProject.PrintCondition != null)
+                {
+                    IsCustomPluginV = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin;
 
+                }
+            }
             SessionManager.Instance.CurrentProject.PrintCondition = new FujifilmUSA.Sync.Entity.PrintCondition
             {
                 Media = txtMedia.Text.Trim(),
@@ -326,7 +352,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Blanket = txtBlanket.Text.Trim(),
                 BlanketAge = txtBlanketAge.Text.Trim(),
                 Screening = txtScreening.Text.Trim(),
-                Coating = txtCoating.Text.Trim()
+                Coating = txtCoating.Text.Trim(),
+                IsCustomPlugin = IsCustomPluginV
             };
 
 
@@ -347,7 +374,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             SetProjectTypeVisisbility();
         }
-        
+
         void SetProjectTypeVisisbility()
         {
             if (cmbPrintingType.SelectedIndex == 1)//flexo printing type
@@ -382,7 +409,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtCoating.Text = "";
             }
         }
-    
+
         #endregion
 
         #region Properties

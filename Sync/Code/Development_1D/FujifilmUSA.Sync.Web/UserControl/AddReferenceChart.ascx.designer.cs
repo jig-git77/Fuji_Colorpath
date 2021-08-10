@@ -301,85 +301,130 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.DropDownList cmbValidation_4D_Multi_Color;
         
         /// <summary>
-        /// locHowManyColors control.
+        /// chkIsSupportMulticolor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locHowManyColors;
+        protected global::System.Web.UI.WebControls.CheckBox chkIsSupportMulticolor;
         
         /// <summary>
-        /// cmbHowManyColors control.
+        /// trTotalNoColor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbHowManyColors;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trTotalNoColor;
         
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// drpTotalNoColor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.DropDownList drpTotalNoColor;
         
         /// <summary>
-        /// ValidationContainer1 control.
+        /// trChannel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer ValidationContainer1;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel;
         
         /// <summary>
-        /// Tr_NameOfColors control.
+        /// trChannel5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr_NameOfColors;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel5;
         
         /// <summary>
-        /// locNameOfColors control.
+        /// drpChannel5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locNameOfColors;
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel5;
         
         /// <summary>
-        /// txtColor5 control.
+        /// trChannel6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtColor5;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel6;
         
         /// <summary>
-        /// txtColor6 control.
+        /// drpChannel6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtColor6;
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel6;
         
         /// <summary>
-        /// txtColor7 control.
+        /// trChannel7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtColor7;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel7;
+        
+        /// <summary>
+        /// drpChannel7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel7;
+        
+        /// <summary>
+        /// trChannel8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel8;
+        
+        /// <summary>
+        /// drpChannel8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel8;
+        
+        /// <summary>
+        /// trChannel9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel9;
+        
+        /// <summary>
+        /// drpChannel9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel9;
         
         /// <summary>
         /// locUploadChartPreview control.

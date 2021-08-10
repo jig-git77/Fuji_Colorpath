@@ -221,6 +221,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnCurrentDlpSubOperation.Value = ((int)SessionManager.Instance.CurrentDlpSubOperation).ToString();
                 hdnSync1DType.Value = IsSync1DType.ToString();
                 hdnSyncDlpPlusType.Value = IsSyncDLPPlusType.ToString();
+                hdnIsDlpMultiColor.Value = Convert.ToString(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ? true : false);
+
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
@@ -355,6 +357,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //Pass use DLP as false for initial call
                         useDLP = false;
                         DeviceLinkProfile = null;
+                        DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
 
                         if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
                             _presenterAnalyze.CreateG7AlignmentCurve();
@@ -367,6 +370,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                         DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
                         _presenterAnalyze.CreateDestinationAndDlpPlus();
+                    }
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
+                    {
+                        EndDate = System.DateTime.Now;
+                        DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                        DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                        _presenterAnalyze.CreateDestinationAndDlpMultiColor();
                     }
                     else
                     {
@@ -526,6 +536,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLPPlus);
             }
         }
+        public bool IsDlpMultiColor { get; set; }
         #endregion
     }
 }

@@ -34,6 +34,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         String.Join(",", measurementIds),
                                         Convert.ToInt32(PCSDataType)
                                     });
+
                     if (dsPcsDcsData.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)
@@ -42,7 +43,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_M"));
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
-
                             if (PCSDataType == PCSDataTypes.Spectral)
                             {
                                 response.PcsData.Add(DataReader.ReadDouble(row, "nm380"));
@@ -428,7 +428,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "CPSync4DPlus.GetMeasurementDeltasByMeasurementID_Avg";
             }
-            
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -485,7 +485,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return VmeasurementSummary;
         }
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false)
         {
             // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
@@ -497,6 +497,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (IsVerification)
             {
                 storedProc = "CPSyncV.GetVPatchDetailsByMeasurementID";
+            }
+            if (IsDlpMultiColor)
+            {
+                storedProc = "CPSync4DMultiColor.GetPatchDetailsByMeasurementID";
             }
 
             DataTable dtPatchDetails = new DataTable();
@@ -723,7 +727,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         #region Get common Gamut chart data
-        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsDlpMultiColor = false)
         {
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
             var GamutChartData = new List<AnalyzeChart_Gray>[3];
@@ -740,7 +744,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "CPSyncV.GetVChartData_Gray";
             }
-
+            if (IsDlpMultiColor)
+            {
+                storedProc = "CPSync4DMultiColor.GetChartData_Gray";
+            }
+            
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1100,7 +1108,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false, bool IsSyncDLPPlusType = false)
         {
-            var G7ChardDAta = new List<AnalyzeChart_G7>[8];            
+            var G7ChardDAta = new List<AnalyzeChart_G7>[8];
             string storedProc = "[CPSync].[GetChartData_G7]";
             if (IsAverageOfMeasurements)
             {
@@ -1118,7 +1126,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "[CPSync4DPlus].[GetChartData_G7_Avg]";
             }
-            
+
 
             #region Get Data logic for the GrayF
             Common.ImplementBusinessLogic(
@@ -2795,7 +2803,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         mToolVersion.MinReqVersion = Convert.ToString(dtPatchDetails.Rows[0]["MinReqVersion"]);
                         mToolVersion.URLlocation = Convert.ToString(dtPatchDetails.Rows[0]["URLlocation"]);
                         mToolVersion.UpdateInfo = Convert.ToString(dtPatchDetails.Rows[0]["UpdateInfo"]);
-                        
+
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_ValidateApplicationMeasurement"));
@@ -2821,6 +2829,285 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurementErrorFile"));
+        }
+
+        public DataTable ProjectListByDeviceLAB_Xmf(string deviceSerialNo, short instrumentTypeID)
+        {
+            var measurements = new DataSet();
+            string storedProc = "CP.GetProjectListBySerial_LAB_Xmf";
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                             new object[] { deviceSerialNo, instrumentTypeID });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_ProjectListByDeviceLAB_Xmf"));
+            return dtPatchDetails;
+        }
+
+        public DataSet GetChannelMeasurementData(List<int> measurementIds)
+        {
+            DataSet dtResult = new DataSet();
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    dtResult = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "CPSync4D.GetChannelMeasurementData",
+                            new object[]
+                                    {
+                                        String.Join(",", measurementIds),
+
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "GetChannelMeasurementData"));
+            return dtResult;
+        }
+
+        //public MeasurementDataResponse GetMultiColorMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType)
+        //{
+        //    var response = new MeasurementDataResponse()
+        //    {
+        //        DcsData = new List<double>(),
+        //        PcsData = new List<double>()
+        //    };
+        //    Common.ImplementBusinessLogic(
+        //        () =>
+        //        {
+        //            var dsPcsDcsData = DataAccessFactory.
+        //                Instance.
+        //                GetDsResult(
+        //                    "CPSync4D.GetMeasurementData",
+        //                    new object[]
+        //                            {
+        //                                String.Join(",", measurementIds),
+        //                                Convert.ToInt32(PCSDataType)
+        //                            });
+        //            var dsMultiColorData = DataAccessFactory.
+        //              Instance.
+        //              GetDsResult(
+        //                  "CPSync4D.GetChannelMeasurementData",
+        //                  new object[]
+        //                          {
+        //                                String.Join(",", measurementIds)
+        //                          });
+        //            if (dsPcsDcsData.Tables[0].Rows.Count > 0)
+        //            {
+        //                foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)
+        //                {
+        //                    //response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_C"));
+        //                    //response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_M"));
+        //                    //response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
+        //                    //response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
+        //                    if (PCSDataType == PCSDataTypes.Spectral)
+        //                    {
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm380"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm390"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm400"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm410"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm420"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm430"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm440"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm450"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm460"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm470"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm480"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm490"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm500"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm510"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm520"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm530"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm540"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm550"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm560"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm570"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm580"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm590"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm600"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm610"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm620"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm630"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm640"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm650"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm660"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm670"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm680"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm690"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm700"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm710"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm720"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "nm730"));
+        //                    }
+        //                    else //XYZ data
+        //                    {
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_X"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Y"));
+        //                        response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Z"));
+        //                    }
+        //                }
+
+        //                DataTable dtMesaurementID = dsPcsDcsData.Tables[0].DefaultView.ToTable(true, "MeasurementID");
+        //                for (int i = 0; i < dtMesaurementID.Rows.Count; i++)
+        //                {
+        //                    dsPcsDcsData.Tables[0].DefaultView.RowFilter = "MeasurementID = " + dtMesaurementID.Rows[i][0].ToString();
+        //                    DataView dvResult = dsPcsDcsData.Tables[0].DefaultView;
+        //                    foreach (DataRow row in dvResult.ToTable().Rows)
+        //                    {
+        //                        response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_C"));
+        //                        response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_M"));
+        //                        response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
+        //                        response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
+        //                    }
+        //                    ///Adding multicolor chaneel
+        //                    if (dsMultiColorData.Tables.Count > 0)
+        //                    {
+        //                        if (dsMultiColorData.Tables[0].Rows.Count > 0)
+        //                        {
+        //                            dsMultiColorData.Tables[0].DefaultView.RowFilter = "MeasurementID = " + dtMesaurementID.Rows[i][0].ToString();
+        //                            DataView dvResultMultiColor = dsMultiColorData.Tables[0].DefaultView;
+        //                            foreach (DataRow row in dvResultMultiColor.ToTable().Rows)
+        //                            {
+        //                                response.DcsData.Add(DataReader.ReadDouble(row, "ChannelValue"));
+        //                            }
+        //                        }
+        //                    }
+
+
+
+        //                }
+
+        //            }
+        //        },
+        //        new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementData"));
+        //    return response;
+        //}
+
+        public MeasurementDataResponse GetMultiColorMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType)
+        {
+            var response = new MeasurementDataResponse()
+            {
+                DcsData = new List<double>(),
+                PcsData = new List<double>()
+            };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPcsDcsData = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "CPSync4D.GetMeasurementData_MultiColor",
+                            new object[]
+                                    {
+                                        String.Join(",", measurementIds),
+                                        Convert.ToInt32(PCSDataType)
+                                    });
+
+                    if (dsPcsDcsData.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)
+                        {
+                            response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_C"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_M"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
+                            if (!string.IsNullOrEmpty(Convert.ToString(row["TotalNoColor"])))
+                            {
+                                response.TotalNoColors = Convert.ToInt32(row["TotalNoColor"]);
+                                if (Convert.ToInt32(row["TotalNoColor"]) == 5)
+                                {
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_5"));
+                                }
+                                else if (Convert.ToInt32(row["TotalNoColor"]) == 6)
+                                {
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_5"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_6"));
+                                }
+                                else if (Convert.ToInt32(row["TotalNoColor"]) == 7)
+                                {
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_5"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_6"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_7"));
+                                }
+                                else if (Convert.ToInt32(row["TotalNoColor"]) == 8)
+                                {
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_5"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_6"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_7"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_8"));
+                                }
+                                else if (Convert.ToInt32(row["TotalNoColor"]) == 9)
+                                {
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_5"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_6"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_7"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_8"));
+                                    response.DcsData.Add(DataReader.ReadDouble(row, "Channel_9"));
+                                }
+                            }
+
+
+                            if (PCSDataType == PCSDataTypes.Spectral)
+                            {
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm380"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm390"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm400"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm410"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm420"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm430"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm440"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm450"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm460"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm470"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm480"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm490"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm500"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm510"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm520"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm530"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm540"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm550"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm560"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm570"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm580"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm590"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm600"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm610"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm620"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm630"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm640"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm650"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm660"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm670"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm680"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm690"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm700"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm710"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm720"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "nm730"));
+                            }
+                            else //XYZ data
+                            {
+                                response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_X"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Y"));
+                                response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Z"));
+                            }
+                        }
+
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementData"));
+            return response;
         }
         #endregion
 

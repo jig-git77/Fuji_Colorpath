@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
 namespace FujifilmUSA.Sync.Entity
 {
     public class ReferenceChart
@@ -22,6 +16,12 @@ namespace FujifilmUSA.Sync.Entity
         public decimal LabL { get; set; }
         public decimal LabA { get; set; }
         public decimal LabB { get; set; }
+        public decimal Channel_5 { get; set; }
+        public decimal Channel_6 { get; set; }
+        public decimal Channel_7 { get; set; }
+        public decimal Channel_8 { get; set; }
+        public decimal Channel_9 { get; set; }
+
 
 
         //public ReferenceLab ReferenceLABs { get; set; }

@@ -1084,6 +1084,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int SpotProjectId { get; set; }
         public bool IsUsed { get; set; }
         public bool IsSyncDLPPlusType { get; set; }
+        public bool IsDlpMultiColor { get; set; }
         #endregion
     }
 }

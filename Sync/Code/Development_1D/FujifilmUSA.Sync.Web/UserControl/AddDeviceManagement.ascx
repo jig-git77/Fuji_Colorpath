@@ -430,6 +430,95 @@
                             <tr>
                                 <td align="right">
                                     <span style="font-weight: bold;">
+                                     IsSupportMulticolor
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsSupportMulticolor" runat="server" AutoPostBack="true" OnCheckedChanged="chkIsSupportMulticolor_CheckedChanged"/>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="trTotalNoColor" runat="server">
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                     TotalNoColor<span style="color: Red;">*</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                      <asp:DropDownList ID="drpTotalNoColor" runat="server" AutoPostBack="true" OnSelectedIndexChanged="drpTotalNoColor_SelectedIndexChanged" Width="370px">
+                                          <asp:ListItem Text="------SELECT ANY------" Value="0"></asp:ListItem>
+                                          <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                          <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                          <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                          <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                          <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                      </asp:DropDownList>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                           <tr id="trChannel" runat="server">
+                                
+                               <td colspan="3" style="vertical-align:top;text-align:left;">
+                                   <table style="width:100%;margin-left:44px;">
+                                       <tr id="trChannel5" runat="server">
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_5<span style="color: Red;">*</span></span>&nbsp;:
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel5" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr id="trChannel6" runat="server">
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_6<span style="color: Red;">*</span></span>&nbsp;:
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel6" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr id="trChannel7" runat="server">
+                                           <td style="vertical-align:top;">
+                                               <span style="font-weight: bold;"> Channel_7<span style="color: Red;">*</span></span>&nbsp;:
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel7" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr id="trChannel8" runat="server">
+                                           <td style="vertical-align:top;">
+                                                <span style="font-weight: bold;">Channel_8<span style="color: Red;">*</span></span>&nbsp;:
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel8" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                        <tr id="trChannel9" runat="server">
+                                           <td style="vertical-align:top;">
+                                                <span style="font-weight: bold;">Channel_9<span style="color: Red;">*</span></span>&nbsp;:
+                                           </td>
+                                            <td style="vertical-align:top;">
+                                               <asp:DropDownList ID="drpChannel9" runat="server"  Width="370px"></asp:DropDownList>
+                                           </td>
+                                       </tr>
+                                   </table>
+                               </td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
                                     <asp:Localize ID="locIsActive" runat="server" 
                                         meta:resourcekey="locIsActiveResource1" Text="Is Active?"></asp:Localize>
                                     </span>

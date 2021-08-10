@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false)
         {
             return new DataTable();
         }
@@ -57,7 +57,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             throw new NotImplementedException();
         }
 
-        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsDlpMultiColor = false)
         {
             throw new NotImplementedException();
         }
@@ -270,6 +270,20 @@ namespace FujifilmUSA.Sync.Business.Mock
         public MToolVersion CheckMToolVersionUpdate(int oSPlatformID)
         {
             throw new NotImplementedException();
+        }
+        public DataTable ProjectListByDeviceLAB_Xmf(string deviceSerialNo, short instrumentTypeID)
+        {
+            return new DataTable();
+        }
+        public DataSet GetChannelMeasurementData(List<int> measurementIds)
+        {
+            return new DataSet();
+
+        }
+        public MeasurementDataResponse GetMultiColorMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType)
+        {
+            return new MeasurementDataResponse();
+
         }
         #endregion
 

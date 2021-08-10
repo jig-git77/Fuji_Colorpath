@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.IO;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Entity;
+﻿using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using Telerik.Web.UI;
 
@@ -24,9 +23,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public decimal CmykY { get; set; }
         public decimal CmykK { get; set; }
         public string HTMLColor { get; set; }
-        public decimal Color5 { get; set; }
-        public decimal Color6 { get; set; }
-        public decimal Color7 { get; set; }
+        public decimal Channel_5 { get; set; }
+        public decimal Channel_6 { get; set; }
+        public decimal Channel_7 { get; set; }
+        public decimal Channel_8 { get; set; }
+        public decimal Channel_9 { get; set; }
     }
 
     public partial class AddReferenceChart : BaseControl, IViewAddReferenceChart
@@ -41,21 +42,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
         public AddReferenceChart()
         {
-            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            Load += (sender, e) => ExceptionHandling(Page_Load, sender, e);
         }
         #region Page Events
         protected override void OnInit(EventArgs e)
-        {            
+        {
             _presenterAddReferenceChart = new PresenterAddReferenceChart(this);
+
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
-            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);            
+        {
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            trChannel.Visible = false;
+            trTotalNoColor.Visible = false;
+
             if (!IsPostBack)
-            {               
+            {
                 BindInstrumentTypeList();
-               
+                BindMultiColorChannel();
                 if (Request.QueryString["RefChartId"] != null)
                 {
                     var RefChartId = Request.QueryString["RefChartId"];
@@ -88,35 +94,193 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     return;
                 }
             }
+            if (chkIsSupportMulticolor.Checked)
+            {
+                trTotalNoColor.Visible = true;
+                if (drpChannel5.SelectedValue == "0")
+                {
+                    fujiStatusbar.DisplayMessage("Please select channel5", false);
+                    return;
+
+                }
+                if (Convert.ToInt16(drpTotalNoColor.SelectedValue) >= 0)
+                {
+                    trChannel.Visible = true;
+                }
+                if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 5)
+                {
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+
+                }
+                else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 6)
+                {
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+                    if (drpChannel6.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel6", false);
+                        return;
+                    }
+
+                }
+                else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 7)
+                {
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+                    if (drpChannel6.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel6", false);
+                        return;
+                    }
+                    if (drpChannel7.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel7", false);
+                        return;
+                    }
+
+                }
+                else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 8)
+                {
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+                    if (drpChannel6.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel6", false);
+                        return;
+                    }
+                    if (drpChannel7.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel7", false);
+                        return;
+                    }
+                    if (drpChannel8.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel8", false);
+                        return;
+                    }
+
+                }
+                else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 9)
+                {
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+                    if (drpChannel6.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel6", false);
+                        return;
+                    }
+                    if (drpChannel7.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel7", false);
+                        return;
+                    }
+                    if (drpChannel8.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel8", false);
+                        return;
+                    }
+                    if (drpChannel9.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel9", false);
+                        return;
+
+                    }
+
+                }
+            }
             ReferenceChartType = new ReferenceChartType();
             ReferenceChartType.ReferenceChartTypeId = (short)Convert.ToInt32(hdnRefChartID.Value);
             ReferenceChartType.ChartName = txtChartName.Text.Trim();
             ReferenceChartType.NumOfRows = Convert.ToInt32(txtNumOfRows.Text);
             ReferenceChartType.NumOfCols = Convert.ToInt32(txtNumOfCols.Text);
-            ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);       
+            ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);
             ReferenceChartType.IsUsed = chkIsUsed.Checked;
             ReferenceChartType.ChartSettingXML = string.IsNullOrEmpty(txtChartSetting.Text) ? null : txtChartSetting.Text;
-            if (chklist_ProjectType.Items[0].Selected == true)           
+            if (chklist_ProjectType.Items[0].Selected == true)
+            {
                 ReferenceChartType.IsSync1D_ISO = short.Parse(cmbSync1D_ISO.SelectedValue);
+            }
+
             if (chklist_ProjectType.Items[1].Selected == true)
+            {
                 ReferenceChartType.IsSync1D_G7 = short.Parse(cmbSync1D_G7.SelectedValue);
+            }
+
             if (chklist_ProjectType.Items[2].Selected == true)
+            {
                 ReferenceChartType.IsSync4D = short.Parse(cmbSync4D.SelectedValue);
-            if (chklist_Validation.Items[0].Selected==true)
+            }
+
+            if (chklist_Validation.Items[0].Selected == true)
+            {
                 ReferenceChartType.Validation_1D = short.Parse(cmbValidation_1D.SelectedValue);
+            }
+
             if (chklist_Validation.Items[1].Selected == true)
+            {
                 ReferenceChartType.Validation_4D = short.Parse(cmbValidation_4D.SelectedValue);
+            }
 
             if (chklist_ProjectType.Items[3].Selected == true)
+            {
                 ReferenceChartType.IsSync4D_Plus = short.Parse(cmbSync4DPlus.SelectedValue);
+            }
 
             if (chklist_Validation.Items[2].Selected == true)
+            {
                 ReferenceChartType.Validation_4DPlus = short.Parse(cmbValidation4DPlus.SelectedValue);
+            }
 
             if (chklist_ProjectType.Items[4].Selected == true)
+            {
                 ReferenceChartType.IsDLPMultiColor = short.Parse(cmbSync4DMultiColor.SelectedValue);
+            }
+
             if (chklist_Validation.Items[3].Selected == true)
+            {
                 ReferenceChartType.Validation_4D_Mutli_Color = short.Parse(cmbValidation_4D_Multi_Color.SelectedValue);
+            }
+
+            ReferenceChartType.IsSupportMulticolor = chkIsSupportMulticolor.Checked;
+            if (chkIsSupportMulticolor.Checked)
+            {
+                ReferenceChartType.TotalNoColor = Convert.ToInt16(drpTotalNoColor.SelectedValue);
+                ReferenceChartType.Channel_5 = Convert.ToInt16(drpChannel5.SelectedValue);
+                ReferenceChartType.Channel_6 = Convert.ToInt16(drpChannel6.SelectedValue);
+                ReferenceChartType.Channel_7 = Convert.ToInt16(drpChannel7.SelectedValue);
+                ReferenceChartType.Channel_8 = Convert.ToInt16(drpChannel8.SelectedValue);
+                ReferenceChartType.Channel_9 = Convert.ToInt16(drpChannel9.SelectedValue);
+            }
+            else
+            {
+                ReferenceChartType.TotalNoColor = 0;
+                ReferenceChartType.Channel_5 = null;
+                ReferenceChartType.Channel_6 = null;
+                ReferenceChartType.Channel_7 = null;
+                ReferenceChartType.Channel_8 = null;
+                ReferenceChartType.Channel_9 = null;
+            }
 
             if ((fucUploadChartPreview.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_ChartPreview.Value) > 0) && (fucUploadOriginalChart.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_OriginalChart.Value) > 0))
             {
@@ -146,19 +310,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                      CmykM = x.CmykM,
                                                                      CmykY = x.CmykY,
                                                                      CmykK = x.CmykK,
-                                                                     HtmlColor = x.HTMLColor
+                                                                     HtmlColor = x.HTMLColor,
+                                                                     Channel_5 = x.Channel_5,
+                                                                     Channel_6 = x.Channel_6,
+                                                                     Channel_7 = x.Channel_7,
+                                                                     Channel_8 = x.Channel_8,
+                                                                     Channel_9 = x.Channel_9
                                                                  }).ToList();
 
 
                         _presenterAddReferenceChart.SaveReferenceChart();
-                        if (IsErrorOccured) return;
+                        if (IsErrorOccured)
+                        {
+                            return;
+                        }
+
                         Response.Redirect("ReferenceChartManagement.aspx");
                     }
                 }
                 else
                 {
                     _presenterAddReferenceChart.UpdateReferenceChart();
-                    if (IsErrorOccured) return;
+                    if (IsErrorOccured)
+                    {
+                        return;
+                    }
+
                     Response.Redirect("ReferenceChartManagement.aspx");
                 }
             }
@@ -191,40 +368,176 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             #region Check Column Names
                             var columns = sr.ReadLine().Split(',');
-                            if (columns.Length != 7)
+                            if (chkIsSupportMulticolor.Checked)
                             {
-                                throw new Exception(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatch"));
+                                trChannel.Visible = true;
+                                if (Convert.ToInt16(drpTotalNoColor.SelectedValue) >= 0)
+                                {
+                                    trTotalNoColor.Visible = true;
+                                }
+                                int fixedColumn = 7;
+                                if (drpTotalNoColor.SelectedValue == "5")
+                                {
+                                    fixedColumn = fixedColumn + 1;
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "6")
+                                {
+                                    fixedColumn = fixedColumn + 2;
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "7")
+                                {
+                                    fixedColumn = fixedColumn + 3;
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "8")
+                                {
+                                    fixedColumn = fixedColumn + 4;
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "9")
+                                {
+                                    fixedColumn = fixedColumn + 5;
+                                }
+
+                                if (columns.Length != fixedColumn)
+                                {
+                                    throw new Exception(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatch"));
+                                }
                             }
-                            columns.ToList().ForEach(x => x = x.Trim());
-                            if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[1].Equals("SAMPLE_NAME", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase))
+                            else
                             {
-                                throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                                if (columns.Length != 7)
+                                {
+                                    throw new Exception(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatch"));
+                                }
+                            }
+                            if (chkIsSupportMulticolor.Checked)
+                            {
+                                trChannel.Visible = true;
+                                if (Convert.ToInt16(drpTotalNoColor.SelectedValue) >= 0)
+                                {
+                                    trTotalNoColor.Visible = true;
+                                }
+                                if (drpTotalNoColor.SelectedValue == "5")
+                                {
+                                    columns.ToList().ForEach(x => x = x.Trim());
+                                    if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[1].Equals("SAMPLE_NAME", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[7].Equals("CHANNEL_5", StringComparison.CurrentCultureIgnoreCase))
+                                    {
+                                        throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                                    }
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "6")
+                                {
+                                    columns.ToList().ForEach(x => x = x.Trim());
+                                    if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[1].Equals("SAMPLE_NAME", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[7].Equals("CHANNEL_5", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[8].Equals("CHANNEL_6", StringComparison.CurrentCultureIgnoreCase))
+                                    {
+                                        throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                                    }
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "7")
+                                {
+                                    columns.ToList().ForEach(x => x = x.Trim());
+                                    if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[1].Equals("SAMPLE_NAME", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[7].Equals("CHANNEL_5", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[8].Equals("CHANNEL_6", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[9].Equals("CHANNEL_7", StringComparison.CurrentCultureIgnoreCase))
+                                    {
+                                        throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                                    }
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "8")
+                                {
+                                    columns.ToList().ForEach(x => x = x.Trim());
+                                    if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[1].Equals("SAMPLE_NAME", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[7].Equals("CHANNEL_5", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[8].Equals("CHANNEL_6", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[9].Equals("CHANNEL_7", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[10].Equals("CHANNEL_8", StringComparison.CurrentCultureIgnoreCase))
+                                    {
+                                        throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                                    }
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "9")
+                                {
+                                    columns.ToList().ForEach(x => x = x.Trim());
+                                    if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[1].Equals("SAMPLE_NAME", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[7].Equals("CHANNEL_5", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[8].Equals("CHANNEL_6", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[9].Equals("CHANNEL_7", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[10].Equals("CHANNEL_8", StringComparison.CurrentCultureIgnoreCase) ||
+                                        !columns[11].Equals("CHANNEL_9", StringComparison.CurrentCultureIgnoreCase))
+                                    {
+                                        throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                                    }
+                                }
+
+                            }
+
+                            else
+                            {
+                                columns.ToList().ForEach(x => x = x.Trim());
+                                if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
+                                    !columns[1].Equals("SAMPLE_NAME", StringComparison.CurrentCultureIgnoreCase) ||
+                                    !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
+                                    !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
+                                    !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||
+                                    !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
+                                    !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase))
+                                {
+                                    throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                                }
                             }
                             #endregion
                         }
                         else
                         {
                             var dataRow = sr.ReadLine().Split(',');
-                            if (cmbHowManyColors.SelectedIndex == 0)
-                            {
-                                if (dataRow.Length != 7)
-                                {
-                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
-                                }
-                            }
-                            else
-                            {
-                                if (dataRow.Length != 10)
-                                {
-                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
-                                }
-                            }
+                            //Comment while implement MultiColor 
+                            //if (cmbHowManyColors.SelectedIndex == 0)
+                            //{
+                            //    if (dataRow.Length != 7)
+                            //    {
+                            //        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    if (dataRow.Length != 10)
+                            //    {
+                            //        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
+                            //    }
+                            //}
                             dataRow.ToList().ForEach(x => x = x.Trim());
                             var chartDataRow = new ReferenceChartImportData();
                             #region Converts row to ReferenceChart Object
@@ -301,40 +614,202 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             }
                             //PatchTypeId
                             //TODO: Need to calculate patch type Id
+                            //Comment while implement MultiColor 
+                            //if (cmbHowManyColors.SelectedIndex > 0)
+                            //{
+                            //    //Color5
+                            //    if (decimal.TryParse(dataRow[7], out cmyk))
+                            //    {
+                            //        chartDataRow.Color5 = cmyk;
+                            //    }
+                            //    else
+                            //    {
+                            //        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                            //    }
 
-                            if (cmbHowManyColors.SelectedIndex > 0)
+                            //    //Color6
+                            //    if (decimal.TryParse(dataRow[8], out cmyk))
+                            //    {
+                            //        chartDataRow.Color6 = cmyk;
+                            //    }
+                            //    else
+                            //    {
+                            //        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                            //    }
+
+                            //    //Color7
+                            //    if (decimal.TryParse(dataRow[9], out cmyk))
+                            //    {
+                            //        chartDataRow.Color7 = cmyk;
+                            //    }
+                            //    else
+                            //    {
+                            //        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                            //    }
+
+                            //}
+
+                            if (chkIsSupportMulticolor.Checked)
                             {
-                                //Color5
-                                if (decimal.TryParse(dataRow[7], out cmyk))
+                                if (drpTotalNoColor.SelectedValue == "5")
                                 {
-                                    chartDataRow.Color5 = cmyk;
-                                }
-                                else
-                                {
-                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
-                                }
+                                    //Color5
+                                    if (decimal.TryParse(dataRow[7], out cmyk))
+                                    {
+                                        chartDataRow.Channel_5 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
 
-                                //Color6
-                                if (decimal.TryParse(dataRow[8], out cmyk))
-                                {
-                                    chartDataRow.Color6 = cmyk;
-                                }
-                                else
-                                {
-                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
-                                }
 
-                                //Color7
-                                if (decimal.TryParse(dataRow[9], out cmyk))
-                                {
-                                    chartDataRow.Color7 = cmyk;
                                 }
-                                else
+                                else if (drpTotalNoColor.SelectedValue == "6")
                                 {
-                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    //Color5
+                                    if (decimal.TryParse(dataRow[7], out cmyk))
+                                    {
+                                        chartDataRow.Channel_5 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color6
+                                    if (decimal.TryParse(dataRow[8], out cmyk))
+                                    {
+                                        chartDataRow.Channel_6 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+
+
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "7")
+                                {
+                                    //Color5
+                                    if (decimal.TryParse(dataRow[7], out cmyk))
+                                    {
+                                        chartDataRow.Channel_5 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color6
+                                    if (decimal.TryParse(dataRow[8], out cmyk))
+                                    {
+                                        chartDataRow.Channel_6 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color7
+                                    if (decimal.TryParse(dataRow[9], out cmyk))
+                                    {
+                                        chartDataRow.Channel_7 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "8")
+                                {
+                                    //Color5
+                                    if (decimal.TryParse(dataRow[7], out cmyk))
+                                    {
+                                        chartDataRow.Channel_5 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color6
+                                    if (decimal.TryParse(dataRow[8], out cmyk))
+                                    {
+                                        chartDataRow.Channel_6 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color7
+                                    if (decimal.TryParse(dataRow[9], out cmyk))
+                                    {
+                                        chartDataRow.Channel_7 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color8
+                                    if (decimal.TryParse(dataRow[10], out cmyk))
+                                    {
+                                        chartDataRow.Channel_8 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+
+                                }
+                                else if (drpTotalNoColor.SelectedValue == "9")
+                                {
+                                    //Color5
+                                    if (decimal.TryParse(dataRow[7], out cmyk))
+                                    {
+                                        chartDataRow.Channel_5 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color6
+                                    if (decimal.TryParse(dataRow[8], out cmyk))
+                                    {
+                                        chartDataRow.Channel_6 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color7
+                                    if (decimal.TryParse(dataRow[9], out cmyk))
+                                    {
+                                        chartDataRow.Channel_7 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color8
+                                    if (decimal.TryParse(dataRow[10], out cmyk))
+                                    {
+                                        chartDataRow.Channel_8 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
+                                    //Color9
+                                    if (decimal.TryParse(dataRow[11], out cmyk))
+                                    {
+                                        chartDataRow.Channel_9 = cmyk;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                    }
                                 }
 
                             }
+
                             #endregion
                             refChartImportData.Add(chartDataRow);
                         }
@@ -354,9 +829,128 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void rgChartData_OnNeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
         {
+            if (chkIsSupportMulticolor.Checked)
+            {
+
+                trTotalNoColor.Visible = true;
+                if (Convert.ToInt16(drpTotalNoColor.SelectedValue) > 0)
+                {
+                    trChannel.Visible = true;
+                    SetMultiColorChannel();
+                }
+            }
             if (ViewState[vsChartData] != null)
             {
+
                 rgChartData.DataSource = ViewState[vsChartData];
+                if (chkIsSupportMulticolor.Checked)
+                {
+                    if (drpTotalNoColor.SelectedValue == "5")
+                    {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(10);
+
+                        rgChartData.Columns[7].Visible = true;
+                        rgChartData.Columns[8].Visible = false;
+                        rgChartData.Columns[9].Visible = false;
+                        rgChartData.Columns[10].Visible = false;
+                        rgChartData.Columns[11].Visible = false;
+                    }
+                    else if (drpTotalNoColor.SelectedValue == "6")
+                    {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(15);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[8].HeaderStyle.Width = Unit.Percentage(10);
+
+                        rgChartData.Columns[7].Visible = true;
+                        rgChartData.Columns[8].Visible = true;
+                        rgChartData.Columns[9].Visible = false;
+                        rgChartData.Columns[10].Visible = false;
+                        rgChartData.Columns[11].Visible = false;
+                    }
+                    else if (drpTotalNoColor.SelectedValue == "7")
+                    {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[8].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[9].HeaderStyle.Width = Unit.Percentage(10);
+
+                        rgChartData.Columns[7].Visible = true;
+                        rgChartData.Columns[8].Visible = true;
+                        rgChartData.Columns[9].Visible = true;
+                        rgChartData.Columns[10].Visible = false;
+                        rgChartData.Columns[11].Visible = false;
+                    }
+                    else if (drpTotalNoColor.SelectedValue == "8")
+                    {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[8].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[9].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[10].HeaderStyle.Width = Unit.Percentage(8);
+
+                        rgChartData.Columns[7].Visible = true;
+                        rgChartData.Columns[8].Visible = true;
+                        rgChartData.Columns[9].Visible = true;
+                        rgChartData.Columns[10].Visible = true;
+                        rgChartData.Columns[11].Visible = false;
+                    }
+                    else if (drpTotalNoColor.SelectedValue == "9")
+                    {
+                        rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(10);
+                        rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[7].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[8].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[9].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[10].HeaderStyle.Width = Unit.Percentage(8);
+                        rgChartData.Columns[11].HeaderStyle.Width = Unit.Percentage(8);
+
+                        rgChartData.Columns[7].Visible = true;
+                        rgChartData.Columns[8].Visible = true;
+                        rgChartData.Columns[9].Visible = true;
+                        rgChartData.Columns[10].Visible = true;
+                        rgChartData.Columns[11].Visible = true;
+                    }
+                }
+                else
+                {
+                    rgChartData.Columns[0].HeaderStyle.Width = Unit.Percentage(10);
+                    rgChartData.Columns[1].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[2].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[3].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[4].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[5].HeaderStyle.Width = Unit.Percentage(15);
+                    rgChartData.Columns[6].HeaderStyle.Width = Unit.Percentage(15);
+                }
             }
         }
 
@@ -371,10 +965,122 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trChartSetting.Visible = false;
             }
         }
+
+        protected void chkIsSupportMulticolor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkIsSupportMulticolor.Checked)
+            {
+
+                trTotalNoColor.Visible = true;
+
+            }
+            else
+            {
+                locUploadChartData.Text = "Upload Chart Data(SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)";
+                trTotalNoColor.Visible = false;
+
+            }
+
+        }
+        protected void drpTotalNoColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string FixLabel = "Upload Chart Data(SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)";
+            if (drpTotalNoColor.SelectedIndex > 0)
+            {
+
+                trTotalNoColor.Visible = true;
+                trChannel.Visible = true;
+                SetMultiColorChannel();
+                if (drpTotalNoColor.SelectedValue == "5")
+                {
+                    locUploadChartData.Text = FixLabel.Replace(")", "") + ",CHANNEL_5)";
+                }
+                else if (drpTotalNoColor.SelectedValue == "6")
+                {
+                    locUploadChartData.Text = FixLabel.Replace(")", "") + ",CHANNEL_5,CHANNEL_6)";
+                }
+                else if (drpTotalNoColor.SelectedValue == "7")
+                {
+                    locUploadChartData.Text = FixLabel.Replace(")", "") + ",CHANNEL_5,CHANNEL_6,CHANNEL_7)";
+                }
+                else if (drpTotalNoColor.SelectedValue == "8")
+                {
+                    locUploadChartData.Text = FixLabel.Replace(")", "") + ",CHANNEL_5,CHANNEL_6,CHANNEL_7,CHANNEL_8)";
+                }
+                else if (drpTotalNoColor.SelectedValue == "9")
+                {
+                    locUploadChartData.Text = FixLabel.Replace(")", "") + ",CHANNEL_5,CHANNEL_6,CHANNEL_7,CHANNEL_9)";
+                }
+
+            }
+            else
+            {
+                locUploadChartData.Text = FixLabel;
+                trChannel.Visible = false;
+            }
+
+        }
         #endregion
 
         #region Methods     
+        private void SetMultiColorChannel()
+        {
+            if (drpTotalNoColor.SelectedValue == "5")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = false;
+                trChannel7.Visible = false;
+                trChannel8.Visible = false;
+                trChannel9.Visible = false;
+                drpChannel6.SelectedValue = "0";
+                drpChannel7.SelectedValue = "0";
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
 
+            }
+            else if (drpTotalNoColor.SelectedValue == "6")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = true;
+                trChannel7.Visible = false;
+                trChannel8.Visible = false;
+                trChannel9.Visible = false;
+
+                drpChannel7.SelectedValue = "0";
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
+            }
+            else if (drpTotalNoColor.SelectedValue == "7")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = true;
+                trChannel7.Visible = true;
+                trChannel8.Visible = false;
+                trChannel9.Visible = false;
+
+
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
+            }
+            else if (drpTotalNoColor.SelectedValue == "8")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = true;
+                trChannel7.Visible = true;
+                trChannel8.Visible = true;
+                trChannel9.Visible = false;
+
+                drpChannel9.SelectedValue = "0";
+            }
+            else if (drpTotalNoColor.SelectedValue == "9")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = true;
+                trChannel7.Visible = true;
+                trChannel8.Visible = true;
+                trChannel9.Visible = true;
+            }
+        }
         private void BindInstrumentTypeList()
         {
             _presenterAddReferenceChart.GetInstrumentTypeList();
@@ -391,7 +1097,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType = new ReferenceChartType { ReferenceChartTypeId = (short)RefChartId };
             _presenterAddReferenceChart.GetReferenceChartDetails();
             if (!IsErrorOccured)
-            {                                
+            {
                 Tr_UploadData.Visible = false;
                 hdnRefChartID.Value = Convert.ToString(RefChartId);
                 txtChartName.Text = ReferenceChartType.ChartName.ToString();
@@ -452,6 +1158,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     chklist_Validation.Items[3].Selected = true;
                     cmbValidation_4D_Multi_Color.SelectedValue = ReferenceChartType.Validation_4D_Mutli_Color.ToString();
                 }
+                chkIsSupportMulticolor.Checked = ReferenceChartType.IsSupportMulticolor ?? false;
+                chkIsSupportMulticolor.Enabled = false;
+                if (ReferenceChartType.IsSupportMulticolor == true)
+                {
+
+                    trChannel.Visible = true;
+                    trTotalNoColor.Visible = true;
+                    drpTotalNoColor.SelectedValue = ReferenceChartType.TotalNoColor.ToString();
+                    drpChannel5.SelectedValue = ReferenceChartType.Channel_5.ToString();
+                    drpChannel6.SelectedValue = ReferenceChartType.Channel_6.ToString();
+                    drpChannel7.SelectedValue = ReferenceChartType.Channel_7.ToString();
+                    drpChannel8.SelectedValue = ReferenceChartType.Channel_8.ToString();
+                    drpChannel9.SelectedValue = ReferenceChartType.Channel_9.ToString();
+
+                    drpTotalNoColor.Enabled = false;
+                    drpChannel5.Enabled = false;
+                    drpChannel6.Enabled = false;
+                    drpChannel7.Enabled = false;
+                    drpChannel8.Enabled = false;
+                    drpChannel9.Enabled = false;
+                    SetMultiColorChannel();
+                }
+                else
+                {
+                    trChannel.Visible = false;
+                    trTotalNoColor.Visible = false;
+                }
                 if (ReferenceChartType.ChartPreview != null)
                 {
                     Hidden_ChartPreview.Value = ReferenceChartType.ChartPreview.Length.ToString();
@@ -468,13 +1201,54 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             try
             {
-                XDocument doc = XDocument.Parse(xmlString);                
+                XDocument doc = XDocument.Parse(xmlString);
             }
             catch (Exception ex)
-            {                 
+            {
                 return false;
             }
             return true;
+        }
+        private void BindMultiColorChannel()
+        {
+            DataSet dataSet = _presenterAddReferenceChart.GetMultiColorChannelList();
+            if (dataSet.Tables.Count > 0)
+            {
+                if (dataSet.Tables[0].Rows.Count > 0)
+                {
+                    drpChannel5.DataSource = dataSet.Tables[0];
+                    drpChannel5.DataValueField = "MultiColorChannelID";
+                    drpChannel5.DataTextField = "MultiColorChannelName";
+                    drpChannel5.DataBind();
+                    drpChannel5.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                    drpChannel6.DataSource = dataSet.Tables[0];
+                    drpChannel6.DataValueField = "MultiColorChannelID";
+                    drpChannel6.DataTextField = "MultiColorChannelName";
+                    drpChannel6.DataBind();
+                    drpChannel6.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                    drpChannel7.DataSource = dataSet.Tables[0];
+                    drpChannel7.DataValueField = "MultiColorChannelID";
+                    drpChannel7.DataTextField = "MultiColorChannelName";
+                    drpChannel7.DataBind();
+                    drpChannel7.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                    drpChannel8.DataSource = dataSet.Tables[0];
+                    drpChannel8.DataValueField = "MultiColorChannelID";
+                    drpChannel8.DataTextField = "MultiColorChannelName";
+                    drpChannel8.DataBind();
+                    drpChannel8.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                    drpChannel9.DataSource = dataSet.Tables[0];
+                    drpChannel9.DataValueField = "MultiColorChannelID";
+                    drpChannel9.DataTextField = "MultiColorChannelName";
+                    drpChannel9.DataBind();
+                    drpChannel9.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                }
+            }
+
         }
         #endregion
 
@@ -486,18 +1260,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public ReferenceChartType ReferenceChartType { get; set; }
 
-        #endregion
 
-        protected void cmbHowManyColors_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbHowManyColors.SelectedIndex == 0)
-            {
-                Tr_NameOfColors.Visible = false;
-            }
-            else
-            {
-                Tr_NameOfColors.Visible = true;
-            }
-        }
+
+
+
+        #endregion
+        //Comment while implement MultiColor 
+        //protected void cmbHowManyColors_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    //Comment while implement MultiColor 
+        //    //if (cmbHowManyColors.SelectedIndex == 0)
+        //    //{
+        //    //    Tr_NameOfColors.Visible = false;
+        //    //}
+        //    //else
+        //    //{
+        //    //    Tr_NameOfColors.Visible = true;
+        //    //}
+        //}
     }
 }

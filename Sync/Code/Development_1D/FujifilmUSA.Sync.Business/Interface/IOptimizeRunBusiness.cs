@@ -21,8 +21,8 @@ namespace FujifilmUSA.Sync.Business.Interface
         bool Delete1DMeasurement(int measurementId);
         void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime, short CurveTypeId);
 
-        void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing);
-        void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing);
+        void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing, string description);
+        void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing, string description);
         CurveDataResponse GetCurveData(int optimizeRunId, short curveTypeId);
         byte[] Get1DDeviceLinkProfile(int optimizeRunId);
         EOptimizeRunStatus Get1DLastRunStatus(int OptimizeRunId);
@@ -47,5 +47,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         void OptimizeSpotNamedColorProfile(int OptimizeRunID, int Status, DateTime EndDate);
 
         void CreateInitialDestinationAndDeviceLinkProfilesPlus(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
+        void CreateInitialDestinationAndDeviceLinkProfilesMultiColor(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);        
     }
 }

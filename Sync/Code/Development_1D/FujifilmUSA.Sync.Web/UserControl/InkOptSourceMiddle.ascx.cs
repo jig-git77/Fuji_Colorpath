@@ -239,6 +239,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLPPlus);
             }
         }
+        public bool IsDlpMultiColor { get; set; }
         #endregion
 
 

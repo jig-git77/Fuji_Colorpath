@@ -60,6 +60,12 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
             return userBusiness.validateUserByAuthKey(_viewLogin.EncyptedTocken);
         }
+        public void UserLogInByDeviceLAB_Xmf()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
+            _viewLogin.UserReferenceChartApp = userBusiness.UserLogInByDeviceLAB_Xmf(_viewLogin.DeviceSerialNo, _viewLogin.InstrumentTypeID,_viewLogin.UserId);
+        }
 
     }
 }
