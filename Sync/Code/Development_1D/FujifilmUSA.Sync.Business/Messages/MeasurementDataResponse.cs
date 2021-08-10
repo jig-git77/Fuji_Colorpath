@@ -9,5 +9,6 @@ namespace FujifilmUSA.Sync.Business.Messages
     {
         public List<Double> PcsData { get; set; }
         public List<Double> DcsData { get; set; }    
+        public int TotalNoColors { get; set; }
     }
 }

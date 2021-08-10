@@ -61,7 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification ||
                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D ||
                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ||
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus) &&
+                   SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus) &&
                    SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
                 {
@@ -91,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 //----------------"Import Measurements" button only available for "Sync4D" or "Ink Optimization" Project Type and only for initial 1st run (Not shown in any type of Validation)--------------//
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization   || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                 {
                     if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                     {
@@ -191,8 +191,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (result > 0)
                 {
                     GetMToolMessage(1);
-                    //Devlopment/prodcuction support only HTTP.
-                    //Response.Redirect(Request.Url.ToString());
+                    ////Devlopment/prodcuction support only HTTP.
+                    // Response.Redirect(Request.Url.ToString());
                     //Stage Code support only HTTPS.
                     Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
                 }

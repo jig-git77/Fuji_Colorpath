@@ -21,7 +21,6 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.OptimizeDeviceLinkProfile(_viewConfirmSave.ProjectId, _viewConfirmSave.OptimizeRunId, _viewConfirmSave.MeasurementIds,
                                                           _viewConfirmSave.ProfileDescription, Convert.ToInt32(EOptimizeRunStatus.Closed), DateTime.Now);
         }
-
         public void GetMeasurementsOnRunId()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
@@ -96,7 +95,8 @@ namespace FujifilmUSA.Sync.Presenter
                 true,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                 DateTime.Now,
-                _viewConfirmSave.Is1DMeasurementSmoothing);
+                _viewConfirmSave.Is1DMeasurementSmoothing,
+                _viewConfirmSave.ProfileDescription);
 
         }
 
@@ -111,7 +111,8 @@ namespace FujifilmUSA.Sync.Presenter
                 true,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                 DateTime.Now,
-                _viewConfirmSave.Is1DMeasurementSmoothing);
+                _viewConfirmSave.Is1DMeasurementSmoothing,
+                _viewConfirmSave.ProfileDescription);
 
         }
 

@@ -110,6 +110,7 @@ var $lnk_L_GrayBalanceLargeChart;
 var $hdnCurrentUserRole;
 var AUTH_TOKEN = '';
 var $hdnSyncDlpPlusType;
+var $hdnIsDlpMultiColor;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -280,6 +281,7 @@ $(document).ready(function () {
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
     AUTH_TOKEN = $("#hdfAuthToken").val();
     $hdnSyncDlpPlusType = $('#hdnSyncDlpPlusType').val();
+    $hdnIsDlpMultiColor = $('#hdnIsDlpMultiColor').val();
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
         if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -763,7 +765,12 @@ function BindAllTabs() {
     BindGrayCharts();
 
     //Bind current measurement patch details
-    BindMeasurementPatchDetails();
+    if ($hdnIsDlpMultiColor != "True") {
+        BindMeasurementPatchDetails();
+    }
+    else {
+        BindMeasurementPatchDetailsForMultiColor();
+    }
 
     //Bind report image
     BindReportImage();
@@ -1136,7 +1143,8 @@ function BindMeasurementPatchDetails() {
                                 MeasurementId: parseInt($hdnCurrentMeasurement.val()),
                                 IsVerificationProject: $hdnVerification,
                                 IsSync1DTypeProject: $hdnSync1DType,
-                                metricSumID: $('#hdPatchMatricSum').val()
+                                metricSumID: $('#hdPatchMatricSum').val(),
+                                IsDLPMultiColor: $hdnIsDlpMultiColor
                             },
                             dataType: "json",
                             headers: {
@@ -1572,7 +1580,7 @@ function BindMeasurementPatchDetails() {
                     grid.hideColumn(22);
                 }
                 //show measurement export button visible only for sys admin user
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
             }
@@ -1886,7 +1894,851 @@ function BindMeasurementPatchDetails() {
     });
 }
 
+////**************** START BIND THE CURRENT MEASUREMENT PATCH KENDO GRID For MULTICOLOR  ****************////
+function BindMeasurementPatchDetailsForMultiColor() {
 
+    var measurementID = parseInt($hdnCurrentMeasurement.val());
+    var TotalNoColor = 0;
+    var IsSupportMulticolor = false;
+    $('#hdPatchMatricSum').val(''); //set the metric sum --All default value
+
+    var patchGrid = $divMeasurementPatchDetails.data("kendoGrid");
+    if (patchGrid) {
+        $divMeasurementPatchDetails.data('kendoGrid').dataSource.read();
+        $divMeasurementPatchDetails.data('kendoGrid').refresh();
+    } else {
+        $divMeasurementPatchDetails.kendoGrid({
+            dataSource: {
+                transport: {
+                    read: function (options) {
+                        kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), true);
+
+
+                        var ajaxParameter = {
+                            type: "GET",
+                            url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
+                            data: {
+                                MeasurementId: parseInt($hdnCurrentMeasurement.val()),
+                                IsVerificationProject: $hdnVerification,
+                                IsSync1DTypeProject: $hdnSync1DType,
+                                metricSumID: $('#hdPatchMatricSum').val(),
+                                IsDLPMultiColor: $hdnIsDlpMultiColor
+                            },
+                            dataType: "json",
+                            headers: {
+                                'Accept-Language': $CurrentCulture,
+                                'Authorization': 'Basic ' + AUTH_TOKEN
+                            }
+                        };
+
+                        commonAjaxCall(ajaxParameter, function (response) {
+                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                            if (response.data != null) {
+                                Resources = response.data.GlobalResources;
+                                var patches = response.data.measurementPatchDetails;
+                                TotalNoColor = response.data.TotalNoColors;
+                                IsSupportMulticolor = response.data.IsSupportMulticolor;
+                                options.success(patches);
+
+                                //set the column header
+                                $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                                $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                                $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                                if (response.data.measurementPatchDetails[0].IsWeighted) {
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
+                                }
+                                
+                                if (TotalNoColor == 5) {
+                                    $divMeasurementPatchDetails.find("th[data-field=Channel5] b").html(Resources.Channel_5);
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel5] b")[0]).prop("title", Resources.Channel_5); //Header ToolTip Channel5
+                                }
+                                else if (TotalNoColor == 6) {
+                                    $divMeasurementPatchDetails.find("th[data-field=Channel5] b").html(Resources.Channel_5);
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel5] b")[0]).prop("title", Resources.Channel_5); //Header ToolTip Channel5
+                                    $divMeasurementPatchDetails.find("th[data-field=Channel6] b").html(Resources.Channel_6);
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel6] b")[0]).prop("title", Resources.Channel_6); //Header ToolTip Channel6
+                                }
+                                else if (TotalNoColor == 7) {
+                                    $divmeasurementpatchdetails.find("th[data-field=channel5] b").html(resources.Channel_5);
+                                    $divmeasurementpatchdetails.find("th[data-field=channel6] b").html(resources.Channel_6);
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel5] b")[0]).prop("title", Resources.Channel_5); //Header ToolTip Channel5
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel6] b")[0]).prop("title", Resources.Channel_6); //Header ToolTip Channel6
+                                    $divmeasurementpatchdetails.find("th[data-field=channel7] b").html(resources.Channel_7);
+                                    $($divMeasurementPatchDetails.find("th[data-field=channel7] b")[0]).prop("title", Resources.Channel_7); //Header ToolTip Channel7
+                                }
+                                else if (TotalNoColor == 8) {
+                                    $divmeasurementpatchdetails.find("th[data-field=channel5] b").html(resources.Channel_5);
+                                    $divmeasurementpatchdetails.find("th[data-field=channel6] b").html(resources.Channel_6);
+                                    $divmeasurementpatchdetails.find("th[data-field=channel7] b").html(resources.Channel_7);
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel5] b")[0]).prop("title", Resources.Channel_5);  //Header ToolTip Channel5
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel6] b")[0]).prop("title", Resources.Channel_6);  //Header ToolTip Channel6
+                                    $($divMeasurementPatchDetails.find("th[data-field=channel7] b")[0]).prop("title", Resources.Channel_7);  //Header ToolTip Channel7
+                                    $divmeasurementpatchdetails.find("th[data-field=channel8] b").html(resources.Channel_8);
+                                    $($divMeasurementPatchDetails.find("th[data-field=channel8] b")[0]).prop("title", Resources.Channel_8); //Header ToolTip Channel8
+                                }
+                                else if (TotalNoColor == 9) {
+                                    $divmeasurementpatchdetails.find("th[data-field=channel5] b").html(resources.Channel_5);
+                                    $divmeasurementpatchdetails.find("th[data-field=channel6] b").html(resources.Channel_6);
+                                    $divmeasurementpatchdetails.find("th[data-field=channel7] b").html(resources.Channel_7);
+                                    $divmeasurementpatchdetails.find("th[data-field=channel8] b").html(resources.Channel_8);
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel5] b")[0]).prop("title", Resources.Channel_5); //Header ToolTip Channel5
+                                    $($divMeasurementPatchDetails.find("th[data-field=Channel6] b")[0]).prop("title", Resources.Channel_6); //Header ToolTip Channel6
+                                    $($divMeasurementPatchDetails.find("th[data-field=channel7] b")[0]).prop("title", Resources.Channel_7); //Header ToolTip Channel7
+                                    $($divMeasurementPatchDetails.find("th[data-field=channel8] b")[0]).prop("title", Resources.Channel_8); //Header ToolTip Channel8
+                                    $divmeasurementpatchdetails.find("th[data-field=channel9] b").html(resources.Channel_9);
+                                    $($divMeasurementPatchDetails.find("th[data-field=channel9] b")[0]).prop("title", Resources.Channel_9); //Header ToolTip Channel9
+                                }
+
+
+
+
+
+                            }
+                        }, function (XMLHttpRequest, textStatus, errorThrown) {
+                            if (XMLHttpRequest.status == 401) {
+                                ShowDialog("You are not authorized user. Please login again.", "Message");
+                            } else {
+                                //alert(errorThrown);
+                                console.log(errorThrown);
+                            }
+                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                        });
+                    },
+
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            SampleID: {
+                                from: "SampleID",
+                                type: "number"
+                            },
+                            SampleName: {
+                                from: "SampleName"
+                            },
+                            CMYK_C: {
+                                from: "CMYK_C",
+                                type: "number"
+                            },
+                            CMYK_M: {
+                                from: "CMYK_M",
+                                type: "number"
+                            },
+                            CMYK_Y: {
+                                from: "CMYK_Y",
+                                type: "number"
+                            },
+                            CMYK_K: {
+                                from: "CMYK_K",
+                                type: "number"
+                            },
+                            HTMLColor: {
+                                from: "HTMLColor"
+                            },
+                            TargetL: {
+                                from: "TargetL",
+                                type: "number"
+                            },
+                            Targeta: {
+                                from: "Targeta",
+                                type: "number"
+                            },
+                            Targetb: {
+                                from: "Targetb",
+                                type: "number"
+                            },
+                            CIELAB_L: {
+                                from: "CIELAB_L",
+                                type: "number"
+                            },
+                            CIELAB_a: {
+                                from: "CIELAB_a",
+                                type: "number"
+                            },
+                            CIELAB_b: {
+                                from: "CIELAB_b",
+                                type: "number"
+                            },
+                            ΔE: {
+                                from: "ΔE",
+                                type: "number"
+                            },
+                            ΔE94: {
+                                from: "ΔE94",
+                                type: "number"
+                            },
+                            ΔE2000: {
+                                from: "ΔE2000",
+                                type: "number"
+                            },
+                            Density_V: {
+                                from: "Density_V",
+                                type: "number"
+                            },
+                            Density_C: {
+                                from: "Density_C",
+                                type: "number"
+                            },
+                            Density_M: {
+                                from: "Density_M",
+                                type: "number"
+                            },
+                            Density_Y: {
+                                from: "Density_Y",
+                                type: "number"
+                            },
+                            PatchTypeID: {
+                                from: "PatchTypeID",
+                                type: "number"
+                            },
+                            ΔH: {
+                                from: "ΔH",
+                                type: "number"
+                            },
+                            ΔCh: {
+                                from: "ΔCh",
+                                type: "number"
+                            },
+                            ΔL: {
+                                from: "ΔL",
+                                type: "number"
+                            },
+                            Channel5: {
+                                from: "Channel5",
+                                type: "number"
+                            },
+                            Channel6: {
+                                from: "Channel6",
+                                type: "number"
+                            },
+                            Channel7: {
+                                from: "Channel7",
+                                type: "number"
+                            },
+                            Channel8: {
+                                from: "Channel8",
+                                type: "number"
+                            },
+                            Channel9: {
+                                from: "Channel9",
+                                type: "number"
+                            }
+
+                        }
+                    }
+                },
+                pageSize: 10
+            },
+            sortable: true,
+            scrollable: true,
+            resizable: true,
+            //height: 405,
+            //filterable: true,
+            filterable: {
+                extra: false,
+                //operators: {
+                //    string: {
+                //        eq: "Is equal to"
+                //    }
+                //}
+            },
+            pageable: {
+                refresh: false,
+                pageSizes: true
+            },
+            noRecords: {
+                template: ''
+            },
+            toolbar: kendo.template($("#templatePatchDetails").html()),
+            //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
+            columns: [
+                {
+                    field: "HTMLColor",
+                    filterable: false,
+                    title: "<b title='Patch'>Patch</b>",
+                    //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
+                    template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
+                    width: "50px",
+                    locked: true,
+                    sortable: false
+                    //lockable: false,
+                },
+                {
+                    field: "SampleID",
+                    title: "<b title='ID'>ID</b>",
+                    width: "50px",
+                    filterable: false,
+                    locked: true,
+                },
+                {
+                    field: "SampleName",
+                    title: "<b title='Name'>Name</b>",
+                    filterable: false,
+                    width: "75px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_C",
+                    title: "<b title='C'>C</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_M",
+                    title: "<b title='M'>M</b>",
+                    format: "{0:n2}",
+                    width: "58px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_Y",
+                    title: "<b title='Y'>Y</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_K",
+                    title: "<b title='K'>K</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "ΔE",
+                    title: "<b title='ΔE'>ΔE</b>",
+                    width: "65px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔE94",
+                    title: "<b title='ΔE94'>ΔE94</b>",
+                    width: "80px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔE2000",
+                    title: "<b title='ΔE2000'>ΔE2000</b>",
+                    width: "90px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "TargetL",
+                    title: "<b title='Target L*'>Target L*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_L",
+                    title: "<b title='Actual L*'>Actual L*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Targeta",
+                    title: "<b title='Target a*'>Target a*</b>",
+                    width: '100px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_a",
+                    title: "<b title='Actual a*'>Actual a*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Targetb",
+                    title: "<b title='Target b*'>Target b*</b>",
+                    width: '100px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_b",
+                    title: "<b title='Actual b*'>Actual b*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_V",
+                    title: "<b title='Density_V'>Density_V</b>",
+                    width: "110px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_C",
+                    title: "<b title='Density_C'>Density_C</b>",
+                    width: '110px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_M",
+                    title: "<b title='Density_M'>Density_M</b>",
+                    width: "110px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_Y",
+                    title: "<b title='Density_Y'>Density_Y</b>",
+                    width: '110px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔH",
+                    title: "<b title='ΔH'>ΔH</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },
+                {
+                    field: "ΔCh",
+                    title: "<b title='ΔCh'>ΔCh</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },
+                {
+                    field: "ΔL",
+                    title: "<b title='ΔL'>ΔL</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },                
+                {
+                    field: "Channel5",
+                    title: "<b title='Channel5'>Channel5</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    
+                },                
+                {
+                    field: "Channel6",
+                    title: "<b title='Channel6'>Channel6</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    
+                },
+              
+                {
+                    field: "Channel7",
+                    title: "<b title='Channel7'>Channel7</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    
+                },                
+                {
+                    field: "Channel8",
+                    title: "<b title='Channel8'>Channel8</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                   
+                },              
+                {
+                    field: "Channel9",
+                    title: "<b title='Channel9'>Channel9</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    
+                },
+            ],
+            dataBound: function (e) {
+                var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
+                var grid = $divMeasurementPatchDetails.data("kendoGrid");
+                if (!isNaN(selectedMatricSum)) {
+                    switch (selectedMatricSum) {
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 25:
+                        case 26:
+                            grid.showColumn(20);
+                            grid.hideColumn(21);
+                            grid.hideColumn(22);
+                            break;
+                        case 8:
+                        case 9:
+                        case 36:
+                        case 37:
+                        case 48:
+                        case 56:
+                            grid.hideColumn(20);
+                            grid.showColumn(21);
+                            grid.hideColumn(22);
+                            break;
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 38:
+                        case 39:
+                        case 40:
+                        case 41:
+                            grid.hideColumn(20);
+                            grid.hideColumn(21);
+                            grid.showColumn(22);
+                            break;
+                        default:
+                            grid.hideColumn(20);
+                            grid.hideColumn(21);
+                            grid.hideColumn(22);
+                    }
+                } else {
+                    grid.hideColumn(20);
+                    grid.hideColumn(21);
+                    grid.hideColumn(22);
+                }
+                //show measurement export button visible only for sys admin user
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                    $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
+                }                
+                if (TotalNoColor == 5) {
+                    grid.hideColumn(24);// Channel_6
+                    grid.hideColumn(25);// Channel_7
+                    grid.hideColumn(26);// Channel_8
+                    grid.hideColumn(27);// Channel_9
+                }
+                else if (TotalNoColor == 6) {
+                    grid.hideColumn(25); ///Channel_7
+                    grid.hideColumn(26);///Channel_8
+                    grid.hideColumn(27);///Channel_9
+                    
+                }
+                else if (TotalNoColor == 7) {                                        
+                    grid.hideColumn(26);// Channel_8
+                    grid.hideColumn(27);// Channel_9
+                }
+                else if (TotalNoColor == 8) {                    
+                    grid.hideColumn(27);// Channel_9
+                }
+                
+            }
+
+
+            //dataBound: function (e) {
+            //    debugger;
+            //    var measurementId = 0;
+            //    if (e.sender.dataSource._view.length > 0) {
+            //        measurementId = e.sender.dataSource._view[0].MeasurementID;
+            //    }
+
+            //    if (measurementId > 0) {
+            //        this.hideColumn(4);
+            //        this.hideColumn(5);
+            //        this.hideColumn(6);
+            //        this.hideColumn(7);
+            //    }
+            //    else {
+            //        this.hideColumn(8);
+            //        this.hideColumn(9);
+            //        this.hideColumn(10);
+            //    }
+
+
+            //    var dataSource = this.dataSource;
+            //    this.element.find('tr').each(function () {
+            //        var row = $(this);
+            //        //set resource message
+            //        row.find('#lnkView').attr('title', _Resources.gridAnalyzeToolTipViewResource);
+            //    });
+            //}
+        });
+    }
+
+
+
+
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        var params = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            fromDeltaE: $selectedDeltaE,
+            IsAverageOfMeasurements: $isAverageOfMeasurements
+        };
+
+        $divMeasurementPatchDetails.find("#ddlMatricSum").kendoDropDownList({
+            dataTextField: "Metric",
+            dataValueField: "MetricSumID",
+            autoBind: true,
+            keepOpen: false,
+            optionLabel: "All",
+            dataSource: {
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: SERVICE_BASE_URL + 'api/Chart/GetValidationMetrics',
+                        dataType: "json",
+                        data: params,
+                    }
+                }
+            },
+            dataBound: function (e) {
+                e.sender.select(0); //set default value for matric sum dropdown on measurement change
+            },
+            change: function (e) {
+                var matrixSum = '-1';
+                if (this.value() != '')
+                    matrixSum = this.value();
+
+                $('#hdPatchMatricSum').val(this.value());
+                $divMeasurementPatchDetails.data('kendoGrid').dataSource.read();
+                $divMeasurementPatchDetails.data('kendoGrid').refresh();
+            }
+        });
+
+    } else {
+        $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
+    }
+
+    $divMeasurementPatchDetails.find('#btnExportMeasurement').unbind("click").on('click', function (e) {
+        e.preventDefault();
+
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+
+        var ajaxParameter = {
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),
+            data: {},
+            dataType: "json",
+            async: false,
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+        });
+
+        //$.ajax({
+        //    type: "POST",            
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),           
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
+    });
+
+
+    $divMeasurementPatchDetails.find('#btnExportCGATS').unbind("click").on('click', function (e) {
+        e.preventDefault();
+
+        var selectedMatricSum = '';
+        if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
+            selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+        }
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        //var apiReportParameters = {
+        //    MeasurementId: measurementID,
+        //    IsVerificationProject: $hdnVerification,
+        //    IsSync1DTypeProject: $hdnSync1DType,
+        //    metricSumID: selectedMatricSum
+        //};
+
+        var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
+        var optimizationRun = $(this).attr('data-id');
+        var sortObj = null;
+        var filterObj = null;
+        //set the sorting parameters
+        if (grid.dataSource._sort) {
+            sortObj = grid.dataSource._sort[0];
+        }
+        //set the filtering parameters
+        if (grid.dataSource._filter) {
+            filterObj = {
+                filters: grid.dataSource._filter.filters,
+                logic: 'AND'
+            };
+            //set the type of filter fields
+            $.each(filterObj.filters, function (index, obj) {
+                obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+            });
+        }
+
+        //create object
+        var filterObj = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            metricSumID: selectedMatricSum,
+            sort: sortObj,
+            filter: filterObj
+        };
+
+        var ajaxParameter = {
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
+            data: filterObj,
+            dataType: "json",
+            async: false,
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+        });
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
+        //    data: filterObj,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
+    });
+
+    $divMeasurementPatchDetails.find('#btnExportCxF').unbind("click").on('click', function (e) {
+        e.preventDefault();
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        var selectedMatricSum = '';
+        if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
+            selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+        }
+        //var apiReportParameters = {
+        //    MeasurementId: measurementID,
+        //    IsVerificationProject: $hdnVerification,
+        //    IsSync1DTypeProject: $hdnSync1DType,
+        //    metricSumID: selectedMatricSum
+        //};
+
+        var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
+        var optimizationRun = $(this).attr('data-id');
+        var sortObj = null;
+        var filterObj = null;
+        //set the sorting parameters
+        if (grid.dataSource._sort) {
+            sortObj = grid.dataSource._sort[0];
+        }
+        //set the filtering parameters
+        if (grid.dataSource._filter) {
+            filterObj = {
+                filters: grid.dataSource._filter.filters,
+                logic: 'AND'
+            };
+            //set the type of filter fields
+            $.each(filterObj.filters, function (index, obj) {
+                obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+            });
+        }
+
+        //create object
+        var filterObj = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            metricSumID: selectedMatricSum,
+            sort: sortObj,
+            filter: filterObj
+        };
+
+        var ajaxParameter = {
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
+            data: filterObj,
+            dataType: "json",
+            async: false,
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+        });
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
+        //    data: filterObj,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});       
+    });
+
+    $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
+        $("form.k-filter-menu button[type='reset']").trigger("click");
+    });
+
+    $('#divMeasurementPatchDetails .k-grid-header th.k-header').mouseenter(function () {
+        $(this).find('.k-grid-filter').show();
+    }).mouseleave(function () {
+        $(this).find('.k-grid-filter').hide();
+    });
+}
 
 ////************************ CHART BINDINGS  ***********************////
 
@@ -2052,6 +2904,7 @@ function BindGrayCharts() {
         IsAverageOfMeasurements: $isAverageOfMeasurements,
         IsVerificationProject: $hdnVerification,
         IsSync1DTypeProject: $hdnSync1DType,
+        IsDlpMultiColor: $hdnIsDlpMultiColor,
     };
 
     var ajaxParameter = {

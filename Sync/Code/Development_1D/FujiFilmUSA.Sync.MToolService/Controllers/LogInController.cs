@@ -233,6 +233,68 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
             return actionResult;
         }
 
+        [HttpGet]
+        public IHttpActionResult UserLogInByDeviceLAB_Xmf(string SerialNumber, short? InstrumentType,int ProjectId)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+
+                if (string.IsNullOrEmpty(SerialNumber))
+                {
+                    validationMessage = "Please provide Serial Number.";
+                }
+
+                if (InstrumentType == null)
+                {
+                    validationMessage = "Please provide Instrument Type";
+                }
+                if (ProjectId == 0)
+                {
+                    validationMessage = "Please provide Project Id";
+                }
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+
+                    DeviceSerialNo = SerialNumber;
+                    InstrumentTypeID = Convert.ToInt16(InstrumentType);
+                    UserId = Convert.ToInt32(ProjectId);
+                    _presenterlogin.UserLogInByDeviceLAB_Xmf();
+
+                    if (UserReferenceChartApp != null)
+                    {  
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, UserReferenceChartApp));
+                    }
+                    else
+                    {
+                        BaseErrorResponse errprResponse = new BaseErrorResponse();
+                        errprResponse.Error.UserMessage = "Reference chart is not available.";
+                        errprResponse.Error.Code = (int)ResponseStatus.Business_InvalidData;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
         #region IViewTaskeroUser Members
         public string UserName { get; set; }
         public string Password { get; set; }

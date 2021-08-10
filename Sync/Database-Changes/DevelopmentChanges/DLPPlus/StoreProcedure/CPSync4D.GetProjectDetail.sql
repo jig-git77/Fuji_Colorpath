@@ -35,9 +35,9 @@ AS
 			CASE ISNULL(PRJ.MetricTargetPresetID,0)
 				WHEN 0 THEN 0
 				ELSE (CASE 
-						WHEN PRJ.LicenseTypeID = 1 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID) --For Sync1D projects only
-						WHEN PRJ.LicenseTypeID = 11 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID) --For DLPPlus projects only
-						ELSE 3 ------ For Sync4D or rest of projects
+						WHEN PRJ.LicenseTypeID = 1 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID)
+						WHEN PRJ.LicenseTypeID = 11 THEN (SELECT TOP 1 ValidationType FROM [CPSyncV].[MetricTargetPreset]  AS MTP WHERE MTP.MetricTargetPresetId = PRJ.MetricTargetPresetID) --Add for DLPPLUS Condition
+						ELSE 3
 						END)
 			END
 			) 'ProjectTypeId',

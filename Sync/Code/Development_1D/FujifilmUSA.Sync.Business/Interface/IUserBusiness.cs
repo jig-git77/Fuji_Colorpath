@@ -30,5 +30,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         ReferenceChartApp UserLoginReferenceChartBySerial(string serial, short InstrumentTypeId);
         ReferenceChartApp UserLogInByDeviceLAB(string serial, short InstrumentTypeId);
         int validateUserByAuthKey(string authToken);
+        ReferenceChartApp UserLogInByDeviceLAB_Xmf(string serial, short InstrumentTypeId,int projectId);
     }
 }

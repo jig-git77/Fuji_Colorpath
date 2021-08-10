@@ -34,7 +34,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                   new XAttribute("CMYK_M", x.CmykM),
                                                                                   new XAttribute("CMYK_Y", x.CmykY),
                                                                                   new XAttribute("CMYK_K", x.CmykK),
-                                                                                  new XAttribute("HTMLColor", x.HtmlColor)
+                                                                                  new XAttribute("HTMLColor", x.HtmlColor),
+                                                                                  new XAttribute("Channel_5", x.Channel_5),
+                                                                                  new XAttribute("Channel_6", x.Channel_6),
+                                                                                  new XAttribute("Channel_7", x.Channel_7),
+                                                                                  new XAttribute("Channel_8", x.Channel_8),
+                                                                                  new XAttribute("Channel_9", x.Channel_9)
                                                                          )).ToList());
 
                     returnValue = DataAccessFactory.
@@ -56,6 +61,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.Validation_4D ,
                                                                                     referenceChartType.IsSync4D_Plus,
                                                                                     referenceChartType.Validation_4DPlus,
+                                                                                    referenceChartType.IsDLPMultiColor,
+                                                                                    referenceChartType.Validation_4D_Mutli_Color,
+                                                                                    referenceChartType.IsSupportMulticolor,
+                                                                                    referenceChartType.TotalNoColor,
+                                                                                    referenceChartType.Channel_5,
+                                                                                    referenceChartType.Channel_6,
+                                                                                    referenceChartType.Channel_7,
+                                                                                    referenceChartType.Channel_8,
+                                                                                    referenceChartType.Channel_9,
                                                                                     referenceChartType.ChartSettingXML
                                                                                 });
                     if (returnValue == -1)
@@ -116,7 +130,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         K = referenceCharts.Select(x => Convert.ToDouble(x.CmykK)).ToList()
                     };
                     //var response = client.ExtractProfileValues(extractProfileValuesRequest);
-                    var response = Utilities.GetProfilerServiceClientCall<ExtractProfileValuesRequest,ExtractProfileValuesResponse>(extractProfileValuesRequest, Utilities.ProfilerCallMethod.ExtractProfile, Utilities.ProfilerRequestCall.HttpPost);
+                    var response = Utilities.GetProfilerServiceClientCall<ExtractProfileValuesRequest, ExtractProfileValuesResponse>(extractProfileValuesRequest, Utilities.ProfilerCallMethod.ExtractProfile, Utilities.ProfilerRequestCall.HttpPost);
                     for (int i = 0; i < referenceCharts.Count; i++)
                     {
                         referenceLabs.Add(new ReferenceLab()
@@ -187,7 +201,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Validation_4D = DataReader.ReadShort(x, "Validation_4D"),
                                 ChartSettingXML = DataReader.ReadString(x, "ChartSetting"),
                                 IsSync4D_Plus = DataReader.ReadShort(x, "IsSync4D_Plus"),
-                                Validation_4DPlus = DataReader.ReadShort(x, "Validation_4DPlus")
+                                Validation_4DPlus = DataReader.ReadShort(x, "Validation_4DPlus"),
+                                IsDLPMultiColor = DataReader.ReadShort(x, "IsDLPMultiColor"),
+                                Validation_4D_Mutli_Color = DataReader.ReadShort(x, "Validation_4D_Mutli_Color"),
+                                IsSupportMulticolor = DataReader.ReadBoolean(x, "IsSupportMulticolor"),
+                                TotalNoColor = DataReader.ReadShort(x, "TotalNoColor"),
+                                Channel_5 = DataReader.ReadShort(x, "Channel_5"),
+                                Channel_6 = DataReader.ReadShort(x, "Channel_6"),
+                                Channel_7 = DataReader.ReadShort(x, "Channel_7"),
+                                Channel_8 = DataReader.ReadShort(x, "Channel_8"),
+                                Channel_9 = DataReader.ReadShort(x, "Channel_9")
 
                             }).ToList();
                     }
@@ -223,6 +246,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.Validation_4D,
                                         referenceChartType.IsSync4D_Plus,
                                         referenceChartType.Validation_4DPlus,
+                                        referenceChartType.IsDLPMultiColor,
+                                        referenceChartType.Validation_4D_Mutli_Color,
+                                        referenceChartType.IsSupportMulticolor,
+                                        referenceChartType.TotalNoColor,
+                                        referenceChartType.Channel_5,
+                                        referenceChartType.Channel_6,
+                                        referenceChartType.Channel_7,
+                                        referenceChartType.Channel_8,
+                                        referenceChartType.Channel_9,
                                         referenceChartType.ChartSettingXML
                                     });
                     if (returnValue == -1)

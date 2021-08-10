@@ -217,6 +217,10 @@ $(document).ready(function () {
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'DLPPlus';
                                 break;
+                            case ELicenseType.DLPMultiColor:
+                                projectTypeImagePath = 'Images/DLP.png';
+                                projectTypeImageTitle = 'DLP Multi Color';
+                                break;
                         }
                         break;
                     case EOptimizeRunStatus.Certify:
@@ -244,6 +248,10 @@ $(document).ready(function () {
                             case ELicenseType.DLPPlus:
                                 projectTypeImagePath = 'Images/DLP_Certified.png';
                                 projectTypeImageTitle = 'DLPPlus';
+                                break;
+                            case ELicenseType.DLPMultiColor:
+                                projectTypeImagePath = 'Images/DLP_Certified.png';
+                                projectTypeImageTitle = 'DLP Multi Color';
                                 break;
                         }
                         break;
@@ -288,6 +296,9 @@ $(document).ready(function () {
                     case ELicenseType.IccProfiling: break;
                     case ELicenseType.DLPPlus:
                         projectTypeTooltip = "DLPPlus";
+                        break;
+                    case ELicenseType.DLPMultiColor:
+                        projectTypeTooltip = "DLP Mutli Color";
                         break;
                 }
                

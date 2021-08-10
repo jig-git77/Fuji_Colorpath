@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
@@ -23,6 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseMultiColorCustomSourceText { get; set; }
         public string ELicenseSpotLibraryText { get; set; }
         public string ELicenseDLpPlusText { get; set; }
+        public string ELicenseDLPMultiColorText { get; set; }
 
         #region Private Variables - Globalization
         private const string _recAddDevice = "addDeviceText";
@@ -71,7 +73,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseMultiColorCustomSourceText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.MultiColorCustomSource);
             ELicenseSpotLibraryText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
             ELicenseDLpPlusText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
+            ELicenseDLPMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
 
+            trTotalNoColor.Visible = false;
+            trChannel.Visible = false;
             if (Page.IsPostBack)
             {
                 return;
@@ -82,6 +87,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindDeviceFamily();
             BindBranch();
             BindLicenses();
+            BindMultiColorChannel();
 
             if (Request.QueryString["DeviceID"] != null)
             {
@@ -176,11 +182,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtMultiColorCustomSource.Enabled = false;
                         txtSpotLibrary.Enabled = false;
                         txtDlpPlus.Enabled = false;
+                        txtDLPMultiColor.Enabled = false;
                     }
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = "0";
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = txtDLPMultiColor.Text = "0";
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -192,6 +199,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtMultiColorCustomSource.Enabled = (License.LicenseType.Where(x => x == ELicenseType.MultiColorCustomSource).Count() > 0);
                         txtSpotLibrary.Enabled = (License.LicenseType.Where(x => x == ELicenseType.SpotLibrary).Count() > 0);
                         txtDlpPlus.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPPlus).Count() > 0);
+                        txtDLPMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPMultiColor).Count() > 0);
                         
                     }
                 }
@@ -215,6 +223,121 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectDeviceFamily), false);//Please select device family.
                 return;
             }
+            if (chkIsSupportMulticolor.Checked)
+            {
+                trTotalNoColor.Visible = true;
+
+                if (drpTotalNoColor.SelectedValue == "0")
+                {
+                    fujiStatusbar.DisplayMessage("Please Select Total number of Color", false);
+                    return;
+                }
+                if (Convert.ToInt16(drpTotalNoColor.SelectedValue) >= 0)
+                {
+                    trChannel.Visible = true;
+                }
+                if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 5)
+                {
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+
+                }
+                else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 6)
+                { trChannel.Visible = true;
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+                    if (drpChannel6.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel6", false);
+                        return;
+                    }
+
+                }
+                else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 7)
+                {
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+                    if (drpChannel6.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel6", false);
+                        return;
+                    }
+                    if (drpChannel7.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel7", false);
+                        return;
+                    }
+
+                }
+                else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 8)
+                {
+                    if(drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+                    if (drpChannel6.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel6", false);
+                        return;
+                    }
+                    if (drpChannel7.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel7", false);
+                        return;
+                    }
+                    if (drpChannel8.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel8", false);
+                        return;
+                    }
+
+                }
+                else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 9)
+                {
+                    if (drpChannel5.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel5", false);
+                        return;
+
+                    }
+                    if (drpChannel6.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel6", false);
+                        return;
+                    }
+                    if (drpChannel7.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel7", false);
+                        return;
+                    }
+                    if (drpChannel8.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel8", false);
+                        return;
+                    }
+                    if (drpChannel9.SelectedValue == "0")
+                    {
+                        fujiStatusbar.DisplayMessage("Please select channel9", false);
+                        return;
+
+                    }
+
+                }
+            }
 
             int? licenseId = Convert.ToInt32(cmbLicense.SelectedValue.Equals(GetResourceString(_recSelect)) ? null : cmbLicense.SelectedValue);//--Select--
             Device = new Device()
@@ -225,9 +348,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                  new DeviceFamily() { DeviceFamilyId = Convert.ToInt16(cmbDeviceFamily.SelectedValue) },
                 IsActive = chkIsActive.Checked,
                 IsValidation = chkIsValidation.Checked,
-                IsFlexo = chkIsFlexo.Checked
+                IsFlexo = chkIsFlexo.Checked,
+                IsSupportMulticolor = chkIsSupportMulticolor.Checked,
+               
+
+
             };
-           
+            if (chkIsSupportMulticolor.Checked)
+            {
+                Device.TotalNoColor = Convert.ToInt16(drpTotalNoColor.SelectedValue.ToString());
+                Device.Channel_5 = Convert.ToInt16(drpChannel5.SelectedValue.ToString());
+                Device.Channel_6 = Convert.ToInt16(drpChannel6.SelectedValue.ToString());
+                Device.Channel_7 = Convert.ToInt16(drpChannel7.SelectedValue.ToString());
+                Device.Channel_8 = Convert.ToInt16(drpChannel8.SelectedValue.ToString());
+                Device.Channel_9 = Convert.ToInt16(drpChannel9.SelectedValue.ToString());
+
+            }
             if (txtSync1D.Enabled)
             {
                 Device.LicenseTypeProject.Add(ELicenseType.Sync1D, Convert.ToInt32(txtSync1D.Text));
@@ -281,6 +417,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Device.LicenseTypeProject.Add(ELicenseType.DLPPlus, Convert.ToInt32(txtDlpPlus.Text));
             }
+
+            if (txtDLPMultiColor.Enabled)
+            {
+                Device.LicenseTypeProject.Add(ELicenseType.DLPMultiColor, Convert.ToInt32(txtDLPMultiColor.Text));
+            }
+
             if (DId == 0) // Add New company
             {
                 _presenterDeviceManagement.InsertDevice();
@@ -318,6 +460,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 chkIsActive.Checked = Device.IsActive;
                 chkIsValidation.Checked = Device.IsValidation;
                 chkIsFlexo.Checked = Device.IsFlexo;
+                chkIsSupportMulticolor.Checked = Device.IsSupportMulticolor;
+                if (Device.IsSupportMulticolor)
+                {
+                    trTotalNoColor.Visible = true;
+                    trChannel.Visible = true;
+                    drpTotalNoColor.SelectedValue = Device.TotalNoColor.ToString();                    
+                    drpChannel5.SelectedValue = Device.Channel_5.ToString();
+                    drpChannel6.SelectedValue = Device.Channel_6.ToString();
+                    drpChannel7.SelectedValue = Device.Channel_7.ToString();
+                    drpChannel8.SelectedValue = Device.Channel_8.ToString();
+                    drpChannel9.SelectedValue = Device.Channel_9.ToString();
+                    SetMultiColorChannel();
+                }
+
+
                 //-----------In Edit Device page, put MaxProjects value from DB----------------//
                 foreach (KeyValuePair<ELicenseType, int> item in Device.LicenseTypeProject)
                 {
@@ -330,9 +487,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.Sync1D:
                             txtSync1D.Text = val.ToString();
                             break;
-                        case ELicenseType.DLP:                            
+                        case ELicenseType.DLP:
                             txtDlp.Text = val.ToString();
-                             break;
+                            break;
                         case ELicenseType.InkOptimization:
                             txtInkOpt.Text = val.ToString();
                             break;
@@ -362,10 +519,110 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.DLPPlus:
                             txtDlpPlus.Text = val.ToString();
                             break;
+                        case ELicenseType.DLPMultiColor:
+                            txtDLPMultiColor.Text = val.ToString();
+                            break;
                         default:
                             break;
                     }
                 }
+            }
+        }
+
+        private void BindMultiColorChannel()
+        {
+            DataSet dataSet = _presenterDeviceManagement.GetMultiColorChannelList();
+            if (dataSet.Tables.Count > 0)
+            {
+                if (dataSet.Tables[0].Rows.Count > 0) {
+                    drpChannel5.DataSource = dataSet.Tables[0];
+                    drpChannel5.DataValueField = "MultiColorChannelID";
+                    drpChannel5.DataTextField = "MultiColorChannelName";
+                    drpChannel5.DataBind();
+                    drpChannel5.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                    drpChannel6.DataSource = dataSet.Tables[0];
+                    drpChannel6.DataValueField = "MultiColorChannelID";
+                    drpChannel6.DataTextField = "MultiColorChannelName";
+                    drpChannel6.DataBind();
+                    drpChannel6.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                    drpChannel7.DataSource = dataSet.Tables[0];
+                    drpChannel7.DataValueField = "MultiColorChannelID";
+                    drpChannel7.DataTextField = "MultiColorChannelName";
+                    drpChannel7.DataBind();
+                    drpChannel7.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                    drpChannel8.DataSource = dataSet.Tables[0];
+                    drpChannel8.DataValueField = "MultiColorChannelID";
+                    drpChannel8.DataTextField = "MultiColorChannelName";
+                    drpChannel8.DataBind();
+                    drpChannel8.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                    drpChannel9.DataSource = dataSet.Tables[0];
+                    drpChannel9.DataValueField = "MultiColorChannelID";
+                    drpChannel9.DataTextField = "MultiColorChannelName";
+                    drpChannel9.DataBind();
+                    drpChannel9.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
+
+                }
+            }
+
+        }
+
+        private void SetMultiColorChannel()
+        {
+            if (drpTotalNoColor.SelectedValue == "5")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = false;
+                trChannel7.Visible = false;
+                trChannel8.Visible = false;
+                trChannel9.Visible = false;
+                drpChannel6.SelectedValue = "0";
+                drpChannel7.SelectedValue = "0";
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
+
+            }
+            else if (drpTotalNoColor.SelectedValue == "6")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = true;
+                trChannel7.Visible = false;
+                trChannel8.Visible = false;
+                trChannel9.Visible = false;
+                drpChannel7.SelectedValue = "0";
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
+            }
+            else if (drpTotalNoColor.SelectedValue == "7")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = true;
+                trChannel7.Visible = true;
+                trChannel8.Visible = false;
+                trChannel9.Visible = false;
+                
+                drpChannel8.SelectedValue = "0";
+                drpChannel9.SelectedValue = "0";
+            }
+            else if (drpTotalNoColor.SelectedValue == "8")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = true;
+                trChannel7.Visible = true;
+                trChannel8.Visible = true;
+                trChannel9.Visible = false;
+                drpChannel9.SelectedValue = "0";
+            }
+            else if (drpTotalNoColor.SelectedValue == "9")
+            {
+                trChannel5.Visible = true;
+                trChannel6.Visible = true;
+                trChannel7.Visible = true;
+                trChannel8.Visible = true;
+                trChannel9.Visible = true;
             }
         }
         #endregion
@@ -404,5 +661,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public License License { get; set; }
         #endregion
+
+        protected void chkIsSupportMulticolor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkIsSupportMulticolor.Checked)
+            {
+                trTotalNoColor.Visible = true;
+            }
+            else
+            {
+                trTotalNoColor.Visible = false;
+            }
+        }
+
+        protected void drpTotalNoColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (drpTotalNoColor.SelectedIndex > 0)
+            {
+                trChannel.Visible = true;
+                trTotalNoColor.Visible = true;
+                SetMultiColorChannel();
+
+            }
+            else
+            {
+                trChannel.Visible = false;
+            }
+
+        }
     }
 }

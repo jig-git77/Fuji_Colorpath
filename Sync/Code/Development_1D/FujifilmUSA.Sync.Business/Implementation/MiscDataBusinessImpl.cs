@@ -359,5 +359,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+
+
+        #region CP.MulticolorChannel
+        public DataSet GetMultiColorChannelList()
+        {
+            DataSet dstMultiColorChannelList = new DataSet();
+            dstMultiColorChannelList = DataAccessFactory.Instance.GetDsResult("[CP].[GeMultiColorChannelList]");
+            return dstMultiColorChannelList;
+        }
+        #endregion
     }
 }

@@ -503,6 +503,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindOptimizationChart()
         {
             ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);
+            LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)
@@ -521,6 +522,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindBaseDLPChart()
         {
             ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);
+            LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
+            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)

@@ -176,11 +176,11 @@ jQuery.browser.version = RegExp.$1;
                                                 </td>                                                
                                                 <td colspan="2">
                                                     <asp:CheckBox runat="server" ID="chkFullGamutCustomSource" CssClass="checkListBox" Visible="true"/> 
-                                                </td>                                                
+                                                </td>           
+                                                 
                                             </tr>   
                                         </table>
-                                        <table>
-                                                 
+                                        <table>                                                 
                                            <tr>
                                                 <td><asp:CheckBox runat="server" ID="chkMultiColorCustomSource" CssClass="checkListBox" Visible="true"/>                                                       
                                                 </td>
@@ -190,6 +190,17 @@ jQuery.browser.version = RegExp.$1;
                                                 <td>
                                                     <asp:CheckBox runat="server" ID="chkDLPPlus" CssClass="checkListBox" Visible="true"/>                  
                                                 </td> 
+                                            </tr>
+                                        </table>
+                                        <table>                                                 
+                                           <tr>
+                                                <td>
+                                                     <asp:CheckBox runat="server" ID="chkDLPMutliColor" CssClass="checkListBox" Visible="true"/> 
+                                                     </td>
+                                                <td colspan="2">
+                                                    &nbsp;&nbsp;
+                                                </td>   
+                                                
                                             </tr>
                                         </table>
                                     </div>

@@ -81,6 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkMultiColorCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.MultiColorCustomSource);
             chkSpotLibrary.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
             chkDLPPlus.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
+            chkDLPMutliColor.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
         }
         private void Bindcompany()
         {
@@ -154,7 +155,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             };
             if (chkSync1D.Checked)
                 License.LicenseType.Add(ELicenseType.Sync1D);
-            if (chkDlp.Checked)          
+            if (chkDlp.Checked)            
                 License.LicenseType.Add(ELicenseType.DLP);               
             if (chkInk.Checked)
                 License.LicenseType.Add(ELicenseType.InkOptimization);
@@ -174,6 +175,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.SpotLibrary);
             if (chkDLPPlus.Checked)
                 License.LicenseType.Add(ELicenseType.DLPPlus);
+            if (chkDLPMutliColor.Checked)
+                License.LicenseType.Add(ELicenseType.DLPMultiColor);
 
 
             if (LId == 0) // Add New company
@@ -206,8 +209,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.Sync1D:
                             chkSync1D.Checked = true;
                             break;
-                        case ELicenseType.DLP:
-                            chkDlp.Checked = true;                            
+                        case ELicenseType.DLP:                           
+                            chkDlp.Checked = true;                                                            
                             break;
                         case ELicenseType.InkOptimization:
                             chkInk.Checked = true;
@@ -236,6 +239,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.DLPPlus:
                             chkDLPPlus.Checked = true;
                             break;
+                        case ELicenseType.DLPMultiColor:
+                            chkDLPMutliColor.Checked = true;
+                            break;
                     }
                 });
                 txtLicenseDescription.Text = License.LicenseDesc;
@@ -250,8 +256,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 chkIsActive.Checked = License.IsActive;
                 if (chkIsActive.Checked == false)
                 {
-                    chkSync1D.Checked = chkDlp.Checked = chkInk.Checked = chkInk_Source.Checked = chkSync4D_Certification.Checked = chkCustomSourceProfile.Checked = chkReProfileCustomSource.Checked = chkFullGamutCustomSource.Checked = chkMultiColorCustomSource.Checked = chkSpotLibrary.Checked = false;
-                    chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = chkSpotLibrary.Enabled = false;
+                    chkSync1D.Checked = chkDlp.Checked = chkInk.Checked = chkInk_Source.Checked = chkSync4D_Certification.Checked = chkCustomSourceProfile.Checked = chkReProfileCustomSource.Checked = chkFullGamutCustomSource.Checked = chkMultiColorCustomSource.Checked = chkSpotLibrary.Checked = chkDLPMutliColor.Checked =  false;
+                    chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = chkSpotLibrary.Enabled = chkDLPMutliColor.Checked = false;
                 }
             }
         }
@@ -280,7 +286,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (chkIsActive.Checked == true)
             {
-                chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = chkSpotLibrary.Enabled = true;
+                chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = chkSpotLibrary.Enabled = chkDLPMutliColor.Enabled =  true;
             }
             else
             {
