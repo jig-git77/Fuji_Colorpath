@@ -40,13 +40,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnLogout;
         
         /// <summary>
-        /// imgbtnLogo control.
+        /// lbtnimgLogo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgbtnLogo;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lbtnimgLogo;
         
         /// <summary>
         /// Image1 control.

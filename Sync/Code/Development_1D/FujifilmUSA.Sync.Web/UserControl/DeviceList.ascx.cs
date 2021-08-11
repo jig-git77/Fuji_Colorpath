@@ -38,6 +38,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgDeviceList.PageSize = Utilities.PageSize;
             if (!IsPostBack)
             {
+                SessionManager.Instance.CurrentOptimizeRun = null;
+                SessionManager.Instance.CurrentProject = null;
+                SessionManager.Instance.CurrentDevice = null;
+                SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;                
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
                 BindCompanyDropDown();
             }

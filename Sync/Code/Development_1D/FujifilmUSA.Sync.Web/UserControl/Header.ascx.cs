@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {          
             if (!IsPostBack)
             {
                 if (SessionManager.Instance.CurrentUser != null)
@@ -39,15 +39,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region "Control Events"
-        protected void imgbtnLogo_Click(object sender, EventArgs e)
-        {
-            SessionManager.Instance.CurrentOptimizeRun = null;
-            SessionManager.Instance.CurrentProject = null;
-            SessionManager.Instance.CurrentDevice = null;            
-            SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
-            Response.RedirectPermanent("Index.aspx");
-        }
+        //protected void imgbtnLogo_Click(object sender, EventArgs e)
+        //{
+        //    //SessionManager.Instance.CurrentOptimizeRun = null;
+        //    //SessionManager.Instance.CurrentProject = null;
+        //    //SessionManager.Instance.CurrentDevice = null;
+        //    //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+        //    //SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
+        //    //Response.RedirectPermanent("Index.aspx");
+        //}
 
         protected void lbtnLogout_Click(object sender, EventArgs e)
         {
@@ -65,6 +65,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
-
+       
     }
 }
