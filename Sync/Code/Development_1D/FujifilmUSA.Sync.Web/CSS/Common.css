@@ -254,6 +254,13 @@ label {
         #header .setting a:hover {
             background: url(../Images/setting_icon_hover.png) no-repeat top left;
         }
+    #header .logoHeader a {
+        background: url(../Images/logo.png) no-repeat top left;       
+        float: left;
+        padding-top: 2px;
+        width: 213px;
+        height: 41px
+    }
 
 #containar {
     padding: 0 26px 0 30px;

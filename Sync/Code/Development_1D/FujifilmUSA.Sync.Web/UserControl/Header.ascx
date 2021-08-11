@@ -15,12 +15,13 @@
 
 
  <div id="header">
-        <table style="width:100%;">
+      <table style="width:100%;">
             <tr>
                 <td align="left" style="width:20%;">
                         <div class="logo">
-                           <asp:ImageButton runat="server" ID="imgbtnLogo" OnClick="imgbtnLogo_Click" 
-                                ImageUrl="~/Images/logo.png" />
+                            <div class="logoHeader"><a id="lbtnimgLogo" runat="server" href="~/Index.aspx">&nbsp;</a></div>
+                           
+                           <%--<asp:ImageButton runat="server" ID="imgbtnLogo" OnClick="imgbtnLogo_Click" ImageUrl="~/Images/logo.png"  />--%>
                         </div>
                 </td>
                 <td align="right">
@@ -34,6 +35,7 @@
                 </td>
             </tr>
         </table>
+       
     	
     </div>
 
