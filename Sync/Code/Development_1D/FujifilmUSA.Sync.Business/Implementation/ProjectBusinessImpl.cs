@@ -341,7 +341,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
                                     PrintStandard = DataReader.ReadString(x, "PrintStandard"),
                                 },
-                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
+                                CreateDate = DataReader.ReadDate(x, "CreateDateTime"),
                                 PrintCondition =
                                                     new PrintCondition()
                                                     {
