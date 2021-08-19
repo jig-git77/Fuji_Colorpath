@@ -119,7 +119,7 @@ AS
 		  WHERE    
 	   PRJ.CPDeviceID = @DeviceID AND (ISNULL(@LicenseTypeID,0) = 0 OR PRJ.LicenseTypeID = @LicenseTypeID) AND
 	   PRJ.IsUsed = 1    
-      ORDER BY EndDateTime DESC
+      ORDER BY CreateDateTime DESC
   END TRY
 	BEGIN CATCH
       DECLARE @ERROR_NUMBER INT   
