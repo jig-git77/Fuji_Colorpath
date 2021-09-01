@@ -400,7 +400,7 @@ $(document).ready(function () {
             //End:
         }
         apiParameter.ProjectLicenseType = $hdnCurrentProjectLicenseType;
-       
+
         var ajaxParameter = {
             type: "POST",
             url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
@@ -1965,7 +1965,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
                                     $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
                                     $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
                                 }
-                                
+
                                 if (TotalNoColor == 5) {
                                     $divMeasurementPatchDetails.find("th[data-field=Channel5] b").html(Resources.Channel_5);
                                     $($divMeasurementPatchDetails.find("th[data-field=Channel5] b")[0]).prop("title", Resources.Channel_5); //Header ToolTip Channel5
@@ -2321,42 +2321,42 @@ function BindMeasurementPatchDetailsForMultiColor() {
                     width: '75px',
                     format: "{0:n2}",
                     hidden: true,
-                },                
+                },
                 {
                     field: "Channel5",
                     title: "<b title='Channel5'>Channel5</b>",
                     width: '75px',
                     format: "{0:n2}",
-                    
-                },                
+
+                },
                 {
                     field: "Channel6",
                     title: "<b title='Channel6'>Channel6</b>",
                     width: '75px',
                     format: "{0:n2}",
-                    
+
                 },
-              
+
                 {
                     field: "Channel7",
                     title: "<b title='Channel7'>Channel7</b>",
                     width: '75px',
                     format: "{0:n2}",
-                    
-                },                
+
+                },
                 {
                     field: "Channel8",
                     title: "<b title='Channel8'>Channel8</b>",
                     width: '75px',
                     format: "{0:n2}",
-                   
-                },              
+
+                },
                 {
                     field: "Channel9",
                     title: "<b title='Channel9'>Channel9</b>",
                     width: '75px',
                     format: "{0:n2}",
-                    
+
                 },
             ],
             dataBound: function (e) {
@@ -2408,7 +2408,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
                 //show measurement export button visible only for sys admin user
                 if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
-                }                
+                }
                 if (TotalNoColor == 5) {
                     grid.hideColumn(24);// Channel_6
                     grid.hideColumn(25);// Channel_7
@@ -2419,16 +2419,16 @@ function BindMeasurementPatchDetailsForMultiColor() {
                     grid.hideColumn(25); ///Channel_7
                     grid.hideColumn(26);///Channel_8
                     grid.hideColumn(27);///Channel_9
-                    
+
                 }
-                else if (TotalNoColor == 7) {                                        
+                else if (TotalNoColor == 7) {
                     grid.hideColumn(26);// Channel_8
                     grid.hideColumn(27);// Channel_9
                 }
-                else if (TotalNoColor == 8) {                    
+                else if (TotalNoColor == 8) {
                     grid.hideColumn(27);// Channel_9
                 }
-                
+
             }
 
 
@@ -2925,7 +2925,11 @@ function BindGrayCharts() {
         jsonColors = response.data.GamutChart;
         jsonGray = response.data.LABChart;
         _Resources = response.data.GlobalResources;
-        PopulateChartTargetVersusActualAB();
+        if ($hdnIsDlpMultiColor == "True") {
+            PopulateChartTargetVersusActualABMultiColor();
+        } else {
+            PopulateChartTargetVersusActualAB();
+        }
         PopulateChartGamutABComparision();
         PopulateChartLComparision();
         PopulateChartLGrayBalance();
@@ -4258,6 +4262,255 @@ function PopulateChartTargetVersusActualAB() {
         seriesArray.push(actualObject);
 
         //create the series of the array for line
+        var kendoSeriseObj = {};
+        kendoSeriseObj.data = seriesArray;
+        kendoSeriseObj.color = element.PatchType;
+        kendoSeriseObj.markers = {
+            background: element.PatchType,
+            //size: 6,
+            border: {
+                width: 1,
+                color: function (e) {
+                    return 'black';
+                }
+            }
+        };
+        kendoSeriseObj.width = 2;
+        kendoSeriseObj.highlight = {
+            visible: false
+        }
+
+        //Check patch type for tooltip caption
+        var tooltipCaption = '';
+        switch (element.PatchType) {
+            case "Cyan":
+                tooltipCaption = _Resources._recCyanPathMetrics;
+                break;
+            case "Magenta":
+                tooltipCaption = _Resources._recMagentaPathMetrics;
+                break;
+            case "Yellow":
+                tooltipCaption = _Resources._recYellowPathMetrics;
+                break;
+            case "Red":
+                tooltipCaption = _Resources._recRedPathMetrics;
+                break;
+            case "Green":
+                tooltipCaption = _Resources._recGreenPathMetrics;
+                break;
+            case "Blue":
+                tooltipCaption = _Resources._recBluePathMetrics;
+                break;
+            case "Paper":
+                tooltipCaption = _Resources._recPaperPathMetrics;
+                break;
+        }
+
+
+        //create tool tip
+
+        var bgColor = element.PatchType == "Paper" ? "White" : element.PatchType;
+        var textColor = "white";
+        if (element.PatchType == "Paper" || element.PatchType == "Yellow" || element.PatchType == "Cyan") {
+            textColor = "black";
+        }
+        var tooltipString = '<div style="color: ' + textColor + '; padding: 2px; background-color: ' + bgColor + ';border-radius: 4px;padding: 5px 5px 5px 6px;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFW…8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);"><table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + element.CielabB.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
+        tooltipString += '</table></div>';
+
+        //kendoSeriseObj.tooltip = {
+        //    visible: true,
+        //    template: tooltipString,
+        //    shared: true
+        //};
+
+        kendoSeriseObj.tooltip = {
+            visible: true, template: function (d) {
+                debugger;
+                var seriesData = d.series.data;
+                var lastItem = seriesData[seriesData.length - 1];
+
+                if (lastItem != d.dataItem) {
+                    setTimeout(function () {
+                        $(".k-chart-tooltip").addClass('tempTooltip');
+                    }, 150);
+                    return "";
+                } else {
+                    setTimeout(function () {
+                        $(".k-chart-tooltip").removeData('tempTooltip');
+                    }, 150);
+                }
+                return tooltipString;
+            }, shared: false
+        };
+
+
+        //Calcaulte Targets
+        var kendoTargetObj = {};
+        kendoTargetObj.data = [[element.Targeta, element.Targetb]];
+        kendoTargetObj.color = "Green";
+        kendoTargetObj.markers = { background: "Green" };
+        kendoTargetObj.highlight = {
+            visible: false
+        }
+
+
+        $('#tootipDemo').html(tooltipString);
+        if (element.PatchType == "Cyan") {
+            targetCYANSeriseObj = kendoSeriseObj;
+            targetCYAN = kendoTargetObj;
+        }
+        if (element.PatchType == "Magenta") {
+            targetMAGENTASeriseObj = kendoSeriseObj;
+            targetMAGENTA = kendoTargetObj;
+
+        }
+        if (element.PatchType == "Yellow") {
+            targetYELLOWSeriseObj = kendoSeriseObj;
+            targetYELLOW = kendoTargetObj;
+        }
+        if (element.PatchType == "Red") {
+            targetREDSeriseObj = kendoSeriseObj;
+            targetRED = kendoTargetObj;
+        }
+        if (element.PatchType == "Green") {
+            targetGREENSeriseObj = kendoSeriseObj;
+            targetGREEN = kendoTargetObj;
+        }
+        if (element.PatchType == "Blue") {
+            targetBLUESeriseObj = kendoSeriseObj;
+            targetBLUE = kendoTargetObj;
+        }
+        if (element.PatchType == "Paper") {
+            kendoSeriseObj.data = [targetPAPERObj];
+            kendoSeriseObj.color = "White";
+            kendoSeriseObj.markers = { background: "White", size: 6 };
+            targetPAPERSeriseObj = kendoSeriseObj;
+        }
+    });
+
+
+    $chart_TargetVersusActualAB.kendoChart({
+        renderAs: "canvas",
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        //title: {
+        //    text: "a* - b* Comparison"
+        //},
+        series: [
+            targetCYAN,
+            targetMAGENTA,
+            targetYELLOW,
+            targetRED,
+            targetGREEN,
+            targetBLUE,
+            targetCYANSeriseObj,
+            targetMAGENTASeriseObj,
+            targetYELLOWSeriseObj,
+            targetREDSeriseObj,
+            targetGREENSeriseObj,
+            targetBLUESeriseObj,
+            targetPAPERSeriseObj
+        ],
+        xAxis: {
+            name: "xAxis",
+            min: -100,
+            max: 100,
+            majorUnit: 20,
+            axisCrossingValues: [-100, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        yAxis: {
+            name: "yAxis",
+            min: -100,
+            max: 100,
+            step: 20,
+            majorUnit: 20,
+            axisCrossingValues: [-100, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        chartArea: {
+            width: 300,
+            height: 250,
+            background: ''
+        },
+        //plotArea: {
+        //    border: {
+        //        width: 2,
+        //        color: "black"
+        //    }
+        //},
+        //render: renderChartWithBackgroundByAxis
+    });
+
+
+
+}
+
+
+////**************** START BIND THE AB COMPARISION (GMAUT) CHART MULTICOLOR  ****************////
+function PopulateChartTargetVersusActualABMultiColor() {
+
+
+    //************* Get object from array ***************//
+    var paperObj = $.grep(jsonTarget, function (element) { return element.PatchType == "Paper"; })[0];
+
+    //************* Target Objects ***************//
+    var targetArray = {};
+    var targetCYAN = {};
+    var targetMAGENTA = {};
+    var targetYELLOW = {};
+    var targetRED = {};
+    var targetGREEN = {};
+    var targetBLUE = {};
+    var targetPAPERObj = [paperObj.Targeta, paperObj.Targetb];
+    var targetPAPER = [targetPAPERObj];
+
+    //************* SERIES ARRAY ***************//
+
+    var targetCYANSeriseObj = {};
+    var targetMAGENTASeriseObj = {};
+    var targetYELLOWSeriseObj = {};
+    var targetREDSeriseObj = {};
+    var targetGREENSeriseObj = {};
+    var targetBLUESeriseObj = {};
+    var targetPAPERSeriseObj = {};
+
+    $.each(jsonTarget, function (index, element) {
+        var seriesArray = [];
+
+        //Get colors from the colors array ()
+        var colorsArray = $.grep(jsonColors, function (colorObj) { return colorObj.PatchType == element.PatchType });
+        if (colorsArray.length > 0) {
+            seriesArray.push(targetPAPERObj);
+            $.each(colorsArray, function (i, colorObj) {
+                var dots = [colorObj.CielabA, colorObj.CielabB];
+                seriesArray.push(dots);
+            });
+        }
+
+        //add actuall color object
+        var actualObject = [element.CielabA, element.CielabB];
+        seriesArray.push(actualObject);
+
+        //create the series of the array for line
+
         var kendoSeriseObj = {};
         kendoSeriseObj.data = seriesArray;
         kendoSeriseObj.color = element.PatchType;
