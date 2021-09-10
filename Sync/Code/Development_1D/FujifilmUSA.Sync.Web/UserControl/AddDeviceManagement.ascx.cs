@@ -25,6 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseSpotLibraryText { get; set; }
         public string ELicenseDLpPlusText { get; set; }
         public string ELicenseDLPMultiColorText { get; set; }
+        public string ELicenseSync1DMultiColorText { get; set; }
 
         #region Private Variables - Globalization
         private const string _recAddDevice = "addDeviceText";
@@ -74,6 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseSpotLibraryText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
             ELicenseDLpPlusText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
             ELicenseDLPMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
+            ELicenseSync1DMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1DMultiColor);
 
             trTotalNoColor.Visible = false;
             trChannel.Visible = false;
@@ -183,11 +185,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtSpotLibrary.Enabled = false;
                         txtDlpPlus.Enabled = false;
                         txtDLPMultiColor.Enabled = false;
+                        txtSync1DMultiColor.Enabled = false;
                     }
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = txtDLPMultiColor.Text = "0";
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = txtDLPMultiColor.Text = txtSync1DMultiColor.Text = "0";
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -200,6 +203,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtSpotLibrary.Enabled = (License.LicenseType.Where(x => x == ELicenseType.SpotLibrary).Count() > 0);
                         txtDlpPlus.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPPlus).Count() > 0);
                         txtDLPMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPMultiColor).Count() > 0);
+                        txtSync1DMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1DMultiColor).Count() > 0);
                     }
                 }
             }
@@ -421,6 +425,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Device.LicenseTypeProject.Add(ELicenseType.DLPMultiColor, Convert.ToInt32(txtDLPMultiColor.Text));
             }
+            if (txtSync1DMultiColor.Enabled)
+            {
+                Device.LicenseTypeProject.Add(ELicenseType.Sync1DMultiColor, Convert.ToInt32(txtSync1DMultiColor.Text));
+            }
 
             if (DId == 0) // Add New company
             {
@@ -520,6 +528,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.DLPMultiColor:
                             txtDLPMultiColor.Text = val.ToString();
+                            break;
+                        case ELicenseType.Sync1DMultiColor:
+                            txtSync1DMultiColor.Text = val.ToString();
                             break;
                         default:
                             break;

@@ -385,6 +385,23 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                         <tr>
+                                            <td>
+                                                 <span>
+                                                    <%=ELicenseSync1DMultiColorText%> &nbsp;</span></td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtSync1DMultiColor" runat="server" Height="19px" Width="50px" MaxLength="4"
+                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic" ControlToValidate="txtSync1DMultiColor"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer12" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </table>
                                     </div>
                                 </td>

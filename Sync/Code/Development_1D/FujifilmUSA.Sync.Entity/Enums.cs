@@ -436,6 +436,8 @@ namespace FujifilmUSA.Sync.Entity
         DLPPlus = 11,
         [Description("ELicenseType_DLP_MULTI_COLOR")]//DLPMutliColor
         DLPMultiColor = 12,
+        [Description("ELicenseType_Sync1D_MULTI_COLOR")]//Sync1DMultiColor
+        Sync1DMultiColor = 13,
     }
 
     public enum UserType

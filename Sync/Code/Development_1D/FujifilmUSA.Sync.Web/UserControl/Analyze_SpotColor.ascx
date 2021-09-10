@@ -338,10 +338,12 @@
                                 from: "IsSelected",
                                 type: "boolean",
                             },
+                          
                         }
                     }
                 },
-                pageSize: 20
+                pageSize: 20,
+               
             },
             resizable: true,
             sortable: true,
@@ -368,11 +370,12 @@
             },
             sortable: true,
             selectable: "true",
-            //filterable: true,
-            pageable: {
+            //filterable: true,           
+             pageable: {
                 refresh: true,
-                pageSizes: true
-            },
+                pageSizes: true,
+                alwaysVisible: false,
+             },
             noRecords: {
                 template: ''
             },

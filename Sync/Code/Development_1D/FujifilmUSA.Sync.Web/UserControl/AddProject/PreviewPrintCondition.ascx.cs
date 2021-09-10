@@ -256,7 +256,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblObserver.Text = Data["observerTypeId"];
                     lblAlignmentChart.Text = Data["referenceChartTypeId"];
 
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
                     {
                         lblMSelectedPresets.Text = Data["metricTargetPresetName"];
                         lblMPresetDescription.Text = Data["metricTargetPresetDesc"];

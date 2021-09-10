@@ -764,7 +764,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         measurementPatchDetails = patchDetails,
                         GlobalResources = _globalResourceValues,
                         TotalNoColors = totalNoColor,
-                        IsSupportMulticolor=isSupportMulticolor
+                        IsSupportMulticolor = isSupportMulticolor
                     };
                     httpResponse.Data = objGroup;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
@@ -1263,6 +1263,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsUsed { get; set; }
         public bool IsSyncDLPPlusType { get; set; }
         public bool IsDlpMultiColor { get; set; }
+
 
         #endregion
 

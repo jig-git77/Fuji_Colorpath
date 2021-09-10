@@ -52,11 +52,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindPCSDataType(); //Load PCSDataType 
 
                 PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
-                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1DMultiColor)
                 {
                     trTargetLAB.Visible = false;
                     trProjectType.Visible = false;
-                }
+                }                
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
                 {
                     trPaperScaling_4D.Visible = true;
@@ -112,7 +112,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ProfileName = lblSourceProfileName.Text
             };
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
@@ -204,13 +204,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtProfileDescription.Text = lblSourceProfileName.Text = GetResourceString(_recTargetPrintConditionNotAvailableMessage);
             }
             
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
                 cmbProjectType_SelectedIndexChanged(null, null);
         }
 
         protected void cmbProjectType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (ViewState[_vsPrintStandardType] != null)
                 {
@@ -284,7 +284,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbPrintStandardType.SelectedValue = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID.ToString();
                 cmbPrintStandardType_SelectedIndexChanged(null, null);
             }
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 cmbProjectType.SelectedValue = SessionManager.Instance.CurrentProject.ProjectTypeId.ToString();
                 cmbProjectType_SelectedIndexChanged(null, null);
@@ -501,7 +501,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbPCSDataType.DataTextField = "Value";
             cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>();
 
-            if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D) //If 1D then G7 type, or for all other Projects 4D,etc...
+            if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) //If 1D then G7 type, or for all other Projects 4D,etc...
             {
                 cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != Common.Utilities.GetEnumDescriptionAttributeValue(PCSDataTypes.Density)).ToDictionary(p => p.Key, p => p.Value);
             }
@@ -510,7 +510,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != Common.Utilities.GetEnumDescriptionAttributeValue(PCSDataTypes.XYZ)).ToDictionary(p => p.Key, p => p.Value);
             }
             cmbPCSDataType.DataBind();
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) //Bydefault spectral selection for Sync1D projects only
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) //Bydefault spectral selection for Sync1D projects only
             {
                 cmbPCSDataType.SelectedIndex = 1; //Bydefault spectral selection
             }
@@ -744,7 +744,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus);
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor);
             }
         }
         public bool IsSpotTargetType

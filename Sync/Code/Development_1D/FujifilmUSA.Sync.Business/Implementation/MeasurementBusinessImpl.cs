@@ -242,18 +242,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }).ToList();
 
                     measurements.ForEach(x =>
-                                             {
-                                                 x.MeasurementPatches =
-                                                     dsMeasurements.Tables[1].AsEnumerable().
-                                                         Where(y => DataReader.ReadInt(y, "MeasurementID") == x.MeasurementId).
-                                                         Select(y => new MeasurementPatch()
-                                                         {
-                                                             MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
-                                                             MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
-                                                             HtmlColor = DataReader.ReadString(y, "HtmlColor"),
-                                                             Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
-                                                         }).ToList();
-                                             });
+                    {
+                        x.MeasurementPatches =
+                            dsMeasurements.Tables[1].AsEnumerable().
+                                Where(y => DataReader.ReadInt(y, "MeasurementID") == x.MeasurementId).
+                                Select(y => new MeasurementPatch()
+                                {
+                                    MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
+                                    MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
+                                    HtmlColor = DataReader.ReadString(y, "HtmlColor"),
+                                    Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
+                                }).ToList();
+                    });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAnalyzeChartMeasurement"));
             return measurements;
@@ -748,7 +748,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "CPSync4DMultiColor.GetChartData_Gray";
             }
-            
+
             Common.ImplementBusinessLogic(
                 () =>
                 {

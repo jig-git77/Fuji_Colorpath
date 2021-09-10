@@ -237,7 +237,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     }).ToList();
                             }
                         }
-                        if (project.LicenseType == ELicenseType.Sync1D)
+                        if (project.LicenseType == ELicenseType.Sync1D || project.LicenseType == ELicenseType.Sync1DMultiColor)
                         {
                             //----Select ProjectTargetLAB-----------//
                             if (dsProject.Tables[5].Rows.Count > 0)

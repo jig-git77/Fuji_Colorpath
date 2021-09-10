@@ -221,6 +221,10 @@ $(document).ready(function () {
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'DLP Multi Color';
                                 break;
+                            case ELicenseType.Sync1DMultiColor:
+                                projectTypeImagePath = 'Images/AlignCurve.png';
+                                projectTypeImageTitle = 'Sync1D Multi Color';
+                                break;
                         }
                         break;
                     case EOptimizeRunStatus.Certify:
@@ -252,6 +256,10 @@ $(document).ready(function () {
                             case ELicenseType.DLPMultiColor:
                                 projectTypeImagePath = 'Images/DLP_Certified.png';
                                 projectTypeImageTitle = 'DLP Multi Color';
+                                break;
+                            case ELicenseType.Sync1DMultiColor:
+                                projectTypeImagePath = 'Images / AlignCurve_Certified.png';
+                                projectTypeImageTitle = 'Sync1D Multi Color';
                                 break;
                         }
                         break;
@@ -299,6 +307,9 @@ $(document).ready(function () {
                         break;
                     case ELicenseType.DLPMultiColor:
                         projectTypeTooltip = "DLP Mutli Color";
+                        break;
+                    case ELicenseType.Sync1DMultiColor:
+                        projectTypeTooltip = "Sync1D Mutli Color";
                         break;
                 }
                

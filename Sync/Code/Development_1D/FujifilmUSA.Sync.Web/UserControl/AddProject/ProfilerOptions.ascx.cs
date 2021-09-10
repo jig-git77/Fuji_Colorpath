@@ -70,7 +70,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lnkbtnTargetColorSpace.Visible = IsXmfNewProject;
             PanelOptionalRetarget.GroupingText = "<b>" + GetResourceString("PanelOptionalRetarget") + "</b>";
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (ViewState[_vsMetricTargetPreset] == null)
                 {
@@ -183,7 +183,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void LoadProjectInfoFromSession()
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 //Sync1D
                 if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.MetricTargetPresetId != 0)
@@ -328,7 +328,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (SessionManager.Instance.CurrentProject.PrintStandardTVI == null || SessionManager.Instance.CurrentProject.PrintStandardTVI.Count == 0)
                 {
@@ -464,7 +464,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (SessionManager.Instance.CurrentProject.ProjectTargetDensity == null || SessionManager.Instance.CurrentProject.ProjectTargetDensity.Count == 0)
                 {
@@ -510,7 +510,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (SessionManager.Instance.CurrentProject.ProjectTargetHueAngle == null || SessionManager.Instance.CurrentProject.ProjectTargetHueAngle.Count == 0)
                 {
@@ -849,7 +849,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 SessionManager.Instance.CurrentProject.IsWeightedTolerances = chkWeightedTolerances.Checked;
                 SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);

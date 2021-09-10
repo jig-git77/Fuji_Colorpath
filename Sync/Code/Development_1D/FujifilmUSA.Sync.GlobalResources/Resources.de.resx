@@ -1363,4 +1363,7 @@ erwünschten Format überein.</value>
   <data name="ELicenseType_DLP_MULTI_COLOR" xml:space="preserve">
     <value>DLP Multi Color</value>
   </data>
+  <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
+    <value>Sync1D Multi Color</value>
+  </data>
 </root>

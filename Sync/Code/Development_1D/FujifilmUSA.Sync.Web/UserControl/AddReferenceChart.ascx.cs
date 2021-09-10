@@ -256,10 +256,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ReferenceChartType.IsDLPMultiColor = short.Parse(cmbSync4DMultiColor.SelectedValue);
             }
+            if (chklist_ProjectType.Items[5].Selected == true)
+            {
+                ReferenceChartType.IsSync1DMultiColor = short.Parse(cmbSync1DMultiColor.SelectedValue);
+            }
 
             if (chklist_Validation.Items[3].Selected == true)
             {
                 ReferenceChartType.Validation_4D_Mutli_Color = short.Parse(cmbValidation_4D_Multi_Color.SelectedValue);
+            }
+            if (chklist_Validation.Items[4].Selected == true)
+            {
+                ReferenceChartType.Validation_Sync1D_Multi_Color = short.Parse(cmbValidation_Sync1D_Multi_Color.SelectedValue);
             }
 
             ReferenceChartType.IsSupportMulticolor = chkIsSupportMulticolor.Checked;
@@ -1158,6 +1166,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     chklist_Validation.Items[3].Selected = true;
                     cmbValidation_4D_Multi_Color.SelectedValue = ReferenceChartType.Validation_4D_Mutli_Color.ToString();
                 }
+
+                if (ReferenceChartType.IsSync1DMultiColor >= 1)
+                {
+                    chklist_ProjectType.Items[5].Selected = true;
+                    cmbSync1DMultiColor.SelectedValue = ReferenceChartType.IsSync1DMultiColor.ToString();
+                }
+                if (ReferenceChartType.Validation_Sync1D_Multi_Color >= 1)
+                {
+                    chklist_Validation.Items[4].Selected = true;
+                    cmbValidation_Sync1D_Multi_Color.SelectedValue = ReferenceChartType.Validation_Sync1D_Multi_Color.ToString();
+                }
+
                 chkIsSupportMulticolor.Checked = ReferenceChartType.IsSupportMulticolor ?? false;
                 chkIsSupportMulticolor.Enabled = false;
                 if (ReferenceChartType.IsSupportMulticolor == true)

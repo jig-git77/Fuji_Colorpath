@@ -140,14 +140,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     }
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
+                    //bool isCustomPlugin = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin;
                     SessionManager.Instance.CurrentProject = Project;
+                  //  SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin = isCustomPlugin;
                     //Disable links if project is already certified 
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification && SessionManager.Instance.CurrentProject.Status == EOptimizeRunStatus.Certify)
                     {
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
                     }
                     //For Sync1D Retargted projects
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)
+                    if ((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) && SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)
                     {
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
                         SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();

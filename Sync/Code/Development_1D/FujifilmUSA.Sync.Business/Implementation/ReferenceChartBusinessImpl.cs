@@ -70,6 +70,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.Channel_7,
                                                                                     referenceChartType.Channel_8,
                                                                                     referenceChartType.Channel_9,
+                                                                                    referenceChartType.IsSync1DMultiColor,
+                                                                                    referenceChartType.Validation_Sync1D_Multi_Color,
                                                                                     referenceChartType.ChartSettingXML
                                                                                 });
                     if (returnValue == -1)
@@ -210,7 +212,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Channel_6 = DataReader.ReadShort(x, "Channel_6"),
                                 Channel_7 = DataReader.ReadShort(x, "Channel_7"),
                                 Channel_8 = DataReader.ReadShort(x, "Channel_8"),
-                                Channel_9 = DataReader.ReadShort(x, "Channel_9")
+                                Channel_9 = DataReader.ReadShort(x, "Channel_9"),
+                                IsSync1DMultiColor = DataReader.ReadShort(x, "IsSync1DMultiColor"),
+                                Validation_Sync1D_Multi_Color = DataReader.ReadShort(x, "Validation_Sync1D_Multi_Color"),
 
                             }).ToList();
                     }
@@ -255,6 +259,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.Channel_7,
                                         referenceChartType.Channel_8,
                                         referenceChartType.Channel_9,
+                                        referenceChartType.IsSync1DMultiColor,
+                                        referenceChartType.Validation_Sync1D_Multi_Color,
                                         referenceChartType.ChartSettingXML
                                     });
                     if (returnValue == -1)

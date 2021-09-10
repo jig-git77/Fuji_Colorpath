@@ -91,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 //----------------"Import Measurements" button only available for "Sync4D" or "Ink Optimization" Project Type and only for initial 1st run (Not shown in any type of Validation)--------------//
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization   || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                 {
                     if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                     {
@@ -138,7 +138,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
             LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
 
-            
+
             if (SessionManager.Instance.CurrentProject.PrintCondition != null)
             {
                 if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
@@ -146,13 +146,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
-                        GetMToolMessage(1);                        
+                        GetMToolMessage(1);
                         btnAddPluginStatus.CssClass = "green_btnotactive";
                         //btnAddPluginStatus.Enabled = false;
                     }
                     else
                     {
-                        GetMToolMessage(0);                        
+                        GetMToolMessage(0);
                         btnAddPluginStatus.CssClass = "green_bt";
                         //btnAddPluginStatus.Enabled = true;
                     }
@@ -166,18 +166,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
-                        GetMToolMessage(1);                        
+                        GetMToolMessage(1);
                         btnAddPluginStatus.CssClass = "green_btnotactive";
                         //btnAddPluginStatus.Enabled = false;
                     }
                     else
                     {
                         GetMToolMessage(0);
-                        btnAddPluginStatus.CssClass = "green_bt";                        
+                        btnAddPluginStatus.CssClass = "green_bt";
                         //btnAddPluginStatus.Enabled = true;
                     }
 
-                } 
+                }
             }
             hdnbtnAnalyzeParent.Value = ((LinkButton)NamingContainer.FindControl("btnAnalyze")).ClientID;
             hdfHasDeletePermission.Value = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject).ToString();
@@ -192,9 +192,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     GetMToolMessage(1);
                     ////Devlopment/prodcuction support only HTTP.
-                    // Response.Redirect(Request.Url.ToString());
+                    Response.Redirect(Request.Url.ToString());
                     //Stage Code support only HTTPS.
-                    Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
+                    //Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
                 }
                 else
                 {
@@ -238,13 +238,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 str.Append("<b>This project is currently activated for measurement.</b>");
                 str.Append("<br />");
                 str.Append("<b>Measure charts and upload using the ColorPath MTool, Return here when you're done.</b>");
-                
+
             }
             else
             {
                 str.Append("<b>This project is not currently activated for measurement.</b>");
-                
-            }            
+
+            }
             lblMessage.Text = str.ToString();
         }
         #endregion
@@ -269,6 +269,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-       
+
     }
 }

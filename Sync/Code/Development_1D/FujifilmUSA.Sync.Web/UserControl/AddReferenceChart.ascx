@@ -177,6 +177,7 @@
                                                     <asp:ListItem Value="2">Sync4D: </asp:ListItem>
                                                     <asp:ListItem Value="3">Sync4D_Plus: </asp:ListItem>
                                                     <asp:ListItem Value="4">DLP Multi Color: </asp:ListItem>
+                                                    <asp:ListItem Value="5">Sync1D Multi Color: </asp:ListItem>
                                                 </asp:CheckBoxList>                                   
                                             </div>
 
@@ -208,6 +209,11 @@
                                                     <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
                                                 </asp:DropDownList>
                                                   <br />
+                                                <asp:DropDownList ID="cmbSync1DMultiColor" runat="server">
+                                                    <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
+                                                    <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
+                                                </asp:DropDownList>
+                                                  <br />
                                               
                                             </div>
                                                     </td>
@@ -218,7 +224,8 @@
                                                     <asp:ListItem Value="0">Validation 1D: </asp:ListItem>
                                                     <asp:ListItem Value="1">Validation 4D: </asp:ListItem>                                                                                    
                                                     <asp:ListItem Value="2">Validation 4D_Plus: </asp:ListItem>
-                                                     <asp:ListItem Value="3">Validation 4D_Mutli_Color: </asp:ListItem>
+                                                    <asp:ListItem Value="3">Validation 4D_Mutli_Color: </asp:ListItem>
+                                                    <asp:ListItem Value="4">Validation Sync1D_Multi_Color: </asp:ListItem>
                                                 </asp:CheckBoxList>   
                                             </div>
                                                            </td>
@@ -239,6 +246,11 @@
                                                 </asp:DropDownList>
                                                 <br />
                                                  <asp:DropDownList ID="cmbValidation_4D_Multi_Color" runat="server">
+                                                    <asp:ListItem Selected="True" Value="1">G7</asp:ListItem>
+                                                    <asp:ListItem Value="2">ISO</asp:ListItem>
+                                                </asp:DropDownList>
+                                               <br />
+                                                 <asp:DropDownList ID="cmbValidation_Sync1D_Multi_Color" runat="server">
                                                     <asp:ListItem Selected="True" Value="1">G7</asp:ListItem>
                                                     <asp:ListItem Value="2">ISO</asp:ListItem>
                                                 </asp:DropDownList>

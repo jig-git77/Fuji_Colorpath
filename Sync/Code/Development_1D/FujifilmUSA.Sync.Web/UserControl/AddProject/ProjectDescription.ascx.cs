@@ -169,7 +169,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
                 cmbPrintingType.Enabled = SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId == 0 ? true : false;
 
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
                 {
                     Tr_OffsetPrintData.Visible = true;
                 }
@@ -310,7 +310,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void ddlLicenseType_SelectedIndexChanged(object sender, EventArgs e)
         {
             locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceText);
-            if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.Sync1D)
+            if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.Sync1D || (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.Sync1DMultiColor)
             {
                 Tr_OffsetPrintData.Visible = true;
             }
