@@ -3728,6 +3728,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsDlpMultiColor = value;
             }
         }
+        public bool IsSync1DMultiColor
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1DMultiColor);
+            }
+            set
+            {
+                IsSync1DMultiColor = value;
+            }
+        }
         #endregion
 
     }

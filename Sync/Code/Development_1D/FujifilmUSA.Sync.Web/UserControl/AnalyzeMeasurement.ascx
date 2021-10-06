@@ -138,8 +138,8 @@
 </style>
 <%--<script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>--%>
 <script src="JS/DYMO_Label_Framework_2_0_2.js"></script>
-<%--<script src="JS/AnalyzeMeasurement.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
-<script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>
+<script src="JS/AnalyzeMeasurement.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<%--<script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>--%>
 
 
 
@@ -365,6 +365,7 @@
                 <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnSyncDlpPlusType" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnIsDlpMultiColor" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnIsSync1DMultiColor" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">

@@ -240,6 +240,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public bool IsDlpMultiColor { get; set; }
+        public bool IsSync1DMultiColor { get; set; }
         #endregion
 
 

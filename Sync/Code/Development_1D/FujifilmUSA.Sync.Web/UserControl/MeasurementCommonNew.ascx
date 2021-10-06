@@ -208,13 +208,17 @@
         var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
         var ProjectId = jQuery("input[id$=hdProjectId]").val();
         var getMeasurementUrl = BASE_SERVICE_URL;
-
+        
 
         if (jQuery("input[id$=hdIsVerification]").val() == "true") {
             getMeasurementUrl = "Services/PluginDataService.svc/GetVMeasurementsByProjectId/" + ProjectId;
             //getMeasurementUrl += "PluginData.svc/GetVMeasurementsByProjectId/" + ProjectId;
         }
         else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>') {
+            getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
+            //getMeasurementUrl += "PluginData.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
+        }
+        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1DMultiColor %>') {
             getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
             //getMeasurementUrl += "PluginData.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
         }
@@ -253,7 +257,7 @@
                         jQuery("input[id*='hdMeasurementsTotal']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//      
                         //----------------Display Import Button--------------//  
                         if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
-                            if (json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>) {
+                            if (json.length < <%= ((FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D || FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1DMultiColor ) ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>) {
                                 $("#btnImportMeasurements").css('visibility', 'visible');
                             }
                             else {
@@ -313,6 +317,10 @@
             //deleteMeasurementUrl += "PluginData.svc/DeleteVMeasurement/" + measurementId;
         }
         else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>') {
+            deleteMeasurementUrl = "Services/PluginDataService.svc/Delete1DMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/Delete1DMeasurement/" + measurementId;
+        }
+       else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1DMultiColor %>') {
             deleteMeasurementUrl = "Services/PluginDataService.svc/Delete1DMeasurement/" + measurementId;
             //deleteMeasurementUrl += "PluginData.svc/Delete1DMeasurement/" + measurementId;
         }
@@ -425,8 +433,9 @@
    function ShowImportFileWindow() {
         if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') &&
             (jQuery("input[id*='hdMeasurementsTotal']").val() >=
-        <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == 
-        FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : 
+        <%= ((FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == 
+        FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ||FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == 
+        FujifilmUSA.Sync.Entity.ELicenseType.Sync1DMultiColor) ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : 
         (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary ? 
         ApplicationConfiguration.Instance.MeasurementLimitSpotProject : ApplicationConfiguration.Instance.MeasurementsLimit)) %>)) {
             MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');

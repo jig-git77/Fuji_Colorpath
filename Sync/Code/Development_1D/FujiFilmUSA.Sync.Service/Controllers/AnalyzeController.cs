@@ -791,7 +791,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
 
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Sync1D)
+                    if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Sync1D || Convert.ToInt32(LicenseType) == (int)ELicenseType.Sync1DMultiColor)
                         _presenterAnalyze.Get1DPatchDetailsOfMeasurementExport();
                     else if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Validation)
                         _presenterAnalyze.GetValidationPatchDetailsOfMeasurementExport();
@@ -1085,6 +1085,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsUsed { get; set; }
         public bool IsSyncDLPPlusType { get; set; }
         public bool IsDlpMultiColor { get; set; }
+        public bool IsSync1DMultiColor { get; set; }
         #endregion
     }
 }

@@ -195,7 +195,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     SessionManager.Instance.CurrentDlpSubOperation = SessionManager.Instance.CurrentProject.LicenseType; //---Assign DLP or Sync1D project type
-                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1DMultiColor) //-----Sync1D ----Sync1DMultiColor
                     {
                         //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
                         hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
@@ -222,7 +222,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnSync1DType.Value = IsSync1DType.ToString();
                 hdnSyncDlpPlusType.Value = IsSyncDLPPlusType.ToString();
                 hdnIsDlpMultiColor.Value = Convert.ToString(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ? true : false);
-
+                hdnIsSync1DMultiColor.Value = Convert.ToString(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor ? true : false);
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
@@ -258,7 +258,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trRBtnListDeltaE.Visible = false;
 
                 }
-                else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
+                else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1DMultiColor) //-----Sync1D -----Sync1DMultiColor
                 {
                     //Hide Verification button
                     lbtnMeasurementVerification.Visible = false;
@@ -345,13 +345,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) //------Sync1DMultiColor
                     _presenterAnalyze.Get1DMeasurementsOnRunId();
                 else
                     _presenterAnalyze.GetMeasurementsOnRunId();
                 if (!IsErrorOccured)
                 {
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) //------Sync1DMultiColor
                     {
                         EndDate = System.DateTime.Now;
                         //Pass use DLP as false for initial call
@@ -500,7 +500,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D);
+                return ((SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1DMultiColor)); //------Sync1DMultiColor
             }
         }
 
@@ -537,6 +537,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public bool IsDlpMultiColor { get; set; }
+        public bool IsSync1DMultiColor { get; set; }
         #endregion
     }
 }

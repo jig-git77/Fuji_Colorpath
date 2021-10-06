@@ -70,7 +70,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.Channel_7,
                                                                                     referenceChartType.Channel_8,
                                                                                     referenceChartType.Channel_9,
-                                                                                    referenceChartType.IsSync1DMultiColor,
+                                                                                    referenceChartType.IsSync1DMultiColor_ISO,
+                                                                                     referenceChartType.IsSync1DMultiColor_G7,
                                                                                     referenceChartType.Validation_Sync1D_Multi_Color,
                                                                                     referenceChartType.ChartSettingXML
                                                                                 });
@@ -213,7 +214,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Channel_7 = DataReader.ReadShort(x, "Channel_7"),
                                 Channel_8 = DataReader.ReadShort(x, "Channel_8"),
                                 Channel_9 = DataReader.ReadShort(x, "Channel_9"),
-                                IsSync1DMultiColor = DataReader.ReadShort(x, "IsSync1DMultiColor"),
+                                IsSync1DMultiColor_ISO = DataReader.ReadShort(x, "IsSync1DMultiColor_ISO"),
+                                IsSync1DMultiColor_G7 = DataReader.ReadShort(x, "IsSync1DMultiColor_G7"),
                                 Validation_Sync1D_Multi_Color = DataReader.ReadShort(x, "Validation_Sync1D_Multi_Color"),
 
                             }).ToList();
@@ -259,7 +261,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.Channel_7,
                                         referenceChartType.Channel_8,
                                         referenceChartType.Channel_9,
-                                        referenceChartType.IsSync1DMultiColor,
+                                        referenceChartType.IsSync1DMultiColor_ISO,
+                                        referenceChartType.IsSync1DMultiColor_G7,
                                         referenceChartType.Validation_Sync1D_Multi_Color,
                                         referenceChartType.ChartSettingXML
                                     });

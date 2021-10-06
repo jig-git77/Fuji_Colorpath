@@ -485,7 +485,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return VmeasurementSummary;
         }
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, bool IsSync1DMultiColor = false)
         {
             // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
@@ -501,6 +501,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (IsDlpMultiColor)
             {
                 storedProc = "CPSync4DMultiColor.GetPatchDetailsByMeasurementID";
+            }
+            if (IsSync1DMultiColor)
+            {
+                storedProc = "CPSyncMultiColor.GetPatchDetailsByMeasurementID";
             }
 
             DataTable dtPatchDetails = new DataTable();
@@ -2563,7 +2567,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 () =>
                 {
                     XElement measurementPatches = null;
-                    if (LicenseTypeID == 1)//1D project
+                    if (LicenseTypeID == 1 || LicenseTypeID == 13)//1D project
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                          measurement.MeasurementPatches.
@@ -2621,7 +2625,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                         )).ToList());
                     }
 
-                    if (LicenseTypeID == 2 || LicenseTypeID == 5)//dlp and Sync4DCertification project
+                    if (LicenseTypeID == 2 || LicenseTypeID == 5 || LicenseTypeID == 12)//dlp and Sync4DCertification project and DLPMultiColor
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                          measurement.MeasurementPatches.

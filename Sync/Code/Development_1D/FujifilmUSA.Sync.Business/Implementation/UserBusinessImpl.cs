@@ -1386,6 +1386,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     ProjectTypeId = Convert.ToInt32(dsUser.Tables[0].Rows[0]["ProfileTypeID"]) != 3 ? DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID") : (short)51,
                                     ProjectTypeName = Convert.ToInt32(dsUser.Tables[0].Rows[0]["ProfileTypeID"]) != 3 ? Convert.ToString((ELicenseType)DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID")) : Convert.ToString((ELicenseType)51),
                                 };
+                                user.ProjectType.ProjectTypeId = user.ProjectType.ProjectTypeId == 13 ? (short)1 : user.ProjectType.ProjectTypeId; //Todo For Calling 1DSaveMeasurement method from MToolService we passed 1 instead of 13                               
+
                                 user.EntryDate = DataReader.ReadString(dsUser.Tables[0].Rows[0], "EntryDate");
                                 user.PrintStandardType = DataReader.ReadString(dsUser.Tables[0].Rows[0], "PrintStandard");
                                 //user1.MeasureDeviceSrNo = DataReader.ReadString(dsUser.Tables[1].Rows[0], "MeasureDeviceSrNo");

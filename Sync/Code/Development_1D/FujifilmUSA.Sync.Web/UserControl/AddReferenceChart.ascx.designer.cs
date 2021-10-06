@@ -256,13 +256,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.DropDownList cmbSync4DMultiColor;
         
         /// <summary>
-        /// cmbSync1DMultiColor control.
+        /// cmbSync1DMultiColor_ISO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbSync1DMultiColor;
+        protected global::System.Web.UI.WebControls.DropDownList cmbSync1DMultiColor_ISO;
+        
+        /// <summary>
+        /// cmbSync1DMultiColor_G7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbSync1DMultiColor_G7;
         
         /// <summary>
         /// chklist_Validation control.
