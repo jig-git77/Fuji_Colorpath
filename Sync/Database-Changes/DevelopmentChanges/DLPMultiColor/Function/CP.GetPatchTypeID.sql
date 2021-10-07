@@ -1,6 +1,6 @@
-
+USE [ColorPathSync_Stage]
 GO
-/****** Object:  UserDefinedFunction [CP].[GetPatchTypeID]    Script Date: 7/7/2021 12:19:29 PM ******/
+/****** Object:  UserDefinedFunction [CP].[GetPatchTypeID]    Script Date: 9/22/2021 3:48:48 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -29,41 +29,50 @@ AS
 		SET @Channel_8 = ROUND(@Channel_8,0)
 		SET @Channel_9 = ROUND(@Channel_9,0)
 
-		IF EXISTS(SELECT * FROM CP.PatchType WHERE CMYK_C = @CMYK_C AND CMYK_M = @CMYK_M AND CMYK_Y = @CMYK_Y AND CMYK_K = @CMYK_K AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0))
-		BEGIN
+		IF (ISNULL(@Channel_5,0) > 0 OR ISNULL(@Channel_6,0) > 0 OR ISNULL(@Channel_7,0) > 0 OR ISNULL(@Channel_8,0) > 0 OR ISNULL(@Channel_9,0) > 0)
+		BEGIN  -----If extra channels has any value then directly assign this patch as 51 ignore
 			SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
-				WHERE CMYK_C = @CMYK_C AND CMYK_M = @CMYK_M AND CMYK_Y = @CMYK_Y AND CMYK_K = @CMYK_K
+						WHERE CMYK_C IS NULL AND CMYK_M IS NULL AND CMYK_Y IS NULL AND CMYK_K IS NULL
 		END
 		ELSE
 		BEGIN
-			--REMAINING CYAN PATCHES
-			IF @CMYK_C > 0 AND @CMYK_M = 0 AND @CMYK_Y = 0 AND @CMYK_K = 0 AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0)
+		
+			IF EXISTS(SELECT * FROM CP.PatchType WHERE CMYK_C = @CMYK_C AND CMYK_M = @CMYK_M AND CMYK_Y = @CMYK_Y AND CMYK_K = @CMYK_K AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0))
 			BEGIN
 				SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
-					WHERE CMYK_C IS NULL AND CMYK_M = @CMYK_M AND CMYK_Y = @CMYK_Y AND CMYK_K = @CMYK_K
-			END
-			--REMAINING MAGENTA PATCHES
-			ELSE IF @CMYK_C = 0 AND @CMYK_M > 0 AND @CMYK_Y = 0 AND @CMYK_K = 0 AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0)
-			BEGIN
-				SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
-					WHERE CMYK_C = @CMYK_C AND CMYK_M IS NULL AND CMYK_Y = @CMYK_Y AND CMYK_K = @CMYK_K
-			END
-			--REMAINING YELLOW PATCHES
-			ELSE IF @CMYK_C = 0 AND @CMYK_M = 0 AND @CMYK_Y > 0 AND @CMYK_K = 0 AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0)
-			BEGIN
-				SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
-					WHERE CMYK_C = @CMYK_C AND CMYK_M = @CMYK_M AND CMYK_Y IS NULL AND CMYK_K = @CMYK_K
-			END
-			--REMAINING YELLOW PATCHES
-			ELSE IF @CMYK_C = 0 AND @CMYK_M = 0 AND @CMYK_Y = 0 AND @CMYK_K > 0 AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0)
-			BEGIN
-				SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
-					WHERE CMYK_C = @CMYK_C AND CMYK_M = @CMYK_M AND CMYK_Y = @CMYK_Y AND CMYK_K IS NULL
+					WHERE CMYK_C = @CMYK_C AND CMYK_M = @CMYK_M AND CMYK_Y = @CMYK_Y AND CMYK_K = @CMYK_K
 			END
 			ELSE
 			BEGIN
-				SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
-					WHERE CMYK_C IS NULL AND CMYK_M IS NULL AND CMYK_Y IS NULL AND CMYK_K IS NULL
+				--REMAINING CYAN PATCHES
+				IF @CMYK_C > 0 AND @CMYK_M = 0 AND @CMYK_Y = 0 AND @CMYK_K = 0 AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0)
+				BEGIN
+					SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
+						WHERE CMYK_C IS NULL AND CMYK_M = @CMYK_M AND CMYK_Y = @CMYK_Y AND CMYK_K = @CMYK_K
+				END
+				--REMAINING MAGENTA PATCHES
+				ELSE IF @CMYK_C = 0 AND @CMYK_M > 0 AND @CMYK_Y = 0 AND @CMYK_K = 0 AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0)
+				BEGIN
+					SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
+						WHERE CMYK_C = @CMYK_C AND CMYK_M IS NULL AND CMYK_Y = @CMYK_Y AND CMYK_K = @CMYK_K
+				END
+				--REMAINING YELLOW PATCHES
+				ELSE IF @CMYK_C = 0 AND @CMYK_M = 0 AND @CMYK_Y > 0 AND @CMYK_K = 0 AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0)
+				BEGIN
+					SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
+						WHERE CMYK_C = @CMYK_C AND CMYK_M = @CMYK_M AND CMYK_Y IS NULL AND CMYK_K = @CMYK_K
+				END
+				--REMAINING YELLOW PATCHES
+				ELSE IF @CMYK_C = 0 AND @CMYK_M = 0 AND @CMYK_Y = 0 AND @CMYK_K > 0 AND (ISNULL(@Channel_5,0) = 0 AND ISNULL(@Channel_6,0) = 0 AND ISNULL(@Channel_7,0) = 0 AND ISNULL(@Channel_8,0) = 0 AND ISNULL(@Channel_9,0) = 0)
+				BEGIN
+					SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
+						WHERE CMYK_C = @CMYK_C AND CMYK_M = @CMYK_M AND CMYK_Y = @CMYK_Y AND CMYK_K IS NULL
+				END
+				ELSE
+				BEGIN
+					SELECT @PatchTypeID = PatchTypeID FROM CP.PatchType
+						WHERE CMYK_C IS NULL AND CMYK_M IS NULL AND CMYK_Y IS NULL AND CMYK_K IS NULL
+				END
 			END
 		END
 		RETURN @PatchTypeID
