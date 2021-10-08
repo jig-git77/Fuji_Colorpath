@@ -1,9 +1,9 @@
 ﻿IF NOT EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('[CPSync4D].[GetProjectDetail1]'))
-	exec('CREATE PROCEDURE [CPSync4D].[GetProjectDetail1] AS BEGIN SET NOCOUNT ON; END')
+	exec('CREATE PROCEDURE [CPSync4D].[GetProjectDetail] AS BEGIN SET NOCOUNT ON; END')
 
 GO
 /****** Object:  StoredProcedure [CPSync4D].[GetProjectDetail]    Script Date: 12/04/2012 09:30:16 ******/
-ALTER PROCEDURE [CPSync4D].[GetProjectDetail1] 
+ALTER PROCEDURE [CPSync4D].[GetProjectDetail] 
 	@ProjectID INT,
 	@IsVarification BIT = 0
 AS  
