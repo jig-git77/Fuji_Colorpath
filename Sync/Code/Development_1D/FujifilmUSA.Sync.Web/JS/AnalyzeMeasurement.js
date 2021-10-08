@@ -112,6 +112,7 @@ var AUTH_TOKEN = '';
 var $hdnSyncDlpPlusType;
 var $hdnIsDlpMultiColor;
 var $hdnIsSync1DMultiColor;
+var $hdnCurrentRunName;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -284,7 +285,7 @@ $(document).ready(function () {
     $hdnSyncDlpPlusType = $('#hdnSyncDlpPlusType').val();
     $hdnIsDlpMultiColor = $('#hdnIsDlpMultiColor').val();
     $hdnIsSync1DMultiColor = $('#hdnIsSync1DMultiColor').val();
-    
+    $hdnCurrentRunName = $('#hdnCurrentRunName').val();
    
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
@@ -770,12 +771,11 @@ function BindAllTabs() {
 
     //Bind current measurement patch details
     
-    if ($hdnIsDlpMultiColor != "True" && $hdnIsSync1DMultiColor != "True") {       
-        BindMeasurementPatchDetails();
+    if (($hdnIsDlpMultiColor == "True" && $hdnIsSync1DMultiColor == "True") && ($hdnIsDlpMultiColor == "Run-0")) {
+        BindMeasurementPatchDetailsForMultiColor(); //It called DLPMultiColor and Sync1DMultiColor
     }    
     else {
-        
-        BindMeasurementPatchDetailsForMultiColor(); //It called DLPMultiColor and Sync1DMultiColor
+        BindMeasurementPatchDetails();
     }
 
     //Bind report image
@@ -1162,7 +1162,8 @@ function BindMeasurementPatchDetails() {
                                 IsSync1DTypeProject: $hdnSync1DType,
                                 metricSumID: $('#hdPatchMatricSum').val(),
                                 IsDLPMultiColor: $hdnIsDlpMultiColor,
-                                Is1DMultiColor: $hdnIsSync1DMultiColor
+                                Is1DMultiColor: $hdnIsSync1DMultiColor,
+                                CurrentRunName: $hdnCurrentRunName
                             },
                             dataType: "json",
                             headers: {
@@ -1942,7 +1943,8 @@ function BindMeasurementPatchDetailsForMultiColor()
                                 IsSync1DTypeProject: $hdnSync1DType,
                                 metricSumID: $('#hdPatchMatricSum').val(),
                                 IsDLPMultiColor: $hdnIsDlpMultiColor,
-                                Is1DMultiColor: $hdnIsSync1DMultiColor
+                                Is1DMultiColor: $hdnIsSync1DMultiColor,
+                                CurrentRunName: $hdnCurrentRunName
                             },
                             dataType: "json",
                             headers: {
@@ -2946,7 +2948,7 @@ function BindGrayCharts() {
         jsonColors = response.data.GamutChart;
         jsonGray = response.data.LABChart;
         _Resources = response.data.GlobalResources;
-        if ($hdnIsDlpMultiColor == "True") {
+        if ($hdnIsDlpMultiColor == "True" && $hdnCurrentRunName == "Run-0") {
             PopulateChartTargetVersusActualABMultiColor();
         } else {
             PopulateChartTargetVersusActualAB();

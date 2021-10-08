@@ -63,5 +63,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool IsSyncDLPPlusType { get; }
         bool IsDlpMultiColor { get; set; }
         bool IsSync1DMultiColor { get; set; }
+        string CurrentRunname { get; set; }
     }
 }

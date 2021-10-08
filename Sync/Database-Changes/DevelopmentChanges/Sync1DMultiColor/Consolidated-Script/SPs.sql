@@ -158,7 +158,8 @@ AS
 					(SELECT COUNT(*) FROM CPSync.Measurement mnt WHERE mnt.OptimizeRunID = OPT.OptimizeRunID) AS MeasurementCount,
 					CPSync.GetOptimizeRunChartId(OPT.OptimizeRunID) AS ReferenceChartTypeId,
 					(SELECT TOP 1 ChartName FROM CP.ReferenceChartType WHERE ReferenceChartTypeID = CPSync.GetOptimizeRunChartId(OPT.OptimizeRunID)) AS ChartName,
-					OPT.DeviceLinkProfile
+					OPT.DeviceLinkProfile,
+					OPT.RunName AS CurrentRunName
 				FROM  
 					CPSync.OptimizeRun OPT  
 				WHERE  
@@ -177,7 +178,8 @@ AS
 					(SELECT COUNT(*) FROM CPSync4D.Measurement mnt WHERE mnt.OptimizeRunID = OPT.OptimizeRunID) AS MeasurementCount,
 					CPSync4D.GetOptimizeRunChartId(OPT.OptimizeRunID) AS ReferenceChartTypeId,
 					(SELECT TOP 1 ChartName FROM CP.ReferenceChartType WHERE ReferenceChartTypeID = CPSync4D.GetOptimizeRunChartId(OPT.OptimizeRunID)) AS ChartName,
-					OPT.DeviceLinkProfile
+					OPT.DeviceLinkProfile,
+					OPT.RunName AS CurrentRunName
 				FROM  
 					CPSync4D.OptimizeRun OPT  
 				WHERE  

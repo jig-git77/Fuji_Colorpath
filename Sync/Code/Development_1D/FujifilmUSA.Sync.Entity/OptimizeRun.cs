@@ -20,5 +20,6 @@ namespace FujifilmUSA.Sync.Entity
         public string DlpName { get; set; }
         public string LastDlpName { get; set; }
         public byte[] NamedColorProfile { get; set; }
+        public string CurrentRunName { get; set; }
     }
 }

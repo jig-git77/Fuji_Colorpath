@@ -3739,6 +3739,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsSync1DMultiColor = value;
             }
         }
+        public string CurrentRunname { get; set; }
         #endregion
 
     }

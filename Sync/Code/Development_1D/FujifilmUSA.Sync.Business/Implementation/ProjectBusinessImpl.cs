@@ -164,7 +164,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 ReferenceChartType =
                                                     new KeyValuePair<short, string>(DataReader.ReadShort(x, "ReferenceChartTypeId"),
                                                                                     DataReader.ReadString(x, "ChartName")),
-                                DeviceLinkProfile = DataReader.ReadByteArray(x, "DeviceLinkProfile")
+                                DeviceLinkProfile = DataReader.ReadByteArray(x, "DeviceLinkProfile"),
+                                CurrentRunName = DataReader.ReadString(x, "CurrentRunName")
+
                             }).ToList();
 
                         if (!isVerification)

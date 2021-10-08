@@ -680,7 +680,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor,bool? Is1DMultiColor)
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor,bool? Is1DMultiColor,string CurrentRunName)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
@@ -720,6 +720,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     IsDlpMultiColor = IsDLPMultiColor == null ? false : Convert.ToBoolean(IsDLPMultiColor);
                     IsSync1DMultiColor = Is1DMultiColor == null ? false : Convert.ToBoolean(Is1DMultiColor);
+                    CurrentRunname = CurrentRunName;
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
 
                     if (!string.IsNullOrEmpty(metricSumID) && Convert.ToInt32(metricSumID) != -1)
@@ -745,7 +746,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         }
                     }
                     GenerateResources();
-                    if ((IsDlpMultiColor == true)  || (Is1DMultiColor==true))
+                    if (((IsDlpMultiColor == true)  || (Is1DMultiColor==true)) && CurrentRunname == "Run-0")
                     {
                         if (dtPatchDetails.Rows.Count > 0)
                         {
@@ -1265,6 +1266,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsSyncDLPPlusType { get; set; }
         public bool IsDlpMultiColor { get; set; }
         public bool IsSync1DMultiColor { get; set; }
+        public string CurrentRunname { get; set; }
 
 
         #endregion
