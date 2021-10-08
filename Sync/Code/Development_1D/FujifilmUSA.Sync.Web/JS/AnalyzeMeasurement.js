@@ -770,8 +770,8 @@ function BindAllTabs() {
     BindGrayCharts();
 
     //Bind current measurement patch details
-    
-    if (($hdnIsDlpMultiColor == "True" && $hdnIsSync1DMultiColor == "True") && ($hdnIsDlpMultiColor == "Run-0")) {
+
+    if (($hdnIsDlpMultiColor == "True" || $hdnIsSync1DMultiColor == "True") && ($hdnCurrentRunName == "Run-0")) {
         BindMeasurementPatchDetailsForMultiColor(); //It called DLPMultiColor and Sync1DMultiColor
     }    
     else {
