@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -754,6 +754,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to i1-IO-Pro3.
+        /// </summary>
+        internal static string EInstrumentType_i1IOPro3 {
+            get {
+                return ResourceManager.GetString("EInstrumentType_i1IOPro3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to i1-Pro.
         /// </summary>
         internal static string EInstrumentType_i1Pro {
@@ -768,6 +777,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string EInstrumentType_i1Pro2 {
             get {
                 return ResourceManager.GetString("EInstrumentType_i1Pro2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to i1-Pro3.
+        /// </summary>
+        internal static string EInstrumentType_i1Pro3 {
+            get {
+                return ResourceManager.GetString("EInstrumentType_i1Pro3", resourceCulture);
             }
         }
         

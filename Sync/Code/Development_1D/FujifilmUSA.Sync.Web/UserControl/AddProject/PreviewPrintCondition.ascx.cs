@@ -204,7 +204,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblObserver.Text = Data["observerTypeId"];
                     trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
+                                          || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro3))
                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
+                                          || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro3))
                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
                     lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
                     Div_Presets.Visible = false;
@@ -235,7 +237,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
+                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro3))
                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
+                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro3))
                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
                     lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
                     lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
@@ -326,7 +330,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
+                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro3))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
+                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro3))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
 
                 lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();

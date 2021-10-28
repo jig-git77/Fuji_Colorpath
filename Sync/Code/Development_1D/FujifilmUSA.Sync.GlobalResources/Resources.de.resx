@@ -1363,4 +1363,10 @@ erwünschten Format überein.</value>
   <data name="ELicenseType_DLP_MULTI_COLOR" xml:space="preserve">
     <value>DLP Multi Color</value>
   </data>
+  <data name="EInstrumentType_i1IOPro3" xml:space="preserve">
+    <value>i1-IO-Pro3</value>
+  </data>
+  <data name="EInstrumentType_i1Pro3" xml:space="preserve">
+    <value>i1-Pro3</value>
+  </data>
 </root>
