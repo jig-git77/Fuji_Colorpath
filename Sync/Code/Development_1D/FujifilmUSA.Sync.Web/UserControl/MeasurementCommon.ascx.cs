@@ -54,7 +54,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ||
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus) && 
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor) && 
                     SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
