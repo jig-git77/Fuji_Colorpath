@@ -283,20 +283,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                         dvMetricPreset.Visible = false;
                         dvOptionPreset.Visible = true;
-                    }
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
-                    {
-                        lblMSelectedPresets.Text = Data["metricTargetPresetName"];
-                        lblMPresetDescription.Text = Data["metricTargetPresetDesc"];
-                        if (Data["ReTargetProject"] != "") //---Only display ReTarget Project details when it is Sync1D project with ReTarget enabled
-                        {
-                            lblReTargetProject.Text = Data["ReTargetProject"];
-                        }
-                        else
-                        {
-                            lblReTargetProject.Text = "";
-                            locReTargetProj.Visible = false;
-
+                    }                   
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                     {
                         lblMSelectedPresets.Text = Data["metricTargetPresetName"];

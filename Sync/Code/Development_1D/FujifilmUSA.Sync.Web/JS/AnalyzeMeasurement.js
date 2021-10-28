@@ -111,6 +111,7 @@ var $hdnCurrentUserRole;
 var AUTH_TOKEN = '';
 var $hdnSyncDlpPlusType;
 var $hdnIsDlpMultiColor;
+var $hdnCurrentRunName;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -282,6 +283,7 @@ $(document).ready(function () {
     AUTH_TOKEN = $("#hdfAuthToken").val();
     $hdnSyncDlpPlusType = $('#hdnSyncDlpPlusType').val();
     $hdnIsDlpMultiColor = $('#hdnIsDlpMultiColor').val();
+    $hdnCurrentRunName = $('#hdnCurrentRunName').val();
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
         if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -400,7 +402,7 @@ $(document).ready(function () {
             //End:
         }
         apiParameter.ProjectLicenseType = $hdnCurrentProjectLicenseType;
-       
+
         var ajaxParameter = {
             type: "POST",
             url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
@@ -765,11 +767,11 @@ function BindAllTabs() {
     BindGrayCharts();
 
     //Bind current measurement patch details
-    if ($hdnIsDlpMultiColor != "True") {
-        BindMeasurementPatchDetails();
+    if (($hdnIsDlpMultiColor == "True") && ($hdnCurrentRunName == "Run-0")) {
+        BindMeasurementPatchDetailsForMultiColor(); //It called DLPMultiColor and Sync1DMultiColor
     }
     else {
-        BindMeasurementPatchDetailsForMultiColor();
+        BindMeasurementPatchDetails();
     }
 
     //Bind report image
@@ -1144,7 +1146,8 @@ function BindMeasurementPatchDetails() {
                                 IsVerificationProject: $hdnVerification,
                                 IsSync1DTypeProject: $hdnSync1DType,
                                 metricSumID: $('#hdPatchMatricSum').val(),
-                                IsDLPMultiColor: $hdnIsDlpMultiColor
+                                IsDLPMultiColor: $hdnIsDlpMultiColor,
+                                CurrentRunName: $hdnCurrentRunName
                             },
                             dataType: "json",
                             headers: {
@@ -1410,28 +1413,28 @@ function BindMeasurementPatchDetails() {
                     title: "<b title='C'>C</b>",
                     format: "{0:n2}",
                     width: "55px",
-                    locked: true,
+                    //locked: true,
                 },
                 {
                     field: "CMYK_M",
                     title: "<b title='M'>M</b>",
                     format: "{0:n2}",
                     width: "58px",
-                    locked: true,
+                    //locked: true,
                 },
                 {
                     field: "CMYK_Y",
                     title: "<b title='Y'>Y</b>",
                     format: "{0:n2}",
                     width: "55px",
-                    locked: true,
+                    //locked: true,
                 },
                 {
                     field: "CMYK_K",
                     title: "<b title='K'>K</b>",
                     format: "{0:n2}",
                     width: "55px",
-                    locked: true,
+                    //locked: true,
                 },
                 {
                     field: "ΔE",
@@ -1922,7 +1925,8 @@ function BindMeasurementPatchDetailsForMultiColor() {
                                 IsVerificationProject: $hdnVerification,
                                 IsSync1DTypeProject: $hdnSync1DType,
                                 metricSumID: $('#hdPatchMatricSum').val(),
-                                IsDLPMultiColor: $hdnIsDlpMultiColor
+                                IsDLPMultiColor: $hdnIsDlpMultiColor,
+                                CurrentRunName: $hdnCurrentRunName
                             },
                             dataType: "json",
                             headers: {
@@ -1965,7 +1969,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
                                     $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
                                     $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
                                 }
-                                
+
                                 if (TotalNoColor == 5) {
                                     $divMeasurementPatchDetails.find("th[data-field=Channel5] b").html(Resources.Channel_5);
                                     $($divMeasurementPatchDetails.find("th[data-field=Channel5] b")[0]).prop("title", Resources.Channel_5); //Header ToolTip Channel5
@@ -2050,6 +2054,26 @@ function BindMeasurementPatchDetailsForMultiColor() {
                                 from: "CMYK_K",
                                 type: "number"
                             },
+                            Channel5: {
+                                from: "Channel5",
+                                type: "number"
+                            },
+                            Channel6: {
+                                from: "Channel6",
+                                type: "number"
+                            },
+                            Channel7: {
+                                from: "Channel7",
+                                type: "number"
+                            },
+                            Channel8: {
+                                from: "Channel8",
+                                type: "number"
+                            },
+                            Channel9: {
+                                from: "Channel9",
+                                type: "number"
+                            },
                             HTMLColor: {
                                 from: "HTMLColor"
                             },
@@ -2120,26 +2144,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
                             ΔL: {
                                 from: "ΔL",
                                 type: "number"
-                            },
-                            Channel5: {
-                                from: "Channel5",
-                                type: "number"
-                            },
-                            Channel6: {
-                                from: "Channel6",
-                                type: "number"
-                            },
-                            Channel7: {
-                                from: "Channel7",
-                                type: "number"
-                            },
-                            Channel8: {
-                                from: "Channel8",
-                                type: "number"
-                            },
-                            Channel9: {
-                                from: "Channel9",
-                                type: "number"
                             }
 
                         }
@@ -2200,28 +2204,64 @@ function BindMeasurementPatchDetailsForMultiColor() {
                     title: "<b title='C'>C</b>",
                     format: "{0:n2}",
                     width: "55px",
-                    locked: true,
+                   // locked: true,
                 },
                 {
                     field: "CMYK_M",
                     title: "<b title='M'>M</b>",
                     format: "{0:n2}",
                     width: "58px",
-                    locked: true,
+                   // locked: true,
                 },
                 {
                     field: "CMYK_Y",
                     title: "<b title='Y'>Y</b>",
                     format: "{0:n2}",
                     width: "55px",
-                    locked: true,
+                    //locked: true,
                 },
                 {
                     field: "CMYK_K",
                     title: "<b title='K'>K</b>",
                     format: "{0:n2}",
                     width: "55px",
-                    locked: true,
+                   // locked: true,
+                },
+                {
+                    field: "Channel5",
+                    title: "<b title='Channel5'>Channel5</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+
+                },
+                {
+                    field: "Channel6",
+                    title: "<b title='Channel6'>Channel6</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+
+                },
+
+                {
+                    field: "Channel7",
+                    title: "<b title='Channel7'>Channel7</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+
+                },
+                {
+                    field: "Channel8",
+                    title: "<b title='Channel8'>Channel8</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+
+                },
+                {
+                    field: "Channel9",
+                    title: "<b title='Channel9'>Channel9</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+
                 },
                 {
                     field: "ΔE",
@@ -2321,43 +2361,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
                     width: '75px',
                     format: "{0:n2}",
                     hidden: true,
-                },                
-                {
-                    field: "Channel5",
-                    title: "<b title='Channel5'>Channel5</b>",
-                    width: '75px',
-                    format: "{0:n2}",
-                    
-                },                
-                {
-                    field: "Channel6",
-                    title: "<b title='Channel6'>Channel6</b>",
-                    width: '75px',
-                    format: "{0:n2}",
-                    
-                },
-              
-                {
-                    field: "Channel7",
-                    title: "<b title='Channel7'>Channel7</b>",
-                    width: '75px',
-                    format: "{0:n2}",
-                    
-                },                
-                {
-                    field: "Channel8",
-                    title: "<b title='Channel8'>Channel8</b>",
-                    width: '75px',
-                    format: "{0:n2}",
-                   
-                },              
-                {
-                    field: "Channel9",
-                    title: "<b title='Channel9'>Channel9</b>",
-                    width: '75px',
-                    format: "{0:n2}",
-                    
-                },
+                }
             ],
             dataBound: function (e) {
                 var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
@@ -2369,9 +2373,9 @@ function BindMeasurementPatchDetailsForMultiColor() {
                         case 7:
                         case 25:
                         case 26:
-                            grid.showColumn(20);
-                            grid.hideColumn(21);
-                            grid.hideColumn(22);
+                            grid.showColumn(25);//grid.showColumn(20);
+                            grid.hideColumn(26);//grid.hideColumn(21);
+                            grid.hideColumn(27);//grid.hideColumn(22);
                             break;
                         case 8:
                         case 9:
@@ -2379,9 +2383,9 @@ function BindMeasurementPatchDetailsForMultiColor() {
                         case 37:
                         case 48:
                         case 56:
-                            grid.hideColumn(20);
-                            grid.showColumn(21);
-                            grid.hideColumn(22);
+                            grid.hideColumn(25);//grid.hideColumn(20);
+                            grid.showColumn(26);//grid.showColumn(21);
+                            grid.hideColumn(27);//grid.hideColumn(22);
                             break;
                         case 10:
                         case 11:
@@ -2391,44 +2395,44 @@ function BindMeasurementPatchDetailsForMultiColor() {
                         case 39:
                         case 40:
                         case 41:
-                            grid.hideColumn(20);
-                            grid.hideColumn(21);
-                            grid.showColumn(22);
+                            grid.hideColumn(25);//grid.hideColumn(20);
+                            grid.hideColumn(26);//grid.hideColumn(21);
+                            grid.showColumn(27);//grid.showColumn(22);
                             break;
                         default:
-                            grid.hideColumn(20);
-                            grid.hideColumn(21);
-                            grid.hideColumn(22);
+                            grid.hideColumn(25);//grid.hideColumn(20);
+                            grid.hideColumn(26);//grid.hideColumn(21);
+                            grid.hideColumn(27);//grid.hideColumn(22);
                     }
                 } else {
-                    grid.hideColumn(20);
-                    grid.hideColumn(21);
-                    grid.hideColumn(22);
+                    grid.hideColumn(25);//grid.hideColumn(20);
+                    grid.hideColumn(26);//grid.hideColumn(21);
+                    grid.hideColumn(27);//grid.hideColumn(22);
                 }
                 //show measurement export button visible only for sys admin user
                 if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
-                }                
+                }
                 if (TotalNoColor == 5) {
-                    grid.hideColumn(24);// Channel_6
-                    grid.hideColumn(25);// Channel_7
-                    grid.hideColumn(26);// Channel_8
-                    grid.hideColumn(27);// Channel_9
+                    grid.hideColumn(8);//grid.hideColumn(24);// Channel_6
+                    grid.hideColumn(9);//grid.hideColumn(25);// Channel_7
+                    grid.hideColumn(10);//grid.hideColumn(26);// Channel_8
+                    grid.hideColumn(11);//grid.hideColumn(27);// Channel_9
                 }
                 else if (TotalNoColor == 6) {
-                    grid.hideColumn(25); ///Channel_7
-                    grid.hideColumn(26);///Channel_8
-                    grid.hideColumn(27);///Channel_9
-                    
+                    grid.hideColumn(9);//grid.hideColumn(25); ///Channel_7
+                    grid.hideColumn(10);//grid.hideColumn(26);///Channel_8
+                    grid.hideColumn(11);//grid.hideColumn(27);///Channel_9
+
                 }
-                else if (TotalNoColor == 7) {                                        
-                    grid.hideColumn(26);// Channel_8
-                    grid.hideColumn(27);// Channel_9
+                else if (TotalNoColor == 7) {
+                    grid.hideColumn(10);//grid.hideColumn(26);// Channel_8
+                    grid.hideColumn(11);//grid.hideColumn(27);// Channel_9
                 }
-                else if (TotalNoColor == 8) {                    
-                    grid.hideColumn(27);// Channel_9
+                else if (TotalNoColor == 8) {
+                    grid.hideColumn(11);//grid.hideColumn(27);// Channel_9
                 }
-                
+
             }
 
 

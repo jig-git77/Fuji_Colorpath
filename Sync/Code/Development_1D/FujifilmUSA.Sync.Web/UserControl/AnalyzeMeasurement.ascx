@@ -365,6 +365,7 @@
                 <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnSyncDlpPlusType" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnIsDlpMultiColor" ClientIDMode="Static" />
+                 <asp:HiddenField ID="hdnCurrentRunName" runat="server" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">

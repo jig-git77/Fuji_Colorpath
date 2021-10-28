@@ -222,6 +222,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnSync1DType.Value = IsSync1DType.ToString();
                 hdnSyncDlpPlusType.Value = IsSyncDLPPlusType.ToString();
                 hdnIsDlpMultiColor.Value = Convert.ToString(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ? true : false);
+                hdnCurrentRunName.Value = SessionManager.Instance.CurrentOptimizeRun.CurrentRunName.ToString();
 
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
@@ -537,6 +538,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public bool IsDlpMultiColor { get; set; }
+        public string CurrentRunname { get; set; }
         #endregion
     }
 }

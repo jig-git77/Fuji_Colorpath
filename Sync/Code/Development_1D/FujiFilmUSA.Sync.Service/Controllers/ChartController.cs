@@ -680,7 +680,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor)
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor, string CurrentRunName)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
@@ -719,6 +719,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     IsDlpMultiColor = IsDLPMultiColor == null ? false : Convert.ToBoolean(IsDLPMultiColor);
+                    CurrentRunname = CurrentRunName;
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
 
                     if (!string.IsNullOrEmpty(metricSumID) && Convert.ToInt32(metricSumID) != -1)
@@ -744,7 +745,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         }
                     }
                     GenerateResources();
-                    if (IsDlpMultiColor)
+                    if (IsDlpMultiColor == true && CurrentRunname == "Run-0")
                     {
                         if (dtPatchDetails.Rows.Count > 0)
                         {
@@ -1263,6 +1264,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsUsed { get; set; }
         public bool IsSyncDLPPlusType { get; set; }
         public bool IsDlpMultiColor { get; set; }
+        public string CurrentRunname { get; set; }
 
         #endregion
 

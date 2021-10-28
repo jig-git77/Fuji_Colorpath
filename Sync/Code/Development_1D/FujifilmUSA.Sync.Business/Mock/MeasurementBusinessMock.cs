@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, string CurrentRunName = "")
         {
             return new DataTable();
         }
