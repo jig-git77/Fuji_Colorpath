@@ -88,22 +88,7 @@
     });
 
 
-    $(document).ready(function () {
-        //Default Action
-        $(".hideclass").hide(); //Hide all content
-        $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
-        $(".hideclass:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content
-        //On Click Event
-        $("ul.tabs li").click(function () {
-            $("ul.tabs li").removeClass("active"); //Remove any "active" class
-            $('#<%= hdnSelectedTabIndex.ClientID %>').val($(this).index());
-            $(this).addClass("active"); //Add "active" class to selected tab
-            $(".hideclass").hide(); //Hide all tab content
-            var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
-            $(activeTab).fadeIn(); //Fade in the active content
-
-            return false;
-        });
+    $(document).ready(function () {       
         var CurrentCulture = $("#hdfCurrentCulture").val();
         SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
         var optimizationId = $('#hdfOptimizationRunID').val();
@@ -906,6 +891,23 @@
             //    }
             //});
         });
+
+         //Default Action
+        $(".hideclass").hide(); //Hide all content
+        $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
+        $(".hideclass:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content
+        //On Click Event
+        $("ul.tabs li").click(function () {
+            $("ul.tabs li").removeClass("active"); //Remove any "active" class
+            $('#<%= hdnSelectedTabIndex.ClientID %>').val($(this).index());
+            $(this).addClass("active"); //Add "active" class to selected tab
+            $(".hideclass").hide(); //Hide all tab content
+            var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+            $(activeTab).fadeIn(); //Fade in the active content
+
+            return false;
+        });
+
     });
 
     function generateABTargetChart(predicredA, measuredA, predicredB, measuredB, hasMeasurement) {
