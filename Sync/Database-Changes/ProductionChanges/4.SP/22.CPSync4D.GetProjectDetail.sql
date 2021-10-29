@@ -202,7 +202,8 @@ AS
 				(SELECT COUNT(*) FROM CPSyncV.Measurement mnt WHERE mnt.ProjectID = @ProjectID) AS MeasurementCount,
 				0 AS ReferenceChartTypeId,
 				'' AS ChartName,
-				NULL AS DeviceLinkProfile				
+				NULL AS DeviceLinkProfile,
+				'' AS CurrentRunName --Pass blank name as CurrentRunName for validation							
 		END
 	
 	-----Select data (Only for Sync1D projects)
