@@ -199,12 +199,29 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
         public bool CheckInstrumentType(int currentProjectInstrumentType, int measurementInstrumentType)
         {
+            //----For i1-IO
             if ((currentProjectInstrumentType == (int)EInstrumentType.i1IO && measurementInstrumentType == (int)EInstrumentType.i1IOPro2)
                 || (currentProjectInstrumentType == (int)EInstrumentType.i1IOPro2 && measurementInstrumentType == (int)EInstrumentType.i1IO))
                 return true;
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1IO && measurementInstrumentType == (int)EInstrumentType.i1IOPro3)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1IOPro3 && measurementInstrumentType == (int)EInstrumentType.i1IO))
+                return true;
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1IOPro2 && measurementInstrumentType == (int)EInstrumentType.i1IOPro3)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1IOPro3 && measurementInstrumentType == (int)EInstrumentType.i1IOPro2))
+                return true;
+
+            //------For i1-Pro
             if ((currentProjectInstrumentType == (int)EInstrumentType.i1Pro && measurementInstrumentType == (int)EInstrumentType.i1Pro2)
                 || (currentProjectInstrumentType == (int)EInstrumentType.i1Pro2 && measurementInstrumentType == (int)EInstrumentType.i1Pro))
                 return true;
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1Pro && measurementInstrumentType == (int)EInstrumentType.i1Pro3)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1Pro3 && measurementInstrumentType == (int)EInstrumentType.i1Pro))
+                return true;
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1Pro2 && measurementInstrumentType == (int)EInstrumentType.i1Pro3)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1Pro3 && measurementInstrumentType == (int)EInstrumentType.i1Pro2))
+                return true;
+
+            //-----For i1-iSis
             if ((currentProjectInstrumentType == (int)EInstrumentType.i1Sis && measurementInstrumentType == (int)EInstrumentType.i1Sis2)
                 || (currentProjectInstrumentType == (int)EInstrumentType.i1Sis2 && measurementInstrumentType == (int)EInstrumentType.i1Sis))
                 return true;
