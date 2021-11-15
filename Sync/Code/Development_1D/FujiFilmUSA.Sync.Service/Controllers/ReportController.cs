@@ -1110,8 +1110,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         fileName = ExportColdera2File(listPatch, model);
                     else if (model.LibraryType == 3)
                         fileName = ExportColorgateFile(listPatch, model);
-                    else
+                    else if (model.LibraryType == 4)
                         fileName = ExportCMYK_DBDFile(listPatch, model);
+                    else
+                        fileName = ExportCMYK_PackZFile(listPatch, model);  //--Option 5 = PackZ file
 
 
                     if (!string.IsNullOrEmpty(fileName))
@@ -1659,7 +1661,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             sw.WriteLine("</ColorList>");
             sw.WriteLine("</MediaDeviceColors>");
             //--------End: Footer--------------//
-
+            
             sw.Close();
 
             //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".xml", CMYKFileName + ".xml");
@@ -1815,6 +1817,132 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".zip", CMYKFileName + ".zip");
         }
         #endregion
+
+        #region Create file and download .tcb file for PackZ CMYK type
+        private string ExportCMYK_PackZFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
+            string fileName = detail.FileName + ".tcb";
+            string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);
+
+            System.IO.StreamWriter sw;
+            sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
+
+            //--------Start: Header------------//
+            sw.WriteLine("PACKZ Software Color Book version 1.0");
+            sw.WriteLine("BookName" + "\t" + detail.BookName);
+            sw.WriteLine("Name" + "\t" + "Opacity%" + "\t" + "CMYK%" + "\t" + "RGB%" + "\t" + "Lab" + "\t" + "Type");
+            sw.WriteLine(" ");
+            sw.WriteLine(" ");
+            //--------End: Header--------------//
+
+            double X, Y, Z;
+            int R, G, B;
+
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+
+                X = LabtoXYZ(listPatch[i].Cie_L, listPatch[i].Cie_a, listPatch[i].Cie_b, "L");
+                Y = LabtoXYZ(listPatch[i].Cie_L, listPatch[i].Cie_a, listPatch[i].Cie_b, "a");
+                Z = LabtoXYZ(listPatch[i].Cie_L, listPatch[i].Cie_a, listPatch[i].Cie_b, "b");
+
+                R = XYZtoRGB(X, Y, Z, "X");
+                G = XYZtoRGB(X, Y, Z, "Y");
+                B = XYZtoRGB(X, Y, Z, "Z");
+
+                sw.WriteLine(SpotName_Parameter + "\t" + "0.0" + "\t" + listPatch[i].Cmyk_C.ToString("N1") + "\t" + listPatch[i].Cmyk_M.ToString("N1") + "\t" + listPatch[i].Cmyk_Y.ToString("N1") + "\t" + listPatch[i].Cmyk_K.ToString("N1") + "\t"+ R + "\t"+ G + "\t"+ B + "\t" + listPatch[i].Cie_L.ToString() + "\t" + listPatch[i].Cie_a.ToString() + "\t" + listPatch[i].Cie_b.ToString() + "\t" + "Standard");
+            }
+
+            sw.Close();
+
+            //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".tcb", CMYKFileName + ".tcb");
+            return fileName;
+        }
+        #endregion
+
+
+        // Converts CIELab to CIEXYZ.
+        double LabtoXYZ(double l, double a, double b, string LAB)
+        {
+            double delta = 6.0 / 29.0;
+
+            double fy = (l + 16) / 116.0;
+            double fx = fy + (a / 500.0);
+            double fz = fy - (b / 200.0);
+
+            double d65X = 0.9505;
+            double d65Y = 1.0;
+            double d65Z = 1.089;
+
+            double R = 0;
+
+            if (LAB == "L")
+            {
+                // x component
+                double X;
+                
+                if (fx > delta)
+                    X = d65X * (fx * fx * fx);
+                else
+                    X = (fx - 16.0 / 116.0) * 3 * (delta * delta) * d65X;
+                return X;
+            }
+            else if (LAB == "a")
+            {
+                // y component
+                double Y;
+                if (fy > delta)
+                    Y = d65Y * (fy * fy * fy);
+                else
+                    Y = (fy - 16.0 / 116.0) * 3 * (delta * delta) * d65Y;
+                return Y;
+            }
+            else if (LAB == "b")
+            {
+                // z component
+                double Z;
+                if (fz > delta)
+                    Z = d65Z * (fz * fz * fz);
+                else
+                    Z = (fz - 16.0 / 116.0) * 3 * (delta * delta) * d65Z;
+                return Z;
+            }
+            return R;
+        }
+
+        // Converts CIEXYZ to RGB structure.
+        int XYZtoRGB(double x, double y, double z, string XYZ)
+        {
+            int R = 0;
+            double Clinear0, Clinear1, Clinear2;
+            Clinear0 = x * 3.241 - y * 1.5374 - z * 0.4986; // red
+            Clinear1 = -x * 0.9692 + y * 1.876 - z * 0.0416; // green
+            Clinear2 = x * 0.0556 - y * 0.204 + z * 1.057; // blue
+
+            List<double> Clinearitems = new List<double>();
+            Clinearitems.Add(Clinear0);
+            Clinearitems.Add(Clinear1);
+            Clinearitems.Add(Clinear2);
+
+            for (int i = 0; i <= 2; i++)
+            {
+                if (Clinearitems[i] <= 0.0031308)
+                    Clinearitems[i] = 12.92 * Clinearitems[i];
+                else
+                    Clinearitems[i] = (1 + 0.055) * Math.Pow(Clinearitems[i], (1.0 / 2.4)) - 0.055;
+                Clinearitems[i] = Double.Parse(String.Format("{0:0.00}", Clinearitems[i] * 255.0));
+            }
+            if (XYZ == "X")
+                return Convert.ToInt32(Clinearitems[0]);
+            else if (XYZ == "Y")
+                return Convert.ToInt32(Clinearitems[1]);
+            else if (XYZ == "Z")
+                return Convert.ToInt32(Clinearitems[2]);
+            return R;
+        }
 
 
         //Get density of LabL to export CMYK values
