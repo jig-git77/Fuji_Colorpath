@@ -1852,7 +1852,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 R = XYZtoRGB(X, Y, Z, "X");
                 G = XYZtoRGB(X, Y, Z, "Y");
                 B = XYZtoRGB(X, Y, Z, "Z");
-
+             
                 sw.WriteLine(SpotName_Parameter + "\t" + "0.0" + "\t" + listPatch[i].Cmyk_C.ToString("N1") + "\t" + listPatch[i].Cmyk_M.ToString("N1") + "\t" + listPatch[i].Cmyk_Y.ToString("N1") + "\t" + listPatch[i].Cmyk_K.ToString("N1") + "\t"+ R + "\t"+ G + "\t"+ B + "\t" + listPatch[i].Cie_L.ToString() + "\t" + listPatch[i].Cie_a.ToString() + "\t" + listPatch[i].Cie_b.ToString() + "\t" + "Standard");
             }
 
@@ -1869,9 +1869,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             double delta = 6.0 / 29.0;
 
-            double fy = (l + 16) / 116.0;
-            double fx = fy + (a / 500.0);
-            double fz = fy - (b / 200.0);
+            double fy = (l + 16) / 116;
+            double fx = fy + (a / 500);
+            double fz = fy - (b / 200);
 
             double d65X = 0.9505;
             double d65Y = 1.0;
@@ -1883,11 +1883,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 // x component
                 double X;
-                
                 if (fx > delta)
                     X = d65X * (fx * fx * fx);
                 else
                     X = (fx - 16.0 / 116.0) * 3 * (delta * delta) * d65X;
+
                 return X;
             }
             else if (LAB == "a")
@@ -1898,6 +1898,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     Y = d65Y * (fy * fy * fy);
                 else
                     Y = (fy - 16.0 / 116.0) * 3 * (delta * delta) * d65Y;
+
                 return Y;
             }
             else if (LAB == "b")
@@ -1908,8 +1909,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     Z = d65Z * (fz * fz * fz);
                 else
                     Z = (fz - 16.0 / 116.0) * 3 * (delta * delta) * d65Z;
+
                 return Z;
             }
+
             return R;
         }
 
@@ -1918,9 +1921,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             int R = 0;
             double Clinear0, Clinear1, Clinear2;
-            Clinear0 = x * 3.241 - y * 1.5374 - z * 0.4986; // red
-            Clinear1 = -x * 0.9692 + y * 1.876 - z * 0.0416; // green
-            Clinear2 = x * 0.0556 - y * 0.204 + z * 1.057; // blue
+
+            Clinear0 = (x * 3.241) - (y * 1.5374) - (z * 0.4986); // red
+            Clinear1 = (-x * 0.9692) + (y * 1.876) - (z * 0.0416); // green
+            Clinear2 = (x * 0.0556) - (y * 0.204) + (z * 1.057); // blue
 
             List<double> Clinearitems = new List<double>();
             Clinearitems.Add(Clinear0);
@@ -1935,15 +1939,32 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     Clinearitems[i] = (1 + 0.055) * Math.Pow(Clinearitems[i], (1.0 / 2.4)) - 0.055;
                 Clinearitems[i] = Double.Parse(String.Format("{0:0.00}", Clinearitems[i] * 255.0));
             }
+
             if (XYZ == "X")
-                return Convert.ToInt32(Clinearitems[0]);
+                return RGBRange(Convert.ToInt32(Clinearitems[0]));
             else if (XYZ == "Y")
-                return Convert.ToInt32(Clinearitems[1]);
+                return RGBRange(Convert.ToInt32(Clinearitems[1]));
             else if (XYZ == "Z")
-                return Convert.ToInt32(Clinearitems[2]);
+                return RGBRange(Convert.ToInt32(Clinearitems[2]));
+           
             return R;
         }
+        
+        //Set RGB range between 0 to 255
+        int RGBRange(int RGBValue)
+        {
+            int R = 0;
 
+            if (RGBValue > 255)
+                R = 255;
+            else
+                if (RGBValue < 0)
+                R = 0;
+            else
+                R = RGBValue;
+
+            return R;
+        }
 
         //Get density of LabL to export CMYK values
         double GetNdensity(double Lab_L)
