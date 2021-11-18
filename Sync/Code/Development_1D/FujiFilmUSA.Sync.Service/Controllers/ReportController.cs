@@ -535,7 +535,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.CurveTypeId = Convert.ToInt16(CurveType);
                     if (Convert.ToInt16(CurveType) == 100 || Convert.ToInt16(CurveType) == 101)
                         this.CurveTypeId = 5;
-                    if (Convert.ToInt16(CurveType) == 102)
+                    if (Convert.ToInt16(CurveType) == 102 || Convert.ToInt16(CurveType) == 104)
                         this.CurveTypeId = 45;
 
                     _presenterExport.GetCurveData();
@@ -932,6 +932,50 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Nexus.zip", CurveFileName + "_Nexus.zip");
                         #endregion
                     }
+                    else if (CurveType == 104)  // Esko
+                    {
+                        #region Create Zip file and download file for Esko
+
+                        CurveFileName = ExportFileName;
+                        string zipCurveFileName = CurveFileName + "_Esko.zip";
+                        ReportFileName = "/UploadFiles/CurvesFile/" + zipCurveFileName;
+
+
+                        //check if file exists and delete it
+                        if (System.IO.File.Exists(CurveFilePath + zipCurveFileName))
+                            System.IO.File.Delete(CurveFilePath + zipCurveFileName);
+
+                        System.IO.StreamWriter swC;
+                        System.IO.StreamWriter swM;
+                        System.IO.StreamWriter swY;
+                        System.IO.StreamWriter swK;
+                        swC = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Esko_Cya.txt");
+                        swM = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Esko_Mag.txt");
+                        swY = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Esko_Yel.txt");
+                        swK = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Esko_Bla.txt");
+
+
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            swC.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_C).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000"));
+                            swM.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_M).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000"));
+                            swY.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_Y).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000"));
+                            swK.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_K).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000"));
+                        }
+
+                        swC.Close();
+                        swM.Close();
+                        swY.Close();
+                        swK.Close();
+
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Esko_Cya.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Esko_Mag.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Esko_Yel.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Esko_Bla.txt");
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Esko.zip", CurveFileName + "_Esko.zip");
+                        #endregion
+                    }
                     if (string.IsNullOrEmpty(ReportFileName))
                         ReportFileName = "/UploadFiles/CurvesFile/" + CurveFileName;
                     httpResponse.Data = ReportFileName;
@@ -979,7 +1023,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.CurveTypeId = Convert.ToInt16(CurveType);
                     if (Convert.ToInt16(CurveType) == 100 || Convert.ToInt16(CurveType) == 101)
                         this.CurveTypeId = 5;
-                    if (Convert.ToInt16(CurveType) == 102)
+                    if (Convert.ToInt16(CurveType) == 102 || Convert.ToInt16(CurveType) == 104)
                         this.CurveTypeId = 45;
 
                     _presenterExport.GetCurveData();
@@ -1093,9 +1137,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                                     Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
                                     Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
                                     Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
-                                    Cie_L = Convert.ToDouble(dr["TargetL"]),
-                                    Cie_a = Convert.ToDouble(dr["Targeta"]),
-                                    Cie_b = Convert.ToDouble(dr["Targetb"]),
+                                    Target_L = Convert.ToDouble(dr["TargetL"]),
+                                    Target_a = Convert.ToDouble(dr["Targeta"]),
+                                    Target_b = Convert.ToDouble(dr["Targetb"]),
+                                    Cie_L = Convert.ToDouble(dr["MeasuredL"]),
+                                    Cie_a = Convert.ToDouble(dr["Measureda"]),
+                                    Cie_b = Convert.ToDouble(dr["Measuredb"]),
                                     Spot1 = 0
                                 };
                                 listPatch.Add(patch);
@@ -1770,7 +1817,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
                 sw.WriteLine("\tColorType:string = " + "\"Normal\";");
                 sw.WriteLine("\tNeutralDensity:double = " + GetNdensity(listPatch[i].Cie_L).ToString("0.000000000000000e+0") + ";");
-                sw.WriteLine("\tTempLab:double[3] = " + listPatch[i].Cie_L.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_a.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_b.ToString("0.000000000000000e+0") + ";");
+                sw.WriteLine("\tTempLab:double[3] = " + listPatch[i].Target_L.ToString("0.000000000000000e+0") + "," + listPatch[i].Target_a.ToString("0.000000000000000e+0") + "," + listPatch[i].Target_b.ToString("0.000000000000000e+0") + ";");
                 sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", (listPatch[i].Cmyk_C / 100)) + "," + (listPatch[i].Cmyk_M / 100).ToString("0.000000000000000e+0") + "," + (listPatch[i].Cmyk_Y / 100).ToString("0.000000000000000e+0") + "," + (listPatch[i].Cmyk_K / 100).ToString("0.000000000000000e+0") + ";");
                 sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
                 sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
