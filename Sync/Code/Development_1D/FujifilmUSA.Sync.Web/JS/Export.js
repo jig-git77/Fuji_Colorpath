@@ -191,8 +191,8 @@ function BindChart() {
         curveTypeID = 5;
     }
 
-    //---Set same value for "Onyx G7 Import" like "Nexus" for export curve data
-    if (curveTypeID == 102) {
+    //---Set same value for "Onyx G7 Import" and "Esko" like "Nexus" for export curve data
+    if (curveTypeID == 102 || curveTypeID == 104) {
         curveTypeID = 45;
     }
 

@@ -246,4 +246,7 @@
   <data name="locDownloadSourceProfResource1.Text" xml:space="preserve">
     <value>Source Profile Creation Complete_ja</value>
   </data>
+  <data name="EskoResource1.Text" xml:space="preserve">
+    <value>Esko</value>
+  </data>
 </root>

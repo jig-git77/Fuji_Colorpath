@@ -375,6 +375,7 @@
                                                     <asp:ListItem Text="ColorGate-CGCX" meta:resourcekey="ColCGCXResource1" Value="101"></asp:ListItem>
                                                     <asp:ListItem Text="Onyx G7 Import" meta:resourcekey="OnyxG7ImportResource1" Value="102"></asp:ListItem>
                                                     <asp:ListItem Text="Hybrid" meta:resourcekey="HybridResource1" Value="103" Enabled="false"></asp:ListItem>
+                                                    <asp:ListItem Text="Esko" meta:resourcekey="EskoResource1" Value="104"></asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
                                         </tr>
