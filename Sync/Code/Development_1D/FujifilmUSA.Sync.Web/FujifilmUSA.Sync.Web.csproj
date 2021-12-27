@@ -1116,6 +1116,7 @@
     <Content Include="Content\kendo\2020.2.617\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2020.2.617\Uniform\sprite_kpi_2x.png" />
     <Content Include="COProjectMaxLimit.aspx" />
+    <Content Include="CORevoriaUsersProcess.aspx" />
     <Content Include="COXMFTestNewPage.html" />
     <Content Include="COXMFTestPage.html" />
     <Content Include="COTransferSiteControl.aspx" />
@@ -1307,6 +1308,7 @@
     <Content Include="JS\Printing.js" />
     <Content Include="JS\ProjectList.js" />
     <Content Include="JS\ProjectListNew.js" />
+    <Content Include="JS\RevoriaUserProjectList.js" />
     <Content Include="JS\SpotProjectListNew.js" />
     <Content Include="KendoGridSearchPanel.html" />
     <Content Include="MeasurementLog.aspx" />
@@ -1883,6 +1885,7 @@
     <Content Include="Content\kendo\2020.2.617\kendo.uniform.mobile.min.css.map" />
     <None Include="Properties\PublishProfiles\CPSyncWeb.pubxml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
+    <Content Include="RevoriaUserProjectList.aspx" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.js" />
@@ -3993,6 +3996,7 @@
     <Content Include="UserControl\CODisplaybar.ascx" />
     <Content Include="UserControl\COErrorMessage.ascx" />
     <Content Include="UserControl\COProjectMaxLimit.ascx" />
+    <Content Include="UserControl\CORevoriaUsersProcess.ascx" />
     <Content Include="UserControl\COTransferSiteControl.ascx" />
     <Content Include="UserControl\COValidationCallback.ascx" />
     <Content Include="UserControl\COViewOpenProject.ascx" />
@@ -4027,6 +4031,7 @@
     <Content Include="UserControl\ReferenceChartManagement.ascx" />
     <Content Include="UserControl\ReportSingleMeasurement.ascx" />
     <Content Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx" />
+    <Content Include="UserControl\RevoriaUserProjectList.ascx" />
     <Content Include="UserControl\SpotMeasurement.ascx" />
     <Content Include="UserControl\SpotTargetManagement.ascx" />
     <Content Include="UserControl\Spot_Measurement.ascx" />
@@ -4566,6 +4571,13 @@
     <Compile Include="COProjectMaxLimit.aspx.designer.cs">
       <DependentUpon>COProjectMaxLimit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CORevoriaUsersProcess.aspx.cs">
+      <DependentUpon>CORevoriaUsersProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CORevoriaUsersProcess.aspx.designer.cs">
+      <DependentUpon>CORevoriaUsersProcess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="COTransferSiteControl.aspx.cs">
       <DependentUpon>COTransferSiteControl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4828,6 +4840,13 @@
     </Compile>
     <Compile Include="ReportMaster.Master.designer.cs">
       <DependentUpon>ReportMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="RevoriaUserProjectList.aspx.cs">
+      <DependentUpon>RevoriaUserProjectList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RevoriaUserProjectList.aspx.designer.cs">
+      <DependentUpon>RevoriaUserProjectList.aspx</DependentUpon>
     </Compile>
     <Compile Include="SessionEnd.aspx.cs">
       <DependentUpon>SessionEnd.aspx</DependentUpon>
@@ -5116,6 +5135,13 @@
     <Compile Include="UserControl\COProjectMaxLimit.ascx.designer.cs">
       <DependentUpon>COProjectMaxLimit.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\CORevoriaUsersProcess.ascx.cs">
+      <DependentUpon>CORevoriaUsersProcess.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CORevoriaUsersProcess.ascx.designer.cs">
+      <DependentUpon>CORevoriaUsersProcess.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\COTransferSiteControl.ascx.cs">
       <DependentUpon>COTransferSiteControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5352,6 +5378,13 @@
     </Compile>
     <Compile Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx.designer.cs">
       <DependentUpon>ReportSingleMeasurement_G7_Vali.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\RevoriaUserProjectList.ascx.cs">
+      <DependentUpon>RevoriaUserProjectList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\RevoriaUserProjectList.ascx.designer.cs">
+      <DependentUpon>RevoriaUserProjectList.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\SpotMeasurement.ascx.cs">
       <DependentUpon>SpotMeasurement.ascx</DependentUpon>

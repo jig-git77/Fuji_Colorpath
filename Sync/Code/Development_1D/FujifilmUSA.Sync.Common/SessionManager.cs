@@ -358,6 +358,8 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
+        public RevoriaUser CurrentRevoriaUser { get; set; }
+
         #endregion
     }
 }

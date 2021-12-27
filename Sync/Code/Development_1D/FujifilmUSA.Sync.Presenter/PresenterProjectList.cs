@@ -27,6 +27,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewProjectList.Projects = projectBusiness.GetProjectsByDeviceId(_viewProjectList.DeviceId,_viewProjectList.LicenseTypeID);             
         }
 
+        public void GetRevoriaUserProjectListByDeviceId()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
+            _viewProjectList.Projects = projectBusiness.GetRevoriaUserProjectsByDeviceId(_viewProjectList.DeviceId, _viewProjectList.LicenseTypeID,_viewProjectList.PQId);
+        }
+
         public void DeleteProject()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();

@@ -832,6 +832,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public UserReferenceChart UserReferenceChart { get; set; }
         public string DeviceSerialNo { get; set; }
         public short InstrumentTypeID { get; set; }
+
+        public RevoriaUser RevoriaUser { get; set; }
         #endregion
     }
 }

@@ -443,7 +443,8 @@ namespace FujifilmUSA.Sync.Entity
     public enum UserType
     {
         WebSiteUser = 0,
-        XmfColorOrganizerUser = 1
+        XmfColorOrganizerUser = 1,
+        RevoriaColorOrganizerUser = 2
     }
 
     public enum Template

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using FujifilmUSA.Sync.Entity;
@@ -31,5 +32,9 @@ namespace FujifilmUSA.Sync.Business.Interface
         ReferenceChartApp UserLogInByDeviceLAB(string serial, short InstrumentTypeId);
         int validateUserByAuthKey(string authToken);
         ReferenceChartApp UserLogInByDeviceLAB_Xmf(string serial, short InstrumentTypeId,int projectId);
+
+        #region RevoriaUser Methods
+        DataSet InserTempProjectRevoriaUser(RevoriaUser user);
+        #endregion
     }
 }

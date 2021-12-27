@@ -552,6 +552,42 @@
                                     </div>
                                 </td>
                             </tr>
+                             <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                    <asp:Localize ID="Localize1" runat="server" 
+                                        Text="IsRevoriaType?"></asp:Localize>
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="ChkIsRevoriaType" runat="server" />
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                    <asp:Localize ID="Localize2" runat="server" 
+                                        Text="DeviceKey"></asp:Localize>
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                       <asp:TextBox ID="txtDeviceKey" runat="server" Height="19px" Width="370px"></asp:TextBox>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                 </td>

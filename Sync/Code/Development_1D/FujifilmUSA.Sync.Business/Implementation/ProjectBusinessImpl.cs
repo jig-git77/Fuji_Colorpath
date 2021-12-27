@@ -368,6 +368,72 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objProjectList;
         }
 
+
+        public List<Project> GetRevoriaUserProjectsByDeviceId(int deviceId, int LicenseTypeID,string pQId)
+        {
+            var objProjectList = new List<Project>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectList =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPRevoriaUsers.GetRevoriaUserProjectList",
+                                new object[]
+                                        {
+                                            deviceId, LicenseTypeID,pQId
+                                        });
+                    if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+                    {
+                        objProjectList = dsProjectList.Tables[0].AsEnumerable().
+                            Select(x => new Project()
+                            {
+                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                ProjectName = DataReader.ReadString(x, "ProjectName"),
+                                DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                LicenseType = (ELicenseType)DataReader.ReadInt(x, "LicenseTypeID"),
+                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                                //HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
+                                SourceProfile = new SourceProfile()
+                                {
+                                    SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
+                                    ProfileName = DataReader.ReadString(x, "ProfileName")
+                                },
+                                PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+                                {
+                                    PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
+                                    PrintStandard = DataReader.ReadString(x, "PrintStandard"),
+                                },
+                                CreateDate = DataReader.ReadDate(x, "CreateDateTime"),
+                                PrintCondition =
+                                                    new PrintCondition()
+                                                    {
+                                                        Media = DataReader.ReadString(x, "Media"),
+                                                        Colorant = DataReader.ReadString(x, "Colorant"),
+                                                        RipSettings = DataReader.ReadString(x, "RipSettings")
+                                                    },
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                                CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
+                                                                               DataReader.ReadString(x, "ProjectName"),
+                                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
+                                                                               : String.Format("{0} DLP{1}.icc",
+                                                                               DataReader.ReadString(x, "ProjectName"),
+                                                                               DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00")),
+                                EnabledValidation = DataReader.ReadBoolean(x, "EnabledValidation"),
+                                ValidationStatus = (ValidationStatus)DataReader.ReadInt(x, "ValidationStatus"),
+                                HasSpotProject = DataReader.ReadBoolean(x, "HasSpotProject"),
+                                IsTempTableRecord = DataReader.ReadBoolean(x, "IsTempTableRecord")
+                                
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectsByDeviceId"));
+            return objProjectList;
+        }
+
+
         public int DeleteProject(int projectId)
         {
             int returnValue = 0;
@@ -829,7 +895,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@NewPaper_Black_a", Type = DbType.Decimal, Value = project.NewPaper_Black_a},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
                                                      new Parameters() {ParameterName = "@IsCustomProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption},
-                                                     new Parameters() {ParameterName = "@IsCustomPlugin", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomPlugin}
+                                                     new Parameters() {ParameterName = "@IsCustomPlugin", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomPlugin},
+                                                     new Parameters() {ParameterName = "@PrintQId", Type = DbType.String, Value = project.PrintQId},
+                                                     new Parameters() {ParameterName = "@IsRevoriaType", Type = DbType.Boolean, Value = project.IsRevoriaType},
 
                                                  },
                                              new List<Parameters>()

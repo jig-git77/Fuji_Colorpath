@@ -310,6 +310,8 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
         public ReferenceChartApp UserReferenceChartApp { get; set; }
         public string DeviceSerialNo { get; set; }
         public short InstrumentTypeID { get; set; }
+
+        public RevoriaUser RevoriaUser { get; set; }
         #endregion
     }
 }

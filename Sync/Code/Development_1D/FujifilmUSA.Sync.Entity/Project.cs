@@ -62,5 +62,9 @@ namespace FujifilmUSA.Sync.Entity
         public decimal NewPaper_Black_b { get; set; }
 
         public short IsCustomProfileOptions { get; set; }
+
+        public bool IsTempTableRecord { get; set; }
+        public string PrintQId { get; set; }
+        public bool IsRevoriaType { get; set; }
     }
 }

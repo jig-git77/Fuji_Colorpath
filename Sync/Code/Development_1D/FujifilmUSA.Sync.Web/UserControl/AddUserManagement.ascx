@@ -412,10 +412,10 @@
                                                             </td>
                                                             <td runat="server">
                                                                 <div style="float: left;">
-                                                                    <asp:DropDownList ID="cmbUserType" runat="server" Width="270px" 
-            CssClass="select" meta:resourcekey="cmbUserTypeResource1">
+                                                                    <asp:DropDownList ID="cmbUserType" runat="server" Width="270px" CssClass="select" meta:resourcekey="cmbUserTypeResource1">
                                                                         <asp:ListItem Selected="True" Value="0" meta:resourcekey="ListItemResource1">Website User</asp:ListItem>
                                                                         <asp:ListItem Value="1" meta:resourcekey="ListItemResource2">XMF User</asp:ListItem>
+                                                                        <asp:ListItem Value="2">Revoria User</asp:ListItem>
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div style="float: left">

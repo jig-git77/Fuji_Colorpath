@@ -1745,6 +1745,36 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return user;
         }
 
+        #region RevoriaUser Methods
+        public DataSet InserTempProjectRevoriaUser(RevoriaUser user)
+        {
+            DataSet returnValue = new DataSet();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "[CPRevoriaUsers].[InsertTempRevoriaUsersProject]",
+                            new object[]
+                                    {
+                                        user.ProjectName
+                                        , user.UserName
+                                        , Guid.Parse(user.ProjectGuid)
+                                        , user.Devicekey
+                                        , user.Media
+                                        , user.Colorant
+                                        , user.RipSettings
+                                        , user.Notes
+                                        , user.PrintQId
+                                        , user.ServicePostUrl
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InserTempProjectRevoriaUser"));
+            return returnValue;
+        }
+        #endregion
+
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;

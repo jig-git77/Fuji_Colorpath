@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -66,6 +67,15 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
             _viewLogin.UserReferenceChartApp = userBusiness.UserLogInByDeviceLAB_Xmf(_viewLogin.DeviceSerialNo, _viewLogin.InstrumentTypeID,_viewLogin.UserId);
         }
+
+        #region RevoriaUser Methods
+        public DataSet InserTempProjectRevoriaUser(RevoriaUser user)
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
+            return userBusiness.InserTempProjectRevoriaUser(_viewLogin.RevoriaUser);
+        }
+        #endregion
 
     }
 }

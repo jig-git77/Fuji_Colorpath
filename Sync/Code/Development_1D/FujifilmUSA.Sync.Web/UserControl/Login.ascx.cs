@@ -1,19 +1,20 @@
-﻿using System;
-using System.Linq;
-using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Presenter;
+﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Security;
-using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Login : BaseControl, IViewLogin
+    public partial class Login : BaseControl, IViewLogin, IViewDevice
     {
         #region "Declaration"
         private PresenterLogin _presenterlogin;
+        private PresenterDevice _presenterdevice;
         public string btnLoginId
         {
             get { return bntLogin.UniqueID; }
@@ -26,12 +27,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presenterlogin = new PresenterLogin(this);
+            _presenterdevice = new PresenterDevice(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             //if (SessionManager.Instance.CurrentUser != null)
             //    Response.Redirect("Index.aspx");'
-           
+
+            string StrUserName = "";
+            string Strpwd = "";
+            string StrDeviceId = "";
+            string StrProjectUniqueId = "";
+
+
+
             if (!IsPostBack)
             {
                 if ((Request.Cookies["SyncFujiLogin"] == null || Request.Cookies["SyncFujiLogin"].Value == "") &&
@@ -45,15 +54,88 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtUserName.Text = Request.Cookies["SyncFujiLogin"].Value;
                     txtPassword.Attributes.Add("value", Request.Cookies["SyncFujiPass"].Value);
 
-                }                
+                }
+
+                if (Request.QueryString.Count == 4)
+                {
+                    if (Request.QueryString["UName"] != null)
+                    {
+                        if (!string.IsNullOrEmpty(Request.QueryString["UName"]))
+                        {
+                            StrUserName = Request.QueryString["UName"].Replace("'","");
+                        }
+                    }
+                    if (Request.QueryString["Pwd"] != null)
+                    {
+                        if (!string.IsNullOrEmpty(Request.QueryString["Pwd"]))
+                        {
+                            Strpwd = Request.QueryString["Pwd"].Replace("'", "");
+                        }
+                    }
+                    if (Request.QueryString["DId"] != null)
+                    {
+                        if (!string.IsNullOrEmpty(Request.QueryString["DId"]))
+                        {
+                            StrDeviceId = Request.QueryString["DId"].Replace("'", "");
+                        }
+                    }
+                    if (Request.QueryString["PId"] != null)
+                    {
+                        if (!string.IsNullOrEmpty(Request.QueryString["PId"]))
+                        {
+                            StrProjectUniqueId = Request.QueryString["PId"].Replace("'", "");
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(StrUserName) && !string.IsNullOrEmpty(Strpwd) && !string.IsNullOrEmpty(StrDeviceId) && !string.IsNullOrEmpty(StrProjectUniqueId))
+                    {
+                        UserName = StrUserName;
+                        Password = Strpwd;
+                        _presenterlogin.UserLogin();
+                        if (!IsErrorOccured)
+                        {
+                            if (CurrentUser != null && CurrentUser.LoginId != null)
+                            {
+                                SessionManager.Instance.CurrentUser = CurrentUser;
+                                DeviceId = Convert.ToInt32(StrDeviceId);
+                                CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
+                                _presenterdevice.DeviceListByDeviceId();
+
+                                SessionManager.Instance.CurrentDevice = SelectedDevice;
+                                SessionManager.Instance.CurrentBranchName = "HanoverPark";
+
+                                //----*Start: Adding entry for all login to site----//
+                                UserId = SessionManager.Instance.CurrentUser.UserId;
+                                OSName = Hidden_OSName.Value.ToString();
+                                BrowserName = Hidden_BrowserName.Value.ToString();
+                                EntryDate = DateTime.Now.ToString();
+                                _presenterlogin.InsertLoginActivityLogs();
+                                //-------------------*End--------------------------//
+                                //------------Create new Project under this Device-----------------//
+                                SessionManager.Instance.CurrentProject = new Project()
+                                {
+                                    DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
+                                    IsUsed = true,
+                                    CurrentDisplayStatus = ECurrentProjectStatus.New
+                                };
+
+                                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+                                FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                                Response.Redirect("AddProject.aspx");
+
+                            }
+
+                        }
+                    }
+                }
             }
         }
         protected void bntLogin_Click(object sender, EventArgs e)
         {
-         
+
             UserName = txtUserName.Text.Trim();
             Password = txtPassword.Text.Trim();
-          
+
             _presenterlogin.UserLogin();
 
             if (!IsErrorOccured)
@@ -71,7 +153,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //-------------------*End--------------------------//
 
                     WebLogActivityManager.LogActivity(LogActivityType.LoggedIn, null, Request.UserHostAddress);
-                    
+
                     if (chkRememberMe.Checked == true)
                     {
                         var objCookie = new HttpCookie("SyncFujiLogin") { Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20) };
@@ -84,7 +166,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //objCookie.Secure = true;
                         //objCookie.HttpOnly = false;
                         //objCookie.SameSite = SameSiteMode.None;
-                        Response.SetCookie(objCookie);                        
+                        Response.SetCookie(objCookie);
                     }
                     else
                     {
@@ -106,7 +188,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         else
                         {
                             fujiStatusbar.DisplayMessage("You are already logged-in from other browser!", false);
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                            Page.ClientScript.RegisterStartupScript(GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
                         }
                     }
 
@@ -115,12 +197,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (CheckUsersValidity(UserName))
                         {
                             FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                            Response.Redirect("Index.aspx",false);
+                            Response.Redirect("Index.aspx", false);
                         }
                         else
                         {
-                            fujiStatusbar.DisplayMessage("You are already logged-in from other browser!", false);                            
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                            fujiStatusbar.DisplayMessage("You are already logged-in from other browser!", false);
+                            Page.ClientScript.RegisterStartupScript(GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
                         }
                     }
                     else if (SessionManager.Instance.CurrentUser.HasAdminPermission())
@@ -133,19 +215,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         else
                         {
                             fujiStatusbar.DisplayMessage("You are already logged-in from other browser!", false);
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                            Page.ClientScript.RegisterStartupScript(GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
                         }
                     }
                     else
                     {
                         fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Error_NoPermission"), false);
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                        Page.ClientScript.RegisterStartupScript(GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
                     }
                 }
                 else
                 {
                     fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                    Page.ClientScript.RegisterStartupScript(GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
                 }
             }
         }
@@ -173,7 +255,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 List<User> users = CacheManager.Instance.ActiveUsers;
                 User user = null;
                 if (users != null && users.Count > 0)
+                {
                     user = users.FirstOrDefault(c => c.LoginId == username);
+                }
 
                 if (user == null)
                 {
@@ -192,7 +276,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         System.Threading.Thread.Sleep(Convert.ToInt32(ApplicationConfigurationManager.Instance().KeepUserAliveInSeconds) * 1000);
                         activeTime = DateTime.Now.TimeOfDay - user.LastPingTime.TimeOfDay;
                         if (activeTime.TotalSeconds < Convert.ToDouble(ApplicationConfigurationManager.Instance().KeepUserAliveInSeconds))
+                        {
                             return false;
+                        }
                     }
                     user.LastPingTime = DateTime.Now;
                 }
@@ -218,6 +304,47 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string DeviceSerialNo { get; set; }
         public short InstrumentTypeID { get; set; }
         public ReferenceChartApp UserReferenceChartApp { get; set; }
+
+        public RevoriaUser RevoriaUser { get; set; }
+        #endregion
+
+
+        #region IViewDevice Members
+        public int TaskeroUserId { get; set; }
+        public int RoleId { get; set; }
+        public int CompanyId
+        {
+            get
+            {
+                return SessionManager.Instance.SelectedCompany;
+            }
+            set
+            {
+                SessionManager.Instance.SelectedCompany = value;
+            }
+        }
+
+        public int BranchId
+        {
+            get
+            {
+                return SessionManager.Instance.SelectedBranch;
+            }
+            set
+            {
+                SessionManager.Instance.SelectedBranch = value;
+            }
+        }
+
+        public MeasurementDevice MeasurementDevice { get; set; }
+        public List<MeasurementDevice> MeasurementDevices { get; set; }
+        public Dictionary<int, string> BranchList { get; set; }
+        public Dictionary<int, string> CompanyList { get; set; }
+        public Dictionary<int, string> LicenseList { get; set; }
+        public Dictionary<int, string> InstrumentTypeList { get; set; }
+        public List<Device> Devices { get; set; }
+        public int DeviceId { get; set; }
+        public Device SelectedDevice { get; set; }
         #endregion
     }
 }

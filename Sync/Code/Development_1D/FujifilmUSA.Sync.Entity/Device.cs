@@ -32,5 +32,8 @@ namespace FujifilmUSA.Sync.Entity
         public string Channel_7_Name { get; set; }
         public string Channel_8_Name { get; set; }
         public string Channel_9_Name { get; set; }
+
+        public bool IsRevoriaType { get; set; }
+        public string DeviceKey { get; set; }
     }
 }

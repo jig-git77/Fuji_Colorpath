@@ -122,6 +122,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        Channel_7_Name = DataReader.ReadShort(x, "Channel_7") <= 0 ? "" : Convert.ToString((MultiColorChannelName)System.Enum.Parse(typeof(MultiColorChannelName), Convert.ToString(DataReader.ReadShort(x, "Channel_7")))),
                                        Channel_8_Name = DataReader.ReadShort(x, "Channel_8") <= 0 ? "" : Convert.ToString((MultiColorChannelName)System.Enum.Parse(typeof(MultiColorChannelName), Convert.ToString(DataReader.ReadShort(x, "Channel_8")))),
                                        Channel_9_Name = DataReader.ReadShort(x, "Channel_9") <= 0 ? "" : Convert.ToString((MultiColorChannelName)System.Enum.Parse(typeof(MultiColorChannelName), Convert.ToString(DataReader.ReadShort(x, "Channel_9")))),
+                                       IsRevoriaType=DataReader.ReadBoolean(x, "IsRevoriaType"),
+                                       DeviceKey = DataReader.ReadString(x, "DeviceKey"),
                                    }).ToList();
 
                         if (dsDeviceList.Tables[1].Rows.Count > 0)
@@ -185,7 +187,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.Channel_6,
                                         device.Channel_7,
                                         device.Channel_8,
-                                        device.Channel_9
+                                        device.Channel_9,
+                                        device.IsRevoriaType,
+                                        device.DeviceKey
                                     });
                         if (returnValue == -1)
                         {
@@ -230,7 +234,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.Channel_6,
                                         device.Channel_7,
                                         device.Channel_8,
-                                        device.Channel_9
+                                        device.Channel_9,
+                                        device.IsRevoriaType,
+                                        device.DeviceKey
                                     });
                         if (returnValue == -1)
                         {

@@ -86,7 +86,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //public List<Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
         public Entity.CPSpot.SpotProjectList SpotProjectList { get; set; }
         public int SpotProjectId { get; set; }
-
+        public string PQId { get; set; }
         #endregion
     }
 }

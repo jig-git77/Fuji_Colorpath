@@ -190,6 +190,44 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
         #endregion
 
+
+        #region RevoriaUser RESTfull Services
+        [HttpGet]
+        [CustomAuthentication]
+        public IHttpActionResult GetRevoriaUserProjectDetailsByDeviceID(int deviceID,string pqId)
+        {
+            IHttpActionResult actionResult = null;
+            //Models.BaseResponse<List<Project>> httpResponse = new Models.BaseResponse<List<Project>>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                DetermineCulture();
+                Projects = new List<Project>();
+                DeviceId = deviceID;
+                //Now we are passing LicenseTypeID as None to bring all projects based on DeviceId
+                LicenseTypeID = Convert.ToInt32(ELicenseType.None);
+                PQId = pqId;
+                _presenterProjectList.GetRevoriaUserProjectListByDeviceId();
+                GenerateResources();
+                var objGroup = new
+                {
+                    Projects = Projects,
+                    GlobalResources = _globalResourceValues
+                };
+                var json = JsonConvert.SerializeObject(objGroup);
+                httpResponse.Data = json;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+        #endregion
         #region Method for generate resources
         public void GenerateResources()
         {
@@ -211,6 +249,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         //public List<FujifilmUSA.Sync.Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
         public SpotProjectList SpotProjectList { get; set; }
         public int SpotProjectId { get; set; }
+        public string PQId { get; set; }
 
         #endregion
     }

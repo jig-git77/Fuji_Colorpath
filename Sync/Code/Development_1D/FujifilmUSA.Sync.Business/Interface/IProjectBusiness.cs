@@ -62,6 +62,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int GetProjectLicenseTypeLimit(int DeviceID, int LicenseTypeID);
         int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType, string DeviceSerial, short InstrumentTypeId, short LicenseTypeID);
         bool CheckMeasurementPluginStatus(int ProjectID, int OptimizationRunID, string DeviceSerial);
-        
+        List<Project> GetRevoriaUserProjectsByDeviceId(int deviceId, int LicenseTypeID, string pQId);
     }
 }

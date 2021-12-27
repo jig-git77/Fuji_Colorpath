@@ -91,6 +91,7 @@
     <Compile Include="MToolVersionUpdateList.cs" />
     <Compile Include="ReferenceChartApp.cs" />
     <Compile Include="ReportGrading.cs" />
+    <Compile Include="RevoriaUser.cs" />
     <Compile Include="Spectral.cs" />
     <Compile Include="CPSpot\SpotProjectLibrary.cs" />
     <Compile Include="CPSpot\SpotTarget.cs" />

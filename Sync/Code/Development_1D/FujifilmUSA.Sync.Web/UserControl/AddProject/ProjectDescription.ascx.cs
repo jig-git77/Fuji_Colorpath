@@ -49,6 +49,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 LoadDeviceInfoFromSession();
                 LoadProjectInfoFromSession();
                 LoadSpotTargetInfoFromSession();
+
+                if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.RevoriaColorOrganizerUser))
+                {
+                    txtMedia.Text = SessionManager.Instance.CurrentRevoriaUser.Media;
+                    txtColorant.Text = SessionManager.Instance.CurrentRevoriaUser.Colorant;
+                    txtRipSetting.Text = SessionManager.Instance.CurrentRevoriaUser.RipSettings;
+                    txtNotes.Text = SessionManager.Instance.CurrentRevoriaUser.Notes;
+                }
             }
             if (IsXmfUser)
             {

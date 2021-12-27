@@ -353,6 +353,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsValidation = chkIsValidation.Checked,
                 IsFlexo = chkIsFlexo.Checked,
                 IsSupportMulticolor = chkIsSupportMulticolor.Checked,
+                IsRevoriaType = ChkIsRevoriaType.Checked,
+                DeviceKey = txtDeviceKey.Text.Trim(),
                
 
 
@@ -480,6 +482,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     drpChannel9.SelectedValue = Device.Channel_9.ToString();
                     SetMultiColorChannel();
                 }
+                ChkIsRevoriaType.Checked = Device.IsRevoriaType;
+                txtDeviceKey.Text = Device.DeviceKey.Trim();
 
 
                 //-----------In Edit Device page, put MaxProjects value from DB----------------//

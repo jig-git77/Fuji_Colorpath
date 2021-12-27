@@ -19,5 +19,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         ReferenceChartApp UserReferenceChartApp { get; set; }
         string DeviceSerialNo { get; set; }
         short InstrumentTypeID { get; set; }
+
+        RevoriaUser RevoriaUser { get; set; }
     }
 }

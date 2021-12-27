@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.Interface;
 using System.Collections.Generic;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -116,7 +117,14 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new ReferenceChartApp();
         }
-       
+
+        #endregion
+
+        #region RevoriaUser Methods
+        public DataSet InserTempProjectRevoriaUser(RevoriaUser user)
+        {
+            return new DataSet();
+        }
         #endregion
 
         #region ITaskBase Members

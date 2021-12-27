@@ -902,6 +902,8 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
         public short InstrumentTypeID { get; set; }
         public int OSPlatformId { get; set; }        
         public MToolVersion MTVersion { get; set; }
+
+        public RevoriaUser RevoriaUser { get; set; }
         #endregion
     }
 }

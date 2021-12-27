@@ -15,7 +15,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Project();
         }
-public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
+        public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
+        {
+            return new List<Project>();
+        }
+        public List<Project> GetRevoriaUserProjectsByDeviceId(int deviceId, int LicenseTypeID, string pQId)
         {
             return new List<Project>();
         }
