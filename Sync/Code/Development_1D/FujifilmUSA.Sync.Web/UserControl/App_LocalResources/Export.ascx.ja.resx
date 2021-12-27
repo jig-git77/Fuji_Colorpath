@@ -222,6 +222,9 @@
   <data name="XMFResource1.Text" xml:space="preserve">
     <value>XMF</value>
   </data>
+  <data name="EskoResource1.Text" xml:space="preserve">
+    <value>Esko</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value />
   </data>

@@ -535,7 +535,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.CurveTypeId = Convert.ToInt16(CurveType);
                     if (Convert.ToInt16(CurveType) == 100 || Convert.ToInt16(CurveType) == 101)
                         this.CurveTypeId = 5;
-                    if (Convert.ToInt16(CurveType) == 102)
+                    if (Convert.ToInt16(CurveType) == 102 || Convert.ToInt16(CurveType) == 104)
                         this.CurveTypeId = 45;
 
                     _presenterExport.GetCurveData();
@@ -932,6 +932,50 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Nexus.zip", CurveFileName + "_Nexus.zip");
                         #endregion
                     }
+                    else if (CurveType == 104)  // Esko
+                    {
+                        #region Create Zip file and download file for Esko
+
+                        CurveFileName = ExportFileName;
+                        string zipCurveFileName = CurveFileName + "_Esko.zip";
+                        ReportFileName = "/UploadFiles/CurvesFile/" + zipCurveFileName;
+
+
+                        //check if file exists and delete it
+                        if (System.IO.File.Exists(CurveFilePath + zipCurveFileName))
+                            System.IO.File.Delete(CurveFilePath + zipCurveFileName);
+
+                        System.IO.StreamWriter swC;
+                        System.IO.StreamWriter swM;
+                        System.IO.StreamWriter swY;
+                        System.IO.StreamWriter swK;
+                        swC = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Esko_Cya.txt");
+                        swM = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Esko_Mag.txt");
+                        swY = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Esko_Yel.txt");
+                        swK = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Esko_Bla.txt");
+
+
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            swC.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_C).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000"));
+                            swM.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_M).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000"));
+                            swY.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_Y).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000"));
+                            swK.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_K).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000"));
+                        }
+
+                        swC.Close();
+                        swM.Close();
+                        swY.Close();
+                        swK.Close();
+
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Esko_Cya.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Esko_Mag.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Esko_Yel.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Esko_Bla.txt");
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Esko.zip", CurveFileName + "_Esko.zip");
+                        #endregion
+                    }
                     if (string.IsNullOrEmpty(ReportFileName))
                         ReportFileName = "/UploadFiles/CurvesFile/" + CurveFileName;
                     httpResponse.Data = ReportFileName;
@@ -979,7 +1023,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.CurveTypeId = Convert.ToInt16(CurveType);
                     if (Convert.ToInt16(CurveType) == 100 || Convert.ToInt16(CurveType) == 101)
                         this.CurveTypeId = 5;
-                    if (Convert.ToInt16(CurveType) == 102)
+                    if (Convert.ToInt16(CurveType) == 102 || Convert.ToInt16(CurveType) == 104)
                         this.CurveTypeId = 45;
 
                     _presenterExport.GetCurveData();
@@ -1093,9 +1137,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                                     Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
                                     Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
                                     Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
-                                    Cie_L = Convert.ToDouble(dr["TargetL"]),
-                                    Cie_a = Convert.ToDouble(dr["Targeta"]),
-                                    Cie_b = Convert.ToDouble(dr["Targetb"]),
+                                    Target_L = Convert.ToDouble(dr["TargetL"]),
+                                    Target_a = Convert.ToDouble(dr["Targeta"]),
+                                    Target_b = Convert.ToDouble(dr["Targetb"]),
+                                    Cie_L = Convert.ToDouble(dr["MeasuredL"]),
+                                    Cie_a = Convert.ToDouble(dr["Measureda"]),
+                                    Cie_b = Convert.ToDouble(dr["Measuredb"]),
                                     Spot1 = 0
                                 };
                                 listPatch.Add(patch);
@@ -1110,8 +1157,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         fileName = ExportColdera2File(listPatch, model);
                     else if (model.LibraryType == 3)
                         fileName = ExportColorgateFile(listPatch, model);
-                    else
+                    else if (model.LibraryType == 4)
                         fileName = ExportCMYK_DBDFile(listPatch, model);
+                    else
+                        fileName = ExportCMYK_PackZFile(listPatch, model);  //--Option 5 = PackZ file
 
 
                     if (!string.IsNullOrEmpty(fileName))
@@ -1659,7 +1708,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             sw.WriteLine("</ColorList>");
             sw.WriteLine("</MediaDeviceColors>");
             //--------End: Footer--------------//
-
+            
             sw.Close();
 
             //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".xml", CMYKFileName + ".xml");
@@ -1768,7 +1817,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
                 sw.WriteLine("\tColorType:string = " + "\"Normal\";");
                 sw.WriteLine("\tNeutralDensity:double = " + GetNdensity(listPatch[i].Cie_L).ToString("0.000000000000000e+0") + ";");
-                sw.WriteLine("\tTempLab:double[3] = " + listPatch[i].Cie_L.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_a.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_b.ToString("0.000000000000000e+0") + ";");
+                sw.WriteLine("\tTempLab:double[3] = " + listPatch[i].Target_L.ToString("0.000000000000000e+0") + "," + listPatch[i].Target_a.ToString("0.000000000000000e+0") + "," + listPatch[i].Target_b.ToString("0.000000000000000e+0") + ";");
                 sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", (listPatch[i].Cmyk_C / 100)) + "," + (listPatch[i].Cmyk_M / 100).ToString("0.000000000000000e+0") + "," + (listPatch[i].Cmyk_Y / 100).ToString("0.000000000000000e+0") + "," + (listPatch[i].Cmyk_K / 100).ToString("0.000000000000000e+0") + ";");
                 sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
                 sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
@@ -1816,6 +1865,153 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
         #endregion
 
+        #region Create file and download .tcb file for PackZ CMYK type
+        private string ExportCMYK_PackZFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
+            string fileName = detail.FileName + ".tcb";
+            string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);
+
+            System.IO.StreamWriter sw;
+            sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
+
+            //--------Start: Header------------//
+            sw.WriteLine("PACKZ Software Color Book version 1.0");
+            sw.WriteLine("BookName" + "\t" + detail.BookName);
+            sw.WriteLine("Name" + "\t" + "Opacity%" + "\t" + "CMYK%" + "\t" + "RGB%" + "\t" + "Lab" + "\t" + "Type");
+            sw.WriteLine(" ");
+            sw.WriteLine(" ");
+            //--------End: Header--------------//
+
+            double X, Y, Z;
+            int R, G, B;
+
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+
+                X = LabtoXYZ(listPatch[i].Cie_L, listPatch[i].Cie_a, listPatch[i].Cie_b, "L");
+                Y = LabtoXYZ(listPatch[i].Cie_L, listPatch[i].Cie_a, listPatch[i].Cie_b, "a");
+                Z = LabtoXYZ(listPatch[i].Cie_L, listPatch[i].Cie_a, listPatch[i].Cie_b, "b");
+
+                R = XYZtoRGB(X, Y, Z, "X");
+                G = XYZtoRGB(X, Y, Z, "Y");
+                B = XYZtoRGB(X, Y, Z, "Z");
+             
+                sw.WriteLine(SpotName_Parameter + "\t" + "0.0" + "\t" + listPatch[i].Cmyk_C.ToString("N1") + "\t" + listPatch[i].Cmyk_M.ToString("N1") + "\t" + listPatch[i].Cmyk_Y.ToString("N1") + "\t" + listPatch[i].Cmyk_K.ToString("N1") + "\t"+ R + "\t"+ G + "\t"+ B + "\t" + listPatch[i].Cie_L.ToString() + "\t" + listPatch[i].Cie_a.ToString() + "\t" + listPatch[i].Cie_b.ToString() + "\t" + "Standard");
+            }
+
+            sw.Close();
+
+            //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".tcb", CMYKFileName + ".tcb");
+            return fileName;
+        }
+        #endregion
+
+
+        // Converts CIELab to CIEXYZ.
+        double LabtoXYZ(double l, double a, double b, string LAB)
+        {
+            double delta = 6.0 / 29.0;
+
+            double fy = (l + 16) / 116;
+            double fx = fy + (a / 500);
+            double fz = fy - (b / 200);
+
+            double d65X = 0.9505;
+            double d65Y = 1.0;
+            double d65Z = 1.089;
+
+            double R = 0;
+
+            if (LAB == "L")
+            {
+                // x component
+                double X;
+                if (fx > delta)
+                    X = d65X * (fx * fx * fx);
+                else
+                    X = (fx - 16.0 / 116.0) * 3 * (delta * delta) * d65X;
+
+                return X;
+            }
+            else if (LAB == "a")
+            {
+                // y component
+                double Y;
+                if (fy > delta)
+                    Y = d65Y * (fy * fy * fy);
+                else
+                    Y = (fy - 16.0 / 116.0) * 3 * (delta * delta) * d65Y;
+
+                return Y;
+            }
+            else if (LAB == "b")
+            {
+                // z component
+                double Z;
+                if (fz > delta)
+                    Z = d65Z * (fz * fz * fz);
+                else
+                    Z = (fz - 16.0 / 116.0) * 3 * (delta * delta) * d65Z;
+
+                return Z;
+            }
+
+            return R;
+        }
+
+        // Converts CIEXYZ to RGB structure.
+        int XYZtoRGB(double x, double y, double z, string XYZ)
+        {
+            int R = 0;
+            double Clinear0, Clinear1, Clinear2;
+
+            Clinear0 = (x * 3.241) - (y * 1.5374) - (z * 0.4986); // red
+            Clinear1 = (-x * 0.9692) + (y * 1.876) - (z * 0.0416); // green
+            Clinear2 = (x * 0.0556) - (y * 0.204) + (z * 1.057); // blue
+
+            List<double> Clinearitems = new List<double>();
+            Clinearitems.Add(Clinear0);
+            Clinearitems.Add(Clinear1);
+            Clinearitems.Add(Clinear2);
+
+            for (int i = 0; i <= 2; i++)
+            {
+                if (Clinearitems[i] <= 0.0031308)
+                    Clinearitems[i] = 12.92 * Clinearitems[i];
+                else
+                    Clinearitems[i] = (1 + 0.055) * Math.Pow(Clinearitems[i], (1.0 / 2.4)) - 0.055;
+                Clinearitems[i] = Double.Parse(String.Format("{0:0.00}", Clinearitems[i] * 255.0));
+            }
+
+            if (XYZ == "X")
+                return RGBRange(Convert.ToInt32(Clinearitems[0]));
+            else if (XYZ == "Y")
+                return RGBRange(Convert.ToInt32(Clinearitems[1]));
+            else if (XYZ == "Z")
+                return RGBRange(Convert.ToInt32(Clinearitems[2]));
+           
+            return R;
+        }
+        
+        //Set RGB range between 0 to 255
+        int RGBRange(int RGBValue)
+        {
+            int R = 0;
+
+            if (RGBValue > 255)
+                R = 255;
+            else
+                if (RGBValue < 0)
+                R = 0;
+            else
+                R = RGBValue;
+
+            return R;
+        }
 
         //Get density of LabL to export CMYK values
         double GetNdensity(double Lab_L)

@@ -83,6 +83,12 @@ namespace FujifilmUSA.Sync.Entity
         public double Cmyk_K { get; set; }
         [JsonProperty("spot1")]
         public double Spot1 { get; set; }
+        [JsonProperty("target_L")]
+        public double Target_L { get; set; }
+        [JsonProperty("target_a")]
+        public double Target_a { get; set; }
+        [JsonProperty("target_b")]
+        public double Target_b { get; set; }
         [JsonProperty("cie_L")]
         public double Cie_L { get; set; }
         [JsonProperty("cie_a")]

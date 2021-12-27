@@ -318,4 +318,7 @@
   <data name="TargetPrintConditionRequiredResource" xml:space="preserve">
     <value>Please select target print condition.</value>
   </data>
+  <data name="BookNameRequiredResource" xml:space="preserve">
+    <value>Please enter book name.</value>
+  </data>
 </root>
