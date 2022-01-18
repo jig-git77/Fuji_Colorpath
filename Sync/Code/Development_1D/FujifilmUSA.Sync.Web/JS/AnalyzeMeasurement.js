@@ -7949,6 +7949,16 @@ function GetLabelXml() {
     return labelPrintXMLString;
 }
 
+var printPreviewWindow = null;
+function ShowLabelPrintPreviewNew() {
+    if (printPreviewWindow != null) {
+        printPreviewWindow.close()
+        printPreviewWindow = null;
+    }
+    printPreviewWindow = window.open("PrintPreviewNew.aspx", "PrintPreviewWindow", "width=410,height=275,resizable=no,scrollbars=no");
+    printPreviewWindow.focus();
+}
+
 //method to get icon image in label print dymo label
 function GetStatusIconImageString() {
     return labelPrintStatusIconString;

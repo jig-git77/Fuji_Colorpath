@@ -563,6 +563,10 @@
 
                                         <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px" style="display: none;">
                                             <div style="float: right; padding-top: 2px; position: absolute; top: 0; right: 0; padding-right: 4px; padding-top: 5px">
+                                                <asp:ImageButton ID="ibtnPrintPreviewNew" runat="server"
+                                                    ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label"
+                                                    OnClientClick="ShowLabelPrintPreviewNew(); return false;"
+                                                    meta:resourcekey="ibtnPrintPreviewResource1" />
                                                 <asp:ImageButton ID="ibtnPrintPreview" runat="server"
                                                     ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label"
                                                     OnClientClick="ShowLabelPrintPreview(); return false;"

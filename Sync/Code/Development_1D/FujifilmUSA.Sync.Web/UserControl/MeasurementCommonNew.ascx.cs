@@ -194,9 +194,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     GetMToolMessage(1);
                     ////Devlopment/prodcuction support only HTTP.
-                    //Response.Redirect(Request.Url.ToString());
+                     Response.Redirect(Request.Url.ToString());
                     //Stage Code support only HTTPS.
-                    Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
+                    //Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
                 }
                 else
                 {
