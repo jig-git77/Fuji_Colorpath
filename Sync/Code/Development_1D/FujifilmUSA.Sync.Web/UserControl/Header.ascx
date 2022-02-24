@@ -31,10 +31,10 @@
                     </div>
                 </td>
               <td align="right"  style="width:15%;">
-                    <div class="updateChangeLog"><a id="lbtnUpdateChangeLog" runat="server" href="~/UpdateChangeLog.aspx" title="Update Change Log">&nbsp;</a></div>
+                    <div class="updateChangeLog"><a id="lbtnUpdateChangeLog" runat="server" href="~/UpdateChangeLog.aspx" >&nbsp;</a></div>
                 </td>
                 <td align="left" style="width:5%;padding-right:15px;">                     
-                    <div class="setting"><a id="lbtnSettings" runat="server" href="~/Settings.aspx" title="Admin Setting">&nbsp;</a></div>
+                    <div class="setting"><a id="lbtnSettings" runat="server" href="~/Settings.aspx" >&nbsp;</a></div>
                 </td>
             </tr>
         </table>
