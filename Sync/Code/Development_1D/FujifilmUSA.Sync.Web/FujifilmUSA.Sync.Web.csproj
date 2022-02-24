@@ -1129,6 +1129,7 @@
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
+    <Content Include="DymoPrinterHelpPreview.html" />
     <Content Include="FireFoxPluginDetails.aspx" />
     <Content Include="GenerateCustomReports.aspx" />
     <Content Include="Global.asax" />
@@ -1179,6 +1180,9 @@
     <Content Include="Images\DLPSource.png" />
     <Content Include="Images\Drupa1.png" />
     <Content Include="Images\Drupa2.png" />
+    <Content Include="Images\DymoHelp-prevbutton.png" />
+    <Content Include="Images\DymoPrintHelpIcon-New.png" />
+    <Content Include="Images\DymoPrintIcon-New.png" />
     <Content Include="Images\eye_blue.png" />
     <Content Include="Images\FujiFilm.png" />
     <Content Include="Images\FujiFilm2.png" />
@@ -1285,7 +1289,9 @@
     <Content Include="Images\Validation_Last_OK.png" />
     <Content Include="Images\Validation_Not_Active.png" />
     <Content Include="Images\Validation_Not_Certified.png" />
+    <Content Include="Images\VStatusFailedIcon-New.png" />
     <Content Include="Images\VStatusFailedIcon.png" />
+    <Content Include="Images\VStatusSuccessIcon-New.png" />
     <Content Include="Images\VStatusSuccessIcon.png" />
     <Content Include="InkOptSourceMiddle.aspx" />
     <Content Include="JQuery\jquery-1.9.1.min.js" />
@@ -1331,6 +1337,7 @@
     <Content Include="PopupSpotProjectList.aspx" />
     <Content Include="PopupSpotProjectOpenPrintCondition.aspx" />
     <Content Include="PrintPreview.aspx" />
+    <Content Include="PrintPreviewNew.aspx" />
     <Content Include="PrintStandardTypeManagement.aspx" />
     <Content Include="ProfileManagement.aspx" />
     <Content Include="ProjectListTemplate.html" />
@@ -4027,6 +4034,7 @@
     <Content Include="UserControl\PopupControl\SpotProjectList.ascx" />
     <Content Include="UserControl\PopupControl\SpotProjectOpenPrintCondition.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
+    <Content Include="UserControl\PrintPreviewNew.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
     <Content Include="UserControl\ProjectListNew.ascx" />
@@ -4797,6 +4805,13 @@
     <Compile Include="PrintPreview.aspx.designer.cs">
       <DependentUpon>PrintPreview.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PrintPreviewNew.aspx.cs">
+      <DependentUpon>PrintPreviewNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrintPreviewNew.aspx.designer.cs">
+      <DependentUpon>PrintPreviewNew.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PrintStandardTypeManagement.aspx.cs">
       <DependentUpon>PrintStandardTypeManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5348,6 +5363,13 @@
     </Compile>
     <Compile Include="UserControl\PrintPreview.ascx.designer.cs">
       <DependentUpon>PrintPreview.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PrintPreviewNew.ascx.cs">
+      <DependentUpon>PrintPreviewNew.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PrintPreviewNew.ascx.designer.cs">
+      <DependentUpon>PrintPreviewNew.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PrintStandardTypeManagement.ascx.cs">
       <DependentUpon>PrintStandardTypeManagement.ascx</DependentUpon>
@@ -9337,7 +9359,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ColorPath SYNC - Print Label</title>
+
+	<style>
+		body {
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			background-color: #ddd;
+			margin: 0;
+			padding: 10px;
+			max-width: 768px;
+		}
+		p {
+			margin: 0 0 0.5em;
+			padding-bottom: 10px;
+		}
+		li { 
+			padding-bottom: 5px;	
+		}
+		.interface-item {
+			font-weight: bold;
+		}
+		.code-item {
+			font-family: monospace;
+			font-weight: bold;
+			font-size: 1.1em;
+			background-color: #FFF;
+			padding: 2px 3px;
+			margin: 0px 4px 2px;
+			display: inline-block;
+
+		}
+		.cps-main-header {
+			background-image: linear-gradient(#0B9272 0%,6%,#2DA487 50%,#219778 55%);
+			background-size: contain;
+			padding: 0 0 0 14px;
+			border-radius: 5pt 5pt 0 0;
+			box-shadow: 1pt 2pt 3pt 1pt darkgray;
+			color: #FFF;
+			font-size: 12pt;
+			font-weight:bold;
+			height:34px;
+			align-items: center;
+			display: flex;
+			line-height: 1em;
+		}
+        .cps-main-header-button-prev {
+            color: #000;
+            font-size: 10pt;
+            margin-right: 20px;
+            padding: 2px 8px 3px 16px;
+            height: 20px;
+            border-radius: 0px 4px 6px 0;
+            background-image: url(Images/DymoHelp-prevbutton.png);
+            background-position: left;
+            background-color: rgba(0,0,0,0);
+            border: 0;
+            display: flex;
+            align-items: center;
+        }
+		.cps-panel {
+			background: #F8F6F7;
+			margin-bottom:3px;
+			box-shadow: 2pt 2pt 3pt 0pt darkgray;
+			border-radius:0 0 5pt 5pt;
+			font-size: 9pt;
+			border: solid 1px #B2B2B2;
+			min-height:565px;
+			padding: 15px;
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.cps-inset-container {
+			background: #EAEAEA;
+			box-shadow: 0 0 0 0.75pt #B4b4b4;
+			border-radius: 5pt;
+			font-size: 9pt;
+			margin: 0 6px 12px;
+		}
+		.cps-inset-header {
+			padding: 12px 6px 4px;
+			border-bottom: solid 1px #B4B4B4;
+			font-size:11pt;
+			font-weight: bold;
+		}
+		.cps-inset-last {
+			padding: 15px;
+			border-radius: 0 0 5pt 5pt;
+			font-size: 9.5pt;
+		}
+	</style>
+
+</head>
+
+<!--Navbar-->	
+	
+<body>
+	<div class="cps-main-header">
+		<a class="cps-main-header-button-prev" href="PrintPreviewNew.aspx">Back</a>
+		<span>Help with Printing ColorPath SYNC Validation Labels</span>
+	</div>
+	<div class="cps-panel">
+		<div class="cps-inset-container" style="flex: 100%">
+			<div class="cps-inset-header">System Requirements</div>
+			<div class="cps-inset-last">
+				<ul>
+					<li>MacOS 10.11 or newer, or Windows 8.1 / 10 / 11</li>
+					<li>Firefox, Chrome, or Edge</li>
+					<li>An active ColorPath SYNC Validation license</li>
+					<li>DYMO LabelWriter 400, 450, or 550</li>
+				</ul>
+			</div>
+		</div>
+		<div class="cps-inset-container" style="flex: 10%;">
+			<div class="cps-inset-header">Install DYMO Software</div>
+			<div class="cps-inset-last">
+				<p>
+					DYMO printer drivers must be installed prior to connecting.
+					Follow the instructions provided by DYMO to install DYMO Connect (for LabelWriter 450 and 550)
+					or DYMO Label Software (for LabelWriter 400).
+				</p>
+				<p>
+					For the LabelWriter 550, DYMO Connect must be opened to detect the labels in the printer before it will print.
+				</p>
+				<h3>Additional Steps for Windows</h3>
+				<ol>
+					<li>In the Windows Control Panel, navigate to <span class="interface-item">Devices and Printers</span>.</li>
+					<li>Right click on the DYMO LabelWriter device and choose <span class="interface-item">Printing Preferences</span>.</li>
+					<li>Change the <span class="interface-item">Orientation</span> to <span class="code-item">landscape</span>.</li>
+					<li>Click <span class="interface-item">Advanced...</span></li>
+					<li>Change the <span class="interface-item">Paper size</span> to <span class="code-item">30256 Shipping</span>.</li>
+					<li>Click <span class="interface-item">OK</span> on both windows to confirm the changes.</li>
+				</ol>
+			</div>
+		</div>
+		<div class="cps-inset-container" style="flex: 10%">
+			<div class="cps-inset-header">Printing Validation Labels</div>
+			<div class="cps-inset-last">
+				<ol>
+					<li>On the label preview page, click <span class="interface-item">Print</span>. The browser's Print dialog will appear.</li>
+					<li>Choose the DYMO LabelWriter and click <span class="interface-item">More Settings</span>.</li>
+					<li>
+						Set the <span class="interface-item">Paper size</span> to any of the following:<br>
+						<span class="code-item">30256 Shipping</span>
+						<span class="code-item">Shipping Address 2.31 by 4.00 inches</span>
+						<span class="code-item">custom 58.76x101.6mm</span>.
+					</li>
+					<li>
+						Set the <span class="interface-item">Margins</span> to <span class="code-item">Default</span>
+						and the <span class="interface-item">Orientation</span> to <span class="code-item">Landscape</span>.
+					</li>
+					<li>Click <span class="interface-item">Print</span>.</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

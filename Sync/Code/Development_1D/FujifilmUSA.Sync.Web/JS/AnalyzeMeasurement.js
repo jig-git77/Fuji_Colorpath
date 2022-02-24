@@ -112,6 +112,7 @@ var AUTH_TOKEN = '';
 var $hdnSyncDlpPlusType;
 var $hdnIsDlpMultiColor;
 var $hdnCurrentRunName;
+var labelPrintHTMLString = '';
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -927,6 +928,7 @@ function BindMeasurementSummary() {
                         //generate dymo printing string to print the dymo label only for validation
                         if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
                             PopulateDymoPrinter(measurement);
+                            PopulateDymoPrinterNew(measurement);
                         }
                         measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
                         $hdnValidationType = measurement.ValidationType;
@@ -7672,9 +7674,55 @@ function PopulateDymoPrinter(obj) {
     //});
 }
 
+//set the measurement detail for dymo label printing
+function PopulateDymoPrinterNew(obj) {
+
+    var apiParameter = {
+        LicenseType: $hdnCurrentProjectLicenseType,
+        //LicenseType: 2,
+        DeviceName: $('#hdnCurrentDeviceName').val(),
+        MeasurementSummary: obj
+    };
+
+    var ajaxParameter = {
+        type: "POST",
+        url: SERVICE_BASE_URL + 'api/Analyze/GetDymoPrintDataNew',
+        data: JSON.stringify(apiParameter),
+        dataType: "json",
+        headers: {
+            "content-type": "application/json",
+            'Authorization': 'Basic ' + AUTH_TOKEN
+        }
+    };
+
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response.data != null) {
+            labelPrintHTMLString = response.data.labelPrintHtmlStringNew;
+        }
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
+        }
+    });
+}
 //method to get label string to print in dymo label
 function GetLabelXml() {
     return labelPrintXMLString;
+}
+//method to get label string to print in dymo label
+function GetLabelHTML() {
+    return labelPrintHTMLString;
+}
+var printPreviewWindow = null;
+function ShowLabelPrintPreviewNew() {
+    if (printPreviewWindow != null) {
+        printPreviewWindow.close()
+        printPreviewWindow = null;
+    }
+    printPreviewWindow = window.open("PrintPreviewNew.aspx", "PrintPreviewWindow", "width=768,height=650,resizable=no,scrollbars=no,menubar=yes");
+    printPreviewWindow.focus();
 }
 
 //method to get icon image in label print dymo label

@@ -307,6 +307,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ibtnPrintPreview.Visible = false;
                 ibtnPrintLabel.Visible = false;
+                ibtnPrintPreviewNew.Visible = false;
             }
         }
 
