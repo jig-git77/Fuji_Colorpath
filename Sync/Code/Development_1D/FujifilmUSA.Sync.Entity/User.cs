@@ -42,6 +42,8 @@ namespace FujifilmUSA.Sync.Entity
         public short UVMode { get; set; }
         public DateTime LastActiveDate { get; set; }
         public string APIAuthKey { get; set; }
+        public bool IsUpdateAlert { get; set; }
+        public bool IsAlertPopup { get; set; }
         #endregion
 
         #region extension Methods

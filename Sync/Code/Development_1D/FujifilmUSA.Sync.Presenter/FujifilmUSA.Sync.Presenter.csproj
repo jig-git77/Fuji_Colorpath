@@ -86,6 +86,7 @@
     <Compile Include="PresenterReportCMYKDensity.cs" />
     <Compile Include="PresenterReportGrading.cs" />
     <Compile Include="PresenterReportSingleMeasurement.cs" />
+    <Compile Include="PresenterUpdateChangeLog.cs" />
     <Compile Include="PresenterUserManagement.cs" />
     <Compile Include="PresenterBranchManagement.cs" />
     <Compile Include="PresenterAnalyze.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="ViewInterface\IViewSourceProfile.cs" />
     <Compile Include="ViewInterface\IViewAddSpotTarget.cs" />
     <Compile Include="ViewInterface\IViewSpotTargetManagement.cs" />
+    <Compile Include="ViewInterface\IViewUpdateChangeLog.cs" />
     <Compile Include="ViewInterface\IViewUserManagement.cs" />
     <Compile Include="ViewInterface\IViewAddBranchManagement.cs" />
     <Compile Include="ViewInterface\IViewBranchManagement.cs" />

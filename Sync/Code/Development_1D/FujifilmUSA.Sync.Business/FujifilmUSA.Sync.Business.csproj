@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
     <Compile Include="Implementation\SpotTargetBusinessImpl.cs" />
+    <Compile Include="Implementation\UpdateChangeLogImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
     <Compile Include="Implementation\ActivityValidationRuleBusinessImpl.cs" />
     <Compile Include="Interface\IApplicationConfigurationBusiness.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ISpotTargetBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
+    <Compile Include="Interface\IUpdateChangeLogListBusiness.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
     <Compile Include="Interface\IActivityValidationRuleBusiness.cs" />
     <Compile Include="LogActivityManager.cs" />
@@ -129,6 +131,7 @@
     </Compile>
     <Compile Include="Mock\SourceProfileBusinessMock.cs" />
     <Compile Include="Mock\SpotTargetBusinessMock.cs" />
+    <Compile Include="Mock\UpdateChangeLogMock.cs" />
     <Compile Include="Mock\UserBusinessImpl.cs" />
     <Compile Include="ProfilerServiceClient\Enums.cs" />
     <Compile Include="ProfilerServiceClient\IccProfile.cs" />

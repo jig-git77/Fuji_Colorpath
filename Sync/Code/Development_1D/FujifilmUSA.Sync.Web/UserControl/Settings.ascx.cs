@@ -43,6 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divMetricTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
             divMeasurementLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementLogs);
             divMToolVersion.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementLogs);
+            divUpdateChangeLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUpdateChangeLog);
 
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
@@ -64,6 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divSpotTargetSeparator.Visible = divSpotTarget.Visible && divLookupTVILABDensitySeparator.Visible;
             divMetricTargetSeperator.Visible = divMetricTarget.Visible && divSpotTarget.Visible;
             divMeasurementLogSeperator.Visible = divMeasurementLog.Visible && divMetricTarget.Visible;
+            divUpdateChangeLogSeperator.Visible = divMToolVersion.Visible && divUpdateChangeLog.Visible;
         }
         #endregion
 

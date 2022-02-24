@@ -5,9 +5,32 @@
     TagPrefix="ucCreateDLP" %>
 <%@ Register Src="~/UserControl/OperationSelection.ascx" TagName="OperationSelection"
     TagPrefix="ucOperationSelection" %>
+<%@ Register Src="~/UserControl/PopupControl/OpenUpdatePopup.ascx" TagName="OpenUpdatePopup"
+    TagPrefix="ucOpenUpdatePopup" %>
 <script src="JS/jquery.tools.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+
+    function ShowOpenPopupUpdateWindow() {
+        var PopupUpdateValue = document.getElementById('<%=hdnPopupUpdateValue.ClientID%>').value;
+        var AlertPopupValue = document.getElementById('<%=hdnAlertPopupValue.ClientID%>').value;
+        if (PopupUpdateValue == "True" || AlertPopupValue == "True") {
+            // Need a random item in the querystring so the RadWindow does not pull from cache.
+            var WinId = "Win" + Math.random().toString();
+            var oWindow;
+            oWindow = GetRadWindowManager().open("PopupOpenUpdatePopup.aspx?popupUpdateValue=" + PopupUpdateValue + "&alertPopupValue=" + AlertPopupValue + "&wid=" + WinId, "OpenPopupUpdateWindow");
+            oWindow.show();
+            return false;
+        }
+    }
+</script>
+
 <script type="text/javascript" language="javascript">
     jQuery(document).ready(function () {
+        ShowOpenPopupUpdateWindow();
         $("[id*='lbtnSelectDevice']").each(function () {
             $(this).tooltip({
                 tip: $("[TDeviceId*=" + $(this).attr("DeviceId") + "]"),
@@ -245,6 +268,17 @@
     </div>
     <div class="clear">
     </div>
+     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True" Behaviors="Close,Move" Width="705" Height="215" VisibleStatusbar="false">
+        <Windows>
+            <telerik:RadWindow ID="OpenUpdatePopupWindow" runat="server" IconUrl="" VisibleStatusbar="false"
+                ShowContentDuringLoad="false" Title="Open Update Popup"
+                Behaviors="Move,Close">
+            </telerik:RadWindow>
+        </Windows>
+    </telerik:RadWindowManager>
+
+    <input id="hdnPopupUpdateValue" type="hidden" runat="server" />
+    <input id="hdnAlertPopupValue" type="hidden" runat="server" />
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

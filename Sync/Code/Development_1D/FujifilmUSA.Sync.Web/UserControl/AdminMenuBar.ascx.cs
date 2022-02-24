@@ -38,6 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnSpotTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget);
                 lbtnMetricTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
                 lbtnMToolVersion.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMToolVersion);
+                lbtnUpdateChangeLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUpdateChangeLog);
             }
         }
         #endregion
@@ -136,6 +137,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnMToolVersion_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("MToolVersionManagement.aspx");
+        }
+        protected void lbtnUpdateChangeLog_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("UpdateChangeLogManagement.aspx");
         }
         #endregion
 

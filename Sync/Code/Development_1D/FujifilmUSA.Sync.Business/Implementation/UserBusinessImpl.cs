@@ -53,7 +53,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             MeasurementDeviceId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "MeasurementDeviceID"),
                             DensityType = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "DensityType"),
                             UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode"),
-                            APIAuthKey = DataReader.ReadString(dsUser.Tables[0].Rows[0], "APIAuthKey")
+                            APIAuthKey = DataReader.ReadString(dsUser.Tables[0].Rows[0], "APIAuthKey"),
+                            IsUpdateAlert = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsUpdateAlert"),
+                            IsAlertPopup = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsAlertPopup")
                         };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()

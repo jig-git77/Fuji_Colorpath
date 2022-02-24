@@ -247,12 +247,26 @@ label {
         background: url(../Images/setting_icon.png) no-repeat top left;
         width: 39px;
         height: 40px;
-        margin: 8px 18px 0 0;
-        float: right;
+        /*margin: 8px 18px 0 0;*/
+        margin: 8px 0 0 0;
+        float: left;
     }
 
         #header .setting a:hover {
             background: url(../Images/setting_icon_hover.png) no-repeat top left;
+        }
+
+    #header .updateChangeLog a {
+        background: url(../Images/update_alert.png) no-repeat top left;
+        width: 39px;
+        height: 40px;
+        /*margin: 8px 18px 0 65px;*/
+        margin: 8px 0 0 0;
+        float: right;
+    }
+
+        #header .updateChangeLog a:hover {
+            background: url(../Images/update_alert_hover.png) no-repeat top left;
         }
     #header .logoHeader a {
         background: url(../Images/logo.png) no-repeat top left;       

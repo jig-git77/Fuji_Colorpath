@@ -44,6 +44,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;                
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
                 BindCompanyDropDown();
+                // Start: -----Pass value to display Update alerts or not ---------------//
+                if (SessionManager.Instance.CurrentUser != null)
+                {
+                    hdnPopupUpdateValue.Value = SessionManager.Instance.CurrentUser.IsUpdateAlert.ToString();
+                    hdnAlertPopupValue.Value = SessionManager.Instance.CurrentUser.IsAlertPopup.ToString();
+                }
+                // End:----------------------------------------------------------------//
             }
         }
         #endregion

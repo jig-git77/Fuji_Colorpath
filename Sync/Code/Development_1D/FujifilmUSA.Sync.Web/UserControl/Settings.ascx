@@ -342,7 +342,7 @@
                 <td style="height:50px;">
                 </td>
             </tr>   
-             <tr style="vertical-align:central;" >
+           <tr style="vertical-align:central;" >
                 <td style="vertical-align:central;" >                    
                      <div id="divMToolVersion" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
                     <asp:LinkButton ID="lnkMToolVersion" runat="server"
@@ -354,6 +354,18 @@
                         <asp:Localize runat="server" Text="MTool Version" ID="Localize7"></asp:Localize>                    
                     </asp:LinkButton>
                          </div>
+                     <div id="divUpdateChangeLogSeperator" runat ="server" align="center" valign="bottom" style="float:left;">
+                        <img alt="" src="Images/admin-icon-divider.png" />
+                    </div> 
+                    <div id="divUpdateChangeLog" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                    <asp:LinkButton ID="lnkUpdateChangeLog" runat="server"
+                        PostBackUrl="~/UpdateChangeLogManagement.aspx">                       
+                        <div>
+                            <asp:Image ID="ImgUpdateChangeLog" runat="server" AlternateText="Update Change Log" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="UpdateChangeLog" />
+                        </div>
+                        <asp:Localize runat="server" Text="Update Change Log" ID="Localize8" ></asp:Localize>                    
+                    </asp:LinkButton>
+                </div>
                     </td>
                  </tr>
             <tr>

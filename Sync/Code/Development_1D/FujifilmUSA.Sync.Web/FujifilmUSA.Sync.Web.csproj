@@ -116,6 +116,7 @@
     <Content Include="AddReferenceChartPreset.aspx" />
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="AddSpotTarget.aspx" />
+    <Content Include="AddUpdateChangeLogManagement.aspx" />
     <Content Include="AnalyzeMeasurement.aspx" />
     <Content Include="Analyze_SpotColor.aspx" />
     <Content Include="ApplicationConfiguration.aspx" />
@@ -1271,6 +1272,8 @@
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\tick-mark.png" />
     <Content Include="Images\Title-Bg-Black.gif" />
+    <Content Include="Images\update_alert.png" />
+    <Content Include="Images\update_alert_hover.png" />
     <Content Include="Images\user-management.png" />
     <Content Include="Images\Validation Report_G7_preview.jpg" />
     <Content Include="Images\Validation Report_preview.jpg" />
@@ -1320,6 +1323,7 @@
     <Content Include="PopupImportMeasurementFile.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
+    <Content Include="PopupOpenUpdatePopup.aspx" />
     <Content Include="PopupReportCMYKDensity.aspx" />
     <Content Include="PopupReportGrading.aspx" />
     <Content Include="PopupSpotClosePrintCondition.aspx" />
@@ -3959,6 +3963,8 @@
     <Content Include="Templates\style.css" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_G7.htm" />
     <Content Include="Terms\ColorPath SYNC Firefox ESR.pdf" />
+    <Content Include="UpdateChangeLog.aspx" />
+    <Content Include="UpdateChangeLogManagement.aspx" />
     <Content Include="UserControl\AccessDenied.ascx" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
@@ -3973,6 +3979,7 @@
     <Content Include="UserControl\AddReferenceChartPreset.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddSpotTarget.ascx" />
+    <Content Include="UserControl\AddUpdateChangeLogManagement.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
     <Content Include="UserControl\AdminStatusbar.ascx" />
     <Content Include="UserControl\AddDeviceManagement.ascx" />
@@ -4011,6 +4018,7 @@
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
     <Content Include="UserControl\PopupControl\ImportMeasurementFile.ascx" />
     <Content Include="UserControl\PopupControl\ImportMeasurements.ascx" />
+    <Content Include="UserControl\PopupControl\OpenUpdatePopup.ascx" />
     <Content Include="UserControl\PopupControl\ReportCMYKDensity.ascx" />
     <Content Include="UserControl\PopupControl\ReportGrading.ascx" />
     <Content Include="UserControl\PopupControl\SpotClosePrintCondition.ascx" />
@@ -4030,6 +4038,8 @@
     <Content Include="UserControl\SpotMeasurement.ascx" />
     <Content Include="UserControl\SpotTargetManagement.ascx" />
     <Content Include="UserControl\Spot_Measurement.ascx" />
+    <Content Include="UserControl\UpdateChangeLog.ascx" />
+    <Content Include="UserControl\UpdateChangeLogManagement.ascx" />
     <Content Include="UserControl\ValidationContainer.ascx" />
     <Content Include="UserControl\Permission.ascx" />
     <Content Include="UserControl\SessionEnd.ascx" />
@@ -4352,6 +4362,13 @@
     </Compile>
     <Compile Include="AddSpotTarget.aspx.designer.cs">
       <DependentUpon>AddSpotTarget.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddUpdateChangeLogManagement.aspx.cs">
+      <DependentUpon>AddUpdateChangeLogManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddUpdateChangeLogManagement.aspx.designer.cs">
+      <DependentUpon>AddUpdateChangeLogManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminMaster.Master.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
@@ -4724,6 +4741,13 @@
     <Compile Include="PopupOpenForgotPassword.aspx.designer.cs">
       <DependentUpon>PopupOpenForgotPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupOpenUpdatePopup.aspx.cs">
+      <DependentUpon>PopupOpenUpdatePopup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupOpenUpdatePopup.aspx.designer.cs">
+      <DependentUpon>PopupOpenUpdatePopup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PopupReportCMYKDensity.aspx.cs">
       <DependentUpon>PopupReportCMYKDensity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4885,6 +4909,20 @@
     <Compile Include="Spot_Measurement.aspx.designer.cs">
       <DependentUpon>Spot_Measurement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UpdateChangeLog.aspx.cs">
+      <DependentUpon>UpdateChangeLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateChangeLog.aspx.designer.cs">
+      <DependentUpon>UpdateChangeLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateChangeLogManagement.aspx.cs">
+      <DependentUpon>UpdateChangeLogManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateChangeLogManagement.aspx.designer.cs">
+      <DependentUpon>UpdateChangeLogManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AccessDenied.ascx.cs">
       <DependentUpon>AccessDenied.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5001,6 +5039,13 @@
     </Compile>
     <Compile Include="UserControl\AddSpotTarget.ascx.designer.cs">
       <DependentUpon>AddSpotTarget.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddUpdateChangeLogManagement.ascx.cs">
+      <DependentUpon>AddUpdateChangeLogManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddUpdateChangeLogManagement.ascx.designer.cs">
+      <DependentUpon>AddUpdateChangeLogManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddUserManagement.ascx.cs">
       <DependentUpon>AddUserManagement.ascx</DependentUpon>
@@ -5241,6 +5286,13 @@
     <Compile Include="UserControl\PopupControl\ImportMeasurements.ascx.designer.cs">
       <DependentUpon>ImportMeasurements.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\PopupControl\OpenUpdatePopup.ascx.cs">
+      <DependentUpon>OpenUpdatePopup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\OpenUpdatePopup.ascx.designer.cs">
+      <DependentUpon>OpenUpdatePopup.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\PopupControl\ReportCMYKDensity.ascx.cs">
       <DependentUpon>ReportCMYKDensity.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5373,6 +5425,20 @@
     </Compile>
     <Compile Include="UserControl\Spot_Measurement.ascx.designer.cs">
       <DependentUpon>Spot_Measurement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UpdateChangeLog.ascx.cs">
+      <DependentUpon>UpdateChangeLog.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\UpdateChangeLog.ascx.designer.cs">
+      <DependentUpon>UpdateChangeLog.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UpdateChangeLogManagement.ascx.cs">
+      <DependentUpon>UpdateChangeLogManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\UpdateChangeLogManagement.ascx.designer.cs">
+      <DependentUpon>UpdateChangeLogManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ValidationContainer.ascx.cs">
       <DependentUpon>ValidationContainer.ascx</DependentUpon>
@@ -9242,6 +9308,12 @@
     <Content Include="UserControl\PopupControl\App_LocalResources\SpotProjectOpenPrintCondition.ascx.ja.resx" />
     <Content Include="UserControl\PopupControl\App_LocalResources\SpotProjectOpenPrintCondition.ascx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\UpdateChangeLog.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\UpdateChangeLog.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\UpdateChangeLog.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\UpdateChangeLog.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -9265,7 +9337,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

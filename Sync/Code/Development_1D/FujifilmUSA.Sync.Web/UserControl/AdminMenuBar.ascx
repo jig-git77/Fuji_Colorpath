@@ -195,6 +195,15 @@
                         ID="Localize2"></asp:Localize>
                 </span>
             </asp:LinkButton>
+             <asp:LinkButton ID="lbtnUpdateChangeLog" runat="server"
+                CssClass="dock-item overlapobject"
+                OnClick="lbtnUpdateChangeLog_Click">
+                <img src="Images/application-configuration.png" style="position: relative; z-index: 1;" alt="Add Update Change Log" />
+                <span>
+                    <asp:Localize Text="Update Change Log" runat="server"
+                        ID="Localize3"></asp:Localize>
+                </span>
+            </asp:LinkButton>
         </div>
     </div>
 </div>
