@@ -311,6 +311,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindTolerances()
         {
             MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
+            LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
             _presenterDeviceFamilyProfilerOption.GetMetricSumTargetValues();
             if (!IsErrorOccured)
             {

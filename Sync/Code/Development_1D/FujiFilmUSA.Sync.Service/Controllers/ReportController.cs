@@ -122,7 +122,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         //objReportPDF.ReportName = "Single Measurement Report";
                         //objReportPDF.DLPName = "DLP_NAME";
                         objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
-
+                        objReportPDF.LicenceType = chart.LicenceType;
+                        LicenseTypeId = chart.LicenceType;
                         if (chart.validationType == 1)
                         {
                             //code to set the report title
@@ -131,12 +132,17 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             {
                                 objReportPDF.ReportName = "Press Alignment Report";
                             }
-
+                            if (chart.LicenceType == 11)
+                            {
+                                objReportPDF.ReportName = "DLP Optimization Report";
+                                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_DLPPlus;
+                            }
 
                             DSReport_G7_Vali = new DataSet();
                             _presenterReportSingleMeasurement.GetReportDataOnMeasurement_G7_Vali();
                             objReportPDF.DS_Common = DSReport_G7_Vali;
-                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7;
+                            if (LicenseTypeId != 11) //if this is not DLPPlus 
+                                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7;
                         }
                         else
                         {
@@ -321,7 +327,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         [HttpGet]
         [CustomAuthentication]
         public IHttpActionResult GenerateSummaryDeltaCharts(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
-                                                            bool? IsSync1DTypeProject, string fromDeltaE, int validationType)
+                                                            bool? IsSync1DTypeProject, string fromDeltaE, int validationType, short licenseTypeId)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -362,7 +368,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
                     this.From_ΔE = Convert.ToString(fromDeltaE);
                     this.ValidationType = Convert.ToInt32(validationType);
-
+                    this.LicenseTypeId = licenseTypeId;
                     _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
                     //List<Dictionary<string, decimal>> listDeltaSummary = new List<Dictionary<string, decimal>>();
                     List<string> listStatesNames = new List<string>();
@@ -376,7 +382,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             //    listStatesNames.Add(dc.ColumnName);
                             //}
 
-                            if (!IsVerification && !IsSync1DType)
+                            if (!IsVerification && !IsSync1DType && licenseTypeId != 11)
                             {
                                 for (int index = 0; index < DSReport.Tables[2].Columns.Count - 1; index++)
                                     listStatesNames.Add(DSReport.Tables[2].Columns[index].ColumnName);
@@ -1896,6 +1902,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public DataSet DSReport_G7_Vali { get; set; }
         public int ValidationType { get; set; }
         public bool IsAverageOfMeasurements { get; set; }
+        public short LicenseTypeId { get; set; }
         #endregion
 
         #region IViewReportGrading Members

@@ -162,481 +162,6 @@
 </div>
 <div class="listDevice" style="margin-left: 10px;">
     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
-
-    <table cellpadding="0" cellspacing="10" border="0" width="97%" id="tbMetricPreset" runat="server">
-        <tr id="tr1" runat="server">
-            <td>
-                <div style="display: block;" class="contantbox tabcontant">
-                    <div class="section_top">
-                        &nbsp;
-                    </div>
-                    <div class="section_middle">
-                        <div class="combopart">
-                            <div class="header">
-                                <div class="content">
-                                    <div class="text" style="float: left;">
-                                        <span>
-                                            <asp:Localize runat="server" Text="Metric Presets"
-                                                ID="locMetricPresets" meta:resourcekey="locMetricPresetsResource1"></asp:Localize></span>
-                                    </div>
-                                    <div style="float: right">
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                </div>
-                            </div>
-                            <asp:Panel ID="pnlAddProjectDescriptionMetricPreset" Style="padding: 5px" runat="server"
-                                BorderStyle="None">
-                                <table>
-                                    <tr>
-                                        <td style="width: 100px">
-                                            <span>
-                                                <asp:Localize runat="server" Text="Selected Presets:"
-                                                    ID="locMSelectedPresets" meta:resourcekey="locMSelectedPresetsResource1"></asp:Localize></span>
-                                        </td>
-                                        <td style="width: 450px">
-                                            <asp:DropDownList ID="ddlMetricPresets" runat="server" CssClass="select" AutoPostBack="True"
-                                                OnSelectedIndexChanged="ddlMetricPresets_SelectedIndexChanged">
-                                            </asp:DropDownList>
-
-                                        </td>
-                                        <td style="width: 130px">
-                                            <span id="spanMetricSetting" runat="server" visible="false">
-                                                <div id="MSimgHeader" class="expanded" style="width: 20px !important;background-image:none !important;" >
-                                                  ⓘ &nbsp;
-                                                </div>
-                                                <label class="collapsibleContainerTitle">
-                                                    Metric Setting</label>
-
-                                            </span>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td valign="top" colspan="3">
-                                            <span>
-                                                <asp:Localize runat="server" Text="Preset Description:"
-                                                    ID="locMPresetDescription" meta:resourcekey="locMPresetDescriptionResource1"></asp:Localize></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td valign="top" colspan="3">
-                                            <asp:TextBox ID="txtMPresetDescription" runat="server" Width="120%" Height="100px"
-                                                TextMode="MultiLine" Enabled="False" ReadOnly="True"
-                                                Text="This preset is best used for analog devices ……"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">
-                                            <asp:Panel ID="PanelOptionalRetarget" runat="server" GroupingText="<b>Optional Retarget</b>" Width="120%">
-                                                <asp:UpdatePanel runat="server" ID="upd">
-                                                    <ContentTemplate>
-                                                        <div runat="server" id="divDevice" visible="false">
-                                                            <table>
-                                                                <tr>
-                                                                    <td style="width: 200px;">
-                                                                        <span style="padding-left: 5px;">
-                                                                            <asp:Localize runat="server" Text="Select Device: "
-                                                                                ID="locSelectDevice" meta:resourcekey="locSelectDeviceResource1"></asp:Localize></span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div style="float: left">
-                                                                            <asp:DropDownList runat="server" ID="cmbDevice" AutoPostBack="true" CssClass="select" OnSelectedIndexChanged="cmbDevice_SelectedIndexChanged" Width="250"></asp:DropDownList>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div runat="server" id="divRetarget" visible="false">
-                                                            <table>
-                                                                <tr>
-                                                                    <td style="width: 200px;">
-                                                                        <span style="padding-left: 5px;">
-                                                                            <asp:Localize runat="server" Text="Select Certified Print Condition:"
-                                                                                ID="Localize1" meta:resourcekey="locReTargetResource1"></asp:Localize></span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div style="float: left">
-                                                                            <asp:DropDownList ID="ddlReTargetList" runat="server" CssClass="select" AutoPostBack="true" OnSelectedIndexChanged="ddlReTargetList_SelectedIndexChanged" Width="250">
-                                                                            </asp:DropDownList>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div runat="server" id="divRetargetDetails" visible="false">
-                                                            <table style="padding-left: 5px;">
-                                                                <tr>
-                                                                    <td style="width: 200px;">
-                                                                        <span>
-                                                                            <asp:Localize runat="server" Text="Print Standard Type: "
-                                                                                ID="Localize12" meta:resourcekey="locParentProjectNameResource1"></asp:Localize></span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div style="float: left">
-                                                                            <asp:Label runat="server" ID="lblPrintStandardTypeName" />
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 200px;">
-                                                                        <span>
-                                                                            <asp:Localize runat="server" Text="Metric Target Preset: "
-                                                                                ID="Localize13" meta:resourcekey="locReTargetLibraryNameResource1"></asp:Localize></span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div style="float: left">
-                                                                            <asp:Label runat="server" ID="lblMetricTargetPresetName" />
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
-                            <div class="clear">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section_bottom">
-                        &nbsp;
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr id="trAdvancedOptions" runat="server">
-            <td>
-                <div style="display: block;" class="contantbox tabcontant">
-                    <div class="section_top">
-                        &nbsp;
-                    </div>
-                    <div class="section_middle">
-                        <div class="combopart">
-                            <div id="dvaccordionMetric" class="header collapsibleContainerTitle">
-                                <div class="content">
-                                    <div class="text">
-                                        <div style="float: left">
-                                        </div>
-                                        <div style="float: left;">
-                                            <div id="dvimgHeader" class="expanded">
-                                                &nbsp;
-                                            </div>
-                                            <label class="collapsibleContainerTitle">
-                                                <asp:Localize runat="server" Text="Advanced Options"
-                                                    ID="locAdvancedOptionsMetric" meta:resourcekey="locAdvancedOptionsMetricResource1"></asp:Localize></label>
-                                        </div>
-                                        <div class="clear">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <asp:Panel ID="panelAdvancedOptionsMetricPresets" Style="padding: 1px" runat="server" BorderStyle="None"
-                                Width="100%" Enabled="true">
-                                <table cellpadding="0" cellspacing="10" border="0">
-                                    <tr>
-                                        <td valign="top" style="width: 250px; padding-right: 0px; border: 1px Solid Gray;">
-                                            <div id="dvTolerances" style="padding-left: 5px;">
-                                                <label>
-                                                    <b>
-                                                        <asp:Localize runat="server" Text="Tolerances"
-                                                            ID="locTolerances" meta:resourcekey="locTolerancesResource1"></asp:Localize></b></label>
-                                                <br />
-                                                <asp:ListView ID="lvTolerances" runat="server" ItemPlaceholderID="phItemTolerances">
-                                                    <LayoutTemplate>
-                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                            </tr>
-                                                            <asp:PlaceHolder ID="phItemTolerances" runat="server"></asp:PlaceHolder>
-                                                        </table>
-                                                    </LayoutTemplate>
-                                                    <ItemTemplate>
-                                                        <tr style="line-height: 25px;">
-                                                            <td style="width: 160px;">
-                                                                <asp:Label runat="server" Text='<%# Eval("MetricSumName") %>' ID="lblToleranceName"></asp:Label>
-                                                            </td>
-                                                            <td class="style4">
-                                                                <asp:Label runat="server" Text='<%# Eval("TargetValue") %>' ID="lblToleranceValue"></asp:Label>
-                                                            </td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                </asp:ListView>
-                                                <br />
-                                                <asp:CheckBox ID="chkWeightedTolerances" runat="server" Visible="false" />&nbsp;<asp:Label ID="lblWeightedTolerances" runat="server" Text="Use Weighted Tolerances" meta:resourcekey="lblWeightedTolerancesResource1" Visible="false"></asp:Label>
-                                                <div id="Div_LinearizationType" runat="server" visible="false">
-                                                    <asp:CheckBox ID="chkLinearizationType" runat="server" Checked="true" />&nbsp;<asp:Label ID="lblLinearizationType" runat="server" Text="Use LinearizationType TR015" meta:resourcekey="lblLinearizationTypeResource1"></asp:Label>
-                                                </div>
-                                                Choose Measurement Correction: 
-                                                                    <asp:DropDownList ID="cmbMeaCorrection" runat="server">
-                                                                        <asp:ListItem Value="0" Text="None"></asp:ListItem>
-                                                                        <asp:ListItem Value="1" Text="Correction" Selected="True"></asp:ListItem>
-                                                                        <asp:ListItem Value="2" Text="Smoothing"></asp:ListItem>
-                                                                        <asp:ListItem Value="3" Text="Correction + Smoothing"></asp:ListItem>
-                                                                    </asp:DropDownList>
-
-                                            </div>
-                                        </td>
-                                        <td valign="top" style="width: 195px; border: 1px Solid Gray;">
-
-
-                                            <div id="dvTVITargets" style="padding-left: 10px;">
-                                                <label>
-                                                    <b>
-                                                        <asp:Localize runat="server" Text="TVI Targets" ID="locTVITargets" meta:resourcekey="locTVITargetsResource1"></asp:Localize></b>
-                                                </label>
-                                                <br />
-                                                <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px;">
-                                                    <tr style="line-height: 15px;">
-                                                        <td></td>
-                                                        <td colspan="2" align="center">
-                                                            <b>
-                                                                <asp:Localize runat="server" Text="Targets" ID="locTargets" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="line-height: 15px;">
-                                                        <td align="left">
-                                                            <span><b>
-                                                                <asp:Localize ID="locTVIPatch" runat="server" Text="Patch %" meta:resourcekey="locTVIPatchPerResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                        <td align="center">
-                                                            <span><b>
-                                                                <asp:Localize ID="locTVICyan" runat="server" Text="CMY" meta:resourcekey="locTVICMYResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                        <td align="center">
-                                                            <span><b>
-                                                                <asp:Localize ID="locTVIBlack" runat="server" Text="K" meta:resourcekey="locTVIBlackResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI10" runat="server" Text="10"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI10CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI10K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI20" runat="server" Text="20"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI20CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI20K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI25" runat="server" Text="25"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI25CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI25K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI30" runat="server" Text="30"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI30CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI30K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI40" runat="server" Text="40"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI40CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI40K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI50" runat="server" Text="50"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI50CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI50K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI60" runat="server" Text="60"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI60CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI60K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI70" runat="server" Text="70"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI70CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI70K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI75" runat="server" Text="75"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI75CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI75K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI80" runat="server" Text="80"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI80CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI80K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblTVI90" runat="server" Text="90"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI90CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtTVI90K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-
-                                        </td>
-
-                                        <td valign="top" style="width: 195px; border: 1px Solid Gray;">
-
-
-                                            <div id="Div1" style="padding-left: 10px;">
-                                                <label>
-                                                    <b>
-                                                        <asp:Localize runat="server" Text="Density Targets" ID="Localize2" meta:resourcekey="locDensityTargetsResource1"></asp:Localize></b>
-                                                </label>
-                                                <br />
-                                                <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px;">
-                                                    <tr>
-                                                        <td colspan="4" align="center">
-                                                            <b>
-                                                                <asp:Localize runat="server" Text="Targets" ID="Localize7" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="center">
-                                                            <span><b>
-                                                                <asp:Localize ID="Localize3" runat="server" Text="C" meta:resourcekey="locDensityCResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                        <td align="center">
-                                                            <span><b>
-                                                                <asp:Localize ID="Localize4" runat="server" Text="M" meta:resourcekey="locDensityMResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                        <td align="center">
-                                                            <span><b>
-                                                                <asp:Localize ID="Localize5" runat="server" Text="Y" meta:resourcekey="locDensityYResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                        <td align="center">
-                                                            <span><b>
-                                                                <asp:Localize ID="Localize6" runat="server" Text="K" meta:resourcekey="locDensityKResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="center">
-                                                            <asp:TextBox ID="txtDensityC" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateDensityRange(this)"></asp:TextBox>
-                                                        </td>
-                                                        <td align="center">
-                                                            <asp:TextBox ID="txtDensityM" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateDensityRange(this)"></asp:TextBox>
-                                                        </td>
-                                                        <td align="center">
-                                                            <asp:TextBox ID="txtDensityY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateDensityRange(this)"></asp:TextBox>
-                                                        </td>
-                                                        <td align="center">
-                                                            <asp:TextBox ID="txtDensityK" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateDensityRange(this)"></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <br />
-                                            <div id="dvHueAngleTargets" style="padding-left: 10px;" runat="server" visible="false">
-                                                <label>
-                                                    <b>
-                                                        <asp:Localize runat="server" Text="Hue Angle Targets" ID="Localize8" meta:resourcekey="locHueAngleTargetsResource1"></asp:Localize></b>
-                                                </label>
-                                                <br />
-                                                <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px;">
-                                                    <tr style="line-height: 15px;">
-                                                        <td></td>
-                                                        <td colspan="2" align="left">
-                                                            <b>
-                                                                <asp:Localize runat="server" Text="Targets" ID="Localize9" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="line-height: 15px;">
-                                                        <td align="left">
-                                                            <span><b>
-                                                                <asp:Localize ID="Localize10" runat="server" Text="Patch" meta:resourcekey="locHueAnglePatchPerResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                        <td align="left">
-                                                            <span><b>
-                                                                <asp:Localize ID="Localize11" runat="server" Text="Hue Angle" meta:resourcekey="locHueAngleResource1"></asp:Localize></b></span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="Label1" runat="server" Text="C"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtHue_C" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="Label2" runat="server" Text="M"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtHue_M" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="Label3" runat="server" Text="Y"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtHue_Y" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="Label4" runat="server" Text="R"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtHue_R" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="Label5" runat="server" Text="G"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtHue_G" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="Label6" runat="server" Text="B"></asp:Label></td>
-                                                        <td>
-                                                            <asp:TextBox ID="txtHue_B" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-                                </table>
-                            </asp:Panel>
-                        </div>
-                    </div>
-                    <div class="tab_bottom">
-                        &nbsp;
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
     <table cellpadding="0" cellspacing="10" border="0" width="97%" id="tbOptionPreset" runat="server">
         <tr id="trListHeader" runat="server">
             <td>
@@ -1162,10 +687,485 @@
             </td>
         </tr>
     </table>
+    <table cellpadding="0" cellspacing="10" border="0" width="97%" id="tbMetricPreset" runat="server">
+        <tr id="tr1" runat="server">
+            <td>
+                <div style="display: block;" class="contantbox tabcontant">
+                    <div class="section_top">
+                        &nbsp;
+                    </div>
+                    <div class="section_middle">
+                        <div class="combopart">
+                            <div class="header">
+                                <div class="content">
+                                    <div class="text" style="float: left;">
+                                        <span>
+                                            <asp:Localize runat="server" Text="Metric Presets"
+                                                ID="locMetricPresets" meta:resourcekey="locMetricPresetsResource1"></asp:Localize></span>
+                                    </div>
+                                    <div style="float: right">
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </div>
+                            <asp:Panel ID="pnlAddProjectDescriptionMetricPreset" Style="padding: 5px" runat="server"
+                                BorderStyle="None">
+                                <table>
+                                    <tr>
+                                        <td style="width: 100px">
+                                            <span>
+                                                <asp:Localize runat="server" Text="Selected Presets:"
+                                                    ID="locMSelectedPresets" meta:resourcekey="locMSelectedPresetsResource1"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 450px">
+                                            <asp:DropDownList ID="ddlMetricPresets" runat="server" CssClass="select" AutoPostBack="True"
+                                                OnSelectedIndexChanged="ddlMetricPresets_SelectedIndexChanged">
+                                            </asp:DropDownList>
+
+                                        </td>
+                                        <td style="width: 130px">
+                                            <span id="spanMetricSetting" runat="server" visible="false">
+                                                <div id="MSimgHeader" class="expanded" style="width: 20px !important;background-image:none !important;" >
+                                                  ⓘ &nbsp;
+                                                </div>
+                                                <label class="collapsibleContainerTitle">
+                                                    Metric Setting</label>
+
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td valign="top" colspan="3">
+                                            <span>
+                                                <asp:Localize runat="server" Text="Preset Description:"
+                                                    ID="locMPresetDescription" meta:resourcekey="locMPresetDescriptionResource1"></asp:Localize></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" colspan="3">
+                                            <asp:TextBox ID="txtMPresetDescription" runat="server" Width="120%" Height="100px"
+                                                TextMode="MultiLine" Enabled="False" ReadOnly="True"
+                                                Text="This preset is best used for analog devices ……"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <asp:Panel ID="PanelOptionalRetarget" runat="server" GroupingText="<b>Optional Retarget</b>" Width="120%">
+                                                <asp:UpdatePanel runat="server" ID="upd">
+                                                    <ContentTemplate>
+                                                        <div runat="server" id="divDevice" visible="false">
+                                                            <table>
+                                                                <tr>
+                                                                    <td style="width: 200px;">
+                                                                        <span style="padding-left: 5px;">
+                                                                            <asp:Localize runat="server" Text="Select Device: "
+                                                                                ID="locSelectDevice" meta:resourcekey="locSelectDeviceResource1"></asp:Localize></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div style="float: left">
+                                                                            <asp:DropDownList runat="server" ID="cmbDevice" AutoPostBack="true" CssClass="select" OnSelectedIndexChanged="cmbDevice_SelectedIndexChanged" Width="250"></asp:DropDownList>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div runat="server" id="divRetarget" visible="false">
+                                                            <table>
+                                                                <tr>
+                                                                    <td style="width: 200px;">
+                                                                        <span style="padding-left: 5px;">
+                                                                            <asp:Localize runat="server" Text="Select Certified Print Condition:"
+                                                                                ID="Localize1" meta:resourcekey="locReTargetResource1"></asp:Localize></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div style="float: left">
+                                                                            <asp:DropDownList ID="ddlReTargetList" runat="server" CssClass="select" AutoPostBack="true" OnSelectedIndexChanged="ddlReTargetList_SelectedIndexChanged" Width="250">
+                                                                            </asp:DropDownList>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div runat="server" id="divRetargetDetails" visible="false">
+                                                            <table style="padding-left: 5px;">
+                                                                <tr>
+                                                                    <td style="width: 200px;">
+                                                                        <span>
+                                                                            <asp:Localize runat="server" Text="Print Standard Type: "
+                                                                                ID="Localize12" meta:resourcekey="locParentProjectNameResource1"></asp:Localize></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div style="float: left">
+                                                                            <asp:Label runat="server" ID="lblPrintStandardTypeName" />
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 200px;">
+                                                                        <span>
+                                                                            <asp:Localize runat="server" Text="Metric Target Preset: "
+                                                                                ID="Localize13" meta:resourcekey="locReTargetLibraryNameResource1"></asp:Localize></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div style="float: left">
+                                                                            <asp:Label runat="server" ID="lblMetricTargetPresetName" />
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </asp:Panel>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                            <div class="clear">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section_bottom">
+                        &nbsp;
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr id="trAdvancedOptions" runat="server">
+            <td>
+                <div style="display: block;" class="contantbox tabcontant">
+                    <div class="section_top">
+                        &nbsp;
+                    </div>
+                    <div class="section_middle">
+                        <div class="combopart">
+                            <div id="dvaccordionMetric" class="header collapsibleContainerTitle">
+                                <div class="content">
+                                    <div class="text">
+                                        <div style="float: left">
+                                        </div>
+                                        <div style="float: left;">
+                                            <div id="dvimgHeader" class="expanded">
+                                                &nbsp;
+                                            </div>
+                                            <label class="collapsibleContainerTitle">
+                                                <asp:Localize runat="server" Text="Advanced Options"
+                                                    ID="locAdvancedOptionsMetric" meta:resourcekey="locAdvancedOptionsMetricResource1"></asp:Localize></label>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <asp:Panel ID="panelAdvancedOptionsMetricPresets" Style="padding: 1px" runat="server" BorderStyle="None"
+                                Width="100%" Enabled="true">
+                                <table cellpadding="0" cellspacing="10" border="0">
+                                    <tr>
+                                        <td valign="top" style="width: 250px; padding-right: 0px; border: 1px Solid Gray;">
+                                            <div id="dvTolerances" style="padding-left: 5px;">
+                                                <label>
+                                                    <b>
+                                                        <asp:Localize runat="server" Text="Tolerances"
+                                                            ID="locTolerances" meta:resourcekey="locTolerancesResource1"></asp:Localize></b></label>
+                                                <br />
+                                                <asp:ListView ID="lvTolerances" runat="server" ItemPlaceholderID="phItemTolerances">
+                                                    <LayoutTemplate>
+                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <asp:PlaceHolder ID="phItemTolerances" runat="server"></asp:PlaceHolder>
+                                                        </table>
+                                                    </LayoutTemplate>
+                                                    <ItemTemplate>
+                                                        <tr style="line-height: 25px;">
+                                                            <td style="width: 160px;">
+                                                                <asp:Label runat="server" Text='<%# Eval("MetricSumName") %>' ID="lblToleranceName"></asp:Label>
+                                                            </td>
+                                                            <td class="style4">
+                                                                <asp:Label runat="server" Text='<%# Eval("TargetValue") %>' ID="lblToleranceValue"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:ListView>
+                                                <br />
+                                                <asp:CheckBox ID="chkWeightedTolerances" runat="server" Visible="false" />&nbsp;<asp:Label ID="lblWeightedTolerances" runat="server" Text="Use Weighted Tolerances" meta:resourcekey="lblWeightedTolerancesResource1" Visible="false"></asp:Label>
+                                                <div id="Div_LinearizationType" runat="server" visible="false">
+                                                    <asp:CheckBox ID="chkLinearizationType" runat="server" Checked="true" />&nbsp;<asp:Label ID="lblLinearizationType" runat="server" Text="Use LinearizationType TR015" meta:resourcekey="lblLinearizationTypeResource1"></asp:Label>
+                                                </div>
+                                                Choose Measurement Correction: 
+                                                                    <asp:DropDownList ID="cmbMeaCorrection" runat="server">
+                                                                        <asp:ListItem Value="0" Text="None"></asp:ListItem>
+                                                                        <asp:ListItem Value="1" Text="Correction" Selected="True"></asp:ListItem>
+                                                                        <asp:ListItem Value="2" Text="Smoothing"></asp:ListItem>
+                                                                        <asp:ListItem Value="3" Text="Correction + Smoothing"></asp:ListItem>
+                                                                    </asp:DropDownList>
+
+                                            </div>
+                                        </td>
+                                        <td valign="top" style="width: 195px; border: 1px Solid Gray;">
+
+
+                                            <div id="dvTVITargets" style="padding-left: 10px;">
+                                                <label>
+                                                    <b>
+                                                        <asp:Localize runat="server" Text="TVI Targets" ID="locTVITargets" meta:resourcekey="locTVITargetsResource1"></asp:Localize></b>
+                                                </label>
+                                                <br />
+                                                <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px;">
+                                                    <tr style="line-height: 15px;">
+                                                        <td></td>
+                                                        <td colspan="2" align="center">
+                                                            <b>
+                                                                <asp:Localize runat="server" Text="Targets" ID="locTargets" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="line-height: 15px;">
+                                                        <td align="left">
+                                                            <span><b>
+                                                                <asp:Localize ID="locTVIPatch" runat="server" Text="Patch %" meta:resourcekey="locTVIPatchPerResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                        <td align="center">
+                                                            <span><b>
+                                                                <asp:Localize ID="locTVICyan" runat="server" Text="CMY" meta:resourcekey="locTVICMYResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                        <td align="center">
+                                                            <span><b>
+                                                                <asp:Localize ID="locTVIBlack" runat="server" Text="K" meta:resourcekey="locTVIBlackResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI10" runat="server" Text="10"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI10CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI10K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI20" runat="server" Text="20"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI20CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI20K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI25" runat="server" Text="25"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI25CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI25K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI30" runat="server" Text="30"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI30CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI30K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI40" runat="server" Text="40"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI40CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI40K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI50" runat="server" Text="50"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI50CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI50K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI60" runat="server" Text="60"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI60CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI60K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI70" runat="server" Text="70"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI70CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI70K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI75" runat="server" Text="75"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI75CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI75K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI80" runat="server" Text="80"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI80CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI80K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblTVI90" runat="server" Text="90"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI90CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtTVI90K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateTVIRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                        </td>
+
+                                        <td valign="top" style="width: 195px; border: 1px Solid Gray;">
+
+
+                                            <div id="Div1" style="padding-left: 10px;">
+                                                <label>
+                                                    <b>
+                                                        <asp:Localize runat="server" Text="Density Targets" ID="Localize2" meta:resourcekey="locDensityTargetsResource1"></asp:Localize></b>
+                                                </label>
+                                                <br />
+                                                <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px;">
+                                                    <tr>
+                                                        <td colspan="4" align="center">
+                                                            <b>
+                                                                <asp:Localize runat="server" Text="Targets" ID="Localize7" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center">
+                                                            <span><b>
+                                                                <asp:Localize ID="Localize3" runat="server" Text="C" meta:resourcekey="locDensityCResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                        <td align="center">
+                                                            <span><b>
+                                                                <asp:Localize ID="Localize4" runat="server" Text="M" meta:resourcekey="locDensityMResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                        <td align="center">
+                                                            <span><b>
+                                                                <asp:Localize ID="Localize5" runat="server" Text="Y" meta:resourcekey="locDensityYResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                        <td align="center">
+                                                            <span><b>
+                                                                <asp:Localize ID="Localize6" runat="server" Text="K" meta:resourcekey="locDensityKResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center">
+                                                            <asp:TextBox ID="txtDensityC" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateDensityRange(this)"></asp:TextBox>
+                                                        </td>
+                                                        <td align="center">
+                                                            <asp:TextBox ID="txtDensityM" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateDensityRange(this)"></asp:TextBox>
+                                                        </td>
+                                                        <td align="center">
+                                                            <asp:TextBox ID="txtDensityY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateDensityRange(this)"></asp:TextBox>
+                                                        </td>
+                                                        <td align="center">
+                                                            <asp:TextBox ID="txtDensityK" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateDensityRange(this)"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <br />
+                                            <div id="dvHueAngleTargets" style="padding-left: 10px;" runat="server" visible="false">
+                                                <label>
+                                                    <b>
+                                                        <asp:Localize runat="server" Text="Hue Angle Targets" ID="Localize8" meta:resourcekey="locHueAngleTargetsResource1"></asp:Localize></b>
+                                                </label>
+                                                <br />
+                                                <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px;">
+                                                    <tr style="line-height: 15px;">
+                                                        <td></td>
+                                                        <td colspan="2" align="left">
+                                                            <b>
+                                                                <asp:Localize runat="server" Text="Targets" ID="Localize9" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="line-height: 15px;">
+                                                        <td align="left">
+                                                            <span><b>
+                                                                <asp:Localize ID="Localize10" runat="server" Text="Patch" meta:resourcekey="locHueAnglePatchPerResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                        <td align="left">
+                                                            <span><b>
+                                                                <asp:Localize ID="Localize11" runat="server" Text="Hue Angle" meta:resourcekey="locHueAngleResource1"></asp:Localize></b></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="Label1" runat="server" Text="C"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtHue_C" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="Label2" runat="server" Text="M"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtHue_M" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="Label3" runat="server" Text="Y"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtHue_Y" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="Label4" runat="server" Text="R"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtHue_R" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="Label5" runat="server" Text="G"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtHue_G" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="Label6" runat="server" Text="B"></asp:Label></td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtHue_B" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)" onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                        </div>
+                    </div>
+                    <div class="tab_bottom">
+                        &nbsp;
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
 
 
     <div>
-        <telerik:RadToolTip RenderMode="Lightweight" ID="RadToolTipTolerancesDlpPlus" runat="server" TargetControlID="spanMetricSetting" RelativeTo="Element"
+        <telerik:RadToolTip RenderMode="Lightweight" ID="RadToolTipTolerancesDlpPlus" runat="server" TargetControlID="spanMetricSetting" RelativeTo="Mouse"
             Position="TopCenter" RenderInPageRoot="true" Visible="false">
             <div id="dvTolerancesDlpPlus" style="padding-left: 5px;">
                 <label>

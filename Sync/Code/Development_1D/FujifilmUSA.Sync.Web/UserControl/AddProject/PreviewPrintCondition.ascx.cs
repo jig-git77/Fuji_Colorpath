@@ -300,6 +300,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                         dvMetricPreset.Visible = true;
                         dvOptionPreset.Visible = true;
+                        dvOptionPresetSmallMiddle.Style.Add("height", "380px !important");
                     }
 
                     imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";

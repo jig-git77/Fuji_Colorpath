@@ -90,7 +90,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (IsVerification)
             {
-                objReportPDF.ReportName = "Validation Report";                
+                objReportPDF.ReportName = "Validation Report";
             }
             else if (IsSync1DType)
             {
@@ -337,142 +337,142 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region " ==== Summary Delta Value Chart === "
         private void BindSummaryDeltaValueBarChart(DataTable DT)
         {
-          
-                ChartResultSummary_Delta.BorderColor = Color.White;
-                ChartResultSummary_Delta.BorderWidth = 0;
-                ChartResultSummary_Delta.BackColor = Color.White;
 
-                //========== Clear Points and Show Chart ==========//
-                ChartResultSummary_Delta.Visible = true;
-                ChartResultSummary_Delta.Series[0].Points.Clear();
-                ChartResultSummary_Delta.Series[1].Points.Clear();
-                ChartResultSummary_Delta.Series[2].Points.Clear();
+            ChartResultSummary_Delta.BorderColor = Color.White;
+            ChartResultSummary_Delta.BorderWidth = 0;
+            ChartResultSummary_Delta.BackColor = Color.White;
 
-                #region //========== Declarations ==========//
-                // === Series0 to display Thresold value === //
-                Series objSeries0 = (Series)ChartResultSummary_Delta.Series[0];
-                objSeries0.XValueType = ChartValueType.Int32;
-                objSeries0.YValueType = ChartValueType.String;
-                objSeries0.CustomProperties = "DrawingStyle=Cylinder";
+            //========== Clear Points and Show Chart ==========//
+            ChartResultSummary_Delta.Visible = true;
+            ChartResultSummary_Delta.Series[0].Points.Clear();
+            ChartResultSummary_Delta.Series[1].Points.Clear();
+            ChartResultSummary_Delta.Series[2].Points.Clear();
 
-                // === Series1 to display Actual value === //
-                Series objSeries1 = (Series)ChartResultSummary_Delta.Series[1];
-                objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;             
-                objSeries1.CustomProperties = "DrawingStyle=Cylinder";
+            #region //========== Declarations ==========//
+            // === Series0 to display Thresold value === //
+            Series objSeries0 = (Series)ChartResultSummary_Delta.Series[0];
+            objSeries0.XValueType = ChartValueType.Int32;
+            objSeries0.YValueType = ChartValueType.String;
+            objSeries0.CustomProperties = "DrawingStyle=Cylinder";
 
-                // === Series2 to display red marker on Thresold value === //
-                Series objSeries2 = (Series)ChartResultSummary_Delta.Series[2];
-                objSeries2.XValueType = ChartValueType.Int32;
-                objSeries2.YValueType = ChartValueType.String;
-                objSeries2.CustomProperties = "DrawingStyle=Cylinder";           
-                            
-                #endregion
+            // === Series1 to display Actual value === //
+            Series objSeries1 = (Series)ChartResultSummary_Delta.Series[1];
+            objSeries1.XValueType = ChartValueType.Int32;
+            objSeries1.YValueType = ChartValueType.String;
+            objSeries1.CustomProperties = "DrawingStyle=Cylinder";
 
-                #region //========== ChartArea Settings ==========//
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].AxisX.LabelStyle.Enabled = false;
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
+            // === Series2 to display red marker on Thresold value === //
+            Series objSeries2 = (Series)ChartResultSummary_Delta.Series[2];
+            objSeries2.XValueType = ChartValueType.Int32;
+            objSeries2.YValueType = ChartValueType.String;
+            objSeries2.CustomProperties = "DrawingStyle=Cylinder";
 
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.Auto = true;
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.X = float.Parse("0");
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.Y = float.Parse("5");
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.Width = float.Parse("99");
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.Height = float.Parse("97");
+            #endregion
 
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.Auto = true;
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.X = float.Parse("0");
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.Y = float.Parse("2");
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.Width = float.Parse("98");
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.Height = float.Parse("97");
+            #region //========== ChartArea Settings ==========//
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].AxisX.LabelStyle.Enabled = false;
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
 
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].ShadowOffset = 0;
-                ChartResultSummary_Delta.BorderSkin.SkinStyle = BorderSkinStyle.None;
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].BorderWidth = 0;
-                ChartResultSummary_Delta.BorderSkin.BorderWidth = 0;
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.Auto = true;
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.X = float.Parse("0");
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.Y = float.Parse("5");
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.Width = float.Parse("99");
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].Position.Height = float.Parse("97");
 
-                #endregion
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.Auto = true;
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.X = float.Parse("0");
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.Y = float.Parse("2");
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.Width = float.Parse("98");
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].InnerPlotPosition.Height = float.Parse("97");
 
-                #region " === Fill Series === "
-                // === Limit with red marker === //
-                if (DT != null && DT.Rows.Count > 0)
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].ShadowOffset = 0;
+            ChartResultSummary_Delta.BorderSkin.SkinStyle = BorderSkinStyle.None;
+            ChartResultSummary_Delta.ChartAreas["ChartArea1"].BorderWidth = 0;
+            ChartResultSummary_Delta.BorderSkin.BorderWidth = 0;
+
+            #endregion
+
+            #region " === Fill Series === "
+            // === Limit with red marker === //
+            if (DT != null && DT.Rows.Count > 0)
+            {
+                if (!IsVerification && !IsSync1DType) //--For Sync4D Optimization only
                 {
-                    if (!IsVerification && !IsSync1DType) //--For Sync4D Optimization only
-                    {
-                        #region //-----for Sync4D
+                    #region //-----for Sync4D
 
-                        ChartResultSummary_Delta.Height = Unit.Pixel(200);
+                    ChartResultSummary_Delta.Height = Unit.Pixel(200);
 
-                        List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
-                        levels.Add(Convert.ToDecimal(DT.Rows[0]["Avg_ΔE"].ToString()));
-                        levels.Add(Convert.ToDecimal(DT.Rows[0]["Max_ΔE"].ToString()));
-                        levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔE"].ToString()));
-                        levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔH"].ToString()));
-                        levels.Add(Convert.ToDecimal(DT.Rows[0]["GrayΔE"].ToString()));
-                        levels.Add(Convert.ToDecimal(DT.Rows[0]["NinetyFiveΔE"].ToString()));
-                        DtELimit = levels.Max() + 2;
-                        DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+                    List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["Avg_ΔE"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["Max_ΔE"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔE"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔH"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["GrayΔE"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["NinetyFiveΔE"].ToString()));
+                    DtELimit = levels.Max() + 2;
+                    DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
 
-                        //---------Normal Binding Graph-------//
-                        if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 0);
-                        else
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Avg_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 0);
+                    //---------Normal Binding Graph-------//
+                    if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 0);
+                    else
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Avg_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 0);
 
-                        if (Convert.IsDBNull(DT.Rows[0]["Max_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 1);
-                        else
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Max_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 1);
+                    if (Convert.IsDBNull(DT.Rows[0]["Max_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 1);
+                    else
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Max_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 1);
 
-                        if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 2);
-                        else
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 2);
+                    if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 2);
+                    else
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 2);
 
-                        if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 3);
-                        else
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔH"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 3);
+                    if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 3);
+                    else
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔH"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 3);
 
-                        if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 4);
-                        else
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["GrayΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 4);
+                    if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 4);
+                    else
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["GrayΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 4);
 
-                        if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 5);
-                        else
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["NinetyFiveΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)),0, 5);
+                    if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 5);
+                    else
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["NinetyFiveΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 5);
 
-                        // === Save Chart Image after generating image with proper data === //
-                        string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;
-                        ChartResultSummary_Delta.SaveImage(Server.MapPath(FileName));
-                        #endregion
-                    }
-                    else   //---For Sync 1D ISO or 4D ISO validation
-                    {
-                        ChartResultSummary_Delta.Height = Unit.Pixel(30 * (DT.Rows.Count + 1));   //------Pass Chart height dynamically based on no. of Metric sums records  
-                       
-                        List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
-                        for (int i = 0; i < DT.Rows.Count; i++)
-                        {
-                            levels.Add(Convert.ToDecimal(DT.Rows[i]["MeasuredValue"].ToString()));
-                        }
-                        DtELimit = levels.Max() + 1;
-                        DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
-
-                        //---------Normal Binding Graph-------//
-                        for (int i = 0; i < DT.Rows.Count; i++)
-                        {
-                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["MeasuredValue"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["TargetValue"].ToString())), 0);
-                        }
-
-                        // === Save Chart Image after generating image with proper data === //
-                        string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;
-                        ChartResultSummary_Delta.SaveImage(Server.MapPath(FileName));
-                    }
+                    // === Save Chart Image after generating image with proper data === //
+                    string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;
+                    ChartResultSummary_Delta.SaveImage(Server.MapPath(FileName));
+                    #endregion
                 }
-                #endregion
-          
+                else   //---For Sync 1D ISO or 4D ISO validation
+                {
+                    ChartResultSummary_Delta.Height = Unit.Pixel(30 * (DT.Rows.Count + 1));   //------Pass Chart height dynamically based on no. of Metric sums records  
+
+                    List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                    for (int i = 0; i < DT.Rows.Count; i++)
+                    {
+                        levels.Add(Convert.ToDecimal(DT.Rows[i]["MeasuredValue"].ToString()));
+                    }
+                    DtELimit = levels.Max() + 1;
+                    DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+
+                    //---------Normal Binding Graph-------//
+                    for (int i = 0; i < DT.Rows.Count; i++)
+                    {
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["MeasuredValue"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["TargetValue"].ToString())), 0);
+                    }
+
+                    // === Save Chart Image after generating image with proper data === //
+                    string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;
+                    ChartResultSummary_Delta.SaveImage(Server.MapPath(FileName));
+                }
+            }
+            #endregion
+
         }
         private void BindDeltaValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, double ACT, double TH, double Tol, int Index)
         {
@@ -483,39 +483,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Y2 = (Convert.ToString(ACT) == "" ? 0 : Convert.ToDouble(ACT.ToString()));
             Y3 = (Convert.ToString(Tol) == "" ? 0 : Convert.ToDouble(Tol.ToString()));
 
-                // === When Actual value is not available then no series will display and no marker will display
-                if (Y2 == 0)
-                    Y1 = Y2;
+            // === When Actual value is not available then no series will display and no marker will display
+            if (Y2 == 0)
+                Y1 = Y2;
 
 
-                Series SeriesActual = objSeries1;
-                objSeries0.Points.AddXY((Double)0, Y1);
-                objSeries0.Points[Index]["PointWidth"] = "0.8";
-                objSeries1.Points.AddXY((Double)0, Y2);
+            Series SeriesActual = objSeries1;
+            objSeries0.Points.AddXY((Double)0, Y1);
+            objSeries0.Points[Index]["PointWidth"] = "0.8";
+            objSeries1.Points.AddXY((Double)0, Y2);
 
-                objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
-                if (IsSync1DType || IsVerification) //-----For Sync1D projects or validation projects (1D / 4D)
-                {
-                    objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
-                }
+            objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
+            if (IsSync1DType || IsVerification) //-----For Sync1D projects or validation projects (1D / 4D)
+            {
+                objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
+            }
 
-                SeriesActual.Points[Index]["PointWidth"] = "0.8";
+            SeriesActual.Points[Index]["PointWidth"] = "0.8";
 
-                if (Y1 == 0 && Y2 == 0)
-                {
-                    objSeries0.Points[Index].MarkerImage = "";
-                }
-         
+            if (Y1 == 0 && Y2 == 0)
+            {
+                objSeries0.Points[Index].MarkerImage = "";
+            }
+
         }
         #endregion
 
-     
+
         protected void btn_GeneratePDF_Click(object sender, ImageClickEventArgs e)
         {
             if (txt_MeasurementID.Text != null)
             {
                 MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
-               
+
                 From_ΔE = txt_dTE.Text;
                 ValidationType = Convert.ToInt32(txt_Vali_Type.Text);
                 DSReport = new DataSet();
@@ -564,6 +564,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public int OptimizeRunId { get; set; }
+        public short LicenseTypeId { get; set; }
         #endregion
     }
 }

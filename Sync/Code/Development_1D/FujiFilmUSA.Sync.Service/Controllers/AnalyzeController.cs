@@ -1215,6 +1215,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsSyncDLPPlusType { get; set; }
         public bool IsDlpMultiColor { get; set; }
         public string CurrentRunname { get; set; }
+        public int LicenseTypeId { get; set; }
         #endregion
     }
 }

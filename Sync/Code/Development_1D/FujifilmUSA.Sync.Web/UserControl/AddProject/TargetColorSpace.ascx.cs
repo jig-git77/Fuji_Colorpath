@@ -129,6 +129,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+                SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling.Checked;
 
                 //------If 1D project then pass NewPaperScaling LAB values--------//
                 SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L.Text);
@@ -204,7 +205,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtProfileDescription.Text = lblSourceProfileName.Text = GetResourceString(_recTargetPrintConditionNotAvailableMessage);
             }
             
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                 cmbProjectType_SelectedIndexChanged(null, null);
         }
 
@@ -379,6 +380,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbProjectType.SelectedValue = SessionManager.Instance.CurrentProject.ProjectTypeId.ToString();
                 cmbProjectType_SelectedIndexChanged(null, null);
+                chk_IsPaperScaling.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                 if (SessionManager.Instance.CurrentProject.ProjectTargetLAB != null && SessionManager.Instance.CurrentProject.ProjectTargetLAB.Count > 0) //If open the existing project, then load from session
                 {
                     chk_IsPaperScaling.Enabled = false; //Disable Paper Scaling when project is already created

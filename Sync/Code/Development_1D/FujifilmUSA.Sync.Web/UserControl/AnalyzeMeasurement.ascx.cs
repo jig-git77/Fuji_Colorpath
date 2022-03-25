@@ -540,6 +540,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         public bool IsDlpMultiColor { get; set; }
         public string CurrentRunname { get; set; }
+        public int LicenseTypeId { get; set; }
         #endregion
     }
 }

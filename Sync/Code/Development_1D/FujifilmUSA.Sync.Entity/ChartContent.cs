@@ -46,7 +46,7 @@ namespace FujifilmUSA.Sync.Entity
 
         public ReportGrading grading { get; set; }
         public string ProjectLicenseType { get; set; }
-
+        public short LicenceType { get; set; }
     }
 
     public class SpotChartContent

@@ -118,7 +118,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            var charData = measurementBusiness.GetChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
+            var charData = measurementBusiness.GetChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements, _viewAnalyze.LicenseTypeId);
             _viewAnalyze.DTDeltaEPrimaryPatches = charData[0];
             _viewAnalyze.DTPaperPatches = charData[1];
             _viewAnalyze.DTDensity = charData[2];

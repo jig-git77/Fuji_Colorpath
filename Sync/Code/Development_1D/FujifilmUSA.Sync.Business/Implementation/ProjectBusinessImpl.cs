@@ -1362,13 +1362,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId)
+        public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId, int LicenseTypeID)
         {
             List<Entity.CPSyncV.MetricSum> metricSumList = new List<Entity.CPSyncV.MetricSum>();
+            string StoreProcedureName = string.Empty;
+            if (LicenseTypeID == (short)ELicenseType.DLPPlus)
+            {
+                StoreProcedureName = "[CPSync4DPlus].[GetMetricSumTargetValues]";
+            }
+            else
+            {
+                StoreProcedureName = "[CPSyncV].[GetMetricSumTargetValues]";
+            }
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[GetMetricSumTargetValues]", new object[] { metricTargetPresetId });
+                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(StoreProcedureName, new object[] { metricTargetPresetId });
 
                     if (dsMetricTargetPresetList != null && dsMetricTargetPresetList.Tables.Count > 0)
                     {

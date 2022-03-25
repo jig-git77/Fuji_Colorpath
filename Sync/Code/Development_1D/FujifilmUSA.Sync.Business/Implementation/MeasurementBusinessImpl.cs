@@ -523,7 +523,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         #region Get common chart data
-        public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, int LicenseTypeId = 0)
         {
             var DeltaEPatchDetails = new List<AnalyzeChart>();
             var ChartDetailArray = new List<AnalyzeChart>[3];
@@ -539,6 +539,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (IsVerification)
             {
                 storedProc = "CPSyncV.GetVChartData_InkPaper";
+            }
+            if (LicenseTypeId == (short)ELicenseType.DLPPlus)
+            {
+                storedProc = "CPSync4DPlus.GetChartData_InkPaper";
             }
 
             Common.ImplementBusinessLogic(
@@ -955,7 +959,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return LABChartDetails;
         }
 
-        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, short LicenseTypeId = 0)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleMeasurement";
@@ -971,12 +975,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "Report.GetSingleVMeasurement";
             }
+            if (LicenseTypeId == (short)ELicenseType.DLPPlus)
+            {
+                storedProc = "Report.GetSingleDLPPlusMeasurement";
+
+            }
 
             Common.ImplementBusinessLogic(
                 () =>
                 {
                     var dsMeasurements = new DataSet();
-                    if (!IsVerification && !IsSync1DType)
+                    if (!IsVerification && !IsSync1DType && LicenseTypeId != 11)
                     {
                         dsMeasurements = DataAccessFactory.
                              Instance.
@@ -998,7 +1007,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, short LicenseTypeId = 0)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleVMeasurement";
@@ -1009,6 +1018,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
                     storedProc = "Report.GetSingle1DMeasurement_Avg";
                 }
+            }
+            if (LicenseTypeId == (short)ELicenseType.DLPPlus)
+            {
+                storedProc = "Report.GetSingleDLPPlusMeasurement";
+
             }
             Common.ImplementBusinessLogic(
                 () =>
@@ -2621,7 +2635,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                         )).ToList());
                     }
 
-                    if (LicenseTypeID == 2 || LicenseTypeID == 5 || LicenseTypeID == 12)//dlp and Sync4DCertification project and DLPMultiColor
+                    if (LicenseTypeID == 2 || LicenseTypeID == 5 || LicenseTypeID == 12 || LicenseTypeID == 11)//dlp and Sync4DCertification project and DLPMultiColor AND DLPPLUS
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                          measurement.MeasurementPatches.

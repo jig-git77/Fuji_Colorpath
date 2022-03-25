@@ -128,7 +128,7 @@ public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
             return 0;
         }
 
-        public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId)
+        public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId, int LicenseTypeID)
         {
             return new List<Entity.CPSyncV.MetricSum>();
         }

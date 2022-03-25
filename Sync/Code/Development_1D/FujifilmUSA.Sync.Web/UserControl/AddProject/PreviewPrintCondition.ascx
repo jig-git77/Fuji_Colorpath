@@ -343,7 +343,7 @@
                 <div id="Div_Presets" runat="server"  style="display: block;">
                     <div class="section_small_top">
                         &nbsp;</div>
-                    <div class="section_small_middle">
+                    <div class="section_small_middle" id="dvOptionPresetSmallMiddle" runat="server">
                         <div class="combopart" id="dvOptionPreset" runat="server">
                             <div class="header">
                                 <div class="content">

@@ -26,7 +26,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
-            _viewDeviceFamilyProfilerOption.MetricSumTargetValues = projectBusiness.GetMetricSumTargetValues(_viewDeviceFamilyProfilerOption.MetricTargetPresetId);
+            _viewDeviceFamilyProfilerOption.MetricSumTargetValues = projectBusiness.GetMetricSumTargetValues(_viewDeviceFamilyProfilerOption.MetricTargetPresetId, _viewDeviceFamilyProfilerOption.LicenseTypeId);
         }
 
         public void GetPrintStandardTVI()

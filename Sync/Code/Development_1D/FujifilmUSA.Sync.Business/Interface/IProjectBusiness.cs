@@ -34,7 +34,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Project> GetProjectsForImportMeasurement(int deviceId, int LicenseTypeID, int CurrentProjectID);
         List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int CurrentProjectID);
         int ImportMeasurements(int MeasurementID, int OptimizeRunID,int LicenseTypeID, int UserID);
-        List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId);
+        List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId, int LicenseTypeID);
         List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId);
         List<Entity.CPSync1D.ProjectTargetDensity> GetPrintStandardDensity(int printStandardTypeId);
         List<Entity.CPSync1D.ProjectTargetHueAngle> GetPrintStandardHueAngle(int printStandardTypeId);

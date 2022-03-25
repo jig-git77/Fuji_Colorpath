@@ -1,0 +1,671 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Single Measurement Report Process</title>
+    <link href="#csspath#" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+    <!--------------------------------------- : Page 0 - Front Page : ------------------------------------------------>
+    <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+        <tr>
+            <td align="center">
+                <table style="width: 660px" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr style="height:187px;"><td></td></tr>
+                    <tr>
+                        <td align="right">
+                            <img src="##LOGOIMAGES##login_logo.png" style="width: 485px; height: 94px" />
+                        </td>
+                    </tr>
+                    <tr style="height:550px; overflow:hidden">
+                        <td valign="top">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr style="height:45px;">
+                                    <td style="width:50%;"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="padding-right:10px;"> <img src="##IMAGES##G7_logo_web.gif" style="width: 92px; height: 50px" /></td>
+                                    <td class="Cover-Title">
+                                        ###ReportName###<br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="Cover-Subtitle-1">
+                                        <br />
+                                        <br />
+                                        ###CompanyName###<br />
+                                        ###BranchName###<br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="color: Green;">
+                                        _____________________________________________
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="Cover-Subtitle-2">
+                                        <br />
+                                        <br />
+                                        ###PressName###<br />
+                                        ###ProjectName### (##RunNo##)<br />
+                                        <br />
+                                        ###CurrentDate###
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style=" vertical-align:middle ; color :Black; font-size :10px; font-family : Arial; padding : 0 0 0 30px;">
+                          &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style=" vertical-align:middle ; color :Black; font-size :10px; font-family : Arial; padding : 0 0 0 30px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!--------------------------------------- : Page 1 - Front Page : ------------------------------------------------>
+    <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+        <tr>
+            <td align="center">
+                <table style="width: 660px" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr style="height:61px;">
+                        <td>
+                            <img alt="" src="##IMAGES##FujiFilm.png" width="180px" />
+                        </td>
+                        <td>
+                            <img alt="" src="##IMAGES####ReportTitle##.png" width="306px" />
+                        </td>
+                        <td style="vertical-align:middle;">
+                            <img alt="" src="##IMAGES##logo-report.png" width="203px" />
+                        </td>
+                    </tr>
+                    <tr style="height:770px; overflow:hidden" =">
+                        <td colspan="3" valign="top" style="padding-left:35px; padding-right:20px;">
+                            <br />
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td colspan="3">
+                                        <p class="Header_1">
+                                            ###MeasurementType###
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:49%;">
+
+                                        <div id="_idContainer003">
+                                            <p class="Header_1">Project Description</p>
+                                        </div>
+                                        <div id="_idContainer004" class="Basic-Text-Frame">
+                                            <table width="100%" id="table001" class="Metadata-Table">
+                                                <colgroup>
+                                                    <col class="_idGenTableRowColumn-1" />
+                                                    <col class="_idGenTableRowColumn-2" />
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Device</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###Device###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Print Condition</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###ProjectName###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Job:</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###JobName###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Timestamp</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###TimeStamp###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Location</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###Location###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Technician</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###Technician###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="_idContainer005" class="Basic-Text-Frame">
+                                            <br /><br /><p class="Header_1">Measurement Setup</p>
+                                        </div>
+                                        <div id="_idContainer006" class="Basic-Text-Frame">
+                                            <table width="100%" id="table002" class="Metadata-Table">
+                                                <colgroup>
+                                                    <col class="_idGenTableRowColumn-1" />
+                                                    <col class="_idGenTableRowColumn-2" />
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Measurement Device</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###MeasurementDevice###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Serial Number</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###SerialNumber###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">∆E Type</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###DeltaEFormula###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">UV Mode</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###UVMode###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Base Chart</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###DLPChart###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Optimization Chart</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###OptiChart###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </td>
+                                    <td style="width:2%;"></td>
+                                    <td valign="top" style="width:49%;">
+                                        <div id="_idContainer009" class="Basic-Text-Frame">
+                                            <p class="Header_1">Print Condition</p>
+                                        </div>
+                                        <div id="_idContainer010" class="Basic-Text-Frame">
+                                            <table width="100%" id="table003" class="Metadata-Table">
+                                                <colgroup>
+                                                    <col class="_idGenTableRowColumn-1" />
+                                                    <col class="_idGenTableRowColumn-2" />
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Print Target</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###PrintTarget###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Substrate</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###Media###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Colorant</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###Colorant###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">RIP Settings</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###RipSettings###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-3">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Profiler Preset</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###ProfilerPreset###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">Metric Preset</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red">###MetricPreset###</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text-Bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</p>
+                                                        </td>
+                                                        <td class="Metadata-Table Green">
+                                                            <p class="Body-Text"><span class="Red"></span></p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="_idContainer007" class="Basic-Text-Frame">
+                                            <br /><br /><p class="Header_1">Notes</p>
+                                        </div>
+                                        <div id="_idContainer008" style="background-color:#b6ddc7;">
+                                            <p class="Body-Text" style="padding-left:4px;"><span class="Red">###Notes###</span></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!--------------------------------------- : Page 2 - Front Page : ------------------------------------------------>
+    <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+        <tr>
+            <td align="center">
+                <table style="width: 660px" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr style="height:61px;">
+                        <td>
+                            <img alt="" src="##IMAGES##FujiFilm.png" width="180px" />
+                        </td>
+                        <td>
+                            <img alt="" src="##IMAGES####ReportTitle##.png" width="306px" />
+                        </td>
+                        <td style="vertical-align:middle;">
+                            <img alt="" src="##IMAGES##logo-report.png" width="203px" />
+                        </td>
+                    </tr>
+                    <tr style="height:770px; overflow:hidden" =">
+                        <td colspan="3" valign="top" style="padding-left:35px; padding-right:0px;">
+                            <br />
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="width:49%;">
+                                        <div id="_idContainer013" class="Basic-Text-Frame">
+                                            <p class="Header_1">Metrics Summary</p>
+                                        </div>
+                                        <div id="_idContainer014" class="_idGenObjectStyleOverride-1">
+                                            <table width="100%">
+                                                <tr>
+                                                    <td style="width:50%;">
+                                                        <table id="table005" class="Metadata-Table" =">
+                                                            <colgroup>
+                                                                <col class="_idGenTableRowColumn-7" />
+                                                                <col class="_idGenTableRowColumn-8" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                            </colgroup>
+
+                                                            <thead>
+                                                                <tr class="Metadata-Table _idGenTableRowColumn-title">
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold">Metric</p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center">Tol.</p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center">Actual</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                ###MetricsSummaryDetail###
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td style="width:2%;"></td>
+                                    <td valign="top" style="width:49%;"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" style="width:49%;">
+                                        <div id="_idContainer013" class="Basic-Text-Frame">
+                                            <p class="Header_1">G7 Grayscale Metrics</p>
+                                        </div>
+                                        <div id="_idContainer014" class="_idGenObjectStyleOverride-1">
+                                            <table width="100%">
+                                                <tr>
+                                                    <td style="width:50%;">
+                                                        <table id="table005" class="Metadata-Table" =">
+                                                            <colgroup>
+                                                                <col class="_idGenTableRowColumn-7" />
+                                                                <col class="_idGenTableRowColumn-8" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                            </colgroup>
+
+                                                            <thead>
+                                                                <tr class="Metadata-Table _idGenTableRowColumn-title">
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold">Metric</p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center">Tol.</p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center">Actual</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                ###DeltaSummaryDetail###
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td valign="top" style="width:50%;">
+                                                        <img class="_idGenObjectAttribute-1" src="###ResultSummary_DeltaImage###" alt="" style="width:100%;height:128px;margin-top:8px;" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div>
+                                            <br /><p class="Body-Text">G7 gray balance is a standardized scale of CMY percentages that should appear neutral to the eye relative to the paper, and can be calculated and measured in a* and b* values for each scale step. Red lines indicate tolerances.</p>
+                                        </div>
+                                    </td>
+                                    <td style="width:2%;"></td>
+                                    <td valign="top" style="width:49%;">
+                                        <div id="_idContainer020" class="Basic-Text-Frame">
+                                            <p class="Header_1">Gray ∆Ch</p>
+                                        </div>
+                                        <div class="_idGenObjectLayout-1">
+                                            <div id="_idContainer021" class="_idGenObjectStyleOverride-1">
+                                                <img class="_idGenObjectAttribute-1" src="###ResultSummary_DeltaChImage###" alt="" width="300px" height="70px" />
+                                            </div>
+                                        </div>
+                                        <div id="_idContainer022" class="Basic-Text-Frame">
+                                            <br /><p class="Header_1">Black ∆L</p>
+                                        </div>
+                                        <div class="_idGenObjectLayout-1">
+                                            <div id="_idContainer023" class="_idGenObjectStyleOverride-1">
+                                                <img class="_idGenObjectAttribute-1" src="###ResultSummary_BlackDeltaLImage###" alt="" width="300px" height="70px" />
+                                            </div>
+                                        </div>
+                                        <div id="_idContainer024" class="Basic-Text-Frame">
+                                            <br /><p class="Header_1">Gray ∆L</p>
+                                        </div>
+                                        <div class="_idGenObjectLayout-1">
+                                            <div id="_idContainer025" class="_idGenObjectStyleOverride-1">
+                                                <img class="_idGenObjectAttribute-1" src="###ResultSummary_GrayDeltaLImage###" alt="" width="300px" height="70px" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div>
+                                            <br /><p class="Body-Text">These three plots show weighted (blue) and non-weighted (black) values. The weighted values are required for Master G7 submissions, but non-weighted data can be more valuable for evaluating press alignment.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!--------------------------------------- : Page 3 - Front Page : ------------------------------------------------>
+    <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+        <tr>
+            <td align="center">
+                <table style="width: 660px" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr style="height:61px;">
+                        <td>
+                            <img alt="" src="##IMAGES##FujiFilm.png" width="180px" />
+                        </td>
+                        <td>
+                            <img alt="" src="##IMAGES####ReportTitle##.png" width="306px" />
+                        </td>
+                        <td style="vertical-align:middle;">
+                            <img alt="" src="##IMAGES##logo-report.png" width="203px" />
+                        </td>
+                    </tr>
+                    <tr style="height:770px; overflow:hidden" =">
+                        <td colspan="3" valign="top" style="padding-left:35px; padding-right:20px;">
+                            <br />
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td colspan="3">
+                                        <div id="Div2" class="Basic-Text-Frame">
+                                            <table width="100%">
+                                                <tr>
+                                                    <td style=" width: 400px;">
+                                                        <div>
+                                                            <p class="Header_1">Colorimetric Aims</p>
+                                                        </div>
+                                                        <table id="table007" class="Metadata-Table" width="100%">
+                                                            <colgroup>
+                                                                <col class="_idGenTableRowColumn-15" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                                <col class="_idGenTableRowColumn-9" />
+                                                            </colgroup>
+                                                            <thead>
+                                                                <tr class="Metadata-Table _idGenTableRowColumn-title-black">
+                                                                    <td class="Metadata-Table Substrate" />
+                                                                    <td class="Metadata-Table Green" colspan="3">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">Target</span></p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green" colspan="3">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">Actual</span></p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green" rowspan="2">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">∆E</span><span class="Body-Text-white">00</span><span class="Body-Text-white"> Tol.</span></p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green" rowspan="2">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">∆E</span><span class="Body-Text-white">00</span><span class="Body-Text-white"> </span><span class="Body-Text-white">Act.</span></p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="Metadata-Table _idGenTableRowColumn-title-black">
+                                                                    <td class="Metadata-Table Substrate" />
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">L*</span></p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">a*</span></p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">b*</span></p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">L*</span></p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">a*</span></p>
+                                                                    </td>
+                                                                    <td class="Metadata-Table Green">
+                                                                        <p class="Body-Text-Bold-Center"><span class="Body-Text-white">b*</span></p>
+                                                                    </td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                ###DeltaESummaryDetail###
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td valign="top">
+                                                        <div class="_idGenObjectLayout-1">
+                                                            <div id="Div6" class="_idGenObjectStyleOverride-1" style="padding-top:15px;">
+                                                                <div>
+                                                                    <p class="Header_1">###DeltaEFormula### Primary Aims</p>
+                                                                </div>
+                                                                <img class="_idGenObjectAttribute-1" src="###ResultSummary_DeltaEImage###" width="200px" height="175px" alt='Summary Delta' style="margin-top:15px;" />
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p class="Body-Text">Colorimetric aims are obtained from the characterized reference print condition chosen as the color target. Red lines indicate tolerances and green lines indicate the previous run.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:200px;">
+                                        <div id="Div3" class="Basic-Text-Frame">
+                                            <br /><p class="Header_1">a* b* Aims: Spider Plot</p>
+                                        </div>
+                                        <div id="Div4" class="Basic-Text-Frame gamutChart">
+                                            <img class="_idGenObjectAttribute-1" src="###TargetVersusActualAB###" height="190px" width="190px" alt='Target Versus Actual AB' />
+                                        </div>
+                                        <div id="Div5" class="Basic-Text-Frame">
+                                            <p class="Header_1">a* b* Aims: Actual vs Target</p>
+                                        </div>
+                                        <div id="Div11" class="Basic-Text-Frame gamutChart">
+                                            <img class="_idGenObjectAttribute-1" src="###ABComparison###" height="190px" width="190px" alt='Target Versus Actual AB' />
+                                        </div>
+                                        <div id="Div12" class="Basic-Text-Frame">
+                                            <p class="Header_1">L* Aims: Actual vs Target</p>
+                                        </div>
+                                        <div id="Div13" class="Basic-Text-Frame">
+                                            <img class="_idGenObjectAttribute-1" src="###LComparison###" height="44px" width="190px" alt='Target Versus Actual AB' />
+                                        </div>
+                                    </td>
+                                    <td style="width:5px;"></td>
+                                    <td valign="top">
+                                        <div id="Div7" class="Basic-Text-Frame">
+                                            <br /><p class="Header_1" style="padding-left:15px;">Gray Balance L*a*b*</p>
+                                        </div>
+                                        <div id="Div8" class="Basic-Text-Frame">
+                                            <table width="100%" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td style="width:60%;" valign="top">
+                                                        <img src="###ResultSummary_GrayLImage###" width="250px" height="107px" alt='Summary Delta'
+                                                             id='img4' />
+                                                    </td>
+                                                    <td style="width: 40%; padding-left: 8px; padding-right: 5px;" valign="top">
+                                                        <p class="Body-Text">
+                                                            <br/>These three plots show the lightness variation (L*) and any color casts in gray (a* and b*).
+                                                            <br /><br/>L* shows lightness — the lower the value the darker the color.
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:60%; padding-left:8px;" valign="top">
+                                                        <img src="###ResultSummary_GrayaImage###" width="250px" height="107px" alt='Summary Delta'
+                                                             id='img7' />
+                                                    </td>
+                                                    <td style="width: 40%; padding-left: 8px; padding-right: 5px;" valign="top">
+                                                        <p class="Body-Text"><br/><br/>a* shows the red-to-green hue axis. A positive value is red; a negative value is green.</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:60%; padding-left:8px;" valign="top">
+                                                        <img src="###ResultSummary_GraybImage###" width="250px" height="107px" alt='Summary Delta'
+                                                             id='img8' />
+                                                    </td>
+                                                    <td style="width: 40%; padding-left: 8px; padding-right: 5px;" valign="top">
+                                                        <p class="Body-Text"><br/><br/>b* shows the yellow-to-blue hue axis. A positive value is yellow; a negative value is blue.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:200px;"></td>
+                                    <td style="width:5px;"></td>
+                                    <td>
+                                        <div id="Div10" class="Basic-Text-Frame">
+                                            <table width="100%" cellpadding="0" cellspacing="0">
+
+                                                <tr>
+                                                    <td colspan="2" style="padding-left:15px;">
+                                                        <p class="Body-Text">IDEAlliance®, G7®, GRACoL® and SWOP® are registered trademarks of IDEAlliance.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

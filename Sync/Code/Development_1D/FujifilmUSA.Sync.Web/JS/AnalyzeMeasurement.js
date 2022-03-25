@@ -360,7 +360,12 @@ $(document).ready(function () {
             apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
             apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
             apiParameter.InkPaperDansityChart = Get_InkPaperChartDansityChartImage();
-            apiParameter.TVI_Summary_Chart = Get_TVISummaryDotGainChartImage();
+            if ($hdnCurrentDlpSubOperation != ELicenseType.DLPPlus) {
+                apiParameter.TVI_Summary_Chart = Get_TVISummaryDotGainChartImage();
+            }
+            else {
+                apiParameter.TVI_Summary_Chart = "";
+            }
             apiParameter.GrayBalanceDeltaCH_Chart = Get_GrayBalanceDelta_CH_ChartImage();
             apiParameter.GrayBalanceDeltaL_Chart = Get_GrayDelta_L_ChartImage();
             apiParameter.BlackBalanceDeltaL_Chart = Get_BlackDelta_L_ChartImage();
@@ -1106,6 +1111,9 @@ function BindReportImage() {
         if ($hdnSync1DType == 'True') {
             imagePath = 'Images/Sync1D Report_preview_G7.jpg';   //For Sync1D G7 Projects
         }
+        if ($hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+            imagePath = 'Images/G7DLPPlus Report_preview.jpg';   //For DLPPlus G7 Projects
+        }
     }
     else {          //ISO type OR ValidationType = 0 for Default View type
 
@@ -1585,7 +1593,7 @@ function BindMeasurementPatchDetails() {
                     grid.hideColumn(22);
                 }
                 //show measurement export button visible only for sys admin user
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
             }
@@ -2471,7 +2479,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
 
 
 
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
 
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var params = {
@@ -2831,6 +2839,7 @@ function BindInkPaperChartABComparision() {
         IsAverageOfMeasurements: $isAverageOfMeasurements,
         IsVerificationProject: $hdnVerification,
         IsSync1DTypeProject: $hdnSync1DType,
+        licenseTypeId: $hdnCurrentDlpSubOperation,
         fromDeltaE: $selectedDeltaE,
     };
 
@@ -2985,7 +2994,8 @@ function BindDeltaSummaryStatesChart() {
         IsVerificationProject: $hdnVerification,
         IsSync1DTypeProject: $hdnSync1DType,
         fromDeltaE: $selectedDeltaE,
-        validationType: $hdnValidationType
+        validationType: $hdnValidationType,
+        licenseTypeId: $hdnCurrentDlpSubOperation
     };
 
     var ajaxParameter = {
@@ -3720,7 +3730,7 @@ function PopulateInkPaperChartABComparision() {
     var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
 
 
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
         maxNum = Math.max.apply(Math, axis) + 1;    //get the max ΔE with +1
         var DeltaLimitArray = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔELimit; });
         maxDeltaLimit = Math.max.apply(Math, DeltaLimitArray) + 1
@@ -3773,7 +3783,7 @@ function PopulateInkPaperChartABComparision() {
             visual: function (e) {
                 var visual = e.createVisual();
                 //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                     if (e.series.index == 0) {
                         var axis = e.sender.getAxis("valueAxis");
 
@@ -3869,12 +3879,12 @@ function PopulateInkPaperChartABComparision() {
                 toolTipString += item.value.toFixed(2);
 
                 //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                     toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
                 }
 
                 //-----For Sync1D projects, display Previous ΔE in tooltip also
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.PreAvgΔE > 0) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.PreAvgΔE > 0) {
                     toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
                     toolTipString += item.PreAvgΔE.toFixed(2);
                     toolTipString += "</td></tr>";
@@ -3892,7 +3902,7 @@ function PopulateInkPaperChartABComparision() {
         },
         render: function (e) {
             //-----For Sync1D projects or validation projects
-            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                 var chart = e.sender;
                 $.each(thrashHold.paths, function (index, obj) {
                     //set the line 
@@ -3973,7 +3983,7 @@ function PopulateInkPaperChartABComparision() {
                 circleDensity.options.stroke.color = "red";
                 visual.append(circleDensity);
 
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && e.dataItem.preAvgDensity > 0) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && e.dataItem.preAvgDensity > 0) {
                     var targetAvg = axis.slot(e.dataItem.preAvgDensity).origin.y;
                     var pathAvg = new kendo.drawing.Path({ stroke: { width: 1, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
                     visual.append(pathAvg);
@@ -4021,7 +4031,7 @@ function PopulateInkPaperChartABComparision() {
                 tooltipString = '<table><tr><td><center><b>' + item.title + '</b></center><td></tr>';
                 tooltipString += '<tr><td>' + _Resources._recActual + ":</b> " + item.density.toFixed(2) + '</td></tr>';
                 tooltipString += '<tr><td>' + _Resources._recTarget + ":</b> " + item.densityLimit.toFixed(2) + '</td></tr>';
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.preAvgDensity > 0) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.preAvgDensity > 0) {
                     tooltipString += '<tr><td>' + _Resources._recPrevious + ":</b> " + item.preAvgDensity.toFixed(2) + '</td></tr>';
                 }
                 tooltipString += '</table>';
@@ -5190,7 +5200,7 @@ function PopulateSummaryDeltaChart() {
             visual: function (e) {
                 var visual = e.createVisual();
                 //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                     if (e.series.index == 0) {
                         var axis = e.sender.getAxis("valueAxis");
 
@@ -5266,7 +5276,7 @@ function PopulateSummaryDeltaChart() {
         render: function (e) {
 
             //-----For Sync1D projects or validation projects
-            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                 var chart = e.sender;
                 $.each(thrashHold.paths, function (index, obj) {
                     //set the line 

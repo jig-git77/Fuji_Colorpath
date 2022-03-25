@@ -514,7 +514,8 @@ namespace FujifilmUSA.Sync.Entity
         ReportSingleMeasurement_ISO = 17,
         ReportSingleMeasurement_Default = 18,
         ReportScoringMeasurement_Default = 19,
-        ReportSpotColorProject = 20
+        ReportSpotColorProject = 20,
+        ReportSingleMeasurement_DLPPlus = 21
     }
 
     public enum ValidationRuleType

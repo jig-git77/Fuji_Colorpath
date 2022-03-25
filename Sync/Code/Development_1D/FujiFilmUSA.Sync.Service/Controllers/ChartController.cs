@@ -375,7 +375,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, string fromDeltaE)
+        public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, int? licenseTypeId, string fromDeltaE)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -421,6 +421,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    LicenseTypeId = licenseTypeId ?? 0;
                     this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
                     From_ΔE = fromDeltaE;
 
@@ -782,15 +783,18 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
 
+      
         [HttpGet]
         public ValidationMetrics[] GetValidationMetrics(int? MeasurementId, string fromDeltaE, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
-                                                           bool? IsSync1DTypeProject)
+                                                           bool? IsSync1DTypeProject, bool? IsSyncDlpPlusTypeProject)
         {
             ValidationMetrics[] matricsArray = null;
             try
             {
                 IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                 IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                IsSyncDLPPlusType = IsSyncDlpPlusTypeProject == null ? false : Convert.ToBoolean(IsSyncDlpPlusTypeProject);
+                IsSyncDLPPlusType = IsSyncDlpPlusTypeProject == null ? false : Convert.ToBoolean(IsSyncDlpPlusTypeProject);
                 this.MeasurementId = Convert.ToInt32(MeasurementId);
                 From_ΔE = fromDeltaE;
                 this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
@@ -1265,6 +1269,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsSyncDLPPlusType { get; set; }
         public bool IsDlpMultiColor { get; set; }
         public string CurrentRunname { get; set; }
+        public int LicenseTypeId { get; set; }
 
         #endregion
 
