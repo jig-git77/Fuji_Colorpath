@@ -246,7 +246,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <asp:TextBox ID="txtProfileDescription" runat="server" Width="120%" Height="100px"
+                                            <asp:TextBox ID="txtProfileDescription" runat="server" Width="117%" Height="100px"
                                                 TextMode="MultiLine" Enabled="False" ReadOnly="True"
                                                 Text="This preset is best used for analog devices ……"
                                                 meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
@@ -745,7 +745,7 @@
                                     </tr>
                                     <tr>
                                         <td valign="top" colspan="3">
-                                            <asp:TextBox ID="txtMPresetDescription" runat="server" Width="120%" Height="100px"
+                                            <asp:TextBox ID="txtMPresetDescription" runat="server" Width="99%" Height="100px"
                                                 TextMode="MultiLine" Enabled="False" ReadOnly="True"
                                                 Text="This preset is best used for analog devices ……"></asp:TextBox>
                                         </td>
