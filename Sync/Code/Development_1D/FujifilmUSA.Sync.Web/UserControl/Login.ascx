@@ -50,7 +50,7 @@
     function SendMessageToParent() {
         var bx = document.getElementById('<%=txtUserName.ClientID %>');
         if (bx != null && window.parent != null) {
-            window.parent.postMessage(bx.value, "http://www.softwebdemo.com/Softweb/ColorOrganizerDemo");
+             //window.parent.postMessage(bx.value, "http://www.softwebdemo.com/Softweb/ColorOrganizerDemo");
         }
         return true;
     }
