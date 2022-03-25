@@ -593,8 +593,8 @@
                                             meta:resourcekey="locSaveResource1" ></asp:Localize> 
                                              </span>
                                         </asp:LinkButton>
-                                        <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
-                                            PostBackUrl="~/ReferenceChartManagement.aspx">
+                                        <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" OnClick="lbtnCancel_Click">
+                                            <%--PostBackUrl="~/ReferenceChartManagement.aspx"--%>
                                                     <span> <asp:Localize runat="server" Text="Cancel" ID="locCancel" 
                                             meta:resourcekey="locCancelResource1" ></asp:Localize> 
                                             </span>

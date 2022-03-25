@@ -1020,6 +1020,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
         }
+        protected void lbtnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ReferenceChartManagement.aspx");
+        }
         #endregion
 
         #region Methods     
