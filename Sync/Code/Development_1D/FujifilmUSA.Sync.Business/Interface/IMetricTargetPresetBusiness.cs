@@ -5,9 +5,9 @@ using System.Data;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
-    public interface IMetricTargetPresetBusiness: ITaskBase
+    public interface IMetricTargetPresetBusiness : ITaskBase
     {
-       // List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, bool isVarification = false);
+        // List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, bool isVarification = false);
         //List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId);
 
         int InsertMetricTargetPreset(Entity.CPSyncV.MetricTargetPreset MetricTargetPreset);
@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         bool DeleteMetricTargetPreset(int metricTargetPresetId);
         List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPreset(int metricTargetPresetId, int currentUserId);
 
-        List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0);
+        List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0, bool IsDLPPlus = false, short LicenseTypeId = 0, int DeviceId = 0);
         List<Entity.CPSyncV.MetricSum> GetMetricSumList();
         List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPatchPreset(int metricTargetPresetId, int currentUserId);
         Dictionary<int, string> BindChartPatchList(int ReferenceChartTypeId);

@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
             metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
-            _viewAddMetricTargetPreset.ReferenceChartType = metricTargetPresetBusiness.GetReferenceChartTypeList(0,0,0,0,_viewAddMetricTargetPreset.InstrumentId);
+            _viewAddMetricTargetPreset.ReferenceChartType = metricTargetPresetBusiness.GetReferenceChartTypeList(0, 0, 0, 0, _viewAddMetricTargetPreset.InstrumentId, false, 0, 0);
         }
 
         public void InstrumentTypeList()

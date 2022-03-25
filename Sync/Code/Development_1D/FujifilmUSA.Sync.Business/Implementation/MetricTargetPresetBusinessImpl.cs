@@ -6,11 +6,11 @@ using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.CustomExceptions;
-using System.Xml.Linq;    
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
-    public class MetricTargetPresetBusinessImpl: IMetricTargetPresetBusiness
+    public class MetricTargetPresetBusinessImpl : IMetricTargetPresetBusiness
     {
         #region  IMetricTargetPresetBusiness Members
 
@@ -127,13 +127,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return metricTargetPresets;
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeId = 0)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeId = 0, bool IsDLPPlus = false, short LicenseTypeId = 0, int DeviceId = 0)
         {
             var presetList = new List<ReferenceChartType>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] {MeasurementDeviceID, ChartDisplayType, ProjectTypeId, MetricTargetPresetID, InstrumentTypeId });
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { MeasurementDeviceID, ChartDisplayType, ProjectTypeId, MetricTargetPresetID, InstrumentTypeId, IsDLPPlus, LicenseTypeId, DeviceId });
                     if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(

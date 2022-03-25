@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Entity.CPSyncV.MetricTargetPreset>();
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0, bool IsDLPPlus = false, short LicenseTypeId = 0, int DeviceId = 0)
         {
             return new List<ReferenceChartType>();
         }
