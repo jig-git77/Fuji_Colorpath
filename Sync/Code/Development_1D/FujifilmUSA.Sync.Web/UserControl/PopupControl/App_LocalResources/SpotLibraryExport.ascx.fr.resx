@@ -171,4 +171,10 @@
   <data name="locInkPoolIDResource1.Text" xml:space="preserve">
     <value>Ink Pool ID: </value>
   </data>
+  <data name="PackZResource1.Text" xml:space="preserve">
+    <value>PackZ</value>
+  </data>
+  <data name="locBookNameResource1.Text" xml:space="preserve">
+    <value>Book Name:</value>
+  </data>
 </root>

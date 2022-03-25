@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             {
                 hdnSpotProjectIDs.Value = Convert.ToString(Request.QueryString["SpotProjectIds"]);
             }
-            
+
         }
         #endregion
 
@@ -57,6 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trCalderaRow2.Visible = true;
                 trCaldera2Row1.Visible = false;
                 trXMF.Visible = false;
+                trPackZ.Visible = false;
             }
             else if (cmbCMYKLibrary.SelectedValue.ToString() == "2")//Caldera2 option
             {
@@ -64,6 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trCalderaRow2.Visible = true;
                 trCaldera2Row1.Visible = true;
                 trXMF.Visible = false;
+                trPackZ.Visible = false;
             }
             else if (cmbCMYKLibrary.SelectedValue.ToString() == "4")//XMF option
             {
@@ -71,6 +73,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trCalderaRow2.Visible = false;
                 trCaldera2Row1.Visible = false;
                 trXMF.Visible = true;
+                trPackZ.Visible = false;
+            }
+            else if (cmbCMYKLibrary.SelectedValue.ToString() == "5")//PackZ option
+            {
+                trCalderaRow1.Visible = false;
+                trCalderaRow2.Visible = false;
+                trCaldera2Row1.Visible = false;
+                trXMF.Visible = false;
+                trPackZ.Visible = true;
             }
             else//ColorGate option
             {
@@ -78,8 +89,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trCalderaRow2.Visible = false;
                 trCaldera2Row1.Visible = false;
                 trXMF.Visible = false;
+                trPackZ.Visible = false;
             }
-           
+
         }
 
 

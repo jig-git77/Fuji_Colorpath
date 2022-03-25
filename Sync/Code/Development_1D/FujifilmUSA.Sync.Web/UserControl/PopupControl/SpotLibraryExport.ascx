@@ -41,7 +41,8 @@
                 Quality: $('#txtQuality').val(),
                 InkPoolID: $('#txtInkPoolIOD').val(),
                 Comment: $('#txtComment').val(),
-                SpotProjectIDs: $('#hdnSpotProjectIDs').val()
+                SpotProjectIDs: $('#hdnSpotProjectIDs').val(),
+                BookName: $('#txtBookName').val()
             }
 
             var ajaxParameter = {
@@ -111,7 +112,7 @@
 
             if ($("#txtFileName").val() == "") {
                 //var spanError = $("#txtFileName").parent("div").next('div').find('span')[1];
-                var requiedFileName = $('#<%=rfvtxtFileName.ClientID%>');                                
+                var requiedFileName = $('#<%=rfvtxtFileName.ClientID%>');
                 var spanError = $("#txtFileName").parent("div").next('div').find(requiedFileName);
                 isSuccess = false;
                 //$("#txtFileName").parent("div").next('div').find('span')[1].show();
@@ -124,8 +125,8 @@
                 isSuccess = false;
                 //$("#txtFileName").parent("div").next('div').find('span')[0].show();
                 //var spanError = $("#txtFileName").parent("div").next('div').find('span')[0];
-                var blankSpaceValidationFileName = $('#<%=revtxtFileName.ClientID%>');                                
-                var spanError = $("#txtFileName").parent("div").next('div').find(blankSpaceValidationFileName);                
+                var blankSpaceValidationFileName = $('#<%=revtxtFileName.ClientID%>');
+                var spanError = $("#txtFileName").parent("div").next('div').find(blankSpaceValidationFileName);
                 $(spanError).show();
             }
 
@@ -165,6 +166,12 @@
                 if ($("#txtComment").val() == "") {
                     isSuccess = false;
                     $("#txtComment").parent("div").next('div').find('span').show();
+                }
+            }
+            if (type == "5") {
+                if ($("#txtBookName").val() == "") {
+                    isSuccess = false;
+                    $("#txtBookName").parent("div").next('div').find('span').show();
                 }
             }
         }
@@ -223,6 +230,7 @@
                                                         <asp:ListItem Text="Caldera2" meta:resourcekey="Caldera2Resource1" Value="2"></asp:ListItem>
                                                         <asp:ListItem Text="ColorGate" meta:resourcekey="ColorgateResource1" Value="3"></asp:ListItem>
                                                         <asp:ListItem Text="XMF" meta:resourcekey="XMFResource1" Value="4"></asp:ListItem>
+                                                        <asp:ListItem Text="PackZ" meta:resourcekey="PackZResource1" Value="5"></asp:ListItem>
                                                     </asp:DropDownList>
 
                                                 </div>
@@ -427,6 +435,37 @@
                                                 </div>
                                             </td>
                                         </tr>
+
+                                        <tr runat="server" id="trPackZ" visible="false">
+                                            <td>
+                                                <span>
+                                                    <asp:Localize runat="server" Text="Book Name: " ID="locBookName"
+                                                        meta:resourcekey="locBookNameResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtBookName" runat="server" Width="200px" Height="19px"
+                                                        MaxLength="50" Text="" ClientIDMode="Static"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvBookName" runat="server" Display="Dynamic" ControlToValidate="txtBookName"
+                                                        ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
+                                                        <ucValidationContainer:ValidationContainer ID="rfvBookNamenContainer" runat="server"
+                                                            ValidationMsg="Please enter book name." Size="200" ResourceValidationMsg="BookNameRequiredResource"/>
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="clear">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
