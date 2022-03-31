@@ -98,10 +98,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                         {
-                            if (SessionManager.Instance.CurrentProject.EnabledPaperScaling == false) //---If project has paper scalling enabled, then don't give option to import measurements
-                            {
-                                hdDisplayImport.Value = "yes";
-                            }
+                            //if (SessionManager.Instance.CurrentProject.EnabledPaperScaling == false) //---If project has paper scalling enabled, then don't give option to import measurements
+                            //{
+                                 hdDisplayImport.Value = "yes";
+                            //}
                         }
                     }
                 }
