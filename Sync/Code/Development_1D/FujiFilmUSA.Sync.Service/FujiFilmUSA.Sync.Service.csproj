@@ -16,7 +16,7 @@
     <RootNamespace>FujiFilmUSA.Sync.Service</RootNamespace>
     <AssemblyName>FujiFilmUSA.Sync.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -106,6 +106,7 @@
     <Content Include="Images\CPSPrintStandardBottomImage.jpg" />
     <Content Include="Images\FujiFilm.png" />
     <Content Include="Images\G7AlignmentReportTitle.png" />
+    <Content Include="Images\G7DLPPlusReportTitle.png" />
     <Content Include="Images\G7VAlignmentReportTitle.png" />
     <Content Include="Images\G7_logo_web.gif" />
     <Content Include="Images\header-left-img.gif" />
