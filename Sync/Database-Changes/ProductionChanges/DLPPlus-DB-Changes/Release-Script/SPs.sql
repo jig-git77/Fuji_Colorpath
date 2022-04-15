@@ -451,7 +451,7 @@ GO
 -- =============================================
 -- Author:		Dhruti Patel
 -- =============================================
-ALTER PROCEDURE [CPSync4DPlus].[GetChartData_InkPaper] 
+CREATE PROCEDURE [CPSync4DPlus].[GetChartData_InkPaper] 
 @MeasurementID   int   
 ,@From_ΔE NVARCHAR(20)
 AS  
@@ -855,7 +855,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [Report].[GetSingleDLPPlusMeasurement] 
+CREATE PROCEDURE [Report].[GetSingleDLPPlusMeasurement] 
  @MeasurementID   int  
 ,@From_ΔE  NVARCHAR(20)  
 ,@ProjectType int 
@@ -1136,7 +1136,7 @@ GO
 
 
 
-CREATE PROCEDURE [CPSync4DPlus].[CalculateMetrics]	
+ALTER PROCEDURE [CPSync4DPlus].[CalculateMetrics]	
 	@MeasurementID INT,
 	@UserID INT
 AS
@@ -1931,7 +1931,7 @@ GO
 
 
 
-CREATE PROCEDURE [CPSync4DPlus].[GetMeasurementDeltasByMeasurementID]  
+ALTER PROCEDURE [CPSync4DPlus].[GetMeasurementDeltasByMeasurementID]  
 @MeasurementID   int
 ,@From_ΔE NVARCHAR(20) 
 AS  
