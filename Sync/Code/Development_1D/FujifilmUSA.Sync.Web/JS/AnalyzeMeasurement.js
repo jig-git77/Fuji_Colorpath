@@ -1632,7 +1632,7 @@ function BindMeasurementPatchDetails() {
 
 
 
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
 
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var params = {
