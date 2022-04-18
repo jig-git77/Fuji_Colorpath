@@ -408,6 +408,7 @@ $(document).ready(function () {
             //End:
         }
         apiParameter.ProjectLicenseType = $hdnCurrentProjectLicenseType;
+        apiParameter.LicenceType = $hdnCurrentDlpSubOperation;
 
         var ajaxParameter = {
             type: "POST",
@@ -1640,7 +1641,9 @@ function BindMeasurementPatchDetails() {
             IsVerificationProject: $hdnVerification,
             IsSync1DTypeProject: $hdnSync1DType,
             fromDeltaE: $selectedDeltaE,
-            IsAverageOfMeasurements: $isAverageOfMeasurements
+            IsAverageOfMeasurements: $isAverageOfMeasurements,
+            IsSyncDlpPlusTypeProject: $hdnSyncDlpPlusType
+
         };
 
         $divMeasurementPatchDetails.find("#ddlMatricSum").kendoDropDownList({
@@ -2487,7 +2490,8 @@ function BindMeasurementPatchDetailsForMultiColor() {
             IsVerificationProject: $hdnVerification,
             IsSync1DTypeProject: $hdnSync1DType,
             fromDeltaE: $selectedDeltaE,
-            IsAverageOfMeasurements: $isAverageOfMeasurements
+            IsAverageOfMeasurements: $isAverageOfMeasurements,
+            IsSyncDlpPlusTypeProject: $hdnSyncDlpPlusType
         };
 
         $divMeasurementPatchDetails.find("#ddlMatricSum").kendoDropDownList({
