@@ -75,16 +75,16 @@
                             Exit Sub
                         End If
 
-                        'strFileContent = My.Computer.FileSystem.ReadAllText("c:\Targets.txt")
-                        'strFileContent = My.Computer.FileSystem.ReadAllText("C:\Users\shah_c\Desktop\06232010104733691.txt")
+                    'strFileContent = My.Computer.FileSystem.ReadAllText("c:\Targets.txt")
+                    'strFileContent = My.Computer.FileSystem.ReadAllText("C:\Users\shah_c\Desktop\06232010104733691.txt")
 
-                        'Save the posted measurement file
-                        If Not IsNothing(strFileContent) AndAlso strFileContent <> String.Empty Then
-                            SaveMeasurementFile(strFileContent)
-                        End If
+                    'Save the posted measurement file
+                    'If Not IsNothing(strFileContent) AndAlso strFileContent <> String.Empty Then
+                    '    SaveMeasurementFile(strFileContent)
+                    'End If
 
-                        'Parse the measurement File
-                        ParseMeasurementData(strFileContent)
+                    'Parse the measurement File
+                    ParseMeasurementData(strFileContent)
 
                         Response.Write("OK")
                   End If
@@ -252,7 +252,7 @@
                     Case "BEGIN_DATA_TOLERANCES","END_DATA_TOLERANCES","BEGIN_DATA_ACTUAL_VALUES", "END_DATA_ACTUAL_VALUES", "SAMPLE_ID"
                         Exit Sub
                 End Select
-    
+
                 If Fields.Contains("ORIGINATOR") = True Then
                     If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
                         objColorMeasurement.Originator = Fields(1)
@@ -261,14 +261,14 @@
                 ElseIf Fields.Contains("CREATED") = True Then
                     Dim dt As DateTime
                     'date received is in European Format
-                    dt = DateTime.Parse(Fields(1),System.Globalization.CultureInfo.GetCultureInfo("en-GB"))
+                    dt = DateTime.Parse(Fields(1), System.Globalization.CultureInfo.GetCultureInfo("en-GB"))
                     objColorMeasurement.MeasurementDT = dt
                     Return
                 ElseIf Fields.Contains("CREATEDGMT") = True Then
                     Dim dt As DateTime
-                    dt = DateTime.Parse(Fields(1),System.Globalization.CultureInfo.GetCultureInfo("en-GB"))
+                    dt = DateTime.Parse(Fields(1), System.Globalization.CultureInfo.GetCultureInfo("en-GB"))
                     If IsDate(dt) = True Then
-                         objColorMeasurement.MeasurementGMT = dt        
+                        objColorMeasurement.MeasurementGMT = dt
                     End If
                     Return
                 ElseIf Fields.Contains("TARGET_NAME") = True Then
@@ -276,7 +276,7 @@
                     Return
                 ElseIf Fields.Contains("PROOF_SUPPLIER") = True Then
                     If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        objColorMeasurement.ProofSupplier = Fields(1)        
+                        objColorMeasurement.ProofSupplier = Fields(1)
                     End If
                     Return
                 ElseIf Fields.Contains("TARGET_FILE") = True Then
@@ -288,11 +288,11 @@
                     objColorMeasurement.DongleNumber = Fields(1)
                     Return
                 ElseIf Fields.Contains("GUID") = True Then
-                    objColorMeasurement.Measurement_GUID =  New Guid(Fields(1).Replace("""", String.Empty))
-                    Return        
-                ElseIf ( (InStr(CurrentRow,"ID" & vbTab,CompareMethod.Binary)> 0 ) OR ( InStr(CurrentRow,"ID  " & vbTab,CompareMethod.Binary) > 0 ) ) AndAlso ( InStr(CurrentRow,"SAMPLE_NAME",CompareMethod.Text) = 0   ) Then
-                    objColorMeasurement.CPVClientID =  Convert.ToInt32(Fields(1))
-                    Return               
+                    objColorMeasurement.Measurement_GUID = New Guid(Fields(1).Replace("""", String.Empty))
+                    Return
+                ElseIf ((InStr(CurrentRow, "ID" & vbTab, CompareMethod.Binary) > 0) Or (InStr(CurrentRow, "ID  " & vbTab, CompareMethod.Binary) > 0)) AndAlso (InStr(CurrentRow, "SAMPLE_NAME", CompareMethod.Text) = 0) Then
+                    objColorMeasurement.CPVClientID = Convert.ToInt32(Fields(1))
+                    Return
                 ElseIf Fields.Contains("DE_FORMULA") = True Then
                     If Fields(1) = "dE" Then
                         objColorMeasurement.dEType = ColorMeasurement.DeltaEType.LAB
@@ -304,7 +304,7 @@
                         objColorMeasurement.dEType = ColorMeasurement.DeltaEType.CMC
                     End If
                     Return
-                ElseIf Instr(CurrentRow,"PAPER_LIMIT",CompareMethod.Text) > 0  Then
+                ElseIf Instr(CurrentRow, "PAPER_LIMIT", CompareMethod.Text) > 0 Then
                     If Fields.Length > 1 Then
                         Dim charSeparators() As Char = {" "c}
                         Dim Values As String() = Fields(1).Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
@@ -314,434 +314,502 @@
                         End If
                     End If
                     Return
-                ElseIf (Instr(CurrentRow,"AVERAGE_LIMIT", CompareMethod.Text) > 0) AndAlso ( InStr(CurrentRow,"GRAY",CompareMethod.Text) = 0  )  Then
+                ElseIf Instr(CurrentRow, "GRAY_AVERAGE_LIMIT_DH", CompareMethod.Text) > 0 Then
                     If Fields.Length > 1 Then
-                         Dim charSeparators() As Char = {" "c}
-                         Dim Values As String()  = Fields(1).Split(charSeparators,StringSplitOptions.RemoveEmptyEntries)
-                         objColorMeasurement.Targ_Avg_dE = Convert.ToDecimal(Values(0))
-                         If Values.Length > 1 Then
-                            objColorMeasurement.TargStrict_Avg_dE = Convert.ToDecimal(Values(1))
-                         End If
-                    End IF
-                    Return
-                ElseIf InStr(CurrentRow,"MAXIMUM_LIMIT", CompareMethod.Text) > 0 Then
-                    If Fields.Length > 1 Then
-                         Dim charSeparators() As Char = {" "c}
-                         Dim Values As String()  = Fields(1).Split(charSeparators,StringSplitOptions.RemoveEmptyEntries)
-                         objColorMeasurement.Targ_Maximum_dE = Convert.ToDecimal(Values(0))
-                         If Values.Length > 1 Then
-                            objColorMeasurement.TargStrict_Maximum_dE = Convert.ToDecimal(Values(1))
-                         End If
-                    End If
-                    Return
-                ElseIf (InStr(CurrentRow,"PRIMARY_LIMIT", CompareMethod.Text)> 0 ) AndAlso (InStr(CurrentRow, "_DH", CompareMethod.Text) =  0 )Then
-                    If Fields.Length > 1 Then
-                         Dim charSeparators() As Char = {" "c}
-                         Dim Values As String()  = Fields(1).Split(charSeparators,StringSplitOptions.RemoveEmptyEntries)
-                         objColorMeasurement.Targ_Primary_dE = Convert.ToDecimal(Values(0))
-                         If Values.Length > 1 Then
-                            objColorMeasurement.TargStrict_Primary_dE = Convert.ToDecimal(Values(1))
-                         End If
-                    End If
-                    Return
-                ElseIf InStr(CurrentRow,"PRIMARY_LIMIT_DH", CompareMethod.Text) > 0  Then
-                    If Fields.Length > 1 Then
-                         Dim charSeparators() As Char = {" "c}
-                         Dim Values As String()  = Fields(1).Split(charSeparators,StringSplitOptions.RemoveEmptyEntries)
-                         objColorMeasurement.Targ_Primary_DH = Convert.ToDecimal(Values(0))
-                         If Values.Length > 1 Then
-                            objColorMeasurement.TargStrict_Primary_DH = Convert.ToDecimal(Values(1))
-                         End If
-                    End If
-                    Return
-                ElseIf Instr(CurrentRow,"GRAY_AVERAGE_LIMIT_DH",CompareMethod.Text) > 0 Then
-                    If Fields.Length > 1 Then
-                         Dim charSeparators() As Char = {" "c}
-                         Dim Values As String()  = Fields(1).Split(charSeparators,StringSplitOptions.RemoveEmptyEntries)
-                         objColorMeasurement.Targ_Gray_DH = Convert.ToDecimal(Values(0))
-                         If Values.Length > 1 Then
+                        Dim charSeparators() As Char = {" "c}
+                        Dim Values As String() = Fields(1).Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
+                        objColorMeasurement.Targ_Gray_DH = Convert.ToDecimal(Values(0))
+                        If Values.Length > 1 Then
                             objColorMeasurement.TargStrict_Gray_DH = Convert.ToDecimal(Values(1))
-                         End If
+                        End If
                     End If
                     Return
+                ElseIf (Instr(CurrentRow, "AVERAGE_LIMIT", CompareMethod.Text) > 0) AndAlso (InStr(CurrentRow, "GRAY", CompareMethod.Text) = 0) Then
+                    If Fields.Length > 1 Then
+                        Dim charSeparators() As Char = {" "c}
+                        Dim Values As String() = Fields(1).Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
+                        objColorMeasurement.Targ_Avg_dE = Convert.ToDecimal(Values(0))
+                        If Values.Length > 1 Then
+                            objColorMeasurement.TargStrict_Avg_dE = Convert.ToDecimal(Values(1))
+                        End If
+                    End If
+                    Return
+                ElseIf InStr(CurrentRow, "MAXIMUM_LIMIT", CompareMethod.Text) > 0 Then
+                    If Fields.Length > 1 Then
+                        Dim charSeparators() As Char = {" "c}
+                        Dim Values As String() = Fields(1).Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
+                        objColorMeasurement.Targ_Maximum_dE = Convert.ToDecimal(Values(0))
+                        If Values.Length > 1 Then
+                            objColorMeasurement.TargStrict_Maximum_dE = Convert.ToDecimal(Values(1))
+                        End If
+                    End If
+                    Return
+                ElseIf InStr(CurrentRow, "PRIMARY_LIMIT_DH", CompareMethod.Text) > 0 Then
+                    If Fields.Length > 1 Then
+                        Dim charSeparators() As Char = {" "c}
+                        Dim Values As String() = Fields(1).Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
+                        objColorMeasurement.Targ_Primary_DH = Convert.ToDecimal(Values(0))
+                        If Values.Length > 1 Then
+                            objColorMeasurement.TargStrict_Primary_DH = Convert.ToDecimal(Values(1))
+                        End If
+                    End If
+                    Return
+                ElseIf (InStr(CurrentRow, "PRIMARY_LIMIT", CompareMethod.Text) > 0) AndAlso (InStr(CurrentRow, "_DH", CompareMethod.Text) = 0) Then
+                    If Fields.Length > 1 Then
+                        Dim charSeparators() As Char = {" "c}
+                        Dim Values As String() = Fields(1).Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
+                        objColorMeasurement.Targ_Primary_dE = Convert.ToDecimal(Values(0))
+                        If Values.Length > 1 Then
+                            objColorMeasurement.TargStrict_Primary_dE = Convert.ToDecimal(Values(1))
+                        End If
+                    End If
+                    Return
+
+
                 ElseIf Fields.Contains("LIMIT_95%_QUANTILE") = True Then
                     objColorMeasurement.Targ_95PCT_Quantile = Convert.ToDecimal(Fields(1))
                     Return
                 ElseIf Fields.Contains("AVERAGE_LIMIT_OUTER_AREA") = True Then
                     objColorMeasurement.Targ_Avg_OuterArea = Convert.ToDecimal(Fields(1))
                     Return
-                
-                ElseIf (InStr(CurrentRow, "PAPER", CompareMethod.Binary) > 0  AndAlso InStr(CurrentRow,"PRINTER_PAPER") = 0 ) AndAlso IsNumeric(Fields(1)) = True Then
-                    If Fields.Length = 2  Then
-                         objColorMeasurement.Paper_dE = Convert.ToDecimal(Fields(1))
-                         Return
-                    End If
-                   
-                ElseIf Fields.Contains("AVERAGE") = True Then
-                    objColorMeasurement.AVG_dE = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("MAXIMUM") = True Then
-                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
-                    objColorMeasurement.MAX_dE = Convert.ToDecimal( Values(0) )
-                    If Values.Length = 2 Then
-                        objColorMeasurement.PatchMaxdE = Values(1)
-                    End If
-                    Return
-                ElseIf Fields.Contains("PRIMARY") = True Then
-                     Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
-                     objColorMeasurement.Primary_dE = Convert.ToDecimal(Values(0))
-                     If Values.Length   = 2 Then
-                        objColorMeasurement.PatchPrimarydE = Values(1)
-                     End If
-                     Return
-                ElseIf Fields.Contains("PRIMARY_MAX_DH") = True Then
-                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
-                    objColorMeasurement.MAX_Primary_DH = Convert.ToDecimal(Values(0))
-                    If Values.Length = 2 Then
-                        objColorMeasurement.PatchMaxdE = Values(1)
-                    End IF
-                    Return
-                ElseIf Fields.Contains("GRAY_AVERAGE_DH") = True Then
-                    objColorMeasurement.AVG_Gray_DH = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("95%_QUANTILE") = True Then
-                    objColorMeasurement.NineFive_Quantile = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("AVERAGE_OUTER_AREA") = True Then
-                    objColorMeasurement.Avg_OuterArea = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf (InStr(CurrentRow, "USER", CompareMethod.Binary) > 0 AndAlso InStr(CurrentRow,"_USER") = 0 AndAlso Instr(CurrentRow.ToLower(),"\user") = 0 ) Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        objColorMeasurement.User = Fields(1)
-                    End If
-                    Return
-                'ElseIf Fields.Contains("DEVICE") = True Then
-                '    If Fields.Length > 1 Then
-                '        Dim Values() As String = Fields(1).Trim.Split(CChar(" ")) 
-                '        objColorMeasurement.Instrument = Values(0)
-                '        objColorMeasurement.Instrument_SerialNum = Values(1)       
-                '    End If
 
-                '    Return
-                ElseIf Fields.Contains("MEASUREMENT") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        If Fields.Contains("Observer") = True Then
-                            Dim Values() As String = Fields(1).Trim.Split(CChar(","))
-                            objColorMeasurement.ObserverType = Values(0)
-                            objColorMeasurement.Illuminant = Values(1)
-                            objColorMeasurement.Filter = Values(2)
-                            Return
+                    '------------------New code updated on 5/4/22 on Parser1 service for Taskero Prod-------------------
+
+                    'ElseIf (InStr(CurrentRow, "PAPER", CompareMethod.Binary) > 0 AndAlso InStr(CurrentRow, "PRINTER_PAPER") = 0) AndAlso IsNumeric(Fields(1)) = True Then
+                    '    If Fields.Length = 2  Then
+                    '         objColorMeasurement.Paper_dE = Convert.ToDecimal(Fields(1))
+                    '         Return
+                    '    End If
+
+
+                ElseIf (InStr(CurrentRow, "PAPER", CompareMethod.Text) > 0) Then
+                    If (InStr(CurrentRow, "PRINTER_PAPER") = 0) Then
+                        Dim MidWords As String
+                        MidWords = LTrim(Mid(CurrentRow, 6))
+                        Fields = {Mid(CurrentRow, 1, 5), MidWords}
+                        Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
+                        If (IsNumeric(Values(0)) = True) Then
+                            If Values.Length = 2 Then
+                                objColorMeasurement.Paper_dE = Convert.ToDecimal(Values(0))
+
+                            End If
                         End If
                     End If
-                ElseIf Fields.Contains("CUSTOMER") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        objColorMeasurement.Customer = Fields(1)
-                    End If
+                    Return
 
-                    Return
-                ElseIf Fields.Contains("JOB") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        objColorMeasurement.Job = Fields(1)
-                    End If
-                    Return
-                ElseIf Fields.Contains("PROOFER") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        objColorMeasurement.Proofer = Fields(1)
-                    End If
-                    Return
-                ElseIf Fields.Contains("INFO ") = True Then
-                    If Fields.Length > 1 Then
-                        objColorMeasurement.Info = Fields(1)
-                    End If
-
-                    Return
-                ElseIf Fields.Contains("PROOF_OK") = True Then
-                    If Convert.ToInt16(Fields(1)) = 0 Then
-                        objColorMeasurement.ProofSatus = ColorMeasurement.ProofStaus.Failed
-                    ElseIf Convert.ToInt16(Fields(1)) = 1 Then
-                        objColorMeasurement.ProofSatus = ColorMeasurement.ProofStaus.Caution
-                    Else
-                        objColorMeasurement.ProofSatus = ColorMeasurement.ProofStaus.Passed
-                    End If
-                    Return
-                ElseIf Fields.Contains("OUTPUT_SUBSTRATE") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        objColorMeasurement.Substrate = Fields(1)
-                    End If
-                    Return
-                ElseIf Fields.Contains("OUTPUT_SUBSTRATE_SKU") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.SubstrateSKU = Fields(1)
-                    End If
-                    Return
-                ElseIf Fields.Contains("OUTPUT_SUBSTRATE_BATCH") = True Then
-                    If Fields.Length > 1 Then
-                        objColorMeasurement.SubstrateBatch = Fields(1)
-                    End If
-                    Return
-                ElseIf Fields.Contains("OUTPUT_MANUFACTURER") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.PrinterMake = Fields(1)
-                    End If
-                    Return
-                ElseIf Fields.Contains("OUTPUT_MODEL") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        objColorMeasurement.PrinterModel = Fields(1)
-                    End If
-                    Return
-                ElseIf Fields.Contains("OUTPUT_SERIAL_NUMBER") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.PrinterSerialNum = Fields(1)
-                    End If
-                    Return
-                 ElseIf Fields.Contains("PRINTER_TIME") = True Then
-                    If Fields.Length = 2 AndAlso IsDate(Fields(1)) = True Then
-                         objColorMeasurement.PrinterTime = Convert.ToDateTime(Fields(1))
+                ElseIf (InStr(CurrentRow, "GRAY_AVERAGE_DH", CompareMethod.Text) > 0) Then
+                    Dim MidWords As String
+                    MidWords = LTrim(Mid(CurrentRow, 16))
+                    Fields = {Mid(CurrentRow, 1, 15), MidWords}
+                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
+                    If Fields.Contains("GRAY_AVERAGE_DH") = True Then
+                        objColorMeasurement.AVG_Gray_DH = Convert.ToDecimal(Values(0))
                     End If
                     Return
 
-                 ElseIf Fields.Contains("PRINTER_PAPER") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.PrinterPaper = Fields(1)
+                ElseIf (InStr(CurrentRow, "AVERAGE_OUTER_AREA", CompareMethod.Text) > 0) Then
+                    Dim MidWords As String
+                    MidWords = LTrim(Mid(CurrentRow, 19))
+                    Fields = {Mid(CurrentRow, 1, 18), MidWords}
+                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
+                    If Fields.Contains("AVERAGE_OUTER_AREA") = True Then
+                        objColorMeasurement.Avg_OuterArea = Convert.ToDecimal(Values(0))
                     End If
-                    Return
-                 ElseIf Fields.Contains("PRINTER_CC_TABLE") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.PrinterCCTable = Fields(1)
-                    End If
-                    Return
-                 ElseIf Fields.Contains("PRINTER_STATE") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.PrinterState = Fields(1)
-                    End If
-                    Return
-                 ElseIf Fields.Contains("PRINTER_ICC_TARGET") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.PrinterICCTarget = Fields(1)
-                    End If
-                    Return
-                  ElseIf Fields.Contains("PRINTER_USER") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.PrinterUser = Fields(1)
-                    End If
-                    Return
-                 ElseIf Fields.Contains("PRINTER_HOST") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                         objColorMeasurement.PrinterHost = Fields(1)
-                    End If
-                    Return
-                 ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab) > 0 Then
 
-                     If InStr(CurrentRow, "PRINTER_INK" & vbTab & "0", CompareMethod.Text) > 0 Then
-
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 0"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                         End With
-                         objColorMeasurement.InkLevels.Add(objInkLevel)
-                         Return
-
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "1", CompareMethod.Text) > 0 Then
-
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 1"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "2", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 2"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "3", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 3"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "4", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 4"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "5", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 5"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "6", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 6"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "5", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 5"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "6", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 6"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "7", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 7"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "8", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 8"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "9", CompareMethod.Text) > 0 Then
-                        Dim objInkLevel As New InkLevel()
-                        With objInkLevel
-                            .InkPos = "PRINTER_INK 9"
-                            .InkName = Fields(2)
-                            .CurrLevel = Convert.ToDecimal(Fields(3))
-                            .MaxLevel = Convert.ToDecimal(Fields(4))
-                            .Measurement_GUID = objColorMeasurement.Measurement_GUID
-                        End With
-                        objColorMeasurement.InkLevels.Add(objInkLevel)
-                        Return
-                     End If
-                ElseIf Fields.Contains("OUTPUT_RIP_TYPE") = True Then
-                    If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
-                        objColorMeasurement.RipType = Fields(1)
+                ElseIf (InStr(CurrentRow, "AVERAGE", CompareMethod.Text) > 0) Then
+                    Dim MidWords As String
+                    MidWords = LTrim(Mid(CurrentRow, 8))
+                    Fields = {Mid(CurrentRow, 1, 7), MidWords}
+                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
+                    If Fields.Contains("AVERAGE") = True Then
+                        objColorMeasurement.AVG_dE = Convert.ToDecimal(Values(0))
                     End If
                     Return
 
-                '*********************************************************
-                ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_C") = True Then
-                    objColorMeasurement.TargetDensity_C = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_M") = True Then
-                    objColorMeasurement.TargetDensity_M = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_Y") = True Then
-                    objColorMeasurement.TargetDensity_Y = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_K") = True Then
-                    objColorMeasurement.TargetDensity_K = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_THRESHOLD") = True Then
-                    objColorMeasurement.TargetDensity_Th = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_C") = True Then
-                    objColorMeasurement.TargetDotGain_C = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_M") = True Then
-                    objColorMeasurement.TargetDotGain_M = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_Y") = True Then
-                    objColorMeasurement.TargetDotGain_Y = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_K") = True Then
-                    objColorMeasurement.TargetDotGain_K = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_THRESHOLD") = True Then
-                    objColorMeasurement.TargetDotGain_Th = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_C") = True Then
-                    objColorMeasurement.TargetPrintContrast_C = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_M") = True Then
-                    objColorMeasurement.TargetPrintContrast_M = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_Y") = True Then
-                    objColorMeasurement.TargetPrintContrast_Y = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_K") = True Then
-                    objColorMeasurement.TargetPrintContrast_K = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_THRESHOLD") = True Then
-                    objColorMeasurement.TargetPrintContrast_Th = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_TRAP_R") = True Then
-                    objColorMeasurement.TargetTrap_R = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_TRAP_G") = True Then
-                    objColorMeasurement.TargetTrap_G = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_TRAP_B") = True Then
-                    objColorMeasurement.TargetTrap_B = Convert.ToDecimal(Fields(1))
-                    Return
-                ElseIf Fields.Contains("OUTPUT_TARGET_TRAP_THRESHOLD") = True Then
-                    objColorMeasurement.TargetTrap_Th = Convert.ToDecimal(Fields(1))
-                    Return
-                '***********************************************************
-                ElseIf Fields.Contains("LGOROWLENGTH") = True Then
-                    If Fields.Length = 2 Then
-                         objColorMeasurement.NumOfPatchLines = CType(Fields(1), Integer)
-                    Else
-                        Throw New Exception("Number of Patch Lines Not Found")
+                ElseIf (InStr(CurrentRow, "MAXIMUM", CompareMethod.Text) > 0) Then
+                    Dim MidWords As String
+                    MidWords = LTrim(Mid(CurrentRow, 8))
+                    Fields = {Mid(CurrentRow, 1, 7), MidWords}
+                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
+                    If Fields.Contains("MAXIMUM") = True Then
+                        objColorMeasurement.MAX_dE = Convert.ToDecimal(Values(0))
+                        If Values.Length = 2 Then
+                            objColorMeasurement.PatchMaxdE = Values(1)
+                        End If
                     End If
                     Return
-                ElseIf Fields.Contains("NUMBER_OF_SETS") = True Then
-                    objColorMeasurement.NumOfPatches = CType(Fields(1), Integer)
+
+                ElseIf (InStr(CurrentRow, "PRIMARY_MAX_DH", CompareMethod.Text) > 0) Then
+                    Dim MidWords As String
+                    MidWords = LTrim(Mid(CurrentRow, 15))
+                    Fields = {Mid(CurrentRow, 1, 14), MidWords}
+                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
+                    If Fields.Contains("PRIMARY_MAX_DH") = True Then
+                        objColorMeasurement.MAX_Primary_DH = Convert.ToDecimal(Values(0))
+                        If Values.Length > 1 Then
+                            objColorMeasurement.PatchMaxdE = Values(1)
+                        End If
+                    End If
+                    Return
+
+                ElseIf (InStr(CurrentRow, "PRIMARY", CompareMethod.Text) > 0) Then
+                    Dim MidWords As String
+                    MidWords = LTrim(Mid(CurrentRow, 8))
+                    Fields = {Mid(CurrentRow, 1, 7), MidWords}
+                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
+                    If Fields.Contains("PRIMARY") = True Then
+                        objColorMeasurement.Primary_dE = Convert.ToDecimal(Values(0))
+                        If Values.Length > 1 Then
+                            objColorMeasurement.PatchPrimarydE = Values(1)
+                        End If
+                    End If
+                    Return
+
+
+                ElseIf (InStr(CurrentRow, "95%_QUANTILE", CompareMethod.Text) > 0) Then
+                    Dim MidWords As String
+                    MidWords = LTrim(Mid(CurrentRow, 13))
+                    Fields = {Mid(CurrentRow, 1, 12), MidWords}
+                    Dim Values() As String = Fields(1).Trim.Split(CChar(" "))
+                    If Fields.Contains("95%_QUANTILE") = True Then
+                        objColorMeasurement.NineFive_Quantile = Convert.ToDecimal(Values(0))
+                    End If
+                    Return
+
+                    '------End of code update--------------------------------------------------------------------------
+
+                ElseIf (InStr(CurrentRow, "USER", CompareMethod.Binary) > 0 AndAlso InStr(CurrentRow, "_USER") = 0 AndAlso InStr(CurrentRow.ToLower(), "\user") = 0) Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.User = Fields(1)
+                        End If
+                        Return
+                        'ElseIf Fields.Contains("DEVICE") = True Then
+                        '    If Fields.Length > 1 Then
+                        '        Dim Values() As String = Fields(1).Trim.Split(CChar(" ")) 
+                        '        objColorMeasurement.Instrument = Values(0)
+                        '        objColorMeasurement.Instrument_SerialNum = Values(1)       
+                        '    End If
+
+                        '    Return
+                    ElseIf Fields.Contains("MEASUREMENT") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            If Fields.Contains("Observer") = True Then
+                                Dim Values() As String = Fields(1).Trim.Split(CChar(","))
+                                objColorMeasurement.ObserverType = Values(0)
+                                objColorMeasurement.Illuminant = Values(1)
+                                objColorMeasurement.Filter = Values(2)
+                                Return
+                            End If
+                        End If
+                    ElseIf Fields.Contains("CUSTOMER") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.Customer = Fields(1)
+                        End If
+
+                        Return
+                    ElseIf Fields.Contains("JOB") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.Job = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("PROOFER") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.Proofer = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("INFO ") = True Then
+                        If Fields.Length > 1 Then
+                            objColorMeasurement.Info = Fields(1)
+                        End If
+
+                        Return
+                    ElseIf Fields.Contains("PROOF_OK") = True Then
+                        If Convert.ToInt16(Fields(1)) = 0 Then
+                            objColorMeasurement.ProofSatus = ColorMeasurement.ProofStaus.Failed
+                        ElseIf Convert.ToInt16(Fields(1)) = 1 Then
+                            objColorMeasurement.ProofSatus = ColorMeasurement.ProofStaus.Caution
+                        Else
+                            objColorMeasurement.ProofSatus = ColorMeasurement.ProofStaus.Passed
+                        End If
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_SUBSTRATE") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.Substrate = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_SUBSTRATE_SKU") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.SubstrateSKU = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_SUBSTRATE_BATCH") = True Then
+                        If Fields.Length > 1 Then
+                            objColorMeasurement.SubstrateBatch = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_MANUFACTURER") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterMake = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_MODEL") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterModel = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_SERIAL_NUMBER") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterSerialNum = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("PRINTER_TIME") = True Then
+                        If Fields.Length = 2 AndAlso IsDate(Fields(1)) = True Then
+                            objColorMeasurement.PrinterTime = Convert.ToDateTime(Fields(1))
+                        End If
+                        Return
+
+                    ElseIf Fields.Contains("PRINTER_PAPER") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterPaper = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("PRINTER_CC_TABLE") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterCCTable = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("PRINTER_STATE") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterState = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("PRINTER_ICC_TARGET") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterICCTarget = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("PRINTER_USER") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterUser = Fields(1)
+                        End If
+                        Return
+                    ElseIf Fields.Contains("PRINTER_HOST") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.PrinterHost = Fields(1)
+                        End If
+                        Return
+                    ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab) > 0 Then
+
+                        If InStr(CurrentRow, "PRINTER_INK" & vbTab & "0", CompareMethod.Text) > 0 Then
+
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 0"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "1", CompareMethod.Text) > 0 Then
+
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 1"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "2", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 2"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "3", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 3"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "4", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 4"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "5", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 5"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "6", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 6"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "5", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 5"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "6", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 6"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "7", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 7"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "8", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 8"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        ElseIf InStr(CurrentRow, "PRINTER_INK" & vbTab & "9", CompareMethod.Text) > 0 Then
+                            Dim objInkLevel As New InkLevel()
+                            With objInkLevel
+                                .InkPos = "PRINTER_INK 9"
+                                .InkName = Fields(2)
+                                .CurrLevel = Convert.ToDecimal(Fields(3))
+                                .MaxLevel = Convert.ToDecimal(Fields(4))
+                                .Measurement_GUID = objColorMeasurement.Measurement_GUID
+                            End With
+                            objColorMeasurement.InkLevels.Add(objInkLevel)
+                            Return
+                        End If
+                    ElseIf Fields.Contains("OUTPUT_RIP_TYPE") = True Then
+                        If Fields.Length = 2 AndAlso Fields(1) <> String.Empty Then
+                            objColorMeasurement.RipType = Fields(1)
+                        End If
+                        Return
+
+                        '*********************************************************
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_C") = True Then
+                        objColorMeasurement.TargetDensity_C = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_M") = True Then
+                        objColorMeasurement.TargetDensity_M = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_Y") = True Then
+                        objColorMeasurement.TargetDensity_Y = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_K") = True Then
+                        objColorMeasurement.TargetDensity_K = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DENSITY_THRESHOLD") = True Then
+                        objColorMeasurement.TargetDensity_Th = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_C") = True Then
+                        objColorMeasurement.TargetDotGain_C = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_M") = True Then
+                        objColorMeasurement.TargetDotGain_M = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_Y") = True Then
+                        objColorMeasurement.TargetDotGain_Y = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_K") = True Then
+                        objColorMeasurement.TargetDotGain_K = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_DOT_GAIN_THRESHOLD") = True Then
+                        objColorMeasurement.TargetDotGain_Th = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_C") = True Then
+                        objColorMeasurement.TargetPrintContrast_C = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_M") = True Then
+                        objColorMeasurement.TargetPrintContrast_M = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_Y") = True Then
+                        objColorMeasurement.TargetPrintContrast_Y = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_K") = True Then
+                        objColorMeasurement.TargetPrintContrast_K = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_PRINT_CONTRAST_THRESHOLD") = True Then
+                        objColorMeasurement.TargetPrintContrast_Th = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_TRAP_R") = True Then
+                        objColorMeasurement.TargetTrap_R = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_TRAP_G") = True Then
+                        objColorMeasurement.TargetTrap_G = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_TRAP_B") = True Then
+                        objColorMeasurement.TargetTrap_B = Convert.ToDecimal(Fields(1))
+                        Return
+                    ElseIf Fields.Contains("OUTPUT_TARGET_TRAP_THRESHOLD") = True Then
+                        objColorMeasurement.TargetTrap_Th = Convert.ToDecimal(Fields(1))
+                        Return
+                        '***********************************************************
+                    ElseIf Fields.Contains("LGOROWLENGTH") = True Then
+                        If Fields.Length = 2 Then
+                            objColorMeasurement.NumOfPatchLines = CType(Fields(1), Integer)
+                        Else
+                            Throw New Exception("Number of Patch Lines Not Found")
+                        End If
+                        Return
+                    ElseIf Fields.Contains("NUMBER_OF_SETS") = True Then
+                        objColorMeasurement.NumOfPatches = CType(Fields(1), Integer)
                 End If
 
             End If
