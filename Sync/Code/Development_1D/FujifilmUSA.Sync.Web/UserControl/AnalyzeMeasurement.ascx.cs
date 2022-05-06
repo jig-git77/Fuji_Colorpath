@@ -271,6 +271,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Div_ReportCMYKDensity.Visible = true;  //---Disable for time being in Production code
 
                 }
+                else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLPPlus)
+                {
+                    trRBtnListDeltaE.Visible = false;
+                }
                 else
                 {
                     //Hide Verification button

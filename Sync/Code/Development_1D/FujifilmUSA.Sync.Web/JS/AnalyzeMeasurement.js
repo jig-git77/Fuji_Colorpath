@@ -1158,7 +1158,8 @@ function BindMeasurementPatchDetails() {
                                 IsSync1DTypeProject: $hdnSync1DType,
                                 metricSumID: $('#hdPatchMatricSum').val(),
                                 IsDLPMultiColor: $hdnIsDlpMultiColor,
-                                CurrentRunName: $hdnCurrentRunName
+                                CurrentRunName: $hdnCurrentRunName,
+                                LicenseType: $hdnCurrentDlpSubOperation
                             },
                             dataType: "json",
                             headers: {

@@ -485,7 +485,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return VmeasurementSummary;
         }
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, string CurrentRunName = "")
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0)
         {
             // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
@@ -501,6 +501,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (IsDlpMultiColor == true && CurrentRunName == "Run-0") // IF Run-0 with multicolor channel
             {
                 storedProc = "CPSync4DMultiColor.GetPatchDetailsByMeasurementID";
+            }
+            if (LicenseTypeId == (int)ELicenseType.DLPPlus)
+            {
+                storedProc = "CPSync4DPlus.GetPatchDetailsByMeasurementID";
             }
 
             DataTable dtPatchDetails = new DataTable();

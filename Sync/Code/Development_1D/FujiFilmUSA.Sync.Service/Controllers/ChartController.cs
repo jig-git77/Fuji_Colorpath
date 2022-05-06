@@ -681,7 +681,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor, string CurrentRunName)
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor, string CurrentRunName, int LicenseType)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
@@ -720,6 +720,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     IsDlpMultiColor = IsDLPMultiColor == null ? false : Convert.ToBoolean(IsDLPMultiColor);
+                    LicenseTypeId = LicenseType;
                     CurrentRunname = CurrentRunName;
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
 

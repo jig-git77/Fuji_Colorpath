@@ -104,7 +104,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.dtPatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsDlpMultiColor, _viewAnalyze.CurrentRunname);
+            _viewAnalyze.dtPatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsDlpMultiColor, _viewAnalyze.CurrentRunname, _viewAnalyze.LicenseTypeId);
         }
 
         public void GetSpotPatchDetailsofMeasurement()
