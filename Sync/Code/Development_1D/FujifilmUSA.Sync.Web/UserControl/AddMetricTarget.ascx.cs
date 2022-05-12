@@ -179,7 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     MetricSumId = Convert.ToInt32(ddlMetricSum.SelectedItem.Value),
                                     TargetValue = Convert.ToDecimal(txtTargetValue.Text),
                                     MetricTargetPresetID = MetricTargetPreset.MetricTargetPresetID,
-                                    SortOder = Convert.ToInt32(ddlOrder.SelectedValue)
+                                    SortOrder = Convert.ToInt32(ddlOrder.SelectedValue)
                                 });
                             }
                         }
@@ -213,7 +213,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 dr1["MetricTargetID"] = Convert.ToString(item.MetricTargetID);
                 dr1["MetricSumID"] = Convert.ToString(item.MetricSumId);
                 dr1["TargetValue"] = Convert.ToString(item.TargetValue);
-                dr1["RankId"] = Convert.ToString(item.SortOder);
+                dr1["RankId"] = Convert.ToString(item.SortOrder);
                 dt.Rows.Add(dr1);
 
             }

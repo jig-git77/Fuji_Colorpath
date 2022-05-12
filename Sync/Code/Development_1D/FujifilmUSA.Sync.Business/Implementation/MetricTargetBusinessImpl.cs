@@ -93,7 +93,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                   MetricSumId = DataReader.ReadInt(x, "MetricSumID"),
                                   MetricSumName = DataReader.ReadString(x, "MetricSumName"),
                                   TargetValue = DataReader.ReadDecimal(x, "TargetValue"),
-                                  SortOder = DataReader.ReadInt(x, "RankID")
+                                  SortOrder = DataReader.ReadInt(x, "RankID")
                               }).ToList();
                     }
                 },
@@ -111,7 +111,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                  new XAttribute("MetricSumID", x.MetricSumId),
                                                                                  new XAttribute("TargetValue", x.TargetValue),
                                                                                  new XAttribute("MetricTargetPresetID", x.MetricTargetPresetID),
-                                                                                 new XAttribute("RankId", x.SortOder)
+                                                                                 new XAttribute("RankId", x.SortOrder)
                                                                         )).ToList());
             var outParam = new Parameters() { ParameterName = "@IsSaved", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
