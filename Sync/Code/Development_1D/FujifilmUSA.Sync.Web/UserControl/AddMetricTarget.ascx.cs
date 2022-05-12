@@ -65,6 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 DataTable dt = (DataTable)ViewState["CurrentTable"];
                 ImageButton lnkRemove = (ImageButton)e.Row.FindControl("lnkRemove");
                 DropDownList ddlMetricSum = (DropDownList)e.Row.FindControl("ddlMetricSum");
+                DropDownList ddlOrder = (DropDownList)e.Row.FindControl("ddlOrder");
                 if (lnkRemove != null)
                 {
                     if (dt.Rows.Count > 1)
@@ -155,7 +156,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             MetricTargetPreset = new Entity.CPSyncV.MetricTargetPreset();
             MetricTargetPreset.MetricTargetPresetID = Convert.ToInt32(hdfTargetPresetID.Value);
             MetricSumList = new List<Entity.CPSyncV.MetricSum>();
-           
+
             if (grdMetricSum.Rows.Count > 0)
             {
                 foreach (var item in grdMetricSum.Rows)
@@ -167,6 +168,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         DropDownList ddlMetricSum = (DropDownList)row.FindControl("ddlMetricSum");
                         HiddenField hdfTargetMetricId = (HiddenField)row.FindControl("hdfTargetMetricId");
                         TextBox txtTargetValue = (TextBox)row.FindControl("txtTargetValue");
+                        DropDownList ddlOrder = (DropDownList)row.FindControl("ddlOrder");
                         if (ddlMetricSum.SelectedItem.Value != "-1")
                         {
                             if (!string.IsNullOrEmpty(ddlMetricSum.SelectedItem.Value.ToString()) && !string.IsNullOrEmpty(txtTargetValue.Text) && (Convert.ToDecimal(txtTargetValue.Text) > 0 && Convert.ToDecimal(txtTargetValue.Text) < 100))
@@ -176,7 +178,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     MetricTargetID = Convert.ToInt32(hdfTargetMetricId.Value),
                                     MetricSumId = Convert.ToInt32(ddlMetricSum.SelectedItem.Value),
                                     TargetValue = Convert.ToDecimal(txtTargetValue.Text),
-                                    MetricTargetPresetID = MetricTargetPreset.MetricTargetPresetID
+                                    MetricTargetPresetID = MetricTargetPreset.MetricTargetPresetID,
+                                    SortOder = Convert.ToInt32(ddlOrder.SelectedValue)
                                 });
                             }
                         }
@@ -200,6 +203,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             dt.Columns.Add(new DataColumn("MetricTargetId", typeof(string)));//for DropDownList selected item   
             dt.Columns.Add(new DataColumn("MetricSumID", typeof(string)));//for DropDownList selected item   
             dt.Columns.Add(new DataColumn("TargetValue", typeof(string)));//for DropDownList selected item   
+            dt.Columns.Add(new DataColumn("RankId", typeof(string)));//for DropDownList selected item   
 
             int index = 1;
             foreach (var item in MetricTargetPreset.MetricSumTolerances)
@@ -209,6 +213,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 dr1["MetricTargetID"] = Convert.ToString(item.MetricTargetID);
                 dr1["MetricSumID"] = Convert.ToString(item.MetricSumId);
                 dr1["TargetValue"] = Convert.ToString(item.TargetValue);
+                dr1["RankId"] = Convert.ToString(item.SortOder);
                 dt.Rows.Add(dr1);
 
             }
@@ -217,6 +222,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             dr["MetricTargetID"] = "0";
             dr["MetricSumID"] = "-1";
             dr["TargetValue"] = "0";
+            dr["RankId"] = "0";
             dt.Rows.Add(dr);
             ViewState["CurrentTable"] = dt;
             grdMetricSum.DataSource = dt;
@@ -236,7 +242,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
             dr = dt.NewRow();
-            dr["RowNumber"] = 1;            
+            dr["RowNumber"] = 1;
             dr["MetricTargetID"] = "0";
             dr["MetricSumID"] = "-1";
             dr["TargetValue"] = "0";
@@ -252,6 +258,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //After binding the gridview, we can then extract and fill the DropDownList with Data   
             DropDownList ddl1 = (DropDownList)grdMetricSum.Rows[0].Cells[1].FindControl("ddlMetricSum");
             FillDropDownList(ddl1);
+            DropDownList ddlO = (DropDownList)grdMetricSum.Rows[0].Cells[1].FindControl("ddlOrder");
+            FillOrderDropDownList(ddlO);
         }
         private void AddNewRowToGrid()
         {
@@ -285,9 +293,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //HiddenField hdfMetricSumId = (HiddenField)grdMetricSum.Rows[i].Cells[2].FindControl("hdfMetricSumId");
                         HiddenField hdfTargetMetricId = (HiddenField)grdMetricSum.Rows[i].Cells[1].FindControl("hdfTargetMetricId");
 
+                        DropDownList ddlOrder = (DropDownList)grdMetricSum.Rows[i].Cells[1].FindControl("ddlOrder");
+
                         dtCurrentTable.Rows[i]["TargetValue"] = txtTargetValue.Text;
                         dtCurrentTable.Rows[i]["MetricSumID"] = ddlMetricSum.SelectedItem.Value;
                         dtCurrentTable.Rows[i]["MetricTargetId"] = hdfTargetMetricId.Value;
+                        dtCurrentTable.Rows[i]["RankId"] = ddlOrder.SelectedItem.Value;
 
                     }
 
@@ -310,7 +321,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ddl1.DataTextField = "Value";
             ddl1.DataValueField = "Key";
             ddl1.DataSource = MetricSums;
-            ddl1.DataBind();            
+            ddl1.DataBind();
 
             if (grdMetricSum.Rows.Count > 0)
             {
@@ -318,7 +329,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     var row = (GridViewRow)item;
                     if (row.RowType == DataControlRowType.DataRow)
-                    {                        
+                    {
                         DropDownList ddlMetricSum = (DropDownList)row.FindControl("ddlMetricSum");
                         if (!string.IsNullOrEmpty(ddlMetricSum.SelectedItem.Value.ToString()))
                             ddl1.Items.FindByValue(ddlMetricSum.SelectedValue.ToString()).Enabled = false;
@@ -326,6 +337,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
             ddl1.Items.Insert(0, new ListItem() { Value = "", Text = "--Select--" });
+        }
+
+        private void FillOrderDropDownList(DropDownList ddlOrder)
+        {
+            Dictionary<int, string> OrderValueParis = new Dictionary<int, string>();
+            for (int i = 1; i <= 20; i++)
+            {
+                OrderValueParis.Add(i, i.ToString());
+            }
+
+            ddlOrder.DataTextField = "Value";
+            ddlOrder.DataValueField = "Key";
+            ddlOrder.DataSource = OrderValueParis;
+            ddlOrder.DataBind();
+            //if (grdMetricSum.Rows.Count > 0)
+            //{
+            //    foreach (var item in grdMetricSum.Rows)
+            //    {
+            //        var row = (GridViewRow)item;
+            //        if (row.RowType == DataControlRowType.DataRow)
+            //        {
+            //            DropDownList ddlOrderMetricSum = (DropDownList)row.FindControl("ddlOrder");
+            //            if (!string.IsNullOrEmpty(ddlOrderMetricSum.SelectedItem.Value.ToString()))
+            //                ddlOrder.Items.FindByValue(ddlOrderMetricSum.SelectedValue.ToString()).Enabled = false;
+            //        }
+            //    }
+            //}
+            ddlOrder.Items.Insert(0, new ListItem() { Value = "", Text = "--Select--" });
         }
 
         private void SetPreviousData()
@@ -343,9 +382,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         DropDownList ddlMetricSum = (DropDownList)grdMetricSum.Rows[rowIndex].Cells[1].FindControl("ddlMetricSum");
                         HiddenField hdfTargetMetricId = (HiddenField)grdMetricSum.Rows[i].Cells[1].FindControl("hdfTargetMetricId");
 
+                        DropDownList ddlOrder = (DropDownList)grdMetricSum.Rows[rowIndex].Cells[1].FindControl("ddlOrder");
+
                         //Fill the DropDownList with Data   
                         FillDropDownList(ddlMetricSum);
-
+                        FillOrderDropDownList(ddlOrder);
 
                         if (i < dt.Rows.Count - 1)
                         {
@@ -355,6 +396,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             //Set the Previous Selected Items on Each DropDownList  on Postbacks   
                             ddlMetricSum.ClearSelection();
                             ddlMetricSum.Items.FindByValue(dt.Rows[i]["MetricSumID"].ToString()).Selected = true;
+                            ddlOrder.Items.FindByValue(dt.Rows[i]["RankId"].ToString()).Selected = true;
                         }
 
                         rowIndex++;
@@ -378,7 +420,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Implement IViewAddMetricTarget
-        public Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }       
+        public Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }
         public List<Entity.CPSyncV.MetricSum> MetricSumList { get; set; }
         public Dictionary<int, string> MetricSums { get; set; }
         public string MetricSumName { get; set; }

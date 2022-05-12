@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Entity.CPSyncV
         public decimal TargetValue { get; set; }        
         public int MetricTargetPresetID { get; set; }
         public int MetricTargetID { get; set; }
+        public int SortOrder { get; set; }
     }
 }

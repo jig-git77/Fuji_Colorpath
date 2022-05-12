@@ -68,6 +68,13 @@
                                                          <asp:ImageButton runat="server" ID="ButtonAdd" ImageUrl="~/Images/add.png" ToolTip="Add new metric sum." onclick="ButtonAdd_Click" Height="20" Width="20" style="vertical-align: inherit;" />
                                                     </FooterTemplate>  
                                                 </asp:TemplateField>
+                                                 <asp:TemplateField HeaderText="Order" ItemStyle-Width="225" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>                                                        
+                                                        <asp:DropDownList ID="ddlOrder" runat="server" AppendDataBoundItems="true">  
+                                                            <asp:ListItem Value="-1">Select</asp:ListItem>                                                             
+                                                        </asp:DropDownList>  
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Delete" HeaderStyle-Width="50" meta:resourcekey="GridTemplateColumnResource3">  
                                                     <ItemTemplate>  
                                                         <asp:ImageButton runat="server" ID="lnkRemove" ImageUrl="~/Images/remove.png" ToolTip="Please click save button to save your delete action." onclick="lnkRemove_Click" Height="15" Width="15" />
