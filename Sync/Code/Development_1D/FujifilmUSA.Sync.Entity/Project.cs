@@ -62,5 +62,8 @@ namespace FujifilmUSA.Sync.Entity
         public decimal NewPaper_Black_b { get; set; }
 
         public short IsCustomProfileOptions { get; set; }
+
+        public byte[] CustomBCOFileUploadData { get; set; }
+        public string CustomBCOFileName { get; set; }
     }
 }

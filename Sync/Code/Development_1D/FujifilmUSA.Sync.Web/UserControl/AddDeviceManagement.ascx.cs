@@ -25,6 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseSpotLibraryText { get; set; }
         public string ELicenseDLpPlusText { get; set; }
         public string ELicenseDLPMultiColorText { get; set; }
+        public string ELicenseCustomBCOText { get; set; }
 
         #region Private Variables - Globalization
         private const string _recAddDevice = "addDeviceText";
@@ -74,6 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseSpotLibraryText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
             ELicenseDLpPlusText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
             ELicenseDLPMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
+            ELicenseCustomBCOText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomBCO);
 
             trTotalNoColor.Visible = false;
             trChannel.Visible = false;
@@ -183,6 +185,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtSpotLibrary.Enabled = false;
                         txtDlpPlus.Enabled = false;
                         txtDLPMultiColor.Enabled = false;
+                        txtCustomBCO.Enabled = false;
                     }
                     else
                     {
@@ -200,7 +203,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtSpotLibrary.Enabled = (License.LicenseType.Where(x => x == ELicenseType.SpotLibrary).Count() > 0);
                         txtDlpPlus.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPPlus).Count() > 0);
                         txtDLPMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPMultiColor).Count() > 0);
-                        
+                        txtCustomBCO.Enabled = (License.LicenseType.Where(x => x == ELicenseType.CustomBCO).Count() > 0);
+
                     }
                 }
             }
@@ -422,6 +426,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Device.LicenseTypeProject.Add(ELicenseType.DLPMultiColor, Convert.ToInt32(txtDLPMultiColor.Text));
             }
+            if (txtCustomBCO.Enabled)
+            {
+                Device.LicenseTypeProject.Add(ELicenseType.CustomBCO, Convert.ToInt32(txtCustomBCO.Text));
+            }
 
             if (DId == 0) // Add New company
             {
@@ -521,9 +529,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.DLPMultiColor:
                             txtDLPMultiColor.Text = val.ToString();
+                            break;                        
+                        case ELicenseType.CustomBCO:
+                            txtCustomBCO.Text = val.ToString();
                             break;
                         default:
                             break;
+
                     }
                 }
             }

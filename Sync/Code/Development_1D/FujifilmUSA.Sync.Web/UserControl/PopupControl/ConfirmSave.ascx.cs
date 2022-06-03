@@ -121,6 +121,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 Tr_Certify.Visible = false;
                             }
                         }
+                        //Below condition we put for when BCO RUN-1 we have option to certify after that BCO CMYK library export button visible but data is not coming so we reveiw and as
+                        //discusssed we think on RUN-2 onwards we give certify button.(Till RUN-1 CMYK table have only RUN-0 data and RUN-1 only contain Measuremnt entry so as per SP logic we need both in PACKZ format)
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count == 2)
+                        {
+                            lbtnYes.Visible = false;
+                            Tr_Certify.Visible = false;
+
+                        }
                     }
                 }
                 else

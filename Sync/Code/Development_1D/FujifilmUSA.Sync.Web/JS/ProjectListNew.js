@@ -163,6 +163,10 @@ $(document).ready(function () {
                     showSpotProject = false;//BUTON NOT VISIBLE
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
                 }
+                else if (data.LicenseType == ELicenseType.CustomBCO && data.Status == EOptimizeRunStatus.Certify) {
+                    showSpotProject = true;//BUTON VISIBLE
+                    showSpotButtonEnableProject = true; //BUTTON ENABLE 
+                }
                 else if (data.LicenseType != ELicenseType.DLP) {
                     showSpotProject = false;//BUTON NOT VISIBLE
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
@@ -221,6 +225,10 @@ $(document).ready(function () {
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'DLP Multi Color';
                                 break;
+                            case ELicenseType.CustomBCO:
+                                projectTypeImagePath = 'Images/DLP.png';
+                                projectTypeImageTitle = 'Custom BCO';
+                                break;
                         }
                         break;
                     case EOptimizeRunStatus.Certify:
@@ -252,6 +260,10 @@ $(document).ready(function () {
                             case ELicenseType.DLPMultiColor:
                                 projectTypeImagePath = 'Images/DLP_Certified.png';
                                 projectTypeImageTitle = 'DLP Multi Color';
+                                break;
+                            case ELicenseType.CustomBCO:
+                                projectTypeImagePath = 'Images/DLP_Certified.png';
+                                projectTypeImageTitle = 'Custom BCO';
                                 break;
                         }
                         break;
@@ -299,6 +311,9 @@ $(document).ready(function () {
                         break;
                     case ELicenseType.DLPMultiColor:
                         projectTypeTooltip = "DLP Mutli Color";
+                        break;
+                    case ELicenseType.CustomBCO:
+                        projectTypeTooltip = "Custom BCO";
                         break;
                 }
                
@@ -410,7 +425,11 @@ $(document).ready(function () {
                         row.find("td #lnkProjectTypeIcon").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
                         break;
                 }
-
+                if (data.LicenseType == 14) //This is for custom BCO project button disabled
+                {
+                    row.find("td #lnkProjectTypeIcon").addClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
+                    row.find("td #lnkProjectTypeIcon").attr('onclick', '');
+                }
                 //set resource message
                 row.find('#lnkDeleteProject').attr('title', Resources.MsgDeleteProject);
                 projectTypeImagePath = '';

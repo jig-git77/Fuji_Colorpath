@@ -817,6 +817,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom BCO.
+        /// </summary>
+        internal static string ELicenseType_Custom_BCO {
+            get {
+                return ResourceManager.GetString("ELicenseType_Custom_BCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Source Profile.
         /// </summary>
         internal static string ELicenseType_CustomSourceProfile {

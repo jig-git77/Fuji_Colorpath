@@ -62,6 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 lblClosePrintConditionMessage.Text = GetResourceString(_recspotprintOptionsText);
                 hdfServicePath.Value = Utilities.ReadConfigValue("BaseServiceURL");
                 //lbtnDownloadChart.Attributes.Add("onclick", "javascript: return DownloadChart(" + Request.QueryString["ProjectId"].ToString() + ")");
+                HideButtonForCustomBCO();
             }
         }
 
@@ -157,7 +158,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             string zipFilPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/ChartExports/");
             if (!Directory.Exists(zipFilPath))
+            {
                 Directory.CreateDirectory(zipFilPath);
+            };
             using (HttpClient httpClient = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(obj), null, "application/json");
@@ -177,6 +180,22 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         contentStream.CopyTo(filestream);
                     }
                     Utilities.DownloadExportFile(zipFilPath, zipFileName, zipFileName);
+                }
+            }
+        }
+        private void HideButtonForCustomBCO()
+        {
+            if (Request.QueryString["ProjectId"] != null)
+            {
+                SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                _presenterClosePrintCondition.GetProjectDetail_SpotProject();
+                if (!IsErrorOccured)
+                {
+                    if (Project.SpotTargetProject.MasterProjectLicenseType == ELicenseType.CustomBCO)
+                    {
+                        lbtnReOptimize.Visible = false;
+                        //lbtnViewLastAnalysis.Visible = false;
+                    }
                 }
             }
         }

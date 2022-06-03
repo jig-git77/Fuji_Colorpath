@@ -99,7 +99,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
             }
 
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.FullGamutCustomSource && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.FullGamutCustomSource && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomBCO)
             {
                 lblTargetPrintCondition.Text = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandard;
                 lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;
@@ -157,6 +157,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //}
                 Tr_Validation.Visible = false;
             }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO)
+            {
+                Div_Spectrophotometer_Options.Visible = false;
+                Div_Presets.Visible = false;
+                Div_Alignment_Chart.Visible = false;
+                Div_OptChart.Visible = false;
+                Div_ValidationChart.Visible = false;
+                Div_CustomBCO.Visible = true;
+                lblCustomBCOFileName.Text = SessionManager.Instance.CurrentProject.CustomBCOFileName;
+                Div_TargetColorSpace.Visible = false;
+            }
             else
             {
                 IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
@@ -169,7 +180,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 MetricTargetPresetId = Convert.ToInt16(SessionManager.Instance.CurrentProject.MetricTargetPresetId);
                 ReTargetProjectID = SessionManager.Instance.CurrentProject.ReTargetProjectID;
             }
-            _presenterPreviewPrintCondition.GetPreviewPrintCondition();
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomBCO)
+            {
+                _presenterPreviewPrintCondition.GetPreviewPrintCondition();
+            }
 
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource)  //---If "Ink Optimization Source" project type, then only display "Description" and "Option Presets" tabs.
             {
@@ -189,7 +203,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (!IsErrorOccured)
                 {
-                    if(SessionManager.Instance.CurrentProject.SpotTargetProject!=null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
+                    if (SessionManager.Instance.CurrentProject.SpotTargetProject != null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
                     {
                         lblMedia.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Media;
                         lblColorant.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Colorant;
@@ -250,6 +264,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Div_Alignment_Chart.Visible = true;
                 Div_OptChart.Visible = true;
                 Div_ValidationChart.Visible = false;
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO)
+            {
+                Div_Spectrophotometer_Options.Visible = false;
+                Div_Presets.Visible = false;
+                Div_Alignment_Chart.Visible = false;
+                Div_OptChart.Visible = false;
+                Div_ValidationChart.Visible = false;
+                Div_CustomBCO.Visible = true;
+                lblCustomBCOFileName.Text = SessionManager.Instance.CurrentProject.CustomBCOFileName;
+                Div_TargetColorSpace.Visible = false;
             }
             else //---If not "Ink Optimization Source" or "Custom Source Profile" project types, then display all tabs.
             {

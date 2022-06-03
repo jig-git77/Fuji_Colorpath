@@ -124,6 +124,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     AssignLeftPanel();
                 }
             }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO) //---If  "Custom BCO
+            {
+                SessionManager.Instance.CurrentProject.PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+                {
+                    PrintStandardTypeID = 1 //---By default pass 1 as PrintStandard Type---//
+                };
+                _presenterSaveWindow.SaveProject_CustomBCO(); //---Call save project function, w/o any ref charts details
+                if (!IsErrorOccured)
+                {
+                    _presenterSaveWindow.GetProjectDetail();
+                    WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentProject = null;
+                    SessionManager.Instance.CurrentOptimizeRun = null;
+                    Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
+                }
+
+            }
             else //-----------For all other project types
             {
                 _presenterSaveWindow.SaveProject();

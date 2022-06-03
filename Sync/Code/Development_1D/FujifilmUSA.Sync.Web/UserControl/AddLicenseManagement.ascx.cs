@@ -82,6 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkSpotLibrary.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
             chkDLPPlus.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
             chkDLPMutliColor.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
+            chkCustomerBCO.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomBCO);
         }
         private void Bindcompany()
         {
@@ -130,7 +131,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (Request.QueryString["LicenseId"] == null) //----Only force to check one licensetype when its a new license not in edit mode of existing license-----//
             {
-                if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked && !chkFullGamutCustomSource.Checked && !chkMultiColorCustomSource.Checked && !chkSpotLibrary.Checked)
+                if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked && !chkFullGamutCustomSource.Checked && !chkMultiColorCustomSource.Checked && !chkSpotLibrary.Checked && !chkCustomerBCO.Checked)
                 {
                     fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                     return;
@@ -177,7 +178,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.DLPPlus);
             if (chkDLPMutliColor.Checked)
                 License.LicenseType.Add(ELicenseType.DLPMultiColor);
-
+            if (chkCustomerBCO.Checked)
+                License.LicenseType.Add(ELicenseType.CustomBCO);
 
             if (LId == 0) // Add New company
             {
@@ -241,6 +243,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.DLPMultiColor:
                             chkDLPMutliColor.Checked = true;
+                            break;
+                        case ELicenseType.CustomBCO:
+                            chkCustomerBCO.Checked = true;
                             break;
                     }
                 });

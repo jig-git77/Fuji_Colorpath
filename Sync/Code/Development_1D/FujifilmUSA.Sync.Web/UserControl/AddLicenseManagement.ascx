@@ -197,9 +197,13 @@ jQuery.browser.version = RegExp.$1;
                                                 <td>
                                                      <asp:CheckBox runat="server" ID="chkDLPMutliColor" CssClass="checkListBox" Visible="true"/> 
                                                      </td>
-                                                <td colspan="2">
+                                                 <td>
                                                     &nbsp;&nbsp;
-                                                </td>   
+                                                     <asp:CheckBox runat="server" ID="chkCustomerBCO" CssClass="checkListBox" Visible="true"/> 
+                                                     </td>
+                                                <td colspan="1">
+                                                    &nbsp;&nbsp;
+                                                </td>     
                                                 
                                             </tr>
                                         </table>

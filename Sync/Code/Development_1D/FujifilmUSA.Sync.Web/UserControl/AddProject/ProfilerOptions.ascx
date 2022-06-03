@@ -1161,7 +1161,28 @@
             </td>
         </tr>
     </table>
-    
+       <table id="tbCustomBCO" runat="server">
+        <tr>
+            <td align="right">
+                <span style="font-weight: bold;">
+                    <asp:Localize runat="server"
+                        Text="Upload ICC (only *.ICC)" ID="locUploadCustomBCO"></asp:Localize><span style="color: Red;">*</span>
+                </span>
+            </td>
+            <td>
+                <b>&nbsp;: &nbsp;</b>
+            </td>
+            <td align="left">
+
+                <div style="float: left;">
+                    <telerik:RadAsyncUpload runat="server" ID="fcUploadCustomBCO"
+                        MaxFileInputsCount="1" PostbackTriggers="lnkbtnProfilerOptions" AllowedFileExtensions=".icc">
+                    </telerik:RadAsyncUpload>
+                </div>
+
+            </td>
+        </tr>
+    </table>
 
 
     <div>

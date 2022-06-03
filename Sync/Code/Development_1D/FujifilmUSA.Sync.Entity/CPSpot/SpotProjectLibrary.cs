@@ -31,6 +31,7 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
         public int ReTargetSpotProjectID { get; set; }
 
         public CPSpot.SpotTarget ReTargetSpotTarget { get; set; }
+        public ELicenseType MasterProjectLicenseType { get; set; }
     }
 
     public class SpotProjectList

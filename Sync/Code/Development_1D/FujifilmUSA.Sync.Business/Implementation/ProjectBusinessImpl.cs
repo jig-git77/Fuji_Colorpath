@@ -828,7 +828,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@NewPaper_Black_a", Type = DbType.Decimal, Value = project.NewPaper_Black_a},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
                                                      new Parameters() {ParameterName = "@IsCustomProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption},
-                                                     new Parameters() {ParameterName = "@IsCustomPlugin", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomPlugin}
+                                                     new Parameters() {ParameterName = "@IsCustomPlugin", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomPlugin},
+                                                     new Parameters() {ParameterName = "@DestinationProfile", Type = DbType.Binary, Value = project.DestinationProfile} //This add for CustomBCO icc file store data
 
                                                  },
                                              new List<Parameters>()
@@ -1768,7 +1769,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetSpotTargetName"),
                                 Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetSpotTargetDescription")
                             },
-                            ReTargetSpotProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetSpotProjectID")
+                            ReTargetSpotProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetSpotProjectID"),
+                            MasterProjectLicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MasterProjectLicenseTypeID"),
                         };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {

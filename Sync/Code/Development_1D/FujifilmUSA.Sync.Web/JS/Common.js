@@ -80,7 +80,8 @@ var ELicenseType = {
     Validation: 51,
     IccProfiling: 52,
     DLPPlus: 11,
-    DLPMultiColor: 12
+    DLPMultiColor: 12,
+    CustomBCO: 14
 }
 
 //Object for E Validation Status

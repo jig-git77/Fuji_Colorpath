@@ -1369,4 +1369,7 @@ erwünschten Format überein.</value>
   <data name="EInstrumentType_i1Pro3" xml:space="preserve">
     <value>i1-Pro3</value>
   </data>
+  <data name="ELicenseType_Custom_BCO" xml:space="preserve">
+    <value>Custom BCO</value>
+  </data>
 </root>

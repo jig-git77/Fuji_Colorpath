@@ -77,6 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Sync1D
                     tbOptionPreset.Visible = false;
                     tbMetricPreset.Visible = true;
+                    tbCustomBCO.Visible = false;
                     BindMetricPresets();
                     GetPrintStandardTVI();
                     GetPrintStandardDensity();
@@ -111,10 +112,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     BindMetricPresets();
 
                     LoadProjectInfoFromSession();
+                    tbCustomBCO.Visible = false;
                 }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO)
+            {
+                tbOptionPreset.Visible = false;
+                tbMetricPreset.Visible = false;
+                tbCustomBCO.Visible = true;
             }
             else
             {
+                tbCustomBCO.Visible = false;
                 if (ViewState[_vsDeviceFamilyProfilerOption] == null)
                 {
                     tbOptionPreset.Visible = true;
@@ -889,6 +898,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
 
             }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO)
+            {
+                if (fcUploadCustomBCO.UploadedFiles.Count > 0)
+                {
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+                    var memoryStream = new MemoryStream();
+                    fcUploadCustomBCO.UploadedFiles[0].InputStream.CopyTo(memoryStream);
+                    SessionManager.Instance.CurrentProject.DestinationProfile = memoryStream.ToArray();
+                    SessionManager.Instance.CurrentProject.CustomBCOFileName = fcUploadCustomBCO.UploadedFiles[0].FileName;
+                }
+            }
             else
             {
                 SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
@@ -972,6 +992,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                        };
 
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO)
+            {
+                SessionManager.Instance.CurrentProject.MeasurementSetting = new MeasurementSetting();
+                SessionManager.Instance.CurrentProject.PrintStandardType = new Entity.CPSync1D.PrintStandardType();
+                if (fcUploadCustomBCO.UploadedFiles.Count > 0)
+                {
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+                    var memoryStream = new MemoryStream();
+                    fcUploadCustomBCO.UploadedFiles[0].InputStream.CopyTo(memoryStream);
+                    SessionManager.Instance.CurrentProject.DestinationProfile = memoryStream.ToArray();
+                    SessionManager.Instance.CurrentProject.CustomBCOFileName = fcUploadCustomBCO.UploadedFiles[0].FileName;
+                }
             }
             else
             {

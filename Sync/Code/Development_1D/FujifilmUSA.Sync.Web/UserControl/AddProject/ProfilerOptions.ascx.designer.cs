@@ -1563,6 +1563,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.TextBox txtHue_B;
 
         /// <summary>
+        /// tbCustomBCO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tbCustomBCO;
+
+        /// <summary>
+        /// locUploadCustomBCO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locUploadCustomBCO;
+
+        /// <summary>
+        /// fcUploadCustomBCO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAsyncUpload fcUploadCustomBCO;
+
+        /// <summary>
         /// RadToolTipTolerancesDlpPlus control.
         /// </summary>
         /// <remarks>

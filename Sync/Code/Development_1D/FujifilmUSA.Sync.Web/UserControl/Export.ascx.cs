@@ -90,6 +90,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lbtnNamedColorICC.Visible = true;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
                         locDownloadChartAndPrintThroughWorkflow.Text = GetResourceString(locDownloadChartAndPrintThroughWorkflowResourceNCP);
+                        if (SessionManager.Instance.CurrentProject.SpotTargetProject.MasterProjectLicenseType == ELicenseType.CustomBCO)
+                        {
+                            lbtnMeasure.Visible = false;
+                        }
                     }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If "Custom Source Profile" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
                     {
