@@ -1,0 +1,73 @@
+/*---------- Top Line ----------*/
+.header-top-border { background-color:#CC00CC; height:5px; }
+
+/*---------- Main Tab Menu ----------*/
+.top-menu a { background:url(../images/top-menu-link-bg.png) repeat-x top left #40aa8a; padding:4px 10px 6px 10px; line-height:23px; border:1px solid #157453; text-decoration:none; color:#072d21; font-weight:bold; }
+.top-menu a:hover { background:url(../images/top-menu-hover-bg.png) repeat-x top left #0c7f5c; padding:4px 10px 6px 10px; line-height:23px; border:1px solid #157453; text-decoration:none; color:#FFFFFF; font-weight:bold; }
+.top-menu-bottom-border { border-bottom:1px solid #157453; height:55px; }
+
+/*---------- Menu Bottom Line ----------*/
+.header-bottom-border { background-color:#30a17e; height:3px; }
+
+/*---------- Main Form ----------*/
+.content-bg { background:url(../images/center-content-whitebg.png) repeat-x top left #b4ded8; height:650px; }
+.TABLE7{ background:url(../images/center-content-whitebg.png) repeat-x top left #b4ded8;}
+
+/*---------- Top Sub Menu ----------*/
+.content-menu-top { background:url(../images/menu-curve-bg.png) repeat-x top left; line-height:32px; padding-top:2px; }
+.content-menu-top img { vertical-align:middle; }
+.content-menu-top a { text-decoration:none; color:#505050; font-size:11px; font-weight:bold; }
+.content-menu-top a:hover { text-decoration:none; color:#f4021e; font-size:11px; font-weight:bold; }
+.content-menu-top-divider { background:#b4ded8; }
+
+/*----------  Sub Menu ----------*/
+#TopNavTab{border-left:1px solid #157453;}
+#TopNavTab UL {PADDING: 0px; MARGIN: 0px; LIST-STYLE-TYPE: none;}
+#TopNavTab LI {PADDING: 0px; DISPLAY: inline; MARGIN: 0px 3px 0px 0px;  LINE-HEIGHT: 1.3em; font-family:Tahoma; font-size:11px;}
+
+#TopNavTab A {background:url(../images/top-menu-link-bg.png) repeat-x top left #40aa8a; FLOAT: left;COLOR: #072d21; PADDING: 0px 0px 0px 15px; TEXT-DECORATION: none;border-top:1px solid #157453;border-right:1px solid #157453;}
+#TopNavTab A SPAN {DISPLAY: block; FONT-WEIGHT: bold; FLOAT: left; COLOR: #072d21; padding:5px 20px 5px 5px; border-collapse:collapse}
+#TopNavTab A SPAN {FLOAT: none;}
+#TopNavTab A:hover {BACKGROUND-POSITION: 0% -26px;background:url(../images/top-menu-hover-bg.png) repeat-x top left #0c7f5c;border-left:1px solid #40aa8a;border-right:1px solid #40aa8a;border-top:1px solid #40aa8a;}
+#TopNavTab A:hover SPAN {BACKGROUND-POSITION: 100% -26px; COLOR: #FFFFFF;background:url(../images/top-menu-hover-bg.png) repeat-x top left #0c7f5c;}
+
+#TopNavTab .active A { background:url(../images/top-menu-hover-bg.png) repeat-x top left #0c7f5c; FLOAT: left;COLOR: #FFFFFF; PADDING: 0px 0px 0px 13px; TEXT-DECORATION: none;}
+#TopNavTab .active A SPAN { background:url(../images/top-menu-hover-bg.png) repeat-x top left #0c7f5c; PADDING-RIGHT: 17px; DISPLAY: block;PADDING-LEFT: 6px;FONT-WEIGHT: bold;  COLOR: #FFFFFF; FLOAT: left; padding:5px 17px 5px 6px}
+#TopNavTab .active A SPAN {	FLOAT: none}
+#TopNavTab .active A:hover {BACKGROUND-POSITION: 0% -26px; background:url(../images/top-menu-hover-bg.png) repeat-x top left #0c7f5c; COLOR: #FFFFFF}
+#TopNavTab .active A:hover SPAN {BACKGROUND-POSITION: 100% -26px; background:url(../images/top-menu-hover-bg.png) repeat-x top left #0c7f5c; COLOR: #FFFFFF}
+
+/*----------  Style For Pop Up ----------*/
+
+#popup-tab {height:28px;width:800px;padding:0px 0px 0px 5px;float:left}
+
+#popup-tab ul {-x-system-font:none;font-family: Tahoma, Arial, Helvetica, sans-serif, Verdana;font-size:11px;font-size-adjust:none;font-stretch:normal;font-style:normal;font-variant:normal;font-weight:bold;line-height:normal;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0;padding:0;}
+#popup-tab li {display:inline;line-height:1.3em;margin:0 3px 0 0;padding:0;}
+#popup-tab a {background:transparent url(../Images/popup-tabs_left.png) no-repeat scroll left top;color:#000000;float:left;font-size:11px;margin:0px 3px 0 0;padding:0 0 0 7px;text-decoration:none;}
+#popup-tab a span, #popup-tab #current span {background:transparent url(../Images/popup-tabs_right.png) no-repeat scroll right top;color:#FFFFFF;display:block;float:left;font-weight:bold;padding:6px 13px 9px 7px;}
+#popup-tab a span {float:none;}
+
+#popup-tab a:hover {background-position:0 -150px;}
+#popup-tab a:hover span {background-position:100% -150px;color:#000000;}
+#popup-tab .current a,#popup-tab .current a:hover{background-position:0 -150px;}
+
+#popup-tab .current a span,#popup-tab .current a:hover span{background-position:100% -150px;color:#000000;}
+
+.close-btn{float:right; width:70px; height:29px; padding-top:0px ; padding-right:8px; text-align:right}
+
+.tab-bot-line{background:url(../Images/popup-tabs_bot-line.png) repeat-x bottom}
+
+.box-left-line{background:url(../Images/popup-tabs_bot-line.png) repeat-y right}
+
+.box-right-line{background:url(../Images/popup-tabs_bot-line.png) repeat-y left}
+
+.box-bot-line{background:url(../Images/popup-tabs_bot-line.png) repeat-x top}
+
+.myBox{margin: 10px 0px 0px 0px;border: 0px solid #ffffff;color: #ffffff;width: 950px;padding: 0px;text-align: left;background-color: #30a17e;border: 1px solid #606E81;}
+
+.popup-top-bar{background:url(../Images/popup-top-title-bg.png) repeat-x top #30a17e;color:#FFFFFF;height:35px;padding-left:25px;border:1px solid #efefef;font-size:12px;font-weight:bold;}
+.popup-button{ background:url(../images/popup-top-title-bg.png) repeat-x bottom left #30a17e; color:#FFFFFF; border:1px solid #000; padding:2px 3px;font-family:Tahoma; font-size:11px; font-weight:bold; cursor:pointer; Height:25px}
+
+/*----------  Footer ----------*/
+.footer { background:url(../images/footer-shadow1-bg.png) repeat-x top left #119c7a; height:60px; text-align:center; }
+.copyright { background:url(../images/footer-shadow2-bg.png) no-repeat center top; height:60px; line-height:60px; color:#FFFFFF; text-align:center; }
