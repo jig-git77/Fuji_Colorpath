@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
@@ -192,10 +193,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (result > 0)
                 {
                     GetMToolMessage(1);
-                    //Devlopment/prodcuction support only HTTP.
-                    Response.Redirect(Request.Url.ToString());
-                    ////Stage Code support only HTTPS.
-                    //Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
+                    ////Devlopment/prodcuction support only HTTP.
+
+                    //Stage Code support only HTTPS.
+                    if (ConfigurationManager.AppSettings["IsHttpsUrl"].ToString() == "true")
+                    {
+                        Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
+                    }
+                    else
+                    {
+                        Response.Redirect(Request.Url.ToString());
+                    }
+                    // Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
                 }
                 else
                 {

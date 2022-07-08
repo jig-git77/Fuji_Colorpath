@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lblHeader.Text = GetResourceString(_recAddUser); //"Add User";
                 BindRole();
-                BindLanguages();                
+                BindLanguages();
                 if (Request.QueryString["UserId"] != null)
                 {
                     lblHeader.Text = GetResourceString(_recEditUser); //"Edit User";
@@ -74,7 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     catch
                     {
                         UserId = 0;
-                    }                    
+                    }
                 }
                 else
                 {
@@ -172,21 +172,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void SaveUser()
         {
+            string temp_regionId = string.IsNullOrEmpty(cmbRegion.SelectedValue) ? "0" : cmbRegion.SelectedValue;
             UserInformation = new User
-                                  {
-                                      FirstName = txtFirstName.Text.Trim(),
-                                      LastName = txtLastName.Text.Trim(),
-                                      Email = txtEmail.Text.Trim(),
-                                      LoginId = txtAdminUserName.Text.Trim(),
-                                      IsActive = chkIsActive.Checked,
-                                      LastModifiedUserId = SessionManager.Instance.CurrentUser.UserId,
-                                      Role = new Role() { RoleId = Convert.ToInt16(cmbRole.SelectedValue) },
-                                      UserCompany = new UserCompany(),
-                                      UserBranches = new List<UserBranch>(),
-                                      RegionId = 0,
-                                      UserType = Convert.ToInt16(cmbUserType.SelectedItem.Value),
-                                      LanguageCultureCode = ddlLanguages.SelectedValue
-                                  };
+            {
+                FirstName = txtFirstName.Text.Trim(),
+                LastName = txtLastName.Text.Trim(),
+                Email = txtEmail.Text.Trim(),
+                LoginId = txtAdminUserName.Text.Trim(),
+                IsActive = chkIsActive.Checked,
+                LastModifiedUserId = SessionManager.Instance.CurrentUser.UserId,
+                Role = new Role() { RoleId = Convert.ToInt16(cmbRole.SelectedValue) },
+                UserCompany = new UserCompany(),
+                UserBranches = new List<UserBranch>(),
+                RegionId = Convert.ToInt16(temp_regionId), //Add regionID from 0 to actual value for Asana bug Url :https://app.asana.com/0/792718174372036/1202324645729242 
+                UserType = Convert.ToInt16(cmbUserType.SelectedItem.Value),
+                LanguageCultureCode = ddlLanguages.SelectedValue
+            };
 
             #region Set Role related information to user object
             var role = (ERole)Enum.Parse(typeof(ERole), cmbRole.SelectedItem.Text.Replace(" ", "").Trim());

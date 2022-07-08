@@ -10,7 +10,7 @@ using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class TargetColorSpace : BaseControl, IViewTargetColorspace
+    public partial class TargetColorSpace : BaseControl, IViewTargetColorspace, IViewAddUserManagement
     {
         #region "Declaration"
         public bool IsXmfNewProject
@@ -27,9 +27,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recSelect = "selectText";
         private const string _recNoCertifiedSpotCondition = "noCertifiedSpotCondition";
         private const string _recTargetPrintConditionNotAvailableMessage = "TargetPrintConditionNotAvailableMessage";
-        
+
 
         private PresenterTargetColorspace _presenterTargetColorspace;
+        private PresenterUserManagement _presenterUserManagement;
         #endregion
         public TargetColorSpace()
         {
@@ -39,6 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presenterTargetColorspace = new PresenterTargetColorspace(this);
+            _presenterUserManagement = new PresenterUserManagement(this);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -61,7 +63,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     trPaperScaling_4D.Visible = true;
                 }
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor )
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
                 {
                     trPaperScaling_4D.Visible = true;
                 }
@@ -125,7 +127,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_Black_a.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_Black_b.Text);
             }
-           else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
             {
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
@@ -157,7 +159,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
                 {
-                   SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+                    SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
                     //------If DLPMultiColor project then pass NewPaperScaling LAB values--------//
                     SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
                     SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L_4D_White.Text);
@@ -204,7 +206,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 txtProfileDescription.Text = lblSourceProfileName.Text = GetResourceString(_recTargetPrintConditionNotAvailableMessage);
             }
-            
+
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                 cmbProjectType_SelectedIndexChanged(null, null);
         }
@@ -331,7 +333,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Panel_PaperLAB4D_Black.Enabled = false;
                 }
             }
-            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ) //-----If it is projecttype SYnc4D or 4D Certification, then display New Paper scaling L,a,b values---//
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor) //-----If it is projecttype SYnc4D or 4D Certification, then display New Paper scaling L,a,b values---//
             {
                 chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                 if (chk_IsPaperScaling4D.Checked)
@@ -423,7 +425,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterTargetColorspace.GetPrintStandardTypeList();
             if (!IsErrorOccured)
             {
-                if(PrintStandardTypeList!=null && PrintStandardTypeList.Count>0)
+                if (PrintStandardTypeList != null && PrintStandardTypeList.Count > 0)
                 {
                     cmbPrintStandardType.DataValueField = "PrintStandardTypeID";
                     cmbPrintStandardType.DataTextField = "PrintStandard";
@@ -436,7 +438,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbPrintStandardType.Items.Clear();
                     cmbPrintStandardType.Items.Insert(0, new ListItem(GetResourceString(_recTargetPrintConditionNotAvailableMessage), string.Empty));
                 }
-                
+
                 cmbPrintStandardType_SelectedIndexChanged(null, null);
             }
         }
@@ -543,13 +545,53 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbTargetPrintCategory.SelectedIndex = 0;
 
             //disable for all projects except 4d and spot
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLP 
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLP
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimizationSource
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLPMultiColor)
-                cmbTargetPrintCategory.Items.FindByValue("4").Enabled = false;
+             {
+                 cmbTargetPrintCategory.Items.FindByValue("4").Enabled = false;
+             }
+
+
+            //newly implemented logic to select combobox value to region
+            //Select source profile based on user region selected fix issue for Asana bug Url :https://app.asana.com/0/792718174372036/1202324645729242 
+            if (SessionManager.Instance.CurrentUser.Role.RoleId <= 3)
+            {
+                cmbTargetPrintCategory.SelectedIndex = 0;
+                cmbTargetPrintCategory_SelectedIndexChanged(new object(), new EventArgs());
+            }
+            else
+            {
+                UserInformation = new User { UserId = SessionManager.Instance.CurrentUser.UserId };
+                _presenterUserManagement.GetUser();
+                short temp_regionId = 0;
+                string strRegionId = string.Empty;
+                temp_regionId = SessionManager.Instance.CurrentUser.RegionId > 0 ? SessionManager.Instance.CurrentUser.RegionId : UserInformation.RegionId;
+                //strRegionId = temp_regionId <= 3 ? temp_regionId.ToString() : "11";
+                var enumRegion = (ERegion)Enum.Parse(typeof(ERegion), temp_regionId.ToString());
+                switch (enumRegion)
+                {
+                    case ERegion.NA:
+                        strRegionId = "1";
+                        break;
+                    case ERegion.EU:
+                        strRegionId = "2";
+                        break;
+                    case ERegion.JP:
+                        strRegionId = "3";
+                        break;
+                    case ERegion.CA:
+                    case ERegion.AN:
+                        strRegionId = "0";
+                        break;
+                }
+                cmbTargetPrintCategory.SelectedValue = strRegionId;
+                cmbTargetPrintCategory_SelectedIndexChanged(new object(), new EventArgs());
+
+            }
         }
 
         private void BindBranches()
@@ -764,6 +806,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> ReTargetSpotProjectList { get; set; }
         public List<Device> Devices { get; set; }
         public SpotProjectLibrary RetargetSpotProject { get; set; }
+        #endregion
+
+        #region Implement Interface
+        public User UserInformation { get; set; }
+        public Dictionary<int, string> Companies { get; set; }
+        public int CompanyId { get; set; }
+        public Dictionary<int, string> Regions { get; set; }
+        public Dictionary<int, string> UserRoleList { get; set; }
+        public int RegionId { get; set; }
+        public UserAuthenticationUpdateType UpdateType { get; set; }
+        public List<Language> LanguageList { get; set; }
         #endregion
 
     }

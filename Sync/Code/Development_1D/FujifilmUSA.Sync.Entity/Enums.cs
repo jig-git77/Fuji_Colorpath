@@ -661,4 +661,16 @@ namespace FujifilmUSA.Sync.Entity
         Violet = 5
     }
 
+    /// <summary>
+    /// Add region enum which used TargetColorSpace which add for asana bug Url :https://app.asana.com/0/792718174372036/1202324645729242
+    /// </summary>
+    public enum ERegion
+    {
+        NA = 1,
+        EU = 2,
+        CA = 3,
+        JP = 4,
+        AN = 5
+    }
+
 }
