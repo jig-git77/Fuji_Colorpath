@@ -19,6 +19,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recColorPathInstallerMac = "colorPathInstallerMac";
         private const string _recColorPathInstallerPC = "colorPathInstallerPC";
         private const string _recValidationCharts = "ValidationCharts";
+        private const string _recMToolInstallerPC = "MToolInstallerPC";
+        private const string _recMToolInstallerMac = "MToolInstallerMac";
         #endregion
 
         #region Constructor
@@ -44,35 +46,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("DownloadId", typeof(int)));
             dt.Columns.Add(new DataColumn("DownloadName", typeof(string)));
-            dt.Columns.Add(new DataColumn("DownloadPath", typeof(string)));  
+            dt.Columns.Add(new DataColumn("DownloadPath", typeof(string)));
+
+            //DataRow dr = dt.NewRow();
+            //dr["DownloadId"] = "1";
+            //dr["DownloadName"] = GetResourceString(_recColorPathInstallerMac);
+            //dr["DownloadPath"] = "Download/Colorpath MacPlugin Installer.zip";
+            //dt.Rows.Add(dr);
+
+            //DataRow dr1 = dt.NewRow();
+            //dr1["DownloadId"] = "2";
+            //dr1["DownloadName"] = GetResourceString(_recColorPathInstallerPC);
+            //dr1["DownloadPath"] = "Download/Colorpath PCPlugin Installer.zip";
+            //dt.Rows.Add(dr1);
 
             DataRow dr = dt.NewRow();
             dr["DownloadId"] = "1";
-            dr["DownloadName"] = GetResourceString(_recColorPathInstallerMac);
-            dr["DownloadPath"] = "Download/Colorpath MacPlugin Installer.zip";
+            dr["DownloadName"] = GetResourceString(_recMToolInstallerPC);
+            dr["DownloadPath"] = "Download/Measure PC Installer.zip";
             dt.Rows.Add(dr);
 
-            DataRow dr1 = dt.NewRow();
-            dr1["DownloadId"] = "2";
-            dr1["DownloadName"] = GetResourceString(_recColorPathInstallerPC);
-            dr1["DownloadPath"] = "Download/Colorpath PCPlugin Installer.zip";
-            dt.Rows.Add(dr1);
-
             DataRow dr2 = dt.NewRow();
-            dr2["DownloadId"] = "3";
-            dr2["DownloadName"] = GetResourceString(_recValidationCharts);
-            dr2["DownloadPath"] = "Download/Validation Charts.zip";
+            dr2["DownloadId"] = "2";
+            dr2["DownloadName"] = GetResourceString(_recMToolInstallerMac);
+            dr2["DownloadPath"] = "Download/Measure Mac Installer.zip";
             dt.Rows.Add(dr2);
 
-            //DataRow dr3 = dt.NewRow();
-            //dr3["DownloadId"] = "4";
-            //dr3["DownloadName"] = "Taskero Display (ER) Installer - PC";
-            //dr3["DownloadPath"] = "Download/4";
-            //dt.Rows.Add(dr3);
-
+            DataRow dr3 = dt.NewRow();
+            dr3["DownloadId"] = "3";
+            dr3["DownloadName"] = GetResourceString(_recValidationCharts);
+            dr3["DownloadPath"] = "Download/Validation Charts.zip";
+            dt.Rows.Add(dr3);
 
             return dt;
         }
+
         #endregion
     }
 }

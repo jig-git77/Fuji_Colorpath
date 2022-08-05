@@ -132,4 +132,10 @@
   <data name="ValidationCharts" xml:space="preserve">
     <value>Validierungs-Charts</value>
   </data>
+  <data name="MToolInstallerMac" xml:space="preserve">
+    <value>Measure App Installer - Mac_de</value>
+  </data>
+  <data name="MToolInstallerPC" xml:space="preserve">
+    <value>Measure App Installer - PC_de</value>
+  </data>
 </root>
