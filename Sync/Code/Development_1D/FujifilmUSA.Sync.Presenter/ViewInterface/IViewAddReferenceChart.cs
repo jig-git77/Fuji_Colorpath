@@ -11,5 +11,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Dictionary<int, string> ProjectTypeList { get; set; }
         Dictionary<int, string> InstrumentTypeList { get; set; }
         ReferenceChartType ReferenceChartType { get; set; }
+        Dictionary<int, string> DeviceFamilyList { get; set; }
     }
 }

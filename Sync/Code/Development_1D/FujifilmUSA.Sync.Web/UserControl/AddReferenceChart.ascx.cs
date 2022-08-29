@@ -62,6 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindInstrumentTypeList();
                 BindMultiColorChannel();
+                BindDeviceFamilyList();
                 if (Request.QueryString["RefChartId"] != null)
                 {
                     var RefChartId = Request.QueryString["RefChartId"];
@@ -215,6 +216,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType.NumOfRows = Convert.ToInt32(txtNumOfRows.Text);
             ReferenceChartType.NumOfCols = Convert.ToInt32(txtNumOfCols.Text);
             ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);
+            if (drpDeviceFamilyId.SelectedIndex > 0)
+                ReferenceChartType.DeviceFamilyId = Convert.ToInt16(drpDeviceFamilyId.SelectedValue);
             ReferenceChartType.IsUsed = chkIsUsed.Checked;
             ReferenceChartType.ChartSettingXML = string.IsNullOrEmpty(txtChartSetting.Text) ? null : txtChartSetting.Text;
             if (chklist_ProjectType.Items[0].Selected == true)
@@ -1096,6 +1099,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        /// <summary>
+        /// BindDeviceFamilyList
+        /// </summary>
+        private void BindDeviceFamilyList()
+        {
+            _presenterAddReferenceChart.GetDeviceFamilyList();
+            if (!IsErrorOccured)
+            {
+                drpDeviceFamilyId.DataTextField = "Value";
+                drpDeviceFamilyId.DataValueField = "Key";
+                drpDeviceFamilyId.DataSource = DeviceFamilyList;
+                drpDeviceFamilyId.DataBind();
+                drpDeviceFamilyId.Items.Insert(0, "--Select Device Family--"); //"--Select Device Family--
+            }
+        }
+
         private void LoadRefChart(int RefChartId)
         {
             ReferenceChartType = new ReferenceChartType { ReferenceChartTypeId = (short)RefChartId };
@@ -1108,6 +1127,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtNumOfRows.Text = ReferenceChartType.NumOfRows.ToString();
                 txtNumOfCols.Text = ReferenceChartType.NumOfCols.ToString();
                 cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);
+                drpDeviceFamilyId.SelectedValue = Convert.ToString(ReferenceChartType.DeviceFamilyId);
+
                 if (ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1IO || ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1IOPro2 || ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1Sis)
                 {
                     trChartSetting.Visible = true;
@@ -1259,10 +1280,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewAddReferenceChart Members
 
         public Dictionary<int, string> ProjectTypeList { get; set; }
-
         public Dictionary<int, string> InstrumentTypeList { get; set; }
-
         public ReferenceChartType ReferenceChartType { get; set; }
+        public Dictionary<int, string> DeviceFamilyList { get; set; }
 
 
 

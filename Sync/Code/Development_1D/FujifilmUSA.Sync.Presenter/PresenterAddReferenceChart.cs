@@ -21,6 +21,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewReferenceChartManagement = viewReferenceChartManagement;
         }
 
+        public void GetDeviceFamilyList()
+        {
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddReferenceChart.ErrorOccured;
+            _viewAddReferenceChart.DeviceFamilyList = miscDataBusiness.GetDeviceFamilyList();
+        }
+
         public void GetProjectTypeList()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();

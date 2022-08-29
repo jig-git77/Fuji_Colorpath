@@ -37,7 +37,7 @@
           <%--  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>--%>
             <center>
-                <fieldset>
+                <fieldset style="border:none">
                     <legend>
                         <asp:Label ID="lblHeader" runat="server" Text="Add Reference Chart" 
                             meta:resourcekey="lblHeaderResource1"></asp:Label>
@@ -341,6 +341,24 @@
                           
                          </tr>
                    
+                        <tr>
+                            <td align="right">
+                                <span style="font-weight: bold;">
+                                    Device Family
+                                </span>
+                            </td>
+                            <td>
+                                <span style="font-weight: bold;"> &nbsp;:&nbsp;</span>
+                            </td>
+                            <td>
+                                <div style="float: left;">
+                                    <asp:DropDownList ID="drpDeviceFamilyId" runat="server" Width="370px" />
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </td>
+                        </tr>
+
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize runat="server" 

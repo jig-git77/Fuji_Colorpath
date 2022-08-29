@@ -70,7 +70,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.Channel_7,
                                                                                     referenceChartType.Channel_8,
                                                                                     referenceChartType.Channel_9,
-                                                                                    referenceChartType.ChartSettingXML
+                                                                                    referenceChartType.ChartSettingXML,
+                                                                                    referenceChartType.DeviceFamilyId
                                                                                 });
                     if (returnValue == -1)
                     {
@@ -210,7 +211,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Channel_6 = DataReader.ReadShort(x, "Channel_6"),
                                 Channel_7 = DataReader.ReadShort(x, "Channel_7"),
                                 Channel_8 = DataReader.ReadShort(x, "Channel_8"),
-                                Channel_9 = DataReader.ReadShort(x, "Channel_9")
+                                Channel_9 = DataReader.ReadShort(x, "Channel_9"),
+                                DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID")
 
                             }).ToList();
                     }
@@ -255,7 +257,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.Channel_7,
                                         referenceChartType.Channel_8,
                                         referenceChartType.Channel_9,
-                                        referenceChartType.ChartSettingXML
+                                        referenceChartType.ChartSettingXML,
+                                        referenceChartType.DeviceFamilyId
                                     });
                     if (returnValue == -1)
                     {

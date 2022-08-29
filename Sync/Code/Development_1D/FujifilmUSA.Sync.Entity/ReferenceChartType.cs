@@ -29,6 +29,7 @@ namespace FujifilmUSA.Sync.Entity
         public short? Channel_7 { get; set; }
         public short? Channel_8 { get; set; }
         public short? Channel_9 { get; set; }
+        public short? DeviceFamilyId { get; set; }
 
         public bool? IsUsed { get; set; }
         public string ChartSettingXML { get; set; }
