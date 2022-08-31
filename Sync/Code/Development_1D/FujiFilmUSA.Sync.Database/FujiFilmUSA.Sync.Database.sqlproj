@@ -60,5 +60,25 @@
     <Folder Include="Functions" />
     <Folder Include="Table Script" />
     <Folder Include="Views" />
+    <Folder Include="Table Script\08_2022" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
+    <None Include="Table Script\08_2022\08-26-2022_[CP].[CreateReferenceChart].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartTypeList].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\08_2022\08-26-2022_[CP].[UpdateReferenceChart].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\[CP].[CreateReferenceChart].sql" />
+    <None Include="Stored Procedures\[CP].[GetReferenceChartList].sql" />
+    <None Include="Stored Procedures\[CP].[GetReferenceChartTypeList].sql" />
+    <None Include="Stored Procedures\[CP].[UpdateReferenceChart].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Table Script\08_2022\08-26-2022_Add-Column-DeviceFamilyId-ReferenceChartType.sql" />
   </ItemGroup>
 </Project>
