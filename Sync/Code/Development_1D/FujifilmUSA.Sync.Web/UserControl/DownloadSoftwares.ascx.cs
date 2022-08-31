@@ -21,6 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recValidationCharts = "ValidationCharts";
         private const string _recMToolInstallerPC = "MToolInstallerPC";
         private const string _recMToolInstallerMac = "MToolInstallerMac";
+        private const string _recMToolRefGuide = "MToolRefGuide";
         #endregion
 
         #region Constructor
@@ -74,9 +75,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             DataRow dr3 = dt.NewRow();
             dr3["DownloadId"] = "3";
-            dr3["DownloadName"] = GetResourceString(_recValidationCharts);
-            dr3["DownloadPath"] = "Download/Validation Charts.zip";
+            dr3["DownloadName"] = GetResourceString(_recMToolRefGuide);
+            dr3["DownloadPath"] = "Download/ColorPath SYNC Measure Guide.pdf";
             dt.Rows.Add(dr3);
+
+            DataRow dr4 = dt.NewRow();
+            dr4["DownloadId"] = "4";
+            dr4["DownloadName"] = GetResourceString(_recValidationCharts);
+            dr4["DownloadPath"] = "Download/Validation Charts.zip";
+            dt.Rows.Add(dr4);
 
             return dt;
         }

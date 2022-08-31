@@ -138,4 +138,7 @@
   <data name="MToolInstallerPC" xml:space="preserve">
     <value>Measure App Installer - PC_ja</value>
   </data>
+  <data name="MToolRefGuide" xml:space="preserve">
+    <value>Measure App Reference Guide_ja</value>
+  </data>
 </root>
