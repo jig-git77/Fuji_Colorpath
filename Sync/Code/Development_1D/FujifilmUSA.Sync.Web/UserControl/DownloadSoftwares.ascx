@@ -110,7 +110,7 @@
                                                 <ul>
                                                     <li>
                                                         <div class="left">
-                                                            <a href='<%# Eval("DownloadPath") %>'>
+                                                            <a href='<%# Eval("DownloadPath") %>' target="_blank">
                                                                 <asp:Label ID="lblDownloadName" runat="server" 
                                                                 Text='<%# Eval("DownloadName") %>' 
                                                                 meta:resourcekey="lblDownloadNameResource1" />
