@@ -253,7 +253,16 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.spotChartContent = chart;
                         objReportPDF.PDF_NAME = chart.SpotProjectName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".PDF"; //chart.CurrentUserId.ToString() + "_ReportSpotProject.PDF";
                         objReportPDF.ReportName = "Brand Color Optimization";
-                        objReportPDF.ReportType = (int)enumReportType.ReportSpotColorProject; //Only in spot color Optimization part
+
+                        if (chart.IsSpotPatchSaveColorReport == "False")
+                        {
+                            objReportPDF.ReportType = (int)enumReportType.ReportSpotColorProject; //Only in spot color Optimization part
+                        }
+                        else
+                        {
+                            objReportPDF.ReportType = (int)enumReportType.ReportSpotPatchSaveColor; //Only for Spot Patch Save Color Report
+                        }
+
                         objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                         DSReport = new DataSet();
                         _presenterReportSingleMeasurement.GetReportDataOnSpotProject();

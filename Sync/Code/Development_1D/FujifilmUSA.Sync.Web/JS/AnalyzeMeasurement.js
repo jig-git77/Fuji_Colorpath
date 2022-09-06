@@ -37,6 +37,7 @@ var SERVICE_BASE_URL = '';
 var $hdnBaseServiceUrl;
 var $hdnCurrentUserID;
 var $btnGeneratePDF;
+var lnkDownloadReport;
 var $lnkABComparisionLargeChart;
 var $chartLoader;
 var $hdMeasurement;
@@ -226,6 +227,7 @@ $(document).ready(function () {
     $chartLoader = $(".chart-loading");
     $lnkABComparisionLargeChart = $('#lnkABComparisionLargeChart');
     $btnGeneratePDF = $('#btnGeneratePDF');
+    $lnkDownloadReport = $('#lnkDownloadReport');
     $rbtnListDeltaE = $('#rbtnListDeltaE');
     $chart_TargetVersusActualAB = $("#kendoChartTargetVersusActualAB");
     $chart_Gamut_ABComparison = $("#kendoChartGamut_ABComparison");
@@ -310,8 +312,19 @@ $(document).ready(function () {
     });
 
     //Bind click event for report generation
+    $lnkDownloadReport.on('click', function (e) {
+        e.preventDefault();
+        DownloadReportFile();
+    });
+
+    //Bind click event for report generation
     $btnGeneratePDF.on('click', function (e) {
         e.preventDefault();
+        DownloadReportFile();
+    });
+
+    //Bind click event for report generation
+    function DownloadReportFile() {
         kendo.ui.progress($('#divReport'), true);
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var apiParameter = {
@@ -453,7 +466,7 @@ $(document).ready(function () {
         //        console.log(XMLHttpRequest.responseText);
         //    }
         //});
-    });
+    }
 
 
     $lnkABComparisionLargeChart.on('click', function (e) {

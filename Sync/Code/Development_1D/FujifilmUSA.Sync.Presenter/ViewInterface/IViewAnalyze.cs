@@ -53,6 +53,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.AnalyzeChart_DotGain> DTSpreadChartData_CMYK { get; set; }
 
         DataTable DTMaxSpreadChartData { get; set; }
+        DataTable dtMeasurement { get; set; }
 
         bool IsAverageOfMeasurements { get; set; }
         bool Is1DMeasurementSmoothing { get; set; }
@@ -64,5 +65,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool IsDlpMultiColor { get; set; }
         string CurrentRunname { get; set; }
         int LicenseTypeId { get; set; }
+        decimal Dec_E_Value { get; set; }
     }
 }

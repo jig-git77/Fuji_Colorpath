@@ -690,56 +690,58 @@
                 spotpatchlab.push(spotlab);
             });
 
-            var obj = {
-                spotProjectLabs: spotpatchlab
+            if (spotpatchlab != null && spotpatchlab.length > 0) {
+                var obj = {
+                    spotProjectLabs: spotpatchlab
+                }
+
+                var ajaxParameter = {
+                    type: "POST",
+                    url: SERVICE_BASE_URL + 'api/Analyze/SaveSpotProjectLABPatches',
+                    data: obj,
+                    dataType: "json",
+                    headers: {
+                        'Authorization': 'Basic ' + AUTH_TOKEN
+                    }
+                };
+                $('#btnSaveSpotPatch').addClass('active');
+                commonAjaxCall(ajaxParameter, function (response) {
+                    $('#btnSaveSpotPatch').removeClass('active');
+                }, function (XMLHttpRequest, textStatus, errorThrown) {
+                    if (XMLHttpRequest.status == 401) {
+                        ShowDialog("You are not authorized user. Please login again.", "Message");
+                    } else {
+                        alert(errorThrown);
+                    }
+                    $('#btnSaveSpotPatch').removeClass('active');
+                });
+
+                //console.log(filterObj);
+
+                //$.ajax({
+                //    type: "POST",
+                //    url: SERVICE_BASE_URL + 'api/Analyze/SaveSpotProjectLABPatches',
+                //    data: obj,
+                //    dataType: "json",
+                //    success: function (response) {
+                //        $('#btnSaveSpotPatch').removeClass('active');
+                //        //if (response.data != null) {
+                //        //    //console.log(response.data);
+                //        //    var fileName = '~' + response.data;
+                //        //    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                //        //}
+                //    },
+                //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //        $('#btnSaveSpotPatch').removeClass('active');
+                //        console.log(XMLHttpRequest.responseText);
+                //    }
+                //});
+
             }
-
-            var ajaxParameter = {
-                type: "POST",
-                url: SERVICE_BASE_URL + 'api/Analyze/SaveSpotProjectLABPatches',
-                data: obj,
-                dataType: "json",
-                headers: {
-                    'Authorization': 'Basic ' + AUTH_TOKEN
-                }
-            };
-            $('#btnSaveSpotPatch').addClass('active');
-            commonAjaxCall(ajaxParameter, function (response) {
-                $('#btnSaveSpotPatch').removeClass('active');
-            }, function (XMLHttpRequest, textStatus, errorThrown) {
-                if (XMLHttpRequest.status == 401) {
-                    ShowDialog("You are not authorized user. Please login again.", "Message");
-                } else {
-                    alert(errorThrown);
-                }
-                $('#btnSaveSpotPatch').removeClass('active');
-            });
-
-            //console.log(filterObj);
-
-            //$.ajax({
-            //    type: "POST",
-            //    url: SERVICE_BASE_URL + 'api/Analyze/SaveSpotProjectLABPatches',
-            //    data: obj,
-            //    dataType: "json",
-            //    success: function (response) {
-            //        $('#btnSaveSpotPatch').removeClass('active');
-            //        //if (response.data != null) {
-            //        //    //console.log(response.data);
-            //        //    var fileName = '~' + response.data;
-            //        //    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-            //        //}
-            //    },
-            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //        $('#btnSaveSpotPatch').removeClass('active');
-            //        console.log(XMLHttpRequest.responseText);
-            //    }
-            //});
-
 
         });
 
-        $('#lnkGenerateSpotReport').on('click', function (e) {
+        function GenerateSpotPatchSaveColorReport(e) {
             e.preventDefault();
             kendo.ui.progress($('#divReport'), true);
 
@@ -793,7 +795,8 @@
                 CurrentUserId: parseInt($('#hdnCurrentUserID').val()),
                 hasMeasurement: hasMeasurement,
                 chartDetailList: chartList,
-                SpotProjectName:$("#hdnSpotProjectName").val()
+                SpotProjectName: $("#hdnSpotProjectName").val(),
+                IsSpotPatchSaveColorReport: "True"
             };
 
             var ajaxParameter = {
@@ -841,6 +844,69 @@
             //        console.log(XMLHttpRequest.responseText);
             //    }
             //});
+        }
+
+        $('#inkSpotPatchSaveColorReport').on('click', function (e) {
+            GenerateSpotPatchSaveColorReport(e);
+        });
+
+        $('#inkDownloadSpotPatchSaveColorReport').on('click', function (e) {
+            GenerateSpotPatchSaveColorReport(e);
+        });
+
+        function GenerateSpotReport(e) {
+            e.preventDefault();
+            kendo.ui.progress($('#divReport'), true);
+
+            var chartList = [];
+            var grid = $("#divPathDetails").data('kendoGrid')
+            var selectedPatch = $.grep(grid.dataSource.data(), function (elem) {
+                return elem.IsSelected == true;
+            });
+
+            var optimizeRunId = parseInt($('#hdfOptimizationRunID').val());
+            var apiParameter = {
+                OptimizeRunId: optimizeRunId,
+                CurrentUserId: parseInt($('#hdnCurrentUserID').val()),
+                hasMeasurement: hasMeasurement,
+                chartDetailList: chartList,
+                SpotProjectName: $("#hdnSpotProjectName").val(),
+                IsSpotPatchSaveColorReport: "False"
+            };
+
+            var ajaxParameter = {
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Report/ExportSpotAnalyzeChartReport',
+                data: apiParameter,
+                dataType: "json",
+                headers: {
+                    'Authorization': 'Basic ' + AUTH_TOKEN
+                }
+            };
+
+            commonAjaxCall(ajaxParameter, function (response) {
+                kendo.ui.progress($('#divReport'), false);
+                if (response.data != null) {
+                    console.log(response.data);
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                }
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
+                }
+                kendo.ui.progress($('#divReport'), false);
+            });
+        }
+
+        $('#lnkGenerateSpotReport').on('click', function (e) {
+            GenerateSpotReport(e);
+        });
+
+        $('#lnkDownloadSpotReport').on('click', function (e) {
+            GenerateSpotReport(e);
         });
 
         $('#btnExportJsonMeasurement').on('click', function (e) {
@@ -1205,6 +1271,95 @@
         item.IsSelected = $(chk).prop('checked');
     }
 
+    function GetSpotProjectSummarySliderByDeltaE(decEValue) {
+
+        var optimizationId = $('#hdfOptimizationRunID').val();
+
+        //if (typeof optimizationId === 'number' && typeof decEValue === 'number' )
+        //{
+        var ajaxParameter = {
+            type: "GET",
+            url: SERVICE_BASE_URL + "api/Analyze/SpotProjectSummarySliderByDeltaE/",
+            data: { OptimizeRunID: optimizationId, Dec_E: decEValue },
+            dataType: "json"
+        };
+        commonAjaxCall(ajaxParameter, function (response) {
+
+            if (response.data != null) {
+                var objResponse = response.data[0];
+
+                if (objResponse != null) {
+                    document.getElementById("lblTotalColor").innerHTML = objResponse.TotalColors;
+                    document.getElementById("lblLtEqNumber").innerHTML = objResponse.ELTEQ_VALUE;
+                    document.getElementById("lblGrtNumber").innerHTML = objResponse.EGRT_VALUE;
+
+                    document.getElementById("lblLtEqDisplay").innerHTML = "Colors ≤ " + decEValue + " ΔE";
+                    document.getElementById("lblGrtDisplay").innerHTML = "Colors > " + decEValue + " ΔE";
+
+                    document.getElementById("lblLtEqAvg").innerHTML = ((objResponse.ELTEQ_VALUE / objResponse.TotalColors) * 100).toFixed(1) + '%';
+                    document.getElementById("lblGrtAvg").innerHTML = ((objResponse.EGRT_VALUE / objResponse.TotalColors) * 100).toFixed(1) + '%';
+                }
+            }
+
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+
+        });
+        /*}*/
+    }
+
+    function OnDeltaEChanged(sender, eventArgs) {
+        var decEValue = sender.get_value();
+        document.getElementById("txtThreshold").value = decEValue;
+        GetSpotProjectSummarySliderByDeltaE(decEValue);
+    }
+
+    function OnDeltaELoad(sender, eventArgs) {
+        SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
+        txtThresholdChanged();
+    }
+
+    function txtThresholdChanged() {
+        var decEValue = parseFloat($('#txtThreshold').val());
+        var slider = $find("<%= RadSliderForDeltaE.ClientID %>");
+
+        if (slider != null) {
+            if ($('#txtThreshold').val() === "") {
+                decEValue = 0;
+            }
+            else if (Number.isFinite(decEValue) === false) {
+                decEValue = 0;
+                alert('Threshold Must Be Number Between 0 To ' + slider._maximumValue);
+            }
+            slider.set_value(decEValue);
+        }
+    }
+
+    function isNumberKey(txt, evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+        if (charCode == 13)
+            return false;
+
+        if (charCode == 46) {
+            //Check if the text already contains the . character
+            if (txt.value.indexOf('.') === -1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (charCode > 31 &&
+                (charCode < 48 || charCode > 57))
+                return false;
+        }
+        return true;
+    }
+
 </script>
 
 <script type="text/javascript" language="javascript">
@@ -1302,220 +1457,344 @@
                                         <div class="combopart">
                                             <div style="padding-left: 10px;">
 
-                                                <table class="PatchDetailsSummaryTable">
+                                                 <table style="width: 100%;">
                                                     <tr>
-                                                        <td style="width: 42%;"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th colspan="2"><span>
-                                                            <asp:Localize runat="server" ID="locSummary_Header"></asp:Localize>
-                                                        </span></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <table id="tblFirstRunDeltas" runat="server" visible="false" style="width: 100%;">
+                                                        <td style="width: 60%">
+                                                            <table class="PatchDetailsSummaryTable" style="width: 100%;">
                                                                 <tr>
-                                                                    <td style="width: 42%;"><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Min ΔE" runat="server"
-                                                                            ID="locMinDeltaE" meta:resourcekey="locMinDeltaEResource1"></asp:Localize>
-                                                                    </span></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td style="width: 42%;"></td>
+                                                                    <td></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Average ΔE" runat="server"
-                                                                            ID="locAvgDeltaE" meta:resourcekey="locAvgDeltaEResource1"></asp:Localize>
-                                                                    </span></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblAvgDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <th colspan="2">
+                                                                        <span>
+                                                                            <asp:Localize runat="server" ID="locSummary_Header"></asp:Localize>
+                                                                        </span>
+                                                                    </th>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Max ΔE" runat="server"
-                                                                            ID="loclocMaxDeltaE" meta:resourcekey="locMaxDeltaEResource1"></asp:Localize>
-                                                                    </span></td>
+                                                                    <td colspan="2">
+                                                                        <table id="tblFirstRunDeltas" runat="server" visible="false" style="width: 100%;">
+                                                                            <tr>
+                                                                                <td style="width: 42%;">
+                                                                                    <span style="font-weight: bold;">
+                                                                                        <asp:Localize Text="Min ΔE" runat="server"
+                                                                                            ID="locMinDeltaE" meta:resourcekey="locMinDeltaEResource1"></asp:Localize>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <span style="font-weight: bold;">
+                                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                                            ID="locAvgDeltaE" meta:resourcekey="locAvgDeltaEResource1"></asp:Localize>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblAvgDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <span style="font-weight: bold;">
+                                                                                        <asp:Localize Text="Max ΔE" runat="server"
+                                                                                            ID="loclocMaxDeltaE" meta:resourcekey="locMaxDeltaEResource1"></asp:Localize>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td colspan="2" style="width: 100%;">
+                                                                                    <hr />
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        <%--<table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
+                                                                            <tr>
+                                                                                <td style="width: 42%;"></td>
+                                                                                <td><span style="font-weight: bold;">∆E Target-Prediction</span></td>
+                                                                                <td><span style="font-weight: bold;">∆E Measured-Target</span></td>
+                                                                                <td><span style="font-weight: bold;">∆E Measured-Prediction</span></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><span style="font-weight: bold;">
+                                                                                    <asp:Localize Text="Average ΔE" runat="server"
+                                                                                        ID="Localize2" meta:resourcekey="locMinimumDeltaResource"></asp:Localize>
+                                                                                </span></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMinETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMinEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMinEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><span style="font-weight: bold;">
+                                                                                    <asp:Localize Text="Average ΔE" runat="server"
+                                                                                        ID="locAverageDelta" meta:resourcekey="locAverageDeltaResource1"></asp:Localize>
+                                                                                </span></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblAvgETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblAvgEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblAvgEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><span style="font-weight: bold;">
+                                                                                    <asp:Localize Text="Average ΔE" runat="server"
+                                                                                        ID="Localize1" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
+                                                                                </span></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMaxETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td colspan="4">
+                                                                                    <hr />
+                                                                                </td>
+                                                                            </tr>
+                                                                            </table>--%>
+                                                                        <table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
+                                                                            <tr>
+                                                                                <td style="width: 42%;"></td>
+                                                                                <td>
+                                                                                    <span style="font-weight: bold;">
+                                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                                            ID="Localize2" meta:resourcekey="locMinimumDeltaResource"></asp:Localize>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span style="font-weight: bold;">
+                                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                                            ID="locAverageDelta" meta:resourcekey="locAverageDeltaResource1"></asp:Localize>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span style="font-weight: bold;">
+                                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                                            ID="Localize1" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
+                                                                                    </span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><span style="font-weight: bold;">∆E Target-Prediction</span></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMinETP" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblAvgETP" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMaxETP" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><span style="font-weight: bold;">∆E Measured-Target</span></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMinEMT" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblAvgEMT" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><span style="font-weight: bold;">∆E Measured-Prediction</span></td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMinEMP" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblAvgEMP" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td colspan="4">
+                                                                                    <hr />
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="trMeasurementID" runat="server" visible="false">
                                                                     <td>
-                                                                        <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                        <span style="font-weight: bold;">
+                                                                            <asp:Localize Text="MeasurementID" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMeasurementID" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="trMeasurementName" runat="server" visible="false">
+                                                                    <td>
+                                                                        <span style="font-weight: bold;">
+                                                                            <asp:Localize Text="Measurement Name" ID="Localize3" runat="server" meta:resourcekey="locMeasurementNameResource1"></asp:Localize>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMeasurementName" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="trMeasurementDate" runat="server" visible="false">
+                                                                    <td>
+                                                                        <span style="font-weight: bold;">
+                                                                            <asp:Localize Text="Measurement Date" ID="Localize4" runat="server" meta:resourcekey="locMeasurementDateResource1"></asp:Localize>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMeasurementDate" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="2" style="width: 100%;">
-                                                                        <hr />
+                                                                    <td>
+                                                                        <span style="font-weight: bold;">
+                                                                            <asp:Localize Text="Media" runat="server"
+                                                                                ID="locMedia" meta:resourcekey="locMediaResource1"></asp:Localize>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMedia"></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <span style="font-weight: bold;">
+                                                                            <asp:Localize Text="Colorant" runat="server"
+                                                                                ID="locColorant" meta:resourcekey="locColorantResource1"></asp:Localize>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblColorant"></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <span style="font-weight: bold;">
+                                                                            <asp:Localize runat="server"
+                                                                                Text="Rip Settings" ID="locRipSettings"
+                                                                                meta:resourcekey="locRipSettingsResource1"></asp:Localize>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblRipSettings"></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <span style="font-weight: bold;">
+                                                                            <asp:Localize runat="server"
+                                                                                Text="Spot Target" ID="locSpotTarget"
+                                                                                meta:resourcekey="locSpotTargetResource1"></asp:Localize>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblSpotTarget"></asp:Label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <span style="font-weight: bold;">
+                                                                            <asp:Localize runat="server"
+                                                                                Text="ΔE Type" ID="locDeltaType"
+                                                                                meta:resourcekey="locDeltaTypeResource"></asp:Localize>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblDeltaType" Text="ΔE2000"></asp:Label>
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                            <%--<table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
-                                                                <tr>
-                                                                    <td style="width: 42%;"></td>
-                                                                    <td><span style="font-weight: bold;">∆E Target-Prediction</span></td>
-                                                                    <td><span style="font-weight: bold;">∆E Measured-Target</span></td>
-                                                                    <td><span style="font-weight: bold;">∆E Measured-Prediction</span></td>
+                                                        </td>
+                                                        <td style="vertical-align:top">
+                                                            <table  class="PatchDetailsSummaryTable" style="width: 100%;">
+                                                                <tr >
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr >
+                                                                    <th colspan="3" ><span>ΔE Threshold
+                                                                        </span>
+                                                                    </th>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Average ΔE" runat="server"
-                                                                            ID="Localize2" meta:resourcekey="locMinimumDeltaResource"></asp:Localize>
-                                                                    </span></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMinETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMinEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMinEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Average ΔE" runat="server"
-                                                                            ID="locAverageDelta" meta:resourcekey="locAverageDeltaResource1"></asp:Localize>
-                                                                    </span></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblAvgETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblAvgEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblAvgEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Average ΔE" runat="server"
-                                                                            ID="Localize1" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
-                                                                    </span></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMaxETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="4">
-                                                                        <hr />
+                                                                    <td>Threshold:
+                                                                    </td>
+                                                                    <td style="width:20%">
+                                                                        <telerik:RadSlider
+                                                                            ID="RadSliderForDeltaE"
+                                                                            runat="server"
+                                                                            SmallChange="0.5" 
+                                                                            MinimumValue="0"
+                                                                            Width="125px"
+                                                                            OnClientValueChanged="OnDeltaEChanged"
+                                                                            OnClientLoad="OnDeltaELoad"
+                                                                       />
+                                                                    </td>
+                                                                    <td style="padding-top:2px;">
+                                                                        <input type="text" min="0"  id="txtThreshold" style="width: 25PX; margin-right: 10px" value="2.5" oninput="txtThresholdChanged();" onkeypress="return isNumberKey(this, event);" />
                                                                     </td>
                                                                 </tr>
-                                                            </table>--%>
-                                                            <table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
                                                                 <tr>
-                                                                    <td style="width: 42%;"></td>
-                                                                    <td><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Average ΔE" runat="server"
-                                                                            ID="Localize2" meta:resourcekey="locMinimumDeltaResource"></asp:Localize></span>
+                                                                    <td colspan="3" style="text-align:left; "">
+                                                                        <table style="width:100%;" >
+                                                                            <tr>
+                                                                                <td ><span style="font-weight: bold;">Total Color</span></td>
+                                                                                <td  >
+                                                                                    <asp:Label runat="server" ID="lblTotalColor"  ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr >
+                                                                                <td style="width:40%">
+                                                                                    <span style="font-weight: bold;">
+                                                                                        <asp:Label runat="server" ID="lblLtEqDisplay" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td style="width:20%;">
+                                                                                    <asp:Label runat="server" ID="lblLtEqNumber" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                                <td style="width:20%;"">
+                                                                                    <asp:Label runat="server" ID="lblLtEqAvg" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <span style="font-weight: bold;">
+                                                                                        <asp:Label runat="server" ID="lblGrtDisplay" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td >
+                                                                                    <asp:Label runat="server" ID="lblGrtNumber" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <asp:Label runat="server" ID="lblGrtAvg" ClientIDMode="Static" Text="Loading..."></asp:Label>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
                                                                     </td>
-                                                                    <td><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Average ΔE" runat="server"
-                                                                            ID="locAverageDelta" meta:resourcekey="locAverageDeltaResource1"></asp:Localize></span>
-                                                                    </td>
-                                                                    <td><span style="font-weight: bold;">
-                                                                        <asp:Localize Text="Average ΔE" runat="server"
-                                                                            ID="Localize1" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
-                                                                    </span></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><span style="font-weight: bold;">∆E Target-Prediction</span></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMinETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblAvgETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMaxETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><span style="font-weight: bold;">∆E Measured-Target</span></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMinEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblAvgEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><span style="font-weight: bold;">∆E Measured-Prediction</span></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMinEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblAvgEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="4">
-                                                                        <hr />
+                                                                    <td colspan="3">
+                                                                        <table>
+                                                                        </table>
                                                                     </td>
                                                                 </tr>
                                                             </table>
                                                         </td>
-                                                    </tr>
-
-                                                    <tr id="trMeasurementID" runat="server" visible="false">
-                                                        <td>
-                                                            <span style="font-weight: bold;">
-                                                                <asp:Localize Text="MeasurementID" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
-                                                            </span>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblMeasurementID" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                    </tr>
-                                                    <tr id="trMeasurementName" runat="server" visible="false">
-                                                        <td>
-                                                            <span style="font-weight: bold;">
-                                                                <asp:Localize Text="Measurement Name" ID="Localize3" runat="server" meta:resourcekey="locMeasurementNameResource1"></asp:Localize>
-                                                            </span>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblMeasurementName" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                    </tr>
-                                                    <tr id="trMeasurementDate" runat="server" visible="false">
-                                                        <td>
-                                                            <span style="font-weight: bold;">
-                                                                <asp:Localize Text="Measurement Date" ID="Localize4" runat="server" meta:resourcekey="locMeasurementDateResource1"></asp:Localize>
-                                                            </span>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblMeasurementDate" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span style="font-weight: bold;">
-                                                            <asp:Localize Text="Media" runat="server"
-                                                                ID="locMedia" meta:resourcekey="locMediaResource1"></asp:Localize>
-                                                        </span></td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblMedia"></asp:Label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span style="font-weight: bold;">
-                                                            <asp:Localize Text="Colorant" runat="server"
-                                                                ID="locColorant" meta:resourcekey="locColorantResource1"></asp:Localize></span></td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblColorant"></asp:Label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span style="font-weight: bold;">
-                                                            <asp:Localize runat="server"
-                                                                Text="Rip Settings" ID="locRipSettings"
-                                                                meta:resourcekey="locRipSettingsResource1"></asp:Localize></span></td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblRipSettings"></asp:Label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span style="font-weight: bold;">
-                                                            <asp:Localize runat="server"
-                                                                Text="Spot Target" ID="locSpotTarget"
-                                                                meta:resourcekey="locSpotTargetResource1"></asp:Localize></span>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblSpotTarget"></asp:Label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span style="font-weight: bold;">
-                                                            <asp:Localize runat="server"
-                                                                Text="ΔE Type" ID="locDeltaType"
-                                                                meta:resourcekey="locDeltaTypeResource"></asp:Localize></span>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblDeltaType" Text="ΔE2000"></asp:Label></td>
                                                     </tr>
                                                 </table>
 
@@ -1549,22 +1828,75 @@
                                 </section>
                             </div>
 
-                            <div>
+                                  <div>
                                 <section id="tab3" class="contantbox tabcontant hideclass">
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
                                         <div class="combopart">
-                                            <div id="divReport" style="padding-left: 10px; height: 450px;">
+                                            <div id="divReport" style="padding-left: 10px; height: 550px;">
                                                 <div>
-                                                    <a id="lnkGenerateSpotReport">
-                                                        <img id="imgSpotReport" src="Images/SpotDetailsReport.png" alt="Spot Details Report" />
-                                                    </a>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <a id="lnkGenerateSpotReport">
+                                                                <img id="imgSpotReport" src="Images/SpotDetailsReport.png" alt="Spot Details Report" />
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <table style="line-height: 15px; margin-left: 10px;">
+                                                                    <tr>
+                                                                        <td style="font-family: Arial; font-size: 13px; font-weight: bold;">Summary Report</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="font-family: Arial; font-size: 12px;">Display details of the project and a summary of colors within various ΔE thresholds.</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="padding-top: 10px;">
+                                                                            <a id="lnkDownloadSpotReport" class="gray_bt">
+                                                                            <span style="border-style: none;">Download Report</span>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <br />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <a id="inkSpotPatchSaveColorReport">
+                                                                <img id="imgSpotReport1" src="Images/SpotPatchSaveColorReport.png" alt="Spot Details Report" />
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <table style="line-height: 15px; margin-left: 10px;">
+                                                                    <tr>
+                                                                        <td style="font-family: Arial; font-size: 13px; font-weight: bold;">Saved Colors Report</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="font-family: Arial; font-size: 12px;">Display a detailed analysis of each saved color.
+                                                                            <br />
+                                                                            Select colors in the Patch Details tab and click "save" to add colors to the Saved Color Report
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="padding-top: 10px;">
+                                                                            <a id="inkDownloadSpotPatchSaveColorReport" class="gray_bt">
+                                                                            <span>Download Report</span>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
                                             </div>
                                             <div>
-                                                <asp:Localize runat="server"
-                                                    Text="*Select colors in the Patch Details tab and click 'save' to add colors to the Saved Color Report." ID="locSpotReportMessage"
-                                                    meta:resourcekey="locSpotReportMessageResource1"></asp:Localize>
+                                                &nbsp;
                                             </div>
                                             <div class="clear"></div>
                                         </div>

@@ -285,6 +285,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new MeasurementDataResponse();
 
         }
+
+        public DataTable GetSpotProjectSummaryByDeltaE(int? OptimizeRunId, decimal? Dec_E_Value)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region ITaskBase Members

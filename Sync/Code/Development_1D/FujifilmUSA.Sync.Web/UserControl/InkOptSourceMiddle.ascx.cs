@@ -242,6 +242,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public bool IsDlpMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
+        public DataTable dtMeasurement { get; set; }
+        public decimal Dec_E_Value { get; set; }
         #endregion
 
 

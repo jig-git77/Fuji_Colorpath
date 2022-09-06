@@ -234,6 +234,79 @@ p.Body-Text-Bold-Center {
 	text-transform:none;
 }
 
+.bottom-text-small {
+	font-size: 6px;
+}
+
+.TableHeader-Green td {
+	background-color: #39825b;
+	border-right-color: white;
+	border-right-width: 2px;
+	border-right-style: solid;
+	color: white;
+	font-family: Gill Sans MT;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	text-indent: 0;
+	text-transform: none;
+	height: 25px;
+}
+
+.TableRow-White td {
+	background-color: white;
+	border-bottom-color: black;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	color: white;
+	font-family: Gill Sans MT;
+	font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 1.2;
+	text-align: right;
+	text-decoration: none;
+	text-indent: 0;
+	text-transform: none;
+	margin: 10px;
+}
+
+.TableRow-White td {
+	background-color: white;
+	border-bottom-color: black;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	color: black;
+	font-family: Gill Sans MT;
+	font-size: 10px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	text-align: right;
+	text-decoration: none;
+	text-indent: 0;
+	text-transform: none;
+	margin: 10px;
+}
+
+.TableRow-White p {
+	font-family: Gill Sans MT;
+	font-size: 8px;
+	font-style: normal;
+	font-variant: normal;
+	text-align: right;
+	margin: 2px;
+}
+
+TableRow-Bottom-Border {
+	border-bottom-color: black;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
 .Cover-Subtitle-1 {
 	color:#000000;
 	font-family: Gill Sans MT;

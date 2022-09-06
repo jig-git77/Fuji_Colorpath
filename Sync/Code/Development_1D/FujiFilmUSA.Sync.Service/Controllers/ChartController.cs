@@ -1289,6 +1289,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         public string SpotProjectIDs { get; set; }
+        public DataTable dtMeasurement { get; set; }
+        public decimal Dec_E_Value { get; set; }
         #endregion
     }
 }

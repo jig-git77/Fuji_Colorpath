@@ -148,13 +148,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lblMaxEMP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"])).ToString("N2");
                         lblAvgEMP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMP"])).ToString("N2");
 
+                        RadSliderForDeltaE.MaximumValue = Math.Ceiling(Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"]));
+
                         trMeasurementID.Visible = true;
                         trMeasurementName.Visible = true;
                         trMeasurementDate.Visible = true;
                     }
                     else
                     {                        
-                        tblFirstRunDeltas.Visible = true;                        
+                        tblFirstRunDeltas.Visible = true;
+                        RadSliderForDeltaE.MaximumValue = Math.Ceiling(Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"]));
                         lblMinDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinE"])).ToString("N2");
                         lblMaxDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"])).ToString("N2");
                         lblAvgDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgE"])).ToString("N2");
@@ -305,6 +308,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public bool IsDlpMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
+        public DataTable dtMeasurement { get; set; }
+        public decimal Dec_E_Value { get; set; }
         #endregion
 
     }

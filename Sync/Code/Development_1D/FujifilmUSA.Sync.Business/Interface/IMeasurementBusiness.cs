@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
 using System.Data;
+using System;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
@@ -77,5 +78,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataTable ProjectListByDeviceLAB_Xmf(string deviceSerialNo, short instrumentTypeID);
         DataSet GetChannelMeasurementData(List<int> measurementIds);
         MeasurementDataResponse GetMultiColorMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType);
+        DataTable GetSpotProjectSummaryByDeltaE(int? OptimizeRunId, Decimal? Dec_E_Value);
     }
 }

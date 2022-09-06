@@ -362,7 +362,10 @@ namespace FujifilmUSA.Sync.Common
                 {
                     FileName = "Templates/SingleMeasurement_DLPPlus.htm";
                 }
-
+                else if (ReportType == 22) //---- For spotpatchsavecolorreport
+                {
+                    FileName = "Templates/SpotPatchSaveColorReport.htm";
+                }
                 string FilePath = System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName);// System.Web.HttpContext.Current.Server.MapPath(FileName);
 
                 if (FilePath.Trim() == "")
@@ -422,7 +425,7 @@ namespace FujifilmUSA.Sync.Common
                     theDoc.PageNumber = i;
 
 
-                    if (ReportType == 16 || ReportType == 20 || ReportType == 13 || ReportType == 21) //----For G7 Opti / Validation Report + 4D G7 validation report / New DLP 4D report format // DLPPlus report format
+                    if (ReportType == 16 || ReportType == 20 || ReportType == 13 || ReportType == 21 || ReportType == 22) //----For G7 Opti / Validation Report + 4D G7 validation report / New DLP 4D report format // DLPPlus report format /  BCO Spot Patch Save Color List
                     {
                         str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
                        "<tr style=\"height:52px\"><td align=\"left\" valign=\"middle\" bgcolor=\"#22af7c\" style=\"color:#000000; font-size:10px; font-family: Arial; padding: 0 0 0 50px; \" width=\"218px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
@@ -1343,11 +1346,87 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###UVMode###", Convert.ToString(DT.Rows[0]["UVMode"]).Trim() == "" ? "&nbsp;" : 'M' + Convert.ToString(DT.Rows[0]["UVMode"]).Trim());
                         SBStr.Replace("###Notes###", Convert.ToString(DT.Rows[0]["Notes"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Notes"]).Trim());
                         SBStr.Replace("###TotalColors###", Convert.ToString(DT.Rows[0]["TotalColors"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["TotalColors"]).Trim());
-                        SBStr.Replace("###SelectedColors###", Convert.ToString(DT.Rows[0]["SelectedColors"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["SelectedColors"]).Trim());
 
+                        //For Second page's new table code 
+                        SBStr.Replace("###EGRT5###", Convert.ToString(DT.Rows[0]["EGRT5"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT5"]).Trim());
+                        SBStr.Replace("###EGRT5_PER###", Convert.ToString(DT.Rows[0]["EGRT5"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT5"], DT.Rows[0]["TotalColors"]));
 
+                        SBStr.Replace("###EGRT3###", Convert.ToString(DT.Rows[0]["EGRT3"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT3"]).Trim());
+                        SBStr.Replace("###EGRT3_PER###", Convert.ToString(DT.Rows[0]["EGRT3"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT3"], DT.Rows[0]["TotalColors"]));
 
+                        SBStr.Replace("###EGRT2_5###", Convert.ToString(DT.Rows[0]["EGRT2_5"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT2_5"]).Trim());
+                        SBStr.Replace("###EGRT2_5_PER###", Convert.ToString(DT.Rows[0]["EGRT2_5"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT2_5"], DT.Rows[0]["TotalColors"]));
 
+                        SBStr.Replace("###EGRT2###", Convert.ToString(DT.Rows[0]["EGRT2"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT2"]).Trim());
+                        SBStr.Replace("###EGRT2_PER###", Convert.ToString(DT.Rows[0]["EGRT2"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT2"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###EGRT1_5###", Convert.ToString(DT.Rows[0]["EGRT1_5"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT1_5"]).Trim());
+                        SBStr.Replace("###EGRT1_5_PER###", Convert.ToString(DT.Rows[0]["EGRT1_5"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT1_5"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###EGRT1###", Convert.ToString(DT.Rows[0]["EGRT1"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT1"]).Trim());
+                        SBStr.Replace("###EGRT1_PER###", Convert.ToString(DT.Rows[0]["EGRT1"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT1"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###EGRT0_5###", Convert.ToString(DT.Rows[0]["EGRT0_5"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT0_5"]).Trim());
+                        SBStr.Replace("###EGRT0_5_PER###", Convert.ToString(DT.Rows[0]["EGRT0_5"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT0_5"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###EGRT0_25###", Convert.ToString(DT.Rows[0]["EGRT0_25"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT0_25"]).Trim());
+                        SBStr.Replace("###EGRT0_25_PER###", Convert.ToString(DT.Rows[0]["EGRT0_25"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT0_25"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###EGRT0_1###", Convert.ToString(DT.Rows[0]["EGRT0_1"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT0_1"]).Trim());
+                        SBStr.Replace("###EGRT0_1_PER###", Convert.ToString(DT.Rows[0]["EGRT0_1"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT0_1"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###EGRT0_05###", Convert.ToString(DT.Rows[0]["EGRT0_05"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["EGRT0_05"]).Trim());
+                        SBStr.Replace("###EGRT0_05_PER###", Convert.ToString(DT.Rows[0]["EGRT0_05"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["EGRT0_05"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ5###", Convert.ToString(DT.Rows[0]["ELTEQ5"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ5"]).Trim());
+                        SBStr.Replace("###ELTEQ5_PER###", Convert.ToString(DT.Rows[0]["ELTEQ5"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ5"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ3###", Convert.ToString(DT.Rows[0]["ELTEQ3"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ3"]).Trim());
+                        SBStr.Replace("###ELTEQ3_PER###", Convert.ToString(DT.Rows[0]["ELTEQ3"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ3"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ2_5###", Convert.ToString(DT.Rows[0]["ELTEQ2_5"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ2_5"]).Trim());
+                        SBStr.Replace("###ELTEQ2_5_PER###", Convert.ToString(DT.Rows[0]["ELTEQ2_5"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ2_5"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ2###", Convert.ToString(DT.Rows[0]["ELTEQ2"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ2"]).Trim());
+                        SBStr.Replace("###ELTEQ2_PER###", Convert.ToString(DT.Rows[0]["ELTEQ2"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ2"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ1_5###", Convert.ToString(DT.Rows[0]["ELTEQ1_5"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ1_5"]).Trim());
+                        SBStr.Replace("###ELTEQ1_5_PER###", Convert.ToString(DT.Rows[0]["ELTEQ1_5"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ1_5"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ1###", Convert.ToString(DT.Rows[0]["ELTEQ1"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ1"]).Trim());
+                        SBStr.Replace("###ELTEQ1_PER###", Convert.ToString(DT.Rows[0]["ELTEQ1"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ1"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ0_5###", Convert.ToString(DT.Rows[0]["ELTEQ0_5"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ0_5"]).Trim());
+                        SBStr.Replace("###ELTEQ0_5_PER###", Convert.ToString(DT.Rows[0]["ELTEQ0_5"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ0_5"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ0_25###", Convert.ToString(DT.Rows[0]["ELTEQ0_25"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ0_25"]).Trim());
+                        SBStr.Replace("###ELTEQ0_25_PER###", Convert.ToString(DT.Rows[0]["ELTEQ0_25"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ0_25"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ0_1###", Convert.ToString(DT.Rows[0]["ELTEQ0_1"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ0_1"]).Trim());
+                        SBStr.Replace("###ELTEQ0_1_PER###", Convert.ToString(DT.Rows[0]["ELTEQ0_1"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ0_1"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###ELTEQ0_05###", Convert.ToString(DT.Rows[0]["ELTEQ0_05"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ELTEQ0_05"]).Trim());
+                        SBStr.Replace("###ELTEQ0_05_PER###", Convert.ToString(DT.Rows[0]["ELTEQ0_05"]).Trim() == "" ? "&nbsp;" : Percentage(DT.Rows[0]["ELTEQ0_05"], DT.Rows[0]["TotalColors"]));
+
+                        SBStr.Replace("###EAVG###", Convert.ToString(DT.Rows[0]["EAVG"]).Trim() == "" ? "&nbsp;" : Convert.ToString(Math.Round(Convert.ToDecimal(DT.Rows[0]["EAVG"]), 2)).Trim());
+                        SBStr.Replace("###EMAX###", Convert.ToString(DT.Rows[0]["EMAX"]).Trim() == "" ? "&nbsp;" : Convert.ToString(Math.Round(Convert.ToDecimal(DT.Rows[0]["EMAX"]), 2)).Trim());
+
+                        if (Convert.ToString(DT.Rows[0]["MeasurementID"]).Trim() == "0")
+                        {
+                            SBStr.Replace("###DISPLAY_MSG###", "Predictions are estimations based on a single calculation for demonstration purposes only. More accurate results are expected after optimization.");
+                            SBStr.Replace("###EAVG_MSG###", "Average ∆E Predicted*");
+                            SBStr.Replace("###EMAX_MSG###", "Maximum ∆E Predicted*");
+                        }
+                        else
+                        {
+                            SBStr.Replace("###DISPLAY_MSG###", "&nbsp;");
+                            SBStr.Replace("###EAVG_MSG###", "Average ∆E Optimized");
+                            SBStr.Replace("###EMAX_MSG###", "Maximum ∆E Optimized");
+                        }
+                    }
+
+                    if (ReportType == 22) //SpotPatchSaveColorReport
+                    {
                         StreamReader reader = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/SpotChartDetailsPageTemplate.htm"));
                         StringBuilder template = new StringBuilder(reader.ReadToEnd());
                         reader.Close();
@@ -1371,9 +1450,18 @@ namespace FujifilmUSA.Sync.Common
                                 //var skipList = _spotChartContent.chartDetailList.Skip(count).ToList();
                                 var list = _spotChartContent.chartDetailList.Skip(index * 5).Take(5).ToList();
 
+                                if (index == 0)  //Display text for total selected color for only page 1 header.
+                                {
+                                    builder.Append("<div style='text-align:center;' width='100%'>");
+                                    builder.Append("###SelectedColors### Colors were selected for this report out of ###TotalColors### optimized colors.");
+                                    builder.Append("</div>");
+                                    builder.Replace("###SelectedColors###", Convert.ToString(DT.Rows[0]["SelectedColors"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["SelectedColors"]).Trim());
+                                    builder.Replace("###TotalColors###", Convert.ToString(DT.Rows[0]["TotalColors"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["TotalColors"]).Trim());
+                                }
+
                                 foreach (var item in list)
                                 {
-                                    builder.Append("<table cellspacing='10px' style='margin-top:-5px;border-bottom: 1px solid black;'><tr><td style = 'width:175px;'>");
+                                    builder.Append("<table cellspacing='7px' style='margin-top:-5px;border-bottom: 1px solid black;'><tr><td style = 'width:175px;'>");
                                     builder.Append("<table width='100%' style='height:138px;'><tr><td colspan='2'><b>" + item.spotName + "</b></td></tr>");
                                     builder.Append("<tr><td colspan='2' style='background-color:" + item.HTMLColor + ";height:50px;'></td ></tr>");
 
@@ -1433,7 +1521,6 @@ namespace FujifilmUSA.Sync.Common
                             htmlBuilder.Append("</td></tr>");
                             htmlBuilder.Append("</table>");
                         }
-
 
                         SBStr.Replace("###ALL_SPOT_PATCH_DETAIL###", htmlBuilder.ToString());
                     }
@@ -1514,10 +1601,9 @@ namespace FujifilmUSA.Sync.Common
                     }
                 }
 
-
                 #endregion
 
-                if (ReportType != 20)
+                if (ReportType != 20 && ReportType != 22)
                 {
 
                     // === Table 1 = Chart of Target Vs Actual AB Plot === //           
@@ -2404,7 +2490,23 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
-    }
+        /// <summary>
+        /// Percentage
+        /// </summary>
+        /// <param name="objCount"></param>
+        /// <param name="objTotal"></param>
+        /// <returns></returns>
+        public string Percentage(object objCount, object objTotal)
+        {
+            string strReturn = "0";
 
+            if (objCount != null && objTotal != null)
+            {
+                strReturn = Math.Round(((Convert.ToDecimal(objCount) / Convert.ToDecimal(objTotal)) * 100), 1).ToString();
+            }
+
+            return strReturn + "%";
+        }
+    }
 
 }

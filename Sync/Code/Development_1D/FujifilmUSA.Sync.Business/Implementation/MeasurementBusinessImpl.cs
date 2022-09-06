@@ -3127,6 +3127,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementData"));
             return response;
         }
+
+        public DataTable GetSpotProjectSummaryByDeltaE(int? OptimizeRunId, decimal? Dec_E_Value)
+        {
+            string storedProc = "CPSpot.GetSpotProjectSummaryByDeltaE";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId, Dec_E_Value });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectSummary"));
+            return dtPatchDetails;
+        }
+
         #endregion
 
         #region ITaskBase Members

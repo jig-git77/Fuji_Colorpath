@@ -191,9 +191,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     header.InnerText = GetResourceString(_recValidationAnalyzeHeaderText); //"Validation - Analyze";
                     //------Assign dEMethod value to radiolist, based on selected MetricTargetPresetID----------------//
                     hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
+                    txtReportTitle.Text = "Validation Report";
                 }
                 else
                 {
+                    txtReportTitle.Text = "Optimization Report";
                     SessionManager.Instance.CurrentDlpSubOperation = SessionManager.Instance.CurrentProject.LicenseType; //---Assign DLP or Sync1D project type
                     if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
                     {
@@ -545,6 +547,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public bool IsDlpMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
+        public DataTable dtMeasurement { get; set; }
+        public decimal Dec_E_Value { get; set; }
         #endregion
     }
 }

@@ -1189,6 +1189,7 @@
     <Content Include="Images\FUJIFILM_Slogan_270_100.png" />
     <Content Include="Images\G7AlignmentReportTitle.png" />
     <Content Include="Images\G7DLPPlus Report_preview.jpg" />
+    <Content Include="Images\G7DLPPlus Report_preview_Old.jpg" />
     <Content Include="Images\G7VAlignmentReportTitle.png" />
     <Content Include="Images\G7_logo_web.gif" />
     <Content Include="Images\green.png" />
@@ -1211,6 +1212,7 @@
     <Content Include="Images\SpotAB_Bg.gif" />
     <Content Include="Images\SpotDetailsReport.png" />
     <Content Include="Images\SpotL_Bg.jpg" />
+    <Content Include="Images\SpotPatchSaveColorReport.PNG" />
     <Content Include="Images\SpotProject.png" />
     <Content Include="Images\SpotProject_Certified.png" />
     <Content Include="Images\Sync DLP Report_preview.jpg" />
@@ -1219,7 +1221,10 @@
     <Content Include="Images\Sync1D CMYK Density Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
+    <Content Include="Images\Sync1D Report_preview_G7_Old.jpg" />
+    <Content Include="Images\Sync1D Report_preview_Old.jpg" />
     <Content Include="Images\Sync1D Report_preview_Vali.jpg" />
+    <Content Include="Images\Sync1D Report_preview_Vali_Old.jpg" />
     <Content Include="Images\Sync1D.png" />
     <Content Include="Images\Sync1D_Certified.png" />
     <Content Include="Images\DymoPrintPreviewIcon.png" />
@@ -1281,6 +1286,7 @@
     <Content Include="Images\update_alert_hover.png" />
     <Content Include="Images\user-management.png" />
     <Content Include="Images\Validation Report_G7_preview.jpg" />
+    <Content Include="Images\Validation Report_G7_preview_Old.jpg" />
     <Content Include="Images\Validation Report_preview.jpg" />
     <Content Include="Images\ValidationFailed.png" />
     <Content Include="Images\ValidationFailedOld.png" />
@@ -9360,7 +9366,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

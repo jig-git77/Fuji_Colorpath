@@ -58,6 +58,7 @@ namespace FujifilmUSA.Sync.Entity
         public bool hasMeasurement { get; set; }
         public List<SpotPatchDetails> chartDetailList { get; set; }
         public string SpotProjectName { get; set; }
+        public string IsSpotPatchSaveColorReport { get; set; }
     }
 
     public class SpotPatchDetails

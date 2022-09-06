@@ -323,5 +323,11 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             _viewAnalyze.Measurement = measurementBusiness.GetValidationMeasurementPatchDetailsForExport(_viewAnalyze.MeasurementId);
         }
+        public void SpotProjectSummarySliderByDeltaE()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.dtMeasurement = measurementBusiness.GetSpotProjectSummaryByDeltaE(_viewAnalyze.OptimizeRunId, _viewAnalyze.Dec_E_Value);
+        }
     }
 }

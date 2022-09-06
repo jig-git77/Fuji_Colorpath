@@ -1005,6 +1005,37 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
+
+        [HttpGet]
+        public IHttpActionResult SpotProjectSummarySliderByDeltaE(int? OptimizeRunID, decimal? Dec_E)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<DataTable> httpResponse = new BaseResponse<DataTable>();
+            string validationMessage = "";
+            try
+            {
+                if (OptimizeRunID == null || Dec_E == null)
+                {
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+                }
+
+                OptimizeRunId = (int)OptimizeRunID;
+                Dec_E_Value = (decimal)Dec_E;
+
+                _presenterAnalyze.SpotProjectSummarySliderByDeltaE();
+                httpResponse.Data = dtMeasurement;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
         #endregion
 
         #region Methods for Patch Details tab
@@ -1216,6 +1247,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsDlpMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
+        public DataTable dtMeasurement { get; set; }
+        public decimal Dec_E_Value { get; set; }
         #endregion
     }
 }

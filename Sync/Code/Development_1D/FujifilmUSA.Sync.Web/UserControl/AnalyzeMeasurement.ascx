@@ -1517,9 +1517,25 @@
                                         <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 100%;"
                                             cellpadding="0" cellspacing="0" class="TABLE1">
                                             <tr id="Tr4" runat="server">
-                                                <td id="Td5" valign="top" runat="server">
+                                                <td  valign="top" runat="server"  style="width:35%; padding-left:10px;">
                                                     <a id="btnGeneratePDF">
-                                                        <img src="Images/processbar.gif" style="padding-left: 10px;" /></a>
+                                                        <img src="Images/processbar.gif" style="padding-right: 10px;" /></a>
+                                                </td>
+                                                <td>
+                                                    <table style="line-height: 15px;">
+                                                        <tr>
+                                                           <td style="font-family: Arial; font-size: 13px;padding-left:4px; font-weight: bold;">
+                                                               <asp:Label ID="txtReportTitle" runat="server"></asp:Label>
+                                                           </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-top: 10px;">
+                                                                <a id="lnkDownloadReport" class="gray_bt">
+                                                                    <span style="border-style: none;">Download Report</span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </td>
                                                 <td valign="top">
                                                     <div id="Div_ReportGrading" runat="server" visible="false" style="float: right; padding-right: 10px;">
