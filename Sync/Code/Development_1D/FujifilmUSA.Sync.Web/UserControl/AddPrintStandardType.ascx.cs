@@ -48,7 +48,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             lblHeader.Text = GetResourceString(_recAddPrintStandardType); //"Add PrintStandardType";            
             BindSourceProfileDropDown();
-          
+            BindSortOrderDropDown();
+
             if (Request.QueryString["PrintStandardTypeId"] != null)
             {
                 var PrintStandardTypeId = Request.QueryString["PrintStandardTypeId"];
@@ -79,7 +80,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SourceProfile = new SourceProfile()
                 {
                     SourceProfileId = Convert.ToInt16(cmbSourceProfile.SelectedValue)
-                }                
+                },
+                RankId = Convert.ToInt16(cmbRankId.SelectedValue.ToString())
             };
 
             if (hdnPrintStandardTypeID.Value == "0")  // Add New Print Standard Type
@@ -118,6 +120,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbSourceProfile.Items.Insert(0, new ListItem(GetResourceString(_recSelectSourceProfileText), "0"));//-- Select Source Profile --
         }
 
+        /// <summary>
+        /// BindSourceProfileDropDown
+        /// </summary>
+        private void BindSortOrderDropDown()
+        {
+            cmbRankId.Items.Clear();
+
+            for (int i = 100; i > 0; i--)
+            {
+                cmbRankId.Items.Insert(0, i.ToString());
+            }
+
+            cmbRankId.Items.Insert(0, new ListItem(GetResourceString(_recSelectSourceProfileText), "0"));//-- Select Source Profile --
+        }
+
         private void LoadPrintStandardType(int iPrintStandardTypeId)
         {
              PrintStandardType = new Entity.CPSync1D.PrintStandardType { PrintStandardTypeID = (short)iPrintStandardTypeId };
@@ -128,6 +145,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPrintStandardType.Text = PrintStandardType.PrintStandard;
                 cmbSourceProfile.SelectedValue = Convert.ToString(PrintStandardType.SourceProfile.SourceProfileId);  
                 chkIsSync1DType.Checked = (PrintStandardType.IsSync1DType == true ? true : false);
+                cmbRankId.SelectedValue = PrintStandardType.RankId.ToString();
+            
             }
         }
         #endregion
@@ -136,6 +155,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short PrintStandardTypeID { get; set; }
         public string PrintStandard { get; set; }
         public bool IsSync1DType { get; set; }
+        public short RankId { get; set; }
         public Entity.CPSync1D.PrintStandardType PrintStandardType { get; set; }
         public List<Entity.CPSync1D.PrintStandardType> PrintStandardTypes { get; set; }
         public Dictionary<int, string> SourceProfileList { get; set; }

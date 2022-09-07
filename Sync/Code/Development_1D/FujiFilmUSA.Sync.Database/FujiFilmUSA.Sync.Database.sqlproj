@@ -66,6 +66,7 @@
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
     <None Include="Table Script\08_2022\08-26-2022_[CP].[CreateReferenceChart].sql" />
+    <None Include="Table Script\09_2022\09-07-2022_UpdateNPAPIPlugintoBothinLicense.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartTypeList].sql" />
@@ -88,10 +89,21 @@
     <None Include="Stored Procedures\[Report].[GetSpotProjectOptimizeDetails].sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Stored Procedures\[CPSpot].[GetSpotProjectSummaryByDeltaE].sql" />
+    <None Include="Stored Procedures\[CPSpot].[GetSpotProjectSummaryByDeltaE].sql" />
     <None Include="Stored Procedures\[CPSpot].[GetPatchDetailsByOptimizeRunID_Summary].sql" />
     <Build Include="Stored Procedures\[CPSpot].[GetPatchDetailsByOptimizeRunID].sql" />
     <Build Include="Table Script\09_2022\09-06-2022_CPSpot.GetPatchDetailsByOptimizeRunID.sql" />
     <None Include="Table Script\09_2022\09-06-2022_CPSpot.GetPatchDetailsByOptimizeRunID_Summary.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\[CP].[GetPrintStandardType].sql" />
+    <None Include="Stored Procedures\[CP].[GetPrintStandardTypeList].sql" />
+    <None Include="Stored Procedures\[CP].[InsertPrintStandardType].sql" />
+    <None Include="Stored Procedures\[CP].[UpdatePrintStandardType].sql" />
+    <None Include="Table Script\09_2022\09-07-2022_CP.UpdatePrintStandardType.sql" />
+    <None Include="Table Script\09_2022\09-07-2022_Add-Column-RankId-PrintStandType.sql" />
+    <None Include="Table Script\09_2022\09-07-2022_CP.GetPrintStandardType.sql" />
+    <None Include="Table Script\09_2022\09-07-2022_CP.GetPrintStandardTypeList.sql" />
+    <None Include="Table Script\09_2022\09-07-2022_CP.InsertPrintStandardType.sql" />
   </ItemGroup>
 </Project>

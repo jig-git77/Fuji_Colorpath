@@ -103,7 +103,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short PrintStandardTypeID { get; set; }
         public string PrintStandard { get; set; }
         public bool IsSync1DType { get; set; }
-
+        public short RankId { get; set; }
         public Entity.CPSync1D.PrintStandardType PrintStandardType { get; set; }
         public List<Entity.CPSync1D.PrintStandardType> PrintStandardTypes { get; set; }
         public Dictionary<int, string> SourceProfileList { get; set; }       

@@ -168,7 +168,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         printStandardType.PrintStandard,
                                         printStandardType.IsSync1DType,
-                                        printStandardType.SourceProfile.SourceProfileId                                       
+                                        printStandardType.SourceProfile.SourceProfileId,
+                                        printStandardType.RankId
                                     });
                     if (returnValue == -1)
                     {
@@ -194,7 +195,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         printStandardType.PrintStandardTypeID,
                                         printStandardType.PrintStandard,
                                         printStandardType.IsSync1DType,
-                                        printStandardType.SourceProfile.SourceProfileId                                     
+                                        printStandardType.SourceProfile.SourceProfileId,
+                                        printStandardType.RankId
                                     });
                     if (returnValue == -1)
                     {
@@ -235,7 +237,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
                                 PrintStandard = DataReader.ReadString(x, "PrintStandard"),
                                 IsSync1DType = DataReader.ReadBoolean(x, "IsSync1DType"),
-                                SourceProfile = new SourceProfile() { SourceProfileId = DataReader.ReadShort(x, "SourceProfileID"), ProfileName = DataReader.ReadString(x, "ProfileName") }                               
+                                SourceProfile = new SourceProfile() { SourceProfileId = DataReader.ReadShort(x, "SourceProfileID"), ProfileName = DataReader.ReadString(x, "ProfileName") } ,
+                                RankId = DataReader.ReadShort(x, "RankId")
                             }).ToList();
                     }
                 },

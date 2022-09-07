@@ -77,6 +77,25 @@
                                     </div>
                                 </td>
                             </tr>
+                             <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;"><asp:Localize Text="Rank Id" 
+                                        ID="locRankId" runat="server" meta:resourcekey="locRankIdResource1"></asp:Localize>
+                                    </span>
+                                </td>
+                                <td style="width:8px;">
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                        <asp:DropDownList ID="cmbRankId" runat="server" Width="370px" CssClass="select" 
+                                            meta:resourcekey="locRankIdResource1">
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
                             <tr style="visibility:hidden;">
                                 <td  align="right">
                                     <span style="font-weight: bold;"><asp:Localize Text="Is Sync1DType?" runat="server" 

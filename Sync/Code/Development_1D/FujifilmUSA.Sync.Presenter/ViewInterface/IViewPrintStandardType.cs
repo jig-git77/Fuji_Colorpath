@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         short PrintStandardTypeID { get; set; }
         string PrintStandard { get; set; }
         bool IsSync1DType { get; set; }
-
+        short RankId { get; set; }
         Entity.CPSync1D.PrintStandardType PrintStandardType { get; set; }
         List<Entity.CPSync1D.PrintStandardType> PrintStandardTypes { get; set; }
         Dictionary<int, string> SourceProfileList { get; set; }       
