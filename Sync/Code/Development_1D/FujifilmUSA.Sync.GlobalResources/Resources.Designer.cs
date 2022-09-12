@@ -1888,6 +1888,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while retrieving MetricTarget Preset. Please contact your administrator..
+        /// </summary>
+        internal static string Error_GetMetricTargetPresetID {
+            get {
+                return ResourceManager.GetString("Error_GetMetricTargetPresetID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while retrieving MetricTargetPreset list. Please contact your administrator..
         /// </summary>
         internal static string Error_GetMetricTargetPresets {
@@ -1983,6 +1992,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Error_GetReferenceChartForLabCalculation {
             get {
                 return ResourceManager.GetString("Error_GetReferenceChartForLabCalculation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while retrieving Reference Chart Preset. Please contact your administrator..
+        /// </summary>
+        internal static string Error_GetReferenceChartPreset {
+            get {
+                return ResourceManager.GetString("Error_GetReferenceChartPreset", resourceCulture);
             }
         }
         
@@ -2235,6 +2253,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Error_InsertProfilerOptionPreset {
             get {
                 return ResourceManager.GetString("Error_InsertProfilerOptionPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while inserting Reference Chart Preset.Please contact your administrator..
+        /// </summary>
+        internal static string Error_InsertReferenceChartPreset {
+            get {
+                return ResourceManager.GetString("Error_InsertReferenceChartPreset", resourceCulture);
             }
         }
         

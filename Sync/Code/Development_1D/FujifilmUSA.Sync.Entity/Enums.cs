@@ -230,7 +230,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ManageMToolVersion")] //Manage MTool Version
         ManageMToolVersion = 22,
         [Description("ManageUpdateChangeLog")] //Update ChangeLog
-        ManageUpdateChangeLog = 23
+        ManageUpdateChangeLog = 23,
+        [Description("AssignChartWithMTP")] //Assign Chart With MTP
+        AssignChartWithMTP = 24
     }
     public enum ECurrentProjectStatus
     {

@@ -67,6 +67,7 @@
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
     <None Include="Table Script\08_2022\08-26-2022_[CP].[CreateReferenceChart].sql" />
     <None Include="Table Script\09_2022\09-07-2022_UpdateNPAPIPlugintoBothinLicense.sql" />
+    <None Include="Table Script\09_2022\09-12-2022_Insert-Permission-Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartTypeList].sql" />
@@ -105,5 +106,27 @@
     <None Include="Table Script\09_2022\09-07-2022_CP.GetPrintStandardType.sql" />
     <None Include="Table Script\09_2022\09-07-2022_CP.GetPrintStandardTypeList.sql" />
     <None Include="Table Script\09_2022\09-07-2022_CP.InsertPrintStandardType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\[CP].[GetReferenceChartForMTP].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\09_2022\09-12-2022_CP.GetReferenceChartForMTP.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\[CPSyncV].[GetMetricTargetPresetForMTP].sql" />
+    <None Include="Table Script\09_2022\09-12-2022_CPSyncV.GetMetricTargetPresetForMTP.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\[CPSyncV].[GetReferenceChartPreset].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\09_2022\09-12-2022_CPSyncV.GetReferenceChartPreset.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\[CPSyncV].[InsertReferenceChartPreset].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\09_2022\09-12-2022_CPSyncV.InsertReferenceChartPreset.sql" />
   </ItemGroup>
 </Project>

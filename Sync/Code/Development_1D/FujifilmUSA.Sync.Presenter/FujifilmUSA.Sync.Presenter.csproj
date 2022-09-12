@@ -83,6 +83,7 @@
     <Compile Include="PresenterProfileManagement.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PresenterReferenceChartPreset.cs" />
     <Compile Include="PresenterReportCMYKDensity.cs" />
     <Compile Include="PresenterReportGrading.cs" />
     <Compile Include="PresenterReportSingleMeasurement.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="ViewInterface\IViewPrintStandardType.cs" />
     <Compile Include="ViewInterface\IViewProfileManagement.cs" />
     <Compile Include="ViewInterface\IViewReferenceChartManagement.cs" />
+    <Compile Include="ViewInterface\IViewReferenceChartPreset.cs" />
     <Compile Include="ViewInterface\IViewReportCMYKDensity.cs" />
     <Compile Include="ViewInterface\IViewReportGrading.cs" />
     <Compile Include="ViewInterface\IViewReportSingleMeasurement.cs" />

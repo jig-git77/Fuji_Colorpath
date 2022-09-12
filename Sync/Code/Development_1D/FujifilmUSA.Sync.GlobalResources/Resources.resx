@@ -1398,4 +1398,13 @@
   <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
     <value>Sync1D Multi Color</value>
   </data>
+  <data name="Error_GetMetricTargetPresetID" xml:space="preserve">
+    <value>Error occured while retrieving MetricTarget Preset. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetReferenceChartPreset" xml:space="preserve">
+    <value>Error occured while retrieving Reference Chart Preset. Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertReferenceChartPreset" xml:space="preserve">
+    <value>Error occured while inserting Reference Chart Preset.Please contact your administrator.</value>
+  </data>
 </root>

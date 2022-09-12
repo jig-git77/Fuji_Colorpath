@@ -123,6 +123,7 @@
     <Content Include="ApplicationError.aspx" />
     <Content Include="App_Browsers\firefox.browser" />
     <Content Include="App_Browsers\ie.browser" />
+    <Content Include="AssignRefChartWMetricTargetPreset.aspx" />
     <Content Include="BrowserTest.aspx" />
     <Content Include="COAddProject.aspx" />
     <Content Include="COAnalyze.aspx" />
@@ -4011,6 +4012,7 @@
     <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.fr.resx" />
     <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.ja.resx" />
     <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.resx" />
+    <Content Include="UserControl\AssignRefChartWMetricTargetPreset.ascx" />
     <Content Include="UserControl\CODisplaybar.ascx" />
     <Content Include="UserControl\COErrorMessage.ascx" />
     <Content Include="UserControl\COProjectMaxLimit.ascx" />
@@ -4465,6 +4467,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceMessages.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="AssignRefChartWMetricTargetPreset.aspx.cs">
+      <DependentUpon>AssignRefChartWMetricTargetPreset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AssignRefChartWMetricTargetPreset.aspx.designer.cs">
+      <DependentUpon>AssignRefChartWMetricTargetPreset.aspx</DependentUpon>
     </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -5158,6 +5167,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MeasurementCommonNew.ascx.ja.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AssignRefChartWMetricTargetPreset.ascx.cs">
+      <DependentUpon>AssignRefChartWMetricTargetPreset.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AssignRefChartWMetricTargetPreset.ascx.designer.cs">
+      <DependentUpon>AssignRefChartWMetricTargetPreset.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>

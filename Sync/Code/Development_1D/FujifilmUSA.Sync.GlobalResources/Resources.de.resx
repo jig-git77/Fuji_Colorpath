@@ -959,7 +959,7 @@ erwünschten Format überein.</value>
     <value>Leer</value>
   </data>
   <data name="ValidationStatus_NotCertified" xml:space="preserve">
-    <value>Validation(Print Condition is Open)</value>
+    <value>Validation(Print Condition is Open)_de</value>
   </data>
   <data name="Validation_NoMeasurements" xml:space="preserve">
     <value>Das aktuelle Projekt hat keine Validierung, eine Analyse kann deshalb nicht angezeigt werden.</value>
@@ -1374,5 +1374,14 @@ erwünschten Format überein.</value>
   </data>
   <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
     <value>Sync1D Multi Color_de</value>
+  </data>
+  <data name="Error_GetMetricTargetPresetID" xml:space="preserve">
+    <value>Error occured while retrieving MetricTarget Preset. Please contact your administrator._de</value>
+  </data>
+  <data name="Error_GetReferenceChartPreset" xml:space="preserve">
+    <value>Error occured while retrieving Reference Chart Preset. Please contact your administrator._de</value>
+  </data>
+  <data name="Error_InsertReferenceChartPreset" xml:space="preserve">
+    <value>Error occured while inserting Reference Chart Preset.Please contact your administrator._de</value>
   </data>
 </root>

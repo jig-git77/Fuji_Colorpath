@@ -4,7 +4,7 @@
 <script type="text/javascript">
     jQuery(document).ready(function () {
         $('#dock').hide();
-    });   
+    });
 </script>
 
 <div class="admin_top">
@@ -342,7 +342,7 @@
                 <td style="height:50px;">
                 </td>
             </tr>   
-           <tr style="vertical-align:central;" >
+             <tr style="vertical-align:central;" >
                 <td style="vertical-align:central;" >                    
                      <div id="divMToolVersion" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
                     <asp:LinkButton ID="lnkMToolVersion" runat="server"
@@ -361,11 +361,25 @@
                     <asp:LinkButton ID="lnkUpdateChangeLog" runat="server"
                         PostBackUrl="~/UpdateChangeLogManagement.aspx">                       
                         <div>
-                            <asp:Image ID="ImgUpdateChangeLog" runat="server" AlternateText="Update Change Log" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="UpdateChangeLog" />
+                            <asp:Image ID="ImgUpdateChangeLog" runat="server" AlternateText="Update Change Log" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Update Change Log" />
                         </div>
                         <asp:Localize runat="server" Text="Update Change Log" ID="Localize8" ></asp:Localize>                    
                     </asp:LinkButton>
                 </div>
+
+                    <div id="divAssignChartWithMTPSeperator" runat ="server" align="center" valign="bottom" style="float:left;">
+                        <img alt="" src="Images/admin-icon-divider.png" />
+                    </div> 
+                    <div id="divAssignChartWithMTP" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                        <asp:LinkButton ID="lnkAssignChartWithMTP" runat="server"
+                            PostBackUrl="~/AssignRefChartWMetricTargetPreset.aspx">                       
+                            <div>
+                                <asp:Image ID="ImgAssignChartWithMTP" runat="server" AlternateText="Assign Chart with MTP" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Assign Chart with MTP" />
+                            </div>
+                            <asp:Localize runat="server" Text="Assign Chart with MTP" ID="Localize9" ></asp:Localize>                    
+                        </asp:LinkButton>
+                    </div>
+
                     </td>
                  </tr>
             <tr>

@@ -80,6 +80,7 @@
     <Compile Include="Implementation\ReferenceChartBusinessImpl.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Implementation\ReferenceChartPresetImpl.cs" />
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
     <Compile Include="Implementation\SpotTargetBusinessImpl.cs" />
     <Compile Include="Implementation\UpdateChangeLogImpl.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Interface\IReferenceChartBusiness.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interface\IReferenceChartPresetBusiness.cs" />
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ISpotTargetBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />

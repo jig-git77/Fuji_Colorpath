@@ -811,7 +811,7 @@
     <value>Aucun</value>
   </data>
   <data name="ValidationStatus_NotCertified" xml:space="preserve">
-    <value>Validation(Print Condition is Open)</value>
+    <value>Validation(Print Condition is Open)_fr</value>
   </data>
   <data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
     <value>Gestions des règles de validation d'activité</value>
@@ -1373,5 +1373,14 @@
   </data>
   <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
     <value>Sync1D Multi Color_fr</value>
+  </data>
+  <data name="Error_GetMetricTargetPresetID" xml:space="preserve">
+    <value>Error occured while retrieving MetricTarget Preset. Please contact your administrator._fr</value>
+  </data>
+  <data name="Error_GetReferenceChartPreset" xml:space="preserve">
+    <value>Error occured while retrieving Reference Chart Preset. Please contact your administrator._fr</value>
+  </data>
+  <data name="Error_InsertReferenceChartPreset" xml:space="preserve">
+    <value>Error occured while inserting Reference Chart Preset.Please contact your administrator._fr</value>
   </data>
 </root>

@@ -10,7 +10,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public AdminMenuBar()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-        } 
+        }
         #endregion
 
         #region "Page Events"
@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region "Control Events"
-        
+
         protected void lbtnCompany_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("CompanyManagement.aspx");
@@ -116,7 +116,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("PatchPresetManagement.aspx");
         }
-   
+
         protected void lbtnPrintStandardType_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
@@ -142,8 +142,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("UpdateChangeLogManagement.aspx");
         }
-        #endregion
+        protected void lbtAssignChartwithMTP_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("AssignRefChartWMetricTargetPreset.aspx");
+        }
 
+        #endregion
 
     }
 }

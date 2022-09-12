@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Settings()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-        } 
+        }
         #endregion
 
         #region Page Events
@@ -35,15 +35,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             dvApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
             dvProfilerSettings.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings);
 
-            divMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset); 
+            divMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
             divPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
             divLookupTVILABDensity.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity);
             divPatchPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
             divSpotTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget);
             divMetricTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
             divMeasurementLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementLogs);
-            divMToolVersion.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementLogs);
+            divMToolVersion.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMToolVersion);
             divUpdateChangeLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUpdateChangeLog);
+            divAssignChartWithMTP.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.AssignChartWithMTP);
 
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
@@ -66,6 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divMetricTargetSeperator.Visible = divMetricTarget.Visible && divSpotTarget.Visible;
             divMeasurementLogSeperator.Visible = divMeasurementLog.Visible && divMetricTarget.Visible;
             divUpdateChangeLogSeperator.Visible = divMToolVersion.Visible && divUpdateChangeLog.Visible;
+            divAssignChartWithMTPSeperator.Visible = divUpdateChangeLog.Visible && divAssignChartWithMTP.Visible;
         }
         #endregion
 
