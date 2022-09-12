@@ -40,7 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!Page.IsPostBack)
             {
-                hdnCurrentUserID.Value= Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
+                hdnCurrentUserID.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
                 hdnCurrentProjectLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
@@ -63,7 +63,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId)
                 {
                     header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
-                    DLPName = "No NCP";                    
+                    DLPName = "No NCP";
                     locSummary_Header.Text = GetResourceString(_recSummaryHeaderRun0);
                 }
                 else
@@ -116,7 +116,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Response.Redirect("Export.aspx");
             }
 
-        }        
+        }
         #endregion
 
 
@@ -132,7 +132,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) > 0)
                     {
                         tblSecondRunDeltas.Visible = true;
-                        lblMeasurementID.Text= Convert.ToString(dtPatchDetails.Rows[0]["MeasurementID"]);
+                        lblMeasurementID.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementID"]);
                         lblMeasurementName.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);
                         lblMeasurementDate.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementDate"]);
 
@@ -155,7 +155,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         trMeasurementDate.Visible = true;
                     }
                     else
-                    {                        
+                    {
                         tblFirstRunDeltas.Visible = true;
                         RadSliderForDeltaE.MaximumValue = Math.Ceiling(Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"]));
                         lblMinDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinE"])).ToString("N2");
@@ -166,11 +166,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
-        
 
         public bool IsNewNCP
         {
@@ -306,6 +304,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public bool IsDlpMultiColor { get; set; }
+        public bool IsSync1DMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
         public DataTable dtMeasurement { get; set; }

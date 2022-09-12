@@ -97,14 +97,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.MeasurementSummary = measurementBusiness.GetVMeasurementSummary(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements,_viewAnalyze.IsSyncDLPPlusType);
+            _viewAnalyze.MeasurementSummary = measurementBusiness.GetVMeasurementSummary(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements, _viewAnalyze.IsSyncDLPPlusType);
         }
 
         public void GetPatchDetailsofMeasurement()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.dtPatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsDlpMultiColor, _viewAnalyze.CurrentRunname, _viewAnalyze.LicenseTypeId);
+            _viewAnalyze.dtPatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsDlpMultiColor, _viewAnalyze.IsSync1DMultiColor, _viewAnalyze.CurrentRunname, _viewAnalyze.LicenseTypeId);
         }
 
         public void GetSpotPatchDetailsofMeasurement()
@@ -128,7 +128,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            var GaumatChartData = measurementBusiness.GetGamutChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements,_viewAnalyze.IsDlpMultiColor);
+            var GaumatChartData = measurementBusiness.GetGamutChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements, _viewAnalyze.IsDlpMultiColor);
             _viewAnalyze.DTGaumatChart1 = GaumatChartData[0];
             _viewAnalyze.DTGaumatChart2 = GaumatChartData[1];
             _viewAnalyze.DTLABChart = GaumatChartData[2];
@@ -138,7 +138,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            var G7ChardData = measurementBusiness.GetG7ChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsAverageOfMeasurements,_viewAnalyze.IsSyncDLPPlusType);
+            var G7ChardData = measurementBusiness.GetG7ChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsAverageOfMeasurements, _viewAnalyze.IsSyncDLPPlusType);
             _viewAnalyze.GrayFChart = G7ChardData[0];
             _viewAnalyze.GrayFSummary = G7ChardData[1];
             _viewAnalyze.BlackLChart = G7ChardData[2];
@@ -279,7 +279,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            optimizeRunBusiness.OptimizeSpotNamedColorProfile(                    
+            optimizeRunBusiness.OptimizeSpotNamedColorProfile(
                     _viewAnalyze.OptimizeRunId,
                     (int)EOptimizeRunStatus.Closed,
                     DateTime.Now);
@@ -310,7 +310,7 @@ namespace FujifilmUSA.Sync.Presenter
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             _viewAnalyze.Measurement = measurementBusiness.GetSpotMeasurementPatchDetailsForExport(_viewAnalyze.OptimizeRunId);
-        }        
+        }
         public void Get1DPatchDetailsOfMeasurementExport()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
@@ -323,6 +323,7 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             _viewAnalyze.Measurement = measurementBusiness.GetValidationMeasurementPatchDetailsForExport(_viewAnalyze.MeasurementId);
         }
+
         public void SpotProjectSummarySliderByDeltaE()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();

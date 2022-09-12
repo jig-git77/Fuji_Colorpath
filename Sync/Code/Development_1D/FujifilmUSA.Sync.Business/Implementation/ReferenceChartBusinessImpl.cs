@@ -70,6 +70,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.Channel_7,
                                                                                     referenceChartType.Channel_8,
                                                                                     referenceChartType.Channel_9,
+                                                                                    referenceChartType.IsSync1DMultiColor_ISO,
+                                                                                    referenceChartType.IsSync1DMultiColor_G7,
+                                                                                    referenceChartType.Validation_Sync1D_Multi_Color,
                                                                                     referenceChartType.ChartSettingXML,
                                                                                     referenceChartType.DeviceFamilyId
                                                                                 });
@@ -212,7 +215,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Channel_7 = DataReader.ReadShort(x, "Channel_7"),
                                 Channel_8 = DataReader.ReadShort(x, "Channel_8"),
                                 Channel_9 = DataReader.ReadShort(x, "Channel_9"),
-                                DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID")
+                                IsSync1DMultiColor_ISO = DataReader.ReadShort(x, "IsSync1DMultiColor_ISO"),
+                                IsSync1DMultiColor_G7 = DataReader.ReadShort(x, "IsSync1DMultiColor_G7"),
+                                Validation_Sync1D_Multi_Color = DataReader.ReadShort(x, "Validation_Sync1D_Multi_Color"),
+                                DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID"),
 
                             }).ToList();
                     }
@@ -257,6 +263,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.Channel_7,
                                         referenceChartType.Channel_8,
                                         referenceChartType.Channel_9,
+                                        referenceChartType.IsSync1DMultiColor_ISO,
+                                        referenceChartType.IsSync1DMultiColor_G7,
+                                        referenceChartType.Validation_Sync1D_Multi_Color,
                                         referenceChartType.ChartSettingXML,
                                         referenceChartType.DeviceFamilyId
                                     });
@@ -318,15 +327,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var referenceChart = new ReferenceChartType();
             Common.ImplementBusinessLogic(
                 () =>
+                {
+                    var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CP].[GetReferenceChartDataForXmf]", new object[] { refChartId });
+                    if (dsReferenceChart != null && dsReferenceChart.Tables.Count > 0 && dsReferenceChart.Tables[0].Rows.Count > 0)
                     {
-                        var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CP].[GetReferenceChartDataForXmf]", new object[] { refChartId });
-                        if (dsReferenceChart != null && dsReferenceChart.Tables.Count > 0 && dsReferenceChart.Tables[0].Rows.Count > 0)
-                        {
-                            referenceChart.ReferenceChartTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "ReferenceChartTypeID");
-                            referenceChart.ChartPreview = DataReader.ReadByteArray(dsReferenceChart.Tables[0].Rows[0], "ChartPreview");
-                            referenceChart.OriginalChart = DataReader.ReadByteArray(dsReferenceChart.Tables[0].Rows[0], "OriginalChart");
-                        }
-                    },
+                        referenceChart.ReferenceChartTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "ReferenceChartTypeID");
+                        referenceChart.ChartPreview = DataReader.ReadByteArray(dsReferenceChart.Tables[0].Rows[0], "ChartPreview");
+                        referenceChart.OriginalChart = DataReader.ReadByteArray(dsReferenceChart.Tables[0].Rows[0], "OriginalChart");
+                    }
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartsForXmf"));
             return referenceChart;
         }

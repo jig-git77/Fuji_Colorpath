@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.Measurement> MeasurementSummary { get; set; }
 
         List<Entity.AnalyzeChart_G7> GrayFChart { get; set; }
-        List<Entity.AnalyzeChart_G7> GrayFSummary { get; set; }       
+        List<Entity.AnalyzeChart_G7> GrayFSummary { get; set; }
         List<Entity.AnalyzeChart_G7> BlackLChart { get; set; }
         List<Entity.AnalyzeChart_G7> BlackLSummary { get; set; }
         List<Entity.AnalyzeChart_G7> GrayLChart { get; set; }
@@ -60,9 +60,10 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectStatus { get; set; }
         Project Project { get; set; }
         int SpotProjectId { get; set; }
-        bool IsUsed { get; set; }        
+        bool IsUsed { get; set; }
         bool IsSyncDLPPlusType { get; }
         bool IsDlpMultiColor { get; set; }
+        bool IsSync1DMultiColor { get; set; }
         string CurrentRunname { get; set; }
         int LicenseTypeId { get; set; }
         decimal Dec_E_Value { get; set; }

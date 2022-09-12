@@ -118,10 +118,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get { return updateProgress.ClientID; }
         }
-     
+
         public string UpdateProgressClientID
         {
-            get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }            
+            get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }
         }
 
         public string DLPMessage
@@ -161,7 +161,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterGlobal = new PresenterGlobal();
         }
 
-        
+
 
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -179,7 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnCurrentProjectLicenseType.Value = SessionManager.Instance.CurrentProject.LicenseType.ToString();
                 hdnCurrentDeviceName.Value = SessionManager.Instance.CurrentDevice.DeviceName.ToString();
                 hdnCurrentUserRole.Value = SessionManager.Instance.CurrentUser.Role.RoleId.ToString();
-                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;               
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
@@ -197,7 +197,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     txtReportTitle.Text = "Optimization Report";
                     SessionManager.Instance.CurrentDlpSubOperation = SessionManager.Instance.CurrentProject.LicenseType; //---Assign DLP or Sync1D project type
-                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1DMultiColor) //-----Sync1D ----Sync1DMultiColor
                     {
                         //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
                         hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
@@ -224,6 +224,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnSync1DType.Value = IsSync1DType.ToString();
                 hdnSyncDlpPlusType.Value = IsSyncDLPPlusType.ToString();
                 hdnIsDlpMultiColor.Value = Convert.ToString(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ? true : false);
+                hdnIsSync1DMultiColor.Value = Convert.ToString(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor ? true : false);
                 hdnCurrentRunName.Value = SessionManager.Instance.CurrentOptimizeRun.CurrentRunName.ToString();
 
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
@@ -241,7 +242,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         //Div_ReportGrading.Visible = true; //---Disable for time being in Production code
                     }
-                    
+
                     lbtnDownloadAndSaveDLP.Visible = false;
                     lbtnMeasurementVerification.Visible = true;
                     if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification) //---If not Sync 4D Certification type of project, then only display Optimize button
@@ -261,7 +262,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trRBtnListDeltaE.Visible = false;
 
                 }
-                else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
+                else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1DMultiColor) //-----Sync1D -----Sync1DMultiColor
                 {
                     //Hide Verification button
                     lbtnMeasurementVerification.Visible = false;
@@ -353,13 +354,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) //------Sync1DMultiColor
                     _presenterAnalyze.Get1DMeasurementsOnRunId();
                 else
                     _presenterAnalyze.GetMeasurementsOnRunId();
                 if (!IsErrorOccured)
                 {
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) //------Sync1DMultiColor
                     {
                         EndDate = System.DateTime.Now;
                         //Pass use DLP as false for initial call
@@ -508,7 +509,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D);
+                return ((SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1DMultiColor)); //------Sync1DMultiColor
             }
         }
 
@@ -519,7 +520,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         public DataTable DTMaxSpreadChartData { get; set; }
 
-       
+
         public bool IsAverageOfMeasurements
         {
             get;
@@ -545,6 +546,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public bool IsDlpMultiColor { get; set; }
+        public bool IsSync1DMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
         public DataTable dtMeasurement { get; set; }

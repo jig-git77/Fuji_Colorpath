@@ -45,12 +45,12 @@ function ShowDialog(message, title) {
                     window.location.href = 'login.aspx';
                 }
             },
-             {
-                 text: 'Help', primary: true, action: function (e) {
-                     //alert("Help will come later.");
-                     window.location.href = 'login.aspx';
-                 }
-             }
+            {
+                text: 'Help', primary: true, action: function (e) {
+                    //alert("Help will come later.");
+                    window.location.href = 'login.aspx';
+                }
+            }
         ]
     });
 }
@@ -81,6 +81,7 @@ var ELicenseType = {
     IccProfiling: 52,
     DLPPlus: 11,
     DLPMultiColor: 12,
+    Sync1DMultiColor: 13,
     CustomBCO: 14
 }
 

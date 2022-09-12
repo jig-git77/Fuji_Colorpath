@@ -438,6 +438,8 @@ namespace FujifilmUSA.Sync.Entity
         DLPPlus = 11,
         [Description("ELicenseType_DLP_MULTI_COLOR")]//DLPMutliColor
         DLPMultiColor = 12,
+        [Description("ELicenseType_Sync1D_MULTI_COLOR")]//Sync1DMultiColor
+        Sync1DMultiColor = 13,
         [Description("ELicenseType_Custom_BCO")]//Custom BCO
         CustomBCO = 14,
     }
@@ -655,13 +657,12 @@ namespace FujifilmUSA.Sync.Entity
     /// </summary>
     public enum MultiColorChannelName
     {
-        Red=1,
+        Red = 1,
         Green = 2,
         Blue = 3,
         Orange = 4,
         Violet = 5
     }
-
     /// <summary>
     /// Add region enum which used TargetColorSpace which add for asana bug Url :https://app.asana.com/0/792718174372036/1202324645729242
     /// </summary>
@@ -673,5 +674,4 @@ namespace FujifilmUSA.Sync.Entity
         JP = 4,
         AN = 5
     }
-
 }

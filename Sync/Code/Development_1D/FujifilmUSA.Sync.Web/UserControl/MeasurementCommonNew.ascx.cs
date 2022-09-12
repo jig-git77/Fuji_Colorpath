@@ -63,7 +63,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D ||
                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ||
                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus ||
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor) &&
+                   SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ||
+                   SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) &&
                    SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
                 {
@@ -93,7 +94,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 //----------------"Import Measurements" button only available for "Sync4D" or "Ink Optimization" Project Type and only for initial 1st run (Not shown in any type of Validation)--------------//
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization   || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
                 {
                     if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                     {
@@ -101,7 +102,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             //if (SessionManager.Instance.CurrentProject.EnabledPaperScaling == false) //---If project has paper scalling enabled, then don't give option to import measurements
                             //{
-                                 hdDisplayImport.Value = "yes";
+                            hdDisplayImport.Value = "yes";
                             //}
                         }
                     }
@@ -140,7 +141,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
             LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
 
-            
+
             if (SessionManager.Instance.CurrentProject.PrintCondition != null)
             {
                 if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
@@ -148,13 +149,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
-                        GetMToolMessage(1);                        
+                        GetMToolMessage(1);
                         btnAddPluginStatus.CssClass = "green_btnotactive";
                         //btnAddPluginStatus.Enabled = false;
                     }
                     else
                     {
-                        GetMToolMessage(0);                        
+                        GetMToolMessage(0);
                         btnAddPluginStatus.CssClass = "green_bt";
                         //btnAddPluginStatus.Enabled = true;
                     }
@@ -168,18 +169,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
-                        GetMToolMessage(1);                        
+                        GetMToolMessage(1);
                         btnAddPluginStatus.CssClass = "green_btnotactive";
                         //btnAddPluginStatus.Enabled = false;
                     }
                     else
                     {
                         GetMToolMessage(0);
-                        btnAddPluginStatus.CssClass = "green_bt";                        
+                        btnAddPluginStatus.CssClass = "green_bt";
                         //btnAddPluginStatus.Enabled = true;
                     }
 
-                } 
+                }
             }
             hdnbtnAnalyzeParent.Value = ((LinkButton)NamingContainer.FindControl("btnAnalyze")).ClientID;
             hdfHasDeletePermission.Value = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject).ToString();
@@ -248,13 +249,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 str.Append("<b>This project is currently activated for measurement.</b>");
                 str.Append("<br />");
                 str.Append("<b>Measure charts and upload using the ColorPath MTool, Return here when you're done.</b>");
-                
+
             }
             else
             {
                 str.Append("<b>This project is not currently activated for measurement.</b>");
-                
-            }            
+
+            }
             lblMessage.Text = str.ToString();
         }
         #endregion
@@ -279,6 +280,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-       
+
     }
 }

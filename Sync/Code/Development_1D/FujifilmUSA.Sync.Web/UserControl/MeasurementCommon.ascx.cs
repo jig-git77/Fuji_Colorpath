@@ -23,8 +23,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tdNotes.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             tdNotesCaption.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             trCustomer.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
-            trValidationDetails.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) ? false : (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);            
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+            trValidationDetails.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) ? false : (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
+            if ((SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1DMultiColor) && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 lblMeasurementName.Text = GetLocalResourceObject("JobNameCaption").ToString();
             else
                 lblMeasurementName.Text = GetLocalResourceObject("MeasurementNameCaption").ToString();
@@ -50,12 +50,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 btnImportMeasurementFile.Value = GetResourceString("btnImportMeasurementFile");
                 hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
-                btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || 
+                btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus ||
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor) && 
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) &&
                     SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
@@ -82,7 +83,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 //----------------"Import Measurements" button only available for "Sync4D", "Ink Optimization" and "Sync1D" Project Type and only for initial 1st run (Not shown in any type of Validation)--------------//
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
                 {
                     if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                     {
@@ -90,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             //if (SessionManager.Instance.CurrentProject.EnabledPaperScaling == false) //---If project has paper scalling enabled, then don't give option to import measurements
                             //{
-                                hdDisplayImport.Value = "yes";
+                            hdDisplayImport.Value = "yes";
                             //}
                         }
                     }

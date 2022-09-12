@@ -177,6 +177,8 @@
                                                     <asp:ListItem Value="2">Sync4D: </asp:ListItem>
                                                     <asp:ListItem Value="3">Sync4D_Plus: </asp:ListItem>
                                                     <asp:ListItem Value="4">DLP Multi Color: </asp:ListItem>
+                                                    <asp:ListItem Value="5" Enabled="false">1D Multi Color_ISO: </asp:ListItem>
+                                                    <asp:ListItem Value="6" Enabled="false">1D Multi Color_G7: </asp:ListItem>
                                                 </asp:CheckBoxList>                                   
                                             </div>
 
@@ -208,6 +210,16 @@
                                                     <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
                                                 </asp:DropDownList>
                                                   <br />
+                                                <asp:DropDownList ID="cmbSync1DMultiColor_ISO" runat="server" Enabled="false">
+                                                    <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
+                                                    <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
+                                                </asp:DropDownList>
+                                              <%-- <br />--%>
+                                              <asp:DropDownList ID="cmbSync1DMultiColor_G7" runat="server" Enabled="false">
+                                                    <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
+                                                    <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
+                                                </asp:DropDownList>
+                                             <%--     <br />--%>
                                               
                                             </div>
                                                     </td>
@@ -218,7 +230,8 @@
                                                     <asp:ListItem Value="0">Validation 1D: </asp:ListItem>
                                                     <asp:ListItem Value="1">Validation 4D: </asp:ListItem>                                                                                    
                                                     <asp:ListItem Value="2">Validation 4D_Plus: </asp:ListItem>
-                                                     <asp:ListItem Value="3">Validation 4D_Mutli_Color: </asp:ListItem>
+                                                    <asp:ListItem Value="3">Validation 4D_Mutli_Color: </asp:ListItem>
+                                                    <asp:ListItem Value="4" Enabled="false">Validation 1D_Multi_Color: </asp:ListItem>
                                                 </asp:CheckBoxList>   
                                             </div>
                                                            </td>
@@ -242,8 +255,13 @@
                                                     <asp:ListItem Selected="True" Value="1">G7</asp:ListItem>
                                                     <asp:ListItem Value="2">ISO</asp:ListItem>
                                                 </asp:DropDownList>
+                                               <br />
+                                                 <asp:DropDownList ID="cmbValidation_Sync1D_Multi_Color" runat="server" Enabled="false">
+                                                    <asp:ListItem Selected="True" Value="1">G7</asp:ListItem>
+                                                    <asp:ListItem Value="2">ISO</asp:ListItem>
+                                                </asp:DropDownList>
                                             </div>
-                                                           </td>   
+                                          </td>   
                                     </tr>
                                 </table>
                                
@@ -340,25 +358,25 @@
                               </td>
                           
                          </tr>
-                   
-                        <tr>
-                            <td align="right">
-                                <span style="font-weight: bold;">
-                                    Device Family
-                                </span>
-                            </td>
-                            <td>
-                                <span style="font-weight: bold;"> &nbsp;:&nbsp;</span>
-                            </td>
-                            <td>
-                                <div style="float: left;">
-                                    <asp:DropDownList ID="drpDeviceFamilyId" runat="server" Width="370px" />
-                                </div>
-                                <div class="clear">
-                                </div>
-                            </td>
-                        </tr>
 
+                        <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                     Device Family
+                                    </span>
+                                </td>
+                                <td>
+                                   <span style="font-weight: bold;"> &nbsp;:&nbsp;</span>
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                      <asp:DropDownList ID="drpDeviceFamilyId" runat="server" Width="370px" />
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                   
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize runat="server" 
@@ -477,7 +495,7 @@
                                   <table>
                                        <tr>
                                            <td style="vertical-align:top;">
-                                             <div style="overflow:scroll;width:850px;">
+                                            <div style="overflow:scroll;width:850px;">
                                                   <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True" AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
                                     EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true" OnNeedDataSource="rgChartData_OnNeedDataSource" GridLines="None">
 
@@ -611,9 +629,9 @@
                                             meta:resourcekey="locSaveResource1" ></asp:Localize> 
                                              </span>
                                         </asp:LinkButton>
-                                        <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" OnClick="lbtnCancel_Click">
+                                       <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" OnClick="lbtnCancel_Click">
                                             <%--PostBackUrl="~/ReferenceChartManagement.aspx"--%>
-                                                    <span> <asp:Localize runat="server" Text="Cancel" ID="locCancel" 
+                                       <span> <asp:Localize runat="server" Text="Cancel" ID="locCancel" 
                                             meta:resourcekey="locCancelResource1" ></asp:Localize> 
                                             </span>
                                         </asp:LinkButton>

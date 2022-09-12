@@ -31,7 +31,7 @@ jQuery.browser.version = RegExp.$1;
         var btnIdDLP = '#' + '<%= chkDlp.ClientID %>';
         var btnIdDLPPlus = '#' + '<%= chkDLPPlus.ClientID %>';
         $(btnIdDLPPlus).attr("checked", $(btnIdDLP).is(':checked'));
-        
+
 
     }
 
@@ -197,16 +197,16 @@ jQuery.browser.version = RegExp.$1;
                                                 <td>
                                                      <asp:CheckBox runat="server" ID="chkDLPMutliColor" CssClass="checkListBox" Visible="true"/> 
                                                      </td>
-                                                 <td>
-                                                    &nbsp;&nbsp;
-                                                     <asp:CheckBox runat="server" ID="chkCustomerBCO" CssClass="checkListBox" Visible="true"/> 
+                                               <td>
+                                                     <asp:CheckBox runat="server" ID="chkSync1DMultiColor" CssClass="checkListBox" Visible="false"/> 
                                                      </td>
-                                                <td colspan="1">
-                                                    &nbsp;&nbsp;
-                                                </td>     
+                                                <td >
+                                                    <asp:CheckBox runat="server" ID="chkCustomerBCO" CssClass="checkListBox" Visible="true"/> 
+                                                </td>   
                                                 
                                             </tr>
                                         </table>
+                                       
                                     </div>
                                     <div style="float: left">
                                     </div>

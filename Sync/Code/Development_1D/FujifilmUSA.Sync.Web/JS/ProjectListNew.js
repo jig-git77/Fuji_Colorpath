@@ -225,6 +225,10 @@ $(document).ready(function () {
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'DLP Multi Color';
                                 break;
+                            case ELicenseType.Sync1DMultiColor:
+                                projectTypeImagePath = 'Images/AlignCurve.png';
+                                projectTypeImageTitle = 'Sync1D Multi Color';
+                                break;
                             case ELicenseType.CustomBCO:
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'Custom BCO';
@@ -260,6 +264,10 @@ $(document).ready(function () {
                             case ELicenseType.DLPMultiColor:
                                 projectTypeImagePath = 'Images/DLP_Certified.png';
                                 projectTypeImageTitle = 'DLP Multi Color';
+                                break;
+                            case ELicenseType.Sync1DMultiColor:
+                                projectTypeImagePath = 'Images / AlignCurve_Certified.png';
+                                projectTypeImageTitle = 'Sync1D Multi Color';
                                 break;
                             case ELicenseType.CustomBCO:
                                 projectTypeImagePath = 'Images/DLP_Certified.png';
@@ -312,11 +320,14 @@ $(document).ready(function () {
                     case ELicenseType.DLPMultiColor:
                         projectTypeTooltip = "DLP Mutli Color";
                         break;
+                    case ELicenseType.Sync1DMultiColor:
+                        projectTypeTooltip = "Sync1D Mutli Color";
+                        break;
                     case ELicenseType.CustomBCO:
                         projectTypeTooltip = "Custom BCO";
                         break;
                 }
-               
+
                 //set project validation image
                 switch (data.ValidationStatus) {
                     case EValidationStatus.NotCertified:
@@ -352,6 +363,7 @@ $(document).ready(function () {
                 }
 
 
+
                 if (projectTypeImagePath != '') {
                     row.find("td #imgprojectType").attr('src', projectTypeImagePath);   //set the project type image path
                     row.find("td #imgprojectType").attr('title', projectTypeTooltip);   //set the project type image path
@@ -372,7 +384,7 @@ $(document).ready(function () {
                     row.find("td #lnkSpotProjectIcon").show();
                     row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoButtonToolTip); //set the spotproject tooltip
                     row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoButtonToolTip);   //set the spotproject tooltip
-                    if (showSpotButtonEnableProject == true) {                        
+                    if (showSpotButtonEnableProject == true) {
                         row.find("td #lnkSpotProjectIcon").attr("onclick", "javascript: return OpenSpotProjectListWindow('" + data.ProjectId + "','" + data.ProjectName + "')");
                         row.find("td #lnkSpotProjectIcon").addClass("linktbutton");  //set the Spotproject button disabled/enable class
                         row.find("td #lnkSpotProjectIcon").removeClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
@@ -425,11 +437,13 @@ $(document).ready(function () {
                         row.find("td #lnkProjectTypeIcon").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
                         break;
                 }
+
                 if (data.LicenseType == 14) //This is for custom BCO project button disabled
                 {
                     row.find("td #lnkProjectTypeIcon").addClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
                     row.find("td #lnkProjectTypeIcon").attr('onclick', '');
                 }
+
                 //set resource message
                 row.find('#lnkDeleteProject').attr('title', Resources.MsgDeleteProject);
                 projectTypeImagePath = '';

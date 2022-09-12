@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
-using System.Web.UI;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -34,7 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public PreviewPrintCondition()
         {
-            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            Load += (sender, e) => ExceptionHandling(Page_Load, sender, e);
         }
 
         protected override void OnInit(EventArgs e)
@@ -180,6 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 MetricTargetPresetId = Convert.ToInt16(SessionManager.Instance.CurrentProject.MetricTargetPresetId);
                 ReTargetProjectID = SessionManager.Instance.CurrentProject.ReTargetProjectID;
             }
+
             if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomBCO)
             {
                 _presenterPreviewPrintCondition.GetPreviewPrintCondition();
@@ -285,7 +285,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblObserver.Text = Data["observerTypeId"];
                     lblAlignmentChart.Text = Data["referenceChartTypeId"];
 
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
                     {
                         lblMSelectedPresets.Text = Data["metricTargetPresetName"];
                         lblMPresetDescription.Text = Data["metricTargetPresetDesc"];
@@ -308,7 +308,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                         dvMetricPreset.Visible = false;
                         dvOptionPreset.Visible = true;
-                    }                   
+                    }
+
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                     {
                         lblMSelectedPresets.Text = Data["metricTargetPresetName"];

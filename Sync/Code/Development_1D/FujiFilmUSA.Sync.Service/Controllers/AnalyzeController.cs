@@ -1,4 +1,7 @@
 ﻿using ClosedXML.Excel;
+using FujifilmUSA.Sync.Business;
+using FujifilmUSA.Sync.Business.Implementation;
+using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
@@ -137,6 +140,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         #endregion
 
         #region RESTfull Services
+
         [HttpGet]
         [CustomAuthentication]
         public IHttpActionResult GetMeasurementSummaryDetails(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject)
@@ -844,7 +848,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
-        
         [HttpPost]
         [CustomAuthentication]
         public IHttpActionResult SaveSpotProjectLABPatches(SpotProjectLabModel model)
@@ -920,7 +923,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
 
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Sync1D)
+                    if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Sync1D || Convert.ToInt32(LicenseType) == (int)ELicenseType.Sync1DMultiColor)
                         _presenterAnalyze.Get1DPatchDetailsOfMeasurementExport();
                     else if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Validation)
                         _presenterAnalyze.GetValidationPatchDetailsOfMeasurementExport();
@@ -1245,6 +1248,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsUsed { get; set; }
         public bool IsSyncDLPPlusType { get; set; }
         public bool IsDlpMultiColor { get; set; }
+        public bool IsSync1DMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
         public DataTable dtMeasurement { get; set; }

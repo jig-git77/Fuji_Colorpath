@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Presenter;
-using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Entity.CPSpot;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -34,7 +34,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
         public TargetColorSpace()
         {
-            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            Load += (sender, e) => ExceptionHandling(Page_Load, sender, e);
         }
         #region "Page Events"
         protected override void OnInit(EventArgs e)
@@ -54,7 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindPCSDataType(); //Load PCSDataType 
 
                 PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
-                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1DMultiColor)
                 {
                     trTargetLAB.Visible = false;
                     trProjectType.Visible = false;
@@ -114,7 +114,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ProfileName = lblSourceProfileName.Text
             };
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
@@ -132,7 +132,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
                 SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling.Checked;
-
                 //------If 1D project then pass NewPaperScaling LAB values--------//
                 SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a.Text);
@@ -146,7 +145,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
                 {
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                    {
                         SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+                    }
 
                     //------If 4D project then pass NewPaperScaling LAB values--------//
                     SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
@@ -170,7 +171,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_b_4D_Black.Text);
                 }
                 else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
+                {
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
+                }
             }
 
             SessionManager.Instance.CurrentProject.PCSDataTypes = (PCSDataTypes)Convert.ToInt16(cmbPCSDataType.SelectedValue); //PCSDataType Selection 
@@ -201,19 +204,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
                     lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
                 }
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                {
+                    cmbProjectType_SelectedIndexChanged(null, null);
+                }
             }
             else
             {
                 txtProfileDescription.Text = lblSourceProfileName.Text = GetResourceString(_recTargetPrintConditionNotAvailableMessage);
             }
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
-                cmbProjectType_SelectedIndexChanged(null, null);
         }
 
         protected void cmbProjectType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (ViewState[_vsPrintStandardType] != null)
                 {
@@ -239,9 +244,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void btn_PaperApply_Click(object sender, EventArgs e)
         {
             //Load back data from Listview
-            this.ProjectTargetLABList = GetTargetLAB();
+            ProjectTargetLABList = GetTargetLAB();
 
-            if (this.ProjectTargetLABList != null && this.ProjectTargetLABList.Count > 0)
+            if (ProjectTargetLABList != null && ProjectTargetLABList.Count > 0)
             {
                 CIELab Finallab = new CIELab(0, 0, 0);
                 CIEXYZ CurrentPaperxyz = new CIEXYZ(0, 0, 0);
@@ -251,7 +256,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //Create list for Paper Patch
                 List<Entity.CPSync1D.ProjectTargetLAB> PaperProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
-                PaperProjectTargetList = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList();
+                PaperProjectTargetList = ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList();
 
                 //Create list for new lab values
                 List<Entity.CPSync1D.ProjectTargetLAB> NewProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
@@ -263,14 +268,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //convert current Paper's LAB to XYZ
                 CurrentPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(PaperProjectTargetList[0].TargetL), Convert.ToDouble(PaperProjectTargetList[0].TargetA), Convert.ToDouble(PaperProjectTargetList[0].TargetB));
 
-                for (int i = 0; i < this.ProjectTargetLABList.Count; i++)
+                for (int i = 0; i < ProjectTargetLABList.Count; i++)
                 {
                     Finallab = ColorMath.CalcPaperScaleLAB(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, NewMinxyz.X, NewMinxyz.Y, NewMinxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
-                    NewProjectTargetList.Add(new Entity.CPSync1D.ProjectTargetLAB() { PatchType = this.ProjectTargetLABList[i].PatchType, TargetL = (decimal)Finallab.L, TargetA = (decimal)Finallab.A, TargetB = (decimal)Finallab.B });
+                    NewProjectTargetList.Add(new Entity.CPSync1D.ProjectTargetLAB() { PatchType = ProjectTargetLABList[i].PatchType, TargetL = (decimal)Finallab.L, TargetA = (decimal)Finallab.A, TargetB = (decimal)Finallab.B });
                 }
                 //Assign new ProjectTargetLAB list
-                this.ProjectTargetLABList = NewProjectTargetList;
-                lvTargetLAB.DataSource = this.ProjectTargetLABList;
+                ProjectTargetLABList = NewProjectTargetList;
+                lvTargetLAB.DataSource = ProjectTargetLABList;
                 lvTargetLAB.DataBind();
             }
             btn_PaperApply.Visible = false;
@@ -287,7 +292,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbPrintStandardType.SelectedValue = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID.ToString();
                 cmbPrintStandardType_SelectedIndexChanged(null, null);
             }
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 cmbProjectType.SelectedValue = SessionManager.Instance.CurrentProject.ProjectTypeId.ToString();
                 cmbProjectType_SelectedIndexChanged(null, null);
@@ -452,20 +457,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 itemLAB = new Entity.CPSync1D.ProjectTargetLAB();
                 TextBox txtPatchTargetL = item.FindControl("txtPatchTargetL") as TextBox;
                 if (txtPatchTargetL != null)
+                {
                     itemLAB.TargetL = Convert.ToDecimal(txtPatchTargetL.Text);
+                }
 
                 TextBox txtPatchTargetA = item.FindControl("txtPatchTargetA") as TextBox;
                 if (txtPatchTargetA != null)
+                {
                     itemLAB.TargetA = Convert.ToDecimal(txtPatchTargetA.Text);
+                }
 
                 TextBox txtPatchTargetB = item.FindControl("txtPatchTargetB") as TextBox;
                 if (txtPatchTargetB != null)
+                {
                     itemLAB.TargetB = Convert.ToDecimal(txtPatchTargetB.Text);
+                }
 
                 HiddenField hdnPatchTypeId = item.FindControl("hdnPatchTypeId") as HiddenField;
                 Label lblPatch = item.FindControl("lblPatch") as Label;
                 if (hdnPatchTypeId != null)
+                {
                     itemLAB.PatchType = new PatchType() { PatchTypeId = Convert.ToInt16(hdnPatchTypeId.Value), Type = lblPatch.Text };
+                }
 
                 targetLAB.Add(itemLAB);
             }
@@ -475,18 +488,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindTargetLAB()
         {
             trTargetLAB.Visible = true;
-            this.PrintstandardTypeId = Convert.ToInt16(cmbPrintStandardType.SelectedValue);
-            this.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+            PrintstandardTypeId = Convert.ToInt16(cmbPrintStandardType.SelectedValue);
+            ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
             _presenterTargetColorspace.GetTargetLABList();
-            lvTargetLAB.DataSource = this.ProjectTargetLABList;
+            lvTargetLAB.DataSource = ProjectTargetLABList;
             lvTargetLAB.DataBind();
 
-            if (this.ProjectTargetLABList.Count > 0)
+            if (ProjectTargetLABList.Count > 0)
             {
                 //Load Paper LAB values into top Textboxes from List
-                txtPaper_L.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
-                txtPaper_a.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
-                txtPaper_b.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
+                txtPaper_L.Text = ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
+                txtPaper_a.Text = ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
+                txtPaper_b.Text = ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
             }
             else   //By Default
             {
@@ -505,7 +518,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbPCSDataType.DataTextField = "Value";
             cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>();
 
-            if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D) //If 1D then G7 type, or for all other Projects 4D,etc...
+            if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) //If 1D then G7 type, or for all other Projects 4D,etc...
             {
                 cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != Common.Utilities.GetEnumDescriptionAttributeValue(PCSDataTypes.Density)).ToDictionary(p => p.Key, p => p.Value);
             }
@@ -514,7 +527,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != Common.Utilities.GetEnumDescriptionAttributeValue(PCSDataTypes.XYZ)).ToDictionary(p => p.Key, p => p.Value);
             }
             cmbPCSDataType.DataBind();
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) //Bydefault spectral selection for Sync1D projects only
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor) //Bydefault spectral selection for Sync1D projects only
             {
                 cmbPCSDataType.SelectedIndex = 1; //Bydefault spectral selection
             }
@@ -522,7 +535,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindSpotTarget()
         {
-            if (ViewState[_vsSpotTarget] != null) return;
+            if (ViewState[_vsSpotTarget] != null)
+            {
+                return;
+            }
 
             _presenterTargetColorspace.GetSpotTargetList();
             if (!IsErrorOccured)
@@ -542,8 +558,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbTargetPrintCategory.DataTextField = "Value";
             cmbTargetPrintCategory.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<ESourceProfileCategory>();
             cmbTargetPrintCategory.DataBind();
-            cmbTargetPrintCategory.SelectedIndex = 0;
-
+            //cmbTargetPrintCategory.SelectedIndex = 0;
             //disable for all projects except 4d and spot
             if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLP
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification
@@ -551,10 +566,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimizationSource
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLPMultiColor)
-             {
-                 cmbTargetPrintCategory.Items.FindByValue("4").Enabled = false;
-             }
-
+            {
+                cmbTargetPrintCategory.Items.FindByValue("4").Enabled = false;
+            }
 
             //newly implemented logic to select combobox value to region
             //Select source profile based on user region selected fix issue for Asana bug Url :https://app.asana.com/0/792718174372036/1202324645729242 
@@ -698,9 +712,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbBranch.SelectedValue.ToString() != "")
+            {
                 BindDevices();
+            }
             else
+            {
                 divDevice.Visible = false;
+            }
 
             divRetarget.Visible = false;
             divRetargetDetails.Visible = false;
@@ -709,10 +727,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbDevice.SelectedValue.ToString() != "")
+            {
                 BindCertifiedSpotProjects();
+            }
             else
+            {
                 divRetarget.Visible = false;
-
+            }
 
             divRetargetDetails.Visible = false;
         }
@@ -720,9 +741,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void ddlReTargetProject_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlReTargetProject.SelectedValue.ToString() != "")
+            {
                 BindRetargetSpotProjectDetails();
+            }
             else
+            {
                 divRetargetDetails.Visible = false;
+            }
         }
 
         protected void lnkbtnNext_Click(object sender, EventArgs e)
@@ -788,7 +813,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus);
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor);
             }
         }
         public bool IsSpotTargetType
@@ -807,6 +832,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Device> Devices { get; set; }
         public SpotProjectLibrary RetargetSpotProject { get; set; }
         #endregion
+
 
         #region Implement Interface
         public User UserInformation { get; set; }

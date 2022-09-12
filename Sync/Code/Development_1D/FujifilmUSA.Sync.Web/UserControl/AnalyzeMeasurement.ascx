@@ -123,7 +123,7 @@
         border-color: #c5c5c5;
         border-style: solid;
         border-width: 1px;
-        -webkit-appearance: none;        
+        -webkit-appearance: none;
         padding-left: 10px;
         margin-right: 2px;
         margin-left: 10px;
@@ -131,15 +131,15 @@
         height: 200px;
         /*background-color: #eae8e8;*/
     }
-    
-    #ContentPlaceHolder1_ucAnalyze_updateProgress {        
-            z-index: 100;
+
+    #ContentPlaceHolder1_ucAnalyze_updateProgress {
+        z-index: 100;
     }
 </style>
 <%--<script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>--%>
 <script src="JS/DYMO_Label_Framework_2_0_2.js"></script>
-<%--<script src="JS/AnalyzeMeasurement.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
-<script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>
+<script src="JS/AnalyzeMeasurement.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<%--<script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>--%>
 
 
 
@@ -182,7 +182,7 @@
                 updateProgress.control._associatedUpdatePanelId = null;
         }
 
-    }    
+    }
 </script>
 <script type="text/javascript" language="javascript">
     function ConfirmMeasurement() {
@@ -234,8 +234,8 @@
     $(document).ready(function () {
 
         if (!IsPrinterInstalled()) {
-            $('input[type="image"][id*="ibtnPrintLabel"]').hide();
-            // $('input[type="image"][id*="ibtnPrintPreview"]').hide();
+          $('input[type="image"][id*="ibtnPrintLabel"]').hide();
+         // $('input[type="image"][id*="ibtnPrintPreview"]').hide();
             var varibtnPrintPreview = document.getElementById("<%= ibtnPrintPreview.ClientID %>")
             $(varibtnPrintPreview).hide();
         }
@@ -320,18 +320,18 @@
     jQuery(document).ready(function () {
         $("#accordionNew").click
             (
-            function () {
-                var $panel1 = $("div[id*='panelabGamutComparisonNew']");
-                var $img1 = $("div[id*='imgHeaderNew']");
-                $panel1.slideToggle(500);
-                if ($img1.hasClass('expanded')) {
-                    $img1.addClass('collapsed').removeClass('expanded');
-                }
-                else {
-                    $img1.addClass('expanded').removeClass('collapsed');
-                }
-                return false;
-            });
+                function () {
+                    var $panel1 = $("div[id*='panelabGamutComparisonNew']");
+                    var $img1 = $("div[id*='imgHeaderNew']");
+                    $panel1.slideToggle(500);
+                    if ($img1.hasClass('expanded')) {
+                        $img1.addClass('collapsed').removeClass('expanded');
+                    }
+                    else {
+                        $img1.addClass('expanded').removeClass('collapsed');
+                    }
+                    return false;
+                });
 
     });
 
@@ -367,7 +367,8 @@
                 <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnSyncDlpPlusType" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnIsDlpMultiColor" ClientIDMode="Static" />
-                 <asp:HiddenField ID="hdnCurrentRunName" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnIsSync1DMultiColor" ClientIDMode="Static" />
+                <asp:HiddenField ID="hdnCurrentRunName" runat="server" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -564,7 +565,7 @@
 
                                         <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px" style="display: none;">
                                             <div style="float: right; padding-top: 2px; position: absolute; top: 0; right: 0; padding-right: 4px; padding-top: 5px">
-                                                 <asp:ImageButton ID="ibtnPrintPreviewNew" runat="server"
+                                                <asp:ImageButton ID="ibtnPrintPreviewNew" runat="server"
                                                     ImageUrl="../Images/DymoPrintPreviewIcon.png" 
                                                     OnClientClick="ShowLabelPrintPreviewNew(); return false;"
                                                     meta:resourcekey="ibtnPrintPreviewNewResource1" />
@@ -736,7 +737,7 @@
                                                                 <td style="font-size: 13px;">
                                                                     <asp:Localize Text="Upload Date:" ID="locUploadDate" runat="server" meta:resourcekey="locUploadDateResource1"></asp:Localize>
                                                                 </td>
-                                                                <td>                                                                    
+                                                                <td>
                                                                     <span data-format="MM/dd/yyyy HH:mm:ss tt" data-bind="text: MeasurementDateFormatted"></span>
                                                                 </td>
                                                             </tr>
@@ -1581,7 +1582,7 @@
 <div class="contant_bottom">
     &nbsp;
 </div>
-<div id='dialog'>   
+<div id='dialog'>
 </div>
 
 

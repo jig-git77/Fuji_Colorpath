@@ -242,18 +242,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }).ToList();
 
                     measurements.ForEach(x =>
-                                             {
-                                                 x.MeasurementPatches =
-                                                     dsMeasurements.Tables[1].AsEnumerable().
-                                                         Where(y => DataReader.ReadInt(y, "MeasurementID") == x.MeasurementId).
-                                                         Select(y => new MeasurementPatch()
-                                                         {
-                                                             MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
-                                                             MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
-                                                             HtmlColor = DataReader.ReadString(y, "HtmlColor"),
-                                                             Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
-                                                         }).ToList();
-                                             });
+                    {
+                        x.MeasurementPatches =
+                            dsMeasurements.Tables[1].AsEnumerable().
+                                Where(y => DataReader.ReadInt(y, "MeasurementID") == x.MeasurementId).
+                                Select(y => new MeasurementPatch()
+                                {
+                                    MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
+                                    MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
+                                    HtmlColor = DataReader.ReadString(y, "HtmlColor"),
+                                    Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
+                                }).ToList();
+                    });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAnalyzeChartMeasurement"));
             return measurements;
@@ -485,7 +485,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return VmeasurementSummary;
         }
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, bool IsSync1DMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0)
         {
             // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
@@ -501,6 +501,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (IsDlpMultiColor == true && CurrentRunName == "Run-0") // IF Run-0 with multicolor channel
             {
                 storedProc = "CPSync4DMultiColor.GetPatchDetailsByMeasurementID";
+            }
+            if (IsSync1DMultiColor)
+            {
+                if (CurrentRunName == "Run-0") // IF Run-0 with multicolor channel
+                {
+                    storedProc = "CPSyncMultiColor.GetPatchDetailsByMeasurementID";
+                }
+                else
+                { // if run above Run-0 then it consider optimization chart which is not having Multicolor channel
+                    storedProc = "CPSync.GetPatchDetailsByMeasurementID";
+                }
             }
             if (LicenseTypeId == (int)ELicenseType.DLPPlus)
             {
@@ -756,7 +767,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "CPSync4DMultiColor.GetChartData_Gray";
             }
-            
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -2581,7 +2592,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 () =>
                 {
                     XElement measurementPatches = null;
-                    if (LicenseTypeID == 1)//1D project
+                    if (LicenseTypeID == 1 || LicenseTypeID == 13)//1D project
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                          measurement.MeasurementPatches.
@@ -3150,7 +3161,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectSummary"));
             return dtPatchDetails;
         }
-
         #endregion
 
         #region ITaskBase Members

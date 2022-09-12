@@ -166,6 +166,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     DataReader.ReadString(x, "ChartName")),
                                 DeviceLinkProfile = DataReader.ReadByteArray(x, "DeviceLinkProfile"),
                                 CurrentRunName = DataReader.ReadString(x, "CurrentRunName")
+
                             }).ToList();
 
                         if (!isVerification)
@@ -173,35 +174,35 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             int index = 0;
                             string LastDLPName = "";
                             project.OptimizeRuns.ForEach(x =>
-                                                             {
-                                                                 if (index > 0)
-                                                                 {
-                                                                     LastDLPName = project.ProjectName + " DLP" +
-                                                                                   project.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") +
-                                                                                   project.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") +
-                                                                                   project.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") +
-                                                                                   project.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") +
-                                                                                   ".icc";
-                                                                     if (index > 1)
-                                                                     {
-                                                                         if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Certify)
-                                                                         {
-                                                                             LastDLPName = project.ProjectName + " DLP" +
-                                                                                           project.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") +
-                                                                                           project.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") +
-                                                                                           project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") +
-                                                                                           project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString(
-                                                                                               "00") + ".icc";
-                                                                             //----If last run is certify run, then get DLP of its previous run----//
-                                                                         }
-                                                                     }
-                                                                 }
-                                                                 x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
-                                                                 x.DlpName = string.Format("{0} DLP {1}.icc",
-                                                                                           project.ProjectName,
-                                                                                           index++.ToString("000"));
+                            {
+                                if (index > 0)
+                                {
+                                    LastDLPName = project.ProjectName + " DLP" +
+                                                  project.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") +
+                                                  project.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") +
+                                                  project.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") +
+                                                  project.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") +
+                                                  ".icc";
+                                    if (index > 1)
+                                    {
+                                        if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Certify)
+                                        {
+                                            LastDLPName = project.ProjectName + " DLP" +
+                                                          project.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") +
+                                                          project.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") +
+                                                          project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") +
+                                                          project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString(
+                                                              "00") + ".icc";
+                                            //----If last run is certify run, then get DLP of its previous run----//
+                                        }
+                                    }
+                                }
+                                x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
+                                x.DlpName = string.Format("{0} DLP {1}.icc",
+                                                          project.ProjectName,
+                                                          index++.ToString("000"));
 
-                                                             });
+                            });
                             if (project.CurrDlpId > 0)
                             {
                                 project.CurrentDlpName = project.OptimizeRuns.Single(x => x.OptimizeRunId == project.CurrDlpId).DlpName;
@@ -238,7 +239,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     }).ToList();
                             }
                         }
-                        if (project.LicenseType == ELicenseType.Sync1D)
+                        if (project.LicenseType == ELicenseType.Sync1D || project.LicenseType == ELicenseType.Sync1DMultiColor)
                         {
                             //----Select ProjectTargetLAB-----------//
                             if (dsProject.Tables[5].Rows.Count > 0)
@@ -1127,7 +1128,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementDevice;
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0,bool IsDLPPlus=false, short LicenseTypeId = 0,int deviceId =0)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0, bool IsDLPPlus = false, short LicenseTypeId = 0, int deviceId = 0)
         {
             var presetList = new List<ReferenceChartType>();
             Common.ImplementBusinessLogic(
@@ -1229,7 +1230,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data;
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, short PrintingTypeId, bool isVerification = false,int LicenseTypeID=0)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, short PrintingTypeId, bool isVerification = false, int LicenseTypeID = 0)
         {
             List<Entity.CPSyncV.MetricTargetPreset> metricPresetList = new List<Entity.CPSyncV.MetricTargetPreset>();
             Common.ImplementBusinessLogic(
@@ -1240,7 +1241,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (isVerification)
                         procedureName = "[CPSyncV].[GetMetricTargetPresetList]";
 
-                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(procedureName, new object[] { currentUserId, ProjectTypeId, PrintingTypeId,LicenseTypeID });
+                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(procedureName, new object[] { currentUserId, ProjectTypeId, PrintingTypeId, LicenseTypeID });
 
                     if (dsMetricTargetPresetList != null && dsMetricTargetPresetList.Tables.Count > 0)
                     {
@@ -1375,6 +1376,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 StoreProcedureName = "[CPSyncV].[GetMetricSumTargetValues]";
             }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1771,6 +1773,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             },
                             ReTargetSpotProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetSpotProjectID"),
                             MasterProjectLicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MasterProjectLicenseTypeID"),
+
                         };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {

@@ -1371,4 +1371,7 @@
   <data name="ELicenseType_Custom_BCO" xml:space="preserve">
     <value>Custom BCO</value>
   </data>
+  <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
+    <value>Sync1D Multi Color_fr</value>
+  </data>
 </root>

@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, bool IsSync1DMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0)
         {
             return new DataTable();
         }
@@ -160,7 +160,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
         public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
-            return new List<AnalyzeChart_DotGain>(); 
+            return new List<AnalyzeChart_DotGain>();
         }
         public DataTable GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
@@ -247,7 +247,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Measurement();
         }
-        public int ImportMeasurement(Measurement measurement, int LicenseTypeID,int UserID)
+        public int ImportMeasurement(Measurement measurement, int LicenseTypeID, int UserID)
         {
             return 0;
         }
@@ -290,7 +290,6 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             throw new NotImplementedException();
         }
-
         #endregion
 
         #region ITaskBase Members

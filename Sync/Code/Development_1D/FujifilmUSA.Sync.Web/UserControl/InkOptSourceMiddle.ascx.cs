@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recDLPText = "dlpText";
         private const string _recDLPMsgText = "dlpMsgText";
         private const string _reclocCreateSourceProfile = "locCreateSourceProfile";
-        private const string _reclocCreateReProfileSourceProfile = "locCreateSourceProfile";   
+        private const string _reclocCreateReProfileSourceProfile = "locCreateSourceProfile";
 
         public string CreateDLPUpdateProgressClientID
         {
@@ -35,7 +35,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }
         }
-      
+
         protected override void OnInit(EventArgs e)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
@@ -240,6 +240,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public bool IsDlpMultiColor { get; set; }
+        public bool IsSync1DMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
         public DataTable dtMeasurement { get; set; }

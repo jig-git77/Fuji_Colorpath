@@ -943,6 +943,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sync1D Multi Color.
+        /// </summary>
+        internal static string ELicenseType_Sync1D_MULTI_COLOR {
+            get {
+                return ResourceManager.GetString("ELicenseType_Sync1D_MULTI_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sync4D Certification.
         /// </summary>
         internal static string ELicenseType_Sync4DCertification {

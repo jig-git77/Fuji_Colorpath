@@ -70,7 +70,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lnkbtnTargetColorSpace.Visible = IsXmfNewProject;
             PanelOptionalRetarget.GroupingText = "<b>" + GetResourceString("PanelOptionalRetarget") + "</b>";
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (ViewState[_vsMetricTargetPreset] == null)
                 {
@@ -192,7 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void LoadProjectInfoFromSession()
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 //Sync1D
                 if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.MetricTargetPresetId != 0)
@@ -235,9 +235,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
             else
-            {                
+            {
                 if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0)
-                {                    
+                {
                     cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
                     cmbSelectedPresets_SelectedIndexChanged(null, null);
 
@@ -338,7 +338,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (SessionManager.Instance.CurrentProject.PrintStandardTVI == null || SessionManager.Instance.CurrentProject.PrintStandardTVI.Count == 0)
                 {
@@ -474,7 +474,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (SessionManager.Instance.CurrentProject.ProjectTargetDensity == null || SessionManager.Instance.CurrentProject.ProjectTargetDensity.Count == 0)
                 {
@@ -520,7 +520,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 if (SessionManager.Instance.CurrentProject.ProjectTargetHueAngle == null || SessionManager.Instance.CurrentProject.ProjectTargetHueAngle.Count == 0)
                 {
@@ -702,142 +702,142 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 familyOption.
                     ProfilerOptionPresets.Where(x => x.ProfileTypeId == MainProfileTypeID).ToList().
                     ForEach(x =>
+                    {
+                        var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
+                        switch (option)
+                        {
+                            case EProfilerOption.Rendering:
+                                cmbRendering.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.InkMax:
+                                txtBlackPointCustom.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.InkTotal:
+                                //rdsInkTotal.Value = Convert.ToDecimal(x.ProfilerOptionValue);     //---Comment out right now to make it non- editable advanced options
+                                txtInkTotal.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.BlackGeneration:
+                                //rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);     //---Comment out right now to make it non- editable advanced options
+                                txtMode.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.BlackStart:
+                                rdsBlackStart.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                txtBlackStart.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.BlackWidth:
+                                rdsBlackWidth.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                txtBlackWidth.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.DLExceptions:
+                                #region Profiler Exceptions
+
+                                var exception = (EProfilerException)Enum.Parse(typeof(EProfilerException), x.ProfilerOptionValue);
+                                if (exception > 0)
                                 {
-                                    var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
-                                    switch (option)
+                                    if ((exception & EProfilerException.Triplex) == EProfilerException.Triplex)
                                     {
-                                        case EProfilerOption.Rendering:
-                                            cmbRendering.SelectedValue = x.ProfilerOptionValue;
-                                            break;
-                                        case EProfilerOption.InkMax:
-                                            txtBlackPointCustom.Text = x.ProfilerOptionValue;
-                                            break;
-                                        case EProfilerOption.InkTotal:
-                                            //rdsInkTotal.Value = Convert.ToDecimal(x.ProfilerOptionValue);     //---Comment out right now to make it non- editable advanced options
-                                            txtInkTotal.Text = x.ProfilerOptionValue;
-                                            break;
-                                        case EProfilerOption.BlackGeneration:
-                                            //rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);     //---Comment out right now to make it non- editable advanced options
-                                            txtMode.Text = x.ProfilerOptionValue;
-                                            break;
-                                        case EProfilerOption.BlackStart:
-                                            rdsBlackStart.Value = Convert.ToDecimal(x.ProfilerOptionValue);
-                                            txtBlackStart.Text = x.ProfilerOptionValue;
-                                            break;
-                                        case EProfilerOption.BlackWidth:
-                                            rdsBlackWidth.Value = Convert.ToDecimal(x.ProfilerOptionValue);
-                                            txtBlackWidth.Text = x.ProfilerOptionValue;
-                                            break;
-                                        case EProfilerOption.DLExceptions:
-                                            #region Profiler Exceptions
-
-                                            var exception = (EProfilerException)Enum.Parse(typeof(EProfilerException), x.ProfilerOptionValue);
-                                            if (exception > 0)
-                                            {
-                                                if ((exception & EProfilerException.Triplex) == EProfilerException.Triplex)
-                                                {
-                                                    chkTriplex.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.Duplex) == EProfilerException.Duplex)
-                                                {
-                                                    chkDuplex.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.PureGray) == EProfilerException.PureGray)
-                                                {
-                                                    chkGray.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.PureBlack) == EProfilerException.PureBlack)
-                                                {
-                                                    chk100Black.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.PureCMY) == EProfilerException.PureCMY)
-                                                {
-                                                    chk100CMY.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.PureRGB) == EProfilerException.PureRGB)
-                                                {
-                                                    chk100RGB.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.MaxCMY) == EProfilerException.MaxCMY)
-                                                {
-                                                    chkMaxCMY.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.MaxRGB) == EProfilerException.MaxRGB)
-                                                {
-                                                    chkMaxRGB.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.PurePrimaries) == EProfilerException.PurePrimaries)
-                                                {
-                                                    chkPrimaries.Checked = true;
-                                                    chkPC.Checked = true;
-                                                    chkPM.Checked = true;
-                                                    chkPY.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.PureSecondaries) == EProfilerException.PureSecondaries)
-                                                {
-                                                    chkSecondaries.Checked = true;
-                                                    chkSCM.Checked = true;
-                                                    chkSCY.Checked = true;
-                                                    chkSMY.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.BlackOverprint) == EProfilerException.BlackOverprint)
-                                                {
-                                                    chkBlackOverPrint.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.ClipToEdge) == EProfilerException.ClipToEdge)
-                                                {
-                                                    chkBorderClipping.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.PureWhite) == EProfilerException.PureWhite)
-                                                {
-                                                    chkWhite.Checked = true;
-                                                }
-                                                if ((exception & EProfilerException.FullBlack) == EProfilerException.FullBlack)
-                                                {
-                                                    chk400Black.Checked = true;
-                                                }
-                                            }
-                                            break;
-
-                                        #endregion
-                                        case EProfilerOption.DLExceptionRange:
-                                            rdsRange.Value = Convert.ToDecimal(x.ProfilerOptionValue);
-                                            txtRange.Text = x.ProfilerOptionValue;
-                                            break;
-                                        case EProfilerOption.ProfileType:
-                                        case EProfilerOption.ProfileSize:
-                                        case EProfilerOption.ProfileFormat:
-                                        case EProfilerOption.PerceptualCompression2:
-                                        case EProfilerOption.PerceptualCompressionMergeFactor:
-                                        case EProfilerOption.MeasurementCorrection:
-                                        case EProfilerOption.BrightenerCorrection:
-                                        case EProfilerOption.AdaptionType:
-                                        case EProfilerOption.WhiteXYZCorrection:
-                                        case EProfilerOption.GridA2B0:
-                                        case EProfilerOption.GridA2B1:
-                                        case EProfilerOption.GridA2B2:
-                                        case EProfilerOption.GridB2A0:
-                                        case EProfilerOption.GridB2A1:
-                                        case EProfilerOption.GridB2A2:
-                                        case EProfilerOption.GridGamut:
-                                        case EProfilerOption.DLBypassBlack:
-                                        case EProfilerOption.DLOptimizationLimit:
-                                        case EProfilerOption.DLOptimizeExceptions:
-                                        case EProfilerOption.DLOptimizeInkRange:
-                                        case EProfilerOption.DLApplyInkSave:
-                                        case EProfilerOption.DLReplaceCMY:
-                                        case EProfilerOption.DLAddBlack:
-                                        case EProfilerOption.DLAddCMY:
-                                        case EProfilerOption.DLType:
-                                        case EProfilerOption.Flags:
-                                        case EProfilerOption.Attributes0:
-                                        case EProfilerOption.Attributes1:
-                                        case EProfilerOption.SaveProfilerInfo:
-                                        case EProfilerOption.SaveProfilerData:
-                                        case EProfilerOption.Version:
-                                            break;
+                                        chkTriplex.Checked = true;
                                     }
-                                });
+                                    if ((exception & EProfilerException.Duplex) == EProfilerException.Duplex)
+                                    {
+                                        chkDuplex.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.PureGray) == EProfilerException.PureGray)
+                                    {
+                                        chkGray.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.PureBlack) == EProfilerException.PureBlack)
+                                    {
+                                        chk100Black.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.PureCMY) == EProfilerException.PureCMY)
+                                    {
+                                        chk100CMY.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.PureRGB) == EProfilerException.PureRGB)
+                                    {
+                                        chk100RGB.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.MaxCMY) == EProfilerException.MaxCMY)
+                                    {
+                                        chkMaxCMY.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.MaxRGB) == EProfilerException.MaxRGB)
+                                    {
+                                        chkMaxRGB.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.PurePrimaries) == EProfilerException.PurePrimaries)
+                                    {
+                                        chkPrimaries.Checked = true;
+                                        chkPC.Checked = true;
+                                        chkPM.Checked = true;
+                                        chkPY.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.PureSecondaries) == EProfilerException.PureSecondaries)
+                                    {
+                                        chkSecondaries.Checked = true;
+                                        chkSCM.Checked = true;
+                                        chkSCY.Checked = true;
+                                        chkSMY.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.BlackOverprint) == EProfilerException.BlackOverprint)
+                                    {
+                                        chkBlackOverPrint.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.ClipToEdge) == EProfilerException.ClipToEdge)
+                                    {
+                                        chkBorderClipping.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.PureWhite) == EProfilerException.PureWhite)
+                                    {
+                                        chkWhite.Checked = true;
+                                    }
+                                    if ((exception & EProfilerException.FullBlack) == EProfilerException.FullBlack)
+                                    {
+                                        chk400Black.Checked = true;
+                                    }
+                                }
+                                break;
+
+                            #endregion
+                            case EProfilerOption.DLExceptionRange:
+                                rdsRange.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                txtRange.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.ProfileType:
+                            case EProfilerOption.ProfileSize:
+                            case EProfilerOption.ProfileFormat:
+                            case EProfilerOption.PerceptualCompression2:
+                            case EProfilerOption.PerceptualCompressionMergeFactor:
+                            case EProfilerOption.MeasurementCorrection:
+                            case EProfilerOption.BrightenerCorrection:
+                            case EProfilerOption.AdaptionType:
+                            case EProfilerOption.WhiteXYZCorrection:
+                            case EProfilerOption.GridA2B0:
+                            case EProfilerOption.GridA2B1:
+                            case EProfilerOption.GridA2B2:
+                            case EProfilerOption.GridB2A0:
+                            case EProfilerOption.GridB2A1:
+                            case EProfilerOption.GridB2A2:
+                            case EProfilerOption.GridGamut:
+                            case EProfilerOption.DLBypassBlack:
+                            case EProfilerOption.DLOptimizationLimit:
+                            case EProfilerOption.DLOptimizeExceptions:
+                            case EProfilerOption.DLOptimizeInkRange:
+                            case EProfilerOption.DLApplyInkSave:
+                            case EProfilerOption.DLReplaceCMY:
+                            case EProfilerOption.DLAddBlack:
+                            case EProfilerOption.DLAddCMY:
+                            case EProfilerOption.DLType:
+                            case EProfilerOption.Flags:
+                            case EProfilerOption.Attributes0:
+                            case EProfilerOption.Attributes1:
+                            case EProfilerOption.SaveProfilerInfo:
+                            case EProfilerOption.SaveProfilerData:
+                            case EProfilerOption.Version:
+                                break;
+                        }
+                    });
             }
         }
 
@@ -859,7 +859,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
                 SessionManager.Instance.CurrentProject.IsWeightedTolerances = chkWeightedTolerances.Checked;
                 SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
@@ -1010,6 +1010,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             }
+
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
 

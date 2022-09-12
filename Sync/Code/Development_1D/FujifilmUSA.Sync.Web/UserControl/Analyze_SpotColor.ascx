@@ -1,66 +1,58 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze_SpotColor.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze_SpotColor" %>
-
 <link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
 <script src="Scripts/kendo/2020.2.617/kendo.all.min.js"></script>
 <style>
     .PatchDetailsSummaryTable {
-        line-height: 35px;
-        width: 55%;
+    line-height: 35px;
+    width: 55%;
     }
-
-        .PatchDetailsSummaryTable th {
-            color: black;
-            text-align: center;
-            font-weight: bold;
-            background-color: darkgray;
-        }
-
-        .PatchDetailsSummaryTable td {
-            text-align: left;
-        }
-
+    .PatchDetailsSummaryTable th {
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    background-color: darkgray;
+    }
+    .PatchDetailsSummaryTable td {
+    text-align: left;
+    }
     .spinner {
-        opacity: 0;
-        display: none;
-        width: 20px;
-        height: 10px;
-        margin-bottom: 5px;
-        -webkit-transition: opacity 0.25s, max-width 0.45s;
-        -moz-transition: opacity 0.25s, max-width 0.45s;
-        -o-transition: opacity 0.25s, max-width 0.45s;
-        transition: opacity 0.25s, max-width 0.45s;
-        /* Duration fixed since we animate additional hidden width */
+    opacity: 0;
+    display: none;
+    width: 20px;
+    height: 10px;
+    margin-bottom: 5px;
+    -webkit-transition: opacity 0.25s, max-width 0.45s;
+    -moz-transition: opacity 0.25s, max-width 0.45s;
+    -o-transition: opacity 0.25s, max-width 0.45s;
+    transition: opacity 0.25s, max-width 0.45s;
+    /* Duration fixed since we animate additional hidden width */
     }
-
     .has-spinner.active {
-        cursor: progress;
+    cursor: progress;
     }
-
-        .has-spinner.active .spinner {
-            display: inline-block;
-            opacity: 1;
-            max-width: 50px;
-            /* More than it will ever come, notice that this affects on animation duration */
-        }
+    .has-spinner.active .spinner {
+    display: inline-block;
+    opacity: 1;
+    max-width: 50px;
+    /* More than it will ever come, notice that this affects on animation duration */
+    }
     /*#tblSecondRunDeltas td{
-        min-width:60px;
+    min-width:60px;
     }*/
-
     .k-i-sort-asc-sm, .k-i-sort-desc-sm {
-        margin-left: 0px !important;
+    margin-left: 0px !important;
     }
-
     .chartBackground {
-        background: url('Images/LabBackdrop.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        /*height: 190px;*/
-        /*width: 278px;*/
+    background: url('Images/LabBackdrop.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*height: 190px;*/
+    /*width: 278px;*/
     }
 </style>
-
 <script type="application/javascript">
+
     var record = 0;
     var SERVICE_BASE_URL = '';
     var AUTH_TOKEN = '';
@@ -88,7 +80,8 @@
     });
 
 
-    $(document).ready(function () {       
+    $(document).ready(function () {
+
         var CurrentCulture = $("#hdfCurrentCulture").val();
         SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
         var optimizationId = $('#hdfOptimizationRunID').val();
@@ -323,10 +316,12 @@
                                 from: "IsSelected",
                                 type: "boolean",
                             },
+
                         }
                     }
                 },
-                pageSize: 20
+                pageSize: 20,
+
             },
             resizable: true,
             sortable: true,
@@ -353,10 +348,11 @@
             },
             sortable: true,
             selectable: "true",
-            //filterable: true,
+            //filterable: true,           
             pageable: {
-                refresh: true,
-                pageSizes: true
+                refresh: false,
+                pageSizes: true,
+                alwaysVisible: false,
             },
             noRecords: {
                 template: ''
@@ -691,6 +687,7 @@
             });
 
             if (spotpatchlab != null && spotpatchlab.length > 0) {
+
                 var obj = {
                     spotProjectLabs: spotpatchlab
                 }
@@ -824,27 +821,8 @@
                 }
                 kendo.ui.progress($('#divReport'), false);
             });
-
-
-            //$.ajax({
-            //    type: "POST",
-            //    url: SERVICE_BASE_URL + 'api/Report/ExportSpotAnalyzeChartReport',
-            //    data: apiParameter,
-            //    dataType: "json",
-            //    success: function (response) {
-            //        kendo.ui.progress($('#divReport'), false);
-            //        if (response.data != null) {
-            //            console.log(response.data);
-            //            var fileName = '~' + response.data;
-            //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-            //        }
-            //    },
-            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //        kendo.ui.progress($('#divReport'), false);
-            //        console.log(XMLHttpRequest.responseText);
-            //    }
-            //});
         }
+
 
         $('#inkSpotPatchSaveColorReport').on('click', function (e) {
             GenerateSpotPatchSaveColorReport(e);
@@ -958,7 +936,7 @@
             //});
         });
 
-         //Default Action
+        //Default Action
         $(".hideclass").hide(); //Hide all content
         $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
         $(".hideclass:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content
@@ -966,309 +944,309 @@
         $("ul.tabs li").click(function () {
             $("ul.tabs li").removeClass("active"); //Remove any "active" class
             $('#<%= hdnSelectedTabIndex.ClientID %>').val($(this).index());
-            $(this).addClass("active"); //Add "active" class to selected tab
-            $(".hideclass").hide(); //Hide all tab content
-            var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
-            $(activeTab).fadeIn(); //Fade in the active content
-
-            return false;
-        });
-
+         $(this).addClass("active"); //Add "active" class to selected tab
+         $(".hideclass").hide(); //Hide all tab content
+         var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+         $(activeTab).fadeIn(); //Fade in the active content
+    
+         return false;
+     });
+    
     });
-
+    
     function generateABTargetChart(predicredA, measuredA, predicredB, measuredB, hasMeasurement) {
-
-
-        var targetPaperGreenObj = [0, 0];
-        var greenSeriesArray = [];
-        greenSeriesArray.push(targetPaperGreenObj);
-        var kendoGreenSeriseObj = {};
-        kendoGreenSeriseObj.data = greenSeriesArray;
-        kendoGreenSeriseObj.color = 'green';
-        kendoGreenSeriseObj.markers = {
-            background: 'green',
-            size: 10,
-            visual: function (e) {
-                var src = kendo.format("Images/greendot.png");
-                var image = new kendo.drawing.Image(src, e.rect);
-                return image;
-            }
-        };
-        kendoGreenSeriseObj.highlight = {
-            visible: false
-        }
-
-        var targetPAPERRedObj = [predicredA, predicredB];
-        var redSeriesArray = [];
-        redSeriesArray.push(targetPAPERRedObj);
-        var kendoRedSeriseObj = {};
-        kendoRedSeriseObj.data = redSeriesArray;
-        kendoRedSeriseObj.color = 'red';
-        kendoRedSeriseObj.markers = {
-            background: 'red',
-            size: 7,
-            visual: function (e) {
-                var src = kendo.format("Images/purpledot.png");
-                var image = new kendo.drawing.Image(src, e.rect);
-                return image;
-            }
-        };
-        kendoRedSeriseObj.highlight = {
-            visible: false
-        };
-
-        var measuredPAPERBlueObj = [measuredA, measuredB];
-        var blueSeriesArray = [];
-        blueSeriesArray.push(measuredPAPERBlueObj);
-        var kendoBlueSeriseObj = {};
-        kendoBlueSeriseObj.data = blueSeriesArray;
-        kendoBlueSeriseObj.color = 'blue';
-        kendoBlueSeriseObj.markers = {
-            background: 'blue',
-            size: 15,
-            visible: hasMeasurement,
-            visual: function (e) {
-                var src = kendo.format("Images/rotateguntarget.png");
-                var image = new kendo.drawing.Image(src, e.rect);
-                return image;
-            }
-        };
-        kendoBlueSeriseObj.highlight = {
-            visible: false
-        }
-
-        $("#divABCharts").kendoChart({
-            seriesDefaults: {
-                type: "scatter",
-            },
-            series: [
-                kendoGreenSeriseObj,
-                kendoRedSeriseObj,
-                kendoBlueSeriseObj
-            ],
-            xAxis: {
-                name: "xAxis",
-                min: -10,
-                max: 10,
-                majorUnit: 2.5,
-                axisCrossingValues: [-10, 10],
-                labels: {
-                    step: 2,
-                    template: function (e) {
-                        if (e.value == 0)
-                            return 'Target';
-                        return e.value;
-                    },
-                    font: "10px Arial,Helvetica,sans-serif"
-                },
-            },
-            yAxis: {
-                name: "yAxis",
-                min: -10,
-                max: 10,
-                majorUnit: 2.5,
-                axisCrossingValues: [-10, 10],
-                labels: {
-                    step: 2,
-                    template: function (e) {
-                        if (e.value == 0)
-                            return 'Target';
-                        return e.value;
-                    },
-                    rotation: 270,
-                    font: "10px Arial,Helvetica,sans-serif"
-                },
-            },
-            chartArea: {
-                width: 175,
-                height: 140,
-                background: ''
-            },
-            plotArea: {
-                background: "white",
-                margin: {
-                    top: 8,
-                    right: 8,
-                }
-            },
-        });
-
-        var dummyChart = $('#divABCharts').data('kendoChart');
-        dummyChart.options.transitions = false;
-        dummyChart.refresh();
-        return dummyChart.imageDataURL();
+    
+    
+     var targetPaperGreenObj = [0, 0];
+     var greenSeriesArray = [];
+     greenSeriesArray.push(targetPaperGreenObj);
+     var kendoGreenSeriseObj = {};
+     kendoGreenSeriseObj.data = greenSeriesArray;
+     kendoGreenSeriseObj.color = 'green';
+     kendoGreenSeriseObj.markers = {
+         background: 'green',
+         size: 10,
+         visual: function (e) {
+             var src = kendo.format("Images/greendot.png");
+             var image = new kendo.drawing.Image(src, e.rect);
+             return image;
+         }
+     };
+     kendoGreenSeriseObj.highlight = {
+         visible: false
+     }
+    
+     var targetPAPERRedObj = [predicredA, predicredB];
+     var redSeriesArray = [];
+     redSeriesArray.push(targetPAPERRedObj);
+     var kendoRedSeriseObj = {};
+     kendoRedSeriseObj.data = redSeriesArray;
+     kendoRedSeriseObj.color = 'red';
+     kendoRedSeriseObj.markers = {
+         background: 'red',
+         size: 7,
+         visual: function (e) {
+             var src = kendo.format("Images/purpledot.png");
+             var image = new kendo.drawing.Image(src, e.rect);
+             return image;
+         }
+     };
+     kendoRedSeriseObj.highlight = {
+         visible: false
+     };
+    
+     var measuredPAPERBlueObj = [measuredA, measuredB];
+     var blueSeriesArray = [];
+     blueSeriesArray.push(measuredPAPERBlueObj);
+     var kendoBlueSeriseObj = {};
+     kendoBlueSeriseObj.data = blueSeriesArray;
+     kendoBlueSeriseObj.color = 'blue';
+     kendoBlueSeriseObj.markers = {
+         background: 'blue',
+         size: 15,
+         visible: hasMeasurement,
+         visual: function (e) {
+             var src = kendo.format("Images/rotateguntarget.png");
+             var image = new kendo.drawing.Image(src, e.rect);
+             return image;
+         }
+     };
+     kendoBlueSeriseObj.highlight = {
+         visible: false
+     }
+    
+     $("#divABCharts").kendoChart({
+         seriesDefaults: {
+             type: "scatter",
+         },
+         series: [
+             kendoGreenSeriseObj,
+             kendoRedSeriseObj,
+             kendoBlueSeriseObj
+         ],
+         xAxis: {
+             name: "xAxis",
+             min: -10,
+             max: 10,
+             majorUnit: 2.5,
+             axisCrossingValues: [-10, 10],
+             labels: {
+                 step: 2,
+                 template: function (e) {
+                     if (e.value == 0)
+                         return 'Target';
+                     return e.value;
+                 },
+                 font: "10px Arial,Helvetica,sans-serif"
+             },
+         },
+         yAxis: {
+             name: "yAxis",
+             min: -10,
+             max: 10,
+             majorUnit: 2.5,
+             axisCrossingValues: [-10, 10],
+             labels: {
+                 step: 2,
+                 template: function (e) {
+                     if (e.value == 0)
+                         return 'Target';
+                     return e.value;
+                 },
+                 rotation: 270,
+                 font: "10px Arial,Helvetica,sans-serif"
+             },
+         },
+         chartArea: {
+             width: 175,
+             height: 140,
+             background: ''
+         },
+         plotArea: {
+             background: "white",
+             margin: {
+                 top: 8,
+                 right: 8,
+             }
+         },
+     });
+    
+     var dummyChart = $('#divABCharts').data('kendoChart');
+     dummyChart.options.transitions = false;
+     dummyChart.refresh();
+     return dummyChart.imageDataURL();
     }
-
+    
     function generateLTargetChart(predicredL, measuredL, hasMeasurement) {
-
-        var targetPAPERRedObj = [predicredL];
-        var redSeriesArray = [];
-        redSeriesArray.push(targetPAPERRedObj);
-        var kendoRedSeriseObj = {};
-        kendoRedSeriseObj.data = redSeriesArray;
-        kendoRedSeriseObj.color = 'red';
-        kendoRedSeriseObj.markers = {
-            background: 'red',
-            size: 7,
-            visual: function (e) {
-                var src = kendo.format("Images/purpledot.png");
-                var image = new kendo.drawing.Image(src, e.rect);
-                return image;
-            }
-        };
-        kendoRedSeriseObj.highlight = {
-            visible: false
-        }
-
-        var measuredPAPERBlueObj = [measuredL];
-        var blueSeriesArray = [];
-        blueSeriesArray.push(measuredPAPERBlueObj);
-        var kendoBlueSeriseObj = {};
-        kendoBlueSeriseObj.data = blueSeriesArray;
-        kendoBlueSeriseObj.color = 'blue';
-        kendoBlueSeriseObj.markers = {
-            background: 'blue',
-            size: 12,
-            visible: hasMeasurement,
-            visual: function (e) {
-                var src = kendo.format("Images/guntarget.png");
-                var image = new kendo.drawing.Image(src, e.rect);
-                return image;
-            }
-        };
-        kendoBlueSeriseObj.highlight = {
-            visible: false
-        }
-
-        $("#divCharts").kendoChart({
-            seriesDefaults: {
-                type: 'line',
-            },
-            //series: [kendoGreenSeriseObj, kendoRedSeriseObj,kendoBlueSeriseObj],
-            series: [kendoRedSeriseObj, kendoBlueSeriseObj],
-            categoryAxis: {
-                name: "categoryAxis",
-                categories: [],
-            },
-            valueAxis: {
-                name: "valueAxis",
-                axisCrossingValues: [0, 10],
-                min: -10,
-                max: 10,
-                majorUnit: 5,
-                labels: {
-                    template: function (e) {
-
-                        if (e.value == 0)
-                            return 'Target';
-                        return e.value;
-                    },
-                    rotation: 270,
-                    font: "10px Arial,Helvetica,sans-serif"
-                },
-            },
-            chartArea: {
-                width: 70,
-                height: 140,
-            },
-            render: function (e) {
-                var chart = e.sender;
-                //get value axis object
-                var valueAxis = chart.getAxis("valueAxis");
-                //get maximum value from the value axis
-                var valueChartArray = $.map(valueAxis._axis.children, function (elem) {
-                    return parseInt(elem.content);
-                });
-                //assign all value number with number
-                var valueArray = [];
-                $.each(valueChartArray, function (index, item) {
-                    valueArray.push(isNaN(item) ? 0 : item);
-                });
-
-                //get top slot
-                var maxValue = Math.abs(Math.max.apply(Math, valueArray));
-                var maxValueSlot = valueAxis.slot(maxValue);
-
-                var minValue = Math.min.apply(Math, valueArray);
-                var minValueSlot = valueAxis.slot(minValue);
-
-                // Locate right-most category slot                
-                var categoryAxis = chart.getAxis("categoryAxis");
-                var lastCategoryIndex = Math.max(1, categoryAxis.range().max);
-                var minCategorySlot = categoryAxis.slot(0);
-                var maxCategorySlot = categoryAxis.slot(lastCategoryIndex);
-
-                //calculate height and width
-                var plotWidth = maxCategorySlot.origin.x - maxValueSlot.origin.x;
-                var plotHeight = minValueSlot.origin.y - maxValueSlot.origin.y;
-
-                //create ractangle
-                var rect = new geometry.Rect([
-                    // Origin X, Y
-                    maxValueSlot.origin.x, maxValueSlot.origin.y
-                ], [plotWidth, plotHeight]);
-
-                //create path using gradient
-                var path = drawing.Path.fromRect(rect, {
-                    stroke: null,
-                    fill: gradientGray
-                });
-
-                var line = new kendo.drawing.Path({
-                    stroke: {
-                        color: "green",
-                        width: 1
-                    }
-                });
-                var valueSlotLine = valueAxis.slot(0);
-                line.moveTo(valueSlotLine.origin).lineTo([maxCategorySlot.origin.x, valueSlotLine.origin.y]);
-                var group = new kendo.drawing.Group();
-                group.append(path, line);
-
-                //set the path
-                chart.surface.draw(group);
-            }
-        });
-
-        //return base64 string of chart
-        var dummyChart = $('#divCharts').data('kendoChart');
-        dummyChart.options.transitions = false;
-        dummyChart.refresh();
-        return dummyChart.imageDataURL();
+    
+     var targetPAPERRedObj = [predicredL];
+     var redSeriesArray = [];
+     redSeriesArray.push(targetPAPERRedObj);
+     var kendoRedSeriseObj = {};
+     kendoRedSeriseObj.data = redSeriesArray;
+     kendoRedSeriseObj.color = 'red';
+     kendoRedSeriseObj.markers = {
+         background: 'red',
+         size: 7,
+         visual: function (e) {
+             var src = kendo.format("Images/purpledot.png");
+             var image = new kendo.drawing.Image(src, e.rect);
+             return image;
+         }
+     };
+     kendoRedSeriseObj.highlight = {
+         visible: false
+     }
+    
+     var measuredPAPERBlueObj = [measuredL];
+     var blueSeriesArray = [];
+     blueSeriesArray.push(measuredPAPERBlueObj);
+     var kendoBlueSeriseObj = {};
+     kendoBlueSeriseObj.data = blueSeriesArray;
+     kendoBlueSeriseObj.color = 'blue';
+     kendoBlueSeriseObj.markers = {
+         background: 'blue',
+         size: 12,
+         visible: hasMeasurement,
+         visual: function (e) {
+             var src = kendo.format("Images/guntarget.png");
+             var image = new kendo.drawing.Image(src, e.rect);
+             return image;
+         }
+     };
+     kendoBlueSeriseObj.highlight = {
+         visible: false
+     }
+    
+     $("#divCharts").kendoChart({
+         seriesDefaults: {
+             type: 'line',
+         },
+         //series: [kendoGreenSeriseObj, kendoRedSeriseObj,kendoBlueSeriseObj],
+         series: [kendoRedSeriseObj, kendoBlueSeriseObj],
+         categoryAxis: {
+             name: "categoryAxis",
+             categories: [],
+         },
+         valueAxis: {
+             name: "valueAxis",
+             axisCrossingValues: [0, 10],
+             min: -10,
+             max: 10,
+             majorUnit: 5,
+             labels: {
+                 template: function (e) {
+    
+                     if (e.value == 0)
+                         return 'Target';
+                     return e.value;
+                 },
+                 rotation: 270,
+                 font: "10px Arial,Helvetica,sans-serif"
+             },
+         },
+         chartArea: {
+             width: 70,
+             height: 140,
+         },
+         render: function (e) {
+             var chart = e.sender;
+             //get value axis object
+             var valueAxis = chart.getAxis("valueAxis");
+             //get maximum value from the value axis
+             var valueChartArray = $.map(valueAxis._axis.children, function (elem) {
+                 return parseInt(elem.content);
+             });
+             //assign all value number with number
+             var valueArray = [];
+             $.each(valueChartArray, function (index, item) {
+                 valueArray.push(isNaN(item) ? 0 : item);
+             });
+    
+             //get top slot
+             var maxValue = Math.abs(Math.max.apply(Math, valueArray));
+             var maxValueSlot = valueAxis.slot(maxValue);
+    
+             var minValue = Math.min.apply(Math, valueArray);
+             var minValueSlot = valueAxis.slot(minValue);
+    
+             // Locate right-most category slot                
+             var categoryAxis = chart.getAxis("categoryAxis");
+             var lastCategoryIndex = Math.max(1, categoryAxis.range().max);
+             var minCategorySlot = categoryAxis.slot(0);
+             var maxCategorySlot = categoryAxis.slot(lastCategoryIndex);
+    
+             //calculate height and width
+             var plotWidth = maxCategorySlot.origin.x - maxValueSlot.origin.x;
+             var plotHeight = minValueSlot.origin.y - maxValueSlot.origin.y;
+    
+             //create ractangle
+             var rect = new geometry.Rect([
+                 // Origin X, Y
+                 maxValueSlot.origin.x, maxValueSlot.origin.y
+             ], [plotWidth, plotHeight]);
+    
+             //create path using gradient
+             var path = drawing.Path.fromRect(rect, {
+                 stroke: null,
+                 fill: gradientGray
+             });
+    
+             var line = new kendo.drawing.Path({
+                 stroke: {
+                     color: "green",
+                     width: 1
+                 }
+             });
+             var valueSlotLine = valueAxis.slot(0);
+             line.moveTo(valueSlotLine.origin).lineTo([maxCategorySlot.origin.x, valueSlotLine.origin.y]);
+             var group = new kendo.drawing.Group();
+             group.append(path, line);
+    
+             //set the path
+             chart.surface.draw(group);
+         }
+     });
+    
+     //return base64 string of chart
+     var dummyChart = $('#divCharts').data('kendoChart');
+     dummyChart.options.transitions = false;
+     dummyChart.refresh();
+     return dummyChart.imageDataURL();
     }
-
+    
     function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor, deltaE, deltaTP, deltaMT, deltaMP, SpotName) {
-        measuredL = (isNaN(measuredL) || measuredL == null) ? 0 : measuredL;
-        measuredA = (isNaN(measuredA) || measuredA == null) ? 0 : measuredA;
-        measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;
-        deltaE = (isNaN(deltaE) || deltaE == null) ? 0 : deltaE;
-        deltaTP = (isNaN(deltaTP) || deltaTP == null) ? 0 : deltaTP;
-        deltaMT = (isNaN(deltaMT) || deltaMT == null) ? 0 : deltaMT;
-        deltaMP = (isNaN(deltaMP) || deltaMP == null) ? 0 : deltaMP;
-        currentSpotName = SpotName;
-        //console.log("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor);
-        var oWindow;
-        var passingURL = "PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor + "&deltaE=" + deltaE + "&deltaTP=" + deltaTP + "&deltaMT=" + deltaMT + "&deltaMP=" + deltaMP;
-        oWindow = window.radopen(passingURL, "windowPatchDetails");
-        oWindow.show();
-
-        return false;
+     measuredL = (isNaN(measuredL) || measuredL == null) ? 0 : measuredL;
+     measuredA = (isNaN(measuredA) || measuredA == null) ? 0 : measuredA;
+     measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;
+     deltaE = (isNaN(deltaE) || deltaE == null) ? 0 : deltaE;
+     deltaTP = (isNaN(deltaTP) || deltaTP == null) ? 0 : deltaTP;
+     deltaMT = (isNaN(deltaMT) || deltaMT == null) ? 0 : deltaMT;
+     deltaMP = (isNaN(deltaMP) || deltaMP == null) ? 0 : deltaMP;
+     currentSpotName = SpotName;
+     //console.log("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor);
+     var oWindow;
+     var passingURL = "PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor + "&deltaE=" + deltaE + "&deltaTP=" + deltaTP + "&deltaMT=" + deltaMT + "&deltaMP=" + deltaMP;
+     oWindow = window.radopen(passingURL, "windowPatchDetails");
+     oWindow.show();
+    
+     return false;
     }
-
+    
     function OnSpotDetailsLoad(sender, eventArgs) {
-        sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;">' + currentSpotName + '</td></tr></table>')
+     sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;">' + currentSpotName + '</td></tr></table>')
     }
-
+    
     function OnSpotDetailsClose(sender, eventArgs) {
-        sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;"></td></tr></table>')
+     sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;"></td></tr></table>')
     }
-
+    
     function spotPatchSelected(chk) {
-        var uid = $(chk).closest("[data-uid]").data("uid")
-        var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
-        var item = dataSource.getByUid(uid);
-        item.dirty = true;
-        item.IsSelected = $(chk).prop('checked');
+     var uid = $(chk).closest("[data-uid]").data("uid")
+     var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
+     var item = dataSource.getByUid(uid);
+     item.dirty = true;
+     item.IsSelected = $(chk).prop('checked');
     }
 
     function GetSpotProjectSummarySliderByDeltaE(decEValue) {
@@ -1277,38 +1255,38 @@
 
         //if (typeof optimizationId === 'number' && typeof decEValue === 'number' )
         //{
-        var ajaxParameter = {
-            type: "GET",
-            url: SERVICE_BASE_URL + "api/Analyze/SpotProjectSummarySliderByDeltaE/",
-            data: { OptimizeRunID: optimizationId, Dec_E: decEValue },
-            dataType: "json"
-        };
-        commonAjaxCall(ajaxParameter, function (response) {
+            var ajaxParameter = {
+                type: "GET",
+                url: SERVICE_BASE_URL + "api/Analyze/SpotProjectSummarySliderByDeltaE/",
+                data: { OptimizeRunID: optimizationId, Dec_E: decEValue },
+                dataType: "json"
+            };
+            commonAjaxCall(ajaxParameter, function (response) {
 
-            if (response.data != null) {
-                var objResponse = response.data[0];
+                if (response.data != null) {
+                    var objResponse = response.data[0];
 
-                if (objResponse != null) {
-                    document.getElementById("lblTotalColor").innerHTML = objResponse.TotalColors;
-                    document.getElementById("lblLtEqNumber").innerHTML = objResponse.ELTEQ_VALUE;
-                    document.getElementById("lblGrtNumber").innerHTML = objResponse.EGRT_VALUE;
+                    if (objResponse != null) {
+                        document.getElementById("lblTotalColor").innerHTML = objResponse.TotalColors;
+                        document.getElementById("lblLtEqNumber").innerHTML = objResponse.ELTEQ_VALUE;
+                        document.getElementById("lblGrtNumber").innerHTML = objResponse.EGRT_VALUE;
 
-                    document.getElementById("lblLtEqDisplay").innerHTML = "Colors ≤ " + decEValue + " ΔE";
-                    document.getElementById("lblGrtDisplay").innerHTML = "Colors > " + decEValue + " ΔE";
+                        document.getElementById("lblLtEqDisplay").innerHTML = "Colors ≤ " + decEValue + " ΔE";
+                        document.getElementById("lblGrtDisplay").innerHTML = "Colors > " + decEValue + " ΔE";
 
-                    document.getElementById("lblLtEqAvg").innerHTML = ((objResponse.ELTEQ_VALUE / objResponse.TotalColors) * 100).toFixed(1) + '%';
-                    document.getElementById("lblGrtAvg").innerHTML = ((objResponse.EGRT_VALUE / objResponse.TotalColors) * 100).toFixed(1) + '%';
+                        document.getElementById("lblLtEqAvg").innerHTML = ((objResponse.ELTEQ_VALUE / objResponse.TotalColors) * 100).toFixed(1) + '%';
+                        document.getElementById("lblGrtAvg").innerHTML = ((objResponse.EGRT_VALUE / objResponse.TotalColors) * 100).toFixed(1) + '%';
+                    }
                 }
-            }
 
-        }, function (XMLHttpRequest, textStatus, errorThrown) {
-            if (XMLHttpRequest.status == 401) {
-                ShowDialog("You are not authorized user. Please login again.", "Message");
-            } else {
-                alert(errorThrown);
-            }
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
+                }
 
-        });
+            });
         /*}*/
     }
 
@@ -1359,17 +1337,15 @@
         }
         return true;
     }
-
+    
 </script>
-
 <script type="text/javascript" language="javascript">
-
     //According to new or old Project open rad window
     function ChooseRadWindow() {
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
-
+    
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
-
+    
                 if (jQuery("input[id$=hdnIsNewNCP]").val() == "True") {
                     return true;
                 }
@@ -1389,7 +1365,6 @@
         }
     }
 </script>
-
 <div class="contant_top">
     &nbsp;
 </div>
@@ -1408,7 +1383,8 @@
         <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnSpotProjectName" ClientIDMode="Static" />
         <h1 id="header" runat="server">
-            <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
+            <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize>
+        </h1>
         <div class="Information_divAnalyze">
             <asp:LinkButton ID="lbtnDownloadAndSaveNCP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveNCP_Click" OnClientClick="return ChooseRadWindow();">
                 <span>
@@ -1420,7 +1396,7 @@
     </div>
     <%--<div class="listDevice" style="margin-left: 10px;">
         <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
-    </div>--%>
+        </div>--%>
     <div class="listDevice" style="margin-left: 10px;">
         <div id="divToRender" runat="server">
             <%--<div style="display: block; width: 100%">--%>
@@ -1428,7 +1404,6 @@
             <div style="display: none; width: 100%" class="chartBackground">
                 <div id="divABCharts"></div>
             </div>
-
             <%--</div>--%>
             <table cellpadding="0" cellspacing="10" border="0" width="97%">
                 <tr>
@@ -1436,28 +1411,40 @@
                         <section id="tabpart" style="margin-left: 0;">
                             <section class="inner_tab">
                                 <ul class="tabs">
-                                    <li><span><a href="#tab1">
-                                        <asp:Localize Text="Summary" ID="locSummary"
-                                            runat="server" meta:resourcekey="locSummaryResource1"></asp:Localize></a></span></li>
-                                    <li><span><a href="#tab2">
-                                        <asp:Localize Text="Patch Details" ID="locPatchDetails"
-                                            runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
-                                    <li><span><a href="#tab3">
-                                        <asp:Localize Text="Report" ID="locReport"
-                                            runat="server" meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>
+                                    <li>
+                                        <span>
+                                            <a href="#tab1">
+                                                <asp:Localize Text="Summary" ID="locSummary"
+                                                    runat="server" meta:resourcekey="locSummaryResource1"></asp:Localize>
+                                            </a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <a href="#tab2">
+                                                <asp:Localize Text="Patch Details" ID="locPatchDetails"
+                                                    runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize>
+                                            </a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <a href="#tab3">
+                                                <asp:Localize Text="Report" ID="locReport"
+                                                    runat="server" meta:resourcekey="locReportResource1"></asp:Localize>
+                                            </a>
+                                        </span>
+                                    </li>
                                 </ul>
-
                                 <div class="clear"></div>
                             </section>
-
                             <div>
                                 <section id="tab1" class="contantbox tabcontant hideclass">
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
                                         <div class="combopart">
                                             <div style="padding-left: 10px;">
-
-                                                 <table style="width: 100%;">
+                                                <table style="width: 100%;">
                                                     <tr>
                                                         <td style="width: 60%">
                                                             <table class="PatchDetailsSummaryTable" style="width: 100%;">
@@ -1797,7 +1784,6 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-
                                             </div>
                                             <div class="clear"></div>
                                         </div>
@@ -1807,8 +1793,6 @@
                                     </div>
                                 </section>
                             </div>
-
-
                             <div>
                                 <section id="tab2" class="contantbox tabcontant hideclass">
                                     <div class="tab_top">&nbsp;</div>
@@ -1827,8 +1811,7 @@
                                     </div>
                                 </section>
                             </div>
-
-                                  <div>
+                            <div>
                                 <section id="tab3" class="contantbox tabcontant hideclass">
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
@@ -1916,10 +1899,8 @@
 <div class="contant_bottom">
     &nbsp;
 </div>
-<div id="dialog">
-</div>
+<div id="dialog"></div>
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
-
 <asp:HiddenField ID="hdfMeasurementID" runat="server" Value="0" ClientIDMode="Static" />
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
     Height="240" Width="900" VisibleStatusbar="false"

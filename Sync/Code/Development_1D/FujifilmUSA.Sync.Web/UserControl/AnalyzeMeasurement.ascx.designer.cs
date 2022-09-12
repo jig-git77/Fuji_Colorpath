@@ -222,6 +222,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.HiddenField hdnIsDlpMultiColor;
 
         /// <summary>
+        /// hdnIsSync1DMultiColor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIsSync1DMultiColor;
+
+        /// <summary>
         /// hdnCurrentRunName control.
         /// </summary>
         /// <remarks>

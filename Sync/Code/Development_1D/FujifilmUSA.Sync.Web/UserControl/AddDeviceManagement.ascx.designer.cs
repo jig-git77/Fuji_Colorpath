@@ -555,6 +555,42 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer ValidationContainer11;
 
         /// <summary>
+        /// tr_Sync1DMultiColor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow tr_Sync1DMultiColor;
+
+        /// <summary>
+        /// txtSync1DMultiColor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSync1DMultiColor;
+
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+
+        /// <summary>
+        /// ValidationContainer13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer ValidationContainer13;
+
+        /// <summary>
         /// txtCustomBCO control.
         /// </summary>
         /// <remarks>

@@ -25,6 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseSpotLibraryText { get; set; }
         public string ELicenseDLpPlusText { get; set; }
         public string ELicenseDLPMultiColorText { get; set; }
+        public string ELicenseSync1DMultiColorText { get; set; }
         public string ELicenseCustomBCOText { get; set; }
 
         #region Private Variables - Globalization
@@ -75,8 +76,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseSpotLibraryText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
             ELicenseDLpPlusText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
             ELicenseDLPMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
+            ELicenseSync1DMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1DMultiColor);
             ELicenseCustomBCOText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomBCO);
-
             trTotalNoColor.Visible = false;
             trChannel.Visible = false;
             if (Page.IsPostBack)
@@ -185,12 +186,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtSpotLibrary.Enabled = false;
                         txtDlpPlus.Enabled = false;
                         txtDLPMultiColor.Enabled = false;
+                        txtSync1DMultiColor.Enabled = false;
                         txtCustomBCO.Enabled = false;
                     }
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = txtDLPMultiColor.Text = txtCustomBCO.Text = "0";
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = txtDLPMultiColor.Text = txtSync1DMultiColor.Text = txtCustomBCO.Text = "0";
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -203,6 +205,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtSpotLibrary.Enabled = (License.LicenseType.Where(x => x == ELicenseType.SpotLibrary).Count() > 0);
                         txtDlpPlus.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPPlus).Count() > 0);
                         txtDLPMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPMultiColor).Count() > 0);
+                        txtSync1DMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1DMultiColor).Count() > 0);
                         txtCustomBCO.Enabled = (License.LicenseType.Where(x => x == ELicenseType.CustomBCO).Count() > 0);
 
                     }
@@ -251,7 +254,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 }
                 else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 6)
-                { trChannel.Visible = true;
+                {
+                    trChannel.Visible = true;
                     if (drpChannel5.SelectedValue == "0")
                     {
                         fujiStatusbar.DisplayMessage("Please select channel5", false);
@@ -287,7 +291,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 8)
                 {
-                    if(drpChannel5.SelectedValue == "0")
+                    if (drpChannel5.SelectedValue == "0")
                     {
                         fujiStatusbar.DisplayMessage("Please select channel5", false);
                         return;
@@ -354,7 +358,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsValidation = chkIsValidation.Checked,
                 IsFlexo = chkIsFlexo.Checked,
                 IsSupportMulticolor = chkIsSupportMulticolor.Checked,
-               
+
 
 
             };
@@ -372,6 +376,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Device.LicenseTypeProject.Add(ELicenseType.Sync1D, Convert.ToInt32(txtSync1D.Text));
             }
+
+            if (txtCustomBCO.Enabled)
+            {
+                Device.LicenseTypeProject.Add(ELicenseType.CustomBCO, Convert.ToInt32(txtCustomBCO.Text));
+            }
+
 
             if (txtDlp.Enabled)
             {
@@ -426,9 +436,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Device.LicenseTypeProject.Add(ELicenseType.DLPMultiColor, Convert.ToInt32(txtDLPMultiColor.Text));
             }
-            if (txtCustomBCO.Enabled)
+            if (txtSync1DMultiColor.Enabled)
             {
-                Device.LicenseTypeProject.Add(ELicenseType.CustomBCO, Convert.ToInt32(txtCustomBCO.Text));
+                Device.LicenseTypeProject.Add(ELicenseType.Sync1DMultiColor, Convert.ToInt32(txtSync1DMultiColor.Text));
             }
 
             if (DId == 0) // Add New company
@@ -473,7 +483,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     trTotalNoColor.Visible = true;
                     trChannel.Visible = true;
-                    drpTotalNoColor.SelectedValue = Device.TotalNoColor.ToString();                    
+                    drpTotalNoColor.SelectedValue = Device.TotalNoColor.ToString();
                     drpChannel5.SelectedValue = Device.Channel_5.ToString();
                     drpChannel6.SelectedValue = Device.Channel_6.ToString();
                     drpChannel7.SelectedValue = Device.Channel_7.ToString();
@@ -529,13 +539,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.DLPMultiColor:
                             txtDLPMultiColor.Text = val.ToString();
-                            break;                        
+                            break;
+                        case ELicenseType.Sync1DMultiColor:
+                            txtSync1DMultiColor.Text = val.ToString();
+                            break;
                         case ELicenseType.CustomBCO:
                             txtCustomBCO.Text = val.ToString();
                             break;
                         default:
                             break;
-
                     }
                 }
             }
@@ -546,7 +558,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DataSet dataSet = _presenterDeviceManagement.GetMultiColorChannelList();
             if (dataSet.Tables.Count > 0)
             {
-                if (dataSet.Tables[0].Rows.Count > 0) {
+                if (dataSet.Tables[0].Rows.Count > 0)
+                {
                     drpChannel5.DataSource = dataSet.Tables[0];
                     drpChannel5.DataValueField = "MultiColorChannelID";
                     drpChannel5.DataTextField = "MultiColorChannelName";
@@ -615,7 +628,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trChannel7.Visible = true;
                 trChannel8.Visible = false;
                 trChannel9.Visible = false;
-                
+
                 drpChannel8.SelectedValue = "0";
                 drpChannel9.SelectedValue = "0";
             }

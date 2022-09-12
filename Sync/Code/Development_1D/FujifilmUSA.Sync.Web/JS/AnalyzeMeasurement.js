@@ -112,6 +112,7 @@ var $hdnCurrentUserRole;
 var AUTH_TOKEN = '';
 var $hdnSyncDlpPlusType;
 var $hdnIsDlpMultiColor;
+var $hdnIsSync1DMultiColor;
 var $hdnCurrentRunName;
 var labelPrintHTMLString = '';
 //********** kendo objects *********//
@@ -286,10 +287,12 @@ $(document).ready(function () {
     AUTH_TOKEN = $("#hdfAuthToken").val();
     $hdnSyncDlpPlusType = $('#hdnSyncDlpPlusType').val();
     $hdnIsDlpMultiColor = $('#hdnIsDlpMultiColor').val();
+    $hdnIsSync1DMultiColor = $('#hdnIsSync1DMultiColor').val();
     $hdnCurrentRunName = $('#hdnCurrentRunName').val();
+
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
-        if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+        if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
             $selectedDeltaE = $('#hdnDefaultSelectedDelta').val();
         }
         else {
@@ -323,7 +326,6 @@ $(document).ready(function () {
         DownloadReportFile();
     });
 
-    //Bind click event for report generation
     function DownloadReportFile() {
         kendo.ui.progress($('#divReport'), true);
         var measurementID = parseInt($hdnCurrentMeasurement.val());
@@ -362,7 +364,6 @@ $(document).ready(function () {
             GrayNPDChart: '',
 
         };
-
 
         apiParameter.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
         apiParameter.InkPaperPatchChart = GetInkPaperPatchChartImage();
@@ -787,7 +788,8 @@ function BindAllTabs() {
     BindGrayCharts();
 
     //Bind current measurement patch details
-    if (($hdnIsDlpMultiColor == "True") && ($hdnCurrentRunName == "Run-0")) {
+
+    if (($hdnIsDlpMultiColor == "True" || $hdnIsSync1DMultiColor == "True") && ($hdnCurrentRunName == "Run-0")) {
         BindMeasurementPatchDetailsForMultiColor(); //It called DLPMultiColor and Sync1DMultiColor
     }
     else {
@@ -812,7 +814,7 @@ function BindMeasurementSummary() {
     $("#divMeasurementSummary").css('display', 'none');
     $("#divValidationSummary").css('display', 'none');
 
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor) {
 
         $("#divValidationSummary").css('display', 'block');
         apiParameter = {
@@ -953,8 +955,8 @@ function BindMeasurementSummary() {
                         $hdnValidationType = measurement.ValidationType;
 
                         var viewModel = kendo.observable(measurement);
-                        viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
-                        viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
+                        viewModel.isSync1DLicenseType = !(($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor));
+                        viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
 
 
                         if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
@@ -965,6 +967,17 @@ function BindMeasurementSummary() {
                         $('#tblAverageMeasurementSummary').css('display', 'none');
 
                         if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
+
+                            $('#rowCustomer').hide();
+                            $('#rowPageSurface').hide();
+                            $('#rowJobID').hide();
+                            $('#rowNotes').hide();
+                            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                                $('#rowCustomer').show();
+                                $('#rowNotes').show();
+                            }
+                        }
+                        if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1DMultiColor) {
 
                             $('#rowCustomer').hide();
                             $('#rowPageSurface').hide();
@@ -1010,7 +1023,7 @@ function BindMeasurementSummary() {
                             }
 
                             //check the project type Sync1D or Validation
-                            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
                                 //Hide default tabs TVI
                                 //$(tabStrip.items()[4]).show();
@@ -1020,7 +1033,7 @@ function BindMeasurementSummary() {
                                 BindTVICharts();
 
                                 //show average measurement checkbox
-                                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
+                                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor) {
                                     $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
                                 }
                             }
@@ -1171,6 +1184,7 @@ function BindMeasurementPatchDetails() {
                                 IsSync1DTypeProject: $hdnSync1DType,
                                 metricSumID: $('#hdPatchMatricSum').val(),
                                 IsDLPMultiColor: $hdnIsDlpMultiColor,
+                                Is1DMultiColor: $hdnIsSync1DMultiColor,
                                 CurrentRunName: $hdnCurrentRunName,
                                 LicenseType: $hdnCurrentDlpSubOperation
                             },
@@ -1186,6 +1200,7 @@ function BindMeasurementPatchDetails() {
                             if (response.data != null) {
                                 Resources = response.data.GlobalResources;
                                 var patches = response.data.measurementPatchDetails;
+
                                 options.success(patches);
 
                                 //set the column header
@@ -1459,7 +1474,7 @@ function BindMeasurementPatchDetails() {
                     title: "<b title='K'>K</b>",
                     format: "{0:n2}",
                     width: "55px",
-                    //locked: true,
+                    // locked: true,
                 },
                 {
                     field: "ΔE",
@@ -1608,7 +1623,7 @@ function BindMeasurementPatchDetails() {
                     grid.hideColumn(22);
                 }
                 //show measurement export button visible only for sys admin user
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
             }
@@ -1647,7 +1662,7 @@ function BindMeasurementPatchDetails() {
 
 
 
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
 
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var params = {
@@ -1926,7 +1941,6 @@ function BindMeasurementPatchDetails() {
 
 ////**************** START BIND THE CURRENT MEASUREMENT PATCH KENDO GRID For MULTICOLOR  ****************////
 function BindMeasurementPatchDetailsForMultiColor() {
-
     var measurementID = parseInt($hdnCurrentMeasurement.val());
     var TotalNoColor = 0;
     var IsSupportMulticolor = false;
@@ -1953,7 +1967,9 @@ function BindMeasurementPatchDetailsForMultiColor() {
                                 IsSync1DTypeProject: $hdnSync1DType,
                                 metricSumID: $('#hdPatchMatricSum').val(),
                                 IsDLPMultiColor: $hdnIsDlpMultiColor,
-                                CurrentRunName: $hdnCurrentRunName
+                                Is1DMultiColor: $hdnIsSync1DMultiColor,
+                                CurrentRunName: $hdnCurrentRunName,
+                                LicenseType: $hdnCurrentDlpSubOperation
                             },
                             dataType: "json",
                             headers: {
@@ -1963,6 +1979,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
                         };
 
                         commonAjaxCall(ajaxParameter, function (response) {
+
                             kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
                             if (response.data != null) {
                                 Resources = response.data.GlobalResources;
@@ -2231,28 +2248,28 @@ function BindMeasurementPatchDetailsForMultiColor() {
                     title: "<b title='C'>C</b>",
                     format: "{0:n2}",
                     width: "55px",
-                   // locked: true,
+                    //locked: true,
                 },
                 {
                     field: "CMYK_M",
                     title: "<b title='M'>M</b>",
                     format: "{0:n2}",
                     width: "58px",
-                   // locked: true,
+                    // locked: true,
                 },
                 {
                     field: "CMYK_Y",
                     title: "<b title='Y'>Y</b>",
                     format: "{0:n2}",
                     width: "55px",
-                    //locked: true,
+                    // locked: true,
                 },
                 {
                     field: "CMYK_K",
                     title: "<b title='K'>K</b>",
                     format: "{0:n2}",
                     width: "55px",
-                   // locked: true,
+                    //locked: true,
                 },
                 {
                     field: "Channel5",
@@ -2437,7 +2454,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
                     grid.hideColumn(27);//grid.hideColumn(22);
                 }
                 //show measurement export button visible only for sys admin user
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
                 if (TotalNoColor == 5) {
@@ -2496,7 +2513,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
 
 
 
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
 
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var params = {
@@ -2850,7 +2867,6 @@ function BindAnalyzeChart() {
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
 function BindInkPaperChartABComparision() {
-
     var measurementID = parseInt($hdnCurrentMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
@@ -2958,7 +2974,11 @@ function BindGrayCharts() {
         jsonColors = response.data.GamutChart;
         jsonGray = response.data.LABChart;
         _Resources = response.data.GlobalResources;
-        PopulateChartTargetVersusActualAB();
+        if ($hdnIsDlpMultiColor == "True" && $hdnCurrentRunName == "Run-0") {
+            PopulateChartTargetVersusActualABMultiColor();
+        } else {
+            PopulateChartTargetVersusActualAB();
+        }
         PopulateChartGamutABComparision();
         PopulateChartLComparision();
         PopulateChartLGrayBalance();
@@ -3748,7 +3768,7 @@ function PopulateInkPaperChartABComparision() {
     var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
 
 
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
         maxNum = Math.max.apply(Math, axis) + 1;    //get the max ΔE with +1
         var DeltaLimitArray = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔELimit; });
         maxDeltaLimit = Math.max.apply(Math, DeltaLimitArray) + 1
@@ -3801,7 +3821,7 @@ function PopulateInkPaperChartABComparision() {
             visual: function (e) {
                 var visual = e.createVisual();
                 //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                     if (e.series.index == 0) {
                         var axis = e.sender.getAxis("valueAxis");
 
@@ -3897,12 +3917,12 @@ function PopulateInkPaperChartABComparision() {
                 toolTipString += item.value.toFixed(2);
 
                 //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                     toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
                 }
 
                 //-----For Sync1D projects, display Previous ΔE in tooltip also
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.PreAvgΔE > 0) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.PreAvgΔE > 0) {
                     toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
                     toolTipString += item.PreAvgΔE.toFixed(2);
                     toolTipString += "</td></tr>";
@@ -3920,7 +3940,7 @@ function PopulateInkPaperChartABComparision() {
         },
         render: function (e) {
             //-----For Sync1D projects or validation projects
-            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                 var chart = e.sender;
                 $.each(thrashHold.paths, function (index, obj) {
                     //set the line 
@@ -4001,7 +4021,7 @@ function PopulateInkPaperChartABComparision() {
                 circleDensity.options.stroke.color = "red";
                 visual.append(circleDensity);
 
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && e.dataItem.preAvgDensity > 0) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && e.dataItem.preAvgDensity > 0) {
                     var targetAvg = axis.slot(e.dataItem.preAvgDensity).origin.y;
                     var pathAvg = new kendo.drawing.Path({ stroke: { width: 1, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
                     visual.append(pathAvg);
@@ -4049,7 +4069,7 @@ function PopulateInkPaperChartABComparision() {
                 tooltipString = '<table><tr><td><center><b>' + item.title + '</b></center><td></tr>';
                 tooltipString += '<tr><td>' + _Resources._recActual + ":</b> " + item.density.toFixed(2) + '</td></tr>';
                 tooltipString += '<tr><td>' + _Resources._recTarget + ":</b> " + item.densityLimit.toFixed(2) + '</td></tr>';
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.preAvgDensity > 0) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.preAvgDensity > 0) {
                     tooltipString += '<tr><td>' + _Resources._recPrevious + ":</b> " + item.preAvgDensity.toFixed(2) + '</td></tr>';
                 }
                 tooltipString += '</table>';
@@ -4292,6 +4312,255 @@ function PopulateChartTargetVersusActualAB() {
         seriesArray.push(actualObject);
 
         //create the series of the array for line
+        var kendoSeriseObj = {};
+        kendoSeriseObj.data = seriesArray;
+        kendoSeriseObj.color = element.PatchType;
+        kendoSeriseObj.markers = {
+            background: element.PatchType,
+            //size: 6,
+            border: {
+                width: 1,
+                color: function (e) {
+                    return 'black';
+                }
+            }
+        };
+        kendoSeriseObj.width = 2;
+        kendoSeriseObj.highlight = {
+            visible: false
+        }
+
+        //Check patch type for tooltip caption
+        var tooltipCaption = '';
+        switch (element.PatchType) {
+            case "Cyan":
+                tooltipCaption = _Resources._recCyanPathMetrics;
+                break;
+            case "Magenta":
+                tooltipCaption = _Resources._recMagentaPathMetrics;
+                break;
+            case "Yellow":
+                tooltipCaption = _Resources._recYellowPathMetrics;
+                break;
+            case "Red":
+                tooltipCaption = _Resources._recRedPathMetrics;
+                break;
+            case "Green":
+                tooltipCaption = _Resources._recGreenPathMetrics;
+                break;
+            case "Blue":
+                tooltipCaption = _Resources._recBluePathMetrics;
+                break;
+            case "Paper":
+                tooltipCaption = _Resources._recPaperPathMetrics;
+                break;
+        }
+
+
+        //create tool tip
+
+        var bgColor = element.PatchType == "Paper" ? "White" : element.PatchType;
+        var textColor = "white";
+        if (element.PatchType == "Paper" || element.PatchType == "Yellow" || element.PatchType == "Cyan") {
+            textColor = "black";
+        }
+        var tooltipString = '<div style="color: ' + textColor + '; padding: 2px; background-color: ' + bgColor + ';border-radius: 4px;padding: 5px 5px 5px 6px;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFW…8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);"><table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + element.CielabB.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
+        tooltipString += '</table></div>';
+
+        //kendoSeriseObj.tooltip = {
+        //    visible: true,
+        //    template: tooltipString,
+        //    shared: true
+        //};
+
+        kendoSeriseObj.tooltip = {
+            visible: true, template: function (d) {
+                debugger;
+                var seriesData = d.series.data;
+                var lastItem = seriesData[seriesData.length - 1];
+
+                if (lastItem != d.dataItem) {
+                    setTimeout(function () {
+                        $(".k-chart-tooltip").addClass('tempTooltip');
+                    }, 150);
+                    return "";
+                } else {
+                    setTimeout(function () {
+                        $(".k-chart-tooltip").removeData('tempTooltip');
+                    }, 150);
+                }
+                return tooltipString;
+            }, shared: false
+        };
+
+
+        //Calcaulte Targets
+        var kendoTargetObj = {};
+        kendoTargetObj.data = [[element.Targeta, element.Targetb]];
+        kendoTargetObj.color = "Green";
+        kendoTargetObj.markers = { background: "Green" };
+        kendoTargetObj.highlight = {
+            visible: false
+        }
+
+
+        $('#tootipDemo').html(tooltipString);
+        if (element.PatchType == "Cyan") {
+            targetCYANSeriseObj = kendoSeriseObj;
+            targetCYAN = kendoTargetObj;
+        }
+        if (element.PatchType == "Magenta") {
+            targetMAGENTASeriseObj = kendoSeriseObj;
+            targetMAGENTA = kendoTargetObj;
+
+        }
+        if (element.PatchType == "Yellow") {
+            targetYELLOWSeriseObj = kendoSeriseObj;
+            targetYELLOW = kendoTargetObj;
+        }
+        if (element.PatchType == "Red") {
+            targetREDSeriseObj = kendoSeriseObj;
+            targetRED = kendoTargetObj;
+        }
+        if (element.PatchType == "Green") {
+            targetGREENSeriseObj = kendoSeriseObj;
+            targetGREEN = kendoTargetObj;
+        }
+        if (element.PatchType == "Blue") {
+            targetBLUESeriseObj = kendoSeriseObj;
+            targetBLUE = kendoTargetObj;
+        }
+        if (element.PatchType == "Paper") {
+            kendoSeriseObj.data = [targetPAPERObj];
+            kendoSeriseObj.color = "White";
+            kendoSeriseObj.markers = { background: "White", size: 6 };
+            targetPAPERSeriseObj = kendoSeriseObj;
+        }
+    });
+
+
+    $chart_TargetVersusActualAB.kendoChart({
+        renderAs: "canvas",
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        //title: {
+        //    text: "a* - b* Comparison"
+        //},
+        series: [
+            targetCYAN,
+            targetMAGENTA,
+            targetYELLOW,
+            targetRED,
+            targetGREEN,
+            targetBLUE,
+            targetCYANSeriseObj,
+            targetMAGENTASeriseObj,
+            targetYELLOWSeriseObj,
+            targetREDSeriseObj,
+            targetGREENSeriseObj,
+            targetBLUESeriseObj,
+            targetPAPERSeriseObj
+        ],
+        xAxis: {
+            name: "xAxis",
+            min: -100,
+            max: 100,
+            majorUnit: 20,
+            axisCrossingValues: [-100, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        yAxis: {
+            name: "yAxis",
+            min: -100,
+            max: 100,
+            step: 20,
+            majorUnit: 20,
+            axisCrossingValues: [-100, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        chartArea: {
+            width: 300,
+            height: 250,
+            background: ''
+        },
+        //plotArea: {
+        //    border: {
+        //        width: 2,
+        //        color: "black"
+        //    }
+        //},
+        //render: renderChartWithBackgroundByAxis
+    });
+
+
+
+}
+
+
+////**************** START BIND THE AB COMPARISION (GMAUT) CHART MULTICOLOR  ****************////
+function PopulateChartTargetVersusActualABMultiColor() {
+
+
+    //************* Get object from array ***************//
+    var paperObj = $.grep(jsonTarget, function (element) { return element.PatchType == "Paper"; })[0];
+
+    //************* Target Objects ***************//
+    var targetArray = {};
+    var targetCYAN = {};
+    var targetMAGENTA = {};
+    var targetYELLOW = {};
+    var targetRED = {};
+    var targetGREEN = {};
+    var targetBLUE = {};
+    var targetPAPERObj = [paperObj.Targeta, paperObj.Targetb];
+    var targetPAPER = [targetPAPERObj];
+
+    //************* SERIES ARRAY ***************//
+
+    var targetCYANSeriseObj = {};
+    var targetMAGENTASeriseObj = {};
+    var targetYELLOWSeriseObj = {};
+    var targetREDSeriseObj = {};
+    var targetGREENSeriseObj = {};
+    var targetBLUESeriseObj = {};
+    var targetPAPERSeriseObj = {};
+
+    $.each(jsonTarget, function (index, element) {
+        var seriesArray = [];
+
+        //Get colors from the colors array ()
+        var colorsArray = $.grep(jsonColors, function (colorObj) { return colorObj.PatchType == element.PatchType });
+        if (colorsArray.length > 0) {
+            seriesArray.push(targetPAPERObj);
+            $.each(colorsArray, function (i, colorObj) {
+                var dots = [colorObj.CielabA, colorObj.CielabB];
+                seriesArray.push(dots);
+            });
+        }
+
+        //add actuall color object
+        var actualObject = [element.CielabA, element.CielabB];
+        seriesArray.push(actualObject);
+
+        //create the series of the array for line
+
         var kendoSeriseObj = {};
         kendoSeriseObj.data = seriesArray;
         kendoSeriseObj.color = element.PatchType;
@@ -5218,7 +5487,7 @@ function PopulateSummaryDeltaChart() {
             visual: function (e) {
                 var visual = e.createVisual();
                 //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                     if (e.series.index == 0) {
                         var axis = e.sender.getAxis("valueAxis");
 
@@ -5294,7 +5563,7 @@ function PopulateSummaryDeltaChart() {
         render: function (e) {
 
             //-----For Sync1D projects or validation projects
-            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
                 var chart = e.sender;
                 $.each(thrashHold.paths, function (index, obj) {
                     //set the line 
@@ -7702,6 +7971,8 @@ function PopulateDymoPrinter(obj) {
     //});
 }
 
+
+
 //set the measurement detail for dymo label printing
 function PopulateDymoPrinterNew(obj) {
 
@@ -7752,7 +8023,6 @@ function ShowLabelPrintPreviewNew() {
     printPreviewWindow = window.open("PrintPreviewNew.aspx", "PrintPreviewWindow", "width=768,height=650,resizable=no,scrollbars=no,menubar=yes");
     printPreviewWindow.focus();
 }
-
 //method to get icon image in label print dymo label
 function GetStatusIconImageString() {
     return labelPrintStatusIconString;
