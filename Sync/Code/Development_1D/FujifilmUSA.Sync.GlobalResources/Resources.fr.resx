@@ -184,19 +184,19 @@
     <value>Email / Utilisateur déja existant.</value>
   </data>
   <data name="ELicenseType_DLP" xml:space="preserve">
-    <value>Optimisation DLP</value>
+    <value>Optimisation DLP_fr</value>
   </data>
   <data name="ELicenseType_IccProfiling" xml:space="preserve">
-    <value>Profilage ICC</value>
+    <value>Profilage ICC_fr</value>
   </data>
   <data name="ELicenseType_InkOptimization" xml:space="preserve">
-    <value>Ink Optimization</value>
+    <value>Ink Optimization_fr</value>
   </data>
   <data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
-    <value>Ink Optimization Source</value>
+    <value>Ink Optimization Source_fr</value>
   </data>
   <data name="ELicenseType_Sync4DCertification" xml:space="preserve">
-    <value>Sync4D Certification</value>
+    <value>Sync4D Certification_fr</value>
   </data>
   <data name="ELicenseType_CustomSourceProfile" xml:space="preserve">
     <value>Custom Source Profile_fr</value>
@@ -214,10 +214,10 @@
     <value>Brand Color Optimization_fr</value>
   </data>
   <data name="ELicenseType_None" xml:space="preserve">
-    <value>INVALIDE</value>
+    <value>INVALIDE_fr</value>
   </data>
   <data name="ELicenseType_Sync1D" xml:space="preserve">
-    <value>Alignment Curves</value>
+    <value>Alignment Curves_fr</value>
   </data>
   <data name="ELicenseType_Validation" xml:space="preserve">
     <value>Validation Couleur</value>
@@ -607,52 +607,52 @@
     <value>AbsLightenerCompensation</value>
   </data>
   <data name="EProfileRendering_eCLAbsoluteCompressionRI" xml:space="preserve">
-    <value>AbsoluteCompression</value>
+    <value>AbsoluteCompression_fr</value>
   </data>
   <data name="EProfileRendering_eCLAbsolutePerceptualRI" xml:space="preserve">
-    <value>AbsolutePerceptual</value>
+    <value>AbsolutePerceptual_fr</value>
   </data>
   <data name="EProfileRendering_eCLAbsoluteRI" xml:space="preserve">
     <value>pAbsolute</value>
   </data>
   <data name="EProfileRendering_eCLBlackCompensationRI" xml:space="preserve">
-    <value>BlackCompensation</value>
+    <value>BlackCompensation_fr</value>
   </data>
   <data name="EProfileRendering_eCLGamutCompressionRI" xml:space="preserve">
-    <value>GamutCompression</value>
+    <value>GamutCompression_fr</value>
   </data>
   <data name="EProfileRendering_eCLMinimumBlackCompressionRI" xml:space="preserve">
-    <value>MinBlackCompression</value>
+    <value>MinBlackCompression_fr</value>
   </data>
   <data name="EProfileRendering_eCLMinimumCompressionRI" xml:space="preserve">
-    <value>MinCompression</value>
+    <value>MinCompression_fr</value>
   </data>
   <data name="EProfileRendering_eCLMinimumWhiteCompressionRI" xml:space="preserve">
-    <value>MinWhiteCompression</value>
+    <value>MinWhiteCompression_fr</value>
   </data>
   <data name="EProfileRendering_eCLPerceptualCompressionRI" xml:space="preserve">
-    <value>PerceptualCompression</value>
+    <value>PerceptualCompression_fr</value>
   </data>
   <data name="EProfileRendering_eCLRelativeCompressionRI" xml:space="preserve">
-    <value>RelativeCompression</value>
+    <value>RelativeCompression_fr</value>
   </data>
   <data name="EProfileRendering_eCLRelativeLightness" xml:space="preserve">
-    <value>RelativeLightness</value>
+    <value>RelativeLightness_fr</value>
   </data>
   <data name="EProfileRendering_eCLRelativeRI" xml:space="preserve">
     <value>pRelative</value>
   </data>
   <data name="EProfileRendering_icAbsoluteColorimetric" xml:space="preserve">
-    <value>Absolute</value>
+    <value>Absolute_fr</value>
   </data>
   <data name="EProfileRendering_icPerceptual" xml:space="preserve">
-    <value>Perceptual</value>
+    <value>Perceptual_fr</value>
   </data>
   <data name="EProfileRendering_icRelativeColorimetric" xml:space="preserve">
-    <value>Relative</value>
+    <value>Relative_fr</value>
   </data>
   <data name="EProfileRendering_icSaturation" xml:space="preserve">
-    <value>Saturation</value>
+    <value>Saturation_fr</value>
   </data>
   <data name="EReferenceChartDisType_OptimizationChart" xml:space="preserve">
     <value>Charte d'Optimisation</value>
@@ -703,10 +703,10 @@
     <value>M2</value>
   </data>
   <data name="CertificationStatusText" xml:space="preserve">
-    <value>Certification</value>
+    <value>Certification_fr</value>
   </data>
   <data name="DLPText" xml:space="preserve">
-    <value>DLP</value>
+    <value>DLP_fr</value>
   </data>
   <data name="OpenStatusText" xml:space="preserve">
     <value>Ouvrir</value>
@@ -871,7 +871,7 @@
     <value>Ce Projet n'est pas validé, la page d'Analyse ne peut-être affichée</value>
   </data>
   <data name="PCSDataTypes_Spectral" xml:space="preserve">
-    <value>Spectral</value>
+    <value>Spectral_fr</value>
   </data>
   <data name="PCSDataTypes_Density" xml:space="preserve">
     <value>Densité</value>
@@ -880,10 +880,10 @@
     <value>XYZ</value>
   </data>
   <data name="DensityTypes_StatusT" xml:space="preserve">
-    <value>StatusT</value>
+    <value>StatusT_fr</value>
   </data>
   <data name="DensityTypes_StatusE" xml:space="preserve">
-    <value>StatusE</value>
+    <value>StatusE_fr</value>
   </data>
   <data name="EInkOrder_KCMY" xml:space="preserve">
     <value>KCMY</value>
@@ -958,16 +958,16 @@
     <value>YMKC</value>
   </data>
   <data name="EPrintingTypes_Offset" xml:space="preserve">
-    <value>Offset</value>
+    <value>Offset_fr</value>
   </data>
   <data name="EPrintingTypes_Flexo" xml:space="preserve">
-    <value>Flexo</value>
+    <value>Flexo_fr</value>
   </data>
   <data name="Error_InsertLookupTVILABDensity" xml:space="preserve">
     <value>Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator.</value>
   </data>
   <data name="Error_AddLookupTVILABDensity_MissingData" xml:space="preserve">
-    <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data.</value>
+    <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data._fr</value>
   </data>
   <data name="PatchPresetManagement_DeletePatchPreset_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected patch preset?_fr</value>
@@ -994,10 +994,10 @@
     <value>Actuel</value>
   </data>
   <data name="blackPathMetrics" xml:space="preserve">
-    <value>Black Patch Metrics</value>
+    <value>Black Patch Metrics_fr</value>
   </data>
   <data name="bluePathMetrics" xml:space="preserve">
-    <value>Blue Patch Metrics</value>
+    <value>Blue Patch Metrics_fr</value>
   </data>
   <data name="bText" xml:space="preserve">
     <value>b*</value>
@@ -1006,31 +1006,31 @@
     <value>Cyan Patch Metrics_de</value>
   </data>
   <data name="deltaAText" xml:space="preserve">
-    <value>&amp;Delta;a*</value>
+    <value>&amp;Delta;a*_fr</value>
   </data>
   <data name="deltaLText" xml:space="preserve">
-    <value>&amp;Delta;L*</value>
+    <value>&amp;Delta;L*_fr</value>
   </data>
   <data name="gbPatchMetricsText" xml:space="preserve">
-    <value>% GB Patch Metrics_de</value>
+    <value>% GB Patch Metrics_fr</value>
   </data>
   <data name="greenPathMetrics" xml:space="preserve">
-    <value>Green Patch Metrics_de</value>
+    <value>Green Patch Metrics_fr</value>
   </data>
   <data name="magentaPathMetrics" xml:space="preserve">
-    <value>Magenta Patch Metrics</value>
+    <value>Magenta Patch Metrics_fr</value>
   </data>
   <data name="paperPathMetrics" xml:space="preserve">
-    <value>Paper Patch Metrics</value>
+    <value>Paper Patch Metrics_fr</value>
   </data>
   <data name="redPathMetrics" xml:space="preserve">
-    <value>Red Patch Metrics</value>
+    <value>Red Patch Metrics_fr</value>
   </data>
   <data name="targetText" xml:space="preserve">
     <value>Cible</value>
   </data>
   <data name="yellowPathMetrics" xml:space="preserve">
-    <value>Yellow Patch Metrics</value>
+    <value>Yellow Patch Metrics_fr</value>
   </data>
   <data name="aText" xml:space="preserve">
     <value>a*</value>
@@ -1042,31 +1042,31 @@
     <value>L*</value>
   </data>
   <data name="GridTemplateColumnResource0" xml:space="preserve">
-    <value>Type</value>
+    <value>Type_fr</value>
   </data>
   <data name="GridTemplateColumnResource1" xml:space="preserve">
-    <value>Validation</value>
+    <value>Validation_fr</value>
   </data>
   <data name="GridTemplateColumnResource2" xml:space="preserve">
-    <value>Status</value>
+    <value>Status_fr</value>
   </data>
   <data name="GridTemplateColumnResource3" xml:space="preserve">
-    <value>Print Condition</value>
+    <value>Print Condition_fr</value>
   </data>
   <data name="GridTemplateColumnResource4" xml:space="preserve">
-    <value>Target Colorspace</value>
+    <value>Target Colorspace_fr</value>
   </data>
   <data name="GridTemplateColumnResource5" xml:space="preserve">
-    <value>Supprot</value>
+    <value>Supprot_fr</value>
   </data>
   <data name="GridTemplateColumnResource6" xml:space="preserve">
     <value>Encre</value>
   </data>
   <data name="GridTemplateColumnResourceLibrary" xml:space="preserve">
-    <value>Library</value>
+    <value>Library_fr</value>
   </data>
   <data name="ToolTipClickToShort" xml:space="preserve">
-    <value>Click here to short</value>
+    <value>Click here to short_fr</value>
   </data>
   <data name="Error_DeleteOptimizeRunNCP" xml:space="preserve">
     <value>Error occured while deleting optimize run's NCP.Please contact your administrator.</value>
@@ -1081,28 +1081,28 @@
     <value>Error occured while optimizing named color profile. Please contact your administrator.</value>
   </data>
   <data name="ESourceProfileCategory_All" xml:space="preserve">
-    <value>All</value>
+    <value>All_fr</value>
   </data>
   <data name="ESourceProfileCategory_NorthAmericanStandards" xml:space="preserve">
-    <value>North American Standards</value>
+    <value>North American Standards_fr</value>
   </data>
   <data name="ESourceProfileCategory_EuropeanStandards" xml:space="preserve">
-    <value>European Standards</value>
+    <value>European Standards_fr</value>
   </data>
   <data name="ESourceProfileCategory_JapanStandards" xml:space="preserve">
-    <value>Japan Standards</value>
+    <value>Japan Standards_fr</value>
   </data>
   <data name="ESourceProfileCategory_Other" xml:space="preserve">
-    <value>Other</value>
+    <value>Other_fr</value>
   </data>
   <data name="CreateNewLibrary" xml:space="preserve">
-    <value>Create New Library</value>
+    <value>Create New Library_fr</value>
   </data>
   <data name="MsgDeleteProject" xml:space="preserve">
-    <value>Supprimer Projet</value>
+    <value>Supprimer Projet_fr</value>
   </data>
   <data name="OpenProject" xml:space="preserve">
-    <value>Open Project</value>
+    <value>Open Project_fr</value>
   </data>
   <data name="ClearFillterResource" xml:space="preserve">
     <value>Effacer Filtre</value>
@@ -1138,58 +1138,58 @@
     <value>Patch</value>
   </data>
   <data name="gridAnalyzeHeaderSpotNameResource" xml:space="preserve">
-    <value>Spot Name</value>
+    <value>Spot Name_fr</value>
   </data>
   <data name="gridAnalyzeHeaderViewResource" xml:space="preserve">
-    <value>View</value>
+    <value>View_fr</value>
   </data>
   <data name="gridAnalyzeToolTipViewResource" xml:space="preserve">
-    <value>View Patch Details</value>
+    <value>View Patch Details_fr</value>
   </data>
   <data name="Error_Invalid_IsAverageOfMeasurements" xml:space="preserve">
-    <value>Invalid IsAverageOfMeasurements have been provided.</value>
+    <value>Invalid IsAverageOfMeasurements have been provided._fr</value>
   </data>
   <data name="Error_Invalid_IsSync1DTypeProject" xml:space="preserve">
-    <value>Invalid Sync1DType have been provided.</value>
+    <value>Invalid Sync1DType have been provided._fr</value>
   </data>
   <data name="Error_Invalid_IsVerificationProject" xml:space="preserve">
-    <value>Invalid varification have been provided.</value>
+    <value>Invalid varification have been provided._fr</value>
   </data>
   <data name="Error_Invalid_MeasurementId" xml:space="preserve">
-    <value>Invalid MeasurementId have been provided.</value>
+    <value>Invalid MeasurementId have been provided._fr</value>
   </data>
   <data name="blackText" xml:space="preserve">
-    <value>Black</value>
+    <value>Black_fr</value>
   </data>
   <data name="blueText" xml:space="preserve">
-    <value>Blue</value>
+    <value>Blue_fr</value>
   </data>
   <data name="cyanText" xml:space="preserve">
-    <value>Cyan</value>
+    <value>Cyan_fr</value>
   </data>
   <data name="greenText" xml:space="preserve">
-    <value>Green</value>
+    <value>Green_fr</value>
   </data>
   <data name="magentaText" xml:space="preserve">
-    <value>Magenta</value>
+    <value>Magenta_fr</value>
   </data>
   <data name="paperText" xml:space="preserve">
     <value>Papier</value>
   </data>
   <data name="redText" xml:space="preserve">
-    <value>Red</value>
+    <value>Red_fr</value>
   </data>
   <data name="tripletPathMetrics" xml:space="preserve">
-    <value>3-C Patch Metrics</value>
+    <value>3-C Patch Metrics_fr</value>
   </data>
   <data name="tripletText" xml:space="preserve">
     <value>3-C</value>
   </data>
   <data name="yellowText" xml:space="preserve">
-    <value>Yellow</value>
+    <value>Yellow_fr</value>
   </data>
   <data name="deltaEText" xml:space="preserve">
-    <value>&amp;Delta;E</value>
+    <value>&amp;Delta;E_fr</value>
   </data>
   <data name="PreviousText" xml:space="preserve">
     <value>Previous_fr</value>
@@ -1198,13 +1198,13 @@
     <value>Previous ΔE_fr</value>
   </data>
   <data name="gridAnalyzeHeaderCIELAB_AResource" xml:space="preserve">
-    <value>Actuel a*</value>
+    <value>Actuel a*_fr</value>
   </data>
   <data name="gridAnalyzeHeaderCIELAB_BResource" xml:space="preserve">
-    <value>Actuel b*</value>
+    <value>Actuel b*_fr</value>
   </data>
   <data name="gridAnalyzeHeaderCIELAB_LResource" xml:space="preserve">
-    <value>Actuel L*</value>
+    <value>Actuel L*_fr</value>
   </data>
   <data name="gridAnalyzeHeaderDelta_CHResource" xml:space="preserve">
     <value>ΔCh</value>
@@ -1216,16 +1216,16 @@
     <value>ΔL</value>
   </data>
   <data name="gridAnalyzeHeaderDensity_CResource" xml:space="preserve">
-    <value>Density_C</value>
+    <value>Density_C_fr</value>
   </data>
   <data name="gridAnalyzeHeaderDensity_MResource" xml:space="preserve">
-    <value>Density_M</value>
+    <value>Density_M_fr</value>
   </data>
   <data name="gridAnalyzeHeaderDensity_VResource" xml:space="preserve">
-    <value>Density_V</value>
+    <value>Density_V_fr</value>
   </data>
   <data name="gridAnalyzeHeaderDensity_YResource" xml:space="preserve">
-    <value>Density_Y</value>
+    <value>Density_Y_fr</value>
   </data>
   <data name="gridAnalyzeHeaderE2000Resource" xml:space="preserve">
     <value>ΔE2000</value>
@@ -1261,16 +1261,16 @@
     <value>Vérification d\x27une mesure Obligatoire</value>
   </data>
   <data name="Error_Invalid_ProjectId" xml:space="preserve">
-    <value>Invalid ProjectId has been provided.</value>
+    <value>Invalid ProjectId has been provided._fr</value>
   </data>
   <data name="Error_Invalid_GradingDetails" xml:space="preserve">
-    <value>Invalid Grading details have been provided.</value>
+    <value>Invalid Grading details have been provided._fr</value>
   </data>
   <data name="actualTVI" xml:space="preserve">
     <value>Actual TVI:_fr</value>
   </data>
   <data name="patchMetricsText" xml:space="preserve">
-    <value>Patch Metrics</value>
+    <value>Patch Metrics_fr</value>
   </data>
   <data name="targetTVI" xml:space="preserve">
     <value>Target TVI:_fr</value>
@@ -1297,70 +1297,73 @@
     <value>Spot Project Certified_fr</value>
   </data>
   <data name="locLabelAct" xml:space="preserve">
-    <value>Act.</value>
+    <value>Act._fr</value>
   </data>
   <data name="locLabelCustomer" xml:space="preserve">
-    <value>Client:</value>
+    <value>Client:_fr</value>
   </data>
   <data name="locLabelDate" xml:space="preserve">
-    <value>Date</value>
+    <value>Date_fr</value>
   </data>
   <data name="locLabeldEType" xml:space="preserve">
-    <value>dE Type:</value>
+    <value>dE Type:_fr</value>
   </data>
   <data name="locLabelDevice" xml:space="preserve">
     <value>Imprimante:</value>
   </data>
   <data name="locLabelJDFJobID" xml:space="preserve">
-    <value>JDF Job ID:</value>
+    <value>JDF Job ID:_fr</value>
   </data>
   <data name="locLabelJob" xml:space="preserve">
-    <value>Job:</value>
+    <value>Job:_fr</value>
   </data>
   <data name="locLabelMetric" xml:space="preserve">
-    <value>Metric:</value>
+    <value>Metric:_fr</value>
   </data>
   <data name="locLabelPageOrSurface" xml:space="preserve">
-    <value>Page/Surface:</value>
+    <value>Page/Surface:_fr</value>
   </data>
   <data name="locLabelSignature" xml:space="preserve">
-    <value>Signature</value>
+    <value>Signature_fr</value>
   </data>
   <data name="locLabelStandard" xml:space="preserve">
-    <value>Standard:</value>
+    <value>Standard:_fr</value>
   </data>
   <data name="locLabelTimestamp" xml:space="preserve">
-    <value>Timestamp:</value>
+    <value>Timestamp:_fr</value>
   </data>
   <data name="locLabelTol" xml:space="preserve">
     <value>Tol.</value>
   </data>
   <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
-    <value>Custom Source Profile</value>
+    <value>Custom Source Profile_fr</value>
   </data>
   <data name="EMeasureTool_Both" xml:space="preserve">
-    <value>Both</value>
+    <value>Both_fr</value>
   </data>
   <data name="ESourceProfileCategory_NPAPIPlugin" xml:space="preserve">
-    <value>NPAPI Plugin</value>
+    <value>NPAPI Plugin_fr</value>
   </data>
   <data name="ESourceProfileCategory_SYNCMeasureApp" xml:space="preserve">
-    <value>SYNC Measure App</value>
+    <value>SYNC Measure App_fr</value>
   </data>
   <data name="GridDateTimeColumnResource1" xml:space="preserve">
-    <value>Last Activity</value>
+    <value>Last Activity_fr</value>
   </data>
   <data name="ProjectList_BcoButtonToolTip" xml:space="preserve">
-    <value>Brand Color Optimizer(Print Condition is Open)</value>
+    <value>Brand Color Optimizer(Print Condition is Open)_fr</value>
   </data>
   <data name="ProjectList_BcoEnableButtonToolTip" xml:space="preserve">
-    <value>Brand Color Optimization</value>
+    <value>Brand Color Optimization_fr</value>
   </data>
   <data name="ELicenseType_DLP_PLUS" xml:space="preserve">
-    <value>DLP Plus</value>
+    <value>DLP Plus_fr</value>
   </data>
   <data name="ELicenseType_DLP_MULTI_COLOR" xml:space="preserve">
-    <value>DLP Multi Color</value>
+    <value>DLP Multi Color_fr</value>
+  </data>
+  <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
+    <value>Sync1D Multi Color_fr</value>
   </data>
   <data name="EInstrumentType_i1IOPro3" xml:space="preserve">
     <value>i1-IO-Pro3</value>
@@ -1369,10 +1372,7 @@
     <value>i1-Pro3</value>
   </data>
   <data name="ELicenseType_Custom_BCO" xml:space="preserve">
-    <value>Custom BCO</value>
-  </data>
-  <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
-    <value>Sync1D Multi Color_fr</value>
+    <value>Custom BCO_fr</value>
   </data>
   <data name="Error_GetMetricTargetPresetID" xml:space="preserve">
     <value>Error occured while retrieving MetricTarget Preset. Please contact your administrator._fr</value>

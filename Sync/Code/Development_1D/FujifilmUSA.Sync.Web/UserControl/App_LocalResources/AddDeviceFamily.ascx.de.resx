@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Device Family</value>
+    <value>Add Device Family_de</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_de</value>
   </data>
   <data name="locDeviceFamilyNameResource1.Text" xml:space="preserve">
-    <value>Device Family Name</value>
+    <value>Device Family Name_de</value>
   </data>
   <data name="locDeviceManagementResource1.Text" xml:space="preserve">
-    <value>Device Management</value>
+    <value>Device Management_de</value>
   </data>
   <data name="locIsActiveResource1.Text" xml:space="preserve">
-    <value>Is Active?</value>
+    <value>Is Active?_de</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Save_de</value>
   </data>
 </root>

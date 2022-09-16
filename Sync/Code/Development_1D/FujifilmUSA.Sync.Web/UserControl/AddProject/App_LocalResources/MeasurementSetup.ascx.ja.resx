@@ -151,7 +151,7 @@
     <value>色差評価設定</value>
   </data>
   <data name="locValidationSetupNextText" xml:space="preserve">
-    <value>Next</value>
+    <value>Next_ja</value>
   </data>
   <data name="rfvcAlignmentChartContainer" xml:space="preserve">
     <value>DLP生成用チャートを選択してください。</value>
@@ -184,9 +184,9 @@
     <value>スキャン測定</value>
   </data>
   <data name="locrbtnCustomMeasurementType" xml:space="preserve">
-    <value>MTool</value>
+    <value>MTool_ja</value>
   </data>
   <data name="locrbtnPluginMeasurementType" xml:space="preserve">
-    <value>Measurement Plugin</value>
+    <value>Measurement Plugin_ja</value>
   </data>
 </root>

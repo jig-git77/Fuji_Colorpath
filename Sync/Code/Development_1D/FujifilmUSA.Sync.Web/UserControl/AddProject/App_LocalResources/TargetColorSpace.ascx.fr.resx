@@ -124,7 +124,7 @@
     <value>Description</value>
   </data>
   <data name="locProfileDescResource1.Text" xml:space="preserve">
-    <value>Description Profil:</value>
+    <value>Description Profil:_fr</value>
   </data>
   <data name="locProfilerOptionsResource1.Text" xml:space="preserve">
     <value>Option Profil</value>
@@ -133,7 +133,7 @@
     <value>Project Type_fr:</value>
   </data>
   <data name="locSourceProfileResource1.Text" xml:space="preserve">
-    <value>Profil Source:</value>
+    <value>Profil Source:_fr</value>
   </data>
   <data name="locTargetColorspaceResource1.Text" xml:space="preserve">
     <value>Nouveau Profil - Espace de couleur Cible</value>
@@ -175,13 +175,13 @@
     <value>Project Type_fr</value>
   </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
-    <value>Select Certified Library: </value>
+    <value>Select Certified Library: _fr</value>
   </data>
   <data name="locSelectBranchResource1.Text" xml:space="preserve">
-    <value>Select Branch: </value>
+    <value>Select Branch: _fr</value>
   </data>
   <data name="locSelectCompanyResource1.Text" xml:space="preserve">
-    <value>Select Company: </value>
+    <value>Select Company: _fr</value>
   </data>
   <data name="selectText" xml:space="preserve">
     <value>--Sélectionner--</value>
@@ -190,21 +190,21 @@
     <value>Parent Project Name: </value>
   </data>
   <data name="locReTargetDescriptionResource1.Text" xml:space="preserve">
-    <value>Original Library Description: </value>
+    <value>Original Library Description: _fr</value>
   </data>
   <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
-    <value>Original Library:</value>
+    <value>Original Library:_fr</value>
   </data>
   <data name="locSelectDeviceResource1.Text" xml:space="preserve">
-    <value>Select Device: </value>
+    <value>Select Device: _fr</value>
   </data>
   <data name="noCertifiedSpotCondition" xml:space="preserve">
-    <value>No Certified Print Condition</value>
+    <value>No Certified Print Condition_fr</value>
   </data>
   <data name="panelRetargetResource1.GroupingText" xml:space="preserve">
-    <value>&lt;b&gt;Optional Retarget&lt;/b&gt;</value>
+    <value>&lt;b&gt;Optional Retarget&lt;/b&gt;_fr</value>
   </data>
   <data name="TargetPrintConditionNotAvailableMessage" xml:space="preserve">
-    <value>No Target Print Condition</value>
+    <value>No Target Print Condition_fr</value>
   </data>
 </root>

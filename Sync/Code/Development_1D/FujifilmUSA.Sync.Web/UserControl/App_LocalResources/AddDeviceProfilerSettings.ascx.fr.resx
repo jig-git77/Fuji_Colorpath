@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Device Family Profiler Presets</value>
+    <value>Add Device Family Profiler Presets_fr</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_fr</value>
   </data>
   <data name="locDeviceFamilyResource1.Text" xml:space="preserve">
-    <value>Device Family</value>
+    <value>Device Family_fr</value>
   </data>
   <data name="locPresetDescriptionResource1.Text" xml:space="preserve">
-    <value>Preset Description</value>
+    <value>Preset Description_fr</value>
   </data>
   <data name="locPresetNameResource1.Text" xml:space="preserve">
-    <value>Preset Name</value>
+    <value>Preset Name_fr</value>
   </data>
   <data name="locProfilerPresetsMgmt.Text" xml:space="preserve">
-    <value>Profiler Option Presets Management</value>
+    <value>Profiler Option Presets Management_fr</value>
   </data>
   <data name="locProjectTypeResource1.Text" xml:space="preserve">
-    <value>Project Type</value>
+    <value>Project Type_fr</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Save_fr</value>
   </data>
   <data name="locUploadProfilerResource1.Text" xml:space="preserve">
-    <value>Upload Profiler Settings (only csv)</value>
+    <value>Upload Profiler Settings (only csv)_fr</value>
   </data>
   <data name="selectDeviceFamily" xml:space="preserve">
-    <value>--Select Device Family--</value>
+    <value>--Select Device Family--_fr</value>
   </data>
   <data name="selectProjectType" xml:space="preserve">
-    <value>--Select Project Type--</value>
+    <value>--Select Project Type--_fr</value>
   </data>
 </root>

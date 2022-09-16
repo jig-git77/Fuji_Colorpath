@@ -133,7 +133,7 @@
     <value>Nouveau Profil - Paramètre Mesure</value>
   </data>
   <data name="locObeserverResource1.Text" xml:space="preserve">
-    <value>Observation:</value>
+    <value>Observation:_fr</value>
   </data>
   <data name="locProfilerOptionsResource1.Text" xml:space="preserve">
     <value>Options Profilage</value>
@@ -151,7 +151,7 @@
     <value>Paramètre Validation</value>
   </data>
   <data name="locValidationSetupNextText" xml:space="preserve">
-    <value>Next</value>
+    <value>Next_fr</value>
   </data>
   <data name="rfvcAlignmentChartContainer" xml:space="preserve">
     <value>Sélectionner Charte de Base</value>
@@ -178,9 +178,9 @@
     <value>Read Mode:_fr</value>
   </data>
   <data name="locrbtnCustomMeasurementType" xml:space="preserve">
-    <value>MTool</value>
+    <value>MTool_fr</value>
   </data>
   <data name="locrbtnPluginMeasurementType" xml:space="preserve">
-    <value>Measurement Plugin</value>
+    <value>Measurement Plugin_fr</value>
   </data>
 </root>

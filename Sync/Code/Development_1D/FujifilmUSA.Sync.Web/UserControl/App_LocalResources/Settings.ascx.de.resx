@@ -142,16 +142,16 @@
     <value>Meine Einstellungen</value>
   </data>
   <data name="Image5Resource1.AlternateText" xml:space="preserve">
-    <value>Download</value>
+    <value>Download_de</value>
   </data>
   <data name="Image5Resource1.ToolTip" xml:space="preserve">
-    <value>Download</value>
+    <value>Download_de</value>
   </data>
   <data name="imgActivityValidationRulesResource1.AlternateText" xml:space="preserve">
-    <value>Activity Validation Rules</value>
+    <value>Activity Validation Rules_de</value>
   </data>
   <data name="imgActivityValidationRulesResource1.ToolTip" xml:space="preserve">
-    <value>Activity Validation Rules</value>
+    <value>Activity Validation Rules_de</value>
   </data>
   <data name="imgApplicationConfigResource1.AlternateText" xml:space="preserve">
     <value>Anwendungskonfiguration</value>
@@ -178,16 +178,16 @@
     <value>Meßgerät</value>
   </data>
   <data name="imgProfilerSettingsResource1.AlternateText" xml:space="preserve">
-    <value>Device Family Profiler Settings</value>
+    <value>Device Family Profiler Settings_de</value>
   </data>
   <data name="imgProfilerSettingsResource1.ToolTip" xml:space="preserve">
-    <value>Device Family Profiler Settings</value>
+    <value>Device Family Profiler Settings_de</value>
   </data>
   <data name="imgRefChartResource1.AlternateText" xml:space="preserve">
-    <value>Reference Chart</value>
+    <value>Reference Chart_de</value>
   </data>
   <data name="imgRefChartResource1.ToolTip" xml:space="preserve">
-    <value>Reference Chart</value>
+    <value>Reference Chart_de</value>
   </data>
   <data name="imgSoruceProfileResource1.AlternateText" xml:space="preserve">
     <value>Quellprofil</value>
@@ -220,7 +220,7 @@
     <value>Aktivitätsverwaltung</value>
   </data>
   <data name="lnkDownloadResource1.ToolTip" xml:space="preserve">
-    <value>Download</value>
+    <value>Download_de</value>
   </data>
   <data name="lnkMeasurementDeviceResource1.ToolTip" xml:space="preserve">
     <value>Meßgerät</value>
@@ -229,13 +229,13 @@
     <value>Meine Einstellungen</value>
   </data>
   <data name="lnkRefChartResource1.ToolTip" xml:space="preserve">
-    <value>Referenz Chart</value>
+    <value>Referenz Chart_de</value>
   </data>
   <data name="locActivityValidationRulesResource1.Text" xml:space="preserve">
-    <value>Activity Validation Rules</value>
+    <value>Activity Validation Rules_de</value>
   </data>
   <data name="locAdminResource1.Text" xml:space="preserve">
-    <value>Admin</value>
+    <value>Admin_de</value>
   </data>
   <data name="locApplicationConfigurationResource1.Text" xml:space="preserve">
     <value>Anwendungskonfiguration</value>
@@ -250,7 +250,7 @@
     <value>Geräteverwaltung</value>
   </data>
   <data name="locDownloadResource1.Text" xml:space="preserve">
-    <value>Download</value>
+    <value>Download_de</value>
   </data>
   <data name="locLicenseMgmtResource1.Text" xml:space="preserve">
     <value>Lizenzverwaltung</value>
@@ -265,7 +265,7 @@
     <value>Device Family Profiler Settings</value>
   </data>
   <data name="locReferenceChartResource1.Text" xml:space="preserve">
-    <value>Reference Chart</value>
+    <value>Reference Chart_de</value>
   </data>
   <data name="locSourceProfileResource1.Text" xml:space="preserve">
     <value>Quellprofil</value>
@@ -292,21 +292,21 @@
     <value>Patch Preset_de</value>
   </data>
   <data name="imgSpotTargetResource1.AlternateText" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_de</value>
   </data>
   <data name="imgSpotTargetResource1.ToolTip" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_de</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_de</value>
   </data>
   <data name="imgMetricTargetResource1.AlternateText" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_de</value>
   </data>
   <data name="locMetricTargetResource1.Text" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_de</value>
   </data>
   <data name="imgMetricTargetResource1.ToolTip" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_de</value>
   </data>
 </root>

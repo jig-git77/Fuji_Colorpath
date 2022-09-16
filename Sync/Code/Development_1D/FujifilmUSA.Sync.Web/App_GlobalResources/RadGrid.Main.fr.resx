@@ -196,13 +196,13 @@
     <value>Page Suivante</value>
   </data>
   <data name="NoDetailRecordsText" xml:space="preserve">
-    <value>No child records to display.</value>
+    <value>No child records to display._fr</value>
   </data>
   <data name="NoMasterRecordsText" xml:space="preserve">
     <value>Pas de Mesure a afficher</value>
   </data>
   <data name="PagerTextFormat" xml:space="preserve">
-    <value>Modification page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
+    <value>Modification page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;._fr</value>
   </data>
   <data name="PagerTooltipFormatString" xml:space="preserve">
     <value>Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;</value>
@@ -298,7 +298,7 @@
     <value>Taille Page:</value>
   </data>
   <data name="ChangePageSizeLinkButtonText" xml:space="preserve">
-    <value>Modification</value>
+    <value>Modification_fr</value>
   </data>
   <data name="GoToPageLabelText" xml:space="preserve">
     <value>Page:</value>
@@ -373,10 +373,10 @@
     <value>Dernier</value>
   </data>
   <data name="HeaderContextMenuMaxAggregateText" xml:space="preserve">
-    <value>Max</value>
+    <value>Max_fr</value>
   </data>
   <data name="HeaderContextMenuMinAggregateText" xml:space="preserve">
-    <value>Min</value>
+    <value>Min_fr</value>
   </data>
   <data name="HeaderContextMenuNoneAggregateText" xml:space="preserve">
     <value>Aucun</value>

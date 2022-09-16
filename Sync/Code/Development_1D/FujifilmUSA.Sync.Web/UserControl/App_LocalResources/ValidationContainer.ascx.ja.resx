@@ -118,207 +118,207 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActivationDateRequiredResource" xml:space="preserve">
-    <value>Please select activation date.</value>
+    <value>Please select activation date._ja</value>
   </data>
   <data name="BranchNameRequiredResource" xml:space="preserve">
-    <value>Please provide branch name.</value>
+    <value>Please provide branch name._ja</value>
   </data>
   <data name="BranchRequiredResource" xml:space="preserve">
-    <value>Please select branch.</value>
+    <value>Please select branch._ja</value>
   </data>
   <data name="ChartBorderSizeRequiredResource" xml:space="preserve">
-    <value>Please provide chart border size.</value>
+    <value>Please provide chart border size._ja</value>
   </data>
   <data name="ChartHGapRequiredResource" xml:space="preserve">
-    <value>Please provide horizontal gap.</value>
+    <value>Please provide horizontal gap._ja</value>
   </data>
   <data name="ChartNameRequiredResource" xml:space="preserve">
-    <value>Please provide chart name.</value>
+    <value>Please provide chart name._ja</value>
   </data>
   <data name="ChartPagesRequiredResource" xml:space="preserve">
-    <value>Please provide number of pages.</value>
+    <value>Please provide number of pages._ja</value>
   </data>
   <data name="ChartPrevLRequiredResource" xml:space="preserve">
-    <value>Please provide pervious L.</value>
+    <value>Please provide pervious L._ja</value>
   </data>
   <data name="ChartResRequiredResource" xml:space="preserve">
-    <value>Please provide chart res.</value>
+    <value>Please provide chart res._ja</value>
   </data>
   <data name="ChartRowsPerPageRequiredResource" xml:space="preserve">
-    <value>Please provide rows per page.</value>
+    <value>Please provide rows per page._ja</value>
   </data>
   <data name="ChartSizeXRequiredResource" xml:space="preserve">
-    <value>Please provide chart size x.</value>
+    <value>Please provide chart size x._ja</value>
   </data>
   <data name="ChartSizeYRequiredResource" xml:space="preserve">
-    <value>Please provide chart size y.</value>
+    <value>Please provide chart size y._ja</value>
   </data>
   <data name="ChartTotalColumnsRequiredResource" xml:space="preserve">
-    <value>Please provide total columns.</value>
+    <value>Please provide total columns._ja</value>
   </data>
   <data name="ChartVGapRequiredResource" xml:space="preserve">
-    <value>Please provide vertical gap.</value>
+    <value>Please provide vertical gap._ja</value>
   </data>
   <data name="CompanyNameRequiredResource" xml:space="preserve">
-    <value>Please provide company name.</value>
+    <value>Please provide company name._ja</value>
   </data>
   <data name="CompanyRequiredResource" xml:space="preserve">
-    <value>Please select company.</value>
+    <value>Please select company._ja</value>
   </data>
   <data name="DeviceFamilyRequiredResource" xml:space="preserve">
-    <value>Please select Device Family.</value>
+    <value>Please select Device Family._ja</value>
   </data>
   <data name="DeviceNameRequiredResource" xml:space="preserve">
-    <value>Please provide device name.</value>
+    <value>Please provide device name._ja</value>
   </data>
   <data name="EmailPatternRequiredResource" xml:space="preserve">
-    <value>Please enter proper email-address.</value>
+    <value>Please enter proper email-address._ja</value>
   </data>
   <data name="EmailRequiredResource" xml:space="preserve">
-    <value>Please provide email-address.</value>
+    <value>Please provide email-address._ja</value>
   </data>
   <data name="ExpirationDateRequiredResource" xml:space="preserve">
-    <value>Please select expiration date.</value>
+    <value>Please select expiration date._ja</value>
   </data>
   <data name="FirstNameRequiredResource" xml:space="preserve">
-    <value>Please provide first name.</value>
+    <value>Please provide first name._ja</value>
   </data>
   <data name="InstrumentRequiredResource" xml:space="preserve">
-    <value>Please select instrument type.</value>
+    <value>Please select instrument type._ja</value>
   </data>
   <data name="LastNameRequiredResource" xml:space="preserve">
-    <value>Please provide last name.</value>
+    <value>Please provide last name._ja</value>
   </data>
   <data name="LicenseDescriptionRequiredResource" xml:space="preserve">
-    <value>Please provide license description.</value>
+    <value>Please provide license description._ja</value>
   </data>
   <data name="LicenseRequiredResource" xml:space="preserve">
-    <value>Please select license name.</value>
+    <value>Please select license name._ja</value>
   </data>
   <data name="LicenseTypeRequiredResource" xml:space="preserve">
-    <value>Please provide license type.</value>
+    <value>Please provide license type._ja</value>
   </data>
   <data name="LocationRequiredResource" xml:space="preserve">
-    <value>Please provide location.</value>
+    <value>Please provide location._ja</value>
   </data>
   <data name="NoOfProjectsRequiredResource" xml:space="preserve">
-    <value>Please provide no.of projects.</value>
+    <value>Please provide no.of projects._ja</value>
   </data>
   <data name="NumberOfColorsRequiredResource" xml:space="preserve">
-    <value>Please select How Many Colors.</value>
+    <value>Please select How Many Colors._ja</value>
   </data>
   <data name="NumOfColsRequiredResource" xml:space="preserve">
-    <value>Please provide total columns.</value>
+    <value>Please provide total columns._ja</value>
   </data>
   <data name="NumOfRowsRequiredResource" xml:space="preserve">
-    <value>Please provide total rows.</value>
+    <value>Please provide total rows._ja</value>
   </data>
   <data name="PatchSizeXRequiredResource" xml:space="preserve">
-    <value>Please provide patch size x.</value>
+    <value>Please provide patch size x._ja</value>
   </data>
   <data name="PatchSizeYRequiredResource" xml:space="preserve">
-    <value>Please provide patch size y.</value>
+    <value>Please provide patch size y._ja</value>
   </data>
   <data name="PresetDescriptionRequiredResource" xml:space="preserve">
-    <value>Please provide Preset Description.</value>
+    <value>Please provide Preset Description._ja</value>
   </data>
   <data name="PresetNameRequiredResource" xml:space="preserve">
-    <value>Please provide Preset name.</value>
+    <value>Please provide Preset name._ja</value>
   </data>
   <data name="PrintStandardRequiredResource" xml:space="preserve">
-    <value>Please provide PrintStandard name.</value>
+    <value>Please provide PrintStandard name._ja</value>
   </data>
   <data name="PrintStandardTypeRequiredResource" xml:space="preserve">
-    <value>Please select PrintStandardType.</value>
+    <value>Please select PrintStandardType._ja</value>
   </data>
   <data name="ProjectTypeRequiredResource" xml:space="preserve">
-    <value>Please select project type.</value>
+    <value>Please select project type._ja</value>
   </data>
   <data name="RegionRequiredResource" xml:space="preserve">
-    <value>Please select region.</value>
+    <value>Please select region._ja</value>
   </data>
   <data name="RoleRequiredResource" xml:space="preserve">
-    <value>Please select role.</value>
+    <value>Please select role._ja</value>
   </data>
   <data name="SelectDeviceNumberMessageResource" xml:space="preserve">
-    <value>Please select device serial number.</value>
+    <value>Please select device serial number._ja</value>
   </data>
   <data name="SelectLanguageMessageResource" xml:space="preserve">
-    <value>Please select language.</value>
+    <value>Please select language._ja</value>
   </data>
   <data name="SelectSecurityAnsMessageResource" xml:space="preserve">
-    <value>Please provide security answer.</value>
+    <value>Please provide security answer._ja</value>
   </data>
   <data name="SelectSecurityQueMessageResource" xml:space="preserve">
-    <value>Please select security question.</value>
+    <value>Please select security question._ja</value>
   </data>
   <data name="SelectSourceProfileResource" xml:space="preserve">
-    <value>Please select SourceProfile.</value>
+    <value>Please select SourceProfile._ja</value>
   </data>
   <data name="SerialRequiredResource" xml:space="preserve">
-    <value>Please provide serial number.</value>
+    <value>Please provide serial number._ja</value>
   </data>
   <data name="SourceProfileFileRequiredResource" xml:space="preserve">
-    <value>Please provide source profile file.</value>
+    <value>Please provide source profile file._ja</value>
   </data>
   <data name="SourceProfileRequiredResource" xml:space="preserve">
-    <value>Please provide source profile name.</value>
+    <value>Please provide source profile name._ja</value>
   </data>
   <data name="SpotTargetNameRequiredResource" xml:space="preserve">
-    <value>Please provide spot target name.</value>
+    <value>Please provide spot target name._ja</value>
   </data>
   <data name="UserNameRequiredResource" xml:space="preserve">
-    <value>Please provide user name.</value>
+    <value>Please provide user name._ja</value>
   </data>
   <data name="ValidationChartRequiredResource" xml:space="preserve">
-    <value>Please select Validation chart.</value>
+    <value>Please select Validation chart._ja</value>
   </data>
   <data name="MetricSumRequiredResource" xml:space="preserve">
-    <value>Please provide metric sum name.</value>
+    <value>Please provide metric sum name._ja</value>
   </data>
   <data name="MeasurementFileRequiredResource" xml:space="preserve">
-    <value>Please select measurement file.</value>
+    <value>Please select measurement file._ja</value>
   </data>
   <data name="MeasurementNameRequiredResource" xml:space="preserve">
-    <value>Please provide measurement name.</value>
+    <value>Please provide measurement name._ja</value>
   </data>
   <data name="ValidMeasurementFileRequiredResource" xml:space="preserve">
-    <value>Please select a valid json file.</value>
+    <value>Please select a valid json file._ja</value>
   </data>
   <data name="FileNameRequiredResource" xml:space="preserve">
-    <value>Please enter file name.</value>
+    <value>Please enter file name._ja</value>
   </data>
   <data name="LibraryRequiredResource" xml:space="preserve">
-    <value>Please select library.</value>
+    <value>Please select library._ja</value>
   </data>
   <data name="MediaRequiredResource" xml:space="preserve">
-    <value>Please media name.</value>
+    <value>Please media name._ja</value>
   </data>
   <data name="ModelRequiredResource" xml:space="preserve">
-    <value>Please model name.</value>
+    <value>Please model name._ja</value>
   </data>
   <data name="ModeRequiredResource" xml:space="preserve">
-    <value>Please enter mode name.</value>
+    <value>Please enter mode name._ja</value>
   </data>
   <data name="QualityRequiredResource" xml:space="preserve">
-    <value>Please enter quality name.</value>
+    <value>Please enter quality name._ja</value>
   </data>
   <data name="ResolutionRequiredResource" xml:space="preserve">
-    <value>Please enter resolution.</value>
+    <value>Please enter resolution._ja</value>
   </data>
   <data name="ServerRequiredResource" xml:space="preserve">
-    <value>Please server name.</value>
+    <value>Please server name._ja</value>
   </data>
   <data name="CommentRequiredResource" xml:space="preserve">
-    <value>Please enter comment.</value>
+    <value>Please enter comment._ja</value>
   </data>
   <data name="InkPoolIDRequiredResource" xml:space="preserve">
-    <value>Please enter Ink Pool ID.</value>
+    <value>Please enter Ink Pool ID._ja</value>
   </data>
   <data name="TargetPrintConditionRequiredResource" xml:space="preserve">
-    <value>Please select target print condition.</value>
+    <value>Please select target print condition._ja</value>
   </data>
   <data name="BookNameRequiredResource" xml:space="preserve">
-    <value>Please enter book name.</value>
+    <value>Please enter book name._ja</value>
   </data>
 </root>

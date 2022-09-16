@@ -136,7 +136,7 @@
     <value>Begrenzung</value>
   </data>
   <data name="chkDuplexResource1.Text" xml:space="preserve">
-    <value>Duplex</value>
+    <value>Duplex_de</value>
   </data>
   <data name="chkGrayResource1.Text" xml:space="preserve">
     <value>Grau</value>
@@ -172,7 +172,7 @@
     <value>MY</value>
   </data>
   <data name="chkTriplexResource1.Text" xml:space="preserve">
-    <value>Triplex</value>
+    <value>Triplex_de</value>
   </data>
   <data name="chkWhiteResource1.Text" xml:space="preserve">
     <value>Weiss</value>
@@ -232,10 +232,10 @@
     <value>Bereich:</value>
   </data>
   <data name="locRendering1Resource1.Text" xml:space="preserve">
-    <value>Rendering</value>
+    <value>Rendering_de</value>
   </data>
   <data name="locRendering2Resource1.Text" xml:space="preserve">
-    <value>Rendering:</value>
+    <value>Rendering:_de</value>
   </data>
   <data name="locSelectedPresetsResource1.Text" xml:space="preserve">
     <value>Ausgewählte  Presets:</value>
@@ -301,7 +301,7 @@
     <value>Dichte Zielwerte</value>
   </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
-    <value>Select Certified Print Condition:</value>
+    <value>Select Certified Print Condition:_de</value>
   </data>
   <data name="locDensityCResource1.Text" xml:space="preserve">
     <value>C</value>
@@ -337,15 +337,15 @@
     <value>Optional Retarget_de</value>
   </data>
   <data name="locSelectDeviceResource1.Text" xml:space="preserve">
-    <value>Select Device: </value>
+    <value>Select Device: _de</value>
   </data>
   <data name="locParentProjectNameResource1.Text" xml:space="preserve">
-    <value>Print Standard: </value>
+    <value>Print Standard: _de</value>
   </data>
   <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
-    <value>Metric Target Preset: </value>
+    <value>Metric Target Preset: _de</value>
   </data>
   <data name="String" xml:space="preserve">
-    <value>No Certified Align Print Conditions</value>
+    <value>No Certified Align Print Conditions_de</value>
   </data>
 </root>

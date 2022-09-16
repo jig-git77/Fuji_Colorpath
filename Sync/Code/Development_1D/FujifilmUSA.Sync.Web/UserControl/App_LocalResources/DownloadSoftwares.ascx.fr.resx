@@ -124,10 +124,10 @@
     <value>Téléchargement</value>
   </data>
   <data name="colorPathInstallerMac" xml:space="preserve">
-    <value>Colorpath Installer - Mac</value>
+    <value>Colorpath Installer - Mac_fr</value>
   </data>
   <data name="colorPathInstallerPC" xml:space="preserve">
-    <value>Colorpath Installer - PC</value>
+    <value>Colorpath Installer - PC_fr</value>
   </data>
   <data name="ValidationCharts" xml:space="preserve">
     <value>Charte de Validation</value>

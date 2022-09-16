@@ -118,28 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ImportUnsuccessfulMessage" xml:space="preserve">
-    <value>Error occurred while importing measurement, please try again.</value>
+    <value>Error occurred while importing measurement, please try again._fr</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Annuler</value>
+    <value>Annuler_fr</value>
   </data>
   <data name="locImportResource1.Text" xml:space="preserve">
-    <value>Importer</value>
+    <value>Importer_fr</value>
   </data>
   <data name="locMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Enter Measurement Name:</value>
+    <value>Enter Measurement Name:_fr</value>
   </data>
   <data name="locSelectProjectToImportResource1.Text" xml:space="preserve">
-    <value>Select Project file to import all its measurements in this project:</value>
+    <value>Select Project file to import all its measurements in this project:_fr</value>
   </data>
   <data name="SelectMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Select File:</value>
+    <value>Select File:_fr</value>
   </data>
   <data name="JobNameCaption" xml:space="preserve">
     <value>Nom Travail</value>
   </data>
   <data name="lblCustomerResource1.Text" xml:space="preserve">
-    <value>Client</value>
+    <value>Client_fr</value>
   </data>
   <data name="lblJDFJobIdResource1.Text" xml:space="preserve">
     <value>ID Travail JDF</value>
@@ -148,10 +148,10 @@
     <value>Nom Mesure</value>
   </data>
   <data name="lblNotesResource1.Text" xml:space="preserve">
-    <value>Notes</value>
+    <value>Notes_fr</value>
   </data>
   <data name="lblPageOrSurfaceResource1.Text" xml:space="preserve">
-    <value>Page/Surface</value>
+    <value>Page/Surface_fr</value>
   </data>
   <data name="MeasurementNameCaption" xml:space="preserve">
     <value>Nom Mesure</value>

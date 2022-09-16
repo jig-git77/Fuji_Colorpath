@@ -142,9 +142,9 @@
     <value>測色</value>
   </data>
   <data name="btnNCPDeleteResource1" xml:space="preserve">
-    <value>Delete NCP</value>
+    <value>Delete NCP_ja</value>
   </data>
   <data name="deleteNCPMsg" xml:space="preserve">
-    <value>Are you sure you want to delete this NCP?</value>
+    <value>Are you sure you want to delete this NCP?_ja</value>
   </data>
 </root>

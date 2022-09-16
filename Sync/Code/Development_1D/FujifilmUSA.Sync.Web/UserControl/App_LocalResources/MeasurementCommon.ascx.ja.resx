@@ -211,9 +211,9 @@
     <value>ページ/面</value>
   </data>
   <data name="btnCloseModelPopup" xml:space="preserve">
-    <value>OK</value>
+    <value>OK_ja</value>
   </data>
   <data name="btnImportMeasurementFile" xml:space="preserve">
-    <value>Import Measurement File</value>
+    <value>Import Measurement File_ja</value>
   </data>
 </root>

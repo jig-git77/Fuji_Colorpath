@@ -172,9 +172,9 @@
     <value>Clear Filter_fr</value>
   </data>
   <data name="locAddMetricTargetResource1.Text" xml:space="preserve">
-    <value>Assign Metric Target Preset Reference Chart</value>
+    <value>Assign Metric Target Preset Reference Chart_fr</value>
   </data>
   <data name="locMetricTargetMgmtResource1.Text" xml:space="preserve">
-    <value>Metric Target Management</value>
+    <value>Metric Target Management_fr</value>
   </data>
 </root>

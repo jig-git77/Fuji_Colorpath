@@ -187,7 +187,7 @@
     <value>Export in Word Datei</value>
   </data>
   <data name="FilterImageToolTip" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filter_de</value>
   </data>
   <data name="FirstPageToolTip" xml:space="preserve">
     <value>Erste Seite</value>
@@ -229,10 +229,10 @@
     <value>Und</value>
   </data>
   <data name="HeaderContextMenuAvgAggregateText" xml:space="preserve">
-    <value>Avg</value>
+    <value>Avg_de</value>
   </data>
   <data name="HeaderContextMenuBestFitText" xml:space="preserve">
-    <value>Best Fit</value>
+    <value>Best Fit_de</value>
   </data>
   <data name="HeaderContextMenuClearButton" xml:space="preserve">
     <value>Filter löschen</value>
@@ -250,10 +250,10 @@
     <value>Eigene</value>
   </data>
   <data name="HeaderContextMenuFilterButton" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filter_de</value>
   </data>
   <data name="HeaderContextMenuFilterItemText" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filter_de</value>
   </data>
   <data name="HeaderContextMenuFirstAggregateText" xml:space="preserve">
     <value>Erste</value>
@@ -265,10 +265,10 @@
     <value>Letzte</value>
   </data>
   <data name="HeaderContextMenuMaxAggregateText" xml:space="preserve">
-    <value>Max</value>
+    <value>Max_de</value>
   </data>
   <data name="HeaderContextMenuMinAggregateText" xml:space="preserve">
-    <value>Min</value>
+    <value>Min_de</value>
   </data>
   <data name="HeaderContextMenuNoneAggregateText" xml:space="preserve">
     <value>Keine</value>

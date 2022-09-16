@@ -142,7 +142,7 @@
     <value>Blau</value>
   </data>
   <data name="BoundFieldResource1.HeaderText" xml:space="preserve">
-    <value>Job:</value>
+    <value>Job:_de</value>
   </data>
   <data name="BoundFieldResource10.HeaderText" xml:space="preserve">
     <value>Anmerkungen:</value>
@@ -169,7 +169,7 @@
     <value>Seite/Oberfläche:</value>
   </data>
   <data name="BoundFieldResource9.HeaderText" xml:space="preserve">
-    <value>JDF Job ID:</value>
+    <value>JDF Job ID:_de</value>
   </data>
   <data name="bText" xml:space="preserve">
     <value>b*</value>
@@ -202,7 +202,7 @@
     <value>Cyan Meßwerte</value>
   </data>
   <data name="cyanText" xml:space="preserve">
-    <value>Cyan</value>
+    <value>Cyan_de</value>
   </data>
   <data name="deltaAText" xml:space="preserve">
     <value>Δa*</value>
@@ -265,7 +265,7 @@
     <value>ΔL</value>
   </data>
   <data name="GridBoundColumnResource18.HeaderText" xml:space="preserve">
-    <value>Metric</value>
+    <value>Metric_de</value>
   </data>
   <data name="GridBoundColumnResource19.HeaderText" xml:space="preserve">
     <value>Toleranz</value>
@@ -283,7 +283,7 @@
     <value>Ist nicht ok</value>
   </data>
   <data name="GridBoundColumnResource22.HeaderText" xml:space="preserve">
-    <value>Metric</value>
+    <value>Metric_de</value>
   </data>
   <data name="GridBoundColumnResource23.HeaderText" xml:space="preserve">
     <value>Toleranz</value>
@@ -295,7 +295,7 @@
     <value>Ist nicht ok</value>
   </data>
   <data name="GridBoundColumnResource26.HeaderText" xml:space="preserve">
-    <value>Metric</value>
+    <value>Metric_de</value>
   </data>
   <data name="GridBoundColumnResource27.HeaderText" xml:space="preserve">
     <value>Toleranz</value>
@@ -310,7 +310,7 @@
     <value>M</value>
   </data>
   <data name="GridBoundColumnResource30.HeaderText" xml:space="preserve">
-    <value>Metric</value>
+    <value>Metric_de</value>
   </data>
   <data name="GridBoundColumnResource31.HeaderText" xml:space="preserve">
     <value>Toleranz</value>
@@ -364,16 +364,16 @@
     <value>PDF Report laden</value>
   </data>
   <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_de</value>
   </data>
   <data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
     <value>Filter löschen</value>
   </data>
   <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_de</value>
   </data>
   <data name="lbtnClearFillterResource2.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_de</value>
   </data>
   <data name="ListItemResource1.Text" xml:space="preserve">
     <value>Idealliance Digital Chart</value>
@@ -439,7 +439,7 @@
     <value>Dichte</value>
   </data>
   <data name="locFilterMetricSumResource1.Text" xml:space="preserve">
-    <value>Filter by Metric Sum:</value>
+    <value>Filter by Metric Sum:_de</value>
   </data>
   <data name="locG7Resource1.Text" xml:space="preserve">
     <value>G7</value>
@@ -493,7 +493,7 @@
     <value>Ist-Werte</value>
   </data>
   <data name="locLabelAct" xml:space="preserve">
-    <value>Act.</value>
+    <value>Act._de</value>
   </data>
   <data name="locLabelCustomer" xml:space="preserve">
     <value>Kundenname:</value>
@@ -502,16 +502,16 @@
     <value>Datum</value>
   </data>
   <data name="locLabeldEType" xml:space="preserve">
-    <value>dE Type:</value>
+    <value>dE Type:_de</value>
   </data>
   <data name="locLabelDevice" xml:space="preserve">
     <value>Gerät</value>
   </data>
   <data name="locLabelJDFJobID" xml:space="preserve">
-    <value>JDF Job ID:</value>
+    <value>JDF Job ID:_de</value>
   </data>
   <data name="locLabelJob" xml:space="preserve">
-    <value>Job:</value>
+    <value>Job:_de</value>
   </data>
   <data name="locLabelMetric" xml:space="preserve">
     <value>Messung:</value>
@@ -520,16 +520,16 @@
     <value>Seite/Oberfläche:</value>
   </data>
   <data name="locLabelSignature" xml:space="preserve">
-    <value>Signature</value>
+    <value>Signature_de</value>
   </data>
   <data name="locLabelStandard" xml:space="preserve">
-    <value>Standard:</value>
+    <value>Standard:_de</value>
   </data>
   <data name="locLabelTimestamp" xml:space="preserve">
-    <value>Timestamp:</value>
+    <value>Timestamp:_de</value>
   </data>
   <data name="locLabelTol" xml:space="preserve">
-    <value>Tol.</value>
+    <value>Tol._de</value>
   </data>
   <data name="locLComparisonResource1.Text" xml:space="preserve">
     <value>L* Vergleich</value>
@@ -538,10 +538,10 @@
     <value>Max ΔE2000</value>
   </data>
   <data name="locMaxDeltaE94Resource1.Text" xml:space="preserve">
-    <value>Max ΔE94</value>
+    <value>Max ΔE94_de</value>
   </data>
   <data name="locMaxDeltaEResource1.Text" xml:space="preserve">
-    <value>Maximum Predicted ∆E</value>
+    <value>Maximum Predicted ∆E_de</value>
   </data>
   <data name="locMaximumDeltaResource1.Text" xml:space="preserve">
     <value>maximales Δ</value>
@@ -580,7 +580,7 @@
     <value>Datensätze</value>
   </data>
   <data name="locReportResource1.Text" xml:space="preserve">
-    <value>Report</value>
+    <value>Report_de</value>
   </data>
   <data name="locSelectedMetricResource1.Text" xml:space="preserve">
     <value>Selected Metric:</value>
@@ -595,10 +595,10 @@
     <value>Schwarz</value>
   </data>
   <data name="locTVICyanResource1.Text" xml:space="preserve">
-    <value>Cyan</value>
+    <value>Cyan_de</value>
   </data>
   <data name="locTVIMagentaResource1.Text" xml:space="preserve">
-    <value>Magenta</value>
+    <value>Magenta_de</value>
   </data>
   <data name="locTVIResource1.Text" xml:space="preserve">
     <value>Tonwertzunahme</value>
@@ -697,28 +697,28 @@
     <value>Bedruckstoff</value>
   </data>
   <data name="locMinDeltaEResource1.Text" xml:space="preserve">
-    <value>Minimum Predicted ∆E</value>
+    <value>Minimum Predicted ∆E_de</value>
   </data>
   <data name="locSummaryHeaderRun0Resource1" xml:space="preserve">
     <value>Optimal Device Prediction</value>
   </data>
   <data name="locSummaryHeaderRun1Resource1" xml:space="preserve">
-    <value>Summary Comparison</value>
+    <value>Summary Comparison_de</value>
   </data>
   <data name="locRipSettingsResource1.Text" xml:space="preserve">
     <value>Rip Einstellungen</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_de</value>
   </data>
   <data name="locCreateNCPResource1" xml:space="preserve">
-    <value>Create Chart d</value>
+    <value>Create Chart _de</value>
   </data>
   <data name="locMinimumDeltaResource.Text" xml:space="preserve">
-    <value>Minimum Δ</value>
+    <value>Minimum Δ_de</value>
   </data>
   <data name="locDeltaTypeResource.Text" xml:space="preserve">
-    <value>ΔE Type</value>
+    <value>ΔE Type_de</value>
   </data>
   <data name="locMeasurementDateResource1.Text" xml:space="preserve">
     <value>Measurement Date_de</value>

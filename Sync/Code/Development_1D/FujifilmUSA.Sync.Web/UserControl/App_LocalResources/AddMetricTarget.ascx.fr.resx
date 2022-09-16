@@ -118,22 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Metric Sum</value>
+    <value>Metric Sum_fr</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Target Value</value>
+    <value>Target Value_fr</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Delete</value>
+    <value>Delete_fr</value>
   </data>
   <data name="lblAddMetricSumHeaderResource1.Text" xml:space="preserve">
-    <value>Add Metric Sum</value>
+    <value>Add Metric Sum_fr</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>Cancel_fr</value>
   </data>
   <data name="locMetricTargetResource1.Text" xml:space="preserve">
-    <value>Add Metric Target</value>
+    <value>Add Metric Target_fr</value>
   </data>
   <data name="locPatchTargetsResource1.Text" xml:space="preserve">
     <value>Patch Tolerances_fr</value>

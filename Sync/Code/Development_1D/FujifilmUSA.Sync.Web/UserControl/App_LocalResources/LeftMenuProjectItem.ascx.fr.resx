@@ -133,7 +133,7 @@
     <value>Nouvelle Mesure</value>
   </data>
   <data name="lnkAnalyseResource1.Text" xml:space="preserve">
-    <value>Analyse</value>
+    <value>Analyse_fr</value>
   </data>
   <data name="lnkDownloadResource1.Text" xml:space="preserve">
     <value>Téléchargement</value>
@@ -142,7 +142,7 @@
     <value>Mesure</value>
   </data>
   <data name="btnNCPDeleteResource1" xml:space="preserve">
-    <value>Delete NCP</value>
+    <value>Delete NCP_fr</value>
   </data>
   <data name="deleteNCPMsg" xml:space="preserve">
     <value>Are you sure you want to delete this NCP?</value>

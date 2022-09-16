@@ -202,7 +202,7 @@
     <value>Erreur rencontrée durant la récupération des Imprimantes. Contacter votre Administrateur.</value>
   </data>
   <data name="Error_GetDeviceFamilyProfilerOptionPreset" xml:space="preserve">
-    <value>Error occured while retrieving device family profiler option presets. Please contact your administrator.</value>
+    <value>Error occured while retrieving device family profiler option presets. Please contact your administrator._fr</value>
   </data>
   <data name="Error_GetDeviceLinkProfile" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Profils Device Ink. Contacter votre Administrateur.</value>
@@ -613,7 +613,7 @@
     <value>Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator.</value>
   </data>
   <data name="Error_AddLookupTVILABDensity_MissingData" xml:space="preserve">
-    <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data.</value>
+    <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data._fr</value>
   </data>
   <data name="PatchPresetManagement_DeletePatchPreset_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected patch preset?_fr</value>

@@ -145,7 +145,7 @@
     <value>Zurück</value>
   </data>
   <data name="locDownloadChartResource1.Text" xml:space="preserve">
-    <value>Download Chart</value>
+    <value>Download Chart_de</value>
   </data>
   <data name="locDownloadCurrentDLPResource1.Text" xml:space="preserve">
     <value>Lade aktuelle DLP</value>
@@ -163,7 +163,7 @@
     <value>Ups! Hier gibt es keine DLP zum Herunterladen</value>
   </data>
   <data name="noNCPText" xml:space="preserve">
-    <value>Sorry! There is no ncp to download"</value>
+    <value>Sorry! There is no ncp to download"_de</value>
   </data>
   <data name="noSourceText" xml:space="preserve">
     <value>Sorry! There is no source profile to download_de</value>
@@ -175,6 +175,6 @@
     <value>Optionen für Druckbedingung "{0}"</value>
   </data>
   <data name="spotprintOptionsText" xml:space="preserve">
-    <value>Download the chart to print before re-optimizing or view the last analysis to see the current library performance.</value>
+    <value>Download the chart to print before re-optimizing or view the last analysis to see the current library performance._de</value>
   </data>
 </root>

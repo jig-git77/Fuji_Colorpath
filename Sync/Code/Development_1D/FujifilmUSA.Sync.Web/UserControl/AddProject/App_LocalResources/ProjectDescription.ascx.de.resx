@@ -148,7 +148,7 @@
     <value>Zielfarbraum</value>
   </data>
   <data name="locTargetColorSpaceNextText" xml:space="preserve">
-    <value>Next</value>
+    <value>Next_de</value>
   </data>
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Name des Anwenders</value>
@@ -214,6 +214,6 @@
     <value>Washes-Plate/Cylinder:_de</value>
   </data>
   <data name="locRollersMessageResource1.Text" xml:space="preserve">
-    <value>*Include Manufacture, Line Count &amp; BCM</value>
+    <value>*Include Manufacture, Line Count &amp; BCM_de</value>
   </data>
 </root>

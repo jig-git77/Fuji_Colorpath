@@ -121,7 +121,7 @@
     <value>{0}:</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Print Standard Name_ja</value>
+    <value>Print Standard Name_ja_ja</value>
   </data>
   <data name="GridTemplateColumnResource2.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
@@ -133,22 +133,22 @@
     <value>{0}:</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>IsSync1DType?</value>
+    <value>IsSync1DType?_ja</value>
   </data>
   <data name="GridTemplateColumnResource5.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
   <data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
-    <value>delete</value>
+    <value>delete_ja</value>
   </data>
   <data name="imgbtnDeleteResource1.ToolTip" xml:space="preserve">
-    <value>Delete Print Standard Type</value>
+    <value>Delete Print Standard Type_ja</value>
   </data>
   <data name="imgbtnUpdateResource1.AlternateText" xml:space="preserve">
-    <value>edit</value>
+    <value>edit_ja</value>
   </data>
   <data name="imgbtnUpdateResource1.ToolTip" xml:space="preserve">
-    <value>Edit Print Standard Type</value>
+    <value>Edit Print Standard Type_ja</value>
   </data>
   <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
     <value>絞り込み解除</value>
@@ -163,94 +163,94 @@
     <value>絞り込み解除</value>
   </data>
   <data name="locAddPrintStandardTypeResource1.Text" xml:space="preserve">
-    <value>Add Print Standard Type</value>
+    <value>Add Print Standard Type_ja</value>
   </data>
   <data name="locClickMeResource1.Text" xml:space="preserve">
-    <value>Click Me!</value>
+    <value>Click Me!_ja</value>
   </data>
   <data name="locPrintStandardTypeMgmtResource1.Text" xml:space="preserve">
-    <value>Print Standard Type Management</value>
+    <value>Print Standard Type Management_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.CollapseTooltip" xml:space="preserve">
-    <value>Collapse group</value>
+    <value>Collapse group_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.ExpandTooltip" xml:space="preserve">
-    <value>Expand group</value>
+    <value>Expand group_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupByFieldsSeparator" xml:space="preserve">
     <value>; </value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupContinuedFormatString" xml:space="preserve">
-    <value>Fortsetzung von der letzen Seite</value>
+    <value>Fortsetzung von der letzen Seite_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupContinuesFormatString" xml:space="preserve">
-    <value>Fortsetzung auf der nächsten Seite</value>
+    <value>Fortsetzung auf der nächsten Seite_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupSplitDisplayFormat" xml:space="preserve">
-    <value>Showing {0} of {1} items.</value>
+    <value>Showing {0} of {1} items._ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupSplitFormat" xml:space="preserve">
     <value> ({0})</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.UnGroupButtonTooltip" xml:space="preserve">
-    <value>Click here to ungroup</value>
+    <value>Click here to ungroup_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupingSettings.UnGroupTooltip" xml:space="preserve">
-    <value>Drag out of the bar to ungroup</value>
+    <value>Drag out of the bar to ungroup_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.GroupPanel.Text" xml:space="preserve">
-    <value>Drag a column header and drop it here to group by that column</value>
+    <value>Drag a column header and drop it here to group by that column_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.HierarchySettings.CollapseTooltip" xml:space="preserve">
-    <value>Collapse</value>
+    <value>Collapse_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.HierarchySettings.ExpandTooltip" xml:space="preserve">
-    <value>Expand</value>
+    <value>Expand_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.HierarchySettings.SelfCollapseTooltip" xml:space="preserve">
-    <value>Self reference collapse</value>
+    <value>Self reference collapse_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.HierarchySettings.SelfExpandTooltip" xml:space="preserve">
-    <value>Self reference expand</value>
+    <value>Self reference expand_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.AddNewRecordText" xml:space="preserve">
-    <value>Add new record</value>
+    <value>Add new record_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToCsvText" xml:space="preserve">
-    <value>Export to CSV</value>
+    <value>Export to CSV_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToExcelText" xml:space="preserve">
-    <value>Export to Excel</value>
+    <value>Export to Excel_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToPdfText" xml:space="preserve">
-    <value>Export to PDF</value>
+    <value>Export to PDF_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToWordText" xml:space="preserve">
-    <value>Export to Word</value>
+    <value>Export to Word_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.RefreshText" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Refresh_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.ExpandCollapseColumn.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.NoDetailRecordsText" xml:space="preserve">
-    <value>No child records to display.</value>
+    <value>No child records to display._ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.NoMasterRecordsText" xml:space="preserve">
-    <value>No records to display.</value>
+    <value>No records to display._ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.FirstPageToolTip" xml:space="preserve">
-    <value>First Page</value>
+    <value>First Page_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.LastPageToolTip" xml:space="preserve">
-    <value>Last Page</value>
+    <value>Last Page_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.NextPagesToolTip" xml:space="preserve">
-    <value>Next Pages</value>
+    <value>Next Pages_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.NextPageToolTip" xml:space="preserve">
-    <value>Next Page</value>
+    <value>Next Page_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PagerTextFormat" xml:space="preserve">
     <value>Change page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
@@ -259,25 +259,25 @@
     <value>表示数:</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PrevPagesToolTip" xml:space="preserve">
-    <value>Previous Pages</value>
+    <value>Previous Pages_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PrevPageToolTip" xml:space="preserve">
-    <value>Previous Page</value>
+    <value>Previous Page_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.MasterTableView.RowIndicatorColumn.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
   <data name="rgPrintStandardTypeResource1.PagerStyle.FirstPageToolTip" xml:space="preserve">
-    <value>First Page</value>
+    <value>First Page_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.PagerStyle.LastPageToolTip" xml:space="preserve">
-    <value>Last Page</value>
+    <value>Last Page_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.PagerStyle.NextPagesToolTip" xml:space="preserve">
-    <value>Next Pages</value>
+    <value>Next Pages_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.PagerStyle.NextPageToolTip" xml:space="preserve">
-    <value>Next Page</value>
+    <value>Next Page_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.PagerStyle.PagerTextFormat" xml:space="preserve">
     <value>Change page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
@@ -286,21 +286,21 @@
     <value>表示数:</value>
   </data>
   <data name="rgPrintStandardTypeResource1.PagerStyle.PrevPagesToolTip" xml:space="preserve">
-    <value>Previous Pages</value>
+    <value>Previous Pages_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.PagerStyle.PrevPageToolTip" xml:space="preserve">
-    <value>Previous Page</value>
+    <value>Previous Page_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.SortingSettings.SortedAscToolTip" xml:space="preserve">
-    <value>Sorted asc</value>
+    <value>Sorted asc_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.SortingSettings.SortedDescToolTip" xml:space="preserve">
-    <value>Sorted desc</value>
+    <value>Sorted desc_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.SortingSettings.SortToolTip" xml:space="preserve">
-    <value>Click here to sort</value>
+    <value>Click here to sort_ja</value>
   </data>
   <data name="rgPrintStandardTypeResource1.StatusBarSettings.LoadingText" xml:space="preserve">
-    <value>Loading...</value>
+    <value>Loading..._ja</value>
   </data>
 </root>

@@ -148,7 +148,7 @@
     <value>新規印刷条件 - ターゲット色空間</value>
   </data>
   <data name="locTargetColorSpaceNextText" xml:space="preserve">
-    <value>Next</value>
+    <value>Next_ja</value>
   </data>
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>技術者名：</value>
@@ -214,6 +214,6 @@
     <value>Washes-Plate/Cylinder:_ja</value>
   </data>
   <data name="locRollersMessageResource1.Text" xml:space="preserve">
-    <value>*Include Manufacture, Line Count &amp; BCM</value>
+    <value>*Include Manufacture, Line Count &amp; BCM_ja</value>
   </data>
 </root>

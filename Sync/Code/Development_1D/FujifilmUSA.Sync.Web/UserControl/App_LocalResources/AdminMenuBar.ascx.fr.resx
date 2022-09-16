@@ -130,7 +130,7 @@
     <value>Téléchargement</value>
   </data>
   <data name="locLicenseResource1.Text" xml:space="preserve">
-    <value>Licence</value>
+    <value>Licence_fr</value>
   </data>
   <data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
     <value>Instrument de Mesure</value>
@@ -142,7 +142,7 @@
     <value>Charte de Référence</value>
   </data>
   <data name="locSourceProfileResource1.Text" xml:space="preserve">
-    <value>Profil Source</value>
+    <value>Profil Source_fr</value>
   </data>
   <data name="locUserResource1.Text" xml:space="preserve">
     <value>Utilisateur</value>
@@ -163,9 +163,9 @@
     <value>Patch Preset_fr</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_fr</value>
   </data>
   <data name="locMetricTargetResource1.Text" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_fr</value>
   </data>
 </root>

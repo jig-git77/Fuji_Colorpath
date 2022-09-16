@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DescriptionResource1.Text" xml:space="preserve">
-    <value>Description</value>
+    <value>Description_fr</value>
   </data>
   <data name="locAlignmentChart1Resource1.Text" xml:space="preserve">
     <value>Charte d'alignement</value>
@@ -145,10 +145,10 @@
     <value>Nouveau Profil - Compte rendu </value>
   </data>
   <data name="locNotesResource1.Text" xml:space="preserve">
-    <value>Notes</value>
+    <value>Notes_fr</value>
   </data>
   <data name="locObserverResource1.Text" xml:space="preserve">
-    <value>Observation</value>
+    <value>Observation_fr</value>
   </data>
   <data name="locOptionPresetsResource1.Text" xml:space="preserve">
     <value>Options Préréglages</value>
@@ -202,6 +202,6 @@
     <value>ReTarget Project:_fr</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_fr</value>
   </data>
 </root>

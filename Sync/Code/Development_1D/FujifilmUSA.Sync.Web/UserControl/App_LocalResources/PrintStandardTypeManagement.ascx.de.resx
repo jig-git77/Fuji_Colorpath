@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,248 +59,248 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
     <value>Name d. Druckstandards</value>
   </data>
-	<data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
+  <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
     <value>Quellprofil</value>
   </data>
-	<data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
+  <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
     <value>IsSync1DType?</value>
   </data>
-	<data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
+  <data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
     <value>Löschen</value>
   </data>
-	<data name="imgbtnDeleteResource1.ToolTip" xml:space="preserve">
+  <data name="imgbtnDeleteResource1.ToolTip" xml:space="preserve">
     <value>Diesen Druckstandard löschen</value>
   </data>
-	<data name="imgbtnUpdateResource1.AlternateText" xml:space="preserve">
+  <data name="imgbtnUpdateResource1.AlternateText" xml:space="preserve">
     <value>Editieren</value>
   </data>
-	<data name="imgbtnUpdateResource1.ToolTip" xml:space="preserve">
+  <data name="imgbtnUpdateResource1.ToolTip" xml:space="preserve">
     <value>Druckstandard bearbeiten</value>
   </data>
-	<data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
+  <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
     <value>Filter löschen</value>
   </data>
-	<data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
+  <data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
     <value>Filter löschen</value>
   </data>
-	<data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
+  <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
     <value>Filter löschen</value>
   </data>
-	<data name="locAddPrintStandardTypeResource1.Text" xml:space="preserve">
+  <data name="locAddPrintStandardTypeResource1.Text" xml:space="preserve">
     <value>Druckstandard hinzufügen</value>
   </data>
-	<data name="locPrintStandardTypeMgmtResource1.Text" xml:space="preserve">
+  <data name="locPrintStandardTypeMgmtResource1.Text" xml:space="preserve">
     <value>Druckstandards verwalten</value>
   </data>
-	<data name="locClickMeResource1.Text" xml:space="preserve">
+  <data name="locClickMeResource1.Text" xml:space="preserve">
     <value>Click Mich!</value>
   </data>
-	<data name="GridTemplateColumnResource1.EditFormHeaderTextFormat" xml:space="preserve">
+  <data name="GridTemplateColumnResource1.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
-	<data name="GridTemplateColumnResource2.EditFormHeaderTextFormat" xml:space="preserve">
+  <data name="GridTemplateColumnResource2.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
-	<data name="GridTemplateColumnResource5.EditFormHeaderTextFormat" xml:space="preserve">
+  <data name="GridTemplateColumnResource5.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
-	<data name="lbtnClearFillterResource2.ToolTip" xml:space="preserve">
+  <data name="lbtnClearFillterResource2.ToolTip" xml:space="preserve">
     <value>Filter löschen</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.CollapseTooltip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.CollapseTooltip" xml:space="preserve">
     <value>Gruppe ausblenden</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.ExpandTooltip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.ExpandTooltip" xml:space="preserve">
     <value>Gruppe einblenden</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.GroupByFieldsSeparator" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupByFieldsSeparator" xml:space="preserve">
     <value>; </value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.GroupContinuedFormatString" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupContinuedFormatString" xml:space="preserve">
     <value>...Fortsetzung von der vorigen Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.GroupContinuesFormatString" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupContinuesFormatString" xml:space="preserve">
     <value>Fortsetzung auf der nächsten Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.GroupSplitDisplayFormat" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupSplitDisplayFormat" xml:space="preserve">
     <value>Zeige {0} von {1} Elementen.</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.GroupSplitFormat" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.GroupSplitFormat" xml:space="preserve">
     <value> ({0})</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.UnGroupButtonTooltip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.UnGroupButtonTooltip" xml:space="preserve">
     <value>Klicken um die Gruppierung aufzuheben</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupingSettings.UnGroupTooltip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupingSettings.UnGroupTooltip" xml:space="preserve">
     <value>Wegziehen um die Gruppierung aufzuheben</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.GroupPanel.Text" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.GroupPanel.Text" xml:space="preserve">
     <value>Überschrift hierherziehen und loslassen um sie mit dieser Spalte zu gruppieren</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.HierarchySettings.CollapseTooltip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.HierarchySettings.CollapseTooltip" xml:space="preserve">
     <value>Ausblenden</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.HierarchySettings.ExpandTooltip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.HierarchySettings.ExpandTooltip" xml:space="preserve">
     <value>Einblenden</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.HierarchySettings.SelfCollapseTooltip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.HierarchySettings.SelfCollapseTooltip" xml:space="preserve">
     <value>Referenz Einblenden</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.HierarchySettings.SelfExpandTooltip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.HierarchySettings.SelfExpandTooltip" xml:space="preserve">
     <value>Referenz Ausblenden</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.AddNewRecordText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.AddNewRecordText" xml:space="preserve">
     <value>Neuen Datensatz hinzufügen</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToCsvText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToCsvText" xml:space="preserve">
     <value>Als CSV-Datei exportieren</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToExcelText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToExcelText" xml:space="preserve">
     <value>Als  Excel-Datei exportieren</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToPdfText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToPdfText" xml:space="preserve">
     <value>Als  PDF exportieren</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToWordText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.ExportToWordText" xml:space="preserve">
     <value>Als Word-Datei exportieren</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.RefreshText" xml:space="preserve">
-    <value>Refresh</value>
+  <data name="rgPrintStandardTypeResource1.MasterTableView.CommandItemSettings.RefreshText" xml:space="preserve">
+    <value>Refresh_de</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.ExpandCollapseColumn.EditFormHeaderTextFormat" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.ExpandCollapseColumn.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.NoDetailRecordsText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.NoDetailRecordsText" xml:space="preserve">
     <value>Keine Untereinträge zur Anzeige vorhanden.</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.NoMasterRecordsText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.NoMasterRecordsText" xml:space="preserve">
     <value>Keine Einträge zur Anzeige vorhanden</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.FirstPageToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.FirstPageToolTip" xml:space="preserve">
     <value>Erste Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.LastPageToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.LastPageToolTip" xml:space="preserve">
     <value>Letzte Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.NextPagesToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.NextPagesToolTip" xml:space="preserve">
     <value>Nächste Seiten</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.NextPageToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.NextPageToolTip" xml:space="preserve">
     <value>Nächste Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PagerTextFormat" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PagerTextFormat" xml:space="preserve">
     <value>Change page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PageSizeLabelText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PageSizeLabelText" xml:space="preserve">
     <value>Seitengröße:</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PrevPagesToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PrevPagesToolTip" xml:space="preserve">
     <value>Vorherige Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PrevPageToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.PagerStyle.PrevPageToolTip" xml:space="preserve">
     <value>Vorherige Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.MasterTableView.RowIndicatorColumn.EditFormHeaderTextFormat" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.MasterTableView.RowIndicatorColumn.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.PagerStyle.FirstPageToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.PagerStyle.FirstPageToolTip" xml:space="preserve">
     <value>Erste Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.PagerStyle.LastPageToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.PagerStyle.LastPageToolTip" xml:space="preserve">
     <value>Letzte Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.PagerStyle.NextPagesToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.PagerStyle.NextPagesToolTip" xml:space="preserve">
     <value>Nächste Seiten</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.PagerStyle.NextPageToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.PagerStyle.NextPageToolTip" xml:space="preserve">
     <value>Nächste Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.PagerStyle.PagerTextFormat" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.PagerStyle.PagerTextFormat" xml:space="preserve">
     <value>Change page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.PagerStyle.PageSizeLabelText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.PagerStyle.PageSizeLabelText" xml:space="preserve">
     <value>Seitengröße:</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.PagerStyle.PrevPagesToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.PagerStyle.PrevPagesToolTip" xml:space="preserve">
     <value>Vorherige Seiten</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.PagerStyle.PrevPageToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.PagerStyle.PrevPageToolTip" xml:space="preserve">
     <value>Vorherige Seite</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.SortingSettings.SortedAscToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.SortingSettings.SortedAscToolTip" xml:space="preserve">
     <value>Aufsteigend sortieren</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.SortingSettings.SortedDescToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.SortingSettings.SortedDescToolTip" xml:space="preserve">
     <value>Absteigend sortieren</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.SortingSettings.SortToolTip" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.SortingSettings.SortToolTip" xml:space="preserve">
     <value>Hier klicken zum Sortieren</value>
   </data>
-	<data name="rgPrintStandardTypeResource1.StatusBarSettings.LoadingText" xml:space="preserve">
+  <data name="rgPrintStandardTypeResource1.StatusBarSettings.LoadingText" xml:space="preserve">
     <value>Lade...</value>
   </data>
-	<data name="GridTemplateColumnResource4.EditFormHeaderTextFormat" xml:space="preserve">
+  <data name="GridTemplateColumnResource4.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
 </root>

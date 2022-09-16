@@ -133,7 +133,7 @@
     <value>Gerät</value>
   </data>
   <data name="locDownloadResource1.Text" xml:space="preserve">
-    <value>Download</value>
+    <value>Download_de</value>
   </data>
   <data name="locLicenseResource1.Text" xml:space="preserve">
     <value>Lizenz</value>
@@ -148,7 +148,7 @@
     <value>Profileinstellungen Geraätefamilie</value>
   </data>
   <data name="locReferenceChartResource1.Text" xml:space="preserve">
-    <value>Reference Chart</value>
+    <value>Reference Chart_de</value>
   </data>
   <data name="locSourceProfileResource1.Text" xml:space="preserve">
     <value>Quellprofil</value>
@@ -166,9 +166,9 @@
     <value>Patch Preset_de</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_de</value>
   </data>
   <data name="locMetricTargetResource1.Text" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_de</value>
   </data>
 </root>

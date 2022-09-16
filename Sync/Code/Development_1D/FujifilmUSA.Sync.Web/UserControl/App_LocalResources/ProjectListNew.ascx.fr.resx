@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Status</value>
+    <value>Status_fr</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
     <value>Nom</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Standard</value>
+    <value>Standard_fr</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
     <value>Supprot</value>
@@ -214,9 +214,9 @@
     <value>Pas Certifié</value>
   </data>
   <data name="GridTemplateColumnResource0.HeaderText" xml:space="preserve">
-    <value>Type</value>
+    <value>Type_fr</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Validation</value>
+    <value>Validation_fr</value>
   </data>
 </root>

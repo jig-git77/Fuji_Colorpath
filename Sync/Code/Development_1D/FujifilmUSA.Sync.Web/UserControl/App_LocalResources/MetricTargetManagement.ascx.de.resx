@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Name</value>
+    <value>Name_de</value>
   </data>
   <data name="GridTemplateColumnResource10.HeaderText" xml:space="preserve">
     <value>Wird benutzt?</value>
@@ -130,7 +130,7 @@
     <value>Firma</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Region</value>
+    <value>Region_de</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
     <value>dE Bewertung</value>
@@ -172,9 +172,9 @@
     <value>Filter löschen</value>
   </data>
   <data name="locAddMetricTargetResource1.Text" xml:space="preserve">
-    <value>Assign Metric Target Preset Reference Chart</value>
+    <value>Assign Metric Target Preset Reference Chart_de</value>
   </data>
   <data name="locMetricTargetMgmtResource1.Text" xml:space="preserve">
-    <value>Metric Target Management</value>
+    <value>Metric Target Management_de</value>
   </data>
 </root>

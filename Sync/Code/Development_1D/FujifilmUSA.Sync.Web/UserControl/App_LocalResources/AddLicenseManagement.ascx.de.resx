@@ -169,9 +169,9 @@
     <value>--Select Company--_de</value>
   </data>
   <data name="chkIsCustomProfOptionsResource1.Text" xml:space="preserve">
-    <value>Is Custom Profiler Options?</value>
+    <value>Is Custom Profiler Options?_de</value>
   </data>
   <data name="locIsCustomPluginResource1.Text" xml:space="preserve">
-    <value>Measure Tool</value>
+    <value>Measure Tool_de</value>
   </data>
 </root>

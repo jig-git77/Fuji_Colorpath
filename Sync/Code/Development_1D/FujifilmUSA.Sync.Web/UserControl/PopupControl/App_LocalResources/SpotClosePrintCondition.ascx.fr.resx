@@ -163,7 +163,7 @@
     <value>Désolé! Il n'y a pas de DLP à télécharger</value>
   </data>
   <data name="noNCPText" xml:space="preserve">
-    <value>Sorry! There is no ncp to download"</value>
+    <value>Sorry! There is no ncp to download"_fr</value>
   </data>
   <data name="noSourceText" xml:space="preserve">
     <value>Sorry! There is no source profile to download_fr</value>
@@ -175,6 +175,6 @@
     <value>Options pour "{0}" Profil</value>
   </data>
   <data name="spotprintOptionsText" xml:space="preserve">
-    <value>Download the chart to print before re-optimizing or view the last analysis to see the current library performance.</value>
+    <value>Download the chart to print before re-optimizing or view the last analysis to see the current library performance._fr</value>
   </data>
 </root>

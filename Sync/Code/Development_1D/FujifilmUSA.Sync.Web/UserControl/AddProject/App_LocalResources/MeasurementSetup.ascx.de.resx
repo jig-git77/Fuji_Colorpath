@@ -145,13 +145,13 @@
     <value>Spectrophotometer Optionen</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
-    <value>UV Parameter:</value>
+    <value>UV Parameter:_de</value>
   </data>
   <data name="locValidationSetupResource1.Text" xml:space="preserve">
     <value>Validierungsparameter</value>
   </data>
   <data name="locValidationSetupNextText" xml:space="preserve">
-    <value>Next</value>
+    <value>Next_de</value>
   </data>
   <data name="rfvcAlignmentChartContainer" xml:space="preserve">
     <value>Bitte Base DLP chart auswählen.</value>
@@ -166,7 +166,7 @@
     <value>-- Auswählen --</value>
   </data>
   <data name="txtBaseDLPResource1.Text" xml:space="preserve">
-    <value>Testform:</value>
+    <value>Testform:_de</value>
   </data>
   <data name="String1" xml:space="preserve">
     <value>Kontrollelement</value>
@@ -187,9 +187,9 @@
     <value>Streifen</value>
   </data>
   <data name="locrbtnCustomMeasurementType" xml:space="preserve">
-    <value>MTool</value>
+    <value>MTool_de</value>
   </data>
   <data name="locrbtnPluginMeasurementType" xml:space="preserve">
-    <value>Measurement Plugin</value>
+    <value>Measurement Plugin_de</value>
   </data>
 </root>

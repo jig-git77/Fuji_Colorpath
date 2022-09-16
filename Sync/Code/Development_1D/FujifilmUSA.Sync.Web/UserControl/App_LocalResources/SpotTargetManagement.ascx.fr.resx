@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Spot Target Name</value>
+    <value>Spot Target Name_fr</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Company Name</value>
+    <value>Company Name_fr</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>IsActive?</value>
+    <value>IsActive?_fr</value>
   </data>
   <data name="imgAddResource1.Text" xml:space="preserve">
-    <value>Add Spot Target</value>
+    <value>Add Spot Target_fr</value>
   </data>
   <data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
-    <value>Delete</value>
+    <value>Delete_fr</value>
   </data>
   <data name="imgbtnDeleteResource1.ToolTip" xml:space="preserve">
-    <value>Delete Spot Target</value>
+    <value>Delete Spot Target_fr</value>
   </data>
   <data name="imgbtnEditResource1.AlternateText" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edit_fr</value>
   </data>
   <data name="imgbtnEditResource1.ToolTip" xml:space="preserve">
-    <value>Edit Spot Target</value>
+    <value>Edit Spot Target_fr</value>
   </data>
   <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_fr</value>
   </data>
   <data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_fr</value>
   </data>
   <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_fr</value>
   </data>
   <data name="locAddSpotTargetResource1.Text" xml:space="preserve">
-    <value>Add Spot Target</value>
+    <value>Add Spot Target_fr</value>
   </data>
   <data name="LocalizeResource1.Text" xml:space="preserve">
-    <value>Spot Target Management</value>
+    <value>Spot Target Management_fr</value>
   </data>
   <data name="MessageSpotTargetAssignedToSpotProject" xml:space="preserve">
-    <value>This spot target has BCO projects open, so please delete those first before deleting this.</value>
+    <value>This spot target has BCO projects open, so please delete those first before deleting this._fr</value>
   </data>
 </root>

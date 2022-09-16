@@ -139,7 +139,7 @@
     <value>Blau</value>
   </data>
   <data name="BoundFieldResource1.HeaderText" xml:space="preserve">
-    <value>Job:</value>
+    <value>Job:_de</value>
   </data>
   <data name="BoundFieldResource10.HeaderText" xml:space="preserve">
     <value>Anmerkungen:</value>
@@ -166,7 +166,7 @@
     <value>Seite/Oberfläche:</value>
   </data>
   <data name="BoundFieldResource9.HeaderText" xml:space="preserve">
-    <value>JDF Job ID:</value>
+    <value>JDF Job ID:_de</value>
   </data>
   <data name="bText" xml:space="preserve">
     <value>b*</value>
@@ -340,19 +340,19 @@
     <value>PDF Report laden</value>
   </data>
   <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_de</value>
   </data>
   <data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
     <value>Filter löschen</value>
   </data>
   <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_de</value>
   </data>
   <data name="lbtnClearFillterResource2.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_de</value>
   </data>
   <data name="ListItemResource1.Text" xml:space="preserve">
-    <value>Idealliance Digital Chart</value>
+    <value>Idealliance Digital Chart_de</value>
   </data>
   <data name="loc10PercentileDeltaResource1.Text" xml:space="preserve">
     <value>10% Δ</value>
@@ -439,16 +439,16 @@
     <value>Datum</value>
   </data>
   <data name="locLabeldEType" xml:space="preserve">
-    <value>dE Type:</value>
+    <value>dE Type:_de</value>
   </data>
   <data name="locLabelDevice" xml:space="preserve">
     <value>Gerät</value>
   </data>
   <data name="locLabelJDFJobID" xml:space="preserve">
-    <value>JDF Job ID:</value>
+    <value>JDF Job ID:_de</value>
   </data>
   <data name="locLabelJob" xml:space="preserve">
-    <value>Job:</value>
+    <value>Job:_de</value>
   </data>
   <data name="locLabelMetric" xml:space="preserve">
     <value>Messung:</value>
@@ -457,10 +457,10 @@
     <value>Seite/Oberfläche:</value>
   </data>
   <data name="locLabelSignature" xml:space="preserve">
-    <value>Signature</value>
+    <value>Signature_de</value>
   </data>
   <data name="locLabelStandard" xml:space="preserve">
-    <value>Standard:</value>
+    <value>Standard:_de</value>
   </data>
   <data name="locLabelTimestamp" xml:space="preserve">
     <value>Timestamp:</value>
@@ -514,10 +514,10 @@
     <value>Datensätze</value>
   </data>
   <data name="locReportResource1.Text" xml:space="preserve">
-    <value>Report</value>
+    <value>Report_de</value>
   </data>
   <data name="locSelectedMetricResource1.Text" xml:space="preserve">
-    <value>Selected Metric:</value>
+    <value>Selected Metric:_de</value>
   </data>
   <data name="locSubmitResource1.Text" xml:space="preserve">
     <value>Absenden</value>
@@ -592,10 +592,10 @@
     <value>Gelb</value>
   </data>
   <data name="locTVICyanResource1.Text" xml:space="preserve">
-    <value>Cyan</value>
+    <value>Cyan_de</value>
   </data>
   <data name="locTVIMagentaResource1.Text" xml:space="preserve">
-    <value>Magenta</value>
+    <value>Magenta_de</value>
   </data>
   <data name="locTVIYellowResource1.Text" xml:space="preserve">
     <value>Gelb</value>
@@ -700,7 +700,7 @@
     <value>Job:</value>
   </data>
   <data name="ValidationSummaryJobID.Text" xml:space="preserve">
-    <value>JDF Job ID:</value>
+    <value>JDF Job ID:_de</value>
   </data>
   <data name="ValidationSummaryMeasurementID.Text" xml:space="preserve">
     <value>Messwert ID:</value>
@@ -724,7 +724,7 @@
     <value>Name der Messung:</value>
   </data>
   <data name="ValidationSummaryStatus.Text" xml:space="preserve">
-    <value>Status:</value>
+    <value>Status:_de</value>
   </data>
   <data name="GridMeasuredValue.Text" xml:space="preserve">
     <value>Aktuell</value>
@@ -736,12 +736,12 @@
     <value>Toleranz</value>
   </data>
   <data name="GridPatchTolSampleName.Text" xml:space="preserve">
-    <value>Sample Name</value>
+    <value>Sample Name_de</value>
   </data>
   <data name="GridToleranceValue.Text" xml:space="preserve">
     <value>Toleranz</value>
   </data>
   <data name="percentPatchMetrics" xml:space="preserve">
-    <value>% Patch Metrics</value>
+    <value>% Patch Metrics_de</value>
   </data>
 </root>

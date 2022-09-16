@@ -118,72 +118,72 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addDeviceText" xml:space="preserve">
-    <value>Add Device</value>
+    <value>Add Device_fr</value>
   </data>
   <data name="editDeviceText" xml:space="preserve">
-    <value>Edit Device</value>
+    <value>Edit Device_fr</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Device</value>
+    <value>Add Device_fr</value>
   </data>
   <data name="locBranchNameResource1.Text" xml:space="preserve">
-    <value>Branch Name</value>
+    <value>Branch Name_fr</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_fr</value>
   </data>
   <data name="locCompanyNameResource1.Text" xml:space="preserve">
-    <value>Company Name</value>
+    <value>Company Name_fr</value>
   </data>
   <data name="locDeviceFamilyResource1.Text" xml:space="preserve">
-    <value>Device Family</value>
+    <value>Device Family_fr</value>
   </data>
   <data name="locDeviceManagementResource1.Text" xml:space="preserve">
-    <value>Device Management</value>
+    <value>Device Management_fr</value>
   </data>
   <data name="locDeviceNameResource1.Text" xml:space="preserve">
-    <value>Device Name</value>
+    <value>Device Name_fr</value>
   </data>
   <data name="locIsActiveResource1.Text" xml:space="preserve">
-    <value>Is Active?</value>
+    <value>Is Active?_fr</value>
   </data>
   <data name="locIsFlexoResource1.Text" xml:space="preserve">
-    <value>Is 1D Flexo?</value>
+    <value>Is 1D Flexo?_fr</value>
   </data>
   <data name="locIsValidationResource1.Text" xml:space="preserve">
-    <value>Is Validation?</value>
+    <value>Is Validation?_fr</value>
   </data>
   <data name="locLicenseNameResource1.Text" xml:space="preserve">
-    <value>License Name</value>
+    <value>License Name_fr</value>
   </data>
   <data name="locNoOfProjectsResource1.Text" xml:space="preserve">
-    <value>No. of Projects</value>
+    <value>No. of Projects_fr</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Save_fr</value>
   </data>
   <data name="noLicenseFoundText" xml:space="preserve">
-    <value>No license found for this branch!</value>
+    <value>No license found for this branch!_fr</value>
   </data>
   <data name="plzSelectBranchText" xml:space="preserve">
-    <value>Please select branch.</value>
+    <value>Please select branch._fr</value>
   </data>
   <data name="plzSelectCompanyText" xml:space="preserve">
-    <value>Please select company.</value>
+    <value>Please select company._fr</value>
   </data>
   <data name="plzSelectDeviceFamilyText" xml:space="preserve">
-    <value>Please select device family.</value>
+    <value>Please select device family._fr</value>
   </data>
   <data name="selectBranchText" xml:space="preserve">
-    <value>--Select Branch--</value>
+    <value>--Select Branch--_fr</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
-    <value>--Select Company--</value>
+    <value>--Select Company--_fr</value>
   </data>
   <data name="selectDeviceFamilyText" xml:space="preserve">
-    <value>--Select Device Family--</value>
+    <value>--Select Device Family--_fr</value>
   </data>
   <data name="selectText" xml:space="preserve">
-    <value>--Select--</value>
+    <value>--Select--_fr</value>
   </data>
 </root>
