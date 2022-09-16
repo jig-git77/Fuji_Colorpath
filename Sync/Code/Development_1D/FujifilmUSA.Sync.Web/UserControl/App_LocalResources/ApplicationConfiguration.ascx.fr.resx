@@ -118,33 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="configValueSaveSuccess" xml:space="preserve">
-    <value>Configuration values updated successfully</value>
+    <value>Configuration values updated successfully_fr</value>
   </data>
   <data name="confirmMessageSaveValues" xml:space="preserve">
-    <value>Are you sure you want to modify configuration values? Clicking on OK will affect activity of online users.</value>
+    <value>Are you sure you want to modify configuration values? Clicking on OK will affect activity of online users._fr</value>
   </data>
   <data name="GridTemplateColumnResource1.EditFormHeaderTextFormat" xml:space="preserve">
-    <value>{0}:</value>
+    <value>{0}:_fr</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Configuration Key</value>
+    <value>Configuration Key_fr</value>
   </data>
   <data name="GridTemplateColumnResource2.EditFormHeaderTextFormat" xml:space="preserve">
-    <value>{0}:</value>
+    <value>{0}:_fr</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Configuration Value</value>
+    <value>Configuration Value_fr</value>
   </data>
   <data name="locApplicationConfigurationResource1.Text" xml:space="preserve">
-    <value>Application Configuration</value>
+    <value>Application Configuration_fr</value>
   </data>
   <data name="locNoteResource1.Text" xml:space="preserve">
-    <value>Note:</value>
+    <value>Note:_fr</value>
   </data>
   <data name="locNoteTextResource1.Text" xml:space="preserve">
-    <value>Please modify application configuration values during off working hours, as it will affect activity of online users.</value>
+    <value>Please modify application configuration values during off working hours, as it will affect activity of online users._fr</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Save_fr</value>
   </data>
 </root>

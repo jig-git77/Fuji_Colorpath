@@ -214,7 +214,7 @@
     <value>Charte de Référence</value>
   </data>
   <data name="locAdminResource1.Text" xml:space="preserve">
-    <value>Admin</value>
+    <value>Admin_fr</value>
   </data>
   <data name="locBranchManagementResource1.Text" xml:space="preserve">
     <value>Gestion Division</value>
@@ -292,21 +292,21 @@
     <value>Patch Preset_fr</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_fr</value>
   </data>
   <data name="imgSpotTargetResource1.AlternateText" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_fr</value>
   </data>
   <data name="imgSpotTargetResource1.ToolTip" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_fr</value>
   </data>
   <data name="imgMetricTargetResource1.AlternateText" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_fr</value>
   </data>
   <data name="locMetricTargetResource1.Text" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_fr</value>
   </data>
   <data name="imgMetricTargetResource1.ToolTip" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_fr</value>
   </data>
 </root>

@@ -145,7 +145,7 @@
     <value>測色</value>
   </data>
   <data name="dlpText" xml:space="preserve">
-    <value>DLP</value>
+    <value>DLP_ja</value>
   </data>
   <data name="downloadChartNotAvailableText" xml:space="preserve">
     <value>ダウンロードチャートは使用できません</value>
@@ -160,7 +160,7 @@
     <value>カーブファイル出力</value>
   </data>
   <data name="CalderaResource1.Text" xml:space="preserve">
-    <value>Caldera</value>
+    <value>Caldera_ja</value>
   </data>
   <data name="Chk_CResource1.Text" xml:space="preserve">
     <value>シアン</value>
@@ -175,16 +175,16 @@
     <value>イエロー</value>
   </data>
   <data name="ColCGCXResource1.Text" xml:space="preserve">
-    <value>ColorGate-CGCX</value>
+    <value>ColorGate-CGCX_ja</value>
   </data>
   <data name="ColTVIResource1.Text" xml:space="preserve">
-    <value>ColorGate-TVI</value>
+    <value>ColorGate-TVI_ja</value>
   </data>
   <data name="fivepersResource1.Text" xml:space="preserve">
     <value>5%ステップ</value>
   </data>
   <data name="HarmonyResource1.Text" xml:space="preserve">
-    <value>Harmony</value>
+    <value>Harmony_ja</value>
   </data>
   <data name="locCurveTypeResource1.Text" xml:space="preserve">
     <value>カーブ形式</value>
@@ -208,19 +208,22 @@
     <value>1%ステップ</value>
   </data>
   <data name="OnyxG7ImportResource1.Text" xml:space="preserve">
-    <value>Onyx G7 Import</value>
+    <value>Onyx G7 Import_ja</value>
   </data>
   <data name="HybridResource1.Text" xml:space="preserve">
-    <value>Hybrid</value>
+    <value>Hybrid_ja</value>
   </data>
   <data name="RampageResource1.Text" xml:space="preserve">
-    <value>Rampage</value>
+    <value>Rampage_ja</value>
   </data>
   <data name="tenpersResource1.Text" xml:space="preserve">
     <value>10%ステップ</value>
   </data>
   <data name="XMFResource1.Text" xml:space="preserve">
-    <value>XMF</value>
+    <value>XMF_ja</value>
+  </data>
+  <data name="EskoResource1.Text" xml:space="preserve">
+    <value>Esko_ja</value>
   </data>
   <data name="String1" xml:space="preserve">
     <value />
@@ -232,7 +235,7 @@
     <value>チャートをダウンロードし、DLPを適用したワークフローで印刷してください：</value>
   </data>
   <data name="locExportCMYKResource.Text" xml:space="preserve">
-    <value>Export Library</value>
+    <value>Export Library_ja</value>
   </data>
   <data name="locDownloadCMYKLibraryResource.Text" xml:space="preserve">
     <value>Download CMYK Library_ja</value>
@@ -245,8 +248,5 @@
   </data>
   <data name="locDownloadSourceProfResource1.Text" xml:space="preserve">
     <value>Source Profile Creation Complete_ja</value>
-  </data>
-  <data name="EskoResource1.Text" xml:space="preserve">
-    <value>Esko</value>
   </data>
 </root>

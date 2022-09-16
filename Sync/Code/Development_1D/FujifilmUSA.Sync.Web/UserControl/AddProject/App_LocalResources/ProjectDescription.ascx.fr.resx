@@ -124,13 +124,13 @@
     <value>Imprimante:</value>
   </data>
   <data name="locMediaResource1.Text" xml:space="preserve">
-    <value>Support:</value>
+    <value>Support:_fr</value>
   </data>
   <data name="locNewPrintConditionResource1.Text" xml:space="preserve">
     <value>Nouveau Profil - Description</value>
   </data>
   <data name="locNotesResource1.Text" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Notes:_fr</value>
   </data>
   <data name="locOperationTypeResource1.Text" xml:space="preserve">
     <value>Opération:</value>
@@ -148,7 +148,7 @@
     <value>Espace de Couleur Cible</value>
   </data>
   <data name="locTargetColorSpaceNextText" xml:space="preserve">
-    <value>Next</value>
+    <value>Next_fr</value>
   </data>
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Technicien</value>

@@ -139,7 +139,7 @@
     <value>DLP laden</value>
   </data>
   <data name="locDownloadResource1.Text" xml:space="preserve">
-    <value>Download</value>
+    <value>Download_de</value>
   </data>
   <data name="locMeasureResource1.Text" xml:space="preserve">
     <value>Messen</value>
@@ -154,19 +154,19 @@
     <value>Laden - {0}</value>
   </data>
   <data name="BtnExportCurvesDeltaViewResource1.Text" xml:space="preserve">
-    <value>Export Delta</value>
+    <value>Export Delta_de</value>
   </data>
   <data name="BtnExportCurvesExportViewResource1.Text" xml:space="preserve">
     <value>Export Kurven</value>
   </data>
   <data name="Chk_CResource1.Text" xml:space="preserve">
-    <value>Cyan</value>
+    <value>Cyan_de</value>
   </data>
   <data name="Chk_KResource1.Text" xml:space="preserve">
     <value>Schwarz</value>
   </data>
   <data name="Chk_MResource1.Text" xml:space="preserve">
-    <value>Magenta</value>
+    <value>Magenta_de</value>
   </data>
   <data name="Chk_YResource1.Text" xml:space="preserve">
     <value>Gelb</value>
@@ -178,7 +178,7 @@
     <value>Δansicht</value>
   </data>
   <data name="locExportViewResource1.Text" xml:space="preserve">
-    <value>Export-Format</value>
+    <value>Export-Format_de</value>
   </data>
   <data name="locPreRunResource1.Text" xml:space="preserve">
     <value>Δvorherige Messung</value>
@@ -187,40 +187,43 @@
     <value>ΔRef</value>
   </data>
   <data name="CalderaResource1.Text" xml:space="preserve">
-    <value>Caldera</value>
+    <value>Caldera_de</value>
   </data>
   <data name="ColCGCXResource1.Text" xml:space="preserve">
-    <value>ColorGate-CGCX</value>
+    <value>ColorGate-CGCX_de</value>
   </data>
   <data name="ColTVIResource1.Text" xml:space="preserve">
-    <value>ColorGate-TVI</value>
+    <value>ColorGate-TVI_de</value>
   </data>
   <data name="fivepersResource1.Text" xml:space="preserve">
     <value>5%</value>
   </data>
   <data name="HarmonyResource1.Text" xml:space="preserve">
-    <value>Harmony</value>
+    <value>Harmony_de</value>
   </data>
   <data name="NexusResource1.Text" xml:space="preserve">
     <value>Nexus</value>
   </data>
   <data name="onepersResource1.Text" xml:space="preserve">
-    <value>1%</value>
+    <value>1%_de</value>
   </data>
   <data name="OnyxG7ImportResource1.Text" xml:space="preserve">
-    <value>Onyx G7 Import</value>
+    <value>Onyx G7 Import_de</value>
   </data>
   <data name="HybridResource1.Text" xml:space="preserve">
-    <value>Hybrid</value>
+    <value>Hybrid_de</value>
   </data>
   <data name="RampageResource1.Text" xml:space="preserve">
-    <value>Rampage</value>
+    <value>Rampage_de</value>
   </data>
   <data name="tenpersResource1.Text" xml:space="preserve">
     <value>10%</value>
   </data>
   <data name="XMFResource1.Text" xml:space="preserve">
     <value>XMF</value>
+  </data>
+  <data name="EskoResource1.Text" xml:space="preserve">
+    <value>Esko</value>
   </data>
   <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
     <value>Referenz%</value>
@@ -229,7 +232,7 @@
     <value>Download Chart und mit dem NCP Workflow drucken:</value>
   </data>
   <data name="locExportCMYKResource.Text" xml:space="preserve">
-    <value>Export Library</value>
+    <value>Export Library_de</value>
   </data>
   <data name="locDownloadCMYKLibraryResource.Text" xml:space="preserve">
     <value>Download CMYK Library_de</value>
@@ -242,8 +245,5 @@
   </data>
   <data name="locDownloadSourceProfResource1.Text" xml:space="preserve">
     <value>Source Profile Creation Complete_de</value>
-  </data>
-  <data name="EskoResource1.Text" xml:space="preserve">
-    <value>Esko</value>
   </data>
 </root>

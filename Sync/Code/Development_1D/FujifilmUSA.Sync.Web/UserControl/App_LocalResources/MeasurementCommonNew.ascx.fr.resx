@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnCloseModelPopup" xml:space="preserve">
-    <value>OK</value>
+    <value>OK_fr</value>
   </data>
   <data name="btnImportMeasurements" xml:space="preserve">
     <value>Importer Mesure</value>
@@ -151,7 +151,7 @@
     <value>Nom Travail</value>
   </data>
   <data name="lblCustomerResource1.Text" xml:space="preserve">
-    <value>Client</value>
+    <value>Client_fr</value>
   </data>
   <data name="lblJDFJobIdResource1.Text" xml:space="preserve">
     <value>ID Travail JDF</value>
@@ -160,16 +160,16 @@
     <value>Nom Mesure</value>
   </data>
   <data name="lblNotesResource1.Text" xml:space="preserve">
-    <value>Notes</value>
+    <value>Notes_fr</value>
   </data>
   <data name="lblPageOrSurfaceResource1.Text" xml:space="preserve">
-    <value>Page/Surface</value>
+    <value>Page/Surface_fr</value>
   </data>
   <data name="limitReachText" xml:space="preserve">
     <value>Limite a atteindre</value>
   </data>
   <data name="locColorBarResource1.Text" xml:space="preserve">
-    <value>Colorbar</value>
+    <value>Colorbar_fr</value>
   </data>
   <data name="locImportMeaResource1.Text" xml:space="preserve">
     <value>Importer Mesure</value>
@@ -205,7 +205,7 @@
     <value>Limite de mesure atteinte après cette optimisation</value>
   </data>
   <data name="statusText" xml:space="preserve">
-    <value>Status :</value>
+    <value>Status :_fr</value>
   </data>
   <data name="uploadDateTime" xml:space="preserve">
     <value>Heure Chargement</value>
@@ -214,9 +214,9 @@
     <value>Chargement Mesure</value>
   </data>
   <data name="btnlocAddPluginStatus" xml:space="preserve">
-    <value>Activate</value>
+    <value>Activate_fr</value>
   </data>
   <data name="btnImportMeasurementFile" xml:space="preserve">
-    <value>Import Measurement File</value>
+    <value>Import Measurement File_fr</value>
   </data>
 </root>

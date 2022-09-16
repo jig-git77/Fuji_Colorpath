@@ -121,7 +121,7 @@
     <value>DLP löschen</value>
   </data>
   <data name="btnNCPDeleteResource1" xml:space="preserve">
-    <value>Delete NCP</value>
+    <value>Delete NCP_de</value>
   </data>
   <data name="btnRunDeleteResource1.ToolTip" xml:space="preserve">
     <value>Optimierung löschen</value>
@@ -142,7 +142,7 @@
     <value>Analysieren</value>
   </data>
   <data name="lnkDownloadResource1.Text" xml:space="preserve">
-    <value>Download</value>
+    <value>Download_de</value>
   </data>
   <data name="lnkMeasurementResource1.Text" xml:space="preserve">
     <value>Messung</value>

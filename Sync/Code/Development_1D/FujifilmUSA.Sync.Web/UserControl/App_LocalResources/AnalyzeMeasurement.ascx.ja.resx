@@ -205,22 +205,22 @@
     <value>シアン</value>
   </data>
   <data name="deltaAText" xml:space="preserve">
-    <value>&amp;Delta;a*</value>
+    <value>&amp;Delta;a*_ja</value>
   </data>
   <data name="deltaBText" xml:space="preserve">
-    <value>&amp;Delta;b*</value>
+    <value>&amp;Delta;b*_ja</value>
   </data>
   <data name="deltaEText" xml:space="preserve">
-    <value>&amp;Delta;E</value>
+    <value>&amp;Delta;E_ja</value>
   </data>
   <data name="deltaLText" xml:space="preserve">
-    <value>&amp;Delta;L*</value>
+    <value>&amp;Delta;L*_ja</value>
   </data>
   <data name="dlpMsgText" xml:space="preserve">
     <value>調整が完了したら、{0}をワークフローに適用し、{1}のチャートを再印刷してください。</value>
   </data>
   <data name="dlpText" xml:space="preserve">
-    <value>DLP</value>
+    <value>DLP_ja</value>
   </data>
   <data name="dotGain" xml:space="preserve">
     <value>ドットゲイン</value>
@@ -355,7 +355,7 @@
     <value>判定基準</value>
   </data>
   <data name="GridPatchTolSampleName.Text" xml:space="preserve">
-    <value>Sample Name</value>
+    <value>Sample Name_ja</value>
   </data>
   <data name="GridTargetValue.Text" xml:space="preserve">
     <value>許容</value>

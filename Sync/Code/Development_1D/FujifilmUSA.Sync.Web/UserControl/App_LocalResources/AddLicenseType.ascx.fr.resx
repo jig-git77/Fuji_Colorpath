@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add License Type</value>
+    <value>Add License Type_fr</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_fr</value>
   </data>
   <data name="locLicenseMgmtResource1.Text" xml:space="preserve">
-    <value>License Management</value>
+    <value>License Management_fr</value>
   </data>
   <data name="locLicenseTypeResource1.Text" xml:space="preserve">
-    <value>License Type</value>
+    <value>License Type_fr</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Save_fr</value>
   </data>
 </root>

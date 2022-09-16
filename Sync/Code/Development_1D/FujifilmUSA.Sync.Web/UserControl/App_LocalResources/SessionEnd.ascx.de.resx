@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="locHomePageResource1.Text" xml:space="preserve">
-    <value>Home Page</value>
+    <value>Home Page_de</value>
   </data>
   <data name="locSessionResource1.Text" xml:space="preserve">
     <value>Sitzung</value>

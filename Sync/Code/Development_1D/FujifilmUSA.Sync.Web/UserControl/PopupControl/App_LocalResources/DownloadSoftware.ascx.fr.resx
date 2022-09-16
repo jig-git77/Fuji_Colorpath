@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="colorPathInstallerMac" xml:space="preserve">
-    <value>Colorpath Installer - Mac</value>
+    <value>Colorpath Installer - Mac_fr</value>
   </data>
   <data name="colorPathInstallerPC" xml:space="preserve">
-    <value>Colorpath Installer - PC</value>
+    <value>Colorpath Installer - PC_fr</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
     <value>Nom du Logiciel</value>
   </data>
   <data name="locOutdatedPluginResource1.Text" xml:space="preserve">
-    <value>Your installed plugin is outdated. Please install newer version.</value>
+    <value>Your installed plugin is outdated. Please install newer version._fr</value>
   </data>
 </root>

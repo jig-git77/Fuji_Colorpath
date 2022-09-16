@@ -142,7 +142,7 @@
     <value>Nom du Profil</value>
   </data>
   <data name="locProfileResource1.Text" xml:space="preserve">
-    <value>Profil</value>
+    <value>Profil_fr</value>
   </data>
   <data name="locRegionResource1.Text" xml:space="preserve">
     <value>Région</value>
@@ -178,6 +178,6 @@
     <value>Sauvergarder</value>
   </data>
   <data name="locProfileTypeResource1.Text" xml:space="preserve">
-    <value>Profie Type</value>
+    <value>Profie Type_fr</value>
   </data>
 </root>

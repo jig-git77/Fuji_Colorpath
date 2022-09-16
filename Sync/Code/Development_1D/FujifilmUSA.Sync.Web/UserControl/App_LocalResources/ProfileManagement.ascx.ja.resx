@@ -184,7 +184,7 @@
     <value>平均</value>
   </data>
   <data name="passwordExcellent" xml:space="preserve">
-    <value>Excellent</value>
+    <value>Excellent_ja</value>
   </data>
   <data name="passwordLengthText" xml:space="preserve">
     <value>パスワードは4文字が必要です。</value>

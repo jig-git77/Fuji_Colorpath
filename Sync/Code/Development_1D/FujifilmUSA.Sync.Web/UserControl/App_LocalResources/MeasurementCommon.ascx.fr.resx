@@ -145,7 +145,7 @@
     <value>Limite a atteindre</value>
   </data>
   <data name="locColorBarResource1.Text" xml:space="preserve">
-    <value>Colorbar</value>
+    <value>Colorbar_fr</value>
   </data>
   <data name="locRecentUploadResource1.Text" xml:space="preserve">
     <value>Chargement Récent</value>
@@ -175,7 +175,7 @@
     <value>Limite de mesure atteinte après cette optimisation</value>
   </data>
   <data name="statusText" xml:space="preserve">
-    <value>Status :</value>
+    <value>Status :_fr</value>
   </data>
   <data name="uploadDateTime" xml:space="preserve">
     <value>Heure Chargement</value>
@@ -196,24 +196,24 @@
     <value>Importer Mesure</value>
   </data>
   <data name="lblCustomerResource1.Text" xml:space="preserve">
-    <value>Client</value>
+    <value>Client_fr</value>
   </data>
   <data name="lblJDFJobIdResource1.Text" xml:space="preserve">
     <value>ID Travail JDF</value>
   </data>
   <data name="lblNotesResource1.Text" xml:space="preserve">
-    <value>Notes</value>
+    <value>Notes_fr</value>
   </data>
   <data name="lblPageOrSurfaceResource1.Text" xml:space="preserve">
-    <value>Page/Surface</value>
+    <value>Page/Surface_fr</value>
   </data>
   <data name="locImportMeaResource1.Text" xml:space="preserve">
     <value>Importer Mesure</value>
   </data>
   <data name="btnCloseModelPopup" xml:space="preserve">
-    <value>OK</value>
+    <value>OK_fr</value>
   </data>
   <data name="btnImportMeasurementFile" xml:space="preserve">
-    <value>Import Measurement File</value>
+    <value>Import Measurement File_fr</value>
   </data>
 </root>

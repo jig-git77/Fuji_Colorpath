@@ -181,19 +181,19 @@
     <value>ターゲットプロファイルダウンロード</value>
   </data>
   <data name="RadComboBoxItemResource2.Value" xml:space="preserve">
-    <value>NotCertified</value>
+    <value>NotCertified_ja</value>
   </data>
   <data name="RadComboBoxItemResource3.Value" xml:space="preserve">
-    <value>Disabled</value>
+    <value>Disabled_ja</value>
   </data>
   <data name="RadComboBoxItemResource4.Value" xml:space="preserve">
-    <value>LastOK</value>
+    <value>LastOK_ja</value>
   </data>
   <data name="RadComboBoxItemResource5.Text" xml:space="preserve">
     <value>最後は不合格</value>
   </data>
   <data name="RadComboBoxItemResource5.Value" xml:space="preserve">
-    <value>LastFailed</value>
+    <value>LastFailed_ja</value>
   </data>
   <data name="rcmbValidationStatusResource1.LoadingMessage" xml:space="preserve">
     <value>ロード中です</value>
@@ -355,12 +355,12 @@
     <value>{0}:</value>
   </data>
   <data name="GridTemplateColumnResource6.HeaderText" xml:space="preserve">
-    <value>Region Name</value>
+    <value>Region Name_ja</value>
   </data>
   <data name="GridTemplateColumnResource7.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
   <data name="GridTemplateColumnResource7.HeaderText" xml:space="preserve">
-    <value>Company Name</value>
+    <value>Company Name_ja</value>
   </data>
 </root>

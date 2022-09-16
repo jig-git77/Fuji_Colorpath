@@ -124,7 +124,7 @@
     <value>Standort</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>SupportID</value>
+    <value>SupportID_de</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
     <value>Firmenname</value>

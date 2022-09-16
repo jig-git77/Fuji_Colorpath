@@ -118,40 +118,40 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="editRefChart" xml:space="preserve">
-    <value>Edit Reference Chart</value>
+    <value>Edit Reference Chart_fr</value>
   </data>
   <data name="fucUploadChartDataResource1.Localization.Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_fr</value>
   </data>
   <data name="fucUploadChartDataResource1.Localization.Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Remove_fr</value>
   </data>
   <data name="fucUploadChartDataResource1.Localization.Select" xml:space="preserve">
-    <value>Select</value>
+    <value>Select_fr</value>
   </data>
   <data name="fucUploadChartPreviewResource1.Localization.Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_fr</value>
   </data>
   <data name="fucUploadChartPreviewResource1.Localization.Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Remove_fr</value>
   </data>
   <data name="fucUploadChartPreviewResource1.Localization.Select" xml:space="preserve">
-    <value>Select</value>
+    <value>Select_fr</value>
   </data>
   <data name="fucUploadOriginalChartResource1.Localization.Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_fr</value>
   </data>
   <data name="fucUploadOriginalChartResource1.Localization.Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Remove_fr</value>
   </data>
   <data name="fucUploadOriginalChartResource1.Localization.Select" xml:space="preserve">
-    <value>Select</value>
+    <value>Select_fr</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>SampleID</value>
+    <value>SampleID_fr</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Sample Name</value>
+    <value>Sample Name_fr</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
     <value>CMYK_C</value>
@@ -166,60 +166,60 @@
     <value>CMYK_K</value>
   </data>
   <data name="GridTemplateColumnResource7.HeaderText" xml:space="preserve">
-    <value>HTML RGB</value>
+    <value>HTML RGB_fr</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Reference Chart</value>
+    <value>Add Reference Chart_fr</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_fr</value>
   </data>
   <data name="locChartNameResource1.Text" xml:space="preserve">
-    <value>Chart Name</value>
+    <value>Chart Name_fr</value>
   </data>
   <data name="locChartTypeResource1.Text" xml:space="preserve">
-    <value>Chart Type</value>
+    <value>Chart Type_fr</value>
   </data>
   <data name="locInstrumentTypeResource1.Text" xml:space="preserve">
-    <value>Instrument Type</value>
+    <value>Instrument Type_fr</value>
   </data>
   <data name="locIsUsedResource1.Text" xml:space="preserve">
-    <value>Is Used?</value>
+    <value>Is Used?_fr</value>
   </data>
   <data name="locProjectResource1.Text" xml:space="preserve">
-    <value>Project Type:</value>
+    <value>Project Type:_fr</value>
   </data>
   <data name="locProjectTypeResource1.Text" xml:space="preserve">
-    <value>Project Type</value>
+    <value>Project Type_fr</value>
   </data>
   <data name="locReferenceChartMgmtResource1.Text" xml:space="preserve">
-    <value>Reference Chart Management</value>
+    <value>Reference Chart Management_fr</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Save_fr</value>
   </data>
   <data name="locTotalColumnsResource1.Text" xml:space="preserve">
-    <value>Total Columns</value>
+    <value>Total Columns_fr</value>
   </data>
   <data name="locTotalRowsResource1.Text" xml:space="preserve">
-    <value>Total Rows</value>
+    <value>Total Rows_fr</value>
   </data>
   <data name="locUploadChartDataButtonResource1.Text" xml:space="preserve">
-    <value>Upload Chart Data</value>
+    <value>Upload Chart Data_fr</value>
   </data>
   <data name="locUploadChartDataResource1.Text" xml:space="preserve">
-    <value>Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)</value>
+    <value>Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB) _fr</value>
   </data>
   <data name="locUploadChartPreviewResource1.Text" xml:space="preserve">
-    <value>Upload Chart Preview (only image)</value>
+    <value>Upload Chart Preview (only image)_fr</value>
   </data>
   <data name="locUploadOriginalChartResource1.Text" xml:space="preserve">
-    <value>Upload Original Chart (only pdf)</value>
+    <value>Upload Original Chart (only pdf)_fr</value>
   </data>
   <data name="selectInstrumentType" xml:space="preserve">
-    <value>-- Select Instrument Type --</value>
+    <value>-- Select Instrument Type --_fr</value>
   </data>
   <data name="selectProjectType" xml:space="preserve">
-    <value>-- Select Project Type --</value>
+    <value>-- Select Project Type --_fr</value>
   </data>
 </root>

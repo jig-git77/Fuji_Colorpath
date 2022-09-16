@@ -121,7 +121,7 @@
     <value>キャンセル</value>
   </data>
   <data name="locDownloadChartResource1.Text" xml:space="preserve">
-    <value>Download Chart</value>
+    <value>Download Chart_ja</value>
   </data>
   <data name="locDownloadCurrentDLPResource1.Text" xml:space="preserve">
     <value>最新のDLPダウンロード</value>
@@ -139,7 +139,7 @@
     <value>現在DLPはありません。</value>
   </data>
   <data name="noNCPText" xml:space="preserve">
-    <value>Sorry! There is no ncp to download"</value>
+    <value>Sorry! There is no ncp to download"_ja</value>
   </data>
   <data name="noSourceText" xml:space="preserve">
     <value>Sorry! There is no source profile to download_ja"</value>
@@ -151,6 +151,6 @@
     <value>「{0}」印刷条件のオプション</value>
   </data>
   <data name="spotprintOptionsText" xml:space="preserve">
-    <value>Download the chart to print before re-optimizing or view the last analysis to see the current library performance.</value>
+    <value>Download the chart to print before re-optimizing or view the last analysis to see the current library performance._ja</value>
   </data>
 </root>

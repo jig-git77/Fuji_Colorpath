@@ -118,48 +118,48 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="deleteSoureProfileConfirm" xml:space="preserve">
-    <value>No Reference Charts</value>
+    <value>No Reference Charts_fr</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Chart Name</value>
+    <value>Chart Name_fr</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Num Of Rows</value>
+    <value>Num Of Rows_fr</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Num Of Cols</value>
+    <value>Num Of Cols_fr</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Total Patches</value>
+    <value>Total Patches_fr</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
-    <value>Instrument Name</value>
+    <value>Instrument Name_fr</value>
   </data>
   <data name="GridTemplateColumnResource6.HeaderText" xml:space="preserve">
-    <value>Project Type</value>
+    <value>Project Type_fr</value>
   </data>
   <data name="GridTemplateColumnResource7.HeaderText" xml:space="preserve">
-    <value>IsActive?</value>
+    <value>IsActive?_fr</value>
   </data>
   <data name="imgbtnUpdateResource1.AlternateText" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edit_fr</value>
   </data>
   <data name="imgbtnUpdateResource1.ToolTip" xml:space="preserve">
-    <value>Edit Reference Chart</value>
+    <value>Edit Reference Chart_fr</value>
   </data>
   <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_fr</value>
   </data>
   <data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_fr</value>
   </data>
   <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Fillter_fr</value>
   </data>
   <data name="locAddReferenceChartResource1.Text" xml:space="preserve">
-    <value>Add Reference Chart</value>
+    <value>Add Reference Chart_fr</value>
   </data>
   <data name="LocalizeResource1.Text" xml:space="preserve">
-    <value>Reference Chart Management</value>
+    <value>Reference Chart Management_fr</value>
   </data>
 </root>

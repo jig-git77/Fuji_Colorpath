@@ -118,28 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="dlpText" xml:space="preserve">
-    <value>DLP</value>
+    <value>DLP_fr</value>
   </data>
   <data name="lbtnOptimizeResource1.Text" xml:space="preserve">
-    <value>Non, Optimiser</value>
+    <value>Non, Optimiser_fr</value>
   </data>
   <data name="lbtnOptimizeResource1.ToolTip" xml:space="preserve">
-    <value>Non, Optimiser</value>
+    <value>Non, Optimiser_fr</value>
   </data>
   <data name="lbtnYesResource1.Text" xml:space="preserve">
-    <value>Certifier</value>
+    <value>Certifier_fr</value>
   </data>
   <data name="lbtnYesResource1.ToolTip" xml:space="preserve">
-    <value>Certifier</value>
+    <value>Certifier_fr</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>Annuler</value>
   </data>
   <data name="locCertifyResource1.Text" xml:space="preserve">
-    <value>Certifier:</value>
+    <value>Certifier:_fr</value>
   </data>
   <data name="locNoOptimizeResource1.Text" xml:space="preserve">
-    <value>Non, Optimiser</value>
+    <value>Non, Optimiser_fr</value>
   </data>
   <data name="locOptimizeDLPResource1.Text" xml:space="preserve">
     <value>Optimiser crée un nouveau DLP à incorporer dans votre Flux de travail</value>
@@ -148,13 +148,13 @@
     <value>Optimize creates new optimized NCP which should be implemented in your workflow.</value>
   </data>
   <data name="locOptimizeResource1.Text" xml:space="preserve">
-    <value>Optimiser:</value>
+    <value>Optimiser:_fr</value>
   </data>
   <data name="locSatisfiedColorMatchMsgResource1.Text" xml:space="preserve">
     <value>Certifier et valider la colorimètrie du DLP</value>
   </data>
   <data name="locSatisfiedColorMatchMsgResource1NCP" xml:space="preserve">
-    <value>Certify sets the state of this NCP to Certified and is considered a confirmation that your are satisfied with the colormatch.</value>
+    <value>Certify sets the state of this NCP to Certified and is considered a confirmation that your are satisfied with the colormatch._fr</value>
   </data>
   <data name="locSatisfiedMsgResource1.Text" xml:space="preserve">
     <value>Etes-vous satisfait du résultat?</value>

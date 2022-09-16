@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="dlpText" xml:space="preserve">
-    <value>DLP</value>
+    <value>DLP_ja</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>キャンセル</value>
@@ -133,7 +133,7 @@
     <value>調整を選択すると新しく調整されたDLPを生成されるので、ワークフローに設定してください。</value>
   </data>
   <data name="locOptimizeDLPResource1NCP" xml:space="preserve">
-    <value>Optimize creates new optimized NCP which should be implemented in your workflow.</value>
+    <value>Optimize creates new optimized NCP which should be implemented in your workflow._ja</value>
   </data>
   <data name="locOptimizeResource1.Text" xml:space="preserve">
     <value>調整：</value>
@@ -142,7 +142,7 @@
     <value>承認を選択すると、現時点でのDLPがカラーマッチングの基準を満たしているものとみなされます。</value>
   </data>
   <data name="locSatisfiedColorMatchMsgResource1NCP" xml:space="preserve">
-    <value>Certify sets the state of this NCP to Certified and is considered a confirmation that your are satisfied with the colormatch.</value>
+    <value>Certify sets the state of this NCP to Certified and is considered a confirmation that your are satisfied with the colormatch._ja</value>
   </data>
   <data name="locSatisfiedMsgResource1.Text" xml:space="preserve">
     <value>結果を承認しますか？</value>

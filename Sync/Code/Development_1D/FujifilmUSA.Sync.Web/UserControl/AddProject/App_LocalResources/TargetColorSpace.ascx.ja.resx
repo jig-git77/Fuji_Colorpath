@@ -157,7 +157,7 @@
     <value>カーブ補正方式の選択：</value>
   </data>
   <data name="btn_PaperClear_Click.Text" xml:space="preserve">
-    <value>Reset</value>
+    <value>Reset_ja</value>
   </data>
   <data name="locbtn_PaperApplyResource1.Text" xml:space="preserve">
     <value>適用</value>
@@ -175,36 +175,36 @@
     <value>リセット</value>
   </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
-    <value>Select Certified Library: </value>
+    <value>Select Certified Library: _ja</value>
   </data>
   <data name="locSelectBranchResource1.Text" xml:space="preserve">
-    <value>Select Branch: </value>
+    <value>Select Branch: _ja</value>
   </data>
   <data name="locSelectCompanyResource1.Text" xml:space="preserve">
-    <value>Select Company: </value>
+    <value>Select Company: _ja</value>
   </data>
   <data name="selectText" xml:space="preserve">
     <value>―選択してください―</value>
   </data>
   <data name="locParentProjectNameResource1.Text" xml:space="preserve">
-    <value>Parent Project Name: </value>
+    <value>Parent Project Name: _ja</value>
   </data>
   <data name="locReTargetDescriptionResource1.Text" xml:space="preserve">
-    <value>Original Library Description: </value>
+    <value>Original Library Description: _ja</value>
   </data>
   <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
-    <value>Original Library:</value>
+    <value>Original Library:_ja</value>
   </data>
   <data name="locSelectDeviceResource1.Text" xml:space="preserve">
-    <value>Select Device: </value>
+    <value>Select Device: _ja</value>
   </data>
   <data name="noCertifiedSpotCondition" xml:space="preserve">
-    <value>No Certified Print Condition</value>
+    <value>No Certified Print Condition_ja</value>
   </data>
   <data name="panelRetargetResource1.GroupingText" xml:space="preserve">
-    <value>&lt;b&gt;Optional Retarget&lt;/b&gt;</value>
+    <value>&lt;b&gt;Optional Retarget&lt;/b&gt;_ja</value>
   </data>
   <data name="TargetPrintConditionNotAvailableMessage" xml:space="preserve">
-    <value>No Target Print Condition</value>
+    <value>No Target Print Condition_ja</value>
   </data>
 </root>

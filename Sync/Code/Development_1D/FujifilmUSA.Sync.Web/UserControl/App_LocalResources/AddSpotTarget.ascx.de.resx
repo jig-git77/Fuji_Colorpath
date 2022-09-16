@@ -118,96 +118,96 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="editSpotTarget" xml:space="preserve">
-    <value>Edit Spot Target</value>
+    <value>Edit Spot Target_de</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Spot ID</value>
+    <value>Spot ID_de</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Spot Name</value>
+    <value>Spot Name_de</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Target_L</value>
+    <value>Target_L_de</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Target_a</value>
+    <value>Target_a_de</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
-    <value>Target_b</value>
+    <value>Target_b_de</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Spot Target</value>
+    <value>Add Spot Target_de</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_de</value>
   </data>
   <data name="locChartBorderResource1.Text" xml:space="preserve">
-    <value>Chart Border</value>
+    <value>Chart Border_de</value>
   </data>
   <data name="locChartResResource1.Text" xml:space="preserve">
-    <value>ChartRes</value>
+    <value>ChartRes_de</value>
   </data>
   <data name="locChartSizeXResource1.Text" xml:space="preserve">
-    <value>Chart Size X</value>
+    <value>Chart Size X_de</value>
   </data>
   <data name="locChartSizeYResource1.Text" xml:space="preserve">
-    <value>Chart Size Y</value>
+    <value>Chart Size Y_de</value>
   </data>
   <data name="locCompanyNameResource1.Text" xml:space="preserve">
-    <value>Company Name</value>
+    <value>Company Name_de</value>
   </data>
   <data name="locDescriptionResource1.Text" xml:space="preserve">
-    <value>Description</value>
+    <value>Description_de</value>
   </data>
   <data name="locGapLevelResource1.Text" xml:space="preserve">
-    <value>Gap Level</value>
+    <value>Gap Level_de</value>
   </data>
   <data name="locHgapResource1.Text" xml:space="preserve">
-    <value>Horizontal Gap</value>
+    <value>Horizontal Gap_de</value>
   </data>
   <data name="locIsUsedResource1.Text" xml:space="preserve">
-    <value>Is Used?</value>
+    <value>Is Used?_de</value>
   </data>
   <data name="locPagesResource1.Text" xml:space="preserve">
-    <value>Pages</value>
+    <value>Pages_de</value>
   </data>
   <data name="locPatchSizeXResource1.Text" xml:space="preserve">
-    <value>Patch Size X</value>
+    <value>Patch Size X_de</value>
   </data>
   <data name="locPatchSizeYResource1.Text" xml:space="preserve">
-    <value>Patch Size Y</value>
+    <value>Patch Size Y_de</value>
   </data>
   <data name="locPreviousLResource1.Text" xml:space="preserve">
-    <value>PreviousL</value>
+    <value>PreviousL_de</value>
   </data>
   <data name="locRowsPerPageResource1.Text" xml:space="preserve">
-    <value>Rows Per Page</value>
+    <value>Rows Per Page_de</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Save_de</value>
   </data>
   <data name="locSpotTargetMgmtResource1.Text" xml:space="preserve">
-    <value>Spot Target Management</value>
+    <value>Spot Target Management_de</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target Name</value>
+    <value>Spot Target Name_de</value>
   </data>
   <data name="locTotalColumnsResource1.Text" xml:space="preserve">
-    <value>Total Columns</value>
+    <value>Total Columns_de</value>
   </data>
   <data name="locTotalRowsResource1.Text" xml:space="preserve">
-    <value>Total Rows</value>
+    <value>Total Rows_de</value>
   </data>
   <data name="locVgapResource1.Text" xml:space="preserve">
-    <value>Vertical Gap</value>
+    <value>Vertical Gap_de</value>
   </data>
   <data name="plzSelectCompany" xml:space="preserve">
-    <value>Please select company.</value>
+    <value>Please select company._de</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
-    <value>--Select Company--</value>
+    <value>--Select Company--_de</value>
   </data>
   <data name="locUploadChartDataResource1.Text" xml:space="preserve">
-    <value>Upload Chart Data (SpotID,SpotName,Target_L*,Target_a*,Target_b*)</value>
+    <value>Upload Chart Data (SpotID,SpotName,Target_L*,Target_a*,Target_b*)_de</value>
   </data>
 </root>

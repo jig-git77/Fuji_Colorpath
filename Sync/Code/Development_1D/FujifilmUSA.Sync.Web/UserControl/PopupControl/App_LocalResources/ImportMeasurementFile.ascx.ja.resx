@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ImportUnsuccessfulMessage" xml:space="preserve">
-    <value>Error occurred while importing measurement, please try again.</value>
+    <value>Error occurred while importing measurement, please try again._ja</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>キャンセル</value>
@@ -127,13 +127,13 @@
     <value>読み込み</value>
   </data>
   <data name="locMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Enter Measurement Name:</value>
+    <value>Enter Measurement Name:_ja</value>
   </data>
   <data name="locSelectProjectToImportResource1.Text" xml:space="preserve">
-    <value>Select Project file to import all its measurements in this project:</value>
+    <value>Select Project file to import all its measurements in this project:_ja</value>
   </data>
   <data name="SelectMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Select File:</value>
+    <value>Select File:_ja</value>
   </data>
   <data name="JobNameCaption" xml:space="preserve">
     <value>ジョブ名</value>

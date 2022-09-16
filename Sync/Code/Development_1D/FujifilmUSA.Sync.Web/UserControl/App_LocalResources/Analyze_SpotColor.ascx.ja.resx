@@ -205,22 +205,22 @@
     <value>シアン</value>
   </data>
   <data name="deltaAText" xml:space="preserve">
-    <value>&amp;Delta;a*</value>
+    <value>&amp;Delta;a*_ja</value>
   </data>
   <data name="deltaBText" xml:space="preserve">
-    <value>&amp;Delta;b*</value>
+    <value>&amp;Delta;b*_ja</value>
   </data>
   <data name="deltaEText" xml:space="preserve">
-    <value>&amp;Delta;E</value>
+    <value>&amp;Delta;E_ja</value>
   </data>
   <data name="deltaLText" xml:space="preserve">
-    <value>&amp;Delta;L*</value>
+    <value>&amp;Delta;L*_ja</value>
   </data>
   <data name="dlpMsgText" xml:space="preserve">
     <value>調整が完了したら、{0}をワークフローに適用し、{1}のチャートを再印刷してください。</value>
   </data>
   <data name="dlpText" xml:space="preserve">
-    <value>DLP</value>
+    <value>DLP_ja</value>
   </data>
   <data name="dotGain" xml:space="preserve">
     <value>ドットゲイン</value>
@@ -238,7 +238,7 @@
     <value>グリーン</value>
   </data>
   <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
-    <value>ID</value>
+    <value>ID_ja</value>
   </data>
   <data name="GridBoundColumnResource10.HeaderText" xml:space="preserve">
     <value>実際のL*</value>
@@ -670,25 +670,25 @@
     <value>メディア：</value>
   </data>
   <data name="locMinDeltaEResource1.Text" xml:space="preserve">
-    <value>Minimum Predicted ∆E</value>
+    <value>Minimum Predicted ∆E_ja</value>
   </data>
   <data name="locSummaryHeaderRun0Resource1" xml:space="preserve">
-    <value>Optimal Device Prediction</value>
+    <value>Optimal Device Prediction_ja</value>
   </data>
   <data name="locSummaryHeaderRun1Resource1" xml:space="preserve">
-    <value>Summary Comparison</value>
+    <value>Summary Comparison_ja</value>
   </data>
   <data name="locRipSettingsResource1.Text" xml:space="preserve">
     <value>RIP設定：</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_ja</value>
   </data>
   <data name="locCreateNCPResource1" xml:space="preserve">
-    <value>Create Chart</value>
+    <value>Create Chart_ja</value>
   </data>
   <data name="locMinimumDeltaResource.Text" xml:space="preserve">
-    <value>Minimum Δ</value>
+    <value>Minimum Δ_ja</value>
   </data>
   <data name="locDeltaTypeResource.Text" xml:space="preserve">
     <value>ΔEタイプ</value>
@@ -697,6 +697,6 @@
     <value>Measurement Date_ja</value>
   </data>
   <data name="locSpotReportMessageResource1.Text" xml:space="preserve">
-    <value>*Select colors in the Patch Details tab and click "save" to add colors to the Saved Color Report.</value>
+    <value>*Select colors in the Patch Details tab and click "save" to add colors to the Saved Color Report._ja</value>
   </data>
 </root>

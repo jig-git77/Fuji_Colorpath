@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnCloseModelPopup" xml:space="preserve">
-    <value>OK</value>
+    <value>OK_de</value>
   </data>
   <data name="btnImportMeasurements" xml:space="preserve">
     <value>Messwerte importieren</value>
@@ -148,13 +148,13 @@
     <value>Messwerte importieren</value>
   </data>
   <data name="JobNameCaption" xml:space="preserve">
-    <value>Job Name</value>
+    <value>Job Name_de</value>
   </data>
   <data name="lblCustomerResource1.Text" xml:space="preserve">
     <value>Kunde</value>
   </data>
   <data name="lblJDFJobIdResource1.Text" xml:space="preserve">
-    <value>JDF Job ID</value>
+    <value>JDF Job ID_de</value>
   </data>
   <data name="lblMeasurementNameResource1.Text" xml:space="preserve">
     <value>Name d.Messung</value>
@@ -205,7 +205,7 @@
     <value>Sie können in diesem Optimierungslauf keine weiteren Meßwerte mehr zufügen</value>
   </data>
   <data name="statusText" xml:space="preserve">
-    <value>Status :</value>
+    <value>Status :_de</value>
   </data>
   <data name="uploadDateTime" xml:space="preserve">
     <value>Hochgeladen am</value>
@@ -214,9 +214,9 @@
     <value>Messwerte hochladen</value>
   </data>
   <data name="btnlocAddPluginStatus" xml:space="preserve">
-    <value>Activate</value>
+    <value>Activate_de</value>
   </data>
   <data name="btnImportMeasurementFile" xml:space="preserve">
-    <value>Import Measurement File</value>
+    <value>Import Measurement File_de</value>
   </data>
 </root>

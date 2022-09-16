@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="locAnalyzeResource1.Text" xml:space="preserve">
-    <value>Analyse</value>
+    <value>Analyse_fr</value>
   </data>
   <data name="locHeaderResource1.Text" xml:space="preserve">
-    <value>Calculating</value>
+    <value>Calculating_fr</value>
   </data>
   <data name="locMessageResource1.Text" xml:space="preserve">
-    <value>Calculations complete. Click Analyze to continue.</value>
+    <value>Calculations complete. Click Analyze to continue._fr</value>
   </data>
 </root>

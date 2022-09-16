@@ -229,7 +229,7 @@
     <value>ColorPath - パスワードをリセットしてください</value>
   </data>
   <data name="Email_Subject_SendUserCreatedEmail" xml:space="preserve">
-    <value>Welcome to ColorPath</value>
+    <value>Welcome to ColorPath_ja</value>
   </data>
   <data name="Error_CloseOptimizeRun" xml:space="preserve">
     <value>DLP調整の試行を完了中にエラーが発生しました。管理者に問い合わせてください。</value>
@@ -409,43 +409,43 @@
     <value>i1-Sis</value>
   </data>
   <data name="EProfileRendering_eCLAbsLightenerCompensationRI" xml:space="preserve">
-    <value>AbsLightenerCompensation</value>
+    <value>AbsLightenerCompensation_ja</value>
   </data>
   <data name="EProfileRendering_eCLAbsoluteCompressionRI" xml:space="preserve">
-    <value>AbsoluteCompression</value>
+    <value>AbsoluteCompression_ja</value>
   </data>
   <data name="EProfileRendering_eCLAbsolutePerceptualRI" xml:space="preserve">
-    <value>AbsolutePerceptual</value>
+    <value>AbsolutePerceptual_ja</value>
   </data>
   <data name="EProfileRendering_eCLAbsoluteRI" xml:space="preserve">
-    <value>pAbsolute</value>
+    <value>pAbsolute_ja</value>
   </data>
   <data name="EProfileRendering_eCLBlackCompensationRI" xml:space="preserve">
-    <value>BlackCompensation</value>
+    <value>BlackCompensation_ja</value>
   </data>
   <data name="EProfileRendering_eCLGamutCompressionRI" xml:space="preserve">
-    <value>GamutCompression</value>
+    <value>GamutCompression_ja</value>
   </data>
   <data name="EProfileRendering_eCLMinimumBlackCompressionRI" xml:space="preserve">
-    <value>MinBlackCompression</value>
+    <value>MinBlackCompression_ja</value>
   </data>
   <data name="EProfileRendering_eCLMinimumCompressionRI" xml:space="preserve">
-    <value>MinCompression</value>
+    <value>MinCompression_ja</value>
   </data>
   <data name="EProfileRendering_eCLMinimumWhiteCompressionRI" xml:space="preserve">
-    <value>MinWhiteCompression</value>
+    <value>MinWhiteCompression_ja</value>
   </data>
   <data name="EProfileRendering_eCLPerceptualCompressionRI" xml:space="preserve">
-    <value>PerceptualCompression</value>
+    <value>PerceptualCompression_ja</value>
   </data>
   <data name="EProfileRendering_eCLRelativeCompressionRI" xml:space="preserve">
-    <value>RelativeCompression</value>
+    <value>RelativeCompression_ja</value>
   </data>
   <data name="EProfileRendering_eCLRelativeLightness" xml:space="preserve">
-    <value>RelativeLightness</value>
+    <value>RelativeLightness_ja</value>
   </data>
   <data name="EProfileRendering_eCLRelativeRI" xml:space="preserve">
-    <value>pRelative</value>
+    <value>pRelative_ja</value>
   </data>
   <data name="EProfileRendering_icAbsoluteColorimetric" xml:space="preserve">
     <value>絶対カラー</value>
@@ -691,7 +691,7 @@
     <value>承認</value>
   </data>
   <data name="DLPText" xml:space="preserve">
-    <value>DLP</value>
+    <value>DLP_ja</value>
   </data>
   <data name="OpenStatusText" xml:space="preserve">
     <value>編集中</value>
@@ -958,16 +958,16 @@
     <value>YMKC</value>
   </data>
   <data name="EPrintingTypes_Offset" xml:space="preserve">
-    <value>Offset</value>
+    <value>Offset_ja</value>
   </data>
   <data name="EPrintingTypes_Flexo" xml:space="preserve">
-    <value>Flexo</value>
+    <value>Flexo_ja</value>
   </data>
   <data name="Error_InsertLookupTVILABDensity" xml:space="preserve">
-    <value>Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator.</value>
+    <value>Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator._ja</value>
   </data>
   <data name="Error_AddLookupTVILABDensity_MissingData" xml:space="preserve">
-    <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data.</value>
+    <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data._ja</value>
   </data>
   <data name="PatchPresetManagement_DeletePatchPreset_Confirmation" xml:space="preserve">
     <value>選択した色差判定プリセットを削除しますか？</value>
@@ -1003,13 +1003,13 @@
     <value>シアンパッチ</value>
   </data>
   <data name="deltaAText" xml:space="preserve">
-    <value>&amp;Delta;a*</value>
+    <value>&amp;Delta;a*_ja</value>
   </data>
   <data name="deltaBText" xml:space="preserve">
-    <value>&amp;Delta;b*</value>
+    <value>&amp;Delta;b*_ja</value>
   </data>
   <data name="deltaLText" xml:space="preserve">
-    <value>&amp;Delta;L*</value>
+    <value>&amp;Delta;L*_ja</value>
   </data>
   <data name="gbPatchMetricsText" xml:space="preserve">
     <value>% GB パッチ</value>
@@ -1042,7 +1042,7 @@
     <value> L*</value>
   </data>
   <data name="GridDateTimeColumnResource1" xml:space="preserve">
-    <value>Last Activity</value>
+    <value>Last Activity_ja</value>
   </data>
   <data name="GridTemplateColumnResource0" xml:space="preserve">
     <value>タイプ</value>
@@ -1054,10 +1054,10 @@
     <value>名</value>
   </data>
   <data name="GridTemplateColumnResource3" xml:space="preserve">
-    <value>Print Condition</value>
+    <value>Print Condition_ja</value>
   </data>
   <data name="GridTemplateColumnResource4" xml:space="preserve">
-    <value>Target Colorspace</value>
+    <value>Target Colorspace_ja</value>
   </data>
   <data name="GridTemplateColumnResource5" xml:space="preserve">
     <value>メディア</value>
@@ -1066,46 +1066,46 @@
     <value>色材</value>
   </data>
   <data name="GridTemplateColumnResourceLibrary" xml:space="preserve">
-    <value>Library</value>
+    <value>Library_ja</value>
   </data>
   <data name="ToolTipClickToShort" xml:space="preserve">
-    <value>Click here to short</value>
+    <value>Click here to short_ja</value>
   </data>
   <data name="Error_DeleteOptimizeRunNCP" xml:space="preserve">
-    <value>Error occured while deleting optimize run's NCP.Please contact your administrator.</value>
+    <value>Error occured while deleting optimize run's NCP.Please contact your administrator._ja</value>
   </data>
   <data name="Error_GetLastOptimizedNamedColorProfile" xml:space="preserve">
-    <value>Error occured while retrieving last optimized named color profile. Please contact your administrator.</value>
+    <value>Error occured while retrieving last optimized named color profile. Please contact your administrator._ja</value>
   </data>
   <data name="Error_GetSpotProjectDetail" xml:space="preserve">
-    <value>Error occured while retrieving spot project detail. Please contact your administrator.</value>
+    <value>Error occured while retrieving spot project detail. Please contact your administrator._ja</value>
   </data>
   <data name="Error_OptimizeNamedColorProfile" xml:space="preserve">
-    <value>Error occured while optimizing named color profile. Please contact your administrator.</value>
+    <value>Error occured while optimizing named color profile. Please contact your administrator._ja</value>
   </data>
   <data name="ESourceProfileCategory_All" xml:space="preserve">
     <value>All</value>
   </data>
   <data name="ESourceProfileCategory_NorthAmericanStandards" xml:space="preserve">
-    <value>North American Standards</value>
+    <value>North American Standards_ja</value>
   </data>
   <data name="ESourceProfileCategory_EuropeanStandards" xml:space="preserve">
-    <value>European Standards</value>
+    <value>European Standards_ja</value>
   </data>
   <data name="ESourceProfileCategory_JapanStandards" xml:space="preserve">
-    <value>Japan Standards</value>
+    <value>Japan Standards_ja</value>
   </data>
   <data name="ESourceProfileCategory_Other" xml:space="preserve">
-    <value>Other</value>
+    <value>Other_ja</value>
   </data>
   <data name="CreateNewLibrary" xml:space="preserve">
-    <value>Create New Library</value>
+    <value>Create New Library_ja</value>
   </data>
   <data name="MsgDeleteProject" xml:space="preserve">
     <value>印刷条件の削除</value>
   </data>
   <data name="OpenProject" xml:space="preserve">
-    <value>Open Project</value>
+    <value>Open Project_ja</value>
   </data>
   <data name="ClearFillterResource" xml:space="preserve">
     <value>絞り込み解除</value>
@@ -1135,31 +1135,31 @@
     <value>ΔE_T_P</value>
   </data>
   <data name="gridAnalyzeHeaderIDResource" xml:space="preserve">
-    <value>ID</value>
+    <value>ID_ja</value>
   </data>
   <data name="gridAnalyzeHeaderPatchResource" xml:space="preserve">
-    <value>Patch</value>
+    <value>Patch_ja</value>
   </data>
   <data name="gridAnalyzeHeaderSpotNameResource" xml:space="preserve">
-    <value>Spot Name</value>
+    <value>Spot Name_ja</value>
   </data>
   <data name="gridAnalyzeHeaderViewResource" xml:space="preserve">
-    <value>View</value>
+    <value>View_ja</value>
   </data>
   <data name="gridAnalyzeToolTipViewResource" xml:space="preserve">
-    <value>View Patch Details</value>
+    <value>View Patch Details_ja</value>
   </data>
   <data name="Error_Invalid_IsAverageOfMeasurements" xml:space="preserve">
-    <value>Invalid IsAverageOfMeasurements have been provided.</value>
+    <value>Invalid IsAverageOfMeasurements have been provided._ja</value>
   </data>
   <data name="Error_Invalid_IsSync1DTypeProject" xml:space="preserve">
-    <value>Invalid Sync1DType have been provided.</value>
+    <value>Invalid Sync1DType have been provided._ja</value>
   </data>
   <data name="Error_Invalid_IsVerificationProject" xml:space="preserve">
-    <value>Invalid varification have been provided.</value>
+    <value>Invalid varification have been provided._ja</value>
   </data>
   <data name="Error_Invalid_MeasurementId" xml:space="preserve">
-    <value>Invalid MeasurementId have been provided.</value>
+    <value>Invalid MeasurementId have been provided._ja</value>
   </data>
   <data name="blackText" xml:space="preserve">
     <value>ブラック</value>
@@ -1192,7 +1192,7 @@
     <value>イエロー</value>
   </data>
   <data name="deltaEText" xml:space="preserve">
-    <value>&amp;Delta;E</value>
+    <value>&amp;Delta;E_ja</value>
   </data>
   <data name="PreviousText" xml:space="preserve">
     <value>Previous_ja</value>
@@ -1264,10 +1264,10 @@
     <value>少なくとも１つの測色結果をチェックしてください</value>
   </data>
   <data name="Error_Invalid_ProjectId" xml:space="preserve">
-    <value>Invalid ProjectId has been provided.</value>
+    <value>Invalid ProjectId has been provided._ja</value>
   </data>
   <data name="Error_Invalid_GradingDetails" xml:space="preserve">
-    <value>Invalid Grading details have been provided.</value>
+    <value>Invalid Grading details have been provided._ja</value>
   </data>
   <data name="actualTVI" xml:space="preserve">
     <value>測定値:</value>
@@ -1339,28 +1339,31 @@
     <value>許容</value>
   </data>
   <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
-    <value>Custom Source Profile</value>
+    <value>Custom Source Profile_ja</value>
   </data>
   <data name="EMeasureTool_Both" xml:space="preserve">
-    <value>Both</value>
+    <value>Both_ja</value>
   </data>
   <data name="ESourceProfileCategory_NPAPIPlugin" xml:space="preserve">
-    <value>NPAPI Plugin</value>
+    <value>NPAPI Plugin_ja</value>
   </data>
   <data name="ESourceProfileCategory_SYNCMeasureApp" xml:space="preserve">
-    <value>SYNC Measure App</value>
+    <value>SYNC Measure App_ja</value>
   </data>
   <data name="ProjectList_BcoButtonToolTip" xml:space="preserve">
-    <value>Brand Color Optimizer(Print Condition is Open)</value>
+    <value>Brand Color Optimizer(Print Condition is Open)_ja</value>
   </data>
   <data name="ProjectList_BcoEnableButtonToolTip" xml:space="preserve">
-    <value>Brand Color Optimization</value>
+    <value>Brand Color Optimization_ja</value>
   </data>
   <data name="ELicenseType_DLP_PLUS" xml:space="preserve">
-    <value>DLP Plus</value>
+    <value>DLP Plus_ja</value>
   </data>
   <data name="ELicenseType_DLP_MULTI_COLOR" xml:space="preserve">
-    <value>DLP Multi Color</value>
+    <value>DLP Multi Color_ja</value>
+  </data>
+  <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
+    <value>Sync1D Multi Color_ja</value>
   </data>
   <data name="EInstrumentType_i1IOPro3" xml:space="preserve">
     <value>i1-IO-Pro3</value>
@@ -1370,9 +1373,6 @@
   </data>
   <data name="ELicenseType_Custom_BCO" xml:space="preserve">
     <value>Custom BCO</value>
-  </data>
-  <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
-    <value>Sync1D Multi Color_ja</value>
   </data>
   <data name="Error_GetMetricTargetPresetID" xml:space="preserve">
     <value>Error occured while retrieving MetricTarget Preset. Please contact your administrator._ja</value>

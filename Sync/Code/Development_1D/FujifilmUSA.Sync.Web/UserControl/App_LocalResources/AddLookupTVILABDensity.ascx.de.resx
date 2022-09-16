@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Sync1D Lookup Values</value>
+    <value>Add Sync1D Lookup Values_de</value>
   </data>
   <data name="lblNewEntryMsgResource1.Text" xml:space="preserve">
-    <value>Please choose Project Type because this is first time entries for this Print Standard Type:</value>
+    <value>Please choose Project Type because this is first time entries for this Print Standard Type:_de</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_de</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>Save_de</value>
   </data>
   <data name="plzSelectPrintStandardType" xml:space="preserve">
-    <value>Please select Print Standard Type.</value>
+    <value>Please select Print Standard Type._de</value>
   </data>
   <data name="rfvPrintStandardTypeResource1.ErrorMessage" xml:space="preserve">
-    <value>Please select PrintStandardType.</value>
+    <value>Please select PrintStandardType._de</value>
   </data>
   <data name="selectPrintStandardTypeText" xml:space="preserve">
-    <value>--Select Print Standard Type--</value>
+    <value>--Select Print Standard Type--_de</value>
   </data>
 </root>

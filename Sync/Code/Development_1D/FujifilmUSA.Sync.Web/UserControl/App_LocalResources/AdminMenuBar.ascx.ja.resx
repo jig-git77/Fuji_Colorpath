@@ -151,10 +151,10 @@
     <value>機種プロファイラ―設定</value>
   </data>
   <data name="locActivityValidationRulesResource1.Text" xml:space="preserve">
-    <value>Activity Validation Rules</value>
+    <value>Activity Validation Rules_ja</value>
   </data>
   <data name="locApplicationConfigurationResource1.Text" xml:space="preserve">
-    <value>Application Configuration</value>
+    <value>Application Configuration_ja</value>
   </data>
   <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
     <value>色差判定プリセット</value>
@@ -163,9 +163,9 @@
     <value>色差判定設定</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target</value>
+    <value>Spot Target_ja</value>
   </data>
   <data name="locMetricTargetResource1.Text" xml:space="preserve">
-    <value>Metric Target</value>
+    <value>Metric Target_ja</value>
   </data>
 </root>

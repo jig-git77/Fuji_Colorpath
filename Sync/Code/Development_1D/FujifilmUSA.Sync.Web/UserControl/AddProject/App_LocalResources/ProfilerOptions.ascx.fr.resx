@@ -130,22 +130,22 @@
     <value>  400% Black</value>
   </data>
   <data name="chkBlackOverPrintResource1.Text" xml:space="preserve">
-    <value>Black Overprint</value>
+    <value>Black Overprint_fr</value>
   </data>
   <data name="chkBorderClippingResource1.Text" xml:space="preserve">
-    <value>  Border Clipping</value>
+    <value>  Border Clipping_fr</value>
   </data>
   <data name="chkDuplexResource1.Text" xml:space="preserve">
-    <value>  Duplex</value>
+    <value>  Duplex_fr</value>
   </data>
   <data name="chkGrayResource1.Text" xml:space="preserve">
-    <value>  Gray</value>
+    <value>  Gray_fr</value>
   </data>
   <data name="chkMaxCMYResource1.Text" xml:space="preserve">
-    <value>  Max. C,M,Y</value>
+    <value>  Max. C,M,Y_fr</value>
   </data>
   <data name="chkMaxRGBResource1.Text" xml:space="preserve">
-    <value>  Max. R,G,B</value>
+    <value>  Max. R,G,B_fr</value>
   </data>
   <data name="chkPCResource1.Text" xml:space="preserve">
     <value>  C</value>
@@ -172,34 +172,34 @@
     <value>  MY</value>
   </data>
   <data name="chkTriplexResource1.Text" xml:space="preserve">
-    <value>  Triplex</value>
+    <value>  Triplex_fr</value>
   </data>
   <data name="chkWhiteResource1.Text" xml:space="preserve">
-    <value>  White</value>
+    <value>  White_fr</value>
   </data>
   <data name="locAdvancedOptionsResource1.Text" xml:space="preserve">
     <value>Options Avancées</value>
   </data>
   <data name="locBlackGenerationResource1.Text" xml:space="preserve">
-    <value>Black - Generation</value>
+    <value>Black - Generation_fr</value>
   </data>
   <data name="locBlackStartResource1.Text" xml:space="preserve">
-    <value>Black-Start:</value>
+    <value>Black-Start:_fr</value>
   </data>
   <data name="locBlackWidthResource1.Text" xml:space="preserve">
-    <value>Black-Width:</value>
+    <value>Black-Width:_fr</value>
   </data>
   <data name="locCustomResource1.Text" xml:space="preserve">
-    <value>Custom:</value>
+    <value>Custom:_fr</value>
   </data>
   <data name="locExceptionsResource1.Text" xml:space="preserve">
-    <value>Exceptions</value>
+    <value>Exceptions_fr</value>
   </data>
   <data name="locGCRResource1.Text" xml:space="preserve">
     <value>GCR:</value>
   </data>
   <data name="locMaxInkResource1.Text" xml:space="preserve">
-    <value>Max-Ink:</value>
+    <value>Max-Ink:_fr</value>
   </data>
   <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
     <value>Paramètre Mesure</value>
@@ -208,10 +208,10 @@
     <value>Nouveau Profil - Options Profil</value>
   </data>
   <data name="locOptionsPresetsResource1.Text" xml:space="preserve">
-    <value>Options Presets</value>
+    <value>Options Presets_fr</value>
   </data>
   <data name="locPresetDescriptionResource1.Text" xml:space="preserve">
-    <value>Description Preset:</value>
+    <value>Description Preset:_fr</value>
   </data>
   <data name="locRangeResource1.Text" xml:space="preserve">
     <value>Rang:</value>
@@ -307,7 +307,7 @@
     <value>Density Targets_fr</value>
   </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
-    <value>Select Certified Print Condition:</value>
+    <value>Select Certified Print Condition:_fr</value>
   </data>
   <data name="locDensityCResource1.Text" xml:space="preserve">
     <value>C</value>
@@ -334,15 +334,15 @@
     <value>Optional Retarget_fr</value>
   </data>
   <data name="locSelectDeviceResource1.Text" xml:space="preserve">
-    <value>Select Device: </value>
+    <value>Select Device: _fr</value>
   </data>
   <data name="locParentProjectNameResource1.Text" xml:space="preserve">
-    <value>Print Standard: </value>
+    <value>Print Standard: _fr</value>
   </data>
   <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
-    <value>Metric Target Preset: </value>
+    <value>Metric Target Preset: _fr</value>
   </data>
   <data name="noCertifiedPrintCondition" xml:space="preserve">
-    <value>No Certified Align Print Conditions</value>
+    <value>No Certified Align Print Conditions_fr</value>
   </data>
 </root>

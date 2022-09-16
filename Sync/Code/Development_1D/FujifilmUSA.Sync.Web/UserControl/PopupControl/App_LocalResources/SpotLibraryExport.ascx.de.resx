@@ -118,63 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CalderaResource1.Text" xml:space="preserve">
-    <value>Caldera CMYK</value>
+    <value>Caldera CMYK_de</value>
   </data>
   <data name="ColorgateResource1.Text" xml:space="preserve">
-    <value>ColorGate</value>
+    <value>ColorGate_de</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancel_de</value>
   </data>
   <data name="locFileNameResource1.Text" xml:space="preserve">
-    <value>File Name:</value>
+    <value>File Name:_de</value>
   </data>
   <data name="locGenetareReportResource1" xml:space="preserve">
-    <value>Export</value>
+    <value>Export_de</value>
   </data>
   <data name="locHeaderResource1.Text" xml:space="preserve">
-    <value>Export CMYK Library</value>
+    <value>Export CMYK Library_de</value>
   </data>
   <data name="locMediaResource1.Text" xml:space="preserve">
-    <value>Media:</value>
+    <value>Media:_de</value>
   </data>
   <data name="locModelResource1.Text" xml:space="preserve">
-    <value>Model:</value>
+    <value>Model:_de</value>
   </data>
   <data name="locResolutionResource1.Text" xml:space="preserve">
-    <value>Resolution:</value>
+    <value>Resolution:_de</value>
   </data>
   <data name="locServerResource1.Text" xml:space="preserve">
-    <value>Server:</value>
+    <value>Server:_de</value>
   </data>
   <data name="locTypeResource1.Text" xml:space="preserve">
-    <value>Library Type: </value>
+    <value>Library Type: _de</value>
   </data>
   <data name="SelectTextResource1.Text" xml:space="preserve">
-    <value>-- Select --</value>
+    <value>-- Select --_de</value>
   </data>
   <data name="Caldera2Resource1.Text" xml:space="preserve">
-    <value>Caldera CMYK+</value>
+    <value>Caldera CMYK+_de</value>
   </data>
   <data name="locQualityResource1.Text" xml:space="preserve">
-    <value>Quality</value>
+    <value>Quality_de</value>
   </data>
   <data name="txtModeResource1.Text" xml:space="preserve">
-    <value>Mode</value>
+    <value>Mode_de</value>
   </data>
   <data name="XMFResource1.Text" xml:space="preserve">
-    <value>XMF</value>
+    <value>XMF_de</value>
   </data>
   <data name="CommentResource1.Text" xml:space="preserve">
-    <value>Comment: </value>
+    <value>Comment: _de</value>
   </data>
   <data name="locInkPoolIDResource1.Text" xml:space="preserve">
-    <value>Ink Pool ID: </value>
+    <value>Ink Pool ID: _de</value>
   </data>
   <data name="PackZResource1.Text" xml:space="preserve">
-    <value>PackZ</value>
+    <value>PackZ_de</value>
   </data>
   <data name="locBookNameResource1.Text" xml:space="preserve">
-    <value>Book Name:</value>
+    <value>Book Name:_de</value>
   </data>
 </root>

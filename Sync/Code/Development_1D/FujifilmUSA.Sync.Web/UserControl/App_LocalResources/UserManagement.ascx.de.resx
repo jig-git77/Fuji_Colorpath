@@ -127,7 +127,7 @@
     <value>Nachname</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Email</value>
+    <value>Email_de</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
     <value>Firma</value>
@@ -166,6 +166,6 @@
     <value>Benutzerverwaltung</value>
   </data>
   <data name="locUserReportResource1.Text" xml:space="preserve">
-    <value>User Report</value>
+    <value>User Report_de</value>
   </data>
 </root>

@@ -130,7 +130,7 @@
     <value>Zurück</value>
   </data>
   <data name="locContinueResource1.Text" xml:space="preserve">
-    <value>Weiter</value>
+    <value>Weiter_de</value>
   </data>
   <data name="noDLPText" xml:space="preserve">
     <value>Zur Zeit ist kein DLP aktiv.</value>

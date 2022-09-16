@@ -292,7 +292,7 @@
     <value>{0}:</value>
   </data>
   <data name="rgSourceProfileResource1.MasterTableView.NoDetailRecordsText" xml:space="preserve">
-    <value>No child records to display.</value>
+    <value>No child records to display._fr</value>
   </data>
   <data name="rgSourceProfileResource1.MasterTableView.NoMasterRecordsText" xml:space="preserve">
     <value>Pas de Mesure a afficher</value>
@@ -310,7 +310,7 @@
     <value>Page Suivante</value>
   </data>
   <data name="rgSourceProfileResource1.MasterTableView.PagerStyle.PagerTextFormat" xml:space="preserve">
-    <value>Modification Page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
+    <value>Modification Page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;._fr</value>
   </data>
   <data name="rgSourceProfileResource1.MasterTableView.PagerStyle.PageSizeLabelText" xml:space="preserve">
     <value>Taille Page:</value>
@@ -337,7 +337,7 @@
     <value>Page Suivante</value>
   </data>
   <data name="rgSourceProfileResource1.PagerStyle.PagerTextFormat" xml:space="preserve">
-    <value>Modification Page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
+    <value>Modification Page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;._fr</value>
   </data>
   <data name="rgSourceProfileResource1.PagerStyle.PageSizeLabelText" xml:space="preserve">
     <value>Taille Page:</value>
@@ -364,12 +364,12 @@
     <value>{0}:</value>
   </data>
   <data name="GridTemplateColumnResource6.HeaderText" xml:space="preserve">
-    <value>Region Name</value>
+    <value>Region Name_fr</value>
   </data>
   <data name="GridTemplateColumnResource7.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
   <data name="GridTemplateColumnResource7.HeaderText" xml:space="preserve">
-    <value>Company Name</value>
+    <value>Company Name_fr</value>
   </data>
 </root>

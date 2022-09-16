@@ -199,16 +199,16 @@
     <value>Deaktiviert</value>
   </data>
   <data name="RadComboBoxItemResource4.Text" xml:space="preserve">
-    <value>Last OK</value>
+    <value>Last OK_de_de</value>
   </data>
   <data name="RadComboBoxItemResource4.Value" xml:space="preserve">
-    <value>LastOK</value>
+    <value>LastOK_de</value>
   </data>
   <data name="RadComboBoxItemResource5.Text" xml:space="preserve">
-    <value>Last Failed</value>
+    <value>Last Failed_de</value>
   </data>
   <data name="RadComboBoxItemResource5.Value" xml:space="preserve">
-    <value>LastFailed</value>
+    <value>LastFailed_de</value>
   </data>
   <data name="rcmbValidationStatusResource1.LoadingMessage" xml:space="preserve">
     <value>Lade...</value>
@@ -367,12 +367,12 @@
     <value>{0}:</value>
   </data>
   <data name="GridTemplateColumnResource6.HeaderText" xml:space="preserve">
-    <value>Region Name</value>
+    <value>Region Name_de</value>
   </data>
   <data name="GridTemplateColumnResource7.EditFormHeaderTextFormat" xml:space="preserve">
     <value>{0}:</value>
   </data>
   <data name="GridTemplateColumnResource7.HeaderText" xml:space="preserve">
-    <value>Company Name</value>
+    <value>Company Name_de</value>
   </data>
 </root>

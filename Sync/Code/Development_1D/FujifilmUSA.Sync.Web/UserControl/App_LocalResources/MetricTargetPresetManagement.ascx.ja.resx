@@ -139,7 +139,7 @@
     <value>タイプ</value>
   </data>
   <data name="GridTemplateColumnResource7.HeaderText" xml:space="preserve">
-    <value>Align</value>
+    <value>Align_ja</value>
   </data>
   <data name="GridTemplateColumnResource8.HeaderText" xml:space="preserve">
     <value>Align評価</value>
@@ -157,10 +157,10 @@
     <value>キャンセル 色差判定プリセット</value>
   </data>
   <data name="imgbtnEditResource1.AlternateText" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edit_ja</value>
   </data>
   <data name="imgbtnEditResource1.Text" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edit_ja</value>
   </data>
   <data name="imgbtnEditResource1.Tootltip" xml:space="preserve">
     <value>Edit 色差判定プリセット</value>

@@ -130,16 +130,16 @@
     <value>Wollen Sie wirklich diese Firma löschen?</value>
   </data>
   <data name="DensityTypes_StatusE" xml:space="preserve">
-    <value>StatusE</value>
+    <value>StatusE_de</value>
   </data>
   <data name="DensityTypes_StatusT" xml:space="preserve">
-    <value>StatusT</value>
+    <value>StatusT_de</value>
   </data>
   <data name="DeviceManagement_DeleteDevice_Confirmation" xml:space="preserve">
     <value>Wollen Sie wirklich das ausgewählte Gerät löschen?</value>
   </data>
   <data name="DLPText" xml:space="preserve">
-    <value>DLP</value>
+    <value>DLP_de</value>
   </data>
   <data name="Duplicate_InsertBranch" xml:space="preserve">
     <value>Niederlassung mit diesem Namen existiert bereits.</value>
@@ -280,7 +280,7 @@
     <value>YMKC</value>
   </data>
   <data name="EPrintingTypes_Offset" xml:space="preserve">
-    <value>Offset</value>
+    <value>Offset_de</value>
   </data>
   <data name="EPrintingTypes_Flexo" xml:space="preserve">
     <value>Flexo</value>
@@ -346,7 +346,7 @@
     <value>Brand Color Optimization_de</value>
   </data>
   <data name="ELicenseType_Validation" xml:space="preserve">
-    <value>Color Validation</value>
+    <value>Color Validation_de</value>
   </data>
   <data name="Email_Subject_SendPasswordForceResetEmail" xml:space="preserve">
     <value>ColorPath - Bitte Passwort zurücksetzen</value>
@@ -361,52 +361,52 @@
     <value>AbsLightenerCompensation</value>
   </data>
   <data name="EProfileRendering_eCLAbsoluteCompressionRI" xml:space="preserve">
-    <value>AbsoluteCompression</value>
+    <value>AbsoluteCompression_de</value>
   </data>
   <data name="EProfileRendering_eCLAbsolutePerceptualRI" xml:space="preserve">
-    <value>AbsolutePerceptual</value>
+    <value>AbsolutePerceptual_de</value>
   </data>
   <data name="EProfileRendering_eCLAbsoluteRI" xml:space="preserve">
     <value>pAbsolute</value>
   </data>
   <data name="EProfileRendering_eCLBlackCompensationRI" xml:space="preserve">
-    <value>BlackCompensation</value>
+    <value>BlackCompensation_de</value>
   </data>
   <data name="EProfileRendering_eCLGamutCompressionRI" xml:space="preserve">
-    <value>GamutCompression</value>
+    <value>GamutCompression_de</value>
   </data>
   <data name="EProfileRendering_eCLMinimumBlackCompressionRI" xml:space="preserve">
-    <value>MinBlackCompression</value>
+    <value>MinBlackCompression_de</value>
   </data>
   <data name="EProfileRendering_eCLMinimumCompressionRI" xml:space="preserve">
-    <value>MinCompression</value>
+    <value>MinCompression_de</value>
   </data>
   <data name="EProfileRendering_eCLMinimumWhiteCompressionRI" xml:space="preserve">
-    <value>MinWhiteCompression</value>
+    <value>MinWhiteCompression_de</value>
   </data>
   <data name="EProfileRendering_eCLPerceptualCompressionRI" xml:space="preserve">
-    <value>PerceptualCompression</value>
+    <value>PerceptualCompression_de</value>
   </data>
   <data name="EProfileRendering_eCLRelativeCompressionRI" xml:space="preserve">
-    <value>RelativeCompression</value>
+    <value>RelativeCompression_de</value>
   </data>
   <data name="EProfileRendering_eCLRelativeLightness" xml:space="preserve">
-    <value>RelativeLightness</value>
+    <value>RelativeLightness_de</value>
   </data>
   <data name="EProfileRendering_eCLRelativeRI" xml:space="preserve">
-    <value>pRelative</value>
+    <value>pRelative_de</value>
   </data>
   <data name="EProfileRendering_icAbsoluteColorimetric" xml:space="preserve">
-    <value>Absolute</value>
+    <value>Absolute_de</value>
   </data>
   <data name="EProfileRendering_icPerceptual" xml:space="preserve">
-    <value>Perceptual</value>
+    <value>Perceptual_de</value>
   </data>
   <data name="EProfileRendering_icRelativeColorimetric" xml:space="preserve">
-    <value>Relative</value>
+    <value>Relative_de</value>
   </data>
   <data name="EProfileRendering_icSaturation" xml:space="preserve">
-    <value>Saturation</value>
+    <value>Saturation_de</value>
   </data>
   <data name="EReferenceChartDisType_OptimizationChart" xml:space="preserve">
     <value>Optimierungs- Chart</value>
@@ -421,10 +421,10 @@
     <value>Projekt erzeugen/löschen</value>
   </data>
   <data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
-    <value>Manage Activity Validation Rules</value>
+    <value>Manage Activity Validation Rules_de</value>
   </data>
   <data name="ERolePermission_ManageApplicationConfiguration" xml:space="preserve">
-    <value>Manage Application Configuration</value>
+    <value>Manage Application Configuration_de</value>
   </data>
   <data name="ERolePermission_ManageBranch" xml:space="preserve">
     <value>Niederlassung verwalten</value>
@@ -881,31 +881,31 @@ erwünschten Format überein.</value>
     <value>Wollen Sie die ausgewählte Lizenz wirklich löschen? Dies wird alle damit verbundenen Geräte, Meßgeräte und Projekte löschen! Möchten Sie wirklich alles löschen?</value>
   </data>
   <data name="LogActivityType_ChangeProfile" xml:space="preserve">
-    <value>ChangeProfile</value>
+    <value>ChangeProfile_de</value>
   </data>
   <data name="LogActivityType_CreateDlp" xml:space="preserve">
-    <value>CreateDlp</value>
+    <value>CreateDlp_de</value>
   </data>
   <data name="LogActivityType_CreateDlpError" xml:space="preserve">
-    <value>CreateDlpError</value>
+    <value>CreateDlpError_de</value>
   </data>
   <data name="LogActivityType_CreateProject" xml:space="preserve">
-    <value>CreateProject</value>
+    <value>CreateProject_de</value>
   </data>
   <data name="LogActivityType_LoggedIn" xml:space="preserve">
-    <value>LoggedIn</value>
+    <value>LoggedIn_de</value>
   </data>
   <data name="LogActivityType_LoggedOut" xml:space="preserve">
-    <value>LoggedOut</value>
+    <value>LoggedOut_de</value>
   </data>
   <data name="LogActivityType_None" xml:space="preserve">
-    <value>None</value>
+    <value>None_de</value>
   </data>
   <data name="LogActivityType_OptimizeDlp" xml:space="preserve">
-    <value>OptimizeDlp</value>
+    <value>OptimizeDlp_de</value>
   </data>
   <data name="LogActivityType_OptimizeDlpError" xml:space="preserve">
-    <value>OptimizeDlpError</value>
+    <value>OptimizeDlpError_de</value>
   </data>
   <data name="Login_InvalidLogin" xml:space="preserve">
     <value>Benutzername/Passwort ist ungültig.</value>
@@ -923,10 +923,10 @@ erwünschten Format überein.</value>
     <value>Öffnen</value>
   </data>
   <data name="PCSDataTypes_Density" xml:space="preserve">
-    <value>Density</value>
+    <value>Density_de</value>
   </data>
   <data name="PCSDataTypes_Spectral" xml:space="preserve">
-    <value>Spectral</value>
+    <value>Spectral_de</value>
   </data>
   <data name="PCSDataTypes_XYZ" xml:space="preserve">
     <value>XYZ</value>
@@ -1040,7 +1040,7 @@ erwünschten Format überein.</value>
     <value>Gelb Meßwerte</value>
   </data>
   <data name="GridDateTimeColumnResource1" xml:space="preserve">
-    <value>Last Activity</value>
+    <value>Last Activity_de</value>
   </data>
   <data name="GridTemplateColumnResource0" xml:space="preserve">
     <value>Typ</value>
@@ -1049,13 +1049,13 @@ erwünschten Format überein.</value>
     <value>Validierung</value>
   </data>
   <data name="GridTemplateColumnResource2" xml:space="preserve">
-    <value>Status</value>
+    <value>Status_de</value>
   </data>
   <data name="GridTemplateColumnResource3" xml:space="preserve">
-    <value>Print Condition</value>
+    <value>Print Condition_de</value>
   </data>
   <data name="GridTemplateColumnResource4" xml:space="preserve">
-    <value>Target Colorspace</value>
+    <value>Target Colorspace_de</value>
   </data>
   <data name="GridTemplateColumnResource5" xml:space="preserve">
     <value>Bedruckstoff</value>
@@ -1064,37 +1064,37 @@ erwünschten Format überein.</value>
     <value>Farbtyp</value>
   </data>
   <data name="GridTemplateColumnResourceLibrary" xml:space="preserve">
-    <value>Library</value>
+    <value>Library_de</value>
   </data>
   <data name="ToolTipClickToShort" xml:space="preserve">
-    <value>Click here to short</value>
+    <value>Click here to short_de</value>
   </data>
   <data name="Error_DeleteOptimizeRunNCP" xml:space="preserve">
-    <value>Error occured while deleting optimize run's NCP.Please contact your administrator.</value>
+    <value>Error occured while deleting optimize run's NCP.Please contact your administrator._de</value>
   </data>
   <data name="Error_GetLastOptimizedNamedColorProfile" xml:space="preserve">
-    <value>Error occured while retrieving last optimized named color profile. Please contact your administrator.</value>
+    <value>Error occured while retrieving last optimized named color profile. Please contact your administrator._de</value>
   </data>
   <data name="Error_GetSpotProjectDetail" xml:space="preserve">
-    <value>Error occured while retrieving spot project detail. Please contact your administrator.</value>
+    <value>Error occured while retrieving spot project detail. Please contact your administrator._de</value>
   </data>
   <data name="Error_OptimizeNamedColorProfile" xml:space="preserve">
-    <value>Error occured while optimizing named color profile. Please contact your administrator.</value>
+    <value>Error occured while optimizing named color profile. Please contact your administrator._de</value>
   </data>
   <data name="ESourceProfileCategory_All" xml:space="preserve">
-    <value>All</value>
+    <value>All_de</value>
   </data>
   <data name="ESourceProfileCategory_NorthAmericanStandards" xml:space="preserve">
-    <value>North American Standards</value>
+    <value>North American Standards_de</value>
   </data>
   <data name="ESourceProfileCategory_EuropeanStandards" xml:space="preserve">
-    <value>European Standards</value>
+    <value>European Standards_de</value>
   </data>
   <data name="ESourceProfileCategory_JapanStandards" xml:space="preserve">
-    <value>Japan Standards</value>
+    <value>Japan Standards_de</value>
   </data>
   <data name="ESourceProfileCategory_Other" xml:space="preserve">
-    <value>Other</value>
+    <value>Other_de</value>
   </data>
   <data name="CreateNewLibrary" xml:space="preserve">
     <value>Create New Library de</value>
@@ -1103,7 +1103,7 @@ erwünschten Format überein.</value>
     <value>Projekt löschen</value>
   </data>
   <data name="OpenProject" xml:space="preserve">
-    <value>Open Project de</value>
+    <value>Open Project_de</value>
   </data>
   <data name="ClearFillterResource" xml:space="preserve">
     <value>Filter löschen</value>
@@ -1142,25 +1142,25 @@ erwünschten Format überein.</value>
     <value>Patch</value>
   </data>
   <data name="gridAnalyzeHeaderSpotNameResource" xml:space="preserve">
-    <value>Spot Name</value>
+    <value>Spot Name_de</value>
   </data>
   <data name="gridAnalyzeHeaderViewResource" xml:space="preserve">
-    <value>View</value>
+    <value>View_de</value>
   </data>
   <data name="gridAnalyzeToolTipViewResource" xml:space="preserve">
-    <value>View Patch Details</value>
+    <value>View Patch Details_de</value>
   </data>
   <data name="Error_Invalid_IsAverageOfMeasurements" xml:space="preserve">
-    <value>Invalid IsAverageOfMeasurements have been provided.</value>
+    <value>Invalid IsAverageOfMeasurements have been provided._de</value>
   </data>
   <data name="Error_Invalid_IsSync1DTypeProject" xml:space="preserve">
-    <value>Invalid Sync1DType have been provided.</value>
+    <value>Invalid Sync1DType have been provided._de</value>
   </data>
   <data name="Error_Invalid_IsVerificationProject" xml:space="preserve">
-    <value>Invalid varification have been provided.</value>
+    <value>Invalid varification have been provided._de</value>
   </data>
   <data name="Error_Invalid_MeasurementId" xml:space="preserve">
-    <value>Invalid MeasurementId have been provided.</value>
+    <value>Invalid MeasurementId have been provided._de</value>
   </data>
   <data name="blackText" xml:space="preserve">
     <value>Schwarz</value>
@@ -1265,10 +1265,10 @@ erwünschten Format überein.</value>
     <value>Mindestens ein Messung muß überprüft werden</value>
   </data>
   <data name="Error_Invalid_ProjectId" xml:space="preserve">
-    <value>Invalid ProjectId has been provided.</value>
+    <value>Invalid ProjectId has been provided._de</value>
   </data>
   <data name="Error_Invalid_GradingDetails" xml:space="preserve">
-    <value>Invalid Grading details have been provided.</value>
+    <value>Invalid Grading details have been provided._de</value>
   </data>
   <data name="actualTVI" xml:space="preserve">
     <value>Aktuelle Kompensationskurve</value>
@@ -1277,7 +1277,7 @@ erwünschten Format überein.</value>
     <value>% GB Meßwerte</value>
   </data>
   <data name="percentPatchMetrics" xml:space="preserve">
-    <value>% Patch Metrics</value>
+    <value>% Patch Metrics_de</value>
   </data>
   <data name="targetTVI" xml:space="preserve">
     <value>Ziel Kompensationskurve</value>
@@ -1286,13 +1286,13 @@ erwünschten Format überein.</value>
     <value>Grenzwert TWZ</value>
   </data>
   <data name="Error_Invalid_CurveType" xml:space="preserve">
-    <value>Invalid curve type value has been provided. de</value>
+    <value>Invalid curve type value has been provided._de</value>
   </data>
   <data name="Error_Invalid_OptimizationRunID" xml:space="preserve">
-    <value>Invalid OptimizationRun id value has been provided. de</value>
+    <value>Invalid OptimizationRun id value has been provided._de</value>
   </data>
   <data name="Error_Invalid_ValidationType" xml:space="preserve">
-    <value>Invalid validation type value has been provided. de</value>
+    <value>Invalid validation type value has been provided._de</value>
   </data>
   <data name="SpotProject_Open" xml:space="preserve">
     <value>Spot Project_de</value>
@@ -1316,10 +1316,10 @@ erwünschten Format überein.</value>
     <value>Gerät</value>
   </data>
   <data name="locLabelJDFJobID" xml:space="preserve">
-    <value>JDF Job ID:</value>
+    <value>JDF Job ID:_de</value>
   </data>
   <data name="locLabelJob" xml:space="preserve">
-    <value>Job:</value>
+    <value>Job:_de</value>
   </data>
   <data name="locLabelMetric" xml:space="preserve">
     <value>Messung:</value>
@@ -1328,40 +1328,43 @@ erwünschten Format überein.</value>
     <value>Seite/Oberfläche:</value>
   </data>
   <data name="locLabelSignature" xml:space="preserve">
-    <value>Signature</value>
+    <value>Signature_de</value>
   </data>
   <data name="locLabelStandard" xml:space="preserve">
-    <value>Standard:</value>
+    <value>Standard:_de</value>
   </data>
   <data name="locLabelTimestamp" xml:space="preserve">
-    <value>Timestamp:</value>
+    <value>Timestamp:_de</value>
   </data>
   <data name="locLabelTol" xml:space="preserve">
     <value>Tol.</value>
   </data>
   <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
-    <value>Custom Source Profile</value>
+    <value>Custom Source Profile_de</value>
   </data>
   <data name="EMeasureTool_Both" xml:space="preserve">
-    <value>Both</value>
+    <value>Both_de</value>
   </data>
   <data name="ESourceProfileCategory_NPAPIPlugin" xml:space="preserve">
-    <value>NPAPI Plugin</value>
+    <value>NPAPI Plugin_de</value>
   </data>
   <data name="ESourceProfileCategory_SYNCMeasureApp" xml:space="preserve">
-    <value>SYNC Measure App</value>
+    <value>SYNC Measure App_de</value>
   </data>
   <data name="ProjectList_BcoButtonToolTip" xml:space="preserve">
-    <value>Brand Color Optimizer(Print Condition is Open)</value>
+    <value>Brand Color Optimizer(Print Condition is Open)_de</value>
   </data>
   <data name="ProjectList_BcoEnableButtonToolTip" xml:space="preserve">
-    <value>Brand Color Optimization</value>
+    <value>Brand Color Optimization_de</value>
   </data>
   <data name="ELicenseType_DLP_PLUS" xml:space="preserve">
-    <value>DLP Plus</value>
+    <value>DLP Plus_de</value>
   </data>
   <data name="ELicenseType_DLP_MULTI_COLOR" xml:space="preserve">
-    <value>DLP Multi Color</value>
+    <value>DLP Multi Color_de</value>
+  </data>
+  <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
+    <value>Sync1D Multi Color_de</value>
   </data>
   <data name="EInstrumentType_i1IOPro3" xml:space="preserve">
     <value>i1-IO-Pro3</value>
@@ -1370,10 +1373,7 @@ erwünschten Format überein.</value>
     <value>i1-Pro3</value>
   </data>
   <data name="ELicenseType_Custom_BCO" xml:space="preserve">
-    <value>Custom BCO</value>
-  </data>
-  <data name="ELicenseType_Sync1D_MULTI_COLOR" xml:space="preserve">
-    <value>Sync1D Multi Color_de</value>
+    <value>Custom BCO_de</value>
   </data>
   <data name="Error_GetMetricTargetPresetID" xml:space="preserve">
     <value>Error occured while retrieving MetricTarget Preset. Please contact your administrator._de</value>

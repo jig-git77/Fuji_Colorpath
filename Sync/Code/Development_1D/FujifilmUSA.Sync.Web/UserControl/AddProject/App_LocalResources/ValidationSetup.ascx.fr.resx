@@ -151,7 +151,7 @@
     <value>Validation Metrique</value>
   </data>
   <data name="locValidationOptionsResource1.Text" xml:space="preserve">
-    <value>Options Validation</value>
+    <value>Options Validation_fr</value>
   </data>
   <data name="noValidationLicense" xml:space="preserve">
     <value>Vous n'avez pas la licence pour l'option Validation</value>
@@ -175,7 +175,7 @@
     <value>Description_fr:</value>
   </data>
   <data name="downloadChartNotAvailable" xml:space="preserve">
-    <value>Download chart is not available</value>
+    <value>Download chart is not available_fr</value>
   </data>
   <data name="locMeasCountResource1.Text" xml:space="preserve">
     <value>Measurement Count:_fr</value>

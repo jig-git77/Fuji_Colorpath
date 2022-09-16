@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Software</value>
+    <value>Software_de</value>
   </data>
   <data name="locDownloadResource1.Text" xml:space="preserve">
-    <value>Download</value>
+    <value>Download_de</value>
   </data>
   <data name="colorPathInstallerMac" xml:space="preserve">
-    <value>Colorpath Installer - Mac</value>
+    <value>Colorpath Installer - Mac_de</value>
   </data>
   <data name="colorPathInstallerPC" xml:space="preserve">
-    <value>Colorpath Installer - PC</value>
+    <value>Colorpath Installer - PC_de</value>
   </data>
   <data name="ValidationCharts" xml:space="preserve">
     <value>Validierungs-Charts</value>

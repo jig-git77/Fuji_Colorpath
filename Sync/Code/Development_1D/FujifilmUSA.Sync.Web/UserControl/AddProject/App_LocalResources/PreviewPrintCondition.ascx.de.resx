@@ -124,7 +124,7 @@
     <value>Anpassungs-Chart</value>
   </data>
   <data name="locAlignmentChart2Resource1.Text" xml:space="preserve">
-    <value>Testform</value>
+    <value>Testform_de</value>
   </data>
   <data name="locColorantResource1.Text" xml:space="preserve">
     <value>Farbtyp</value>
@@ -205,6 +205,6 @@
     <value>Kontrollelement</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Spot Target de</value>
+    <value>Spot Target_de</value>
   </data>
 </root>

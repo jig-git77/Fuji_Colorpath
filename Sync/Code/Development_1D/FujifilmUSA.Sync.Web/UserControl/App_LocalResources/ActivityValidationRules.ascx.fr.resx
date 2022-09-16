@@ -118,30 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="confirmSaveMessage" xml:space="preserve">
-    <value>Are you sure you want to delete all activity validation rules?</value>
+    <value>Are you sure you want to delete all activity validation rules?_fr</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Is Rule ON?</value>
+    <value>Is Rule ON?_fr</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Name</value>
+    <value>Name_fr</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Description</value>
+    <value>Description_fr</value>
   </data>
   <data name="locActivityResource1.Text" xml:space="preserve">
-    <value>Activity</value>
+    <value>Activity_fr</value>
   </data>
   <data name="locActivityValidationRulesResource1.Text" xml:space="preserve">
-    <value>Activity Validation Rules</value>
+    <value>Activity Validation Rules_fr</value>
   </data>
   <data name="locSaveRulesResource1.Text" xml:space="preserve">
-    <value>Save Rules</value>
+    <value>Save Rules_fr</value>
   </data>
   <data name="ruleSelectionRequiredMsg" xml:space="preserve">
-    <value>Please select at-least one rule.</value>
+    <value>Please select at-least one rule._fr</value>
   </data>
   <data name="ruleUpdateSuccessMsg" xml:space="preserve">
-    <value>Activity validation rule updated successfully.</value>
+    <value>Activity validation rule updated successfully._fr</value>
   </data>
 </root>
