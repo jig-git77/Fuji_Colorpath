@@ -239,6 +239,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             dt.Columns.Add(new DataColumn("MetricTargetId", typeof(string)));//for DropDownList selected item   
             dt.Columns.Add(new DataColumn("MetricSumID", typeof(string)));//for DropDownList selected item   
             dt.Columns.Add(new DataColumn("TargetValue", typeof(string)));//for DropDownList selected item   
+            dt.Columns.Add(new DataColumn("RankId", typeof(string)));//for DropDownList selected item   
 
 
             dr = dt.NewRow();
@@ -246,6 +247,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             dr["MetricTargetID"] = "0";
             dr["MetricSumID"] = "-1";
             dr["TargetValue"] = "0";
+            dr["RankId"] = "0";
             dt.Rows.Add(dr);
 
             //Store the DataTable in ViewState for future reference   
