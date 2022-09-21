@@ -141,4 +141,7 @@
   <data name="locSaveResource1.Text" xml:space="preserve">
     <value>保存</value>
   </data>
+  <data name="SelectMetricSumDetails" xml:space="preserve">
+    <value>Please Add Metric Sum's Details._ja</value>
+  </data>
 </root>
