@@ -315,7 +315,14 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
-          
+            else if (GetType().BaseType == typeof(AssignRefChartWMetricTargetPreset))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.AssignChartWithMTP))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+
 
             #endregion
             #region Regular Pages
