@@ -132,4 +132,10 @@
   <ItemGroup>
     <None Include="Table Script\09_2022\09-21-2022_Report.GetSpotProjectOptimizeDetails.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\[CPSyncV].[GetMetricTargetPresetForMetricSum].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\09_2022\09-23-2022_CPSyncV.GetMetricTargetPresetForMetricSum.sql" />
+  </ItemGroup>
 </Project>
