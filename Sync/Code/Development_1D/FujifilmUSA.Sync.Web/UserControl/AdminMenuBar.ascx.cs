@@ -39,6 +39,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnMetricTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
                 lbtnMToolVersion.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMToolVersion);
                 lbtnUpdateChangeLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUpdateChangeLog);
+                lbtAssignChartwithMTP.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.AssignChartWithMTP);
             }
         }
         #endregion
