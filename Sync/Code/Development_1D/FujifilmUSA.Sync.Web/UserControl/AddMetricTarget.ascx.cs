@@ -61,26 +61,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.Redirect("MetricTargetManagement.aspx");
         }
-        protected void grdMetricSum_RowCreated(object sender, GridViewRowEventArgs e)
+        private void grdMetricSum_SetControl()
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            foreach (GridViewRow dgvRow in grdMetricSum.Rows)
             {
-                DataTable dt = (DataTable)ViewState["CurrentTable"];
-                ImageButton lnkRemove = (ImageButton)e.Row.FindControl("lnkRemove");
-                DropDownList ddlMetricSum = (DropDownList)e.Row.FindControl("ddlMetricSum");
-                DropDownList ddlOrder = (DropDownList)e.Row.FindControl("ddlOrder");
-                if (lnkRemove != null)
+                if (dgvRow.RowType == DataControlRowType.DataRow)
                 {
-                    if (dt.Rows.Count > 1)
+                    DataTable dt = (DataTable)ViewState["CurrentTable"];
+                    ImageButton lnkRemove = (ImageButton)dgvRow.FindControl("lnkRemove");
+                    DropDownList ddlMetricSum = (DropDownList)dgvRow.FindControl("ddlMetricSum");
+                    DropDownList ddlOrder = (DropDownList)dgvRow.FindControl("ddlOrder");
+                    if (lnkRemove != null)
                     {
-                        if (e.Row.RowIndex == dt.Rows.Count - 1)
-                            lnkRemove.Visible = false;
+                        if (dt.Rows.Count > 1)
+                        {
+                            if (dgvRow.RowIndex == dt.Rows.Count - 1)
+                                lnkRemove.Visible = false;
+                            else
+                                ddlMetricSum.Enabled = (ddlMetricSum.SelectedIndex > 0) ? false : true;
+                        }
                         else
-                            ddlMetricSum.Enabled = string.IsNullOrEmpty(ddlMetricSum.SelectedValue.ToString());
-                    }
-                    else
-                    {
-                        lnkRemove.Visible = false;
+                        {
+                            lnkRemove.Visible = false;
+                        }
                     }
                 }
             }
@@ -151,8 +154,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 //grdMetricSum.DataSource = MetricTargetPreset.MetricSumTolerances;
                 //grdMetricSum.DataBind();
+                grdMetricSum_SetControl();
             }
-
         }
         private void SaveMetricTargetPreset()
         {
@@ -271,10 +274,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void AddNewRowToGrid()
         {
-
             if (ViewState["CurrentTable"] != null)
             {
-
                 DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
                 DataRow drCurrentRow = null;
 
@@ -284,30 +285,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     drCurrentRow["RowNumber"] = dtCurrentTable.Rows.Count + 1;
                     drCurrentRow["MetricTargetID"] = "0";
                     drCurrentRow["TargetValue"] = "0";
+                    drCurrentRow["RankId"] = "0";
                     //add new row to DataTable   
                     dtCurrentTable.Rows.Add(drCurrentRow);
                     //Store the current data to ViewState for future reference   
-
                     ViewState["CurrentTable"] = dtCurrentTable;
-
 
                     for (int i = 0; i < dtCurrentTable.Rows.Count - 1; i++)
                     {
-
                         //extract the TextBox values   
-
                         DropDownList ddlMetricSum = (DropDownList)grdMetricSum.Rows[i].Cells[1].FindControl("ddlMetricSum");
                         TextBox txtTargetValue = (TextBox)grdMetricSum.Rows[i].Cells[1].FindControl("txtTargetValue");
                         //HiddenField hdfMetricSumId = (HiddenField)grdMetricSum.Rows[i].Cells[2].FindControl("hdfMetricSumId");
                         HiddenField hdfTargetMetricId = (HiddenField)grdMetricSum.Rows[i].Cells[1].FindControl("hdfTargetMetricId");
-
                         DropDownList ddlOrder = (DropDownList)grdMetricSum.Rows[i].Cells[1].FindControl("ddlOrder");
 
                         dtCurrentTable.Rows[i]["TargetValue"] = txtTargetValue.Text;
                         dtCurrentTable.Rows[i]["MetricSumID"] = ddlMetricSum.SelectedItem.Value;
                         dtCurrentTable.Rows[i]["MetricTargetId"] = hdfTargetMetricId.Value;
                         dtCurrentTable.Rows[i]["RankId"] = ddlOrder.SelectedItem.Value;
-
                     }
 
                     //Rebind the Grid with the current data to reflect changes   
@@ -373,7 +369,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //        }
             //    }
             //}
-            ddlOrder.Items.Insert(0, new ListItem() { Value = "-1", Text = "--Select--" });
+            ddlOrder.Items.Insert(0, new ListItem() { Value = "0", Text = "--Select--" });
         }
 
         private void SetPreviousData()
@@ -411,6 +407,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
+            grdMetricSum_SetControl();
         }
 
         private void ResetRowID(DataTable dt)
