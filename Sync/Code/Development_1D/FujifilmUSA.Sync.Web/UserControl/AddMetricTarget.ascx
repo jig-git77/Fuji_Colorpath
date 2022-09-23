@@ -47,7 +47,7 @@
                                 
                                 <tr>
                                     <td colspan="3">                                       
-                                        <asp:GridView runat="server" ID="grdMetricSum" AutoGenerateColumns="false" ShowFooter="true" OnRowCreated="grdMetricSum_RowCreated">
+                                        <asp:GridView runat="server" ID="grdMetricSum" AutoGenerateColumns="false" ShowFooter="true" >
                                             <FooterStyle VerticalAlign="Middle" HorizontalAlign="Center" />
                                             <HeaderStyle VerticalAlign="Middle" HorizontalAlign="Center" />
                                             <Columns>                                                
