@@ -1001,7 +1001,7 @@ function BindMeasurementSummary() {
                             var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
                             $(tabStrip.items()[2]).css('display', 'inline-block');
                             //Bind G7 charts
-                            BindG7Charts();
+                            //BindG7Charts(); 10/10/2022 Slowness issue that's why we comment, this calling 2 times .
                             //show average measurement checkbox
                             $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
 
