@@ -45,7 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='RedirectFromProjectList.aspx?RedirectType='AddSpotProject"& ", true);
                 string url = "RedirectFromProjectList.aspx?RedirectType=AddSpotProject&ProjectID="+ ProjectId.ToString();
                 //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='RedirectFromProjectList.aspx?RedirectType=\"AddSpotProject\"&ProjectID='"+ProjectId+"';", true);
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='"+url+"';", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='"+url+"';", true);
             }
         }
     }

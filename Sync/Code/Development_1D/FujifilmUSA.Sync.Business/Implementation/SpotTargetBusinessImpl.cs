@@ -94,6 +94,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     spotTarget.spotTargetSetting.GapLeval,
                                                                                     spotTarget.spotTargetSetting.PreviousL,
                                                                                     spotTarget.spotTargetSetting.ChartRes,
+                                                                                    spotTarget.spotTargetSetting.IsCustom,
                                                                                     spotLabData.ToString()
                                                                                 });                     
                  },
