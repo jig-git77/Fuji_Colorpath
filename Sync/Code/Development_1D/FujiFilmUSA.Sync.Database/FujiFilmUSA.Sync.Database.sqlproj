@@ -62,6 +62,7 @@
     <Folder Include="Views" />
     <Folder Include="Table Script\08_2022" />
     <Folder Include="Table Script\09_2022" />
+    <Folder Include="Table Script\10_2022" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -137,5 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\09_2022\09-23-2022_CPSyncV.GetMetricTargetPresetForMetricSum.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Table Script\10_2022\10-24-2022_[CPSpot].[CreateSpotTarget].sql" />
+    <Build Include="Table Script\10_2022\10-24-2022_ALTER_SpotTargetChartSetting_IsCustom.sql" />
   </ItemGroup>
 </Project>
