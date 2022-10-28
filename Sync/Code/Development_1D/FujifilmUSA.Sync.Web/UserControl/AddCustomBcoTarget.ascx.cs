@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
+using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -61,8 +63,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 try
                 {
-                    var sr = new StreamReader(fucUploadChartData.UploadedFiles[0].InputStream);
-                    var refChartImportData = new List<SpotTargetLAB>();
+                    StreamReader sr = new StreamReader(fucUploadChartData.UploadedFiles[0].InputStream);
+                    List<SpotTargetLAB> refChartImportData = new List<SpotTargetLAB>();
                     string strAllLine = sr.ReadToEnd();
                     string[] lstLines = { };
 
@@ -71,22 +73,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lstLines = strAllLine.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
                     }
 
-                    for (int rows = 0; rows < (uint)lstLines.Count() ; rows++)
+                    for (int rows = 0; rows < (uint)lstLines.Count(); rows++)
                     {
                         if (rows == 0)
                         {
                             #region Check Column Names
-                            var columns = lstLines[rows].Split(',');
-                            if (columns.Length != 5)
+                            string[] columns = lstLines[rows].Split(',');
+                            if (columns.Length != 4)
                             {
                                 throw new Exception(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatch"));
                             }
                             columns.ToList().ForEach(x => x = x.Trim());
-                            if (!columns[0].Equals("SpotID", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[1].Equals("SpotName", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[2].Equals("Target_L*", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[3].Equals("Target_a*", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[4].Equals("Target_b*", StringComparison.CurrentCultureIgnoreCase))
+                            if (!columns[0].Equals("Color_Name", StringComparison.CurrentCultureIgnoreCase) ||
+                                !columns[1].Equals("Target_L*", StringComparison.CurrentCultureIgnoreCase) ||
+                                !columns[2].Equals("Target_a*", StringComparison.CurrentCultureIgnoreCase) ||
+                                !columns[3].Equals("Target_b*", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
                             }
@@ -94,26 +95,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                         else
                         {
-                            var dataRow = lstLines[rows].Split(',');
+                            string[] dataRow = lstLines[rows].Split(',');
                             dataRow.ToList().ForEach(x => x = x.Trim());
-                            var chartDataRow = new SpotTargetLAB();
+                            SpotTargetLAB chartDataRow = new SpotTargetLAB();
+                            Regex regexItem = new Regex("^[a-z0-9_].*?$");
+
                             #region Converts row to ReferenceChart Object
-                            short sampleId;
                             decimal lab;
                             //SpotID
-                            if (short.TryParse(dataRow[0], out sampleId))
-                            {
-                                chartDataRow.SpotID = sampleId;
-                            }
-                            else
-                            {
-                                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
-                            }
+                            chartDataRow.SpotID = (short)(rows);
+
+
 
                             //SpotName
-                            if (!string.IsNullOrEmpty(dataRow[1]))
+                            if (!string.IsNullOrEmpty(dataRow[0]))
                             {
-                                chartDataRow.SpotName = dataRow[1];
+                                chartDataRow.SpotName = dataRow[0];
                             }
                             else
                             {
@@ -121,9 +118,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             }
 
                             //Target L
-                            if (decimal.TryParse(dataRow[2], out lab))
+                            if (decimal.TryParse(dataRow[1], out lab))
                             {
-                                chartDataRow.Target_L = lab;
+                                lab = Math.Round(lab, 2);
+
+                                if (lab > 100 || lab < 0)
+                                { throw new Exception(string.Format("Value of Target L* Must Be Between 0 to 100 Line No. {0}.", rows)); }
+                                else
+                                { chartDataRow.Target_L = lab; }
                             }
                             else
                             {
@@ -131,9 +133,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             }
 
                             //Target a
-                            if (decimal.TryParse(dataRow[3], out lab))
+                            if (decimal.TryParse(dataRow[2], out lab))
                             {
-                                chartDataRow.Target_a = lab;
+                                lab = Math.Round(lab, 2);
+
+                                if (lab > 128 || lab < -128)
+                                { throw new Exception(string.Format("Value of Target A* Must Be Between -128 to 128 Line No. {0}.", rows)); }
+                                else
+                                { chartDataRow.Target_a = lab; }
                             }
                             else
                             {
@@ -141,9 +148,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             }
 
                             //Target b
-                            if (decimal.TryParse(dataRow[4], out lab))
+                            if (decimal.TryParse(dataRow[3], out lab))
                             {
-                                chartDataRow.Target_b = lab;
+                                lab = Math.Round(lab, 2);
+
+                                if (lab > 128 || lab < -128)
+                                { throw new Exception(string.Format("Value of Target B* Must Be Between -128 to 128 Line No. {0}.", rows)); }
+                                else
+                                { chartDataRow.Target_b = lab; }
                             }
                             else
                             {
@@ -151,11 +163,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             }
 
                             #endregion
+
                             refChartImportData.Add(chartDataRow);
                         }
                     }
                     if (refChartImportData.Count > 0)
                     {
+                        //if (refChartImportData.Count != refChartImportData.GroupBy(x => x.SpotName).Count())
+                        //{
+                        //    throw new Exception("Color ID must be unique");
+                        //}
+
                         ViewState[vsChartData] = refChartImportData;
                         rgChartData.Rebind();
                     }
@@ -265,7 +283,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtChartName.Text = SpotTarget.spotTargetSetting.ChartName.ToString();
                 txtNumOfRows.Text = SpotTarget.spotTargetSetting.NumOfRows.ToString();
                 txtNumOfCols.Text = SpotTarget.spotTargetSetting.NumOfCols.ToString();
-            
+
                 txtPages.Text = SpotTarget.spotTargetSetting.Pages.ToString();
                 txtRowsPerPage.Text = SpotTarget.spotTargetSetting.RowsPerPage.ToString();
 

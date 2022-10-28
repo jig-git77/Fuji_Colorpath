@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include="AccessDenied.aspx" />
     <Content Include="ActivityValidationRules.aspx" />
+    <Content Include="AddCustomBcoTarget.aspx" />
     <Content Include="AddDeviceProfilerSettings.aspx" />
     <Content Include="AddLookupTVILABDensity.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
@@ -1175,6 +1176,7 @@
     <Content Include="Images\activity-validation-rules.png" />
     <Content Include="Images\CPSPrintStandardBottomImage.jpg" />
     <Content Include="Images\CPSPrintStandardLogo.jpg" />
+    <Content Include="Images\custom_bco_icon.png" />
     <Content Include="Images\detail1.png" />
     <Content Include="Images\DLPFullGamutSource.png" />
     <Content Include="Images\DLPReProfileSource.png" />
@@ -3982,6 +3984,7 @@
     <Content Include="UpdateChangeLogManagement.aspx" />
     <Content Include="UserControl\AccessDenied.ascx" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
+    <Content Include="UserControl\AddCustomBcoTarget.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
     <Content Include="UserControl\AddLookupTVILABDensity.ascx" />
     <Content Include="UserControl\AddMetricTarget.ascx" />
@@ -4295,6 +4298,13 @@
     </Compile>
     <Compile Include="ActivityValidationRules.aspx.designer.cs">
       <DependentUpon>ActivityValidationRules.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddCustomBcoTarget.aspx.cs">
+      <DependentUpon>AddCustomBcoTarget.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddCustomBcoTarget.aspx.designer.cs">
+      <DependentUpon>AddCustomBcoTarget.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddDeviceProfilerSettings.aspx.cs">
       <DependentUpon>AddDeviceProfilerSettings.aspx</DependentUpon>
@@ -4967,6 +4977,13 @@
     </Compile>
     <Compile Include="UserControl\ActivityValidationRules.ascx.designer.cs">
       <DependentUpon>ActivityValidationRules.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddCustomBcoTarget.ascx.cs">
+      <DependentUpon>AddCustomBcoTarget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddCustomBcoTarget.ascx.designer.cs">
+      <DependentUpon>AddCustomBcoTarget.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddDeviceProfilerSettings.ascx.cs">
       <DependentUpon>AddDeviceProfilerSettings.ascx</DependentUpon>
@@ -9358,6 +9375,11 @@
     <Content Include="UserControl\App_LocalResources\UpdateChangeLog.ascx.fr.resx" />
     <Content Include="UserControl\App_LocalResources\UpdateChangeLog.ascx.ja.resx" />
     <Content Include="UserControl\App_LocalResources\UpdateChangeLog.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddCustomBcoTarget.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

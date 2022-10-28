@@ -243,7 +243,7 @@
                                 </tr>
                                 <tr id="Tr_UploadData" runat="server">
                                    
-                                    <td align="right">
+                                    <td align="right" style="vertical-align: top;">
                                         <span style="font-weight: bold;">
                                             <asp:Localize runat="server"
                                                 Text="Color Library CSV" ID="locUploadChartData"
@@ -312,22 +312,22 @@
                                                 <CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
 
                                                 <Columns>
-                                                    <telerik:GridTemplateColumn DataField="SpotID" AllowFiltering="true" HeaderText="SpotID"
-                                                        UniqueName="SpotID" SortExpression="SpotID" ItemStyle-CssClass="breakWord50"
+                                                    <telerik:GridTemplateColumn DataField="ColorID" AllowFiltering="true" HeaderText="ColorID"
+                                                        UniqueName="ColorID" SortExpression="ColorID" ItemStyle-CssClass="breakWord50"
                                                         ItemStyle-Wrap="true" ShowFilterIcon="true" ItemStyle-Width="10%"
                                                         meta:resourcekey="GridTemplateColumnResource1">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="lblSpotID" runat="server" Text='<%# Eval("SpotID") %>'
-                                                                meta:resourcekey="lblSpotID" />
+                                                            <asp:Label ID="lblColorID" runat="server" Text='<%# Eval("SpotID") %>'
+                                                                meta:resourcekey="lblColorID" />
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
-                                                    <telerik:GridTemplateColumn DataField="SpotName" AllowFiltering="true" HeaderText="Spot Name"
-                                                        UniqueName="SpotName" SortExpression="SpotName" ItemStyle-CssClass="breakWord50"
+                                                    <telerik:GridTemplateColumn DataField="ColorName" AllowFiltering="true" HeaderText="Spot Name"
+                                                        UniqueName="ColorName" SortExpression="ColorName" ItemStyle-CssClass="breakWord50"
                                                         ItemStyle-Wrap="true" ShowFilterIcon="true" ItemStyle-Width="15%"
                                                         meta:resourcekey="GridTemplateColumnResource2">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="lblSpotName" runat="server" Text='<%# Eval("SpotName") %>'
-                                                                meta:resourcekey="lblSpotNameResource1" />
+                                                            <asp:Label ID="lblColorName" runat="server" Text='<%# Eval("SpotName") %>'
+                                                                meta:resourcekey="lblColorNameResource1" />
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
                                                     <telerik:GridTemplateColumn DataField="Target_L" AllowFiltering="true" HeaderText="Target L*"

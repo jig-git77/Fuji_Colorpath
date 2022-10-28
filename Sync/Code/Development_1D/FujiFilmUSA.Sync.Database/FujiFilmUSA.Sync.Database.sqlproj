@@ -142,5 +142,6 @@
   <ItemGroup>
     <Build Include="Table Script\10_2022\10-24-2022_[CPSpot].[CreateSpotTarget].sql" />
     <Build Include="Table Script\10_2022\10-24-2022_ALTER_SpotTargetChartSetting_IsCustom.sql" />
+    <Build Include="Table Script\10_2022\10-28-2022_Insert_Permission.sql" />
   </ItemGroup>
 </Project>

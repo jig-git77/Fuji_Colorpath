@@ -216,6 +216,16 @@
                 </span>
             </asp:LinkButton>
 
+             <asp:LinkButton ID="lbtCustomBCOTargetLibrary" runat="server"
+                CssClass="dock-item overlapobject"
+                OnClick="lbtCustomBCOTargetLibrary_Click">
+                <img src="Images/custom_bco_icon.png" style="position: relative; z-index: 1;" alt="Custom BCO Target Library" />
+                <span>
+                    <asp:Localize Text="Custom BCO Target Library" runat="server"
+                        ID="Localize5"></asp:Localize>
+                </span>
+            </asp:LinkButton>
+
         </div>
     </div>
 </div>

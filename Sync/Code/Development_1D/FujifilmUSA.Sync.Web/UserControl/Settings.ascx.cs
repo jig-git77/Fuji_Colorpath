@@ -45,6 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divMToolVersion.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMToolVersion);
             divUpdateChangeLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUpdateChangeLog);
             divAssignChartWithMTP.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.AssignChartWithMTP);
+            divAddCustomBcoTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCustomBCOTarget);
 
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
@@ -68,9 +69,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divMeasurementLogSeperator.Visible = divMeasurementLog.Visible && divMetricTarget.Visible;
             divUpdateChangeLogSeperator.Visible = divMToolVersion.Visible && divUpdateChangeLog.Visible;
             divAssignChartWithMTPSeperator.Visible = divUpdateChangeLog.Visible && divAssignChartWithMTP.Visible;
+            divAddCustomBcoTargetSeperator.Visible = divAssignChartWithMTP.Visible && divAddCustomBcoTarget.Visible;
         }
         #endregion
-
 
         protected void lbtnCompanyManagement_Click(object sender, EventArgs e)
         {
