@@ -121,19 +121,19 @@
     <value>Edit Spot Target</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Spot ID</value>
+    <value>Color ID</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Spot Name</value>
+    <value>Color Name</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Target_L</value>
+    <value>Target L*</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Target_a</value>
+    <value>Target a*</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
-    <value>Target_b</value>
+    <value>Target b*</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>Add Spot Target</value>
@@ -202,7 +202,7 @@
     <value>Total Rows</value>
   </data>
   <data name="locUploadChartDataResource1.Text" xml:space="preserve">
-    <value>Upload Chart Data (SpotID,SpotName,Target_L*,Target_a*,Target_b*)</value>
+    <value>Color Library Csv</value>
   </data>
   <data name="locVgapResource1.Text" xml:space="preserve">
     <value>Vertical Gap</value>

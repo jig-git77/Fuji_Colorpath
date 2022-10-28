@@ -232,7 +232,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ManageUpdateChangeLog")] //Update ChangeLog
         ManageUpdateChangeLog = 23,
         [Description("AssignChartWithMTP")] //Assign Chart With MTP
-        AssignChartWithMTP = 24
+        AssignChartWithMTP = 24,
+        [Description("ManageCustomBCOTarget")] //Manage Custom BCO Target
+        ManageCustomBCOTarget = 25
     }
     public enum ECurrentProjectStatus
     {

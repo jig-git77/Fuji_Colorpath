@@ -147,8 +147,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("AssignRefChartWMetricTargetPreset.aspx");
         }
+        protected void lbtCustomBCOTargetLibrary_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("AddCustomBcoTarget.aspx");
+        }
 
         #endregion
-
     }
 }

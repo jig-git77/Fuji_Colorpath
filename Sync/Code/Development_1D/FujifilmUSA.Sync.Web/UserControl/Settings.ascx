@@ -382,7 +382,7 @@
                         <asp:LinkButton ID="LinkButton2" runat="server"
                             PostBackUrl="~/AddCustomBcoTarget.aspx">
                             <div>
-                                <asp:Image ID="ImgAddCustomBcoTarget" runat="server" AlternateText="Custom BCO Target Library" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Custom BCO Target Library" />
+                                <asp:Image ID="ImgAddCustomBcoTarget" runat="server" AlternateText="Custom BCO Target Library" ImageUrl="~/Images/custom_bco_icon.png" ToolTip="Custom BCO Target Library" />
                             </div>
                             <asp:Localize runat="server" Text="Custom BCO Target Library" ID="Localize10"></asp:Localize>
                         </asp:LinkButton>

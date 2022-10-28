@@ -1,5 +1,8 @@
-ALTER TABLE CPSpot.SpotTargetChartSetting 
-	Add IsCustom BIT ;
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='SpotTargetChartSetting' AND TABLE_SCHEMA='CPSpot' AND COLUMN_NAME='IsCustom')
+BEGIN
+	ALTER TABLE CPSpot.SpotTargetChartSetting 
+		Add IsCustom BIT ;
+END
 GO
 
 UPDATE CPSpot.SpotTargetChartSetting
