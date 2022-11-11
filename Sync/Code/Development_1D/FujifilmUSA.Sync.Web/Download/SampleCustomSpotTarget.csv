@@ -1,1 +1,11 @@
-SpotID,SpotName,Target_L*,Target_a*,Target_b*
+Color_Name,Target_L*,Target_a*,Target_b*
+Yellow,90.27,-6.53,84.63
+Dark_Yellow,84.67,3.46,78.89
+Bright_Pink,50.72,69.84,-7.1
+Orange,62.77,43.44,57.01
+Red,49.49,65.67,32.22
+Maroon,35.47,47.65,19.3
+Light_Blue,60.89,-36.93,-45.56
+Dark_Blue,34.29,9.7,-42.81
+Teal,53.89,-40.65,-12.43
+Purple,38.18,20.31,-36.5
