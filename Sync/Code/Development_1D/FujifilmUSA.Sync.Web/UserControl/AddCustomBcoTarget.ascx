@@ -3,21 +3,14 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
-<script type="text/javascript">
-    function submitFile(sender, e) {
-        //alert(1);
-        //$("#<%= lbtnUploadChartData.ClientID %>").click();
-        //$("<%= lbtnUploadChartData.ClientID %>").click();
-        //document.getElementById('<%# lbtnUploadChartData.ClientID %>').click();
-    }
-</script>
+
 <div class="admin_top">
     &nbsp;
 </div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
         <h1>
-            <asp:Localize runat="server" Text="New Customr BCO Library"
+            <asp:Localize runat="server" Text="New Custom BCO Library"
                 ID="locNewCustomrBCOLibrary" meta:resourcekey="locNewCustomrBCOLibraryResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
@@ -29,8 +22,8 @@
                     <center>
                         <fieldset style="width: 92%;">
                             <legend>
-                                <asp:Label ID="lblHeader" runat="server" Text="Spot Target Chart"
-                                    meta:resourcekey="lblHeaderResource1"></asp:Label>
+                                <asp:Label ID="lblHeader" runat="server" Text="Add Custom BCO Library"
+                                    ></asp:Label>
                             </legend>
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server"
                                 Visible="False" />
@@ -51,17 +44,17 @@
                                             <asp:HiddenField ID="hdnSpotTargetID" runat="server" Value="0" />
                                         </div>
                                         <div style="float: left">
-                                            <asp:RequiredFieldValidator ID="rfvSpotTarget" runat="server" Display="Dynamic" ControlToValidate="txtChartName"
+                                            <asp:RequiredFieldValidator ID="rfvSpotTarget" runat="server" Display="Dynamic" ControlToValidate="txtSpotTargetName"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvSpotTargetNameContainer" runat="server"
-                                                    ValidationMsg="Please provide spot target name." ResourceValidationMsg="SpotTargetNameRequiredResource" Size="200" />
+                                                    ValidationMsg="Please provide Target Library Name." Size="200" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr runat="server" id="trCompanyName">
                                     <td align="right">
                                         <span style="font-weight: bold;">
                                             <asp:Localize Text="Company Name"
@@ -88,7 +81,7 @@
                                     <td align="right" style="vertical-align: top;">
                                         <span style="font-weight: bold;">
                                             <asp:Localize Text="Description" runat="server"
-                                                ID="loc" meta:resourcekey="locDescriptionResource1"></asp:Localize><span style="color: Red;">*</span> </span>
+                                                ID="loc" meta:resourcekey="locDescriptionResource1"></asp:Localize></span>
                                     </td>
                                     <td style="vertical-align: top;">
                                         <b>&nbsp;:&nbsp;</b>
@@ -100,31 +93,6 @@
                                                 Height="50px"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
-                                        </div>
-                                        <div class="clear">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        <span style="font-weight: bold;">
-                                            <asp:Localize Text="Chart Name" runat="server"
-                                                ID="locChartNameResource" meta:resourcekey="locChartNameResource1"></asp:Localize><span style="color: Red;">*</span> </span>
-                                    </td>
-                                    <td>
-                                        <b>&nbsp;:&nbsp;</b>
-                                    </td>
-                                    <td align="left">
-                                        <div style="float: left;">
-                                            <asp:TextBox ID="txtChartName" runat="server" MaxLength="27" Width="400px"
-                                                Height="19px"></asp:TextBox>
-                                        </div>
-                                        <div style="float: left">
-                                            <asp:RequiredFieldValidator ID="rfvChartName" runat="server" Display="Dynamic" ControlToValidate="txtChartName"
-                                                ForeColor="Red" ValidationGroup="vgAddSpotTarget">
-                                                <ucValidationContainer:ValidationContainer ID="rfvChartNameContainer" runat="server"
-                                                    ValidationMsg="Please provide chart name." ResourceValidationMsg="ChartNameRequiredResource" Size="200" />
-                                            </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -241,8 +209,82 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr id="Tr_UploadData" runat="server">
-                                   
+
+                                <tr id="TR_Density" runat="server">
+                                    <td align="left" colspan="3">
+                                        <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px Solid Gray;">
+                                            <tr>
+                                                <td valign="top" style="width: 100%;">
+                                                    <div id="Div1" style="padding-left: 5px;">
+                                                        <label>
+                                                            <b>
+                                                                <asp:Localize runat="server" Text="Option 1: Upload a set of colors"
+                                                                    ID="Localize1"></asp:Localize></b></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top" style="width: 100%; border-top: 1px Solid Gray; margin: 0;">
+                                                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px; margin-top:5px;">
+                                                        <tr id="Tr_UploadData" runat="server" >
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+                                                                <span style="font-weight: bold;">
+                                                                    <asp:Localize runat="server"
+                                                                        Text="Color Library CSV" ID="locUploadChartData"
+                                                                        meta:resourcekey="locUploadChartDataResource1"></asp:Localize><span style="color: Red;">*</span>
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <b>&nbsp;: &nbsp;</b>
+                                                            </td>
+                                                            <td style="vertical-align: top;">
+                                                                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <telerik:RadAsyncUpload runat="server" ID="fucUploadChartData"
+                                                                                MaxFileInputsCount="1" PostbackTriggers="lbtnSave,lbtnUploadChartData"
+                                                                                Width="200px" meta:resourcekey="fucUploadChartDataResource1">
+                                                                            </telerik:RadAsyncUpload>
+                                                                        </td>
+                                                                        <td></td>
+                                                                        <td align="right" style="width: 200px;">
+                                                                            <asp:LinkButton ID="lbtnUploadChartData" runat="server" CssClass="gray_bt"
+                                                                                OnClick="lbtnUploadChartData_Click"
+                                                                                meta:resourcekey="lbtnUploadChartDataResource1">
+                                                                                <span>
+                                                                                    <asp:Localize runat="server" Text="Submit"
+                                                                                        ID="locUploadChartDataButton"
+                                                                                        meta:resourcekey="locUploadChartDataButtonResource1"></asp:Localize>
+                                                                                </span>
+                                                                            </asp:LinkButton>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 5px;">
+                                                    <i>*The CSV should be formatted with four columns: [Color_Name,Target_L*,Target_a*,Target_b*].
+                                                        <br />
+                                                        *The Color_Name should not include spaces (use _Underscores).
+                                                        <br />
+                                                        <a href="Download/SampleCustomSpotTarget.csv">
+                                                            <input type='button' value='Download Sample CSV'></a>
+                                                        </a>
+                                                    </i>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <%--   <tr id="Tr_UploadData" runat="server">
                                     <td align="right" style="vertical-align: top;">
                                         <span style="font-weight: bold;">
                                             <asp:Localize runat="server"
@@ -278,7 +320,7 @@
                                         </table>
 
                                     </td>
-                                </tr>
+                                </tr>--%>
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;">
@@ -308,9 +350,11 @@
                                             <HeaderStyle Font-Bold="True"></HeaderStyle>
 
                                             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                                            <MasterTableView>
-                                                <CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
-
+                                            <MasterTableView CommandItemDisplay="Top">
+                                                <CommandItemSettings
+                                                    ShowExportToCsvButton="true"
+                                                    ShowRefreshButton="false"
+                                                    ShowAddNewRecordButton="false" />
                                                 <Columns>
                                                     <telerik:GridTemplateColumn DataField="ColorID" AllowFiltering="true" HeaderText="ColorID"
                                                         UniqueName="ColorID" SortExpression="ColorID" ItemStyle-CssClass="breakWord50"
@@ -376,7 +420,7 @@
                                                     </span>
                                                 </asp:LinkButton>
                                                 <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt"
-                                                    PostBackUrl="~/SpotTargetManagement.aspx">
+                                                    PostBackUrl="~/Settings.aspx">
                                                     <span>
                                                         <asp:Localize runat="server" Text="Cancel" ID="locCancel"
                                                             meta:resourcekey="locCancelResource1"></asp:Localize>
