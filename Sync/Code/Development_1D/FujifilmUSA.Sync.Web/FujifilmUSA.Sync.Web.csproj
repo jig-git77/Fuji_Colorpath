@@ -1902,6 +1902,7 @@
     <Content Include="Content\kendo\2020.2.617\kendo.silver.mobile.min.css.map" />
     <Content Include="Content\kendo\2020.2.617\kendo.uniform.min.css.map" />
     <Content Include="Content\kendo\2020.2.617\kendo.uniform.mobile.min.css.map" />
+    <Content Include="Download\SampleCustomSpotTarget.csv" />
     <None Include="Properties\PublishProfiles\CPSyncWeb.pubxml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
@@ -9404,7 +9405,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

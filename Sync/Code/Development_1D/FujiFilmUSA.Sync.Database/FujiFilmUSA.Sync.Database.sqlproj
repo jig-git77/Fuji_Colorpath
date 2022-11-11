@@ -140,8 +140,8 @@
     <None Include="Table Script\09_2022\09-23-2022_CPSyncV.GetMetricTargetPresetForMetricSum.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Table Script\10_2022\10-24-2022_[CPSpot].[CreateSpotTarget].sql" />
-    <Build Include="Table Script\10_2022\10-24-2022_ALTER_SpotTargetChartSetting_IsCustom.sql" />
-    <Build Include="Table Script\10_2022\10-28-2022_Insert_Permission.sql" />
+    <None Include="Table Script\10_2022\10-24-2022_[CPSpot].[CreateSpotTarget].sql" />
+    <None Include="Table Script\10_2022\10-24-2022_ALTER_SpotTargetChartSetting_IsCustom.sql" />
+    <None Include="Table Script\10_2022\10-28-2022_Insert_Permission.sql" />
   </ItemGroup>
 </Project>
