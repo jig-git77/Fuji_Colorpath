@@ -379,8 +379,8 @@
                         <img alt="" src="Images/admin-icon-divider.png" />
                     </div>
                     <div id="divAddCustomBcoTarget" runat="server" align="center" valign="bottom" style="width: 150px; float: left;">
-                        <asp:LinkButton ID="LinkButton2" runat="server"
-                            PostBackUrl="~/AddCustomBcoTarget.aspx">
+                        <asp:LinkButton ID="lnkAddCustomBcoTarget" runat="server"
+                            PostBackUrl="~/CustomBcoManagement.aspx">
                             <div>
                                 <asp:Image ID="ImgAddCustomBcoTarget" runat="server" AlternateText="Custom BCO Target Library" ImageUrl="~/Images/custom_bco_icon.png" ToolTip="Custom BCO Target Library" />
                             </div>

@@ -63,6 +63,7 @@
     <Folder Include="Table Script\08_2022" />
     <Folder Include="Table Script\09_2022" />
     <Folder Include="Table Script\10_2022" />
+    <Folder Include="Table Script\11_2022" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -143,5 +144,11 @@
     <None Include="Table Script\10_2022\10-24-2022_[CPSpot].[CreateSpotTarget].sql" />
     <None Include="Table Script\10_2022\10-24-2022_ALTER_SpotTargetChartSetting_IsCustom.sql" />
     <None Include="Table Script\10_2022\10-28-2022_Insert_Permission.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\11_2022\11-15-2022_ALTER_SpotTargetChartSetting_IsCustom.sql" />
+    <None Include="Table Script\11_2022\11-15-2022_CPSpot.CreateSpotTarget.sql" />
+    <None Include="Table Script\11_2022\11-15-2022_CPSpot.GetSpotTargets.sql" />
+    <None Include="Table Script\11_2022\11-15-2022_CPSpot.GetSpotTargets_CustomBCO.sql" />
   </ItemGroup>
 </Project>

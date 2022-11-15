@@ -28,6 +28,14 @@ namespace FujifilmUSA.Sync.Presenter
             spotBusiness.ErrorOccured += _viewSpotTargetManagement.ErrorOccured;
             _viewSpotTargetManagement.SpotTargetList = spotBusiness.GetSpotTargetList(0, _viewSpotTargetManagement.CurrentUserId);
         }
+
+        public void GetSpotTargets_CustomBCO()
+        {
+            var spotBusiness = BusinessFactory<ISpotTargetBusiness>.CreateObject();
+            spotBusiness.ErrorOccured += _viewSpotTargetManagement.ErrorOccured;
+            _viewSpotTargetManagement.SpotTargetList = spotBusiness.GetSpotTargetList_CustomBCO(0, _viewSpotTargetManagement.CurrentUserId);
+        }
+
         public void SaveSpotTarget()
         {
             var spotBusiness = BusinessFactory<ISpotTargetBusiness>.CreateObject();

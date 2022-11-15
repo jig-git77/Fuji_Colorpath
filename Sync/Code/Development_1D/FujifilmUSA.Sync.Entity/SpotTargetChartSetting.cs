@@ -28,7 +28,6 @@ namespace FujifilmUSA.Sync.Entity
         public int GapLeval { get; set; }
         public int PreviousL { get; set; }
         public int ChartRes { get; set; }
-        public bool IsCustom { get; set; }
     }
 
     [Serializable]

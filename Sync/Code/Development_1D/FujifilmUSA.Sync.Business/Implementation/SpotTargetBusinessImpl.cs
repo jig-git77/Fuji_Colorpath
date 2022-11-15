@@ -94,7 +94,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     spotTarget.spotTargetSetting.GapLeval,
                                                                                     spotTarget.spotTargetSetting.PreviousL,
                                                                                     spotTarget.spotTargetSetting.ChartRes,
-                                                                                    spotTarget.spotTargetSetting.IsCustom,
+                                                                                    spotTarget.IsCustom,
                                                                                     spotLabData.ToString()
                                                                                 });                     
                  },
@@ -218,6 +218,48 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotTarget"));
             return Convert.ToInt32(outParam.Value);
         }
+
+        /// <summary>
+        /// GetSpotTargetList_CustomBCO
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <param name="CurrentUserID"></param>
+        /// <returns></returns>
+        public List<SpotTarget> GetSpotTargetList_CustomBCO(int UserID, int CurrentUserID)
+        {
+            var objSpotTargets = new List<SpotTarget>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsSpots = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "[CPSpot].[GetSpotTargets_CustomBCO]",
+                            new object[]
+                                    {
+                                        UserID,CurrentUserID
+                                    });
+                    if (dsSpots != null && dsSpots.Tables.Count > 0 && dsSpots.Tables[0].Rows.Count > 0)
+                    {
+                        objSpotTargets = dsSpots.Tables[0].AsEnumerable().
+                            Select(x =>
+                                   new SpotTarget()
+                                   {
+                                       SpotTargetID = DataReader.ReadInt(x, "SpotTargetID"),
+                                       SpotTargetName = DataReader.ReadString(x, "SpotTargetName"),
+                                       Company = new Entity.Company()
+                                       {
+                                           CompanyId = DataReader.ReadInt(x, "CompanyID"),
+                                           CompanyName = DataReader.ReadString(x, "CompanyName"),
+                                       },
+                                       IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                   }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotTargetList"));
+            return objSpotTargets;
+        }
+
         #endregion
 
         #region ITaskBase Members

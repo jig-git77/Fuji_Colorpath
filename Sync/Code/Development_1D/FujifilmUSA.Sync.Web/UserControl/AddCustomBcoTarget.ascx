@@ -283,44 +283,6 @@
                                         </table>
                                     </td>
                                 </tr>
-
-                                <%--   <tr id="Tr_UploadData" runat="server">
-                                    <td align="right" style="vertical-align: top;">
-                                        <span style="font-weight: bold;">
-                                            <asp:Localize runat="server"
-                                                Text="Color Library CSV" ID="locUploadChartData"
-                                                meta:resourcekey="locUploadChartDataResource1"></asp:Localize><span style="color: Red;">*</span>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <b>&nbsp;: &nbsp;</b>
-                                    </td>
-                                    <td style="vertical-align: top;">
-                                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
-                                            <tr>
-                                                <td>
-                                                    <telerik:RadAsyncUpload runat="server" ID="fucUploadChartData"
-                                                        MaxFileInputsCount="1" PostbackTriggers="lbtnSave,lbtnUploadChartData"
-                                                        Width="200px" meta:resourcekey="fucUploadChartDataResource1">
-                                                    </telerik:RadAsyncUpload>
-                                                </td>
-                                                <td></td>
-                                                <td align="right" style="width: 200px;">
-                                                    <asp:LinkButton ID="lbtnUploadChartData" runat="server" CssClass="gray_bt"
-                                                        Width="170px" OnClick="lbtnUploadChartData_Click"
-                                                        meta:resourcekey="lbtnUploadChartDataResource1">
-                                                        <span>
-                                                            <asp:Localize runat="server" Text="Upload Chart Data"
-                                                                ID="locUploadChartDataButton"
-                                                                meta:resourcekey="locUploadChartDataButtonResource1"></asp:Localize>
-                                                        </span>
-                                                    </asp:LinkButton>
-                                                </td>
-                                            </tr>
-                                        </table>
-
-                                    </td>
-                                </tr>--%>
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;">
@@ -350,7 +312,7 @@
                                             <HeaderStyle Font-Bold="True"></HeaderStyle>
 
                                             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                                            <MasterTableView CommandItemDisplay="Top">
+                                            <MasterTableView CommandItemDisplay="Top" >
                                                 <CommandItemSettings
                                                     ShowExportToCsvButton="true"
                                                     ShowRefreshButton="false"
@@ -420,7 +382,7 @@
                                                     </span>
                                                 </asp:LinkButton>
                                                 <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt"
-                                                    PostBackUrl="~/Settings.aspx">
+                                                    PostBackUrl="~/CustomBcoManagement.aspx">
                                                     <span>
                                                         <asp:Localize runat="server" Text="Cancel" ID="locCancel"
                                                             meta:resourcekey="locCancelResource1"></asp:Localize>

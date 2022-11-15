@@ -67,7 +67,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (fucUploadChartData.UploadedFiles.Count > 0)
                 {
-
                     StreamReader sr = new StreamReader(fucUploadChartData.UploadedFiles[0].InputStream);
                     List<SpotTargetLAB> refChartImportData = new List<SpotTargetLAB>();
                     string strAllLine = sr.ReadToEnd();
@@ -217,7 +216,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             try
             {
-                if (rgChartData.Items.Count == 0)
+                if (hdnSpotTargetID.Value == "0" && rgChartData.Items.Count == 0)
                 {
                     throw new Exception("Please select Color Library Csv File.");
                 }
@@ -229,6 +228,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SpotTarget.SpotTargetName = txtSpotTargetName.Text;
                     SpotTarget.Description = txtDescription.Text;
                     SpotTarget.IsUsed = chkIsUsed.Checked;
+                    SpotTarget.IsCustom = true;
 
                     SpotProjectChartSetting spotTargetSetting = new SpotProjectChartSetting();
 
@@ -252,8 +252,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     spotTargetSetting.ReadMode = "Strip";
                     spotTargetSetting.Pages = Convert.ToInt32(txtPages.Text);
                     spotTargetSetting.RowsPerPage = Convert.ToInt32(txtRowsPerPage.Text);
-                    spotTargetSetting.IsCustom = true;
-
+                  
                     SpotTarget.spotTargetSetting = spotTargetSetting;
 
                     if (hdnSpotTargetID.Value == "0")
@@ -272,7 +271,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             _presenterSpotTarget.SaveSpotTarget();
                             if (IsErrorOccured) return;
-                            Response.Redirect("Settings.aspx");
+                            Response.Redirect("CustomBcoManagement.aspx");
                         }
                     }
                     else
@@ -280,7 +279,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SpotTarget.SpotTargetID = Convert.ToInt32(hdnSpotTargetID.Value);
                         _presenterSpotTarget.UpdateSpotTarget();
                         if (IsErrorOccured) return;
-                        Response.Redirect("Settings.aspx");
+                        Response.Redirect("CustomBcoManagement.aspx");
                     }
                 }
             }
