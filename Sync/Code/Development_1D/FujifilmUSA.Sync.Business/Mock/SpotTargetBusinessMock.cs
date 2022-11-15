@@ -30,6 +30,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public List<SpotTarget> GetSpotTargetList_CustomBCO(int UserID, int CurrentUserID)
+        {
+            return new List<SpotTarget>();
+        }
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;

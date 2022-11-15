@@ -1127,6 +1127,7 @@
     <Content Include="COViewOpenProject.aspx" />
     <Content Include="CSS\FirefoxPluginStyle.css" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
+    <Content Include="CustomBcoManagement.aspx" />
     <Content Include="CustomReports.aspx" />
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
@@ -4023,6 +4024,7 @@
     <Content Include="UserControl\COTransferSiteControl.ascx" />
     <Content Include="UserControl\COValidationCallback.ascx" />
     <Content Include="UserControl\COViewOpenProject.ascx" />
+    <Content Include="UserControl\CustomBcoManagement.ascx" />
     <Content Include="UserControl\CustomReports.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GenerateCustomReports.ascx" />
@@ -4646,6 +4648,13 @@
     <Compile Include="COViewOpenProject.aspx.designer.cs">
       <DependentUpon>COViewOpenProject.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomBcoManagement.aspx.cs">
+      <DependentUpon>CustomBcoManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomBcoManagement.aspx.designer.cs">
+      <DependentUpon>CustomBcoManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CustomReports.aspx.cs">
       <DependentUpon>CustomReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5237,6 +5246,13 @@
     </Compile>
     <Compile Include="UserControl\COViewOpenProject.ascx.designer.cs">
       <DependentUpon>COViewOpenProject.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\CustomBcoManagement.ascx.cs">
+      <DependentUpon>CustomBcoManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CustomBcoManagement.ascx.designer.cs">
+      <DependentUpon>CustomBcoManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\CustomReports.ascx.cs">
       <DependentUpon>CustomReports.ascx</DependentUpon>
@@ -9405,7 +9421,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
