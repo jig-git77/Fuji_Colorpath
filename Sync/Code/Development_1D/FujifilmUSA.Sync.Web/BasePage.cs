@@ -329,6 +329,13 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(CustomBcoManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCustomBCOTarget))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
 
             #endregion
             #region Regular Pages

@@ -101,9 +101,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        /// <summary>
+        /// likAdd_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void likAdd_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("AddCustomBcoTarget.aspx");
+        }
+
+        /// <summary>
+        /// likDelete_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void likDelete_Click(object sender, EventArgs e)
+        {
+            if (rgSpotTarget.Items.Count > 0)
+            {
+               
+            }
         }
 
         #endregion

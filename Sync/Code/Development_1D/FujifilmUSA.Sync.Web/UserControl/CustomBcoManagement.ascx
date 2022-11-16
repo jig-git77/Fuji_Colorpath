@@ -105,7 +105,7 @@
             </span>
         </asp:LinkButton>
 
-        <asp:LinkButton ID="likDelete" runat="server" class="button" meta:resourcekey="likAddResource1" OnClick="likAdd_Click">
+        <asp:LinkButton ID="likDelete" runat="server" class="button" meta:resourcekey="likAddResource1" OnClick="likDelete_Click">
             <span style="margin-top:0px">
                 <asp:Image ID="Image1" runat="server"
                     ImageUrl="../Images/delete_icon.png" meta:resourcekey="imgAddResource1"/>
@@ -139,11 +139,22 @@
                         <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" Visible="True">
                         </ExpandCollapseColumn>
                         <Columns>
+
                             <telerik:GridTemplateColumn
-                                UniqueName="SpotTargetName" HeaderText="Color ID" DataField="SpotTargetName"
+                                UniqueName="IsActive" AllowFiltering="False"  DataField="IsActive"
+                                meta:resourcekey="GridTemplateColumnResource7">
+                                <ItemTemplate>
+                                    <asp:CheckBox runat="server"/>
+                                </ItemTemplate>
+                                <HeaderStyle Width="40px" HorizontalAlign="Center" />
+                                <ItemStyle HorizontalAlign="Center" />
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn
+                                UniqueName="SpotTargetName" HeaderText="Color Name" DataField="SpotTargetName"
                                 SortExpression="SpotTargetName" FilterControlWidth="130px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
-                                FilterControlAltText="Filter ChartName column"
+                                FilterControlAltText="Filter Color Name column"
                                 meta:resourcekey="GridTemplateColumnResource1">
                                 <ItemTemplate>
                                     <asp:Label ID="lblSpotTargetName" runat="server" Text='<%# Eval("SpotTargetName") %>' />
@@ -152,29 +163,28 @@
                                 <ItemStyle Width="130px" Wrap="True" />
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn
-                                UniqueName="CompanyName" HeaderText="Color Name" DataField="Company.CompanyName"
-                                SortExpression="Company.CompanyName" FilterControlWidth="130px"
+                                UniqueName="Description" HeaderText="Description" DataField="Description"
+                                SortExpression="Description" FilterControlWidth="130px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
-                                FilterControlAltText="Filter CompanyName column"
+                                FilterControlAltText="Filter Description column"
                                 meta:resourcekey="GridTemplateColumnResource2">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("Company.CompanyName") %>' />
+                                    <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("Description") %>' />
                                 </ItemTemplate>
                                 <HeaderStyle Width="130px" />
                                 <ItemStyle Width="130px" Wrap="True" />
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn
-                                UniqueName="IsActive" AllowFiltering="False" HeaderText="IsActive?" DataField="IsActive"
-                                FilterControlWidth="40px"
-                                FilterControlAltText="Filter IsActive column"
-                                meta:resourcekey="GridTemplateColumnResource7">
+                              <telerik:GridTemplateColumn
+                                UniqueName="NumberOfColors" HeaderText="Number Of Colors" DataField="NumberOfColors"
+                                SortExpression="NumberOfColors" FilterControlWidth="130px"
+                                AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
+                                FilterControlAltText="Filter Number Of Colors column"
+                                meta:resourcekey="GridTemplateColumnResource2">
                                 <ItemTemplate>
-                                    <asp:Image ID="imgIsActive" runat="server"
-                                        ImageUrl='<%# Convert.ToBoolean(Eval("IsUsed")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>'
-                                        meta:resourcekey="imgIsActiveResource1" />
+                                    <asp:Label ID="lblNumberOfColors" runat="server" Text='<%# Eval("NumberOfColors") %>' />
                                 </ItemTemplate>
-                                <HeaderStyle Width="40px" HorizontalAlign="Center" />
-                                <ItemStyle HorizontalAlign="Center" />
+                                <HeaderStyle Width="130px" />
+                                <ItemStyle Width="130px" Wrap="True" />
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="SpotTargetID"
                                 UniqueName="Edit" FilterControlWidth="70px"
