@@ -96,7 +96,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     spotTarget.spotTargetSetting.ChartRes,
                                                                                     spotTarget.IsCustom,
                                                                                     spotLabData.ToString()
-                                                                                });                     
+                                                                                });
                  },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotTarget"));
             return returnValue;
@@ -247,12 +247,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                    {
                                        SpotTargetID = DataReader.ReadInt(x, "SpotTargetID"),
                                        SpotTargetName = DataReader.ReadString(x, "SpotTargetName"),
-                                       Company = new Entity.Company()
-                                       {
-                                           CompanyId = DataReader.ReadInt(x, "CompanyID"),
-                                           CompanyName = DataReader.ReadString(x, "CompanyName"),
-                                       },
-                                       IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                       Description = DataReader.ReadString(x, "Description"),
+                                       IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                       NumberOfColors = DataReader.ReadInt(x, "NumberOfColors")
                                    }).ToList();
                     }
                 },

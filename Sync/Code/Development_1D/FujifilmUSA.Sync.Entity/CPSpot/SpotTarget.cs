@@ -17,5 +17,6 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
         public bool IsCustom { get; set; }
         public SpotProjectChartSetting spotTargetSetting {get;set;}
         public List<SpotTargetLAB> spotTargetLab { get; set; }
+        public int NumberOfColors { get; set; }
     }
 }
