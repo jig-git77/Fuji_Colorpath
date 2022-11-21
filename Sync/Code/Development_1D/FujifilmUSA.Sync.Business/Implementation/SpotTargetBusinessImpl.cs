@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Entity.CPSpot;
 using System;
 using System.Collections.Generic;
@@ -144,6 +145,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     ChartRes = DataReader.ReadInt(x, "ChartRes")
                                 }
                             }).First();
+
+                        if (dsSpotTarget.Tables[1].Rows.Count > 0)
+                        {
+                            spotTarget.spotTargetLab = dsSpotTarget.Tables[1].AsEnumerable().
+                            Select(x => new SpotTargetLAB()
+                            {
+                                SpotID = DataReader.ReadShort(x, "SpotID"),
+                                SpotName = DataReader.ReadString(x, "SpotName"),
+                                Target_a = DataReader.ReadDecimal(x, "Target_a*"),
+                                Target_b = DataReader.ReadDecimal(x, "Target_b*"),
+                                Target_L = DataReader.ReadDecimal(x, "Target_L*"),
+                                HTMLColor = DataReader.ReadString(x, "HTMLColor")
+                            }).ToList();
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceCharts"));
@@ -156,9 +171,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                  () =>
                  {
-                     returnValue = DataAccessFactory.
-                        Instance.
-                        ExecuteProcedure("[CPSpot].[UpdateSpotTarget]", new object[]
+                     string strspotLabData = "";
+
+                     if (spotTarget.spotTargetLab!= null && spotTarget.spotTargetLab.Count > 0)
+                     {
+                         XElement spotLabData = new XElement("SpotTargetLABData",
+                                              spotTarget.spotTargetLab.
+                                              Select(x =>
+                                                  new XElement("SpotTargetLAB",
+                                                           new XAttribute("SpotID", x.SpotID),
+                                                           new XAttribute("SpotName", x.SpotName),
+                                                           new XAttribute("Target_L", x.Target_L),
+                                                           new XAttribute("Target_a", x.Target_a),
+                                                           new XAttribute("Target_b", x.Target_b)
+                                              //new XAttribute("HTMLColor", x.HTMLColor)
+                                              )).ToList());
+                         strspotLabData = spotLabData.ToString();
+                     }
+
+                     returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CPSpot].[UpdateSpotTarget]", new object[]
                                                                                 {
                                                                                     spotTarget.SpotTargetID,
                                                                                     spotTarget.Company.CompanyId,
@@ -182,13 +213,46 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     spotTarget.spotTargetSetting.Hgap,
                                                                                     spotTarget.spotTargetSetting.GapLeval,
                                                                                     spotTarget.spotTargetSetting.PreviousL,
-                                                                                    spotTarget.spotTargetSetting.ChartRes
+                                                                                    spotTarget.spotTargetSetting.ChartRes,
+                                                                                    strspotLabData
                                                                                 });
 
                  },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSpotTarget"));
             return returnValue;
         }
+
+
+        public int DeleteSpotTargetList(List<string> lstDeleteSpotTargetID)
+        {
+            string strSpotIdList = "";
+            var outParam = new Parameters() { ParameterName = "@isDeleted", Type = DbType.Int32 };
+
+            if (lstDeleteSpotTargetID != null && lstDeleteSpotTargetID.Count > 0)
+            {
+                XElement spotLabData = new XElement("SpotTargetIdData",
+                                   lstDeleteSpotTargetID.
+                                     Select(x => new XElement("SpotTarget", new XAttribute("SpotTargetId", x.ToString())
+                                     )).ToList());
+                strSpotIdList = spotLabData.ToString();
+            }
+
+            Common.ImplementBusinessLogic(
+                () =>
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSpot.DeleteSpotTargetList",
+                                          new List<Parameters>()
+                                             {
+                                                 new Parameters()
+                                                     {ParameterName = "@SpotTargetList", Size = 4000, Type = DbType.Xml, Value = strSpotIdList},
+                                             },
+                                         new List<Parameters>()
+                                             {
+                                                 outParam
+                                             }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotTarget"));
+            return Convert.ToInt32(outParam.Value);
+        }
+
 
         public int DeleteSpotTarget(int spotTargetId)
         {
@@ -249,7 +313,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        SpotTargetName = DataReader.ReadString(x, "SpotTargetName"),
                                        Description = DataReader.ReadString(x, "Description"),
                                        IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                       NumberOfColors = DataReader.ReadInt(x, "NumberOfColors")
+                                       NumberOfColors = DataReader.ReadInt(x, "NumberOfColors"),
+                                       Company = new Entity.Company()
+                                       {
+                                           CompanyId = DataReader.ReadInt(x, "CompanyID"),
+                                           CompanyName = DataReader.ReadString(x, "CompanyName"),
+                                       },
                                    }).ToList();
                     }
                 },

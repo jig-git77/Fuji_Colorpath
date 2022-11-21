@@ -66,5 +66,11 @@ namespace FujifilmUSA.Sync.Presenter
             spotBusiness.ErrorOccured += _viewSpotTargetManagement.ErrorOccured;
             return  spotBusiness.DeleteSpotTarget(_viewSpotTargetManagement.SpotTargetID);
         }
+        public int DeleteSpotTargetList()
+        {
+            var spotBusiness = BusinessFactory<ISpotTargetBusiness>.CreateObject();
+            spotBusiness.ErrorOccured += _viewSpotTargetManagement.ErrorOccured;
+            return spotBusiness.DeleteSpotTargetList(_viewSpotTargetManagement.lstDeleteSpotTarget);
+        }
     }
 }

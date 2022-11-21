@@ -1,3 +1,4 @@
+/****** Object:  StoredProcedure [CPSpot].[GetSpotTargets_CustomBCO]    Script Date: 11/16/2022 1:18:19 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -30,6 +31,9 @@ BEGIN
 	SELECT DISTINCT st.SpotTargetID
 		,st.SpotTargetName
 		,st.Description
+		,ISNULL(c.CompanyID, 0) AS CompanyID
+		,ISNULL(c.CompanyName, '') AS CompanyName
+		,IsUsed
 		,IsUsed
 		,ISNULL(stl.NumberOfColors,0) NumberOfColors
 	FROM CPSpot.SpotTarget st

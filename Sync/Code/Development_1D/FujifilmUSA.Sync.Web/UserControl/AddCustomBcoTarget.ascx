@@ -3,7 +3,18 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
-
+<telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+    <script type="text/javascript" language="javascript">
+        function ConfirmDeleteSpotTarget() {
+            if (confirm('<%= SpotTargetManagement_DeleteSpot_Confirmation %>')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+</telerik:RadCodeBlock>
 <div class="admin_top">
     &nbsp;
 </div>
@@ -22,8 +33,7 @@
                     <center>
                         <fieldset style="width: 92%;">
                             <legend>
-                                <asp:Label ID="lblHeader" runat="server" Text="Add Custom BCO Library"
-                                    ></asp:Label>
+                                <asp:Label ID="lblHeader" runat="server" Text="Add Custom BCO Library"></asp:Label>
                             </legend>
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server"
                                 Visible="False" />
@@ -225,8 +235,8 @@
                                             </tr>
                                             <tr>
                                                 <td valign="top" style="width: 100%; border-top: 1px Solid Gray; margin: 0;">
-                                                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px; margin-top:5px;">
-                                                        <tr id="Tr_UploadData" runat="server" >
+                                                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px; margin-top: 5px;">
+                                                        <tr id="Tr_UploadData" runat="server">
                                                             <td align="left" style="vertical-align: top; padding-left: 5px;">
                                                                 <span style="font-weight: bold;">
                                                                     <asp:Localize runat="server"
@@ -284,42 +294,25 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="right">
-                                        <span style="font-weight: bold;">
-                                            <asp:Localize Text="Is Used?" runat="server"
-                                                ID="locIsUsed" meta:resourcekey="locIsUsedResource1"></asp:Localize></span>
-                                    </td>
-                                    <td>
-                                        <b>&nbsp;:&nbsp;</b>
-                                    </td>
-                                    <td align="left">
-                                        <div style="float: left;">
-                                            <asp:CheckBox ID="chkIsUsed" runat="server" Checked="True"
-                                                meta:resourcekey="chkIsUsedResource1" />
-                                        </div>
-                                        <div class="clear">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td colspan="3">
                                         <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
                                             AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
-                                            EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true"
+                                            EnableLinqExpressions="False" Width="100%" HeaderStyle-Font-Bold="true"
                                             OnNeedDataSource="rgChartData_OnNeedDataSource"
+                                            OnItemCommand="rgSpotTarget_ItemCommand"
                                             GridLines="None">
 
                                             <HeaderStyle Font-Bold="True"></HeaderStyle>
 
                                             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                                            <MasterTableView CommandItemDisplay="Top" >
+                                            <MasterTableView CommandItemDisplay="Top">
                                                 <CommandItemSettings
-                                                    ShowExportToCsvButton="true"
+                                                    ShowExportToCsvButton="false"
                                                     ShowRefreshButton="false"
                                                     ShowAddNewRecordButton="false" />
                                                 <Columns>
-                                                    <telerik:GridTemplateColumn DataField="ColorID" AllowFiltering="true" HeaderText="ColorID"
-                                                        UniqueName="ColorID" SortExpression="ColorID" ItemStyle-CssClass="breakWord50"
+                                                    <telerik:GridTemplateColumn DataField="SpotID" AllowFiltering="true" HeaderText="ColorID"
+                                                        UniqueName="SpotID" SortExpression="SpotID" ItemStyle-CssClass="breakWord50"
                                                         ItemStyle-Wrap="true" ShowFilterIcon="true" ItemStyle-Width="10%"
                                                         meta:resourcekey="GridTemplateColumnResource1">
                                                         <ItemTemplate>
@@ -327,8 +320,8 @@
                                                                 meta:resourcekey="lblColorID" />
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
-                                                    <telerik:GridTemplateColumn DataField="ColorName" AllowFiltering="true" HeaderText="Spot Name"
-                                                        UniqueName="ColorName" SortExpression="ColorName" ItemStyle-CssClass="breakWord50"
+                                                    <telerik:GridTemplateColumn DataField="SpotName" AllowFiltering="true" HeaderText="Color Name"
+                                                        UniqueName="SpotName" SortExpression="SpotName" ItemStyle-CssClass="breakWord50"
                                                         ItemStyle-Wrap="true" ShowFilterIcon="true" ItemStyle-Width="15%"
                                                         meta:resourcekey="GridTemplateColumnResource2">
                                                         <ItemTemplate>
@@ -362,6 +355,40 @@
                                                             <asp:Label ID="lblTarget_b" runat="server" Text='<%# Eval("Target_b") %>'
                                                                 meta:resourcekey="lblTarget_bResource1" />
                                                         </ItemTemplate>
+                                                    </telerik:GridTemplateColumn>
+                                                    <telerik:GridTemplateColumn DataField="SpotTargetID"
+                                                        UniqueName="Edit" FilterControlWidth="70px"
+                                                        FilterControlAltText="Filter Edit column">
+                                                        <FilterTemplate>
+                                                            <center>
+                                                                <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter"
+                                                                    CommandName="ClearFilter">
+                                                                    <span>
+                                                                        <asp:Image ID="imgClearFillter" runat="server"
+                                                                            AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
+                                                                            meta:resourcekey="imgClearFillterResource1" />
+
+                                                                    </span>
+                                                                </asp:LinkButton>
+                                                            </center>
+                                                        </FilterTemplate>
+                                                        <ItemTemplate>
+                                                            <div>
+                                                                <center>
+                                                                    <div style="width: 45px;">
+                                                                        <div style="float: left;">
+                                                                            <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Spot Target" AlternateText="Delete"
+                                                                                ImageUrl="../Images/delete_icon.png" OnClientClick="javascript:return ConfirmDeleteSpotTarget()"
+                                                                                CommandArgument='<%# Eval("SpotID") %>' CommandName="Delete"
+                                                                                meta:resourcekey="imgbtnDeleteResource1" />
+                                                                        </div>
+                                                                        <div class="clear">
+                                                                        </div>
+                                                                    </div>
+                                                                </center>
+                                                            </div>
+                                                        </ItemTemplate>
+                                                        <HeaderStyle Width="70px" />
                                                     </telerik:GridTemplateColumn>
                                                 </Columns>
 

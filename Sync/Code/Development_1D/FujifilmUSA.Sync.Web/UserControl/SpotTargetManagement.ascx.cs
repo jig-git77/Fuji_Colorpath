@@ -111,6 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //public SpotMeasurement ReferenceChartType { get; set; }
         public int SpotTargetID { get; set; }
         public List<SpotTarget> SpotTargetList { get; set; }
+        public List<string> lstDeleteSpotTarget { get; set; }
         #endregion
     }
 }

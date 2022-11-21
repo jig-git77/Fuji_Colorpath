@@ -10,5 +10,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         int SpotTargetID { get; set; }
         List<SpotTarget> SpotTargetList { get; set; }
+        List<string> lstDeleteSpotTarget { get; set; }
     }
 }

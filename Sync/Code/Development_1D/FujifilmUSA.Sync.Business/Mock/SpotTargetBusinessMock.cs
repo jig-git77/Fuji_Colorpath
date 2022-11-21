@@ -34,6 +34,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<SpotTarget>();
         }
+
+        public int DeleteSpotTargetList(List<string> lstDeleteSpotTargetID)
+        {
+            return 1;
+        }
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;
