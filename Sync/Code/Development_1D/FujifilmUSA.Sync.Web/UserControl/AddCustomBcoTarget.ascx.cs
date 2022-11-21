@@ -14,15 +14,24 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Web.UI.DataVisualization.Charting;
 using Telerik.Web.UI.Skins;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class AddCustomBcoTarget : BaseControl, IViewAddSpotTarget, IViewDevice
     {
-        #region Private Variables - Globalization
+        #region Variables - Globalization
         private const string _recSelectCompany = "selectCompanyText";
         private const string _recEditSpotTarget = "editSpotTarget";
         private const string vsChartData = "_vsChartData";
+        public string SpotTargetManagement_DeleteSpot_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("SpotTargetManagement_DeleteSpot_Confirmation");
+            }
+        }
+
         #endregion
 
         #region Declaration
@@ -227,7 +236,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SpotTarget.Company.CompanyId = cmbCompany.SelectedValue == "" ? -1 : Convert.ToInt32(cmbCompany.SelectedValue);
                     SpotTarget.SpotTargetName = txtSpotTargetName.Text;
                     SpotTarget.Description = txtDescription.Text;
-                    SpotTarget.IsUsed = chkIsUsed.Checked;
+                    SpotTarget.IsUsed = true;
                     SpotTarget.IsCustom = true;
 
                     SpotProjectChartSetting spotTargetSetting = new SpotProjectChartSetting();
@@ -252,40 +261,62 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     spotTargetSetting.ReadMode = "Strip";
                     spotTargetSetting.Pages = Convert.ToInt32(txtPages.Text);
                     spotTargetSetting.RowsPerPage = Convert.ToInt32(txtRowsPerPage.Text);
-                  
+
                     SpotTarget.spotTargetSetting = spotTargetSetting;
 
-                    if (hdnSpotTargetID.Value == "0")
+                    if (ViewState[vsChartData] != null)
                     {
-                        if (ViewState[vsChartData] != null)
-                        {
-                            SpotTarget.spotTargetLab = ((List<SpotTargetLAB>)ViewState[vsChartData]).
-                                                                     Select(x => new SpotTargetLAB()
-                                                                     {
-                                                                         SpotID = x.SpotID,
-                                                                         SpotName = x.SpotName,
-                                                                         Target_L = x.Target_L,
-                                                                         Target_a = x.Target_a,
-                                                                         Target_b = x.Target_b
-                                                                     }).ToList();
 
+                        SpotTarget.spotTargetLab = ((List<SpotTargetLAB>)ViewState[vsChartData]).
+                                                                    Select(x => new SpotTargetLAB()
+                                                                    {
+                                                                        SpotID = x.SpotID,
+                                                                        SpotName = x.SpotName,
+                                                                        Target_L = x.Target_L,
+                                                                        Target_a = x.Target_a,
+                                                                        Target_b = x.Target_b
+                                                                    }).ToList();
+                        if (hdnSpotTargetID.Value == "0")
+                        {
                             _presenterSpotTarget.SaveSpotTarget();
                             if (IsErrorOccured) return;
                             Response.Redirect("CustomBcoManagement.aspx");
                         }
-                    }
-                    else
-                    {
-                        SpotTarget.SpotTargetID = Convert.ToInt32(hdnSpotTargetID.Value);
-                        _presenterSpotTarget.UpdateSpotTarget();
-                        if (IsErrorOccured) return;
-                        Response.Redirect("CustomBcoManagement.aspx");
+                        else
+                        {
+                            SpotTarget.SpotTargetID = Convert.ToInt32(hdnSpotTargetID.Value);
+                            _presenterSpotTarget.UpdateSpotTarget();
+                            if (IsErrorOccured) return;
+                            Response.Redirect("CustomBcoManagement.aspx");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 fujiStatusbar.DisplayMessage(ex.Message, false);
+            }
+        }
+
+        protected void rgSpotTarget_ItemCommand(object sender, GridCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "Delete":
+                    if (e.CommandArgument != null && ViewState[vsChartData] != null)
+                    {
+                        int SpotID = Convert.ToInt32(e.CommandArgument);
+                        List<SpotTargetLAB> refChartImportData = (List<SpotTargetLAB>)ViewState[vsChartData];
+                        refChartImportData.RemoveAt(SpotID - 1);
+
+                        for (short i = 0; i < refChartImportData.Count; i++)
+                        {
+                            refChartImportData[i].SpotID = (short)(i + 1);
+                        }
+
+                        ViewState[vsChartData] = refChartImportData;
+                    }
+                    break;
             }
         }
         #endregion
@@ -331,7 +362,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPages.Text = SpotTarget.spotTargetSetting.Pages.ToString();
                 txtRowsPerPage.Text = SpotTarget.spotTargetSetting.RowsPerPage.ToString();
 
-                chkIsUsed.Checked = (SpotTarget.IsUsed == true ? true : false);
+                if (SpotTarget.spotTargetLab.Count > 0)
+                {
+                    ViewState[vsChartData] = SpotTarget.spotTargetLab;
+                }
             }
         }
         #endregion

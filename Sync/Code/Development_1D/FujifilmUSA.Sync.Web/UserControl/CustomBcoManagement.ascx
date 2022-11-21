@@ -105,7 +105,7 @@
             </span>
         </asp:LinkButton>
 
-        <asp:LinkButton ID="likDelete" runat="server" class="button" meta:resourcekey="likAddResource1" OnClick="likDelete_Click">
+        <asp:LinkButton ID="likDelete" runat="server" class="button" meta:resourcekey="likAddResource1"  OnClientClick="javascript:return ConfirmDeleteSpotTarget()" OnClick="likDelete_Click">
             <span style="margin-top:0px">
                 <asp:Image ID="Image1" runat="server"
                     ImageUrl="../Images/delete_icon.png" meta:resourcekey="imgAddResource1"/>
@@ -140,16 +140,27 @@
                         </ExpandCollapseColumn>
                         <Columns>
 
+                              <telerik:GridTemplateColumn Visible="false"
+                                UniqueName="SpotTargetID" HeaderText="Spot Target ID" DataField="SpotTargetID"
+                                SortExpression="SpotTargetID" FilterControlWidth="130px"
+                                AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
+                                FilterControlAltText="Filter Color Name column"
+                                meta:resourcekey="GridTemplateColumnResource1">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSpotTargetID" runat="server" Text='<%# Eval("SpotTargetID") %>' />
+                                </ItemTemplate>
+                                <HeaderStyle Width="130px" />
+                                <ItemStyle Width="130px" Wrap="True" />
+                            </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn
-                                UniqueName="IsActive" AllowFiltering="False"  DataField="IsActive"
+                                UniqueName="DeleteConfirm" AllowFiltering="False"  DataField="IsActive"
                                 meta:resourcekey="GridTemplateColumnResource7">
                                 <ItemTemplate>
-                                    <asp:CheckBox runat="server"/>
+                                    <asp:CheckBox runat="server" ID="chkDelete" />
                                 </ItemTemplate>
                                 <HeaderStyle Width="40px" HorizontalAlign="Center" />
                                 <ItemStyle HorizontalAlign="Center" />
                             </telerik:GridTemplateColumn>
-
                             <telerik:GridTemplateColumn
                                 UniqueName="SpotTargetName" HeaderText="Color Name" DataField="SpotTargetName"
                                 SortExpression="SpotTargetName" FilterControlWidth="130px"
@@ -158,6 +169,18 @@
                                 meta:resourcekey="GridTemplateColumnResource1">
                                 <ItemTemplate>
                                     <asp:Label ID="lblSpotTargetName" runat="server" Text='<%# Eval("SpotTargetName") %>' />
+                                </ItemTemplate>
+                                <HeaderStyle Width="130px" />
+                                <ItemStyle Width="130px" Wrap="True" />
+                            </telerik:GridTemplateColumn>
+                               <telerik:GridTemplateColumn
+                                UniqueName="CompanyName" HeaderText="CompanyName Name" DataField="Company.CompanyName"
+                                SortExpression="Company.CompanyName" FilterControlWidth="130px"
+                                AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
+                                FilterControlAltText="Filter CompanyName column"
+                                meta:resourcekey="GridTemplateColumnResource2">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("Company.CompanyName") %>' />
                                 </ItemTemplate>
                                 <HeaderStyle Width="130px" />
                                 <ItemStyle Width="130px" Wrap="True" />

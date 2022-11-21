@@ -1,4 +1,5 @@
 ﻿using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Entity.CPSpot;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
@@ -8,7 +9,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Telerik.Web.Data;
 using Telerik.Web.UI;
+using Telerik.Web.UI.Skins;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -26,6 +29,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Constructor
+
+        /// <summary>
+        /// CustomBcoManagement
+        /// </summary>
         public CustomBcoManagement()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
@@ -33,10 +40,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Page Events
+
+        /// <summary>
+        /// OnInit
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnInit(EventArgs e)
         {
             _presenterSpotTarget = new PresenterSpotTargetManagement(this);
         }
+
+        /// <summary>
+        /// Page_Load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             rgSpotTarget.PageSize = Common.Utilities.PageSize;
@@ -50,6 +68,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Methods
 
+        /// <summary>
+        /// BindSpotTargetList
+        /// </summary>
         public void BindSpotTargetList()
         {
             _presenterSpotTarget.GetSpotTargets_CustomBCO();
@@ -57,12 +78,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 rgSpotTarget.DataSource = SpotTargetList;
                 rgSpotTarget.DataBind();
+
+                if (SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0)
+                {
+                    rgSpotTarget.MasterTableView.GetColumn("CompanyName").Visible = false;
+                }
             }
         }
 
         #endregion
 
         #region Control Events
+
+        /// <summary>
+        /// rgSpotTarget_ItemCommand
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void rgSpotTarget_ItemCommand(object sender, GridCommandEventArgs e)
         {
             switch (e.CommandName)
@@ -92,6 +124,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        /// <summary>
+        /// rgSpotTarget_NeedDataSource
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void rgSpotTarget_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             _presenterSpotTarget.GetSpotTargets_CustomBCO();
@@ -120,7 +157,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (rgSpotTarget.Items.Count > 0)
             {
-               
+                lstDeleteSpotTarget = new List<string>();
+
+                foreach (GridDataItem item in rgSpotTarget.MasterTableView.Items)
+                {
+                    CheckBox chkobj = item["DeleteConfirm"].FindControl("chkDelete") as CheckBox;
+                    if (chkobj.Checked)
+                    {
+                        lstDeleteSpotTarget.Add((item["SpotTargetID"].FindControl("lblSpotTargetID") as Label).Text);
+                    }
+                }
+
+                if (lstDeleteSpotTarget.Count > 0)
+                {
+                    int deleteResult = _presenterSpotTarget.DeleteSpotTargetList();
+                    if (deleteResult == -2)
+                        lblMessage.Text = GetResourceString("MessageSpotTargetAssignedToSpotProject");// "This spot target has BCO projects open, so please delete those first before deleting this.";
+                    else
+                    {
+                        lblMessage.Text = "";
+                        rgSpotTarget_NeedDataSource(null, null);
+                        rgSpotTarget.DataBind();
+                    }
+                }
             }
         }
 
@@ -130,6 +189,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //public SpotMeasurement ReferenceChartType { get; set; }
         public int SpotTargetID { get; set; }
         public List<SpotTarget> SpotTargetList { get; set; }
+        public List<string> lstDeleteSpotTarget { get; set; }
         #endregion
     }
 }

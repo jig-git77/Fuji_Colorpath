@@ -15,6 +15,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
 
         /// <summary>
+        /// RadCodeBlock1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadCodeBlock RadCodeBlock1;
+
+        /// <summary>
         /// locNewCustomrBCOLibrary control.
         /// </summary>
         /// <remarks>
@@ -346,24 +355,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locUploadChartDataButton;
-
-        /// <summary>
-        /// locIsUsed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locIsUsed;
-
-        /// <summary>
-        /// chkIsUsed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsUsed;
 
         /// <summary>
         /// rgChartData control.
