@@ -15,10 +15,20 @@ CREATE PROCEDURE [CPSpot].[DeleteSpotTargetList]
 AS
 BEGIN
 		
-    BEGIN TRY
-	
-		SET @isDeleted = -2 ;
-	
+    BEGIN TRY ;
+
+		WITH SpotTargetListData AS 
+		(
+			SELECT [SpotTargetXml].value('@SpotTargetId', 'INT') AS SpotTargetID
+			FROM @SpotTargetList.nodes('/SpotTargetIdData/SpotTarget') p([SpotTargetXml])
+		)
+		SELECT  @isDeleted = -2 FROM [CPSpot].[SpotProject] 	WHERE SpotTargetID in (SELECT SpotTargetID FROM SpotTargetListData ) ;
+
+		if (@isDeleted = -2)
+		BEGIN 			
+			RETURN 
+		END ;
+
 		BEGIN TRAN	;
 
 			WITH SpotTargetListData AS 
