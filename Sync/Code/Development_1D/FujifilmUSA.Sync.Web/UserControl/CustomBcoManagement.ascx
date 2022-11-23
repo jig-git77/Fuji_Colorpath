@@ -29,7 +29,7 @@
         border-style: solid;
         border-width: 0px 0 0px 0px;
     }
-
+    
     .RadGrid_Default .rgRow td, .RadGrid_Default .rgAltRow td, .RadGrid_Default .rgEditRow td, .RadGrid_Default .rgFooter td {
         border-style: none;
         border-width: 0 0 1px;
@@ -106,9 +106,9 @@
         </asp:LinkButton>
 
         <asp:LinkButton ID="likDelete" runat="server" class="button" meta:resourcekey="likAddResource1"  OnClientClick="javascript:return ConfirmDeleteSpotTarget()" OnClick="likDelete_Click">
-            <span style="margin-top:0px">
+            <span>
                 <asp:Image ID="Image1" runat="server"
-                    ImageUrl="../Images/delete_icon.png" meta:resourcekey="imgAddResource1"/>
+                    ImageUrl="../Images/delete_icon_LeftMenu.png" meta:resourcekey="imgAddResource1"/>
 
                 <asp:Localize runat="server" ID="Localize2" Text="Delete"
                     meta:resourcekey="locAddSpotTargetResource1"></asp:Localize>
@@ -174,7 +174,7 @@
                                 <ItemStyle Width="130px" Wrap="True" />
                             </telerik:GridTemplateColumn>
                                <telerik:GridTemplateColumn
-                                UniqueName="CompanyName" HeaderText="CompanyName Name" DataField="Company.CompanyName"
+                                UniqueName="CompanyName" HeaderText="Company Name" DataField="Company.CompanyName"
                                 SortExpression="Company.CompanyName" FilterControlWidth="130px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
                                 FilterControlAltText="Filter CompanyName column"

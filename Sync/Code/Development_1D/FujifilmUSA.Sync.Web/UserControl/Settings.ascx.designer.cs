@@ -24,6 +24,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locAdmin;
 
         /// <summary>
+        /// divGridItemCompany control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemCompany;
+
+        /// <summary>
         /// tdcompany control.
         /// </summary>
         /// <remarks>
@@ -60,13 +69,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locCompanyManagement;
 
         /// <summary>
-        /// divBranchSeprator control.
+        /// divGridItemBranch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBranchSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemBranch;
 
         /// <summary>
         /// tdBranch control.
@@ -105,13 +114,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locBranchManagement;
 
         /// <summary>
-        /// divUserSeprator control.
+        /// divGridItemUserManagement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUserSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemUserManagement;
 
         /// <summary>
         /// tdUser control.
@@ -132,13 +141,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.LinkButton lbtnUserManagement;
 
         /// <summary>
-        /// Image3 control.
+        /// Image6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image3;
+        protected global::System.Web.UI.WebControls.Image Image6;
 
         /// <summary>
         /// locUserMgmt control.
@@ -150,13 +159,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locUserMgmt;
 
         /// <summary>
-        /// divProfileManagementSeprator control.
+        /// divGridItemProfileManagement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divProfileManagementSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemProfileManagement;
 
         /// <summary>
         /// tdProfileManagement control.
@@ -177,13 +186,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.LinkButton lnkProfileMgmt;
 
         /// <summary>
-        /// Image4 control.
+        /// Image7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image4;
+        protected global::System.Web.UI.WebControls.Image Image7;
 
         /// <summary>
         /// locMySettings control.
@@ -195,13 +204,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locMySettings;
 
         /// <summary>
-        /// divLicenseSeprator control.
+        /// divGridItemLicenseManagement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLicenseSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemLicenseManagement;
 
         /// <summary>
         /// tdLicense control.
@@ -240,6 +249,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locLicenseMgmt;
 
         /// <summary>
+        /// divGridItemDeviceManagement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemDeviceManagement;
+
+        /// <summary>
         /// tdDevice control.
         /// </summary>
         /// <remarks>
@@ -276,13 +294,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locDeviceMgmt;
 
         /// <summary>
-        /// divMeasurementSeprator control.
+        /// divGridItemMeasurementDevice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMeasurementSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemMeasurementDevice;
 
         /// <summary>
         /// tdMeasurementDevice control.
@@ -321,13 +339,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locMeasurementDevice;
 
         /// <summary>
-        /// divDownloadSeprator control.
+        /// divGridItemDownload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDownloadSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemDownload;
 
         /// <summary>
         /// tdDownload control.
@@ -366,13 +384,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locDownload;
 
         /// <summary>
-        /// divRefChartSeparator control.
+        /// divGridItemReferenceChart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRefChartSeparator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemReferenceChart;
 
         /// <summary>
         /// tdReferenceChart control.
@@ -411,13 +429,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locReferenceChart;
 
         /// <summary>
-        /// divSourceProfileSeprator control.
+        /// divGridItemSourceProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSourceProfileSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemSourceProfile;
 
         /// <summary>
         /// tdSourceProfile control.
@@ -456,6 +474,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locSourceProfile;
 
         /// <summary>
+        /// divGridItemActivityValidationRules control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemActivityValidationRules;
+
+        /// <summary>
         /// dvActivityValidationRules control.
         /// </summary>
         /// <remarks>
@@ -492,13 +519,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locActivityValidationRules;
 
         /// <summary>
-        /// divProfilerSettingSeparator control.
+        /// divGridItemProfilerSettings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divProfilerSettingSeparator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemProfilerSettings;
 
         /// <summary>
         /// dvProfilerSettings control.
@@ -537,13 +564,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locProfilerSettings;
 
         /// <summary>
-        /// divApplicationConfigurationSeparator control.
+        /// divGridItemApplicationConfiguration control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divApplicationConfigurationSeparator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemApplicationConfiguration;
 
         /// <summary>
         /// dvApplicationConfiguration control.
@@ -582,13 +609,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locApplicationConfiguration;
 
         /// <summary>
-        /// divMetricTargetPresetSeparator control.
+        /// divGridItemMetricTargetPreset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMetricTargetPresetSeparator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemMetricTargetPreset;
 
         /// <summary>
         /// divMetricTargetPreset control.
@@ -609,13 +636,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.LinkButton lnkbtnMetricTargetPreset;
 
         /// <summary>
-        /// Image7 control.
+        /// Image3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image7;
+        protected global::System.Web.UI.WebControls.Image Image3;
 
         /// <summary>
         /// locMetricTargetPreset control.
@@ -627,13 +654,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locMetricTargetPreset;
 
         /// <summary>
-        /// divPatchPresetSeparator control.
+        /// divGridItemPatchPreset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPatchPresetSeparator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemPatchPreset;
 
         /// <summary>
         /// divPatchPreset control.
@@ -663,13 +690,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image Image9;
 
         /// <summary>
-        /// Localize1 control.
+        /// Localize3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
+        protected global::System.Web.UI.WebControls.Localize Localize3;
+
+        /// <summary>
+        /// divGridItemPrintStandardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemPrintStandardType;
 
         /// <summary>
         /// divPrintStandardType control.
@@ -699,22 +735,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image Image8;
 
         /// <summary>
-        /// Localize2 control.
+        /// Localize4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize Localize4;
 
         /// <summary>
-        /// divLookupTVILABDensitySeparator control.
+        /// divGridItemLookupTVILABDensity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLookupTVILABDensitySeparator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemLookupTVILABDensity;
 
         /// <summary>
         /// divLookupTVILABDensity control.
@@ -726,40 +762,40 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLookupTVILABDensity;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// LinkButton3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
 
         /// <summary>
-        /// Image6 control.
+        /// Image4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image6;
+        protected global::System.Web.UI.WebControls.Image Image4;
 
         /// <summary>
-        /// Localize3 control.
+        /// Localize5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
+        protected global::System.Web.UI.WebControls.Localize Localize5;
 
         /// <summary>
-        /// divSpotTargetSeparator control.
+        /// divGridItemSpotTarget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSpotTargetSeparator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemSpotTarget;
 
         /// <summary>
         /// divSpotTarget control.
@@ -789,22 +825,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image Image10;
 
         /// <summary>
-        /// Localize4 control.
+        /// Localize6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize4;
+        protected global::System.Web.UI.WebControls.Localize Localize6;
 
         /// <summary>
-        /// divMetricTargetSeperator control.
+        /// divGridItemMetricTarget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMetricTargetSeperator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemMetricTarget;
 
         /// <summary>
         /// divMetricTarget control.
@@ -834,22 +870,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image Image11;
 
         /// <summary>
-        /// Localize5 control.
+        /// Localize7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize5;
+        protected global::System.Web.UI.WebControls.Localize Localize7;
 
         /// <summary>
-        /// divMeasurementLogSeperator control.
+        /// divGridItemMeasurementLog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMeasurementLogSeperator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemMeasurementLog;
 
         /// <summary>
         /// divMeasurementLog control.
@@ -879,13 +915,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image ImgMeasurementLog;
 
         /// <summary>
-        /// Localize6 control.
+        /// Localize8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize6;
+        protected global::System.Web.UI.WebControls.Localize Localize8;
+
+        /// <summary>
+        /// divGridItemMToolVersion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemMToolVersion;
 
         /// <summary>
         /// divMToolVersion control.
@@ -915,22 +960,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image ImgMToolVersion;
 
         /// <summary>
-        /// Localize7 control.
+        /// Localize9 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize7;
+        protected global::System.Web.UI.WebControls.Localize Localize9;
 
         /// <summary>
-        /// divUpdateChangeLogSeperator control.
+        /// divGridItemUpdateChangeLog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUpdateChangeLogSeperator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemUpdateChangeLog;
 
         /// <summary>
         /// divUpdateChangeLog control.
@@ -960,22 +1005,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image ImgUpdateChangeLog;
 
         /// <summary>
-        /// Localize8 control.
+        /// Localize10 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize8;
+        protected global::System.Web.UI.WebControls.Localize Localize10;
 
         /// <summary>
-        /// divAssignChartWithMTPSeperator control.
+        /// divGridItemAssignChartWithMTP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAssignChartWithMTPSeperator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemAssignChartWithMTP;
 
         /// <summary>
         /// divAssignChartWithMTP control.
@@ -1005,22 +1050,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image ImgAssignChartWithMTP;
 
         /// <summary>
-        /// Localize9 control.
+        /// Localize11 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize9;
+        protected global::System.Web.UI.WebControls.Localize Localize11;
 
         /// <summary>
-        /// divAddCustomBcoTargetSeperator control.
+        /// divGridItemCustomBcoTarget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAddCustomBcoTargetSeperator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridItemCustomBcoTarget;
 
         /// <summary>
         /// divAddCustomBcoTarget control.
@@ -1050,12 +1095,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Image ImgAddCustomBcoTarget;
 
         /// <summary>
-        /// Localize10 control.
+        /// Localize12 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize10;
+        protected global::System.Web.UI.WebControls.Localize Localize12;
     }
 }

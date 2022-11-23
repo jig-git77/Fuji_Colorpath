@@ -47,29 +47,57 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divAssignChartWithMTP.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.AssignChartWithMTP);
             divAddCustomBcoTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCustomBCOTarget);
 
-            ////seperator image 
-            divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
-            divUserSeprator.Visible = tdUser.Visible && tdBranch.Visible;
-            divProfileManagementSeprator.Visible = tdProfileManagement.Visible && tdUser.Visible;
-            divLicenseSeprator.Visible = tdLicense.Visible && tdProfileManagement.Visible;
+            divGridItemCompany.Visible = tdcompany.Visible;
+            divGridItemBranch.Visible = tdBranch.Visible;
+            divGridItemUserManagement.Visible = tdUser.Visible;
+            divGridItemProfileManagement.Visible = tdProfileManagement.Visible;
+            divGridItemLicenseManagement.Visible = tdLicense.Visible;
+            divGridItemDeviceManagement.Visible = tdDevice.Visible;
+            divGridItemActivityValidationRules.Visible = dvActivityValidationRules.Visible;
+            divGridItemPrintStandardType.Visible = divPrintStandardType.Visible;
 
-            divMeasurementSeprator.Visible = tdMeasurementDevice.Visible && tdDevice.Visible;
-            divDownloadSeprator.Visible = tdDownload.Visible && tdMeasurementDevice.Visible;
-            divRefChartSeparator.Visible = tdReferenceChart.Visible && tdDownload.Visible;
-            divSourceProfileSeprator.Visible = tdSourceProfile.Visible && tdReferenceChart.Visible;
+            divGridItemMeasurementDevice.Visible = tdMeasurementDevice.Visible;
+            divGridItemDownload.Visible = tdDownload.Visible;
+            divGridItemReferenceChart.Visible = tdReferenceChart.Visible;
+            divGridItemSourceProfile.Visible = tdSourceProfile.Visible;
 
-            divProfilerSettingSeparator.Visible = dvProfilerSettings.Visible && dvActivityValidationRules.Visible;
-            divApplicationConfigurationSeparator.Visible = dvApplicationConfiguration.Visible && dvProfilerSettings.Visible;
+            divGridItemProfilerSettings.Visible = dvProfilerSettings.Visible;
+            divGridItemApplicationConfiguration.Visible = dvApplicationConfiguration.Visible;
 
-            divMetricTargetPresetSeparator.Visible = divMetricTargetPreset.Visible && dvApplicationConfiguration.Visible;
-            divPatchPresetSeparator.Visible = divPatchPreset.Visible && dvApplicationConfiguration.Visible;
-            divLookupTVILABDensitySeparator.Visible = divLookupTVILABDensity.Visible && divPrintStandardType.Visible;
-            divSpotTargetSeparator.Visible = divSpotTarget.Visible && divLookupTVILABDensitySeparator.Visible;
-            divMetricTargetSeperator.Visible = divMetricTarget.Visible && divSpotTarget.Visible;
-            divMeasurementLogSeperator.Visible = divMeasurementLog.Visible && divMetricTarget.Visible;
-            divUpdateChangeLogSeperator.Visible = divMToolVersion.Visible && divUpdateChangeLog.Visible;
-            divAssignChartWithMTPSeperator.Visible = divUpdateChangeLog.Visible && divAssignChartWithMTP.Visible;
-            divAddCustomBcoTargetSeperator.Visible = divAssignChartWithMTP.Visible && divAddCustomBcoTarget.Visible;
+            divGridItemMetricTargetPreset.Visible = divMetricTargetPreset.Visible;
+            divGridItemPatchPreset.Visible = divPatchPreset.Visible;
+            divGridItemLookupTVILABDensity.Visible = divLookupTVILABDensity.Visible;
+            divGridItemSpotTarget.Visible = divSpotTarget.Visible;
+            divGridItemMetricTarget.Visible = divMetricTarget.Visible;
+            divGridItemMeasurementLog.Visible = divMeasurementLog.Visible;
+            divGridItemMToolVersion.Visible = divMToolVersion.Visible;
+            divGridItemUpdateChangeLog.Visible = divUpdateChangeLog.Visible;
+            divGridItemAssignChartWithMTP.Visible = divAssignChartWithMTP.Visible;
+            #region Commented Code
+            //seperator image 
+            //divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
+            //divUserSeprator.Visible = tdUser.Visible && tdBranch.Visible;
+            //divProfileManagementSeprator.Visible = tdProfileManagement.Visible && tdUser.Visible;
+            //divLicenseSeprator.Visible = tdLicense.Visible && tdProfileManagement.Visible;
+
+            //divMeasurementSeprator.Visible = tdMeasurementDevice.Visible && tdDevice.Visible;
+            //divDownloadSeprator.Visible = tdDownload.Visible && tdMeasurementDevice.Visible;
+            //divRefChartSeparator.Visible = tdReferenceChart.Visible && tdDownload.Visible;
+            //divSourceProfileSeprator.Visible = tdSourceProfile.Visible && tdReferenceChart.Visible;
+
+            //divProfilerSettingSeparator.Visible = dvProfilerSettings.Visible && dvActivityValidationRules.Visible;
+            //divApplicationConfigurationSeparator.Visible = dvApplicationConfiguration.Visible && dvProfilerSettings.Visible;
+
+            //divMetricTargetPresetSeparator.Visible = divMetricTargetPreset.Visible && dvApplicationConfiguration.Visible;
+            //divPatchPresetSeparator.Visible = divPatchPreset.Visible && dvApplicationConfiguration.Visible;
+            //divLookupTVILABDensitySeparator.Visible = divLookupTVILABDensity.Visible && divPrintStandardType.Visible;
+            //divSpotTargetSeparator.Visible = divSpotTarget.Visible && divLookupTVILABDensitySeparator.Visible;
+            //divMetricTargetSeperator.Visible = divMetricTarget.Visible && divSpotTarget.Visible;
+            //divMeasurementLogSeperator.Visible = divMeasurementLog.Visible && divMetricTarget.Visible;
+            //divUpdateChangeLogSeperator.Visible = divMToolVersion.Visible && divUpdateChangeLog.Visible;
+            //divAssignChartWithMTPSeperator.Visible = divUpdateChangeLog.Visible && divAssignChartWithMTP.Visible;
+            //divAddCustomBcoTargetSeperator.Visible = divAssignChartWithMTP.Visible && divAddCustomBcoTarget.Visible; 
+            #endregion
         }
         #endregion
 
