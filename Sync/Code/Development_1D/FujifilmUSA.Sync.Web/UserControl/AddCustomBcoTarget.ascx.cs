@@ -15,6 +15,12 @@ using System.Text.RegularExpressions;
 using System.Web.UI.DataVisualization.Charting;
 using Telerik.Web.UI.Skins;
 using FujifilmUSA.Sync.Common;
+using System.Text;
+using System.Data;
+using System.Reflection;
+using System.Web.Services.Description;
+using AjaxControlToolkit.HTMLEditor.ToolbarButton;
+using System.Runtime.Remoting.Lifetime;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -387,5 +393,108 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Device SelectedDevice { get; set; }
         public int DeviceId { get; set; }
         #endregion
+
+        protected void lbtnCSVSpotTargetLAB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               if (hdnSpotTargetID.Value == "0" && rgChartData.Items.Count == 0)
+                {
+                    throw new Exception("Please submit selected Color Library Csv File.");
+                }
+                else if (rgChartData.Items.Count == 0)
+                {
+                    throw new Exception("No record found.");
+                }
+                else
+                {
+                    var spotTargetLab = (IList<SpotTargetLAB>)ViewState[vsChartData];
+                    string exportedFileName = "SpotTargetLab.csv";
+                    exportedFileName = exportedFileName.Replace(":", "_").Replace("/", "_").Replace(" ", "_");
+                    var csvFile = new ExportFile<SpotTargetLAB>(spotTargetLab, exportedFileName);
+                    var filePath = csvFile.ExportCSV();
+                    if (File.Exists(filePath))
+                    {
+                        var path = "UploadFiles/CsvFile/" + exportedFileName;
+                        ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert",
+                            String.Format("DownloadCsv('{0}');", path), true);
+                                       }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                fujiStatusbar.DisplayMessage(ex.Message, false);
+            }
+        }
+
+        public void ExportTableDateAsCSV(DataTable dtSpotTargetLab)
+        {
+            if (dtSpotTargetLab != null && dtSpotTargetLab.Rows.Count > 0)
+            {
+                string exportedFileInfo = "SpotTargetLab_" + DateTime.Now.ToUniversalTime() + ".csv";
+                exportedFileInfo = exportedFileInfo.Replace(":", "_").Replace("/", "_").Replace(" ", "_");
+                StringBuilder sb = new StringBuilder();
+                string[] columnName = dtSpotTargetLab.Columns.Cast<DataColumn>().Select(c => c.ColumnName).ToArray();
+                var header = string.Join(",", columnName);
+                sb.AppendLine(header);
+
+                List<string> values = dtSpotTargetLab.AsEnumerable().Select(r => string.Join(",", r.ItemArray)).ToList();
+                var rows = string.Join(Environment.NewLine, values);
+                sb.AppendLine(rows);
+
+                System.Web.HttpContext.Current.Response.Clear();
+                System.Web.HttpContext.Current.Response.ContentType = "application/octet-stream";
+                System.Web.HttpContext.Current.Response.AddHeader("content-length", sb.Length.ToString());
+                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + exportedFileInfo);
+                System.Web.HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                System.Web.HttpContext.Current.Response.Write(sb.ToString());
+                System.Web.HttpContext.Current.Response.End();
+
+
+                #region Commented
+                //System.Web.HttpContext.Current.Response.Buffer = true;
+
+                //System.Web.HttpContext.Current.Response.Charset = "";
+
+                //System.Web.HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+                //System.Web.HttpContext.Current.Response.ContentType = ReturnExtension(".csv");
+
+                //System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=");
+
+                //System.Web.HttpContext.Current.Response.BinaryWrite(bytes);
+
+                //System.Web.HttpContext.Current.Response.Flush();
+
+                //System.Web.HttpContext.Current.Response.End(); 
+                #endregion
+
+            }
+        }
+
+        public DataTable ToDataTable<T>(List<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+            //Get all the properties
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name);
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    values[i] = Props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check datatable
+            return dataTable;
+        }
     }
 }
