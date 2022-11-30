@@ -3,6 +3,11 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+    function DownloadCsv(path) {
+        window.location.href = path;
+    }
+</script>
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
         function ConfirmDeleteSpotTarget() {
@@ -293,6 +298,17 @@
                                         </table>
                                     </td>
                                 </tr>
+                                 <tr>
+                                    <td colspan="3" style="text-align:right;">
+                                         <asp:LinkButton ID="lbtnCSVSpotTargetLAB" runat="server" CssClass="gray_bt"
+                                                    OnClick="lbtnCSVSpotTargetLAB_Click">
+                                                    <span>
+                                                        <asp:Localize runat="server" Text="Download CSV" ID="locCSVSpotTargetLAB" 
+                                                            meta:resourcekey="locCSVSpotTargetLABResource1"></asp:Localize>
+                                                    </span>
+                                                </asp:LinkButton>
+                                        </td>
+                                     </tr>
                                 <tr>
                                     <td colspan="3">
                                         <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
@@ -305,11 +321,7 @@
                                             <HeaderStyle Font-Bold="True"></HeaderStyle>
 
                                             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                                            <MasterTableView CommandItemDisplay="Top">
-                                                <CommandItemSettings
-                                                    ShowExportToCsvButton="false"
-                                                    ShowRefreshButton="false"
-                                                    ShowAddNewRecordButton="false" />
+                                            <MasterTableView CommandItemDisplay="None">
                                                 <Columns>
                                                     <telerik:GridTemplateColumn DataField="SpotID" AllowFiltering="true" HeaderText="ColorID"
                                                         UniqueName="SpotID" SortExpression="SpotID" ItemStyle-CssClass="breakWord50"
@@ -415,6 +427,7 @@
                                                             meta:resourcekey="locCancelResource1"></asp:Localize>
                                                     </span>
                                                 </asp:LinkButton>
+                                                                                               <%--<a id="anchorDownloadCsv" runat="server">Jay</a>--%>
                                                 <input id="Hidden_OriginalChart" type="hidden" value="0" runat="server" />
                                                 <input id="Hidden_ChartPreview" type="hidden" value="0" runat="server" />
                                             </div>

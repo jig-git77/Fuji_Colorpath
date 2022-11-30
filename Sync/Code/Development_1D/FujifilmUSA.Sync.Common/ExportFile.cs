@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.IO;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -12,7 +13,7 @@ namespace FujifilmUSA.Sync.Common
         IList<T> lst { get; set; }
         StringBuilder header;
         StringBuilder content;
-        
+
         /// <summary>
         /// Converts the list into tab seperated txt file.
         /// </summary>
@@ -24,7 +25,7 @@ namespace FujifilmUSA.Sync.Common
             FileName = fileName;
         }
 
-       
+
         /// <summary>
         /// Export file 
         /// </summary>
@@ -39,9 +40,32 @@ namespace FujifilmUSA.Sync.Common
             GetContent(properties);
 
             System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-            byte[] value = encoding.GetBytes(string.Format("{0}{1}{2}", header.ToString(),Environment.NewLine,content.ToString()));
+            byte[] value = encoding.GetBytes(string.Format("{0}{1}{2}", header.ToString(), Environment.NewLine, content.ToString()));
             Utilities.DownloadFile(value, FileName);
         }
+
+        public string ExportCSV()
+        {
+            Type entType = typeof(T);
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(entType);
+
+            header = new StringBuilder(10 * lst.Count * properties.Count);
+            content = new StringBuilder(10 * lst.Count * properties.Count);
+
+            GetContent(properties);
+
+            System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+            byte[] value = encoding.GetBytes(string.Format("{0}{1}{2}", header.ToString(), Environment.NewLine, content.ToString()));
+
+            string csvFolderPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CsvFile/");
+            if (!Directory.Exists(csvFolderPath))
+                Directory.CreateDirectory(csvFolderPath);
+            string filePath = csvFolderPath + FileName;
+            File.WriteAllBytes(filePath, value);
+            return filePath;
+        }
+
+
         private void GetContent(PropertyDescriptorCollection properties)
         {
             string delementer = new System.IO.FileInfo(FileName).Extension.Equals(".txt") ? "\t" : ",";
@@ -103,7 +127,7 @@ namespace FujifilmUSA.Sync.Common
         }
         protected string CleanCSVString(string input, string strWordWapper)
         {
-            return string.Format("{0}{1}{0}", strWordWapper,input.Replace("\"", "\"\"").Replace("\r\n", " ").Replace("\r", " ").Replace("\n", ""));
+            return string.Format("{0}{1}{0}", strWordWapper, input.Replace("\"", "\"\"").Replace("\r\n", " ").Replace("\r", " ").Replace("\n", ""));
         }
 
         ~ExportFile()
