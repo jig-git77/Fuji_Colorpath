@@ -390,7 +390,26 @@ namespace FujifilmUSA.Sync.Common
                 fp.Close();
                 SBStr = SetPDFContent(SBStr);
 
-                theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
+
+                if (ReportType == 17) //----For ISO Opti / Validation Report + 4D ISO validation Report (Use "theDoc.AddImageUrl" function instead of "theDoc.AddImageHtml" function because file size is crossing 1 MB which is not supported by ABCPDF, so they advice to use this other function to bypass size limit- only problem happens in Safari)
+                {
+                    string TempFileName = "Test" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".html";
+                    string TempFilePath = PDFPath + "TempISOReport/" + TempFileName;
+                    if (System.IO.File.Exists(TempFilePath))  // === If same named html file is already available then remove === //
+                    {
+                        System.IO.File.Delete(TempFilePath);
+                    }
+                    File.WriteAllText(TempFilePath, SBStr.ToString());
+                    theID = theDoc.AddImageUrl(TempFilePath, true, 700, false);
+                    File.Delete(TempFilePath); //---Delete file since needed work is finished
+                    
+                }
+                else //----For rest of all types of reports use existing logic
+                {
+                    theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
+                }
+               
+
                 theDoc.Rect.Inset(0, 1);
 
 
