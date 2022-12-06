@@ -84,7 +84,7 @@ BEGIN
 					,[SpotTargetXml].value('@Target_a', 'DECIMAL(6,2)') AS Target_a
 					,[SpotTargetXml].value('@Target_b', 'DECIMAL(6,2)') AS Target_b
 				--,[SpotTargetXml].value('@HTMLColor', 'VARCHAR(7)') AS HTMLColor
-				FROM @SpotTargetLABXml.nodes('/SpotTargetLABData/SpotTargetId') p([SpotTargetXml])
+				FROM @SpotTargetLABXml.nodes('/SpotTargetLABData/SpotTargetLAB') p([SpotTargetXml])
 				)
 			INSERT INTO CPSpot.SpotTargetLAB (
 				SpotTargetID
