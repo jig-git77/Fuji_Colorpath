@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="colorIDmustbeunique" xml:space="preserve">
+    <value>カラー ID は一意である必要があります。</value>
+  </data>
+  <data name="colorNamemustbeallowalphanumeric" xml:space="preserve">
+    <value>色名には、英数字と _ (アンダースコア)、行番号 {0} を使用する必要があります。</value>
+  </data>
+  <data name="editSpotTarget" xml:space="preserve">
+    <value>スポット ターゲットの編集</value>
+  </data>
+  <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
+    <value>カラーID</value>
+  </data>
+  <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
+    <value>色名</value>
+  </data>
+  <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
+    <value>ターゲット L*</value>
+  </data>
+  <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
+    <value>ターゲットa*</value>
+  </data>
+  <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
+    <value>目標b*</value>
+  </data>
+  <data name="lblHeaderResource1.Text" xml:space="preserve">
+    <value>スポット ターゲットを追加</value>
+  </data>
+  <data name="locCancelResource1.Text" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="locChartBorderResource1.Text" xml:space="preserve">
+    <value>チャートの境界線</value>
+  </data>
+  <data name="locChartResResource1.Text" xml:space="preserve">
+    <value>チャートレス</value>
+  </data>
+  <data name="locChartSizeXResource1.Text" xml:space="preserve">
+    <value>チャートサイズ X</value>
+  </data>
+  <data name="locChartSizeYResource1.Text" xml:space="preserve">
+    <value>チャートサイズ Y</value>
+  </data>
+  <data name="locCompanyNameResource1.Text" xml:space="preserve">
+    <value>会社名</value>
+  </data>
+  <data name="locDescriptionResource1.Text" xml:space="preserve">
+    <value>説明</value>
+  </data>
+  <data name="locGapLevelResource1.Text" xml:space="preserve">
+    <value>ギャップレベル</value>
+  </data>
+  <data name="locHgapResource1.Text" xml:space="preserve">
+    <value>水平ギャップ</value>
+  </data>
+  <data name="locIsUsedResource1.Text" xml:space="preserve">
+    <value>使用されている？</value>
+  </data>
+  <data name="locNewCustomrBCOLibrary" xml:space="preserve">
+    <value>新しいカスタム BCO ライブラリ</value>
+  </data>
+  <data name="locPagesResource1.Text" xml:space="preserve">
+    <value>ページ</value>
+  </data>
+  <data name="locPatchSizeXResource1.Text" xml:space="preserve">
+    <value>パッチサイズ X</value>
+  </data>
+  <data name="locPatchSizeYResource1.Text" xml:space="preserve">
+    <value>パッチサイズ Y</value>
+  </data>
+  <data name="locPreviousLResource1.Text" xml:space="preserve">
+    <value>以前</value>
+  </data>
+  <data name="locRowsPerPageResource1.Text" xml:space="preserve">
+    <value>ページあたりの行数</value>
+  </data>
+  <data name="locSaveResource1.Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="locSpotTargetMgmtResource1.Text" xml:space="preserve">
+    <value>スポット ターゲット管理</value>
+  </data>
+  <data name="locSpotTargetResource1.Text" xml:space="preserve">
+    <value>ターゲット ライブラリ名</value>
+  </data>
+  <data name="locTotalColumnsResource1.Text" xml:space="preserve">
+    <value>合計列</value>
+  </data>
+  <data name="locTotalRowsResource1.Text" xml:space="preserve">
+    <value>総行数</value>
+  </data>
+  <data name="locUploadChartDataResource1.Text" xml:space="preserve">
+    <value>カラー ライブラリ Csv</value>
+  </data>
+  <data name="locVgapResource1.Text" xml:space="preserve">
+    <value>垂直ギャップ</value>
+  </data>
+  <data name="Norecordfound" xml:space="preserve">
+    <value>レコードが見つかりません。</value>
+  </data>
+  <data name="pleaseselectColorLibraryCsvFile" xml:space="preserve">
+    <value>カラー ライブラリ Csv ファイルを選択してください。</value>
+  </data>
+  <data name="pleaseselectvalidColorLibraryCsvFile" xml:space="preserve">
+    <value>有効なカラー ライブラリ Csv ファイルを選択してください。</value>
+  </data>
+  <data name="pleasesubmitselectedColorLibraryCsvFile" xml:space="preserve">
+    <value>選択したカラー ライブラリ Csv ファイルを提出してください。</value>
+  </data>
+  <data name="plzSelectCompany" xml:space="preserve">
+    <value>会社を選択してください。</value>
+  </data>
+  <data name="selectCompanyText" xml:space="preserve">
+    <value>--会社を選択--</value>
+  </data>
+  <data name="spacesarenotallowedincolornames" xml:space="preserve">
+    <value>色名にスペースは使用できません。行番号 {0} の代わりに _ (アンダースコア) を使用してください。</value>
+  </data>
+  <data name="valueofTargetAMustBeBetween128to128Line" xml:space="preserve">
+    <value>ターゲット A* の値は -128 から 128 行番号 {0} の間でなければなりません。</value>
+  </data>
+  <data name="valueofTargetBMustBeBetween128to128Line" xml:space="preserve">
+    <value>ターゲット B* の値は -128 から 128 行番号 {0} の間でなければなりません。</value>
+  </data>
+  <data name="valueofTargetLMustBeBetween0to100LineNo" xml:space="preserve">
+    <value>ターゲット L* の値は 0 から 100 の間でなければなりません。行番号 {0}。</value>
+  </data>
+</root>

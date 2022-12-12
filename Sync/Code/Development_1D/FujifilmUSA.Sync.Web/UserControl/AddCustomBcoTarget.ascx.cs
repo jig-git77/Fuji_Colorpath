@@ -68,10 +68,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 int _SpotTargetId;
                 if (Int32.TryParse(id, out _SpotTargetId))
                 {
-                    lblHeader.Text = GetResourceString(_recEditSpotTarget);//"Edit Spot Target";
                     LoadSpotTarget(_SpotTargetId);
                 }
             }
+            lblHeader.Text = GetResourceString(_recEditSpotTarget);//"Edit Spot Target";
         }
         #endregion
 
@@ -132,11 +132,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             else if (dataRow[0].Any(x => Char.IsWhiteSpace(x)))
                             {
-                                throw new Exception(string.Format("Spaces are not allowed in color names. Please use _ (underscores) instead, Line No. {0}.", rows));
+                                throw new Exception(string.Format(GetResourceString("spacesarenotallowedincolornames"), rows));
                             }
                             else if (regexItem.IsMatch(dataRow[0]) == false)
                             {
-                                throw new Exception(string.Format("Color Name must be allow alpha numeric and _ (underscores), Line No. {0}.", rows));
+                                throw new Exception(string.Format(GetResourceString("colorNamemustbeallowalphanumeric"), rows));
                             }
                             else
                             {
@@ -149,7 +149,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 lab = Math.Round(lab, 2);
 
                                 if (lab > 100 || lab < 0)
-                                { throw new Exception(string.Format("Value of Target L* Must Be Between 0 to 100 Line No. {0}.", rows)); }
+                                { throw new Exception(string.Format(GetResourceString("valueofTargetLMustBeBetween0to100LineNo"), rows)); }
                                 else
                                 { chartDataRow.Target_L = lab; }
                             }
@@ -164,7 +164,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 lab = Math.Round(lab, 2);
 
                                 if (lab > 128 || lab < -128)
-                                { throw new Exception(string.Format("Value of Target A* Must Be Between -128 to 128 Line No. {0}.", rows)); }
+                                { throw new Exception(string.Format(GetResourceString("valueofTargetAMustBeBetween128to128Line"), rows)); }
                                 else
                                 { chartDataRow.Target_a = lab; }
                             }
@@ -179,7 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 lab = Math.Round(lab, 2);
 
                                 if (lab > 128 || lab < -128)
-                                { throw new Exception(string.Format("Value of Target B* Must Be Between -128 to 128 Line No. {0}.", rows)); }
+                                { throw new Exception(string.Format(GetResourceString("valueofTargetBMustBeBetween128to128Line"), rows)); }
                                 else
                                 { chartDataRow.Target_b = lab; }
                             }
@@ -197,7 +197,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         if (refChartImportData.Count != refChartImportData.Select(O => O.SpotName).GroupBy(X => X).Count())
                         {
-                            throw new Exception("Color ID must be unique.");
+                            throw new Exception(GetResourceString("colorIDmustbeunique"));
                         }
 
                         ViewState[vsChartData] = refChartImportData;
@@ -205,12 +205,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else
                     {
-                        throw new Exception("Please select valid Color Library Csv File.");
+                        throw new Exception(GetResourceString("pleaseselectvalidColorLibraryCsvFile"));
                     }
                 }
                 else
                 {
-                    throw new Exception("Please select Color Library Csv File.");
+                    throw new Exception(GetResourceString("pleaseselectColorLibraryCsvFile"));
                 }
             }
             catch (Exception ex)
@@ -233,7 +233,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (hdnSpotTargetID.Value == "0" && rgChartData.Items.Count == 0)
                 {
-                    throw new Exception("Please select Color Library Csv File.");
+                    throw new Exception(GetResourceString("pleaseselectColorLibraryCsvFile"));
                 }
                 else
                 {
@@ -400,11 +400,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                if (hdnSpotTargetID.Value == "0" && rgChartData.Items.Count == 0)
                 {
-                    throw new Exception("Please submit selected Color Library Csv File.");
+                    throw new Exception(GetResourceString("pleasesubmitselectedColorLibraryCsvFile"));
                 }
                 else if (rgChartData.Items.Count == 0)
                 {
-                    throw new Exception("No record found.");
+                    throw new Exception(GetResourceString("Norecordfound"));
                 }
                 else
                 {
