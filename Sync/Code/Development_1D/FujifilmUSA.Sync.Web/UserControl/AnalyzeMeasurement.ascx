@@ -4,6 +4,7 @@
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
     TagPrefix="uc" %>
 
+
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
