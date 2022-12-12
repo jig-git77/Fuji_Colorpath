@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="colorIDmustbeunique" xml:space="preserve">
+    <value>Color ID must be unique.</value>
+  </data>
+  <data name="colorNamemustbeallowalphanumeric" xml:space="preserve">
+    <value>Color Name must be allow alpha numeric and _ (underscores), Line No. {0}.</value>
+  </data>
   <data name="editSpotTarget" xml:space="preserve">
     <value>Edit Spot Target</value>
   </data>
@@ -207,10 +213,34 @@
   <data name="locVgapResource1.Text" xml:space="preserve">
     <value>Vertical Gap</value>
   </data>
+  <data name="Norecordfound" xml:space="preserve">
+    <value>No record found.</value>
+  </data>
+  <data name="pleaseselectColorLibraryCsvFile" xml:space="preserve">
+    <value>Please select Color Library Csv File.</value>
+  </data>
+  <data name="pleaseselectvalidColorLibraryCsvFile" xml:space="preserve">
+    <value>Please select valid Color Library Csv File.</value>
+  </data>
+  <data name="pleasesubmitselectedColorLibraryCsvFile" xml:space="preserve">
+    <value>Please submit selected Color Library Csv File.</value>
+  </data>
   <data name="plzSelectCompany" xml:space="preserve">
     <value>Please select company.</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
     <value>--Select Company--</value>
+  </data>
+  <data name="spacesarenotallowedincolornames" xml:space="preserve">
+    <value>Spaces are not allowed in color names. Please use _ (underscores) instead, Line No. {0}.</value>
+  </data>
+  <data name="valueofTargetAMustBeBetween128to128Line" xml:space="preserve">
+    <value>Value of Target A* Must Be Between -128 to 128 Line No. {0}.</value>
+  </data>
+  <data name="valueofTargetBMustBeBetween128to128Line" xml:space="preserve">
+    <value>Value of Target B* Must Be Between -128 to 128 Line No. {0}.</value>
+  </data>
+  <data name="valueofTargetLMustBeBetween0to100LineNo" xml:space="preserve">
+    <value>Value of Target L* Must Be Between 0 to 100 Line No. {0}.</value>
   </data>
 </root>

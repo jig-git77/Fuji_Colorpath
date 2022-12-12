@@ -37,6 +37,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindReferenceChartTypeID();
             }
+            BindResourceText();
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //To select ReferenceChartTypeID 
             if (cmbReferenceChartTypeID.SelectedIndex == 0)
             {
-                fujiStatusbar.DisplayMessage("Select Reference Chart.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString("selectReferenceChart"), false);
                 return;
             }
 
@@ -76,7 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //To check atlest one MetricTargetPresetID is selected
             if (lstReferenceChartPreset.Count == 0)
             {
-                fujiStatusbar.DisplayMessage("Select Metric Target Preset.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString("selectMetricTargetPreset"), false);
                 return;
             }
 
@@ -85,11 +86,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //If any error reply with error
             if (_PresenterReferenceChartPreset.InsertReferenceChartPreset() == -1)
             {
-                fujiStatusbar.DisplayMessage("Error While Creating ReferenceChartPresets.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString("errorWhileCreatingReferenceChartPresets"), false);
                 return;
             }
             else
-            { fujiStatusbar.DisplayMessage("Reference Chart Presets Created.", true); }
+            { fujiStatusbar.DisplayMessage(GetResourceString("referenceChartPresetsCreated"), true); }
 
         }
 
@@ -130,7 +131,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbReferenceChartTypeID.DataBind();
             }
 
-            cmbReferenceChartTypeID.Items.Insert(0, new ListItem("--Select Reference Chart Type--", "0"));//-- Select Source Profile --
+            cmbReferenceChartTypeID.Items.Insert(0, new ListItem(GetResourceString("selectReferenceChartType"), "0"));//-- Select Source Profile --
         }
 
         /// <summary>
@@ -161,6 +162,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             }
                         }
             }
+        }
+
+        private void BindResourceText()
+        {
+            locReferenceChartTypeID.Text = GetResourceString("referenceChart");
+            lblHeader.Text = GetResourceString("assignChartwithMTP");
+            locPrintStandardTypeMgmt.Text = GetResourceString("assignChartwithMTP");
+            locRankId.Text = GetResourceString("metricTargetPreset");
+            locSave.Text = GetResourceString("locSave.Text");
+            locCancel.Text = GetResourceString("locCancel.Text");
         }
 
         #endregion
