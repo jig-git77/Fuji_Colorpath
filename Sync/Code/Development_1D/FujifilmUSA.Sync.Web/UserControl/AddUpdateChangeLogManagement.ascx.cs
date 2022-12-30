@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return;
             }
 
-            lblHeader.Text = "Add Update Change Log";
+            //lblHeader.Text = "Add Update Change Log";
 
             if (Request.QueryString["UpdateListID"] != null)
             {
@@ -57,6 +57,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SetUpdateChangeLog(_UpdateListID);
                 }
             }
+            BindResourceValidationMessages();
+        }
+        private void BindResourceValidationMessages()
+        {
+            rfvValHeaderLine.ValidationMsg = GetResourceString("rfvValHeaderLine");
+            rfvVSubHeaderLine.ValidationMsg = GetResourceString("rfvVSubHeaderLine");
+            rfvActivateContainer.ValidationMsg = GetResourceString("rfvActivateContainer");
+            rfvExpiraDateContainer.ValidationMsg = GetResourceString("rfvExpiraDateContainer");
+            rfvMinReqVersionContainer.ValidationMsg = GetResourceString("rfvMinReqVersionContainer");
         }
         protected void lbtnSave_Click(object sender, EventArgs e)
         {

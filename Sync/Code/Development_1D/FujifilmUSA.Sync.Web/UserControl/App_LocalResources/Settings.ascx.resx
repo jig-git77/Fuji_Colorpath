@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,254 +59,296 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="Image1Resource1.AlternateText" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Image1Resource1.AlternateText" xml:space="preserve">
     <value>Company Management</value>
   </data>
-  <data name="Image1Resource1.ToolTip" xml:space="preserve">
+	<data name="Image1Resource1.ToolTip" xml:space="preserve">
     <value>Company Management</value>
   </data>
-  <data name="Image2Resource1.AlternateText" xml:space="preserve">
+	<data name="Image2Resource1.AlternateText" xml:space="preserve">
     <value>Branch Management</value>
   </data>
-  <data name="Image2Resource1.ToolTip" xml:space="preserve">
+	<data name="Image2Resource1.ToolTip" xml:space="preserve">
     <value>Branch Management</value>
   </data>
-  <data name="Image3Resource1.AlternateText" xml:space="preserve">
+	<data name="Image3Resource1.AlternateText" xml:space="preserve">
     <value>User Management</value>
   </data>
-  <data name="Image3Resource1.ToolTip" xml:space="preserve">
+	<data name="Image3Resource1.ToolTip" xml:space="preserve">
     <value>User Management</value>
   </data>
-  <data name="Image4Resource1.AlternateText" xml:space="preserve">
+	<data name="Image4Resource1.AlternateText" xml:space="preserve">
     <value>My Settings</value>
   </data>
-  <data name="Image4Resource1.ToolTip" xml:space="preserve">
+	<data name="Image4Resource1.ToolTip" xml:space="preserve">
     <value>My Settings</value>
   </data>
-  <data name="Image5Resource1.AlternateText" xml:space="preserve">
+	<data name="Image5Resource1.AlternateText" xml:space="preserve">
     <value>Download</value>
   </data>
-  <data name="Image5Resource1.ToolTip" xml:space="preserve">
+	<data name="Image5Resource1.ToolTip" xml:space="preserve">
     <value>Download</value>
   </data>
-  <data name="imgDeviceManagementResource1.AlternateText" xml:space="preserve">
+	<data name="imgDeviceManagementResource1.AlternateText" xml:space="preserve">
     <value>Device Management</value>
   </data>
-  <data name="imgDeviceManagementResource1.ToolTip" xml:space="preserve">
+	<data name="imgDeviceManagementResource1.ToolTip" xml:space="preserve">
     <value>Device Management</value>
   </data>
-  <data name="imgLicenseManagementResource1.AlternateText" xml:space="preserve">
+	<data name="imgLicenseManagementResource1.AlternateText" xml:space="preserve">
     <value>License Management</value>
   </data>
-  <data name="imgLicenseManagementResource1.ToolTip" xml:space="preserve">
+	<data name="imgLicenseManagementResource1.ToolTip" xml:space="preserve">
     <value>License Management</value>
   </data>
-  <data name="imgMeasurementDeviceResource1.AlternateText" xml:space="preserve">
+	<data name="imgMeasurementDeviceResource1.AlternateText" xml:space="preserve">
     <value>Measurement Device</value>
   </data>
-  <data name="imgMeasurementDeviceResource1.ToolTip" xml:space="preserve">
+	<data name="imgMeasurementDeviceResource1.ToolTip" xml:space="preserve">
     <value>Measurement Device</value>
   </data>
-  <data name="imgRefChartResource1.AlternateText" xml:space="preserve">
+	<data name="imgRefChartResource1.AlternateText" xml:space="preserve">
     <value>Reference Chart</value>
   </data>
-  <data name="imgRefChartResource1.ToolTip" xml:space="preserve">
+	<data name="imgRefChartResource1.ToolTip" xml:space="preserve">
     <value>Reference Chart</value>
   </data>
-  <data name="imgSoruceProfileResource1.AlternateText" xml:space="preserve">
+	<data name="imgSoruceProfileResource1.AlternateText" xml:space="preserve">
     <value>Source Profile</value>
   </data>
-  <data name="imgSoruceProfileResource1.ToolTip" xml:space="preserve">
+	<data name="imgSoruceProfileResource1.ToolTip" xml:space="preserve">
     <value>Source Profile</value>
   </data>
-  <data name="lbtnBranchManagementResource1.ToolTip" xml:space="preserve">
+	<data name="lbtnBranchManagementResource1.ToolTip" xml:space="preserve">
     <value>Branch Management</value>
   </data>
-  <data name="lbtnCompanyManagementResource1.ToolTip" xml:space="preserve">
+	<data name="lbtnCompanyManagementResource1.ToolTip" xml:space="preserve">
     <value>Company Management</value>
   </data>
-  <data name="lbtnDeviceManagementResource1.ToolTip" xml:space="preserve">
+	<data name="lbtnDeviceManagementResource1.ToolTip" xml:space="preserve">
     <value>Device Management</value>
   </data>
-  <data name="lbtnLicenseManagementResource1.ToolTip" xml:space="preserve">
+	<data name="lbtnLicenseManagementResource1.ToolTip" xml:space="preserve">
     <value>License Management</value>
   </data>
-  <data name="lbtnSourceProfileResource1.ToolTip" xml:space="preserve">
+	<data name="lbtnSourceProfileResource1.ToolTip" xml:space="preserve">
     <value>Source Profile</value>
   </data>
-  <data name="lbtnUserManagementResource1.ToolTip" xml:space="preserve">
+	<data name="lbtnUserManagementResource1.ToolTip" xml:space="preserve">
     <value>User Management</value>
   </data>
-  <data name="LinkButton1Resource1.Text" xml:space="preserve">
+	<data name="LinkButton1Resource1.Text" xml:space="preserve">
     <value>Activity</value>
   </data>
-  <data name="LinkButton1Resource1.ToolTip" xml:space="preserve">
+	<data name="LinkButton1Resource1.ToolTip" xml:space="preserve">
     <value>Activity Management</value>
   </data>
-  <data name="lnkDownloadResource1.ToolTip" xml:space="preserve">
+	<data name="lnkDownloadResource1.ToolTip" xml:space="preserve">
     <value>Download</value>
   </data>
-  <data name="lnkMeasurementDeviceResource1.ToolTip" xml:space="preserve">
+	<data name="lnkMeasurementDeviceResource1.ToolTip" xml:space="preserve">
     <value>Measurement Device</value>
   </data>
-  <data name="lnkProfileMgmtResource1.ToolTip" xml:space="preserve">
+	<data name="lnkProfileMgmtResource1.ToolTip" xml:space="preserve">
     <value>My Settings</value>
   </data>
-  <data name="lnkRefChartResource1.ToolTip" xml:space="preserve">
+	<data name="lnkRefChartResource1.ToolTip" xml:space="preserve">
     <value>Reference Chart</value>
   </data>
-  <data name="locAdminResource1.Text" xml:space="preserve">
+	<data name="locAdminResource1.Text" xml:space="preserve">
     <value>Admin</value>
   </data>
-  <data name="locBranchManagementResource1.Text" xml:space="preserve">
+	<data name="locBranchManagementResource1.Text" xml:space="preserve">
     <value>Branch Management</value>
   </data>
-  <data name="locCompanyManagementResource1.Text" xml:space="preserve">
+	<data name="locCompanyManagementResource1.Text" xml:space="preserve">
     <value>Company Management</value>
   </data>
-  <data name="locDeviceMgmtResource1.Text" xml:space="preserve">
+	<data name="locDeviceMgmtResource1.Text" xml:space="preserve">
     <value>Device Management</value>
   </data>
-  <data name="locDownloadResource1.Text" xml:space="preserve">
+	<data name="locDownloadResource1.Text" xml:space="preserve">
     <value>Download</value>
   </data>
-  <data name="locLicenseMgmtResource1.Text" xml:space="preserve">
+	<data name="locLicenseMgmtResource1.Text" xml:space="preserve">
     <value>License Management</value>
   </data>
-  <data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
+	<data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
     <value>Measurement Device</value>
   </data>
-  <data name="locMySettingsResource1.Text" xml:space="preserve">
+	<data name="locMySettingsResource1.Text" xml:space="preserve">
     <value>My Settings</value>
   </data>
-  <data name="locReferenceChartResource1.Text" xml:space="preserve">
+	<data name="locReferenceChartResource1.Text" xml:space="preserve">
     <value>Reference Chart</value>
   </data>
-  <data name="locSourceProfileResource1.Text" xml:space="preserve">
+	<data name="locSourceProfileResource1.Text" xml:space="preserve">
     <value>Source Profile</value>
   </data>
-  <data name="locUserMgmtResource1.Text" xml:space="preserve">
+	<data name="locUserMgmtResource1.Text" xml:space="preserve">
     <value>User Management</value>
   </data>
-  <data name="imgProfilerSettingsResource1.AlternateText" xml:space="preserve">
+	<data name="imgProfilerSettingsResource1.AlternateText" xml:space="preserve">
     <value>Device Family Profiler Settings</value>
   </data>
-  <data name="imgProfilerSettingsResource1.ToolTip" xml:space="preserve">
+	<data name="imgProfilerSettingsResource1.ToolTip" xml:space="preserve">
     <value>Device Family Profiler Settings</value>
   </data>
-  <data name="imgActivityValidationRulesResource1.AlternateText" xml:space="preserve">
+	<data name="imgActivityValidationRulesResource1.AlternateText" xml:space="preserve">
     <value>Activity Validation Rules</value>
   </data>
-  <data name="imgActivityValidationRulesResource1.ToolTip" xml:space="preserve">
+	<data name="imgActivityValidationRulesResource1.ToolTip" xml:space="preserve">
     <value>Activity Validation Rules</value>
   </data>
-  <data name="imgApplicationConfigResource1.AlternateText" xml:space="preserve">
+	<data name="imgApplicationConfigResource1.AlternateText" xml:space="preserve">
     <value>Application Configuration</value>
   </data>
-  <data name="imgApplicationConfigResource1.ToolTip" xml:space="preserve">
+	<data name="imgApplicationConfigResource1.ToolTip" xml:space="preserve">
     <value>Application Configuration</value>
   </data>
-  <data name="locActivityValidationRulesResource1.Text" xml:space="preserve">
+	<data name="locActivityValidationRulesResource1.Text" xml:space="preserve">
     <value>Activity Validation Rules</value>
   </data>
-  <data name="locApplicationConfigurationResource1.Text" xml:space="preserve">
+	<data name="locApplicationConfigurationResource1.Text" xml:space="preserve">
     <value>Application Configuration</value>
   </data>
-  <data name="locProfilerSettingsResource1.Text" xml:space="preserve">
+	<data name="locProfilerSettingsResource1.Text" xml:space="preserve">
     <value>Device Family Profiler Settings</value>
   </data>
-  <data name="imgMetricTargetPresetResource1.AlternateText" xml:space="preserve">
+	<data name="imgMetricTargetPresetResource1.AlternateText" xml:space="preserve">
     <value>Metric Target Preset</value>
   </data>
-  <data name="imgMetricTargetPresetResource1.ToolTip" xml:space="preserve">
+	<data name="imgMetricTargetPresetResource1.ToolTip" xml:space="preserve">
     <value>Metric Target Preset</value>
   </data>
-  <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
+	<data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
     <value>Metric Target Preset</value>
   </data>
-  <data name="imgPatchPresetResource1.AlternateText" xml:space="preserve">
+	<data name="imgPatchPresetResource1.AlternateText" xml:space="preserve">
     <value>Patch Preset</value>
   </data>
-  <data name="imgPatchPresetResource1.ToolTip" xml:space="preserve">
+	<data name="imgPatchPresetResource1.ToolTip" xml:space="preserve">
     <value>Patch Preset</value>
   </data>
-  <data name="locPatchPresetResource1.Text" xml:space="preserve">
+	<data name="locPatchPresetResource1.Text" xml:space="preserve">
     <value>Patch Preset</value>
   </data>
-  <data name="locSpotTargetResource1.Text" xml:space="preserve">
+	<data name="locSpotTargetResource1.Text" xml:space="preserve">
     <value>Spot Target</value>
   </data>
-  <data name="imgSpotTargetResource1.AlternateText" xml:space="preserve">
+	<data name="imgSpotTargetResource1.AlternateText" xml:space="preserve">
     <value>Spot Target</value>
   </data>
-  <data name="imgSpotTargetResource1.ToolTip" xml:space="preserve">
+	<data name="imgSpotTargetResource1.ToolTip" xml:space="preserve">
     <value>Spot Target</value>
   </data>
-  <data name="imgMetricTargetResource1.AlternateText" xml:space="preserve">
+	<data name="imgMetricTargetResource1.AlternateText" xml:space="preserve">
     <value>Metric Target</value>
   </data>
-  <data name="locMetricTargetResource1.Text" xml:space="preserve">
+	<data name="locMetricTargetResource1.Text" xml:space="preserve">
     <value>Metric Target</value>
   </data>
-  <data name="imgMetricTargetResource1.ToolTip" xml:space="preserve">
+	<data name="imgMetricTargetResource1.ToolTip" xml:space="preserve">
     <value>Metric Target</value>
+  </data>
+	<data name="ImgAddCustomBcoTarget.ToolTip" xml:space="preserve">
+    <value>Custom BCO Target Library</value>
+  </data>
+	<data name="locCustomBcoTargetResource1.Text" xml:space="preserve">
+    <value>Custom BCO Target Library</value>
+  </data>
+	<data name="ImgAssignChartWithMTP.ToolTip" xml:space="preserve">
+    <value>Assign Chart with MTP</value>
+  </data>
+	<data name="locAssignChartWithMTPResource1.Text" xml:space="preserve">
+    <value>Assign Chart with MTP</value>
+  </data>
+	<data name="ImgUpdateChangeLog.ToolTip" xml:space="preserve">
+        <value>Update Change Log</value>
+  </data>
+	<data name="locUpdateChangeLogResource1.Text" xml:space="preserve">
+    <value>Update Change Log</value>
+  </data>
+	<data name="ImgMToolVersion.ToolTip" xml:space="preserve">
+        <value>MTool Version</value>
+  </data>
+	<data name="locMToolVersionResource1.Text" xml:space="preserve">
+    <value>MTool Version</value>
+  </data>
+	<data name="ImgMeasurementLog.ToolTip" xml:space="preserve">
+        <value>Measurement Log</value>
+  </data>
+	<data name="locMeasurementLogResource1.Text" xml:space="preserve">
+    <value>Measurement Log</value>
+  </data>
+	<data name="ImgPrintStandardType.ToolTip" xml:space="preserve">
+        <value>Print Standard Type</value>
+  </data>
+	<data name="locPrintStandardTypeResource1.Text" xml:space="preserve">
+    <value>Print Standard Type</value>
+  </data>
+	<data name="ImgLookupTVILABDensity.ToolTip" xml:space="preserve">
+        <value>Sync1D LAB TVI Density Values</value>
+  </data>
+	<data name="locLookupTVILABDensityResource1.Text" xml:space="preserve">
+    <value>Sync1D LAB TVI Density Values</value>
   </data>
 </root>

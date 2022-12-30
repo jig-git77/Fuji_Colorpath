@@ -8912,7 +8912,9 @@
     <Content Include="UserControl\App_LocalResources\SessionEnd.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Settings.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Settings.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\SourceProfileManagement.ascx.fr.resx">
@@ -9109,7 +9111,9 @@
     <Content Include="UserControl\App_LocalResources\MetricTargetPresetManagement.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\MetricTargetPresetManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\MetricTargetPresetManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\MetricTargetPresetManagement.ascx.fr.resx" />
@@ -9289,7 +9293,9 @@
     <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.fr.resx" />
@@ -9399,24 +9405,95 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AssignRefChartWMetricTargetPreset.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\AssignRefChartWMetricTargetPreset.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AssignRefChartWMetricTargetPreset.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AssignRefChartWMetricTargetPreset.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AssignRefChartWMetricTargetPreset.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\AssignRefChartWMetricTargetPreset.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\AssignRefChartWMetricTargetPreset.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AssignRefChartWMetricTargetPreset.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AssignRefChartWMetricTargetPreset.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddCustomBcoTarget.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\AddCustomBcoTarget.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\AddCustomBcoTarget.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddCustomBcoTarget.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddCustomBcoTarget.ascx.fr.resx" />
-    <Content Include="UserControl\App_LocalResources\AddCustomBcoTarget.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\CustomBcoManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomBcoManagement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomBcoManagement.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomBcoManagement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddUpdateChangeLogManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddMToolVersionManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddMToolVersionManagement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddMToolVersionManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddMToolVersionManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddUpdateChangeLogManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddUpdateChangeLogManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddUpdateChangeLogManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MToolVersionManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MToolVersionManagement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MToolVersionManagement.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MToolVersionManagement.ascx.fr.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

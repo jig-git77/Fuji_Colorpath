@@ -117,34 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="assignChartwithMTP" xml:space="preserve">
-    <value>MTP でチャートを割り当てる</value>
+	<data name="assignChartwithMTP" xml:space="preserve">
+    <value>Assign Chart with MTP_ja</value>
   </data>
-  <data name="errorWhileCreatingReferenceChartPresets" xml:space="preserve">
-    <value>Error While Creating ReferenceChartPresets._Ja</value>
+	<data name="errorWhileCreatingReferenceChartPresets" xml:space="preserve">
+    <value>Error While Creating ReferenceChartPresets._ja</value>
   </data>
-  <data name="locCancel.Text" xml:space="preserve">
-    <value>キャンセル</value>
+	<data name="locCancel.Text" xml:space="preserve">
+    <value>Cancel_ja</value>
   </data>
-  <data name="locSave.Text" xml:space="preserve">
-    <value>保存</value>
+	<data name="locSave.Text" xml:space="preserve">
+    <value>Save_ja</value>
   </data>
-  <data name="metricTargetPreset" xml:space="preserve">
-    <value>メトリック ターゲット プリセット</value>
+	<data name="metricTargetPreset" xml:space="preserve">
+    <value>Metric Target Preset_ja</value>
   </data>
-  <data name="referenceChart" xml:space="preserve">
-    <value>参照チャート</value>
+	<data name="referenceChart" xml:space="preserve">
+    <value>Reference Chart_ja</value>
   </data>
-  <data name="referenceChartPresetsCreated" xml:space="preserve">
-    <value>リファレンス チャート プリセットが作成されました。</value>
+	<data name="referenceChartPresetsCreated" xml:space="preserve">
+    <value>Reference Chart Presets Created._ja</value>
   </data>
-  <data name="selectMetricTargetPreset" xml:space="preserve">
-    <value>[メトリック ターゲット プリセット] を選択します。</value>
+	<data name="selectMetricTargetPreset" xml:space="preserve">
+    <value>Select Metric Target Preset._ja</value>
   </data>
-  <data name="selectReferenceChart" xml:space="preserve">
-    <value>参照チャートを選択します。</value>
+	<data name="selectReferenceChart" xml:space="preserve">
+    <value>Select Reference Chart._ja</value>
   </data>
-  <data name="selectReferenceChartType" xml:space="preserve">
-    <value>--参照チャートの種類を選択--</value>
+	<data name="selectReferenceChartType" xml:space="preserve">
+    <value>--Select Reference Chart Type--_ja</value>
   </data>
 </root>

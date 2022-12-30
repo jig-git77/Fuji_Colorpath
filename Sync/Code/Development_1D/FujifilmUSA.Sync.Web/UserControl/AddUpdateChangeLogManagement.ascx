@@ -6,7 +6,8 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1><asp:Localize ID="locUpdateChangeLogManagement" runat="server" Text="Update Change Log Management"></asp:Localize></h1>
+        <h1><asp:Localize ID="locUpdateChangeLogManagement" runat="server" Text="Update Change Log Management"
+            meta:resourcekey="locUpdateChangeLogManagementResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -17,13 +18,15 @@
                     <center>
                         <fieldset style="width: 60%;">
                             <legend>
-                                <asp:Label ID="lblHeader" runat="server" Text="Add Update Change Log"></asp:Label>
+                                <asp:Localize ID="lblHeader" runat="server" Text="Add Update Change Log" 
+                                    meta:resourcekey="loclblHeaderResource1"></asp:Localize>
                             </legend>
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="False" />
                             <table>
                                  <tr>
                                 <td align="right">
-                                     <span style="font-weight: bold;"><asp:Localize ID="locHeaderLine" runat="server" Text="Header Line" ></asp:Localize>
+                                     <span style="font-weight: bold;"><asp:Localize ID="locHeaderLine" runat="server" Text="Header Line" 
+                                         meta:resourcekey="loclblHeaderlineResource1"></asp:Localize>
                                          <span style="color: Red;">*</span>
                                       </span>
                                 </td>
@@ -48,7 +51,7 @@
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;"><asp:Localize Text="Sub Header Line" 
-                                            ID="locSubHeaderLine" runat="server"></asp:Localize><span style="color: Red;">*</span>
+                                            ID="locSubHeaderLine" runat="server" meta:resourcekey="loclocSubHeaderLineResource1"></asp:Localize><span style="color: Red;">*</span>
                                         </span>
                                     </td>
                                     <td>
@@ -72,7 +75,8 @@
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;">
-                                            <asp:Localize Text="Description" Id="locDescription" runat="server"></asp:Localize><span style="color: Red;">*</span> </span>
+                                            <asp:Localize Text="Description" Id="locDescription" runat="server"
+                                                meta:resourcekey="loclocDescriptionResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                     </td>
                                     <td>
                                         <b>&nbsp;:&nbsp;</b>
@@ -95,7 +99,7 @@
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;"><asp:Localize Text="Activation Date" 
-                                        ID="locActivationDate" runat="server" ></asp:Localize><span style="color: Red;">*</span>
+                                        ID="locActivationDate" runat="server" meta:resourcekey="locActivationDateResource1" ></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                     </td>
                                     <td>
@@ -145,7 +149,7 @@
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;"><asp:Localize ID="locIsActive" runat="server" 
-                                            Text="Is Active?"></asp:Localize></span>
+                                            Text="Is Active?"  meta:resourcekey="locIsActiveResource1"></asp:Localize></span>
                                     </td>
                                     <td>
                                         <b>&nbsp;:&nbsp;</b>
@@ -160,8 +164,8 @@
                                 </tr>
                                 <tr>
                                     <td align="right">
-                                        <span style="font-weight: bold;"><asp:Localize ID="Localize1" runat="server" 
-                                            Text="Is Alert?"></asp:Localize></span>
+                                        <span style="font-weight: bold;"><asp:Localize ID="locIsAlert" runat="server" 
+                                            Text="Is Alert?" meta:resourcekey="locIsAlertResource1"></asp:Localize></span>
                                     </td>
                                     <td>
                                         <b>&nbsp;:&nbsp;</b>

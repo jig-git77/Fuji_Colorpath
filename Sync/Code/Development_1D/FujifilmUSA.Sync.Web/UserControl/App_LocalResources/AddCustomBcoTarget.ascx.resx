@@ -162,6 +162,9 @@
   <data name="locCompanyNameResource1.Text" xml:space="preserve">
     <value>Company Name</value>
   </data>
+  <data name="locCSVSpotTargetLABResource1.Text" xml:space="preserve">
+    <value>Download CSV</value>
+  </data>
   <data name="locDescriptionResource1.Text" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -176,6 +179,12 @@
   </data>
   <data name="locNewCustomrBCOLibrary" xml:space="preserve">
     <value>New Customr BCO Library</value>
+  </data>
+  <data name="locNewCustomrBCOLibraryResource1.Text" xml:space="preserve">
+    <value>New Custom BCO Library</value>
+  </data>
+  <data name="locOptionUploadSetOfColorResource1.Text" xml:space="preserve">
+    <value>Option 1: Upload a set of colors</value>
   </data>
   <data name="locPagesResource1.Text" xml:space="preserve">
     <value>Pages</value>
@@ -200,6 +209,9 @@
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
     <value>Target Library Name</value>
+  </data>
+  <data name="locSubmitButtonResource1.Text" xml:space="preserve">
+    <value>Submit</value>
   </data>
   <data name="locTotalColumnsResource1.Text" xml:space="preserve">
     <value>Total Columns</value>

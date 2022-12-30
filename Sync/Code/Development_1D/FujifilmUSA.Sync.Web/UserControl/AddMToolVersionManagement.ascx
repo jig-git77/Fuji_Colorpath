@@ -6,7 +6,7 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1><asp:Localize ID="locBranchManagement" runat="server" Text="MTool Version Management"></asp:Localize></h1>
+        <h1><asp:Localize ID="locBranchManagement" runat="server" Text="MTool Version Management" meta:resourcekey="locMtoolManagementResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -17,14 +17,14 @@
                     <center>
                         <fieldset style="width: 60%;">
                             <legend>
-                                <asp:Label ID="lblHeader" runat="server" Text="Add MTool Version"></asp:Label>
+                                <asp:Label ID="lblHeader" runat="server" Text="Add MTool Version" meta:resourcekey="locAddHeaderMtoolVersionResource1"></asp:Label>
                             </legend>
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
                                 Visible="False" />
                             <table>
                                  <tr>
                                 <td align="right">
-                                     <span style="font-weight: bold;"><asp:Localize ID="locOsPlatForm" runat="server" Text="OS PlatForm" ></asp:Localize>
+                                     <span style="font-weight: bold;"><asp:Localize ID="locOsPlatForm" runat="server" Text="OS PlatForm" meta:resourcekey="locOsPlatFormResource1" ></asp:Localize>
                                          <span style="color: Red;">*</span>
                                       </span>
                                 </td>
@@ -50,7 +50,7 @@
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;"><asp:Localize Text="Latest Version" 
-                                            ID="locLatestVersion" runat="server"></asp:Localize><span style="color: Red;">*</span>
+                                            ID="locLatestVersion" runat="server" meta:resourcekey="locLatestVersionResource1"></asp:Localize><span style="color: Red;">*</span>
                                         </span>
                                     </td>
                                     <td>
@@ -75,7 +75,7 @@
                                     <td align="right">
                                         <span style="font-weight: bold;">
                                             <asp:Localize Text="Min Req. Version" 
-                                            Id="locMinReqVersion" runat="server"></asp:Localize><span style="color: Red;">*</span> </span>
+                                            Id="locMinReqVersion" runat="server" meta:resourcekey="locMinReqVersionResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                     </td>
                                     <td>
                                         <b>&nbsp;:&nbsp;</b>
@@ -98,7 +98,7 @@
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;"><asp:Localize Text="URL location" ID="locURLlocation" 
-                                            runat="server"></asp:Localize><span style="color: Red;">*</span> </span>
+                                            runat="server" meta:resourcekey="locURLlocationResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                     </td>
                                     <td>
                                         <b>&nbsp;:&nbsp;</b>
@@ -121,7 +121,7 @@
                                   <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;"><asp:Localize Text="Update Information" runat="server" 
-                                            ID="locUpdateInfo" ></asp:Localize></span>
+                                            ID="locUpdateInfo" meta:resourcekey="locUpdateInfoResource1"></asp:Localize></span>
                                     </td>
                                     <td>
                                         <b>&nbsp;:&nbsp;</b>
@@ -141,7 +141,7 @@
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;"><asp:Localize ID="locIsUsed" runat="server" 
-                                            Text="Is Used?"></asp:Localize></span>
+                                            Text="Is Used?" meta:resourcekey="locIsUsedResource1"></asp:Localize></span>
                                     </td>
                                     <td>
                                         <b>&nbsp;:&nbsp;</b>

@@ -39,8 +39,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return;
             }
 
-            lblHeader.Text = "Add MTool Verion";
-             BindOSPlatformDropDown();
+            //lblHeader.Text = "Add MTool Verion";
+            BindOSPlatformDropDown();
+            BindResourceValidationMessages();
             if (Request.QueryString["OSPlatformDetailsID"] != null)
             {
                 var OSPlatformDetailsID = Request.QueryString["OSPlatformDetailsID"];
@@ -54,6 +55,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
+
+        private void BindResourceValidationMessages()
+        {
+            rfvOSPlatFormContainer.ValidationMsg = GetResourceString("rfvOSPlatFormContainer");
+            ValidationContainer2.ValidationMsg = GetResourceString("rfvLatestVersion");
+            rfvMinReqVersionContainer.ValidationMsg = GetResourceString("rfvMinReqVersionContainer");
+            ValidationContainer1.ValidationMsg = GetResourceString("rfvURLlocation");
+        }
+
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
@@ -70,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbOSPlatForm.DataSource = OSPlatformNameList;
                 cmbOSPlatForm.DataBind();
-                cmbOSPlatForm.Items.Insert(0, new ListItem("Select", "0"));
+                cmbOSPlatForm.Items.Insert(0, new ListItem(GetResourceString("cmbOSPlatForm"), "0"));
             }
         }
         private void SaveMToolVerion()

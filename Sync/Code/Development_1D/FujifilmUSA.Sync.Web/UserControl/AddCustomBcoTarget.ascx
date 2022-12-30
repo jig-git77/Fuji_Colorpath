@@ -62,7 +62,8 @@
                                             <asp:RequiredFieldValidator ID="rfvSpotTarget" runat="server" Display="Dynamic" ControlToValidate="txtSpotTargetName"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvSpotTargetNameContainer" runat="server"
-                                                    ValidationMsg="Please provide Target Library Name." Size="200" />
+                                                    ValidationMsg="Please provide Target Library Name." Size="200" 
+                                                    />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -234,7 +235,7 @@
                                                         <label>
                                                             <b>
                                                                 <asp:Localize runat="server" Text="Option 1: Upload a set of colors"
-                                                                    ID="Localize1"></asp:Localize></b></label>
+                                                                    ID="Localize1" meta:resourcekey="locOptionUploadSetOfColorResource1"></asp:Localize></b></label>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -269,7 +270,7 @@
                                                                                 <span>
                                                                                     <asp:Localize runat="server" Text="Submit"
                                                                                         ID="locUploadChartDataButton"
-                                                                                        meta:resourcekey="locUploadChartDataButtonResource1"></asp:Localize>
+                                                                                        meta:resourcekey="locSubmitButtonResource1"></asp:Localize>
                                                                                 </span>
                                                                             </asp:LinkButton>
                                                                         </td>
