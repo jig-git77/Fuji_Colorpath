@@ -726,13 +726,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.LinkButton lnkbtnPrintStandardType;
 
         /// <summary>
-        /// Image8 control.
+        /// ImgPrintStandardType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image8;
+        protected global::System.Web.UI.WebControls.Image ImgPrintStandardType;
 
         /// <summary>
         /// Localize4 control.
@@ -771,13 +771,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
 
         /// <summary>
-        /// Image4 control.
+        /// ImgLookupTVILABDensity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image4;
+        protected global::System.Web.UI.WebControls.Image ImgLookupTVILABDensity;
 
         /// <summary>
         /// Localize5 control.

@@ -118,129 +118,141 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="colorIDmustbeunique" xml:space="preserve">
-    <value>カラー ID は一意である必要があります。</value>
+    <value>Color ID must be unique._ja</value>
   </data>
   <data name="colorNamemustbeallowalphanumeric" xml:space="preserve">
-    <value>色名には、英数字と _ (アンダースコア)、行番号 {0} を使用する必要があります。</value>
+    <value>Color Name must be allow alpha numeric and _ (underscores), Line No. {0}._ja</value>
   </data>
   <data name="editSpotTarget" xml:space="preserve">
-    <value>スポット ターゲットの編集</value>
+    <value>Edit Spot Target_ja</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>カラーID</value>
+    <value>Color ID_ja</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>色名</value>
+    <value>Color Name_ja</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>ターゲット L*</value>
+    <value>Target L*_ja</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>ターゲットa*</value>
+    <value>Target a*_ja</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
-    <value>目標b*</value>
+    <value>Target b*_ja</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>スポット ターゲットを追加</value>
+    <value>Add Spot Target_ja</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>キャンセル</value>
+    <value>Cancel_ja</value>
   </data>
   <data name="locChartBorderResource1.Text" xml:space="preserve">
-    <value>チャートの境界線</value>
+    <value>Chart Border_ja</value>
   </data>
   <data name="locChartResResource1.Text" xml:space="preserve">
-    <value>チャートレス</value>
+    <value>ChartRes_ja</value>
   </data>
   <data name="locChartSizeXResource1.Text" xml:space="preserve">
-    <value>チャートサイズ X</value>
+    <value>Chart Size X_ja</value>
   </data>
   <data name="locChartSizeYResource1.Text" xml:space="preserve">
-    <value>チャートサイズ Y</value>
+    <value>Chart Size Y_ja</value>
   </data>
   <data name="locCompanyNameResource1.Text" xml:space="preserve">
-    <value>会社名</value>
+    <value>Company Name_ja</value>
+  </data>
+  <data name="locCSVSpotTargetLABResource1.Text" xml:space="preserve">
+    <value>Download CSV_ja</value>
   </data>
   <data name="locDescriptionResource1.Text" xml:space="preserve">
-    <value>説明</value>
+    <value>Description_ja</value>
   </data>
   <data name="locGapLevelResource1.Text" xml:space="preserve">
-    <value>ギャップレベル</value>
+    <value>Gap Level_ja</value>
   </data>
   <data name="locHgapResource1.Text" xml:space="preserve">
-    <value>水平ギャップ</value>
+    <value>Horizontal Gap_ja</value>
   </data>
   <data name="locIsUsedResource1.Text" xml:space="preserve">
-    <value>使用されている？</value>
+    <value>Is Used?_ja</value>
   </data>
   <data name="locNewCustomrBCOLibrary" xml:space="preserve">
-    <value>新しいカスタム BCO ライブラリ</value>
+    <value>New Customr BCO Library_ja</value>
+  </data>
+  <data name="locNewCustomrBCOLibraryResource1.Text" xml:space="preserve">
+    <value>New Custom BCO Library_ja</value>
+  </data>
+  <data name="locOptionUploadSetOfColorResource1.Text" xml:space="preserve">
+    <value>Option 1: Upload a set of colors_ja</value>
   </data>
   <data name="locPagesResource1.Text" xml:space="preserve">
-    <value>ページ</value>
+    <value>Pages_ja</value>
   </data>
   <data name="locPatchSizeXResource1.Text" xml:space="preserve">
-    <value>パッチサイズ X</value>
+    <value>Patch Size X_ja</value>
   </data>
   <data name="locPatchSizeYResource1.Text" xml:space="preserve">
-    <value>パッチサイズ Y</value>
+    <value>Patch Size Y_ja</value>
   </data>
   <data name="locPreviousLResource1.Text" xml:space="preserve">
-    <value>以前</value>
+    <value>PreviousL_ja</value>
   </data>
   <data name="locRowsPerPageResource1.Text" xml:space="preserve">
-    <value>ページあたりの行数</value>
+    <value>Rows Per Page_ja</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>保存</value>
+    <value>Save_ja</value>
   </data>
   <data name="locSpotTargetMgmtResource1.Text" xml:space="preserve">
-    <value>スポット ターゲット管理</value>
+    <value>Spot Target Management_ja</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>ターゲット ライブラリ名</value>
+    <value>Target Library Name_ja</value>
+  </data>
+  <data name="locSubmitButtonResource1.Text" xml:space="preserve">
+    <value>Submit_ja</value>
   </data>
   <data name="locTotalColumnsResource1.Text" xml:space="preserve">
-    <value>合計列</value>
+    <value>Total Columns_ja</value>
   </data>
   <data name="locTotalRowsResource1.Text" xml:space="preserve">
-    <value>総行数</value>
+    <value>Total Rows_ja</value>
   </data>
   <data name="locUploadChartDataResource1.Text" xml:space="preserve">
-    <value>カラー ライブラリ Csv</value>
+    <value>Color Library Csv_ja</value>
   </data>
   <data name="locVgapResource1.Text" xml:space="preserve">
-    <value>垂直ギャップ</value>
+    <value>Vertical Gap_ja</value>
   </data>
   <data name="Norecordfound" xml:space="preserve">
-    <value>レコードが見つかりません。</value>
+    <value>No record found._ja</value>
   </data>
   <data name="pleaseselectColorLibraryCsvFile" xml:space="preserve">
-    <value>カラー ライブラリ Csv ファイルを選択してください。</value>
+    <value>Please select Color Library Csv File._ja</value>
   </data>
   <data name="pleaseselectvalidColorLibraryCsvFile" xml:space="preserve">
-    <value>有効なカラー ライブラリ Csv ファイルを選択してください。</value>
+    <value>Please select valid Color Library Csv File._ja</value>
   </data>
   <data name="pleasesubmitselectedColorLibraryCsvFile" xml:space="preserve">
-    <value>選択したカラー ライブラリ Csv ファイルを提出してください。</value>
+    <value>Please submit selected Color Library Csv File._ja</value>
   </data>
   <data name="plzSelectCompany" xml:space="preserve">
-    <value>会社を選択してください。</value>
+    <value>Please select company._ja</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
-    <value>--会社を選択--</value>
+    <value>--Select Company--_ja</value>
   </data>
   <data name="spacesarenotallowedincolornames" xml:space="preserve">
-    <value>色名にスペースは使用できません。行番号 {0} の代わりに _ (アンダースコア) を使用してください。</value>
+    <value>Spaces are not allowed in color names. Please use _ (underscores) instead, Line No. {0}._ja</value>
   </data>
   <data name="valueofTargetAMustBeBetween128to128Line" xml:space="preserve">
-    <value>ターゲット A* の値は -128 から 128 行番号 {0} の間でなければなりません。</value>
+    <value>Value of Target A* Must Be Between -128 to 128 Line No. {0}._ja</value>
   </data>
   <data name="valueofTargetBMustBeBetween128to128Line" xml:space="preserve">
-    <value>ターゲット B* の値は -128 から 128 行番号 {0} の間でなければなりません。</value>
+    <value>Value of Target B* Must Be Between -128 to 128 Line No. {0}._ja</value>
   </data>
   <data name="valueofTargetLMustBeBetween0to100LineNo" xml:space="preserve">
-    <value>ターゲット L* の値は 0 から 100 の間でなければなりません。行番号 {0}。</value>
+    <value>Value of Target L* Must Be Between 0 to 100 Line No. {0}._ja</value>
   </data>
 </root>

@@ -309,4 +309,48 @@
   <data name="imgMetricTargetResource1.ToolTip" xml:space="preserve">
     <value>Metric Target_ja</value>
   </data>
+
+
+    <data name="ImgAddCustomBcoTarget.ToolTip" xml:space="preserve">
+    <value>Custom BCO Target Library_ja</value>
+  </data>
+	<data name="locCustomBcoTargetResource1.Text" xml:space="preserve">
+    <value>Custom BCO Target Library_ja</value>
+  </data>
+	<data name="ImgAssignChartWithMTP.ToolTip" xml:space="preserve">
+    <value>Assign Chart with MTP_ja</value>
+  </data>
+	<data name="locAssignChartWithMTPResource1.Text" xml:space="preserve">
+    <value>Assign Chart with MTP_ja</value>
+  </data>
+	<data name="ImgUpdateChangeLog.ToolTip" xml:space="preserve">
+        <value>Update Change Log_ja</value>
+  </data>
+	<data name="locUpdateChangeLogResource1.Text" xml:space="preserve">
+    <value>Update Change Log_ja</value>
+  </data>
+	<data name="ImgMToolVersion.ToolTip" xml:space="preserve">
+        <value>MTool Version_ja</value>
+  </data>
+	<data name="locMToolVersionResource1.Text" xml:space="preserve">
+    <value>MTool Version_ja</value>
+  </data>
+	<data name="ImgMeasurementLog.ToolTip" xml:space="preserve">
+        <value>Measurement Log_ja</value>
+  </data>
+	<data name="locMeasurementLogResource1.Text" xml:space="preserve">
+    <value>Measurement Log_ja</value>
+  </data>
+	<data name="ImgPrintStandardType.ToolTip" xml:space="preserve">
+        <value>Print Standard Type_ja</value>
+  </data>
+	<data name="locPrintStandardTypeResource1.Text" xml:space="preserve">
+    <value>Print Standard Type_ja</value>
+  </data>
+	<data name="ImgLookupTVILABDensity.ToolTip" xml:space="preserve">
+        <value>Sync1D LAB TVI Density Values_ja</value>
+  </data>
+	<data name="locLookupTVILABDensityResource1.Text" xml:space="preserve">
+    <value>Sync1D LAB TVI Density Values_ja</value>
+  </data>
 </root>

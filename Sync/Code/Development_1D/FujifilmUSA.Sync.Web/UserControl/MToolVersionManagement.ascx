@@ -91,14 +91,14 @@
 <div class="admin_middle">
     <div class="head">
         <h1>
-            <asp:Localize runat="server" ID="locMToolVersionMgmt" Text="MTool Version Management"></asp:Localize></h1>
+            <asp:Localize runat="server" ID="locMToolVersionMgmt" Text="MTool Version Management" meta:resourcekey="locMtoolManagementResource1"></asp:Localize></h1>
         <asp:LinkButton ID="likAdd" runat="server" class="button"
             OnClick="likAdd_Click" meta:resourcekey="likAddResource1">
             <span>
                 <asp:Image ID="imgAdd" runat="server"
                     ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
 
-                <asp:Localize runat="server" Text="Add MTool Version" ID="locMToolVersion"></asp:Localize>
+                <asp:Localize runat="server" Text="Add MTool Version" ID="locMToolVersion" meta:resourcekey="locAddHeaderMtoolVersionResource1"></asp:Localize>
             </span>
         </asp:LinkButton>
     </div>
@@ -143,7 +143,8 @@
                             <telerik:GridTemplateColumn DataField="LatestVersion" HeaderText="LatestVersion"
                                 UniqueName="LatestVersion" SortExpression="LatestVersion" FilterControlWidth="90px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
-                                FilterControlAltText="Filter LatestVersion column">
+                                FilterControlAltText="Filter LatestVersion column"
+                                meta:resourcekey="GridTemplateColumnResource2">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLatestVersion" runat="server" Text='<%# Eval("LatestVersion") %>'/>
                                 </ItemTemplate>
@@ -153,7 +154,8 @@
                             <telerik:GridTemplateColumn DataField="MinReqVersion" HeaderText="MinReqVersion"
                                 UniqueName="MinReqVersion" SortExpression="MinReqVersion"
                                 FilterControlWidth="70px" AutoPostBackOnFilter="True"
-                                CurrentFilterFunction="Contains" FilterControlAltText="Filter MinReqVersion column">
+                                CurrentFilterFunction="Contains" FilterControlAltText="Filter MinReqVersion column"
+                                meta:resourcekey="GridTemplateColumnResource3">
                                 <ItemTemplate>
                                     <asp:Label ID="lblMinReqVersion" runat="server" Text='<%# Eval("MinReqVersion") %>'/>
                                 </ItemTemplate>
@@ -164,7 +166,8 @@
                                 HeaderText="URLlocation" UniqueName="URLlocation"
                                 SortExpression="URLlocation" FilterControlWidth="200px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
-                                FilterControlAltText="Filter URLlocation column">
+                                FilterControlAltText="Filter URLlocation column"
+                                meta:resourcekey="GridTemplateColumnResource4">
                                 <ItemTemplate>
                                     <asp:Label ID="lblURLlocation" runat="server"
                                         Text='<%# Eval("URLlocation") %>'
@@ -176,7 +179,8 @@
                             <telerik:GridTemplateColumn DataField="UpdateInfo"
                                 HeaderText="UpdateInfo" UniqueName="UpdateInfo" SortExpression="UpdateInfo"
                                 FilterControlWidth="50px" AutoPostBackOnFilter="True"
-                                CurrentFilterFunction="Contains" FilterControlAltText="Filter UpdateInfo column">
+                                CurrentFilterFunction="Contains" FilterControlAltText="Filter UpdateInfo column"
+                                meta:resourcekey="GridTemplateColumnResource5">
                                 <ItemTemplate>
                                     <asp:Label ID="lblUpdateInfo" runat="server"
                                         Text='<%# Eval("UpdateInfo") %>' meta:resourcekey="lblUpdateInfoResource1" />
@@ -186,7 +190,8 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="IsUsed" AllowFiltering="False"
                                 HeaderText="IsUsed?" FilterControlWidth="50px" DataField="IsUsed"
-                                FilterControlAltText="Filter IsUsed column">
+                                FilterControlAltText="Filter IsUsed column" 
+                                meta:resourcekey="GridTemplateColumnResource6">
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsUsed" runat="server"
                                         ImageUrl='<%# Convert.ToBoolean(Eval("IsUsed")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>'

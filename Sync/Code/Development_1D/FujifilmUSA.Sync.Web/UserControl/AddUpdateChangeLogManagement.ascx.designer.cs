@@ -39,7 +39,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHeader;
+        protected global::System.Web.UI.WebControls.Localize lblHeader;
 
         /// <summary>
         /// fujiStatusbar control.
@@ -249,13 +249,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.CheckBox chkIsActive;
 
         /// <summary>
-        /// Localize1 control.
+        /// locIsAlert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
+        protected global::System.Web.UI.WebControls.Localize locIsAlert;
 
         /// <summary>
         /// chkIsAlert control.

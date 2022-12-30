@@ -93,7 +93,7 @@
     <div class="head">
         <h1>
             <asp:Localize Text="Custom BCO Library Management" runat="server"
-                meta:resourcekey="LocalizeResource1"></asp:Localize></h1>
+                meta:resourcekey="locHeaderCustomBcoLibraryManagementResource1"></asp:Localize></h1>
 
         <asp:LinkButton ID="likAdd" runat="server" class="button" meta:resourcekey="likAddResource1" OnClick="likAdd_Click">
             <span>
@@ -101,7 +101,7 @@
                     ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1"  />
 
                 <asp:Localize runat="server" ID="locSpotTarget" Text="New BCO Library"
-                    meta:resourcekey="locAddSpotTargetResource1"></asp:Localize>
+                    meta:resourcekey="locNewBcoLibraryResource1"></asp:Localize>
             </span>
         </asp:LinkButton>
 
@@ -111,7 +111,7 @@
                     ImageUrl="../Images/delete_icon_LeftMenu.png" meta:resourcekey="imgAddResource1"/>
 
                 <asp:Localize runat="server" ID="Localize2" Text="Delete"
-                    meta:resourcekey="locAddSpotTargetResource1"></asp:Localize>
+                    meta:resourcekey="locDeleteResource1"></asp:Localize>
             </span>
         </asp:LinkButton>
 
@@ -190,7 +190,7 @@
                                 SortExpression="Description" FilterControlWidth="130px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
                                 FilterControlAltText="Filter Description column"
-                                meta:resourcekey="GridTemplateColumnResource2">
+                                meta:resourcekey="GridTemplateColumnResource3">
                                 <ItemTemplate>
                                     <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("Description") %>' />
                                 </ItemTemplate>
@@ -202,7 +202,7 @@
                                 SortExpression="NumberOfColors" FilterControlWidth="130px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
                                 FilterControlAltText="Filter Number Of Colors column"
-                                meta:resourcekey="GridTemplateColumnResource2">
+                                meta:resourcekey="GridTemplateColumnResource4">
                                 <ItemTemplate>
                                     <asp:Label ID="lblNumberOfColors" runat="server" Text='<%# Eval("NumberOfColors") %>' />
                                 </ItemTemplate>

@@ -118,129 +118,141 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="colorIDmustbeunique" xml:space="preserve">
-    <value>L'ID couleur doit être unique.</value>
+    <value>Color ID must be unique._fr</value>
   </data>
   <data name="colorNamemustbeallowalphanumeric" xml:space="preserve">
-    <value>Le nom de la couleur doit être alphanumérique et _ (traits de soulignement), numéro de ligne {0}.</value>
+    <value>Color Name must be allow alpha numeric and _ (underscores), Line No. {0}._fr</value>
   </data>
   <data name="editSpotTarget" xml:space="preserve">
-    <value>Modifier la cible ponctuelle</value>
+    <value>Edit Spot Target_fr</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Identifiant de couleur</value>
+    <value>Color ID_fr</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Nom de la couleur</value>
+    <value>Color Name_fr</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Cible L*</value>
+    <value>Target L*_fr</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Cibler un*</value>
+    <value>Target a*_fr</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
-    <value>Cible b*</value>
+    <value>Target b*_fr</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Ajouter une cible ponctuelle</value>
+    <value>Add Spot Target_fr</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Annuler</value>
+    <value>Cancel_fr</value>
   </data>
   <data name="locChartBorderResource1.Text" xml:space="preserve">
-    <value>Bordure du graphique</value>
+    <value>Chart Border_fr</value>
   </data>
   <data name="locChartResResource1.Text" xml:space="preserve">
     <value>ChartRes_fr</value>
   </data>
   <data name="locChartSizeXResource1.Text" xml:space="preserve">
-    <value>Taille du graphique X</value>
+    <value>Chart Size X_fr</value>
   </data>
   <data name="locChartSizeYResource1.Text" xml:space="preserve">
-    <value>Taille du graphique Y</value>
+    <value>Chart Size Y_fr</value>
   </data>
   <data name="locCompanyNameResource1.Text" xml:space="preserve">
-    <value>Nom de l'entreprise</value>
+    <value>Company Name_fr</value>
+  </data>
+  <data name="locCSVSpotTargetLABResource1.Text" xml:space="preserve">
+    <value>Download CSV_fr</value>
   </data>
   <data name="locDescriptionResource1.Text" xml:space="preserve">
-    <value>La description</value>
+    <value>Description_fr</value>
   </data>
   <data name="locGapLevelResource1.Text" xml:space="preserve">
-    <value>Niveau d'écart</value>
+    <value>Gap Level_fr</value>
   </data>
   <data name="locHgapResource1.Text" xml:space="preserve">
-    <value>Écart horizontal</value>
+    <value>Horizontal Gap_fr</value>
   </data>
   <data name="locIsUsedResource1.Text" xml:space="preserve">
-    <value>Est utilisé?</value>
+    <value>Is Used?_fr</value>
   </data>
   <data name="locNewCustomrBCOLibrary" xml:space="preserve">
-    <value>Nouvelle bibliothèque BCO client</value>
+    <value>New Customr BCO Library_fr</value>
+  </data>
+  <data name="locNewCustomrBCOLibraryResource1.Text" xml:space="preserve">
+    <value>New Custom BCO Library_fr</value>
+  </data>
+  <data name="locOptionUploadSetOfColorResource1.Text" xml:space="preserve">
+    <value>Option 1: Upload a set of colors_fr</value>
   </data>
   <data name="locPagesResource1.Text" xml:space="preserve">
-    <value>pages</value>
+    <value>Pages_fr</value>
   </data>
   <data name="locPatchSizeXResource1.Text" xml:space="preserve">
-    <value>Taille de patch X</value>
+    <value>Patch Size X_fr</value>
   </data>
   <data name="locPatchSizeYResource1.Text" xml:space="preserve">
-    <value>Taille du patch Y</value>
+    <value>Patch Size Y_fr</value>
   </data>
   <data name="locPreviousLResource1.Text" xml:space="preserve">
-    <value>Précédemment</value>
+    <value>PreviousL_fr</value>
   </data>
   <data name="locRowsPerPageResource1.Text" xml:space="preserve">
-    <value>Lignes par page</value>
+    <value>Rows Per Page_fr</value>
   </data>
   <data name="locSaveResource1.Text" xml:space="preserve">
-    <value>sauvegarder</value>
+    <value>Save_fr</value>
   </data>
   <data name="locSpotTargetMgmtResource1.Text" xml:space="preserve">
-    <value>Gestion des cibles ponctuelles</value>
+    <value>Spot Target Management_fr</value>
   </data>
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
-    <value>Nom de la bibliothèque cible</value>
+    <value>Target Library Name_fr</value>
+  </data>
+  <data name="locSubmitButtonResource1.Text" xml:space="preserve">
+    <value>Submit_fr</value>
   </data>
   <data name="locTotalColumnsResource1.Text" xml:space="preserve">
-    <value>Nombre total de colonnes</value>
+    <value>Total Columns_fr</value>
   </data>
   <data name="locTotalRowsResource1.Text" xml:space="preserve">
-    <value>Nombre total de lignes</value>
+    <value>Total Rows_fr</value>
   </data>
   <data name="locUploadChartDataResource1.Text" xml:space="preserve">
-    <value>Bibliothèque de couleurs CSV</value>
+    <value>Color Library Csv_fr</value>
   </data>
   <data name="locVgapResource1.Text" xml:space="preserve">
-    <value>Écart vertical</value>
+    <value>Vertical Gap_fr</value>
   </data>
   <data name="Norecordfound" xml:space="preserve">
-    <value>Aucun Enregistrement Trouvé.</value>
+    <value>No record found._fr</value>
   </data>
   <data name="pleaseselectColorLibraryCsvFile" xml:space="preserve">
-    <value>Veuillez sélectionner le fichier Csv de la bibliothèque de couleurs.</value>
+    <value>Please select Color Library Csv File._fr</value>
   </data>
   <data name="pleaseselectvalidColorLibraryCsvFile" xml:space="preserve">
-    <value>Veuillez sélectionner un fichier Csv de bibliothèque de couleurs valide.</value>
+    <value>Please select valid Color Library Csv File._fr</value>
   </data>
   <data name="pleasesubmitselectedColorLibraryCsvFile" xml:space="preserve">
-    <value>Veuillez soumettre le fichier Csv de la bibliothèque de couleurs sélectionnée.</value>
+    <value>Please submit selected Color Library Csv File._fr</value>
   </data>
   <data name="plzSelectCompany" xml:space="preserve">
-    <value>Veuillez sélectionner une entreprise.</value>
+    <value>Please select company._fr</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
-    <value>--Sélectionnez l'entreprise--</value>
+    <value>--Select Company--_fr</value>
   </data>
   <data name="spacesarenotallowedincolornames" xml:space="preserve">
-    <value>Les espaces ne sont pas autorisés dans les noms de couleurs. Veuillez utiliser _ (traits de soulignement) à la place, ligne n° {0}.</value>
+    <value>Spaces are not allowed in color names. Please use _ (underscores) instead, Line No. {0}._fr</value>
   </data>
   <data name="valueofTargetAMustBeBetween128to128Line" xml:space="preserve">
-    <value>La valeur de la cible A* doit être comprise entre -128 et 128 Ligne n° {0}.</value>
+    <value>Value of Target A* Must Be Between -128 to 128 Line No. {0}._fr</value>
   </data>
   <data name="valueofTargetBMustBeBetween128to128Line" xml:space="preserve">
-    <value>La valeur de la cible B* doit être comprise entre -128 et 128 Ligne n° {0}.</value>
+    <value>Value of Target B* Must Be Between -128 to 128 Line No. {0}._fr</value>
   </data>
   <data name="valueofTargetLMustBeBetween0to100LineNo" xml:space="preserve">
-    <value>La valeur de la cible L* doit être comprise entre 0 et 100 Ligne n° {0}.</value>
+    <value>Value of Target L* Must Be Between 0 to 100 Line No. {0}._fr</value>
   </data>
 </root>

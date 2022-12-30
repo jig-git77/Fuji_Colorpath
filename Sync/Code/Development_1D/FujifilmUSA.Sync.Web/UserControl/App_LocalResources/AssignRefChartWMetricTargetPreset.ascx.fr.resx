@@ -117,34 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="assignChartwithMTP" xml:space="preserve">
-    <value>Attribuer un graphique avec MTP</value>
+	<data name="assignChartwithMTP" xml:space="preserve">
+    <value>Assign Chart with MTP_fr</value>
   </data>
-  <data name="errorWhileCreatingReferenceChartPresets" xml:space="preserve">
+	<data name="errorWhileCreatingReferenceChartPresets" xml:space="preserve">
     <value>Error While Creating ReferenceChartPresets._fr</value>
   </data>
-  <data name="locCancel.Text" xml:space="preserve">
-    <value>Annuler</value>
+	<data name="locCancel.Text" xml:space="preserve">
+    <value>Cancel_fr</value>
   </data>
-  <data name="locSave.Text" xml:space="preserve">
-    <value>sauvegarder</value>
+	<data name="locSave.Text" xml:space="preserve">
+    <value>Save_fr</value>
   </data>
-  <data name="metricTargetPreset" xml:space="preserve">
-    <value>Préréglage cible métrique</value>
+	<data name="metricTargetPreset" xml:space="preserve">
+    <value>Metric Target Preset_fr</value>
   </data>
-  <data name="referenceChart" xml:space="preserve">
-    <value>Tableau de référence</value>
+	<data name="referenceChart" xml:space="preserve">
+    <value>Reference Chart_fr</value>
   </data>
-  <data name="referenceChartPresetsCreated" xml:space="preserve">
-    <value>Préréglages du graphique de référence créés.</value>
+	<data name="referenceChartPresetsCreated" xml:space="preserve">
+    <value>Reference Chart Presets Created._fr</value>
   </data>
-  <data name="selectMetricTargetPreset" xml:space="preserve">
-    <value>Sélectionnez Préréglage cible de métrique.</value>
+	<data name="selectMetricTargetPreset" xml:space="preserve">
+    <value>Select Metric Target Preset._fr</value>
   </data>
-  <data name="selectReferenceChart" xml:space="preserve">
-    <value>Sélectionnez Carte de référence.</value>
+	<data name="selectReferenceChart" xml:space="preserve">
+    <value>Select Reference Chart._fr</value>
   </data>
-  <data name="selectReferenceChartType" xml:space="preserve">
-    <value>--Sélectionner le type de graphique de référence--</value>
+	<data name="selectReferenceChartType" xml:space="preserve">
+    <value>--Select Reference Chart Type--_fr</value>
   </data>
 </root>
