@@ -1151,8 +1151,14 @@ function BindReportImage() {
         if ($hdnVerification == 'True') {
             imagePath = 'Images/Sync1D Report_preview_Vali.jpg';   //For Sync1D and Sync4D Validation Projects
         }
-        if ($hdnSync1DType == 'True') {
-            imagePath = 'Images/Sync1D Report_preview.jpg';   //For Sync1D Projects
+        if ($hdnSync1DType == 'True') { 
+            if ($hdnValidationType == 2) { //for sync 1D ISO projects
+                imagePath = 'Images/Sync1D Report_preview_ISO.jpg';   //For Sync1D Projects
+            }
+            else {
+                imagePath = 'Images/Sync1D Report_preview.jpg';   //For Sync1D Projects
+            }
+           
         }
     }
     $btnGeneratePDF.find('img').attr('src', imagePath);

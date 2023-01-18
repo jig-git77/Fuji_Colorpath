@@ -1226,6 +1226,7 @@
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7_Old.jpg" />
+    <Content Include="Images\Sync1D Report_preview_ISO.jpg" />
     <Content Include="Images\Sync1D Report_preview_Old.jpg" />
     <Content Include="Images\Sync1D Report_preview_Vali.jpg" />
     <Content Include="Images\Sync1D Report_preview_Vali_Old.jpg" />
@@ -9518,7 +9519,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
