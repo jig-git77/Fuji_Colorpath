@@ -402,13 +402,13 @@ namespace FujifilmUSA.Sync.Common
                     File.WriteAllText(TempFilePath, SBStr.ToString());
                     theID = theDoc.AddImageUrl(TempFilePath, true, 700, false);
                     File.Delete(TempFilePath); //---Delete file since needed work is finished
-                    
+
                 }
                 else //----For rest of all types of reports use existing logic
                 {
                     theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
                 }
-               
+
 
                 theDoc.Rect.Inset(0, 1);
 
@@ -444,7 +444,7 @@ namespace FujifilmUSA.Sync.Common
                     theDoc.PageNumber = i;
 
 
-                    if (ReportType == 16 || ReportType == 20 || ReportType == 13 || ReportType == 21 || ReportType == 22) //----For G7 Opti / Validation Report + 4D G7 validation report / New DLP 4D report format // DLPPlus report format /  BCO Spot Patch Save Color List
+                    if (ReportType == 16 || ReportType == 17 || ReportType == 20 || ReportType == 13 || ReportType == 21 || ReportType == 22) //----For G7 Opti / Validation Report + 4D G7 validation report / New DLP 4D report format // DLPPlus report format /  BCO Spot Patch Save Color List
                     {
                         str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
                        "<tr style=\"height:52px\"><td align=\"left\" valign=\"middle\" bgcolor=\"#22af7c\" style=\"color:#000000; font-size:10px; font-family: Arial; padding: 0 0 0 50px; \" width=\"218px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
@@ -1232,6 +1232,7 @@ namespace FujifilmUSA.Sync.Common
         public StringBuilder SetPDFContent(StringBuilder SBStr)
         {
             DataTable DT = new DataTable();
+
             try
             {
                 //** Add Styles Path ***//
@@ -1304,7 +1305,10 @@ namespace FujifilmUSA.Sync.Common
                         {
                             SBStr.Replace("###JobStatus###", "&nbsp;");
                             SBStr.Replace("(##RunNo##)", "(" + (Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim()) + ")");
-                            SBStr.Replace("##ReportTitle##", "G7AlignmentReportTitle");
+                            if (ReportType == 17) // FOr ISO Report
+                            { SBStr.Replace("##ReportTitle##", "ISOAlignmentReportTitle"); }
+                            else
+                            { SBStr.Replace("##ReportTitle##", "G7AlignmentReportTitle"); }
                         }
                         SBStr.Replace("###MetricPreset###", Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim());
                         SBStr.Replace("###CompanyName###", Convert.ToString(DT.Rows[0]["CompanyName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["CompanyName"]).Trim());
@@ -1313,7 +1317,7 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
                         SBStr.Replace("###CurrentDate###", System.DateTime.Now.ToString("dddd, MMMM dd, yyyy"));
 
-                        if (ReportType == 16 || ReportType == 21) //--------For G7 Report
+                        if (ReportType == 16 || ReportType == 17 || ReportType == 21) //--------For G7 Report --05/01/2023 ISO Report
                         {
                             SBStr.Replace("###MeasurementType###", Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim().Contains("Averaging") == true ? "This report details an average of measurements." : "This report details a single measurement.");
                             SBStr.Replace("###Technician###", Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim());
@@ -1576,7 +1580,7 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###PressName###", "&nbsp;");
                         SBStr.Replace("###ProjectName###", "&nbsp;");
 
-                        if (ReportType == 16) //--------For G7 Report
+                        if (ReportType == 16 || ReportType == 17) //--------For G7 Report  --05/01/2023 ISO Report
                         {
                             SBStr.Replace("###Technician###", "&nbsp;");
                             SBStr.Replace("###MeasurementDevice###", "&nbsp;");
@@ -1639,7 +1643,7 @@ namespace FujifilmUSA.Sync.Common
 
                         int RowHeight = 280 / (DT.Rows.Count + 2);
                         RowHeight = DT.Rows.Count == 5 ? 45 : RowHeight;
-                        if (ReportType == 16 || ReportType == 21) //--------For G7 Report
+                        if (ReportType == 16 || ReportType == 17 || ReportType == 21) //--------For G7 Report --05/01/2023 ISO Report
                         {
                             RowHeight = 12;
 
@@ -1722,13 +1726,64 @@ namespace FujifilmUSA.Sync.Common
                         DT = DS_Common.Tables[2];
 
                         StringBuilder SBstrDeltaValue = new StringBuilder();
+
                         if (DT != null && DT.Rows.Count > 0)
                         {
                             string strStatusImg = "";
                             int RowHeight = 29;
 
+                            // New iSO Report
+                            if (ReportType == 17)
+                            {
+                                RowHeight = 12;
+                                int intSummary = 0;
+                                int intTVI = 0;
+                                StringBuilder SBstrSummaryValue = new StringBuilder();
+                                StringBuilder SBstrTVIValue = new StringBuilder();
+
+                                for (int i = 0; i < DT.Rows.Count; i++)
+                                {
+                                    if (DT.Rows[i]["IsSummary"] != null && (bool)DT.Rows[i]["IsSummary"] == true)
+                                    {
+                                        if ((intSummary % 2) == 0) //----If even row then make background color green----//
+                                        {
+                                            SBstrSummaryValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
+                                        }
+                                        else             //------Else keep background color white-----//
+                                        {
+                                            SBstrSummaryValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4' style='height: " + RowHeight + "px'>");
+                                        }
+
+                                        SBstrSummaryValue.Append("<td valign='middle' align='left' class='Metadata-Table Green' style='width: 80px;'> <p class='Body-Text-Bold'>" + DT.Rows[i]["MetricSumName"] + "</p></td>");
+                                        SBstrSummaryValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</p></td>");
+                                        SBstrSummaryValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["MeasuredValue"])) + "&nbsp;</p></td>");
+                                        SBstrSummaryValue.Append("</tr>");
+                                        intSummary += 1;
+                                    }
+                                    else
+                                    {
+                                        if ((intTVI % 2) == 0) //----If even row then make background color green----//
+                                        {
+                                            SBstrTVIValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
+                                        }
+                                        else             //------Else keep background color white-----//
+                                        {
+                                            SBstrTVIValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4' style='height: " + RowHeight + "px'>");
+                                        }
+
+                                        SBstrTVIValue.Append("<td valign='middle' align='left' class='Metadata-Table Green' style='width: 80px;'> <p class='Body-Text-Bold'>" + DT.Rows[i]["MetricSumName"] + "</p></td>");
+                                        SBstrTVIValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</p></td>");
+                                        SBstrTVIValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["MeasuredValue"])) + "&nbsp;</p></td>");
+                                        SBstrTVIValue.Append("</tr>");
+                                        intTVI += 1;
+                                    }
+                                }
+                                SBStr.Replace("###DeltaSummaryDetail###", SBstrSummaryValue.ToString());
+                                SBStr.Replace("###DeltaTVIDetail###", SBstrTVIValue.ToString());
+                            }
+
                             //--------For ISO /Default Reports
-                            if (ReportType == 17 || ReportType == 18)
+                            else if (ReportType == 18)
                             {
                                 for (int i = 0; i < DT.Rows.Count; i++)
                                 {
@@ -2051,7 +2106,7 @@ namespace FujifilmUSA.Sync.Common
                     }
 
                     //--------For G7 / All Validation Report
-                    if (ReportType == 16 || ReportType == 21) // DLPPlus G7
+                    if (ReportType == 16 || ReportType == 17 || ReportType == 21) // DLPPlus G7
                     {
                         // === Table 4 = for Chart of Gray ΔCh === //           
                         #region ==== Gray ΔCh Chart ====
@@ -2099,7 +2154,7 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###LComparison###", chartContent.LComparisionChart);
                         SBStr.Replace("###ResultSummary_TVIImage###", chartContent.TVI_Summary_Chart);
 
-                        if (ReportType == 16)
+                        if (ReportType == 16 || ReportType == 17) // --05 / 01 / 2023 ISO Report
                         {
                             //------Region: for Density Data----//
                             DT = DS_Common.Tables[5];

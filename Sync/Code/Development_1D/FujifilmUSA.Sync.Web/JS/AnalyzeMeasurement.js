@@ -389,6 +389,7 @@ $(document).ready(function () {
             apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
         }
         else if ($hdnValidationType == 2) {
+            apiParameter.LComparisionChart = GetLComparisionChartImage();
             apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
             apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
             apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
@@ -402,6 +403,7 @@ $(document).ready(function () {
             apiParameter.TVI_ISO_Magenta_Chart = Get_TVI_ISO_MAGENTA_ChartImage();
             apiParameter.TVI_ISO_Yellow_Chart = Get_TVI_ISO_YELLOW_ChartImage();
             apiParameter.TVI_ISO_Black_Chart = Get_TVI_ISO_BLACK_ChartImage();
+            apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
         }
         else if ($hdnValidationType == 0) {
             apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
