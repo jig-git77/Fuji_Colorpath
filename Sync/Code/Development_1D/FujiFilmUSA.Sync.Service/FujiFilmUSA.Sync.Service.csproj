@@ -113,6 +113,7 @@
     <Content Include="Images\header-left-img.gif" />
     <Content Include="Images\header-middle-bg.gif" />
     <Content Include="Images\header-right-img.gif" />
+    <Content Include="Images\ISOAlignmentReportTitle.png" />
     <Content Include="Images\LabBackdrop.jpg" />
     <Content Include="Images\login_logo.png" />
     <Content Include="Images\Logo-report.png" />
