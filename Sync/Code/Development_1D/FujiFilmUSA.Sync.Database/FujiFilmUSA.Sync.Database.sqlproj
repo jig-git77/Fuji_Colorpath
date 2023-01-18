@@ -64,6 +64,7 @@
     <Folder Include="Table Script\09_2022" />
     <Folder Include="Table Script\10_2022" />
     <Folder Include="Table Script\11_2022" />
+    <Folder Include="Table Script\01_2023" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -155,5 +156,9 @@
     <None Include="Table Script\11_2022\11-21-2022_[CPSpot].[DeleteSpotTargetList].sql" />
     <None Include="Table Script\11_2022\11-21-2022_[CPSpot].[GetSpotTarget].sql" />
     <None Include="Table Script\11_2022\11-21-2022_[CPSpot].[UpdateSpotTarget].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Table Script\01_2023\18-01-2022_[Report].[GetSingle1DMeasurement] .sql" />
+    <Build Include="Table Script\01_2023\18-01-2022_Alter_CPSyncV_IsSummary.sql" />
   </ItemGroup>
 </Project>
