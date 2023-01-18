@@ -8,3 +8,8 @@ GO
 UPDATE CPSyncV.MetricSum 
 	SET IsSummary = 1;
 GO
+
+UPDATE CPSyncV.MetricSum 
+	SET IsSummary = 0
+WHERE MetricSumName like '%TVI%';
+GO
