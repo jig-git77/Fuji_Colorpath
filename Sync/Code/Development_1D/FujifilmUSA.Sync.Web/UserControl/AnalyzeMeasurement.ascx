@@ -368,7 +368,9 @@
                 <asp:HiddenField runat="server" ID="hdnSyncDlpPlusType" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnIsDlpMultiColor" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnIsSync1DMultiColor" ClientIDMode="Static" />
-                <asp:HiddenField ID="hdnCurrentRunName" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentRunName" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnReferenceChartTypeID" ClientIDMode="Static" />
+
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -1503,10 +1505,11 @@
                                                             <a id='lnkLinkFilter' title='Clear filter'>
                                                                 <img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;margin-top: 5px;margin-right: 5px;'></img>
                                                             </a>
-                                                            <button id="btnExportMeasurement" class="k-button" style="display:none;">Export Measurement File</button>
-                                                            <button id="btnExportCGATS" class="k-button">Export to CGATS</button>
-                                                            <button id="btnExportCxF" class="k-button">Export to CxF</button>
-                                                            
+                                                            Export to: 
+                                                            <button id="btnExportMeasurement" class="k-button" style="display:none;">JSON</button>
+                                                            <button id="btnExportCGATS" class="k-button">CGATS</button>
+                                                            <button id="btnExportCxF" class="k-button">CxF</button>
+                                                            <button id="btnExportDotGain" class="k-button" style="display:none;">DG</button>
                                                         </div>
                                         </script>
                                     </div>

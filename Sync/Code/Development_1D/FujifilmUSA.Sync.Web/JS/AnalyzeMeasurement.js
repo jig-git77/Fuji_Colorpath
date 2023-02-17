@@ -115,6 +115,8 @@ var $hdnIsDlpMultiColor;
 var $hdnIsSync1DMultiColor;
 var $hdnCurrentRunName;
 var labelPrintHTMLString = '';
+var $hdnReferenceChartTypeID;
+
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -289,6 +291,7 @@ $(document).ready(function () {
     $hdnIsDlpMultiColor = $('#hdnIsDlpMultiColor').val();
     $hdnIsSync1DMultiColor = $('#hdnIsSync1DMultiColor').val();
     $hdnCurrentRunName = $('#hdnCurrentRunName').val();
+    $hdnReferenceChartTypeID = $('#hdnReferenceChartTypeID').val();
 
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
@@ -1634,6 +1637,10 @@ function BindMeasurementPatchDetails() {
                 if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
+                //Show Dot Gain report export button visible only for Sync1D projects and ReferenceChartTypeID = 78 ("FP790Linearization")
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && $hdnReferenceChartTypeID == "78") {
+                    $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportDotGain').show();
+                }
             }
 
 
@@ -1934,6 +1941,53 @@ function BindMeasurementPatchDetails() {
         //        console.log(XMLHttpRequest.responseText);
         //    }
         //});       
+    });
+
+    $divMeasurementPatchDetails.find('#btnExportDotGain').unbind("click").on('click', function (e) {
+        e.preventDefault();
+
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+
+        var ajaxParameter = {
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetDotGainPatchReport?MeasurementId=' + measurementID,
+            data: {},
+            dataType: "json",
+            async: false,
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+        });
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
+        //    data: filterObj,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
     });
 
     $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
@@ -2465,6 +2519,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
                 if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
+                
                 if (TotalNoColor == 5) {
                     grid.hideColumn(8);//grid.hideColumn(24);// Channel_6
                     grid.hideColumn(9);//grid.hideColumn(25);// Channel_7
@@ -2784,6 +2839,93 @@ function BindMeasurementPatchDetailsForMultiColor() {
         //        console.log(XMLHttpRequest.responseText);
         //    }
         //});       
+    });
+
+    $divMeasurementPatchDetails.find('#btnExportDotGain').unbind("click").on('click', function (e) {
+        e.preventDefault();
+
+        var selectedMatricSum = '';
+        if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
+            selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+        }
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        //var apiReportParameters = {
+        //    MeasurementId: measurementID,
+        //    IsVerificationProject: $hdnVerification,
+        //    IsSync1DTypeProject: $hdnSync1DType,
+        //    metricSumID: selectedMatricSum
+        //};
+
+        var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
+        var optimizationRun = $(this).attr('data-id');
+        var sortObj = null;
+        var filterObj = null;
+        //set the sorting parameters
+        if (grid.dataSource._sort) {
+            sortObj = grid.dataSource._sort[0];
+        }
+        //set the filtering parameters
+        if (grid.dataSource._filter) {
+            filterObj = {
+                filters: grid.dataSource._filter.filters,
+                logic: 'AND'
+            };
+            //set the type of filter fields
+            $.each(filterObj.filters, function (index, obj) {
+                obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+            });
+        }
+
+        //create object
+        var filterObj = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            metricSumID: selectedMatricSum,
+            sort: sortObj,
+            filter: filterObj
+        };
+
+        var ajaxParameter = {
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetDotGainPatchReport',
+            data: filterObj,
+            dataType: "json",
+            async: false,
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+        });
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
+        //    data: filterObj,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
     });
 
     $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {

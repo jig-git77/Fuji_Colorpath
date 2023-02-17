@@ -79,5 +79,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataSet GetChannelMeasurementData(List<int> measurementIds);
         MeasurementDataResponse GetMultiColorMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType);
         DataTable GetSpotProjectSummaryByDeltaE(int? OptimizeRunId, Decimal? Dec_E_Value);
+        DataTable GetPatchDetailsofMeasurement_DotGain(int MeasurementId);
     }
 }
