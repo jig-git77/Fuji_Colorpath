@@ -180,6 +180,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnCurrentDeviceName.Value = SessionManager.Instance.CurrentDevice.DeviceName.ToString();
                 hdnCurrentUserRole.Value = SessionManager.Instance.CurrentUser.Role.RoleId.ToString();
                 hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
+                hdnReferenceChartTypeID.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
+              
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();

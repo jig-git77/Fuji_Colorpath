@@ -610,6 +610,79 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpPost]
         [CustomAuthentication]
+        public IHttpActionResult GetDotGainPatchReport(int? MeasurementId)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            string validationMessage = "";
+            string ReportFileName = "";
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    _presenterAnalyze.GetPatchDetailsofMeasurement_DotGain();
+                    
+                    #region Generate DotGain .txt file
+                    System.IO.StreamWriter sw;
+                    ReportFileName = "/UploadFiles/" + MeasurementId.ToString() + "_MeasurementFile.txt";
+                    string ReportFilePath = HostingEnvironment.MapPath("~/UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.txt";
+                    sw = System.IO.File.CreateText(ReportFilePath);
+                   
+                    sw.WriteLine(@"ORIGINATOR	FujiFilm Colorpath Sync");
+                    sw.WriteLine(@"MEASUREMENT_SOURCE	WhiteBase=Absolute  Filter=No");
+                    sw.WriteLine(@"ILLUMINATION_NAME	D50");
+                    sw.WriteLine(@"OBSERVER_ANGLE	2");
+                    sw.WriteLine(@"DENSITY_FILTER_STANDARD	Status T");
+                    sw.WriteLine(@"DENSITY_WHITE_REFERENCE	Absolute white");
+                    sw.WriteLine(@"KEYWORD	DEVCALSTD");
+                    sw.WriteLine(@"DEVCALSTD	XRGA");
+                    sw.WriteLine(@"CREATED		" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"));
+
+                    sw.WriteLine(@"    ");
+                    sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "6");
+                    sw.WriteLine("BEGIN_DATA_FORMAT");
+                    sw.WriteLine("SAMPLE_ID\tSAMPLE_NAME\tD_VIS\tD_RED\tD_GREEN\tD_BLUE");
+                    sw.WriteLine("END_DATA_FORMAT");
+
+                    sw.WriteLine(@"    ");
+                    sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtPatchDetails.Rows.Count.ToString());
+                    sw.WriteLine("BEGIN_DATA");
+
+                    for (int i = 0; i < dtPatchDetails.Rows.Count; i++)
+                    {
+                        sw.WriteLine(dtPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_Y"].ToString());
+                    }
+                    sw.WriteLine("END_DATA");
+                    sw.Close();
+                    #endregion
+
+                    httpResponse.Data = ReportFileName;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult GetDymoPrintData(DymoMeasurement model)
         {
             IHttpActionResult actionResult = null;

@@ -290,6 +290,12 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             throw new NotImplementedException();
         }
+
+        public DataTable GetPatchDetailsofMeasurement_DotGain(int MeasurementId)
+        {
+            return new DataTable();
+        }
+
         #endregion
 
         #region ITaskBase Members
