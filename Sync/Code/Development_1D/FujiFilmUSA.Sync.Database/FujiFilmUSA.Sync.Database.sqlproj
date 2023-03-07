@@ -66,6 +66,7 @@
     <Folder Include="Table Script\11_2022" />
     <Folder Include="Table Script\01_2023" />
     <Folder Include="Table Script\02_2023" />
+    <Folder Include="Table Script\03_2023" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -163,5 +164,7 @@
     <Build Include="Table Script\01_2023\18-01-2022_Alter_CPSyncV_IsSummary.sql" />
     <None Include="Stored Procedures\[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
     <Build Include="Table Script\02_2023\02-17-2023_[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
+    <Build Include="Stored Procedures\[CPSyncV].[uspInsertColorCharΔCh].sql" />
+    <Build Include="Table Script\03_2023\03-07-2023_[CPSyncV].[uspInsertColorCharΔCh].sql" />
   </ItemGroup>
 </Project>
