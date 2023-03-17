@@ -53,6 +53,23 @@
                             </tr>
                             <tr>
                                 <td align="right">
+                                    <span style="font-weight: bold;"><asp:Localize Text="Is Support CloudFlow?" runat="server" 
+                                        ID="loc" meta:resourcekey="locIsSupportCloudFlowResource1"></asp:Localize></span>
+                                </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsSupportCloudFlow" runat="server" Checked="True" 
+                                            meta:resourcekey="chkIsSupportCloudFlowResource1" />
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
                                     <span style="font-weight: bold;"><asp:Localize Text="Is Active?" runat="server" 
                                         ID="locIsActive" meta:resourcekey="locIsActiveResource1"></asp:Localize></span>
                                 </td>

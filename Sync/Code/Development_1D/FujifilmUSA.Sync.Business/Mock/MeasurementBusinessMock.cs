@@ -296,6 +296,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new DataTable();
         }
 
+        public int ChkCloudFlowSupport(int projectId, int CurrentRefChartTypeId)
+        {
+            return 0;
+        }
+
         #endregion
 
         #region ITaskBase Members

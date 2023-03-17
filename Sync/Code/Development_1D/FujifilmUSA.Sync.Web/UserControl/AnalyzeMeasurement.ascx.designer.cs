@@ -240,13 +240,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.HiddenField hdnCurrentRunName;
 
         /// <summary>
-        /// hdnReferenceChartTypeID control.
+        /// hdnCloudFlowCheck control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnReferenceChartTypeID;
+        protected global::System.Web.UI.WebControls.HiddenField hdnCloudFlowCheck;
 
         /// <summary>
         /// header control.

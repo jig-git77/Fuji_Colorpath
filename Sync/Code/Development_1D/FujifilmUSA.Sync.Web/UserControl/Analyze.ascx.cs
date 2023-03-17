@@ -3743,6 +3743,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int LicenseTypeId { get; set; }
         public DataTable dtMeasurement { get; set; }
         public decimal Dec_E_Value { get; set; }
+        public int CurrentRefChartTypeId { get; set; }
         #endregion
 
     }

@@ -115,7 +115,7 @@ var $hdnIsDlpMultiColor;
 var $hdnIsSync1DMultiColor;
 var $hdnCurrentRunName;
 var labelPrintHTMLString = '';
-var $hdnReferenceChartTypeID;
+var $hdnCloudFlowCheck;
 
 //********** kendo objects *********//
 var drawing = kendo.drawing;
@@ -291,7 +291,7 @@ $(document).ready(function () {
     $hdnIsDlpMultiColor = $('#hdnIsDlpMultiColor').val();
     $hdnIsSync1DMultiColor = $('#hdnIsSync1DMultiColor').val();
     $hdnCurrentRunName = $('#hdnCurrentRunName').val();
-    $hdnReferenceChartTypeID = $('#hdnReferenceChartTypeID').val();
+    $hdnCloudFlowCheck = $('#hdnCloudFlowCheck').val();
 
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
@@ -1637,8 +1637,8 @@ function BindMeasurementPatchDetails() {
                 if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
-                //Show Dot Gain report export button visible only for Sync1D projects and ReferenceChartTypeID = 78 ("FP790Linearization")
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && $hdnReferenceChartTypeID == "78") {
+                //Show Dot Gain report export button visible only if it is Sync1D LicenseType and CloudFlowcheck return 1
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && $hdnCloudFlowCheck == "1") {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportDotGain').show();
                 }
             }

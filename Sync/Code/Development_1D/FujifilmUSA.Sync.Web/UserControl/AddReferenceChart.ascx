@@ -376,7 +376,23 @@
                                     </div>
                                 </td>
                             </tr>
-                   
+                        <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                     IsSupportCloudFlow
+                                    </span>
+                                </td>
+                                <td> <span style="font-weight: bold;">
+                                    &nbsp;:&nbsp;</span>
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsSupportCloudFlow" runat="server" />
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                        </tr>
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize runat="server" 

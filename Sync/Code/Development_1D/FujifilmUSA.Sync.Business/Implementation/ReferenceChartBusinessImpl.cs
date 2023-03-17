@@ -74,7 +74,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.IsSync1DMultiColor_G7,
                                                                                     referenceChartType.Validation_Sync1D_Multi_Color,
                                                                                     referenceChartType.ChartSettingXML,
-                                                                                    referenceChartType.DeviceFamilyId
+                                                                                    referenceChartType.DeviceFamilyId,
+                                                                                    referenceChartType.IsSupportCloudFlow
                                                                                 });
                     if (returnValue == -1)
                     {
@@ -219,7 +220,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 IsSync1DMultiColor_G7 = DataReader.ReadShort(x, "IsSync1DMultiColor_G7"),
                                 Validation_Sync1D_Multi_Color = DataReader.ReadShort(x, "Validation_Sync1D_Multi_Color"),
                                 DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID"),
-
+                                IsSupportCloudFlow = DataReader.ReadBoolean(x, "IsSupportCloudFlow")
                             }).ToList();
                     }
                 },
@@ -267,7 +268,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.IsSync1DMultiColor_G7,
                                         referenceChartType.Validation_Sync1D_Multi_Color,
                                         referenceChartType.ChartSettingXML,
-                                        referenceChartType.DeviceFamilyId
+                                        referenceChartType.DeviceFamilyId,
+                                        referenceChartType.IsSupportCloudFlow
                                     });
                     if (returnValue == -1)
                     {

@@ -1,5 +1,5 @@
 ﻿
-/****** Object:  StoredProcedure [CP].[GetReferenceChartList]    Script Date: 8/31/2022 10:58:59 AM ******/
+/****** Object:  StoredProcedure [CP].[GetReferenceChartList]    Script Date: 3/17/2023 2:09:11 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -43,8 +43,8 @@ BEGIN
 		RCT.IsSync1DMultiColor_ISO,
 		RCT.IsSync1DMultiColor_G7,
 		RCT.Validation_Sync1D_Multi_Color,
-		RCT.DeviceFamilyID
-
+		RCT.DeviceFamilyID,
+		RCT.IsSupportCloudFlow
 
 	FROM
 		CP.ReferenceChartType  AS RCT WITH (NOLOCK) INNER JOIN
@@ -83,7 +83,8 @@ END
 		RCT.IsSync1DMultiColor_ISO,
 		RCT.IsSync1DMultiColor_G7,
 		RCT.Validation_Sync1D_Multi_Color,
-		RCT.DeviceFamilyID
+		RCT.DeviceFamilyID,
+		RCT.IsSupportCloudFlow
 
 	FROM
 		CP.ReferenceChartType AS RCT INNER JOIN

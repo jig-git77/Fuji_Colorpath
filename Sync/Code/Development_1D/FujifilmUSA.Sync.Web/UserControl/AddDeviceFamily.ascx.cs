@@ -29,10 +29,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void SaveDeviceFamily()
         {
             DeviceFamily = new DeviceFamily()
-                               {
-                                   DeviceFamilyDesc = txtDeviceFamilyName.Text,
-                                   IsActive = chkIsActive.Checked
-                               };
+            {
+                DeviceFamilyDesc = txtDeviceFamilyName.Text,
+                IsSupportCloudFlow = chkIsSupportCloudFlow.Checked,
+                IsActive = chkIsActive.Checked
+            };
             _presenterDeviceManagement.InsertDeviceFamily();
             if (IsErrorOccured) return;
             Response.Redirect("DeviceManagement.aspx");

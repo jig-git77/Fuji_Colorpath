@@ -180,8 +180,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnCurrentDeviceName.Value = SessionManager.Instance.CurrentDevice.DeviceName.ToString();
                 hdnCurrentUserRole.Value = SessionManager.Instance.CurrentUser.Role.RoleId.ToString();
                 hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
-                hdnReferenceChartTypeID.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
-              
+               
+                //--Start: Display Button to export measurement in CloudFlow DotGain format if this device family has CloudFlow support
+                ChkCloudFlowSupport();
+                //--End
+
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
@@ -336,6 +339,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else   //Success, No difference
             {
                 hd_CompError.Value = "0";
+            }
+        }
+        #endregion
+
+        #region Check CloudFlow Support
+        public void ChkCloudFlowSupport()
+        {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            CurrentRefChartTypeId = Convert.ToInt16(SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key);
+            int CompatibilityNo = _presenterAnalyze.ChkCloudFlowSupport();
+            if (CompatibilityNo == 1)    //Error in matching between CloudFlow support in DeviceFamily vs ReferenceChartType
+            {
+                hdnCloudFlowCheck.Value = "1";
+            }
+            else   //Success, No difference
+            {
+                hdnCloudFlowCheck.Value = "0";
             }
         }
         #endregion
@@ -553,6 +573,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int LicenseTypeId { get; set; }
         public DataTable dtMeasurement { get; set; }
         public decimal Dec_E_Value { get; set; }
+        public int CurrentRefChartTypeId { get; set; }
         #endregion
     }
 }

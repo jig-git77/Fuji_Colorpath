@@ -3185,6 +3185,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
+        public int ChkCloudFlowSupport(int projectId, int CurrentRefChartTypeId)
+        {
+            var outParam = new Parameters() { ParameterName = "@CompatibilityNo", Type = DbType.Int16 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure("CPSync.ChkCloudFlowSupport",
+                                         new List<Parameters>()
+                                                 {
+                                                     new Parameters() {ParameterName = "@ProjectID", Type = DbType.Int32, Value = projectId},
+                                                     new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int32, Value = CurrentRefChartTypeId}
+                                                 },
+                                         new List<Parameters>()
+                                                 {
+                                                     outParam
+                                                 });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_ChkCloudFlowSupport"));
+            return Convert.ToInt32(outParam.Value);
+        }
+
         #endregion
 
         #region ITaskBase Members

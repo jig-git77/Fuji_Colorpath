@@ -219,6 +219,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);
             if (drpDeviceFamilyId.SelectedIndex > 0)
                 ReferenceChartType.DeviceFamilyId = Convert.ToInt16(drpDeviceFamilyId.SelectedValue);
+            ReferenceChartType.IsSupportCloudFlow = chkIsSupportCloudFlow.Checked;
             ReferenceChartType.IsUsed = chkIsUsed.Checked;
             ReferenceChartType.ChartSettingXML = string.IsNullOrEmpty(txtChartSetting.Text) ? null : txtChartSetting.Text;
             if (chklist_ProjectType.Items[0].Selected == true)
@@ -1143,7 +1144,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtNumOfCols.Text = ReferenceChartType.NumOfCols.ToString();
                 cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);
                 drpDeviceFamilyId.SelectedValue = Convert.ToString(ReferenceChartType.DeviceFamilyId);
-
+                chkIsSupportCloudFlow.Checked = (ReferenceChartType.IsSupportCloudFlow == true ? true : false);
+                
                 if (ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1IO || ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1IOPro2 || ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1Sis)
                 {
                     trChartSetting.Visible = true;

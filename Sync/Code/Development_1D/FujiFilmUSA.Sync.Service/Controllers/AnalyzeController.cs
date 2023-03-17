@@ -616,6 +616,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             BaseResponse<string> httpResponse = new BaseResponse<string>();
             string validationMessage = "";
             string ReportFileName = "";
+            string ChartName = "";
             try
             {
                 if (MeasurementId == null)
@@ -632,41 +633,83 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     _presenterAnalyze.GetPatchDetailsofMeasurement_DotGain();
-                    
+
                     #region Generate DotGain .txt file
                     System.IO.StreamWriter sw;
                     ReportFileName = "/UploadFiles/" + MeasurementId.ToString() + "_MeasurementFile.txt";
                     string ReportFilePath = HostingEnvironment.MapPath("~/UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.txt";
                     sw = System.IO.File.CreateText(ReportFilePath);
-                   
-                    sw.WriteLine(@"ORIGINATOR	FujiFilm Colorpath Sync");
-                    sw.WriteLine(@"MEASUREMENT_SOURCE	WhiteBase=Absolute  Filter=No");
-                    sw.WriteLine(@"ILLUMINATION_NAME	D50");
-                    sw.WriteLine(@"OBSERVER_ANGLE	2");
-                    sw.WriteLine(@"DENSITY_FILTER_STANDARD	Status T");
-                    sw.WriteLine(@"DENSITY_WHITE_REFERENCE	Absolute white");
-                    sw.WriteLine(@"KEYWORD	DEVCALSTD");
-                    sw.WriteLine(@"DEVCALSTD	XRGA");
-                    sw.WriteLine(@"CREATED		" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"));
 
-                    sw.WriteLine(@"    ");
-                    sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "6");
-                    sw.WriteLine("BEGIN_DATA_FORMAT");
-                    sw.WriteLine("SAMPLE_ID\tSAMPLE_NAME\tD_VIS\tD_RED\tD_GREEN\tD_BLUE");
-                    sw.WriteLine("END_DATA_FORMAT");
-
-                    sw.WriteLine(@"    ");
-                    sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtPatchDetails.Rows.Count.ToString());
-                    sw.WriteLine("BEGIN_DATA");
-
-                    for (int i = 0; i < dtPatchDetails.Rows.Count; i++)
+                    ChartName = dtPatchDetails.Rows[0]["ChartName"].ToString();
+                    if (ChartName.ToLower().Contains("linearization")) //------------DotGain report generation for Linearization type chart
                     {
-                        sw.WriteLine(dtPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_Y"].ToString());
+                        #region Generate Linearization DotGain .txt file
+                       
+                        sw.WriteLine(@"ORIGINATOR	FujiFilm Colorpath Sync");
+                        sw.WriteLine(@"MEASUREMENT_SOURCE	WhiteBase=Absolute  Filter=No");
+                        sw.WriteLine(@"ILLUMINATION_NAME	D50");
+                        sw.WriteLine(@"OBSERVER_ANGLE	2");
+                        sw.WriteLine(@"DENSITY_FILTER_STANDARD	Status T");
+                        sw.WriteLine(@"DENSITY_WHITE_REFERENCE	Absolute white");
+                        sw.WriteLine(@"KEYWORD	DEVCALSTD");
+                        sw.WriteLine(@"DEVCALSTD	XRGA");
+                        sw.WriteLine(@"CREATED		" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"));
+
+                        sw.WriteLine(@"    ");
+                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "6");
+                        sw.WriteLine("BEGIN_DATA_FORMAT");
+                        sw.WriteLine("SAMPLE_ID\tSAMPLE_NAME\tD_VIS\tD_RED\tD_GREEN\tD_BLUE");
+                        sw.WriteLine("END_DATA_FORMAT");
+
+                        sw.WriteLine(@"    ");
+                        sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtPatchDetails.Rows.Count.ToString());
+                        sw.WriteLine("BEGIN_DATA");
+
+                        for (int i = 0; i < dtPatchDetails.Rows.Count; i++)
+                        {
+                            sw.WriteLine(dtPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtPatchDetails.Rows[i]["Density_Y"].ToString());
+                        }
+                        sw.WriteLine("END_DATA");
+                        #endregion
                     }
-                    sw.WriteLine("END_DATA");
+                    else if (ChartName.ToLower().Contains("inklimit")) //--------DotGain report generation for InkLimit type chart
+                    {
+                        #region Generate InkLimit DotGain .txt file
+                       
+                        sw.WriteLine(@"ORIGINATOR	FujiFilm Colorpath Sync");
+                        sw.WriteLine(@"MEASUREMENT_SOURCE	""MeasurementCondition=M0   Filter=No""");
+                        sw.WriteLine(@"ILLUMINATION_NAME	D50");
+                        sw.WriteLine(@"OBSERVER_ANGLE	2");
+                        sw.WriteLine(@"FILTER	no");
+                        sw.WriteLine(@"WEIGHTING_FUNCTION   ""ILLUMINANT,   D50""");
+                        sw.WriteLine(@"WEIGHTING_FUNCTION   ""OBSERVER,     2 degree""");
+                        sw.WriteLine(@"KEYWORD	DEVCALSTD");
+                        sw.WriteLine(@"DEVCALSTD	XRGA");
+                        sw.WriteLine(@"CREATED		" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"));
+
+                        sw.WriteLine(@"    ");
+                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "5");
+                        sw.WriteLine("BEGIN_DATA_FORMAT");
+                        sw.WriteLine("SAMPLE_ID\tSAMPLE_NAME\tLAB_L\tLAB_A\tLAB_B");
+                        sw.WriteLine("END_DATA_FORMAT");
+
+                        sw.WriteLine(@"    ");
+                        sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtPatchDetails.Rows.Count.ToString());
+                        sw.WriteLine("BEGIN_DATA");
+
+                        for (int i = 0; i < dtPatchDetails.Rows.Count; i++)
+                        {
+                            sw.WriteLine(dtPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtPatchDetails.Rows[i]["LAB_L"].ToString() + "\t" + dtPatchDetails.Rows[i]["LAB_A"].ToString() + "\t" + dtPatchDetails.Rows[i]["LAB_B"].ToString());
+                        }
+                        sw.WriteLine("END_DATA");
+                        #endregion
+                    }
+                    else
+                    {
+                        sw.WriteLine("No Report Generated");
+                    }
                     sw.Close();
                     #endregion
-
                     httpResponse.Data = ReportFileName;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                 }
@@ -1326,6 +1369,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int LicenseTypeId { get; set; }
         public DataTable dtMeasurement { get; set; }
         public decimal Dec_E_Value { get; set; }
+        public int CurrentRefChartTypeId { get; set; }
         #endregion
     }
 }
