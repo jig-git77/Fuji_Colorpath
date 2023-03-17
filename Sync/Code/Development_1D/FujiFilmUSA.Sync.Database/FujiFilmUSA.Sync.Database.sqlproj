@@ -73,6 +73,8 @@
     <None Include="Table Script\08_2022\08-26-2022_[CP].[CreateReferenceChart].sql" />
     <None Include="Table Script\09_2022\09-07-2022_UpdateNPAPIPlugintoBothinLicense.sql" />
     <None Include="Table Script\09_2022\09-12-2022_Insert-Permission-Table.sql" />
+    <None Include="Table Script\03_2023\03-17-2023_Add_RefChartIsSupportCloudFlow.sql" />
+    <None Include="Table Script\03_2023\03-17-2023_Add_DeviceFamIsSupportCloudFlow.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartTypeList].sql" />
@@ -160,11 +162,23 @@
     <None Include="Table Script\11_2022\11-21-2022_[CPSpot].[UpdateSpotTarget].sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Table Script\01_2023\18-01-2022_[Report].[GetSingle1DMeasurement] .sql" />
-    <Build Include="Table Script\01_2023\18-01-2022_Alter_CPSyncV_IsSummary.sql" />
+    <None Include="Table Script\01_2023\18-01-2022_[Report].[GetSingle1DMeasurement] .sql" />
+    <None Include="Table Script\01_2023\18-01-2022_Alter_CPSyncV_IsSummary.sql" />
     <None Include="Stored Procedures\[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
-    <Build Include="Table Script\02_2023\02-17-2023_[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
-    <Build Include="Stored Procedures\[CPSyncV].[uspInsertColorCharΔCh].sql" />
-    <Build Include="Table Script\03_2023\03-07-2023_[CPSyncV].[uspInsertColorCharΔCh].sql" />
+    <None Include="Table Script\02_2023\02-17-2023_[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
+    <None Include="Stored Procedures\[CPSyncV].[uspInsertColorCharΔCh].sql" />
+    <None Include="Table Script\03_2023\03-07-2023_[CPSyncV].[uspInsertColorCharΔCh].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\[CP].[InsertDeviceFamily].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Stored Procedures\[CPSync].[ChkCloudFlowSupport] .sql" />
+    <Build Include="Table Script\03_2023\03-17-2023_[CP].[CreateReferenceChart].sql" />
+    <Build Include="Table Script\03_2023\03-17-2023_[CP].[GetReferenceChartList].sql" />
+    <Build Include="Table Script\03_2023\03-17-2023_[CP].[InsertDeviceFamily].sql" />
+    <Build Include="Table Script\03_2023\03-17-2023_[CP].[UpdateReferenceChart].sql" />
+    <Build Include="Table Script\03_2023\03-17-2023_[CPSync].[ChkCloudFlowSupport] .sql" />
+    <Build Include="Table Script\03_2023\03-17-2023_[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
   </ItemGroup>
 </Project>

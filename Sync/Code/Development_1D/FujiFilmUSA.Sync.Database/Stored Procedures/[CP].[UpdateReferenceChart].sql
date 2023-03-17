@@ -1,5 +1,5 @@
 ﻿
-/****** Object:  StoredProcedure [CP].[UpdateReferenceChart]    Script Date: 8/31/2022 11:05:08 AM ******/
+/****** Object:  StoredProcedure [CP].[UpdateReferenceChart]    Script Date: 3/17/2023 2:08:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -38,6 +38,7 @@ ALTER PROCEDURE [CP].[UpdateReferenceChart]
 ,@Validation_Sync1D_Multi_Color	TINYINT
 ,@ChartSetting				NVARCHAR(MAX)
 ,@DeviceFamilyID			TINYINT
+,@IsSupportCloudFlow BIT=NULL
 AS
 BEGIN
 	
@@ -88,6 +89,7 @@ BEGIN
 							,IsSync1DMultiColor_G7=@IsSync1DMultiColor_G7
 							,Validation_Sync1D_Multi_Color=@Validation_Sync1D_Multi_Color
 							,DeviceFamilyID=@DeviceFamilyID
+							,IsSupportCloudFlow = @IsSupportCloudFlow
 						WHERE
 							ReferenceChartTypeID = @ReferenceChartTypeID
 				END
@@ -122,6 +124,7 @@ BEGIN
 									,IsSync1DMultiColor_G7=@IsSync1DMultiColor_G7
 									,Validation_Sync1D_Multi_Color=@Validation_Sync1D_Multi_Color
 									,DeviceFamilyID=@DeviceFamilyID
+									,IsSupportCloudFlow = @IsSupportCloudFlow
 								WHERE
 									ReferenceChartTypeID = @ReferenceChartTypeID
 						END
@@ -154,6 +157,7 @@ BEGIN
 									,IsSync1DMultiColor_G7=@IsSync1DMultiColor_G7
 									,Validation_Sync1D_Multi_Color=@Validation_Sync1D_Multi_Color
 									,DeviceFamilyID=@DeviceFamilyID
+									,IsSupportCloudFlow = @IsSupportCloudFlow
 								WHERE
 									ReferenceChartTypeID = @ReferenceChartTypeID
 						END

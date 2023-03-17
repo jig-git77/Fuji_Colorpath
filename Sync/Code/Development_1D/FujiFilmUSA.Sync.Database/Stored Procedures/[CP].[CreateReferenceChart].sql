@@ -1,5 +1,5 @@
 ﻿
-/****** Object:  StoredProcedure [CP].[CreateReferenceChart]    Script Date: 8/31/2022 10:52:25 AM ******/
+/****** Object:  StoredProcedure [CP].[CreateReferenceChart]    Script Date: 3/17/2023 2:07:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -34,6 +34,7 @@ ALTER PROCEDURE [CP].[CreateReferenceChart]
 	,@Validation_Sync1D_Multi_Color	TINYINT
 	,@ChartSetting				NVARCHAR(MAX)
 	,@DeviceFamilyID			TINYINT
+	,@IsSupportCloudFlow BIT=NULL
 
 AS
 
@@ -92,7 +93,8 @@ AS
 					IsSync1DMultiColor_ISO,
 					IsSync1DMultiColor_G7,
 					Validation_Sync1D_Multi_Color,
-					DeviceFamilyID
+					DeviceFamilyID,
+					IsSupportCloudFlow
 				)
 			VALUES
 				(
@@ -123,7 +125,8 @@ AS
 					@Channel_9,
 					@IsSync1DMultiColor,
 					@Validation_Sync1D_Multi_Color,
-					@DeviceFamilyID
+					@DeviceFamilyID,
+					@IsSupportCloudFlow
 				)
 			
 			DECLARE @ChartSettingId TINYINT

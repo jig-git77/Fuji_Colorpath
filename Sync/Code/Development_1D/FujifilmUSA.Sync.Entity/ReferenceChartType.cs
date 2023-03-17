@@ -39,5 +39,6 @@ namespace FujifilmUSA.Sync.Entity
 
         public ProjectType ProjectType { get; set; }
         public int ChartDisplayType { get; set; }
+        public bool? IsSupportCloudFlow { get; set; }
     }
 }

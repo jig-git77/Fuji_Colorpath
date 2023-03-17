@@ -1,0 +1,1 @@
+﻿ALTER TABLE [CP].[DeviceFamily] ADD IsSupportCloudFlow BIT

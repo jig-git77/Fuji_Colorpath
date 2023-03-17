@@ -1271,7 +1271,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsSync1DMultiColor { get; set; }
         public string CurrentRunname { get; set; }
         public int LicenseTypeId { get; set; }
-
+        public decimal Dec_E_Value { get; set; }
+        public int CurrentRefChartTypeId { get; set; }
 
         #endregion
 
@@ -1291,7 +1292,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         public string SpotProjectIDs { get; set; }
         public DataTable dtMeasurement { get; set; }
-        public decimal Dec_E_Value { get; set; }
+
         #endregion
     }
 }

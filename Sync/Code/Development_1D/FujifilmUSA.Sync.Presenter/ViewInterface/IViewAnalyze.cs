@@ -67,5 +67,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string CurrentRunname { get; set; }
         int LicenseTypeId { get; set; }
         decimal Dec_E_Value { get; set; }
+        int CurrentRefChartTypeId { get; set; }
     }
 }

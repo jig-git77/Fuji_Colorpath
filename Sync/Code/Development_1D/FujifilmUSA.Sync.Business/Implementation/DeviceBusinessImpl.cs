@@ -269,6 +269,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             new object[]
                                     {
                                         deviceFamily.DeviceFamilyDesc,
+                                        deviceFamily.IsSupportCloudFlow,
                                         deviceFamily.IsActive,
                                     });
                     if (returnValue == -1)

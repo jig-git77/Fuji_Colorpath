@@ -370,7 +370,7 @@
                 <asp:HiddenField runat="server" ID="hdnIsDlpMultiColor" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnIsSync1DMultiColor" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentRunName" ClientIDMode="Static" />
-                <asp:HiddenField runat="server" ID="hdnReferenceChartTypeID" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCloudFlowCheck" ClientIDMode="Static" />
 
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
