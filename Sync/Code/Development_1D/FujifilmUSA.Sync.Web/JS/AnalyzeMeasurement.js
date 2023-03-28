@@ -1637,9 +1637,10 @@ function BindMeasurementPatchDetails() {
                 if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
-                //Show Dot Gain report export button visible only if it is Sync1D LicenseType and CloudFlowcheck return 1
+                //Show Dot Gain report export button visible only if it is Sync1D LicenseType and CloudFlowcheck return 1 , make hide "JSON" export button
                 if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && $hdnCloudFlowCheck == "1") {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportDotGain').show();
+                    $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').hide();
                 }
             }
 

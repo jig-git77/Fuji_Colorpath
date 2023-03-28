@@ -1,5 +1,4 @@
-USE [ColorPathSync_Stage]
-GO
+
 /****** Object:  StoredProcedure [CPSync].[GetPatchDetailsByMeasurementID_DotGain]    Script Date: 3/17/2023 12:14:53 PM ******/
 SET ANSI_NULLS ON
 GO
