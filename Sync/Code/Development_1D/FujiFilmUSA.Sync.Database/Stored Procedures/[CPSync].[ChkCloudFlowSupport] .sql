@@ -5,7 +5,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [CPSync].[ChkCloudFlowSupport]	
+CREATE PROCEDURE [CPSync].[ChkCloudFlowSupport]	
 	@ProjectID INT,	
 	@ReferenceChartTypeID INT,
 	@CompatibilityNo INT OUTPUT	
