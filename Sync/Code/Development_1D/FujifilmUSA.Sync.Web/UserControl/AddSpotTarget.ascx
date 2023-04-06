@@ -134,7 +134,7 @@
                                 </div>
                             </td>
                         </tr>        
-                        <tr>
+                        <tr runat="server" visible="false">
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize Text="Total Rows" runat="server" 
                                     ID="locTotalRows" meta:resourcekey="locTotalRowsResource1"></asp:Localize><span style="color: Red;">*</span> </span>
@@ -142,7 +142,7 @@
                             <td>
                                 <b>&nbsp;:&nbsp;</b>
                             </td>
-                            <td align="left">
+                            <td align="left"> <%--This textbox is hidden since it is multiple entries like Rows per page--%>
                                 <div style="float: left;">
                                     <telerik:RadNumericTextBox ID="txtNumOfRows" runat="server" Width="100px" Height="16px"
                                         MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" 
@@ -150,7 +150,7 @@
                                     </telerik:RadNumericTextBox>
                                 </div>
                                 <div style="float: left">
-                                  <asp:RequiredFieldValidator ID="rfvNumOfRows" runat="server" Display="Dynamic" ControlToValidate="txtNumOfRows"
+                                  <asp:RequiredFieldValidator ID="rfvNumOfRows" runat="server" Display="Dynamic" ControlToValidate="txtRowsPerPage"
                                         ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                         <ucValidationContainer:ValidationContainer ID="rfvcNumOfRowsContainer" runat="server"
                                             ValidationMsg="Please provide total rows." Size="200" ResourceValidationMsg="NumOfRowsRequiredResource"  />
