@@ -230,14 +230,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //get spot project chart setting
                 SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
                 _presenterExport.GetSpotProjectChartSetting();
-                obj.Configurations.NumberOfPatches = (SpotProjectChartSetting.Pages * SpotProjectChartSetting.NumOfRows * SpotProjectChartSetting.NumOfCols);
+                obj.Configurations.NumberOfPatches = (SpotProjectChartSetting.NumOfRows * SpotProjectChartSetting.NumOfCols);
                 obj.Configurations.ChartPages = SpotProjectChartSetting.Pages;
                 obj.Configurations.PatchWidth = Convert.ToInt32(SpotProjectChartSetting.PatchSizeX);
                 obj.Configurations.PatchHeight = Convert.ToInt32(SpotProjectChartSetting.PatchSizeY);
                 obj.Configurations.ChartBorder = SpotProjectChartSetting.ChartBorder;
                 obj.Configurations.ChartSizeW = Convert.ToInt32(SpotProjectChartSetting.ChartSizeX);
                 obj.Configurations.ChartSizeH = Convert.ToInt32(SpotProjectChartSetting.ChartSizeY);
-                obj.Configurations.RowsPerChart = SpotProjectChartSetting.NumOfRows;
+                obj.Configurations.RowsPerChart = SpotProjectChartSetting.RowsPerPage;
                 obj.Configurations.ColumsPerChart = SpotProjectChartSetting.NumOfCols;
                 obj.Configurations.Vgap = SpotProjectChartSetting.Vgap;
                 obj.Configurations.Hgap = SpotProjectChartSetting.Hgap;
