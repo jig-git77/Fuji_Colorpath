@@ -180,7 +180,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             SpotTarget.spotTargetSetting = new SpotProjectChartSetting();
             SpotTarget.spotTargetSetting.ChartName = txtChartName.Text;
-            SpotTarget.spotTargetSetting.NumOfRows = Convert.ToInt32(txtRowsPerPage.Text); //-----This needs to save as same number like "txtRowsPerPage"-----//
+            SpotTarget.spotTargetSetting.NumOfRows = Convert.ToInt32(txtNumOfRows.Text); 
             SpotTarget.spotTargetSetting.NumOfCols = Convert.ToInt32(txtNumOfCols.Text);
             SpotTarget.spotTargetSetting.ChartSizeX= Convert.ToDecimal(txtChartSizeX.Text);
             SpotTarget.spotTargetSetting.ChartSizeY = Convert.ToDecimal(txtChartSizeY.Text);
