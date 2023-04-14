@@ -86,19 +86,26 @@ namespace FujiFilmUSA.Sync.Service.Utility
         public async Task<List<Bitmap>> GenerateColorListChart(List<Patch> patchs)
         {
             try
-            {                
-                int result = 0;                
+            {          
                 //calculate height and width of image
                 int totalVgap = vGap * (columsPerChart + 2);
                 int totalHgap = hGap * (rowsPerChart + 2);
                 chartSizeW = columsPerChart * patchWidth + (chartBorder * 2) + totalVgap;
                 chartSizeH = rowsPerChart * patchHeight + (chartBorder * 2) + totalHgap;
-
+                int TotalRows = numberOfPatches / columsPerChart;
+                int NewrowsPerChart = 0;
+       
                 List<Bitmap> listBitMapImage = new List<Bitmap>();
                 int patchid = 0;
                 for (int thispage = 1; thispage <= chartPages; thispage++)
                 {
-
+                    //Start: -----Code to support unmatched rows for multiple page chart-----//
+                    NewrowsPerChart = rowsPerChart * thispage;
+                    if (TotalRows < NewrowsPerChart)
+                    {
+                        rowsPerChart = TotalRows - (rowsPerChart * (thispage - 1));
+                    }
+                    //End: --------------------//
 
                     //create image
                     Bitmap image = new Bitmap(chartSizeW, chartSizeH, PixelFormat.Format32bppArgb);
