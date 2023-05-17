@@ -67,6 +67,7 @@
     <Folder Include="Table Script\01_2023" />
     <Folder Include="Table Script\02_2023" />
     <Folder Include="Table Script\03_2023" />
+    <Folder Include="Table Script\04_2023" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -180,5 +181,8 @@
     <None Include="Table Script\03_2023\03-17-2023_[CP].[UpdateReferenceChart].sql" />
     <None Include="Table Script\03_2023\03-17-2023_[CPSync].[ChkCloudFlowSupport] .sql" />
     <None Include="Table Script\03_2023\03-17-2023_[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\04_2023\14-04-2023_Alter_SpotProjectChartSetting.sql" />
   </ItemGroup>
 </Project>
