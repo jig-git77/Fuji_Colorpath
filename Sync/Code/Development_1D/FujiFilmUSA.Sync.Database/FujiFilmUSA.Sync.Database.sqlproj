@@ -68,6 +68,7 @@
     <Folder Include="Table Script\02_2023" />
     <Folder Include="Table Script\03_2023" />
     <Folder Include="Table Script\04_2023" />
+    <Folder Include="Table Script\05_2023" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -184,5 +185,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\04_2023\14-04-2023_Alter_SpotProjectChartSetting.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\05_2023\05-26-2023_[CPSpot].[CreateSpotProject].sql" />
   </ItemGroup>
 </Project>
