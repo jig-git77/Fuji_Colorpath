@@ -147,19 +147,19 @@ $(document).ready(function () {
                 //}
                 //else { showSpotProject = true; }
 
-                if (data.LicenseType == ELicenseType.DLP && data.Status == EOptimizeRunStatus.Certify && data.HasSpotProject == true) {
+                if ((data.LicenseType == ELicenseType.DLP || data.LicenseType == ELicenseType.DLPPlus) && data.Status == EOptimizeRunStatus.Certify && data.HasSpotProject == true) {
                     showSpotProject = true;//BUTON VISIBLE
                     showSpotButtonEnableProject = true; //BUTTON ENABLE 
                 }
-                else if (data.LicenseType == ELicenseType.DLP && data.Status != EOptimizeRunStatus.Certify && data.HasSpotProject == true) {
+                else if ((data.LicenseType == ELicenseType.DLP || data.LicenseType == ELicenseType.DLPPlus) && data.Status != EOptimizeRunStatus.Certify && data.HasSpotProject == true) {
                     showSpotProject = true;//BUTON VISIBLE
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
                 }
-                else if (data.LicenseType == ELicenseType.DLP && data.Status == EOptimizeRunStatus.Certify && data.HasSpotProject == false) {
+                else if ((data.LicenseType == ELicenseType.DLP || data.LicenseType == ELicenseType.DLPPlus) && data.Status == EOptimizeRunStatus.Certify && data.HasSpotProject == false) {
                     showSpotProject = false;//BUTON NOT VISIBLE
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
                 }
-                else if (data.LicenseType == ELicenseType.DLP && data.Status != EOptimizeRunStatus.Certify && data.HasSpotProject == false) {
+                else if ((data.LicenseType == ELicenseType.DLP || data.LicenseType == ELicenseType.DLPPlus) && data.Status != EOptimizeRunStatus.Certify && data.HasSpotProject == false) {
                     showSpotProject = false;//BUTON NOT VISIBLE
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
                 }
@@ -167,7 +167,7 @@ $(document).ready(function () {
                     showSpotProject = true;//BUTON VISIBLE
                     showSpotButtonEnableProject = true; //BUTTON ENABLE 
                 }
-                else if (data.LicenseType != ELicenseType.DLP) {
+                else if (data.LicenseType != ELicenseType.DLP || data.LicenseType != ELicenseType.DLPPlus ) {
                     showSpotProject = false;//BUTON NOT VISIBLE
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
                 }
@@ -398,26 +398,7 @@ $(document).ready(function () {
                 else {
                     row.find("td #lnkSpotProjectIcon").hide();  //set Spot Project button hide if DLP is not project
                 }
-                //if (showSpotProject == true) {
-                //    //row.find("td #lnkSpotProjectIcon").show();  //set the project validation visibility
-                //    row.find("td #lnkSpotProjectIcon").attr("onclick", "javascript: return OpenSpotProjectListWindow('" + data.ProjectId + "','" + data.ProjectName + "')");
-                //    row.find("td #lnkSpotProjectIcon").addClass("linktbutton");  //set the Spotproject button disabled/enable class
-                //    row.find("td #lnkSpotProjectIcon").removeClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
-                //    row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoEnableButtonToolTip); //set the spotproject tooltip
-                //    row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoEnableButtonToolTip);   //set the spotproject tooltip
-                //}
-                //else {
-                //    //row.find("td #lnkSpotProjectIcon").hide();  //set the project validation visibility
-                //    row.find("td #lnkSpotProjectIcon").attr('onclick', '');
-                //    row.find("td #lnkSpotProjectIcon").addClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
-                //    row.find("td #lnkSpotProjectIcon").removeClass("linktbutton");  //set the Spotproject button disabled/enable class
-                //    row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoButtonToolTip); //set the spotproject tooltip
-                //    row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoButtonToolTip);   //set the spotproject tooltip
-                //    if (data.LicenseType != ELicenseType.DLP) {
-                //        row.find("td #lnkSpotProjectIcon").hide();  //set Spot Project button hide if DLP is not project
-                //    }
-                //}
-
+           
                 switch (data.Status) {
                     case EOptimizeRunStatus.Open:
                         var dateCreate = new Date(data.CreateDate);
@@ -467,7 +448,7 @@ $(document).ready(function () {
                 template: kendo.template($("#licenseType-printName-template").html()),
                 field: "ProjectName",
                 title: "<b title='Click here to sort'></b>",
-                width: 70,
+                width: 77,
                 filterable: false,
                 attributes: {
                     style: "word-break: break-all;font-weight: bold;"
@@ -485,7 +466,7 @@ $(document).ready(function () {
             {
                 field: "PrintConditionMedia",
                 title: "<b title='Click here to sort'></b>",
-                width: 25,
+                width: 20,
                 filterable: false,
                 attributes: {
                     //style: "word-break: break-all;"
