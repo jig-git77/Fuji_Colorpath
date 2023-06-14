@@ -69,6 +69,7 @@
     <Folder Include="Table Script\03_2023" />
     <Folder Include="Table Script\04_2023" />
     <Folder Include="Table Script\05_2023" />
+    <Folder Include="Table Script\06_2023" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -188,5 +189,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\05_2023\05-26-2023_[CPSpot].[CreateSpotProject].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\06_2023\06-14-2023_Alter_[CP].[InsertCustomSourceProfile].sql" />
   </ItemGroup>
 </Project>

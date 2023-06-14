@@ -409,6 +409,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
                         _presenterAnalyze.CreateDestinationAndDlpMultiColor();
                     }
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile)
+                    {
+                        EndDate = System.DateTime.Now;
+                        DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                        DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                        _presenterAnalyze.CreateCustomSourceProfileDlp();
+                    }
                     else
                     {
                         EndDate = System.DateTime.Now;
