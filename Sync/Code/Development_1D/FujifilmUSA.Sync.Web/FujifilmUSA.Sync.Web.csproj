@@ -1142,6 +1142,7 @@
     <Content Include="Images\4DCertification.png" />
     <Content Include="Images\4DCertification_Certified.png" />
     <Content Include="Images\abChartBackGround.gif" />
+    <Content Include="Images\acuity.png" />
     <Content Include="Images\add.png" />
     <Content Include="Images\AlignCurve.png" />
     <Content Include="Images\AlignCurve_Certified.png" />
@@ -1179,6 +1180,7 @@
     <Content Include="Images\CPSPrintStandardLogo.jpg" />
     <Content Include="Images\custom_bco_icon.png" />
     <Content Include="Images\detail1.png" />
+    <Content Include="Images\dimatix.png" />
     <Content Include="Images\DLPFullGamutSource.png" />
     <Content Include="Images\DLPReProfileSource.png" />
     <Content Include="Images\DLPSource.png" />
@@ -1188,6 +1190,7 @@
     <Content Include="Images\DymoPrintHelpIcon-New.png" />
     <Content Include="Images\DymoPrintIcon-New.png" />
     <Content Include="Images\eye_blue.png" />
+    <Content Include="Images\flenex.png" />
     <Content Include="Images\FujiFilm.png" />
     <Content Include="Images\FujiFilm2.png" />
     <Content Include="Images\FUJIFILM_Slogan_270_100.png" />
@@ -1203,6 +1206,7 @@
     <Content Include="Images\help-web-button-OLD.png" />
     <Content Include="Images\help-web-button.png" />
     <Content Include="Images\InkOptimizeSource.png" />
+    <Content Include="Images\jpress.png" />
     <Content Include="Images\LabBackdrop.jpg" />
     <Content Include="Images\large-loader.gif" />
     <Content Include="Images\Logo-report.png" />
@@ -1212,6 +1216,7 @@
     <Content Include="Images\refresh-button.png" />
     <Content Include="Images\remove.png" />
     <Content Include="Images\Report-Title.png" />
+    <Content Include="Images\revoria.png" />
     <Content Include="Images\rotateguntarget.png" />
     <Content Include="Images\SpotAB_Bg.gif" />
     <Content Include="Images\SpotDetailsReport.png" />
@@ -1219,6 +1224,7 @@
     <Content Include="Images\SpotPatchSaveColorReport.PNG" />
     <Content Include="Images\SpotProject.png" />
     <Content Include="Images\SpotProject_Certified.png" />
+    <Content Include="Images\superia.png" />
     <Content Include="Images\Sync DLP Report_preview.jpg" />
     <Content Include="Images\Sync DLP Report_preview_Old.jpg" />
     <Content Include="Images\Sync DLP Scoring Report_preview.jpg" />
@@ -1305,6 +1311,7 @@
     <Content Include="Images\VStatusFailedIcon.png" />
     <Content Include="Images\VStatusSuccessIcon-New.png" />
     <Content Include="Images\VStatusSuccessIcon.png" />
+    <Content Include="Images\xmf.png" />
     <Content Include="InkOptSourceMiddle.aspx" />
     <Content Include="JQuery\jquery-1.9.1.min.js" />
     <Content Include="JQuery\jquery-3.5.1.min.js" />

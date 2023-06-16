@@ -575,11 +575,10 @@ label {
 
 /**footer**/
 #footer {
-    height: 27px;
-    /*padding-top: 23px;*/
+    /*height: 27px;
+    padding-top: 23px;*/
     padding-bottom: 30px;
     text-align: center;
-    overflow: hidden;
 }
 
 /**Login Page Csss**/
