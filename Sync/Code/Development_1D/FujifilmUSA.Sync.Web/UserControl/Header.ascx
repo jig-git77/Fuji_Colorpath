@@ -17,23 +17,18 @@
  <div id="header">
       <table style="width:100%;">
             <tr>
-                <td align="left" style="width:20%;">
+                <td align="left" style="width:70%;">
                         <div class="logo">
                             <div class="logoHeader"><a id="lbtnimgLogo" runat="server" href="~/Index.aspx">&nbsp;</a></div>
                            
                            <%--<asp:ImageButton runat="server" ID="imgbtnLogo" OnClick="imgbtnLogo_Click" ImageUrl="~/Images/logo.png"  />--%>
                         </div>
                 </td>
-                <td align="right">
-                    <div class="drupa">
-                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Drupa1.png"></asp:Image>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Drupa2.png"></asp:Image>
-                    </div>
-                </td>
-              <td align="right"  style="width:15%;">
+               
+              <td align="right" style="width:15%;">
                     <div class="updateChangeLog"><a id="lbtnUpdateChangeLog" runat="server" href="~/UpdateChangeLog.aspx" >&nbsp;</a></div>
                 </td>
-                <td align="left" style="width:5%;padding-right:15px;">                     
+                <td align="right" style="width:5%;padding-right:15px;">                     
                     <div class="setting"><a id="lbtnSettings" runat="server" href="~/Settings.aspx" >&nbsp;</a></div>
                 </td>
             </tr>
