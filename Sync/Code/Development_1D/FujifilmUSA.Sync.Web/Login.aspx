@@ -52,7 +52,7 @@
                             <img alt="" src="Images/logo_Fujifilm.png" />
                             <br />
                             <br />
-                            <b>FUJIFILM Graphic Communications Division </b>
+                            <b>FUJIFILM Graphic Communication Division</b>
                         </td>
 
                     </tr>
@@ -95,7 +95,7 @@
                             <br />
                             <br />
 
-                            <b>© <%= DateTime.Now.Year %> FUJIFILM North America Corporation - Graphics Communications Division | 
+                            <b>© <%= DateTime.Now.Year %> FUJIFILM North America Corporation - Graphic Communication Division | 
                         <a href="Terms/ColorPath Sync TC 2013.pdf" title="Terms of Use" target="_blank">Terms and Conditions</a>
                             </b>
                         </td>
