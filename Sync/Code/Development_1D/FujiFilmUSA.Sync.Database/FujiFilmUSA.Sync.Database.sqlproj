@@ -200,4 +200,7 @@
   <ItemGroup>
     <None Include="Table Script\07_2023\07-12-2023_[CPSync4D].[ImportMeasurementDetails].sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\07_2023\07-28-2023_Alter_[CPSyncV].[GetAnalyzeChartVMeasurement].sql" />
+  </ItemGroup>
 </Project>
