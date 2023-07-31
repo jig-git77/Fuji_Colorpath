@@ -1332,6 +1332,68 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotNamedColorProfile"));
         }
 
+        public void CreateDestinationProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+             () =>
+             {
+                 //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Start"), null, false);
+                 var request = new CreateDestinationProfileRequest()
+                 {
+                     PcsData = new List<double>(),
+                     DcsData = new List<double>(),
+                     DestinationProfileOptions = new List<Parameter>()
+                 };
+
+                 var measurementDataResponse =
+                     BusinessFactory<IMeasurementBusiness>.
+                         CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
+
+                 request.PcsData = measurementDataResponse.PcsData;
+                 request.DcsData = measurementDataResponse.DcsData;
+
+                 var profilerOptionBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+                 var destinationOptions =
+                     profilerOptionBusiness.
+                         GetProjectOption(projectId, EProfileType.DestinationProfile);
+                 foreach (KeyValuePair<string, string> option in destinationOptions)
+                 {
+                     request.DestinationProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                 }
+                 request.DestinationProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = destinationDescription });
+
+                 request.PCSDataType = (Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+
+                 //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
+
+                 /* WebClient Example */
+                 var response = Utilities.GetProfilerServiceClientCall<CreateDestinationProfileRequest, CreateDestinationProfileResponse>(request, Utilities.ProfilerCallMethod.CreateDestinationProfile, Utilities.ProfilerRequestCall.HttpPost);
+                 if (response.DestinationProfile.ProfileData == null)
+                 {
+                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
+                     throw new Exception("Destination profile has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + response.Message);
+                 }
+                 //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call invoked."), null, false);
+                 DataAccessFactory.
+                     Instance.
+                     ExecuteProcedure(
+                         "CPSync4D.UpdateInitialDestinationAndDlp",
+                         new object[]
+                             {
+                                        optimizeRunId,
+                                        response.DestinationProfile.ProfileData,
+                                        null,
+                                        status,
+                                        endDateTime
+                             }); ;
+                 //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call finished."), null, false);
+
+
+                 //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - End"), null, false);
+             },
+             new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationProfile"));
+        }
+
         #endregion
 
         #region ITaskBase Members

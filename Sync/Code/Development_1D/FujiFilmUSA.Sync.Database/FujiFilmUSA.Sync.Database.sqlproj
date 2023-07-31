@@ -70,6 +70,7 @@
     <Folder Include="Table Script\04_2023" />
     <Folder Include="Table Script\05_2023" />
     <Folder Include="Table Script\06_2023" />
+    <Folder Include="Table Script\07_2023" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -192,5 +193,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\06_2023\06-14-2023_Alter_[CP].[InsertCustomSourceProfile].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\07_2023\07-12-2023_Insert-Into-LicenseType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\07_2023\07-12-2023_[CPSync4D].[ImportMeasurementDetails].sql" />
   </ItemGroup>
 </Project>

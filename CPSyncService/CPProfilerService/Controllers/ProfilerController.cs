@@ -103,6 +103,13 @@ namespace CPProfilerService.Controllers
             return ProfilerApiBusiness.CreateDestinationAndDeviceLinkMultiColorProfile(request);
 
         }
-       
+
+        [HttpPost]
+        [Route("api/Profiler/CreateDestinationProfile")]
+        [CustomAuthentication]
+        public CreateDestinationProfileResponse CreateDestinationProfile(CreateDestinationProfileRequest request)
+        {
+            return ProfilerApiBusiness.CreateDestinationProfile(request);
+        }
     }
 }

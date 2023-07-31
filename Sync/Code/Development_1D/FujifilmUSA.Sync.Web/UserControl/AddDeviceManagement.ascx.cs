@@ -27,6 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseDLPMultiColorText { get; set; }
         public string ELicenseSync1DMultiColorText { get; set; }
         public string ELicenseCustomBCOText { get; set; }
+        public string ELicenseCustomDestinationProfileText { get; set; }
 
         #region Private Variables - Globalization
         private const string _recAddDevice = "addDeviceText";
@@ -78,6 +79,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseDLPMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
             ELicenseSync1DMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1DMultiColor);
             ELicenseCustomBCOText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomBCO);
+            ELicenseCustomDestinationProfileText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomDestinationProfile);
             trTotalNoColor.Visible = false;
             trChannel.Visible = false;
             if (Page.IsPostBack)
@@ -188,11 +190,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtDLPMultiColor.Enabled = false;
                         txtSync1DMultiColor.Enabled = false;
                         txtCustomBCO.Enabled = false;
+                        txtCustomDestinationProfile.Enabled = false;
                     }
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = txtDLPMultiColor.Text = txtSync1DMultiColor.Text = txtCustomBCO.Text = "0";
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = txtDLPMultiColor.Text = txtSync1DMultiColor.Text = txtCustomBCO.Text = txtCustomDestinationProfile.Text = "0";
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -207,7 +210,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtDLPMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPMultiColor).Count() > 0);
                         txtSync1DMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1DMultiColor).Count() > 0);
                         txtCustomBCO.Enabled = (License.LicenseType.Where(x => x == ELicenseType.CustomBCO).Count() > 0);
-
+                        txtCustomDestinationProfile.Enabled = (License.LicenseType.Where(x => x == ELicenseType.CustomDestinationProfile).Count() > 0);
                     }
                 }
             }
@@ -441,6 +444,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Device.LicenseTypeProject.Add(ELicenseType.Sync1DMultiColor, Convert.ToInt32(txtSync1DMultiColor.Text));
             }
 
+            if (txtCustomDestinationProfile.Enabled)
+            {
+                Device.LicenseTypeProject.Add(ELicenseType.CustomDestinationProfile, Convert.ToInt32(txtCustomDestinationProfile.Text));
+            }
+
             if (DId == 0) // Add New company
             {
                 _presenterDeviceManagement.InsertDevice();
@@ -545,6 +553,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.CustomBCO:
                             txtCustomBCO.Text = val.ToString();
+                            break;
+                        case ELicenseType.CustomDestinationProfile:
+                            txtCustomDestinationProfile.Text = val.ToString();
                             break;
                         default:
                             break;

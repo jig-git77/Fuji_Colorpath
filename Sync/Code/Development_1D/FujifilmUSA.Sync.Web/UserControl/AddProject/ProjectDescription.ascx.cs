@@ -94,7 +94,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ddlLicenseType.SelectedIndex = ddlLicenseType.Items.IndexOf(ddlLicenseType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.LicenseType)));
                 ddlLicenseType.Enabled = false;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO) //-----If Custom Source Profile / Full Gamut Source Profile//Custom BCO project type then rename Target ColorSpace to Next button---//
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile) //-----If Custom Source Profile / Full Gamut Source Profile//Custom BCO project type then rename Target ColorSpace to Next button---//
                 {
                     locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
                 }
@@ -291,7 +294,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
-            if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile || (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.FullGamutCustomSource || ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomBCO))
+            if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile || 
+                (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.FullGamutCustomSource ||
+                (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomBCO ||
+                (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomDestinationProfile)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
                 //SessionManager.Instance.CurrentProject.PrintStandardType = null;
@@ -317,7 +323,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 Tr_OffsetPrintData.Visible = false;
-                if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile || (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.FullGamutCustomSource || (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomBCO)
+                if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile ||
+                    (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.FullGamutCustomSource ||
+                    (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomBCO ||
+                    (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomDestinationProfile)
                 {
                     locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
                 }

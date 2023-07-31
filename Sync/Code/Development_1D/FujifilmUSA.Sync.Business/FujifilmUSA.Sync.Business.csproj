@@ -140,6 +140,7 @@
     <Compile Include="ProfilerServiceClient\Parameter.cs" />
     <Compile Include="ProfilerServiceClient\Patch.cs" />
     <Compile Include="ProfilerServiceClient\Request\CreateDestinationAndDeviceLinkProfileRequest.cs" />
+    <Compile Include="ProfilerServiceClient\Request\CreateDestinationProfileRequest.cs" />
     <Compile Include="ProfilerServiceClient\Request\CreateG7AlignmentCurveRequest.cs" />
     <Compile Include="ProfilerServiceClient\Request\CreateISOAlignmentCurveRequest.cs" />
     <Compile Include="ProfilerServiceClient\Request\CreateSourceProfileRequest.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="ProfilerServiceClient\Request\OptimizeSpotLibraryRequest.cs" />
     <Compile Include="ProfilerServiceClient\Response\BaseResponse.cs" />
     <Compile Include="ProfilerServiceClient\Response\CreateDestinationAndDeviceLinkProfileResponse.cs" />
+    <Compile Include="ProfilerServiceClient\Response\CreateDestinationProfileResponse.cs" />
     <Compile Include="ProfilerServiceClient\Response\CreateG7AlignmentCurveResponse.cs" />
     <Compile Include="ProfilerServiceClient\Response\CreateISOAlignmentCurveResponse.cs" />
     <Compile Include="ProfilerServiceClient\Response\CreateSourceProfileResponse.cs" />

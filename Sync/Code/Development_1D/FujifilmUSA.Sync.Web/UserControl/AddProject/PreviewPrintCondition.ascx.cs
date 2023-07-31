@@ -98,7 +98,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
             }
 
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.FullGamutCustomSource && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomBCO)
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomDestinationProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.FullGamutCustomSource && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomBCO)
             {
                 lblTargetPrintCondition.Text = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandard;
                 lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;

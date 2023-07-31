@@ -82,7 +82,8 @@ var ELicenseType = {
     DLPPlus: 11,
     DLPMultiColor: 12,
     Sync1DMultiColor: 13,
-    CustomBCO: 14
+    CustomBCO: 14,
+    CustomDestinationProfile: 15
 }
 
 //Object for E Validation Status
