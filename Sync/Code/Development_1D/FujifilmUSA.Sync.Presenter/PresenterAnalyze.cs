@@ -344,5 +344,19 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             return measurementBusiness.ChkCloudFlowSupport(_viewAnalyze.ProjectId,_viewAnalyze.CurrentRefChartTypeId);
         }
+
+        public void CreateDestination()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.
+                CreateDestinationProfile(
+                    _viewAnalyze.ProjectId,
+                    _viewAnalyze.OptimizeRunId,
+                    _viewAnalyze.MeasurementIds,
+                    _viewAnalyze.DestinationProfileDescription,
+                    Convert.ToInt32(EOptimizeRunStatus.Closed),
+                    DateTime.Now);
+        }
     }
 }

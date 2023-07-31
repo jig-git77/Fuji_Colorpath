@@ -84,6 +84,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkDLPMutliColor.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
             chkSync1DMultiColor.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1DMultiColor);
             chkCustomerBCO.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomBCO);
+            chkCustomDestinationProfile.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomDestinationProfile);
         }
         private void Bindcompany()
         {
@@ -132,7 +133,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (Request.QueryString["LicenseId"] == null) //----Only force to check one licensetype when its a new license not in edit mode of existing license-----//
             {
-                if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked && !chkFullGamutCustomSource.Checked && !chkMultiColorCustomSource.Checked && !chkSpotLibrary.Checked && !chkCustomerBCO.Checked)
+                if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked 
+                    && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked 
+                    && !chkFullGamutCustomSource.Checked && !chkMultiColorCustomSource.Checked && !chkSpotLibrary.Checked 
+                    && !chkCustomerBCO.Checked && !chkCustomDestinationProfile.Checked)
                 {
                     fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                     return;
@@ -183,6 +187,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.Sync1DMultiColor);
             if (chkCustomerBCO.Checked)
                 License.LicenseType.Add(ELicenseType.CustomBCO);
+            if (chkCustomDestinationProfile.Checked)
+                License.LicenseType.Add(ELicenseType.CustomDestinationProfile);
 
 
             if (LId == 0) // Add New company
@@ -253,6 +259,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.CustomBCO:
                             chkCustomerBCO.Checked = true;
+                            break;
+                        case ELicenseType.CustomDestinationProfile:
+                            chkCustomDestinationProfile.Checked = true;
                             break;
                     }
                 });

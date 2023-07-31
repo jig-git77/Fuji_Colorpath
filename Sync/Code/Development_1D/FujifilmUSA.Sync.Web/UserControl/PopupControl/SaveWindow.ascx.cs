@@ -109,7 +109,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If  "Custom Source Profile" / "Full Gamut Source Profile" project type
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
+                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile ||
+                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If  "Custom Source Profile" / "Full Gamut Source Profile" project type
             {
                 SessionManager.Instance.CurrentProject.PrintStandardType = new Entity.CPSync1D.PrintStandardType()
                 {

@@ -104,6 +104,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (isDownloadEnabled)
                             lnkDownload.Enabled = true;
 
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile && // Download page enable when license type is Custom destination profile and run 0 status closed "2"
+                            SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Closed)
+                        {
+                            lnkDownload.Enabled = true;
+                        }
+
                         if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //-- If ProjectType is Source to Source Profile or Sync 1D ReTarget then, don't show Measurement Page
                         {
                             lnkMeasure.Enabled = false;

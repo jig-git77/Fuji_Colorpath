@@ -195,6 +195,9 @@
     <None Include="Table Script\06_2023\06-14-2023_Alter_[CP].[InsertCustomSourceProfile].sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Table Script\07_2023\07-28-2023_Alter_[CPSyncV].[GetAnalyzeChartVMeasurement].sql" />
+    <None Include="Table Script\07_2023\07-12-2023_Insert-Into-LicenseType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\07_2023\07-12-2023_[CPSync4D].[ImportMeasurementDetails].sql" />
   </ItemGroup>
 </Project>

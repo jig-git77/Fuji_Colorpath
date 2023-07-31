@@ -64,6 +64,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnReOptimize.Visible = false;
                     lbtnDownloadCurrentDLP.Visible = false;
                 }
+                else if (CurrentLicenseType == ELicenseType.CustomDestinationProfile) //---If Custom Destination Profile type of project, then they can not create optimize runs or Download DLP since there is no DLP
+                {
+                    lbtnReOptimize.Visible = false;
+                    lbtnDownloadCurrentDLP.Visible = false;
+                }
                 else if (CurrentLicenseType == ELicenseType.CustomSourceProfile || CurrentLicenseType == ELicenseType.ReProfileCustomSource)  //-------If LicenseTypeID = 6 (Custom Source Profile) or LicenseTypeID = 7 (ReProfile Custom Source), then they can not create optimize runs, they has to close after 1st run--------------------//
                 {
                     lbtnDownloadCurrentDLP.Visible = false;

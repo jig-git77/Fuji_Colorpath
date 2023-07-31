@@ -95,6 +95,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lbtnMeasure.Visible = false;
                         }
                     }
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile) //---If Custom Destination Profile"
+                    {
+                        Div_DLP.Visible = false; // Hide Download DLP in optimize mode of spot project
+                        if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
+                        {
+                            lbtnMeasure.Visible = false;
+                            trDLPDownload.Visible = false; //Hide both Download DLP and Chart in Certify mode
+                            //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
+                            trExportCMYKLibrary.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
+                        }
+                        locDownloadDLPAndChart.Text = "Download Chart";
+                        // header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
+                        locDownloadChartAndPrintThroughWorkflow.Text = GetResourceString(locDownloadChartAndPrintThroughWorkflowResourceNCP);
+                        lbtnMeasure.Visible = false;
+
+                    }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If "Custom Source Profile" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
                     {
                         trSourceProfDownload.Visible = true;

@@ -15,5 +15,6 @@ namespace CPProfilerService.Models.Interface
         ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request);
         CreateSpotLibraryResponse CreateSpotLibraryValues(CreateSpotLibraryRequest request);
         OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(OptimizeSpotLibraryRequest request);
+        CreateDestinationProfileResponse CreateDestinationProfile(CreateDestinationProfileRequest request);
     }
 }

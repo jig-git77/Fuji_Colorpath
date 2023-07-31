@@ -113,6 +113,7 @@
     <Compile Include="Models\Interface\IProfiler.cs" />
     <Compile Include="Models\Request\CreateDestinationAndDeviceLinkProfileMultiColorRequest.cs" />
     <Compile Include="Models\Request\CreateDestinationAndDeviceLinkProfileRequest.cs" />
+    <Compile Include="Models\Request\CreateDestinationProfileRequest.cs" />
     <Compile Include="Models\Request\CreateG7AlignmentCurveRequest.cs" />
     <Compile Include="Models\Request\CreateISOAlignmentCurveRequest.cs" />
     <Compile Include="Models\Request\CreateSourceProfileRequest.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Models\Request\OptimizeSpotLibraryRequest.cs" />
     <Compile Include="Models\Response\BaseResponse.cs" />
     <Compile Include="Models\Response\CreateDestinationAndDeviceLinkProfileResponse.cs" />
+    <Compile Include="Models\Response\CreateDestinationProfileResponse.cs" />
     <Compile Include="Models\Response\CreateG7AlignmentCurveResponse.cs" />
     <Compile Include="Models\Response\CreateISOAlignmentCurveResponse.cs" />
     <Compile Include="Models\Response\CreateSourceProfileResponse.cs" />

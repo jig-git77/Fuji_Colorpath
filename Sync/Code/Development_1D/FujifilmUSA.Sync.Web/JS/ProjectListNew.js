@@ -167,10 +167,20 @@ $(document).ready(function () {
                     showSpotProject = true;//BUTON VISIBLE
                     showSpotButtonEnableProject = true; //BUTTON ENABLE 
                 }
+                else if (data.LicenseType == ELicenseType.CustomDestinationProfile) {
+                    showSpotProject = true;//BUTON VISIBLE
+                    if (data.Status == EOptimizeRunStatus.Closed) {
+                        showSpotButtonEnableProject = true; //BUTTON ENABLE
+                    }
+                    else
+                    {
+                        showSpotButtonEnableProject = false; //BUTTON DISABLE
+                    }            
+                }
                 else if (data.LicenseType != ELicenseType.DLP || data.LicenseType != ELicenseType.DLPPlus ) {
                     showSpotProject = false;//BUTON NOT VISIBLE
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
-                }
+                }        
                 else {
                     showSpotProject = false;
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
@@ -232,6 +242,10 @@ $(document).ready(function () {
                             case ELicenseType.CustomBCO:
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'Custom BCO';
+                                break;
+                            case ELicenseType.CustomDestinationProfile:
+                                projectTypeImagePath = 'Images/DLP.png';
+                                projectTypeImageTitle = 'Destination';
                                 break;
                         }
                         break;
@@ -325,6 +339,8 @@ $(document).ready(function () {
                         break;
                     case ELicenseType.CustomBCO:
                         projectTypeTooltip = "Custom BCO";
+                    case ELicenseType.CustomDestinationProfile:
+                        projectTypeTooltip = 'Destination';
                         break;
                 }
 
