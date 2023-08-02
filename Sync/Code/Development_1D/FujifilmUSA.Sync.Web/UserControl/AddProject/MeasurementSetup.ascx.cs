@@ -102,7 +102,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lbtnMeasure.Visible = false;
                 lnkbtnMeasurementSetup.Visible = true;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //-----If Custom Source Profile / ReProfile Custom Source / Full Gamut Custom Source project type then rename Validation Setup to Next button---//
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //-----If Custom Destination Profile / Custom Source Profile / ReProfile Custom Source / Full Gamut Custom Source project type then rename Validation Setup to Next button---//
                 {
                     locValidationSetup.Text = GetResourceString(_reclocValidationSetupNextText);
                 }
@@ -259,7 +263,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #endregion
 
             //Set next navigation level as ValidationSetup
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
+                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource ||
+                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource ||
+                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ||
+                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile )
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
                 SessionManager.Instance.CurrentProject.EnabledValidation = false;
