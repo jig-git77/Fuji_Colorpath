@@ -50,7 +50,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkDescription.Enabled = true;
                     }
-                    if ((SessionManager.Instance.CurrentProject.SourceProfile != null && SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile) //No Target ColorSpace for Custom Source Profile project type
+                    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
+                        SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
+                        SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
+                        SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomDestinationProfile) //No Target ColorSpace for Custom Source Profile project type
                         || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
                     {
                         lnkTargetColorSpace.Enabled = true;
