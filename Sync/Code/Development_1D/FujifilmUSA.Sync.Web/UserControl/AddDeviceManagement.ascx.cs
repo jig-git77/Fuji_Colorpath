@@ -79,7 +79,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseDLPMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
             ELicenseSync1DMultiColorText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1DMultiColor);
             ELicenseCustomBCOText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomBCO);
-            ELicenseCustomDestinationProfileText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomDestinationProfile);
+            ELicenseCustomDestinationProfileText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DestinationProfile);
             trTotalNoColor.Visible = false;
             trChannel.Visible = false;
             if (Page.IsPostBack)
@@ -210,7 +210,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtDLPMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPMultiColor).Count() > 0);
                         txtSync1DMultiColor.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1DMultiColor).Count() > 0);
                         txtCustomBCO.Enabled = (License.LicenseType.Where(x => x == ELicenseType.CustomBCO).Count() > 0);
-                        txtCustomDestinationProfile.Enabled = (License.LicenseType.Where(x => x == ELicenseType.CustomDestinationProfile).Count() > 0);
+                        txtCustomDestinationProfile.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DestinationProfile).Count() > 0);
                     }
                 }
             }
@@ -446,7 +446,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (txtCustomDestinationProfile.Enabled)
             {
-                Device.LicenseTypeProject.Add(ELicenseType.CustomDestinationProfile, Convert.ToInt32(txtCustomDestinationProfile.Text));
+                Device.LicenseTypeProject.Add(ELicenseType.DestinationProfile, Convert.ToInt32(txtCustomDestinationProfile.Text));
             }
 
             if (DId == 0) // Add New company
@@ -554,7 +554,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.CustomBCO:
                             txtCustomBCO.Text = val.ToString();
                             break;
-                        case ELicenseType.CustomDestinationProfile:
+                        case ELicenseType.DestinationProfile:
                             txtCustomDestinationProfile.Text = val.ToString();
                             break;
                         default:

@@ -190,7 +190,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
         #region IViewAnalyze Members
-
+        public bool IsDestinationProfile { get; set; }
         public int ProjectId { get; set; }
 
         public int OptimizeRunId { get; set; }

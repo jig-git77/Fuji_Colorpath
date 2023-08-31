@@ -167,7 +167,7 @@ $(document).ready(function () {
                     showSpotProject = true;//BUTON VISIBLE
                     showSpotButtonEnableProject = true; //BUTTON ENABLE 
                 }
-                else if (data.LicenseType == ELicenseType.CustomDestinationProfile) {
+                else if (data.LicenseType == ELicenseType.DestinationProfile) {
                     showSpotProject = true;//BUTON VISIBLE
                     if (data.Status == EOptimizeRunStatus.Closed) {
                         showSpotButtonEnableProject = true; //BUTTON ENABLE
@@ -243,7 +243,7 @@ $(document).ready(function () {
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'Custom BCO';
                                 break;
-                            case ELicenseType.CustomDestinationProfile:
+                            case ELicenseType.DestinationProfile:
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'Destination';
                                 break;
@@ -339,7 +339,7 @@ $(document).ready(function () {
                         break;
                     case ELicenseType.CustomBCO:
                         projectTypeTooltip = "Custom BCO";
-                    case ELicenseType.CustomDestinationProfile:
+                    case ELicenseType.DestinationProfile:
                         projectTypeTooltip = 'Destination';
                         break;
                 }

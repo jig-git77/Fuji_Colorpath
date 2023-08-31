@@ -485,13 +485,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return VmeasurementSummary;
         }
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, bool IsSync1DMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, bool IsSync1DMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0, bool IsDestinationProfile = false)
         {
             // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
-            if (IsSync1DType)
+            if (IsDestinationProfile)
             {
-                storedProc = "CPSync.GetPatchDetailsByMeasurementID";
+                storedProc = "CPDestProfile.GetPatchDetailsByMeasurementID";
+            }
+            if (IsVerification)
+            {
+                storedProc = "CPSyncV.GetVPatchDetailsByMeasurementID";
             }
 
             if (IsVerification)
@@ -746,7 +750,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         #region Get common Gamut chart data
-        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsDlpMultiColor = false)
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsDlpMultiColor = false , bool IsDestProfile =false)
         {
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
             var GamutChartData = new List<AnalyzeChart_Gray>[3];
@@ -766,6 +770,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (IsDlpMultiColor)
             {
                 storedProc = "CPSync4DMultiColor.GetChartData_Gray";
+            }
+
+            if (IsDestProfile)
+            {
+                storedProc = "CPDestProfile.GetChartData_Gray";
             }
 
             Common.ImplementBusinessLogic(
@@ -2650,7 +2659,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                         )).ToList());
                     }
 
-                    if (LicenseTypeID == 2 || LicenseTypeID == 5 || LicenseTypeID == 12 || LicenseTypeID == 11 || LicenseTypeID == 15)//dlp and Sync4DCertification project and DLPMultiColor AND DLPPLUS And Custom Destination Profile
+                    if (LicenseTypeID == 2 || LicenseTypeID == 5 || LicenseTypeID == 12 || LicenseTypeID == 11 || LicenseTypeID == 15)//dlp and Sync4DCertification project and DLPMultiColor AND DLPPLUS And Destination Profile
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                          measurement.MeasurementPatches.

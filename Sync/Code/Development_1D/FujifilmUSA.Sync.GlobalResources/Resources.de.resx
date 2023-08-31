@@ -1384,7 +1384,7 @@ erwünschten Format überein.</value>
   <data name="Error_InsertReferenceChartPreset" xml:space="preserve">
     <value>Error occured while inserting Reference Chart Preset.Please contact your administrator._de</value>
   </data>
-  <data name="ELicenseType_Custom_Destination_Profile" xml:space="preserve">
-    <value>Custom Destination Profile_de</value>
+  <data name="ELicenseType_Destination_Profile" xml:space="preserve">
+    <value>Destination Profile_de</value>
   </data>
 </root>

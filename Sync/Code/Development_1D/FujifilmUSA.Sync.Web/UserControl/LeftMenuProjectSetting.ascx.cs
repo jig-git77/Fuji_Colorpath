@@ -53,7 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
                         SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
                         SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
-                        SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomDestinationProfile) //No Target ColorSpace for Custom Source Profile project type
+                        SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
                         || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
                     {
                         lnkTargetColorSpace.Enabled = true;
@@ -107,7 +107,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (isDownloadEnabled)
                             lnkDownload.Enabled = true;
 
-                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile && // Download page enable when license type is Custom destination profile and run 0 status closed "2"
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile && // Download page enable when license type is destination profile and run 0 status closed "2"
                             SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Closed)
                         {
                             lnkDownload.Enabled = true;
@@ -276,6 +276,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                                 Response.Redirect("~/Analyze_SpotColor.aspx");
+                            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile)
+                                Response.Redirect("~/Analyze_DestinationProfile.aspx");
                             else
                                 Response.Redirect("~/Analyze.aspx");
                             break;

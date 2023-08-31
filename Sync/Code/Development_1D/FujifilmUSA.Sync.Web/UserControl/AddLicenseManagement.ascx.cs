@@ -84,7 +84,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkDLPMutliColor.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPMultiColor);
             chkSync1DMultiColor.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1DMultiColor);
             chkCustomerBCO.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomBCO);
-            chkCustomDestinationProfile.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomDestinationProfile);
+            chkCustomDestinationProfile.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DestinationProfile);
         }
         private void Bindcompany()
         {
@@ -188,7 +188,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (chkCustomerBCO.Checked)
                 License.LicenseType.Add(ELicenseType.CustomBCO);
             if (chkCustomDestinationProfile.Checked)
-                License.LicenseType.Add(ELicenseType.CustomDestinationProfile);
+                License.LicenseType.Add(ELicenseType.DestinationProfile);
 
 
             if (LId == 0) // Add New company
@@ -260,7 +260,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.CustomBCO:
                             chkCustomerBCO.Checked = true;
                             break;
-                        case ELicenseType.CustomDestinationProfile:
+                        case ELicenseType.DestinationProfile:
                             chkCustomDestinationProfile.Checked = true;
                             break;
                     }

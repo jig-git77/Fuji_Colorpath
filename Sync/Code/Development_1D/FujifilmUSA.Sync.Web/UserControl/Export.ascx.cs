@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lbtnMeasure.Visible = false;
                         }
                     }
-                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile) //---If Custom Destination Profile"
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile) //---If Destination Profile"
                     {
                         Div_DLP.Visible = false; // Hide Download DLP in optimize mode of spot project
                         if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)

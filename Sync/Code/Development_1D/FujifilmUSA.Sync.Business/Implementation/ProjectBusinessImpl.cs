@@ -765,7 +765,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                              new List<Parameters>()
                                                  {
                                                      new Parameters() {ParameterName = "@CPDeviceID", Type = DbType.Int32, Value = project.DeviceId},
-                                                     new Parameters() {ParameterName = "@PrintStandardTypeID", Type = DbType.Int32, Value = project.PrintStandardType.PrintStandardTypeID},
+                                                     new Parameters() {ParameterName = "@PrintStandardTypeID", Type = DbType.Int32, Value = project?.PrintStandardType?.PrintStandardTypeID},
                                                      new Parameters() {ParameterName = "@ProjectName", Size = 30, Type = DbType.String, Value = project.ProjectName},
                                                      new Parameters()
                                                          {

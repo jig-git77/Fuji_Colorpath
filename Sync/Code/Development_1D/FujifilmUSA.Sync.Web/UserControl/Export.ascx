@@ -99,6 +99,85 @@
                     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
                 </td>
             </tr>
+
+            <tr id="trDestinationProfile" runat="server">
+                <td>
+                    <div style="display: block;" class="contantbox tabcontant">
+                        <div class="section_top">
+                            &nbsp;
+                        </div>
+                        <div class="section_middle">
+                            <div class="combopart">
+                                <div class="header">
+                                    <div class="content">
+                                        <div class="text" style="float: left">
+                                            <asp:Localize runat="server" Text="Download DLP and Chart"
+                                                ID="Localize9" meta:resourcekey="locDownloadDLPAndChartResource1"></asp:Localize>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="border-style: None; padding: 5px">
+                                    <table>
+                                        <tbody>
+                                            <div id="Div2" runat="server">
+                                                <tr>
+                                                    <td>
+                                                        <span>
+                                                            <asp:Localize runat="server"
+                                                                Text="Download DLP and Implement in Workflow :"
+                                                                ID="Localize10"
+                                                                meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="gray_bt"
+                                                            OnClick="lbtnDownloadDLP_Click">
+                                                            <span>
+                                                                <asp:Localize runat="server" Text="Download DLP" ID="Localize11"
+                                                                    meta:resourcekey="locDownloadDLPResource1"></asp:Localize>
+                                                            </span>
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                            </div>
+                                            <div id="Div4" runat="server">
+                                                <tr>
+                                                    <td>
+                                                        <span>
+                                                            <asp:Localize Text="Download Chart and Print through DLP Workflow :"
+                                                                runat="server" ID="Localize12"
+                                                                meta:resourcekey="locDownloadChartAndPrintThroughWorkflowResource1"></asp:Localize></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="gray_bt"
+                                                            OnClick="lbtnDownloadChart_Click">
+                                                            <span>
+                                                                <asp:Localize runat="server" Text="Download Chart" ID="Localize13"
+                                                                    meta:resourcekey="locDownloadChartResource1"></asp:Localize>
+                                                            </span>
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                            </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section_bottom">
+                            &nbsp;
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
             <tr id="trDLPDownload" runat="server">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
@@ -176,6 +255,7 @@
                     </div>
                 </td>
             </tr>
+
             <tr id="trExportCMYKLibrary" runat="server" visible="false">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
@@ -198,7 +278,7 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td>                                                                                                      
+                                                <td>
                                                     <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" OnClientClick="javascript:return ShowSpotLibraryExportWindow();">
                                                         <span>
                                                             <asp:Localize runat="server" Text="Export CMYK"
@@ -207,7 +287,7 @@
                                                         </span>
                                                     </asp:LinkButton>
                                                 </td>
-                                            </tr>                                            
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -221,6 +301,7 @@
                     </div>
                 </td>
             </tr>
+
             <tr id="trSourceProfDownload" runat="server" visible="false">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
@@ -245,8 +326,8 @@
                                             <tr>
                                                 <td>
                                                     <asp:Localize runat="server" Text=""
-                                                                ID="Localize8"
-                                                                meta:resourcekey="locCustomSourceProfileSucessMsgResource1"></asp:Localize>
+                                                        ID="Localize8"
+                                                        meta:resourcekey="locCustomSourceProfileSucessMsgResource1"></asp:Localize>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -257,7 +338,7 @@
                                                                 ID="Localize7"
                                                                 meta:resourcekey="locDeviceListReturnResource1"></asp:Localize>
                                                         </span>
-                                                    </asp:LinkButton> 
+                                                    </asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -273,6 +354,7 @@
                     </div>
                 </td>
             </tr>
+
             <tr id="trAdvancedDownload" runat="server">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
@@ -306,7 +388,7 @@
                                                                 ID="Localize2"
                                                                 meta:resourcekey="locDownloadSourceProfICCResource1"></asp:Localize>
                                                         </span>
-                                                    </asp:LinkButton>                                                    
+                                                    </asp:LinkButton>
                                                     <asp:LinkButton ID="lbtnDownloadDestinationICC" runat="server" CssClass="gray_bt"
                                                         OnClick="lbtnDownloadDestinationICC_Click">
                                                         <span>
@@ -340,6 +422,7 @@
 
                 </td>
             </tr>
+
             <tr id="trExportViewForSync1D" runat="server" visible="false">
                 <td>
                     <asp:HiddenField ID="HD_CurveType" runat="server" Value="1" ClientIDMode="Static"></asp:HiddenField>
@@ -403,7 +486,7 @@
                                 <div>
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
-                                            <td colspan="2">                                                                                             
+                                            <td colspan="2">
                                                 <asp:RadioButtonList ID="rbtnDetlaReflistClient" runat="server" RepeatDirection="Horizontal"
                                                     CssClass="RadioList" ClientIDMode="Static">
                                                     <asp:ListItem Text="ΔRef" Value="0" Selected="0"></asp:ListItem>
@@ -433,6 +516,7 @@
                     </div>
                 </td>
             </tr>
+
         </table>
     </div>
 </div>
@@ -442,7 +526,7 @@
 <div class="clear">
 </div>
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True" meta:resourcekey="RadWindowManagerResource1">
-    <Windows>       
+    <Windows>
         <telerik:RadWindow ID="ReportSpotLibraryExportWindow" runat="server" VisibleStatusbar="false"
             ShowContentDuringLoad="false" Title="Spot Library Export" Width="730" Height="300"
             Behaviors="Close, Move" Behavior="Close, Move">

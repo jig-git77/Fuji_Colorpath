@@ -110,7 +110,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
-                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile ||
                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If  "Custom Source Profile" / "Full Gamut Source Profile" project type
             {
                 SessionManager.Instance.CurrentProject.PrintStandardType = new Entity.CPSync1D.PrintStandardType()
@@ -142,7 +141,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
                 }
-
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile) //---If  "destination profile
+            {
+                _presenterSaveWindow.SaveProject_DestinationProfile(); //---Call save Project Destination Profile function, w/o any ref charts details
+                if (!IsErrorOccured)
+                {
+                    _presenterSaveWindow.GetProjectDetail();
+                    WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
+                    SessionManager.Instance.CurrentProject = Project;
+                    AssignLeftPanel();
+                }
             }
             else //-----------For all other project types
             {

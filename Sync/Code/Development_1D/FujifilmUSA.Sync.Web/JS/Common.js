@@ -83,7 +83,7 @@ var ELicenseType = {
     DLPMultiColor: 12,
     Sync1DMultiColor: 13,
     CustomBCO: 14,
-    CustomDestinationProfile: 15
+    DestinationProfile: 15
 }
 
 //Object for E Validation Status

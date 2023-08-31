@@ -3744,6 +3744,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public DataTable dtMeasurement { get; set; }
         public decimal Dec_E_Value { get; set; }
         public int CurrentRefChartTypeId { get; set; }
+        public bool IsDestinationProfile { get; set; }
         #endregion
 
     }

@@ -71,6 +71,7 @@
     <Folder Include="Table Script\05_2023" />
     <Folder Include="Table Script\06_2023" />
     <Folder Include="Table Script\07_2023" />
+    <Folder Include="Table Script\08_2023" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
@@ -202,5 +203,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\07_2023\07-28-2023_Alter_[CPSyncV].[GetAnalyzeChartVMeasurement].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\08_2023\[CPDestProfile].[GetPatchDetailsByMeasurementID].sql" />
+    <None Include="Table Script\08_2023\[CPSync4D].[CreateProject].sql" />
+    <None Include="Table Script\08_2023\[CPSync4D].[GetChartData_Gray].sql" />
+    <None Include="Table Script\08_2023\[CPSync4D].[GetProjectDetail].sql" />
+    <None Include="Table Script\08_2023\[CPSync4D].[GetProjectList].sql" />
+    <None Include="Table Script\08_2023\New_Schema_cpdestprofile.sql" />
+    <None Include="Table Script\08_2023\UpdateLicenseTypeName.sql" />
   </ItemGroup>
 </Project>

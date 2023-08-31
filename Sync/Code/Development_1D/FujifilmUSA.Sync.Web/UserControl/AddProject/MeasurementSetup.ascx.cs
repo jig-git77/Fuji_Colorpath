@@ -105,11 +105,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource ||
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile ||
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //-----If Custom Destination Profile / Custom Source Profile / ReProfile Custom Source / Full Gamut Custom Source project type then rename Validation Setup to Next button---//
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //-----If Destination Profile / Custom Source Profile / ReProfile Custom Source / Full Gamut Custom Source project type then rename Validation Setup to Next button---//
                 {
                     locValidationSetup.Text = GetResourceString(_reclocValidationSetupNextText);
                 }
+            }
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile)
+            {
+                tdOptimizationChartCombo.Visible = false;
+                tdOptimizationChartCaption.Visible = false;
             }
 
             if (ViewState[vsIsPostBack] == null)
@@ -158,7 +164,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue);
             SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue), cmbAlignmentChart.SelectedItem.Text);
             SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded = cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false;
-            SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile)
+            {
+                SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+            }
+    
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             Project = SessionManager.Instance.CurrentProject;
             _presenterMeasurementSetting.SaveProject();
@@ -249,8 +260,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //else
             //    SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
 
-            SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
 
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile)
+            {
+                SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+            }
 
             if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
             {
@@ -267,7 +281,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource ||
                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource ||
                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ||
-                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile )
+                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile )
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
                 SessionManager.Instance.CurrentProject.EnabledValidation = false;

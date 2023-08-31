@@ -46,12 +46,6 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<MeasurementPatch_AvgDelta>();
         }
 
-
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, bool IsSync1DMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0)
-        {
-            return new DataTable();
-        }
-
         public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, int LicenseTypeId = 0)
         {
             throw new NotImplementedException();
@@ -299,6 +293,16 @@ namespace FujifilmUSA.Sync.Business.Mock
         public int ChkCloudFlowSupport(int projectId, int CurrentRefChartTypeId)
         {
             return 0;
+        }
+
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsDlpMultiColor = false, bool IsSync1DMultiColor = false, string CurrentRunName = "", int LicenseTypeId = 0, bool IsDestinationProfile = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsDlpMultiColor = false, bool IsDestinationProfile = false)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

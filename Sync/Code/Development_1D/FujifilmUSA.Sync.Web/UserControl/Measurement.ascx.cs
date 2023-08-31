@@ -113,7 +113,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.Redirect(
                 SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser)
                     ? string.Format("COAnalyze.aspx?id={0}", Guid.NewGuid())
-                    : "Analyze.aspx");
+                    : SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile ? "Analyze_DestinationProfile.aspx" : "Analyze.aspx");
         }
 
         protected void btnValidationSetup_Click(object sender, EventArgs e)
