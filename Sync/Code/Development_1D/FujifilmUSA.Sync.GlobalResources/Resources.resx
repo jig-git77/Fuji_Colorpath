@@ -1407,7 +1407,7 @@
   <data name="Error_InsertReferenceChartPreset" xml:space="preserve">
     <value>Error occured while inserting Reference Chart Preset.Please contact your administrator.</value>
   </data>
-  <data name="ELicenseType_Custom_Destination_Profile" xml:space="preserve">
-    <value>Custom Destination Profile</value>
+  <data name="ELicenseType_Destination_Profile" xml:space="preserve">
+    <value>Destination Profile</value>
   </data>
 </root>

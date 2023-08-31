@@ -76,6 +76,7 @@ var $divTVI_G7;
 var $divTVI_ISO;
 var $divMeasurementPatchDetails;
 var $divAnalyzeChart;
+var $divAnalyzeDestinationChart;
 var $divChartTVIISO_CYAN;
 var $divChartTVIISO_Magenta;
 var $divChartTVIISO_Yellow;
@@ -262,6 +263,7 @@ $(document).ready(function () {
     $divChartTVIISO_CMYK = $("#divChartTVIISO_CMYK");
     $divChartSummaryDeltaChart = $("#divChartSummaryDeltaChart");
     $divAnalyzeChart = $("#divAnalyzeChart");
+    $divAnalyzeDestinationChart = $("#divAnalyzeDestinationChart");
     $tblDensityChart = $("#tblDensityChart");
     $selectedDeltaE = $rbtnListDeltaE.find('input:checked').val();
     $hdnCurrentMeasurement = $("#hdnCurrentMeasurement");
@@ -454,24 +456,6 @@ $(document).ready(function () {
             }
         });
 
-        //$.ajax({
-        //    type: "POST",
-        //    url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
-        //    data: apiParameter,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        kendo.ui.progress($('#divReport'), false);
-        //        if (response.data != null) {
-        //            console.log(response.data);
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        kendo.ui.progress($('#divReport'), false);
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     }
 
 
@@ -831,108 +815,6 @@ function BindMeasurementSummary() {
             IsSyncDlpPlusTypeProject: $hdnSyncDlpPlusType
         }
 
-        //var ajaxParameter = {
-        //    type: "GET",
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
-        //    data: apiParameter,
-        //    dataType: "json",
-        //    headers: {
-        //        "content-type": "application/json",
-        //        'Accept-Language': $CurrentCulture,
-        //        'Authorization': 'Basic ' + AUTH_TOKEN
-        //    },
-        //    async: false
-        //};
-
-        //commonAjaxCall(ajaxParameter, function (response) {
-        //    if (response.data != null) {
-        //        debugger;
-        //        if (response.data.length > 0) {
-
-        //            var measurements = response.data;
-        //            var measurement = measurements[0];
-
-        //            //generate dymo printing string to print the dymo label only for validation
-        //            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-        //                PopulateDymoPrinter(measurement);
-        //            }
-        //            measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
-        //            $hdnValidationType = measurement.ValidationType;
-
-        //            var viewModel = kendo.observable(measurement);
-        //            viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
-        //            viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
-
-
-        //            if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
-
-        //                $('#tblPatchTolerance').css('display', 'none');
-        //            }
-        //            kendo.bind($("#divValidationSummary"), viewModel);
-        //            $('#tblAverageMeasurementSummary').css('display', 'none');
-
-        //            if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
-
-        //                $('#rowCustomer').hide();
-        //                $('#rowPageSurface').hide();
-        //                $('#rowJobID').hide();
-        //                $('#rowNotes').hide();
-        //                if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-        //                    $('#rowCustomer').show();
-        //                    $('#rowNotes').show();
-        //                }
-        //            }
-
-        //            //check validation type
-        //            if ($hdnValidationType == 1 || $hdnValidationType == 2) {
-
-        //                var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-        //                if ($hdnValidationType == 1) {
-
-        //                    //Show tabs G7
-        //                    //$(tabStrip.items()[2]).show();
-        //                    $(tabStrip.items()[2]).css('display', 'inline-block');
-
-
-        //                    //Bind G7 charts
-        //                    BindG7Charts();
-        //                }
-
-        //                //check the project type Sync1D or Validation
-        //                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-
-        //                    //Hide default tabs TVI
-        //                    //$(tabStrip.items()[4]).show();
-        //                    $(tabStrip.items()[4]).css('display', 'inline-block');
-
-        //                    //Bind TVI charts
-        //                    BindTVICharts();
-
-        //                    //show average measurement checkbox
-        //                    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
-        //                        $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
-        //                    }
-        //                }
-        //            }
-
-        //            //set validation measurement status value for XMF user 
-        //            $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
-
-        //            //create url to open report grading url for scoring report
-        //            reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
-
-        //            //create url to open report grading url for CMYK density report
-        //            reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
-        //        }
-        //    }
-        //}, function (XMLHttpRequest, textStatus, errorThrown) {
-        //    if (XMLHttpRequest.status == 401) {
-        //        ShowDialog("You are not authorized user. Please login again.", "Message");
-        //    } else {
-        //        alert(errorThrown);
-        //    }
-        //});
-
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
             data: apiParameter,
@@ -1101,33 +983,6 @@ function BindMeasurementSummary() {
             }
         });
 
-
-        //$.ajax({
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementSummaryDetails',
-        //    data: apiParameter,
-        //    type: 'GET',
-        //    headers: {
-        //        "content-type": "application/json",
-        //    },
-        //    dataType: 'json',
-        //    headers: {
-        //        'Accept-Language': $CurrentCulture
-        //    },
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            if (response.data.length > 0) {
-        //                var measurements = response.data;
-        //                var measurement = measurements[0];
-        //                measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
-        //                var viewModel = kendo.observable(measurement);
-        //                kendo.bind($("#divMeasurementSummary"), viewModel);
-        //            }
-        //        }
-        //    },
-        //    error: function (xhr, errorType, exception) {
-        //        alert(exception);
-        //    }
-        //});
     }
 
 
@@ -1154,14 +1009,14 @@ function BindReportImage() {
         if ($hdnVerification == 'True') {
             imagePath = 'Images/Sync1D Report_preview_Vali.jpg';   //For Sync1D and Sync4D Validation Projects
         }
-        if ($hdnSync1DType == 'True') { 
+        if ($hdnSync1DType == 'True') {
             if ($hdnValidationType == 2) { //for sync 1D ISO projects
                 imagePath = 'Images/Sync1D Report_preview_ISO.jpg';   //For Sync1D Projects
             }
             else {
                 imagePath = 'Images/Sync1D Report_preview.jpg';   //For Sync1D Projects
             }
-           
+
         }
     }
     $btnGeneratePDF.find('img').attr('src', imagePath);
@@ -1185,7 +1040,6 @@ function BindMeasurementPatchDetails() {
                     read: function (options) {
                         kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), true);
 
-
                         var ajaxParameter = {
                             type: "GET",
                             url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
@@ -1197,7 +1051,8 @@ function BindMeasurementPatchDetails() {
                                 IsDLPMultiColor: $hdnIsDlpMultiColor,
                                 Is1DMultiColor: $hdnIsSync1DMultiColor,
                                 CurrentRunName: $hdnCurrentRunName,
-                                LicenseType: $hdnCurrentDlpSubOperation
+                                LicenseType: $hdnCurrentDlpSubOperation,
+                                IsDestProfile: $hdnCurrentProjectLicenseType == 'DestinationProfile' ? 'True' : 'False'
                             },
                             dataType: "json",
                             headers: {
@@ -1239,7 +1094,6 @@ function BindMeasurementPatchDetails() {
                                     $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
                                     $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
                                 }
-
                             }
                         }, function (XMLHttpRequest, textStatus, errorThrown) {
                             if (XMLHttpRequest.status == 401) {
@@ -1251,61 +1105,6 @@ function BindMeasurementPatchDetails() {
                             kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
                         });
 
-                        //$.ajax({
-                        //    type: "GET",
-                        //    url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
-                        //    //data: apiParameters,
-                        //    data: {
-                        //        MeasurementId: parseInt($hdnCurrentMeasurement.val()),
-                        //        IsVerificationProject: $hdnVerification,
-                        //        IsSync1DTypeProject: $hdnSync1DType,
-                        //        metricSumID: $('#hdPatchMatricSum').val()
-                        //    },
-                        //    dataType: "json",
-                        //    headers: {
-                        //        'Accept-Language': $CurrentCulture
-                        //    },
-                        //    success: function (response) {
-                        //        kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
-                        //        if (response.data != null) {
-                        //            Resources = response.data.GlobalResources;
-                        //            var patches = response.data.measurementPatchDetails;
-                        //            options.success(patches);
-
-                        //            //set the column header
-                        //            $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
-                        //            $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
-                        //            $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
-                        //            if (response.data.measurementPatchDetails[0].IsWeighted) {
-                        //                $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
-                        //                $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
-                        //            }
-
-                        //        }
-
-                        //    },
-                        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        //        kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
-                        //        console.log(XMLHttpRequest.responseText);
-                        //    }
-                        //});
                     },
 
                 },
@@ -1590,6 +1389,16 @@ function BindMeasurementPatchDetails() {
             dataBound: function (e) {
                 var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
                 var grid = $divMeasurementPatchDetails.data("kendoGrid");
+
+                if ($hdnCurrentDlpSubOperation == ELicenseType.DestinationProfile) {
+                    grid.hideColumn(7);
+                    grid.hideColumn(8);
+                    grid.hideColumn(9);
+                    grid.hideColumn(10);
+                    grid.hideColumn(12);
+                    grid.hideColumn(14);
+                }
+
                 if (!isNaN(selectedMatricSum)) {
                     switch (selectedMatricSum) {
                         case 5:
@@ -1645,33 +1454,6 @@ function BindMeasurementPatchDetails() {
             }
 
 
-            //dataBound: function (e) {
-            //    debugger;
-            //    var measurementId = 0;
-            //    if (e.sender.dataSource._view.length > 0) {
-            //        measurementId = e.sender.dataSource._view[0].MeasurementID;
-            //    }
-
-            //    if (measurementId > 0) {
-            //        this.hideColumn(4);
-            //        this.hideColumn(5);
-            //        this.hideColumn(6);
-            //        this.hideColumn(7);
-            //    }
-            //    else {
-            //        this.hideColumn(8);
-            //        this.hideColumn(9);
-            //        this.hideColumn(10);
-            //    }
-
-
-            //    var dataSource = this.dataSource;
-            //    this.element.find('tr').each(function () {
-            //        var row = $(this);
-            //        //set resource message
-            //        row.find('#lnkView').attr('title', _Resources.gridAnalyzeToolTipViewResource);
-            //    });
-            //}
         });
     }
 
@@ -1754,20 +1536,6 @@ function BindMeasurementPatchDetails() {
             }
         });
 
-        //$.ajax({
-        //    type: "POST",            
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),           
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     });
 
 
@@ -1779,12 +1547,6 @@ function BindMeasurementPatchDetails() {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
         var measurementID = parseInt($hdnCurrentMeasurement.val());
-        //var apiReportParameters = {
-        //    MeasurementId: measurementID,
-        //    IsVerificationProject: $hdnVerification,
-        //    IsSync1DTypeProject: $hdnSync1DType,
-        //    metricSumID: selectedMatricSum
-        //};
 
         var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
         var optimizationRun = $(this).attr('data-id');
@@ -1840,22 +1602,6 @@ function BindMeasurementPatchDetails() {
             }
         });
 
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
-        //    data: filterObj,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     });
 
     $divMeasurementPatchDetails.find('#btnExportCxF').unbind("click").on('click', function (e) {
@@ -1865,12 +1611,6 @@ function BindMeasurementPatchDetails() {
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
-        //var apiReportParameters = {
-        //    MeasurementId: measurementID,
-        //    IsVerificationProject: $hdnVerification,
-        //    IsSync1DTypeProject: $hdnSync1DType,
-        //    metricSumID: selectedMatricSum
-        //};
 
         var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
         var optimizationRun = $(this).attr('data-id');
@@ -1926,22 +1666,6 @@ function BindMeasurementPatchDetails() {
             }
         });
 
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
-        //    data: filterObj,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});       
     });
 
     $divMeasurementPatchDetails.find('#btnExportDotGain').unbind("click").on('click', function (e) {
@@ -1973,22 +1697,6 @@ function BindMeasurementPatchDetails() {
             }
         });
 
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
-        //    data: filterObj,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     });
 
     $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
@@ -2473,6 +2181,8 @@ function BindMeasurementPatchDetailsForMultiColor() {
             dataBound: function (e) {
                 var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
                 var grid = $divMeasurementPatchDetails.data("kendoGrid");
+
+
                 if (!isNaN(selectedMatricSum)) {
                     switch (selectedMatricSum) {
                         case 5:
@@ -2520,7 +2230,7 @@ function BindMeasurementPatchDetailsForMultiColor() {
                 if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
-                
+
                 if (TotalNoColor == 5) {
                     grid.hideColumn(8);//grid.hideColumn(24);// Channel_6
                     grid.hideColumn(9);//grid.hideColumn(25);// Channel_7
@@ -2543,34 +2253,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
 
             }
 
-
-            //dataBound: function (e) {
-            //    debugger;
-            //    var measurementId = 0;
-            //    if (e.sender.dataSource._view.length > 0) {
-            //        measurementId = e.sender.dataSource._view[0].MeasurementID;
-            //    }
-
-            //    if (measurementId > 0) {
-            //        this.hideColumn(4);
-            //        this.hideColumn(5);
-            //        this.hideColumn(6);
-            //        this.hideColumn(7);
-            //    }
-            //    else {
-            //        this.hideColumn(8);
-            //        this.hideColumn(9);
-            //        this.hideColumn(10);
-            //    }
-
-
-            //    var dataSource = this.dataSource;
-            //    this.element.find('tr').each(function () {
-            //        var row = $(this);
-            //        //set resource message
-            //        row.find('#lnkView').attr('title', _Resources.gridAnalyzeToolTipViewResource);
-            //    });
-            //}
         });
     }
 
@@ -2652,20 +2334,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
             }
         });
 
-        //$.ajax({
-        //    type: "POST",            
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),           
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     });
 
 
@@ -2677,13 +2345,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
         var measurementID = parseInt($hdnCurrentMeasurement.val());
-        //var apiReportParameters = {
-        //    MeasurementId: measurementID,
-        //    IsVerificationProject: $hdnVerification,
-        //    IsSync1DTypeProject: $hdnSync1DType,
-        //    metricSumID: selectedMatricSum
-        //};
-
         var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
         var optimizationRun = $(this).attr('data-id');
         var sortObj = null;
@@ -2738,22 +2399,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
             }
         });
 
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
-        //    data: filterObj,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     });
 
     $divMeasurementPatchDetails.find('#btnExportCxF').unbind("click").on('click', function (e) {
@@ -2763,12 +2408,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
-        //var apiReportParameters = {
-        //    MeasurementId: measurementID,
-        //    IsVerificationProject: $hdnVerification,
-        //    IsSync1DTypeProject: $hdnSync1DType,
-        //    metricSumID: selectedMatricSum
-        //};
 
         var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
         var optimizationRun = $(this).attr('data-id');
@@ -2824,22 +2463,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
             }
         });
 
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
-        //    data: filterObj,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});       
     });
 
     $divMeasurementPatchDetails.find('#btnExportDotGain').unbind("click").on('click', function (e) {
@@ -2850,13 +2473,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
         var measurementID = parseInt($hdnCurrentMeasurement.val());
-        //var apiReportParameters = {
-        //    MeasurementId: measurementID,
-        //    IsVerificationProject: $hdnVerification,
-        //    IsSync1DTypeProject: $hdnSync1DType,
-        //    metricSumID: selectedMatricSum
-        //};
-
         var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
         var optimizationRun = $(this).attr('data-id');
         var sortObj = null;
@@ -2911,22 +2527,6 @@ function BindMeasurementPatchDetailsForMultiColor() {
             }
         });
 
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
-        //    data: filterObj,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     });
 
     $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
@@ -2985,35 +2585,6 @@ function BindAnalyzeChart() {
         kendo.ui.progress($chartLoader, false);
     });
 
-
-
-
-    //$.ajax({
-    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeChart',
-    //    data: apiParameters,
-    //    type: 'GET',
-    //    dataType: 'json',
-    //    headers: {
-    //        'Accept-Language': $CurrentCulture
-    //    },
-    //    success: function (response) {
-    //        if (response.data != null) {
-    //            jsonAnalyzeList = response.data;
-    //            _Resources = response.data.GlobalResources;
-    //            if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
-    //                $('#divAnalyzeHeader').css('display', 'block');
-    //                //$('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
-    //            } else {
-    //                $('#divAnalyzePagingSection').css('display', 'block');
-
-    //            }
-    //            BindPageNumber();
-    //        }
-    //    },
-    //    error: function (xhr, errorType, exception) {
-    //        kendo.ui.progress($chartLoader, false);
-    //    }
-    //});
 }
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
@@ -3062,37 +2633,6 @@ function BindInkPaperChartABComparision() {
         kendo.ui.progress($chartLoader, false);
     });
 
-
-
-    //$.ajax({
-    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
-    //    data: apiParameters,
-    //    type: 'GET',
-    //    dataType: 'json',
-    //    headers: {
-    //        'Accept-Language': $CurrentCulture
-    //    },
-    //    success: function (response) {
-    //        //console.log('Ink paper chart');
-    //        //console.log(response);
-    //        if (response.data != null) {
-    //            jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
-    //            if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
-    //                $tblDensityChart.css('display', 'none');
-    //            }
-    //            jsonDensityList = response.data.DensityList;
-    //            jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
-    //            _Resources = response.data.GlobalResources;
-    //        }
-
-    //        PopulateInkPaperChartABComparision();
-    //        kendo.ui.progress($chartLoader, false);
-    //    },
-    //    error: function (xhr, errorType, exception) {
-    //        //alert(exception);
-    //        kendo.ui.progress($chartLoader, false);
-    //    }
-    //});
 }
 
 ////**************** START BIND THE INK PAPER (GAMUT) CHARTS  ****************////
@@ -3105,6 +2645,7 @@ function BindGrayCharts() {
         IsVerificationProject: $hdnVerification,
         IsSync1DTypeProject: $hdnSync1DType,
         IsDlpMultiColor: $hdnIsDlpMultiColor,
+        isDestProfile: $hdnCurrentProjectLicenseType == 'DestinationProfile' ? 'True' : 'False'
     };
 
     var ajaxParameter = {
@@ -3144,33 +2685,6 @@ function BindGrayCharts() {
         kendo.ui.progress($chartLoader, false);
     });
 
-    //$.ajax({
-    //    //url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
-    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
-    //    data: apiParameters,
-    //    type: 'GET',
-    //    dataType: 'json',
-    //    headers: {
-    //        'Accept-Language': $CurrentCulture
-    //    },
-    //    success: function (response) {
-    //        //console.log(response);
-    //        jsonTarget = response.data.GamutChartActual;
-    //        jsonColors = response.data.GamutChart;
-    //        jsonGray = response.data.LABChart;
-    //        _Resources = response.data.GlobalResources;
-    //        PopulateChartTargetVersusActualAB();
-    //        PopulateChartGamutABComparision();
-    //        PopulateChartLComparision();
-    //        PopulateChartLGrayBalance();
-    //        kendo.ui.progress($chartLoader, false);
-
-    //    },
-    //    error: function (xhr, errorType, exception) {
-    //        //alert(exception);
-    //        kendo.ui.progress($chartLoader, false);
-    //    }
-    //});
 }
 
 
@@ -3212,26 +2726,6 @@ function BindDeltaSummaryStatesChart() {
             alert(errorThrown);
         }
     });
-
-    //$.ajax({
-    //    url: SERVICE_BASE_URL + 'api/Report/GenerateSummaryDeltaCharts',
-    //    data: apiParameters,
-    //    type: 'GET',
-    //    dataType: 'json',
-    //    success: function (response) {
-    //        if (response != null) {
-    //            jsonSummaryNameList = response.data.DTDeltaSummaryLables;
-    //            jsonSummaryValueList = response.data.DTDeltaSummaryValues;
-    //            jsonSummaryLimitList = response.data.DTDeltaSummaryLimits;
-    //        }
-    //        PopulateSummaryDeltaChart();
-    //    },
-    //    error: function (xhr, errorType, exception) {
-    //        //alert(exception);
-    //        kendo.ui.progress($chartLoader, false);
-    //    }
-    //});
-
 
 }
 
@@ -3280,40 +2774,6 @@ function BindG7Charts() {
     });
 
 
-    //kendo.ui.progress($chartLoader, true);
-    //$.ajax({
-    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateG7Chart',
-    //    data: apiParameters,
-    //    type: 'GET',
-    //    dataType: 'json',
-    //    headers: {
-    //        'Accept-Language': $CurrentCulture
-    //    },
-    //    success: function (response) {
-    //        //console.log('G7 Chart data');
-    //        //console.log(response);
-    //        //console.log(JSON.stringify(response));
-    //        if (response.data != null) {
-    //            jsonGrayFChartList = response.data.GrayFChartList;
-    //            jsonBlackLChartList = response.data.BlackLChartList;
-    //            jsonGrayLChartList = response.data.GrayLChartList;
-    //            jsonBlackNPDChartList = response.data.BlackNPDChartList;
-    //            jsonGrayNPDChartList = response.data.GrayNPDChartList;
-
-    //            kendo.bind($("#divGraySummaryList"), response.data);
-    //            kendo.bind($("#divBlackSummaryList"), response.data);
-    //            kendo.bind($("#divGrayLDeltaSummaryList"), response.data);
-
-    //        }
-    //        PopulateG7Charts();
-
-    //        //kendo.ui.progress($chartLoader, false);
-    //    },
-    //    error: function (xhr, errorType, exception) {
-    //        //alert(exception);
-    //        kendo.ui.progress($chartLoader, false);
-    //    }
-    //});
 }
 
 ////**************** START BIND THE TVI CHARTS  ****************////
@@ -3372,37 +2832,6 @@ function BindTVICharts() {
             kendo.ui.progress($chartLoader, false);
         });
 
-
-        //kendo.ui.progress($chartLoader, true);
-        //$.ajax({
-        //    url: SERVICE_BASE_URL + 'api/Chart/GenerateISOTVIChart',
-        //    data: apiParameters,
-        //    type: 'GET',
-        //    dataType: 'json',
-        //    headers: {
-        //        'Accept-Language': $CurrentCulture
-        //    },
-        //    success: function (response) {
-
-        //        if (response.data != null) {
-        //            jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
-        //            jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
-        //            jsonDTSpreadChartDataList = response.data.DTSpreadChartDataList;
-        //            jsonDTSpreadSplineRangeChartDataList = response.data.DTSpreadSplineRangeChartDataList;
-        //            PopulateTVIISOChart();
-        //            PopulateTVIG7CMYKChart();
-        //            PopulateTVISpreadChart();
-
-        //            var spreadStatesViewModel = response.data.DTMaxSpreadChartDataList[0];
-        //            kendo.bind($('#chromVariationTable'), spreadStatesViewModel);
-        //        }
-        //        //kendo.ui.progress($chartLoader, false);
-        //    },
-        //    error: function (xhr, errorType, exception) {
-        //        //alert(exception);
-        //        kendo.ui.progress($chartLoader, false);
-        //    }
-        //});
     }
 
 
@@ -3435,33 +2864,7 @@ function BindTVICharts() {
             kendo.ui.progress($chartLoader, false);
         });
 
-        //kendo.ui.progress($chartLoader, true);
-        //$.ajax({
-        //    url: SERVICE_BASE_URL + 'api/Chart/GenerateTVIChart',
-        //    data: apiParameters,
-        //    type: 'GET',
-        //    dataType: 'json',
-        //    headers: {
-        //        'Accept-Language': $CurrentCulture
-        //    },
-        //    success: function (response) {
-
-        //        if (response.data != null) {
-
-        //            jsonTVIG7ChartList = response.data.DTTVIChartList;
-        //            PopulateTVIG7Chart();
-        //        }
-
-        //        //kendo.ui.progress($chartLoader, false);
-        //    },
-        //    error: function (xhr, errorType, exception) {
-        //        //alert(exception);
-        //        kendo.ui.progress($chartLoader, false);
-        //    }
-        //});
-
     }
-
 
 }
 
@@ -3533,8 +2936,6 @@ function PopulateAnalyzeChart() {
             };
             return curObj;
         });
-
-
 
         //get the available list of patch id
         var measurementPatchList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
@@ -3638,6 +3039,7 @@ function PopulateAnalyzeChart() {
         },
         series: patchArray,
         valueAxis: {
+            
             title: {
                 text: 'Δ' + $selectedDeltaE,
                 font: "12px Arial,Helvetica,sans-serif",
@@ -3815,38 +3217,6 @@ function PopulateAnalyzeChart() {
                     }
                 });
 
-                //$.ajax({
-                //    url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
-                //    data: apiParameters,
-                //    type: 'GET',
-                //    dataType: 'json',
-                //    success: function (response) {
-
-                //        $hdnCurrentMeasurement.val(currentObj.MeasurementId);
-                //        $hdMeasurement.val(currentObj.MeasurementId);
-
-
-                //        //update the average measurement value 
-                //        $.ajax({
-                //            url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
-                //            data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
-                //            type: 'GET',
-                //            dataType: 'json',
-                //            success: function (response) {
-                //                $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
-                //                $("[id*='lblCompError']").html('');
-
-                //            },
-                //            error: function (xhr, errorType, exception) {
-                //            }
-                //        });
-
-                //        BindAnalyzeChart();
-                //    },
-                //    error: function (xhr, errorType, exception) {
-                //        //alert(exception);                    
-                //    }
-                //});
             }
         },
         seriesClick: function (e) {
@@ -3876,6 +3246,202 @@ function PopulateAnalyzeChart() {
             }
         }
     });
+
+    var patchArrayDest = [];
+
+    $divAnalyzeDestinationChart.kendoChart({
+        seriesDefaults: {
+            type: "line",
+            style: "smooth",
+            markers: {
+                background: function (e) {
+                    if ( e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
+                        return "green";
+                    }
+                    else {
+                        return "black";
+                    }
+                },
+                border: {
+                    width: 1,
+                    color: function (e) {
+                        if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
+                            return "green";
+                        }
+                        else {
+                            return "black";
+                        }
+                    }
+                },
+                type: "circle",
+            }
+        },
+        series: patchArrayDest,
+        valueAxis: {
+            labels: {
+                format: "{0}"
+            },
+            line: {
+                visible: false
+            },
+            axisCrossingValue: -10,
+            //majorUnit: 2
+        },
+        categoryAxis: {
+            name: "categoryAxis",
+            categories: measurementNamesList,
+            majorGridLines: {
+                visible: false
+            },
+            labels: {
+                rotation: "auto",
+                //cursor: "pointer",                
+                visual: function (e) {
+
+                    // Create an empty group that will hold the rendered label
+                    var visual = new kendo.drawing.Group();
+
+                    // Build an HTML fragment and append it to the body                    
+                    //get the category values
+                    var catValue = e.value;
+
+
+                    //set checked or not
+                    var catText = '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
+
+                    var html = $(catText).appendTo(document.body);
+                    // Store a reference to the target rectangle, see below
+                    var rect = e.rect;
+
+                    //create kendo DOM
+                    kendo.drawing.drawDOM(html)
+                        .done(function (group) {
+                            // Clean-up HTML fragment
+                            html.remove();
+                            // Center the label using Layout
+                            var layout = new kendo.drawing.Layout(rect, {
+                                justifyContent: "center"
+                            });
+                            layout.append(group);
+                            layout.reflow();
+                            // Render the content
+                            visual.append(layout);
+                        });
+
+            
+                    return visual;
+                }
+            },
+        },
+        tooltip: {
+            visible: true,
+            template: "${category.MeasurementName}",
+        },
+        chartArea: {
+            width: 690,
+            height: 200,
+            background: "#CECECE",
+            //opacity: 0.3
+        },
+
+        axisLabelClick: function (e) {
+            if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
+                var isChecked = $(e.element).text() != '☑' ? true : false;
+                //get the current clicked category data
+                var currentObj = e.value;
+                //check only one category available or not
+                if (measurementNamesList.length <= 1 && currentObj.IsUsed) {
+                    alert(_Resources.selectMeasurementMsg);
+                    return false;
+                }
+
+                //check in multiple category
+                var otherMeasurements = $.grep(measurementNamesList, function (elem) {
+                    return elem.MeasurementId != currentObj.MeasurementId && (elem.IsUsed || !currentObj.IsUsed)
+                });
+
+                //check atleast one category should checked
+                if (otherMeasurements.length == 0) {
+                    alert(_Resources.selectMeasurementMsg);
+                    return false;
+                }
+                //api call to update the measurement
+                var apiParameters = {
+                    MeasurementId: currentObj.MeasurementId,
+                    isMeasurementUsed: !currentObj.IsUsed,
+                    IsVerificationProject: $hdnVerification,
+                    IsSync1DTypeProject: $hdnSync1DType,
+                };
+
+                var ajaxParameter = {
+                    type: "GET",
+                    url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
+                    data: apiParameters,
+                    dataType: "json",
+                    headers: {
+                        'Authorization': 'Basic ' + AUTH_TOKEN
+                    }
+                };
+
+                commonAjaxCall(ajaxParameter, function (response) {
+                    $hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                    $hdMeasurement.val(currentObj.MeasurementId);
+
+
+                    //update the average measurement value 
+                    $.ajax({
+                        url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
+                        data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
+                            $("[id*='lblCompError']").html('');
+
+                        },
+                        error: function (xhr, errorType, exception) {
+                        }
+                    });
+
+                    BindAnalyzeChart();
+                }, function (XMLHttpRequest, textStatus, errorThrown) {
+                    if (XMLHttpRequest.status == 401) {
+                        ShowDialog("You are not authorized user. Please login again.", "Message");
+                    } else {
+                        alert(errorThrown);
+                    }
+                });
+
+            }
+        },
+        seriesClick: function (e) {
+            if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                    var dMethod = e.category.dEMethod;
+                    dMethod = dMethod.substring(1, dMethod.length);
+                    $('#hdnDefaultSelectedDelta').val(dMethod);
+                    $selectedDeltaE = dMethod;
+
+                    $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                    $hdMeasurement.val($hdnCurrentMeasurement.val());
+                    BindAllTabs();
+
+                    var analyzeChart = $divAnalyzeChart.data('kendoChart');
+                    analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
+                    analyzeChart.refresh();
+                }
+                else {
+                    $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                    $hdMeasurement.val($hdnCurrentMeasurement.val());
+                    BindAllTabs();
+
+                    $divAnalyzeChart.data('kendoChart').refresh();
+                    $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
+                }
+            }
+        }
+    });
+
     BindAllTabs();
 }
 
@@ -4523,15 +4089,9 @@ function PopulateChartTargetVersusActualAB() {
         tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
         tooltipString += '</table></div>';
 
-        //kendoSeriseObj.tooltip = {
-        //    visible: true,
-        //    template: tooltipString,
-        //    shared: true
-        //};
-
         kendoSeriseObj.tooltip = {
             visible: true, template: function (d) {
-                debugger;
+             
                 var seriesData = d.series.data;
                 var lastItem = seriesData[seriesData.length - 1];
 
@@ -4651,13 +4211,6 @@ function PopulateChartTargetVersusActualAB() {
             height: 250,
             background: ''
         },
-        //plotArea: {
-        //    border: {
-        //        width: 2,
-        //        color: "black"
-        //    }
-        //},
-        //render: renderChartWithBackgroundByAxis
     });
 
 
@@ -4772,12 +4325,6 @@ function PopulateChartTargetVersusActualABMultiColor() {
         tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
         tooltipString += '</table></div>';
 
-        //kendoSeriseObj.tooltip = {
-        //    visible: true,
-        //    template: tooltipString,
-        //    shared: true
-        //};
-
         kendoSeriseObj.tooltip = {
             visible: true, template: function (d) {
                 debugger;
@@ -4900,13 +4447,6 @@ function PopulateChartTargetVersusActualABMultiColor() {
             height: 250,
             background: ''
         },
-        //plotArea: {
-        //    border: {
-        //        width: 2,
-        //        color: "black"
-        //    }
-        //},
-        //render: renderChartWithBackgroundByAxis
     });
 
 
@@ -5087,14 +4627,6 @@ function PopulateChartGamutABComparision() {
                 visible: false
             }
         },
-            //{
-            //    data: colorPAPERObject,
-            //    color: "Black",
-            //    markers: { background: "White", size: 10 },
-            //    highlight: {
-            //        visible: false
-            //    }
-            //    },
             paperColorPointObj,
             targetCYANPoint,
             targetMAGENTAPoint,
@@ -5132,13 +4664,6 @@ function PopulateChartGamutABComparision() {
             height: 250,
             background: ''
         },
-        //plotArea: {
-        //    border: {
-        //        width: 2,
-        //        color: "black"
-        //    }
-        //},
-        //render: renderChartWithBackgroundByAxis
     });
 }
 
@@ -5187,7 +4712,6 @@ function PopulateChartLComparision() {
         pointsObjSmall.highlight = {
             visible: false
         }
-
 
         //Check patch type for tooltip caption
         var tooltipCaption = '';
@@ -5253,15 +4777,6 @@ function PopulateChartLComparision() {
         if (element.PatchType == "Paper") {
             paperLComparisionPoint = pointsObj;
             paperLComparisionPoint.color = "White";
-            //paperLComparisionPoint.markers = {
-            //    background: "White", size: 10,
-            //    //border: {
-            //    //    width: 1,
-            //    //    color: function (e) {
-            //    //        return 'black';
-            //    //    }
-            //    //}
-            //};
 
             paperLComparisionPointSmall = pointsObjSmall;
             paperLComparisionPointSmall.color = "White";
@@ -5473,10 +4988,6 @@ function PopulateChartLGrayBalance() {
             style: "smooth"
         },
         dataSource: jsonGray,
-        //title: {
-        //    text: _Resources._recBBalanceChartTitle,
-        //    font: "13px Tahoma"
-        //},
         series: [{
             //data: grayBlackL,            
             xField: "CmykC",
@@ -5702,11 +5213,6 @@ function PopulateSummaryDeltaChart() {
             max: maxNum,
             //margin: marginValue
         },
-        //tooltip: {
-        //    visible: true,
-        //    //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-        //    template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
-        //},
         chartArea: {
             width: 400,
             height: chartHeight
@@ -6639,13 +6145,6 @@ function PopulateTVIG7CMYKChart() {
             style: "smooth",
             width: 2,
         },
-        //legend: {
-        //    position: "top",
-        //    //labels: {
-        //    //    template: "Name: #= text #"
-        //    //}
-        //},
-        //dataSource: jsonKResult,
         series: [
             {
                 data: jsonCMYK_C,
@@ -7489,24 +6988,6 @@ function GetGradingReport(reportDetail) {
         }
     });
 
-    //$.ajax({
-    //    type: "POST",
-    //    url: SERVICE_BASE_URL + 'api/Report/ExportReportGrading',
-    //    data: apiParameter,
-    //    dataType: "json",
-    //    success: function (response) {
-    //        //kendo.ui.progress($('#divReport'), false);
-    //        if (response.data != null) {
-    //            //console.log(response.data);
-    //            var fileName = '~' + response.data;
-    //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-    //        }
-    //    },
-    //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //        //kendo.ui.progress($('#divReport'), false);
-    //        console.log(XMLHttpRequest.responseText);
-    //    }
-    //});    
 }
 
 
@@ -7972,27 +7453,6 @@ function Get_DeltaSummaryChartImage() {
     return chart.imageDataURL();
 }
 
-
-////**************** GET FORMATTED DATE  ****************////
-//function formatMeasurementDateWithTime(d) {
-//    var dtArr = d.split(/[^0-9]/);    
-//    var date = new Date(dtArr[0], dtArr[1] - 1, dtArr[2], dtArr[3], dtArr[4], dtArr[5]);
-//    //var date = new Date(d);
-//    var day = date.getDate();
-//    var month = date.getMonth() + 1;
-//    var year = date.getFullYear();
-//    var hours = date.getHours();
-//    var minutes = date.getMinutes();
-//    var seconds = date.getSeconds();
-//    var ampm = hours >= 12 ? 'PM' : 'AM';
-//    hours = hours % 12;
-//    hours = hours ? hours : 12; // the hour '0' should be '12'
-//    minutes = minutes < 10 ? '0' + minutes : minutes;
-//    seconds = seconds < 10 ? '0' + seconds : seconds;
-//    var strTime = month + '/' + day + '/' + year + '-' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-//    return strTime
-//}
-
 ////**************** METHOD TO CHECK AVG COMPATIBILITY  ****************////
 
 //check average compatibility for measurement
@@ -8101,25 +7561,6 @@ function PopulateDymoPrinter(obj) {
         }
     });
 
-    //$.ajax({
-    //    url: SERVICE_BASE_URL + 'api/Analyze/GetDymoPrintData',
-    //    data: JSON.stringify(apiParameter),
-    //    type: 'POST',
-    //    headers: {
-    //        "content-type": "application/json",
-    //    },
-    //    dataType: 'json',
-    //    success: function (response) {
-    //        if (response.data != null) {
-    //            //console.log(response.data);
-    //            labelPrintXMLString = response.data.labelPrintString;
-    //            labelPrintStatusIconString = response.data.dymoStatusIcon;
-    //        }
-    //    },
-    //    error: function (xhr, errorType, exception) {
-    //        alert(exception);
-    //    }
-    //});
 }
 
 
@@ -8195,48 +7636,3 @@ Math.trunc = Math.trunc || function (x) {
     }
     return Math.ceil(x);
 };
-
-
-//function commonAjaxCall(options, success_call, error_call) {
-//    var ajaxType = options.type;
-//    var ajaxUrl = options.url;
-//    var ajaxData = options.data;
-//    var ajaxDataType = options.dataType;
-//    var ajaxHeaders = options.headers;
-//    var ajaxAsync = true;
-//    if (options.async) {
-//        ajaxAsync = options.async;
-//    }
-
-//    $.ajax({
-//        type: ajaxType,
-//        url: ajaxUrl,
-//        data: ajaxData,
-//        async: ajaxAsync,
-//        dataType: ajaxDataType,
-//        headers: ajaxHeaders,
-//        success: function (response) {
-//            success_call(response);
-//        },
-//        error: function (XMLHttpRequest, textStatus, errorThrown) {
-//            error_call(XMLHttpRequest, textStatus, errorThrown);
-//        }
-//    });
-//}
-
-//function ShowDialog(message, title) {
-//    $("#dialog").kendoDialog({
-//        width: "400px",
-//        title: title,
-//        closable: false,
-//        modal: false,
-//        content: message,
-//        actions: [
-//            {
-//                text: 'OK', primary: true, action: function (e) {
-//                    window.location.href = 'login.aspx';
-//                }
-//            }
-//        ]
-//    });
-//}

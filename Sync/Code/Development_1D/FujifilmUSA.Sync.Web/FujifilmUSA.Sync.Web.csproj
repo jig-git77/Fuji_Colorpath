@@ -118,6 +118,7 @@
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="AddSpotTarget.aspx" />
     <Content Include="AddUpdateChangeLogManagement.aspx" />
+    <Content Include="Analyze_DestinationProfile.aspx" />
     <Content Include="AnalyzeMeasurement.aspx" />
     <Content Include="Analyze_SpotColor.aspx" />
     <Content Include="ApplicationConfiguration.aspx" />
@@ -4014,6 +4015,7 @@
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\Analyze_DestinationProfile.ascx" />
     <Content Include="UserControl\AnalyzeMeasurement.ascx" />
     <Content Include="UserControl\Analyze_SpotColor.ascx" />
     <Content Include="UserControl\ApplicationConfiguration.ascx" />
@@ -4024,7 +4026,9 @@
     <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.de.resx" />
     <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.fr.resx" />
     <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.ja.resx" />
-    <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\AssignRefChartWMetricTargetPreset.ascx" />
     <Content Include="UserControl\CODisplaybar.ascx" />
     <Content Include="UserControl\COErrorMessage.ascx" />
@@ -4414,6 +4418,13 @@
     </Compile>
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Analyze_DestinationProfile.aspx.cs">
+      <DependentUpon>Analyze_DestinationProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analyze_DestinationProfile.aspx.designer.cs">
+      <DependentUpon>Analyze_DestinationProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="AnalyzeMeasurement.aspx.cs">
       <DependentUpon>AnalyzeMeasurement.aspx</DependentUpon>
@@ -5154,6 +5165,13 @@
     </Compile>
     <Compile Include="UserControl\AddLicenseManagement.ascx.designer.cs">
       <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Analyze_DestinationProfile.ascx.cs">
+      <DependentUpon>Analyze_DestinationProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Analyze_DestinationProfile.ascx.designer.cs">
+      <DependentUpon>Analyze_DestinationProfile.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AnalyzeMeasurement.ascx.cs">
       <DependentUpon>AnalyzeMeasurement.ascx</DependentUpon>
@@ -6604,7 +6622,9 @@
     <Content Include="UserControl\App_LocalResources\LeftMenu.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\LeftMenu.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\LeftMenu.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\App_LocalResources\LeftMenu.ascx.ja.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -9502,6 +9522,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\MToolVersionManagement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Analyze_DestinationProfile.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -98,7 +98,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
             }
 
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomDestinationProfile &&
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile &&
                 SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
                 SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.FullGamutCustomSource &&
                 SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary &&
@@ -120,14 +120,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
-                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile ||
+                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile ||
                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource ||
                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If "Custom Source Profile" / "ReProfile Custom Source" / "Full Gamut Source Profile" project type, then skip Validation setup page.
             {
                 V_ReferenceChartTypeId = MetricTargetPresetId = 0;
                 V_MeasurementDeviceId = 0;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile || 
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile || 
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource)
                 {
                     Div_TargetColorSpace.Visible = false;
@@ -241,7 +241,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile ||
-                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomDestinationProfile ||
+                SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile ||
                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || 
                 SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource)  //---If "Custom Source Project" / "ReProfile Custom Source" / "Full Gamut Source Profile" project types
             {

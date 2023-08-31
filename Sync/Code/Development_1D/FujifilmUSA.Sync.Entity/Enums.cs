@@ -446,8 +446,8 @@ namespace FujifilmUSA.Sync.Entity
         Sync1DMultiColor = 13,
         [Description("ELicenseType_Custom_BCO")]//Custom BCO
         CustomBCO = 14,
-        [Description("ELicenseType_Custom_Destination_Profile")]//Custom Destination Profile
-        CustomDestinationProfile = 15
+        [Description("ELicenseType_Destination_Profile")]//Destination Profile
+        DestinationProfile = 15
     }
 
     public enum UserType

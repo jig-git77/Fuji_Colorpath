@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Web.UI.WebControls;
 using System.Web.UI;
+using System.Diagnostics.Eventing.Reader;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -64,7 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnReOptimize.Visible = false;
                     lbtnDownloadCurrentDLP.Visible = false;
                 }
-                else if (CurrentLicenseType == ELicenseType.CustomDestinationProfile) //---If Custom Destination Profile type of project, then they can not create optimize runs or Download DLP since there is no DLP
+                else if (CurrentLicenseType == ELicenseType.DestinationProfile) //---If Destination Profile type of project, then they can not create optimize runs or Download DLP since there is no DLP
                 {
                     lbtnReOptimize.Visible = false;
                     lbtnDownloadCurrentDLP.Visible = false;
@@ -180,7 +181,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else //---For all other types of projects
                     {
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                        Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                        if (CurrentLicenseType == ELicenseType.DestinationProfile)
+                            Utilities.PopupWindowsRedirect(this, "Analyze_DestinationProfile.aspx");
+                        else
+                            Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
                     }
                 }
             }

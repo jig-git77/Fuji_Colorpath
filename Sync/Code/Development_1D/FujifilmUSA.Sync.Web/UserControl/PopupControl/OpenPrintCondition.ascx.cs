@@ -115,6 +115,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
                     }
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile)
+                    {
+                        Utilities.PopupWindowsRedirect(this,
+                                                      SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
+                                                          ? "Analyze_DestinationProfile.aspx"
+                                                          : "Measurement.aspx");
+                    }
                     else
                     {
                         Utilities.PopupWindowsRedirect(this,

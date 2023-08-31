@@ -304,7 +304,7 @@
                                                     ID="txtAlignmentChart" meta:resourcekey="txtBaseDLPResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
                                         <td valign="top"></td>
-                                        <td valign="top" style="width: 45%" id="tdOptimizationChartCaption">
+                                        <td valign="top" runat="server" style="width: 45%" id="tdOptimizationChartCaption">
                                             <span>
                                                 <asp:Localize Text="Optimization Chart:" runat="server" ID="locOptimizationChart" meta:resourcekey="locOptimizationChartResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
@@ -330,7 +330,7 @@
                                             </div>
                                             <asp:Image ID="imgChart" runat="server" meta:resourcekey="imgChartResource1" Width="150px" Visible="true" />
                                         </td>
-                                        <td valign="top" style="padding: 5px 0px 5px 0px; width: 45%" id="tdOptimizationChartCombo">
+                                        <td valign="top" runat="server" style="padding: 5px 0px 5px 0px; width: 45%" id="tdOptimizationChartCombo">
                                             <div style="float: left;">
                                                 <asp:DropDownList ID="cmbOptimizationChart" runat="server" Width="200px" CssClass="select" AutoPostBack="true"
                                                     OnSelectedIndexChanged="cmbOptimizationChart_SelectedIndexChanged">

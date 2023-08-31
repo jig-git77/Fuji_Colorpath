@@ -199,7 +199,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsDlpMultiColor)
+        public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsDlpMultiColor, bool? IsDestProfile)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -246,6 +246,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
                     this.IsDlpMultiColor = IsDlpMultiColor == null ? false : Convert.ToBoolean(IsDlpMultiColor);
+                    this.IsDestinationProfile = IsDestProfile == null ? false : Convert.ToBoolean(IsDestProfile);
                     _presenterAnalyze.GetGrayChart();
                     GenerateResources();
 
@@ -681,7 +682,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor, bool? Is1DMultiColor, string CurrentRunName, int LicenseType)
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor, bool? Is1DMultiColor, string CurrentRunName, int LicenseType,bool? IsDestProfile)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
@@ -721,6 +722,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     IsDlpMultiColor = IsDLPMultiColor == null ? false : Convert.ToBoolean(IsDLPMultiColor);
                     IsSync1DMultiColor = Is1DMultiColor == null ? false : Convert.ToBoolean(Is1DMultiColor);
+                    IsDestinationProfile = IsDestProfile  == null ?false : Convert.ToBoolean(IsDestProfile);
                     LicenseTypeId = LicenseType;
                     CurrentRunname = CurrentRunName;
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
@@ -1292,6 +1294,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         public string SpotProjectIDs { get; set; }
         public DataTable dtMeasurement { get; set; }
+        public bool IsDestinationProfile { get; set; }
 
         #endregion
     }
