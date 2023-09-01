@@ -213,4 +213,7 @@
     <None Include="Table Script\08_2023\New_Schema_cpdestprofile.sql" />
     <None Include="Table Script\08_2023\UpdateLicenseTypeName.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\08_2023\[CPSync4D].[GetAnalyzeChartMeasurement].sql" />
+  </ItemGroup>
 </Project>
