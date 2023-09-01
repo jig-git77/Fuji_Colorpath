@@ -151,7 +151,7 @@ SELECT @EnabledPaperScaling = EnabledPaperScaling, @LicenseTypeID=P.LicenseTypeI
 					CPSync4D.MeasurementPatch AS MP ON M.MeasurementID = MP.MeasurementID AND MP.SampleName = RC.SampleName INNER JOIN
 					CPSync4D.OptimizeRun AS OTR ON OTR.OptimizeRunID = M.OptimizeRunID INNER JOIN
 					CPSync4D.Project AS P ON P.ProjectID = OTR.ProjectID
-		WHERE		MeasurementID = @MeasurementID AND PatchTypeID IN (8,9,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50)
+		WHERE		M.MeasurementID = @MeasurementID AND PatchTypeID IN (8,9,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50)
 		GROUP BY	PatchTypeID,
 					CMYK_C, 		
 					CMYK_M, 			

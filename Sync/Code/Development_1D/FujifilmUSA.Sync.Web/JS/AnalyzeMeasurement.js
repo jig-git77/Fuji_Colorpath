@@ -2587,6 +2587,7 @@ function BindAnalyzeChart() {
 
 }
 
+
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
 function BindInkPaperChartABComparision() {
     var measurementID = parseInt($hdnCurrentMeasurement.val());
@@ -3247,7 +3248,92 @@ function PopulateAnalyzeChart() {
         }
     });
 
-    var patchArrayDest = [];
+    BindAllTabs();
+}
+
+function PopulateAnalyzeDestinationChart() {
+
+    var measurementID = 0;
+    var indexStart = 0;
+    var indexEnd = 0;
+    viewNumber = parseInt($ddlView.val());
+    pageNumber = parseInt($ddlPaging.val());
+
+    indexEnd = jsonAnalyzeList.Measurements.length;
+    indexStart = 0;
+   
+
+    $('#lblPagingMsg').html('Record(s) ' + (indexStart + 1) + ' to ' + (indexEnd) + ' of ' + jsonAnalyzeList.Measurements.length + '');
+
+
+    var analyzeSeriesResult = $.grep(jsonAnalyzeList.Measurements, function (item, index) {
+        return index > indexStart - 1 && index < indexEnd;
+    });
+
+
+    var patchArray = [];
+    if (analyzeSeriesResult.length > 0) {
+
+        //check last measurement and make the last measurement as current in list
+        $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
+
+        //set name of the selected measurement in header lable
+        $('#lblNewAnalyzeLabel').html($.grep(analyzeSeriesResult, function (e) { return e.MeasurementId == parseInt($hdnCurrentMeasurement.val()); })[0].MeasurementName);
+
+        //create the list of measurement in chart
+        measurementNamesList = $.map(analyzeSeriesResult, function (e) {
+            var curObj = {
+                MeasurementId: e.MeasurementId,
+                MeasurementName: e.MeasurementName,
+                IsUsed: e.IsUsed,
+                MeasurementStatus: e.MeasurementStatus,
+                MeasurementDate: e.MeasurementDate,
+                dEMethod: e.dEMethod,
+                MeasurementDateString: e.MeasurementDateString
+            };
+            return curObj;
+        });
+
+        //get the available list of patch id
+        var measurementPatchList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
+            return e.MeasurementPatchId;
+        });
+
+        //generate new array to display the patches
+        $.each(measurementPatchList, function (index, patchID) {
+
+            //check one by one all html code
+            $.each(analyzeSeriesResult, function (index, measureObj) {
+
+                //check the current patch in the main list
+                var arr1Obj1 = $.grep(measureObj.MeasurementPatches, function (e) {
+                    return e.MeasurementPatchId == patchID;
+                });
+
+                //check the patch is already available in the resulted array
+                var availablePatch = $.grep(patchArray, function (e) {
+                    return e.PatchID == patchID;
+                });
+                //if exists then
+                if (availablePatch.length > 0 && arr1Obj1.length > 0) {
+                    availablePatch[0].data.push(arr1Obj1[0].Δe2000); //add into existing E2000 in data array
+                }
+                else {//add new object in resulted array
+
+                    if (arr1Obj1.length > 0) {
+                        var patchObj = {
+                            data: [arr1Obj1[0].Δe2000],
+                            color: arr1Obj1[0].HtmlColor,
+                            PatchID: patchID
+                        }
+
+                        patchArray.push(patchObj);
+                    }
+                }
+            });
+        });
+    }
+
 
     $divAnalyzeDestinationChart.kendoChart({
         seriesDefaults: {
@@ -3255,28 +3341,28 @@ function PopulateAnalyzeChart() {
             style: "smooth",
             markers: {
                 background: function (e) {
-                    if ( e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
-                        return "green";
+                    if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
+                        return "Green";
                     }
                     else {
-                        return "black";
+                        return "Black";
                     }
                 },
                 border: {
-                    width: 1,
+                    width: 2,
                     color: function (e) {
                         if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
-                            return "green";
+                            return "Green";
                         }
                         else {
-                            return "black";
+                            return "Black";
                         }
                     }
                 },
-                type: "circle",
+           
             }
         },
-        series: patchArrayDest,
+        series: patchArray,
         valueAxis: {
             labels: {
                 format: "{0}"
@@ -3284,8 +3370,9 @@ function PopulateAnalyzeChart() {
             line: {
                 visible: false
             },
-            axisCrossingValue: -10,
-            //majorUnit: 2
+            axisCrossingValue: 0,
+            majorUnit: -1,
+          
         },
         categoryAxis: {
             name: "categoryAxis",
@@ -3305,9 +3392,10 @@ function PopulateAnalyzeChart() {
                     //get the category values
                     var catValue = e.value;
 
+                    var arr = catValue.MeasurementName.toString();
 
                     //set checked or not
-                    var catText = '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
+                    var catText = '<div style="text-align:center;"><div>' + arr +'<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
 
                     var html = $(catText).appendTo(document.body);
                     // Store a reference to the target rectangle, see below
@@ -3328,7 +3416,7 @@ function PopulateAnalyzeChart() {
                             visual.append(layout);
                         });
 
-            
+
                     return visual;
                 }
             },
@@ -3339,9 +3427,8 @@ function PopulateAnalyzeChart() {
         },
         chartArea: {
             width: 690,
-            height: 200,
+            height: 160,
             background: "#CECECE",
-            //opacity: 0.3
         },
 
         axisLabelClick: function (e) {
@@ -3416,35 +3503,20 @@ function PopulateAnalyzeChart() {
         },
         seriesClick: function (e) {
             if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                    var dMethod = e.category.dEMethod;
-                    dMethod = dMethod.substring(1, dMethod.length);
-                    $('#hdnDefaultSelectedDelta').val(dMethod);
-                    $selectedDeltaE = dMethod;
 
-                    $hdnCurrentMeasurement.val(e.category.MeasurementId);
-                    $hdMeasurement.val($hdnCurrentMeasurement.val());
-                    BindAllTabs();
+                $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                $hdMeasurement.val($hdnCurrentMeasurement.val());
+                BindAllTabs();
 
-                    var analyzeChart = $divAnalyzeChart.data('kendoChart');
-                    analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
-                    analyzeChart.refresh();
-                }
-                else {
-                    $hdnCurrentMeasurement.val(e.category.MeasurementId);
-                    $hdMeasurement.val($hdnCurrentMeasurement.val());
-                    BindAllTabs();
+                $divAnalyzeDestinationChart.data('kendoChart').refresh();
+                $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
 
-                    $divAnalyzeChart.data('kendoChart').refresh();
-                    $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
-                }
             }
         }
     });
 
     BindAllTabs();
 }
-
 ////**************** POPULATE THE INK PAPER AB COMPARISION (GMAUT) CHART  ****************////
 function PopulateInkPaperChartABComparision() {
 
@@ -7017,7 +7089,12 @@ function BindPageNumber() {
             }));
         }
         $ddlPaging.find('option').last().attr('selected', true);
-        PopulateAnalyzeChart();
+        if ($hdnCurrentDlpSubOperation != ELicenseType.DestinationProfile) {
+            PopulateAnalyzeChart();
+        }
+        else {
+            PopulateAnalyzeDestinationChart();
+        }
     }
 }
 
