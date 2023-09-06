@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -48,7 +49,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
                 hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
@@ -97,7 +97,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile) //---If Destination Profile"
                     {
+                        trDLPDownload.Visible = false;
                         Div_DLP.Visible = false; // Hide Download DLP in optimize mode of spot project
+                        trDestinationProfile.Visible = true;
+                        trNewBCO.Visible = true;
+                        trAdvancedDownload.Visible = false; 
                         if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                         {
                             lbtnMeasure.Visible = false;
@@ -106,7 +110,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             trExportCMYKLibrary.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
                                 SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
                         }
-                        locDownloadDLPAndChart.Text = "Download Chart";
+                        locDownloadDest.Text = "Download Destination Profile ";
                         // header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
                         locDownloadChartAndPrintThroughWorkflow.Text = GetResourceString(locDownloadChartAndPrintThroughWorkflowResourceNCP);
                         lbtnMeasure.Visible = false;
@@ -399,8 +403,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public DataTable dtPatchDetails { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         public string SpotProjectIDs { get; set; }
+
         #endregion
 
-
+        protected void btnCreateBCO_Click(object sender, EventArgs e)
+        {
+            int ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='RedirectFromProjectList.aspx?RedirectType='AddSpotProject"& ", true);
+            string url = "RedirectFromProjectList.aspx?RedirectType=AddSpotProject&ProjectID=" + ProjectId.ToString();
+            //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='RedirectFromProjectList.aspx?RedirectType=\"AddSpotProject\"&ProjectID='"+ProjectId+"';", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='" + url + "';", true);
+        }
     }
 }

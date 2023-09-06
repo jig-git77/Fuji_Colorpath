@@ -78,13 +78,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trDestinationProfile;
 
         /// <summary>
-        /// Localize9 control.
+        /// locDownloadDest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize9;
+        protected global::System.Web.UI.WebControls.Localize locDownloadDest;
 
         /// <summary>
         /// Div2 control.
@@ -94,15 +94,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div2;
-
-        /// <summary>
-        /// Localize10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize10;
 
         /// <summary>
         /// LinkButton1 control.
@@ -123,6 +114,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize Localize11;
 
         /// <summary>
+        /// trNewBCO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trNewBCO;
+
+        /// <summary>
+        /// Localize9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize9;
+
+        /// <summary>
         /// Div4 control.
         /// </summary>
         /// <remarks>
@@ -132,31 +141,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div4;
 
         /// <summary>
-        /// Localize12 control.
+        /// btnCreateBCO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize12;
+        protected global::System.Web.UI.WebControls.LinkButton btnCreateBCO;
 
         /// <summary>
-        /// LinkButton2 control.
+        /// Localize10 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-
-        /// <summary>
-        /// Localize13 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize13;
+        protected global::System.Web.UI.WebControls.Localize Localize10;
 
         /// <summary>
         /// trDLPDownload control.
