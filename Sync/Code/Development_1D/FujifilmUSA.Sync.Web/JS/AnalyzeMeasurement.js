@@ -1443,7 +1443,7 @@ function BindMeasurementPatchDetails() {
                     grid.hideColumn(22);
                 }
                 //show measurement export button visible only for sys admin user
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus || $hdnCurrentDlpSubOperation == ELicenseType.DestinationProfile) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
                 //Show Dot Gain report export button visible only if it is Sync1D LicenseType and CloudFlowcheck return 1 , make hide "JSON" export button
@@ -4155,10 +4155,12 @@ function PopulateChartTargetVersusActualAB() {
         }
         var tooltipString = '<div style="color: ' + textColor + '; padding: 2px; background-color: ' + bgColor + ';border-radius: 4px;padding: 5px 5px 5px 6px;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFW…8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);"><table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + element.CielabB.toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
+        if ($hdnCurrentDlpSubOperation != ELicenseType.DestinationProfile) {
+            tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
+        }
         tooltipString += '</table></div>';
 
         kendoSeriseObj.tooltip = {
@@ -4190,7 +4192,6 @@ function PopulateChartTargetVersusActualAB() {
         kendoTargetObj.highlight = {
             visible: false
         }
-
 
         $('#tootipDemo').html(tooltipString);
         if (element.PatchType == "Cyan") {
@@ -4391,10 +4392,12 @@ function PopulateChartTargetVersusActualABMultiColor() {
         }
         var tooltipString = '<div style="color: ' + textColor + '; padding: 2px; background-color: ' + bgColor + ';border-radius: 4px;padding: 5px 5px 5px 6px;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFW…8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);"><table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + element.CielabB.toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
+        if ($hdnCurrentDlpSubOperation != ELicenseType.DestinationProfile) {
+            tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
+        }
         tooltipString += '</table></div>';
 
         kendoSeriseObj.tooltip = {
@@ -4593,10 +4596,13 @@ function PopulateChartGamutABComparision() {
         //create tool tip
         var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + jsonTargetColor.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + jsonTargetColor.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + jsonTargetColor.CielabB.toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + jsonTargetColor.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + jsonTargetColor.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + jsonTargetColor.Targetb.toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + jsonTargetColor["ΔL"].toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + jsonTargetColor["Δa"].toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + jsonTargetColor["Δb"].toFixed(2) + '</td></tr>';
+
+        if ($hdnCurrentDlpSubOperation != ELicenseType.DestinationProfile) {
+            tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + jsonTargetColor.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + jsonTargetColor.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + jsonTargetColor.Targetb.toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + jsonTargetColor["ΔL"].toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + jsonTargetColor["Δa"].toFixed(2) + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + jsonTargetColor["Δb"].toFixed(2) + '</td></tr>';
+        }
         tooltipString += '</table>';
 
         actualColorPointObj.tooltip = {
@@ -4651,10 +4657,12 @@ function PopulateChartGamutABComparision() {
     //create tool tip
     var tooltipString = '<table><tr><td><center><b>' + _Resources._recPaperPathMetrics + '</b></center><td></tr>';
     tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.CielabB.toFixed(2) + '</td></tr>';
-    tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.Targetb.toFixed(2) + '</td></tr>';
-    tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + paperObj["ΔL"].toFixed(2) + '</td></tr>';
-    tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + paperObj["Δa"].toFixed(2) + '</td></tr>';
-    tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + paperObj["Δb"].toFixed(2) + '</td></tr>';
+    if ($hdnCurrentDlpSubOperation != ELicenseType.DestinationProfile) {
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.Targetb.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + paperObj["ΔL"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + paperObj["Δa"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + paperObj["Δb"].toFixed(2) + '</td></tr>';
+    }
     tooltipString += '</table>';
 
     paperColorPointObj.tooltip = {
@@ -4813,10 +4821,13 @@ function PopulateChartLComparision() {
 
         var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL + ' ' + _Resources._recA + ': ' + element.CielabA + ' ' + _Resources._recB + ': ' + element.CielabB + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL + ' ' + _Resources._recA + ': ' + element.Targeta + ' ' + _Resources._recB + ': ' + element.Targetb + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"] + '</td></tr>';
+
+        if ($hdnCurrentDlpSubOperation != ELicenseType.DestinationProfile) {
+            tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL + ' ' + _Resources._recA + ': ' + element.Targeta + ' ' + _Resources._recB + ': ' + element.Targetb + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"] + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"] + '</td></tr>';
+            tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"] + '</td></tr>';
+        }
         tooltipString += '</table>';
 
         pointsObj.tooltip = { visible: true, template: tooltipString };
@@ -4924,6 +4935,17 @@ function PopulateChartLComparision() {
 ////**************** START BIND THE GRAY BALANCE L*  (GMAUT) CHART  ****************////
 function PopulateChartLGrayBalance() {
 
+     // if project is destination profile then display actual lab value in tooltip .
+    var tooltipString = '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr>';
+
+    if ($hdnCurrentDlpSubOperation != ELicenseType.DestinationProfile) {
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr>';
+    }
+    tooltipString += '</table>';
 
     $chart_L_BalanceChart.kendoChart({
         renderAs: "canvas",
@@ -4951,7 +4973,7 @@ function PopulateChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: tooltipString
             }
         }],
         xAxis: {
@@ -5017,7 +5039,7 @@ function PopulateChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: tooltipString
             }
         }],
         xAxis: {
@@ -5077,7 +5099,7 @@ function PopulateChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: tooltipString
             }
         }],
         xAxis: {

@@ -100,7 +100,7 @@
                 </td>
             </tr>
 
-            <tr id="trDestinationProfile" runat="server">
+            <tr id="trDestinationProfile" visible="false" runat="server">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
                         <div class="section_top">
@@ -112,7 +112,7 @@
                                     <div class="content">
                                         <div class="text" style="float: left">
                                             <asp:Localize runat="server" Text="Download DLP and Chart"
-                                                ID="Localize9" meta:resourcekey="locDownloadDLPAndChartResource1"></asp:Localize>
+                                                ID="locDownloadDest" meta:resourcekey="locDownloadDLPAndChartResource1"></asp:Localize>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -124,46 +124,65 @@
                                             <div id="Div2" runat="server">
                                                 <tr>
                                                     <td>
-                                                        <span>
-                                                            <asp:Localize runat="server"
-                                                                Text="Download DLP and Implement in Workflow :"
-                                                                ID="Localize10"
-                                                                meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
                                                         <asp:LinkButton ID="LinkButton1" runat="server" CssClass="gray_bt"
-                                                            OnClick="lbtnDownloadDLP_Click">
+                                                            OnClick="lbtnDownloadDestinationICC_Click">
                                                             <span>
-                                                                <asp:Localize runat="server" Text="Download DLP" ID="Localize11"
-                                                                    meta:resourcekey="locDownloadDLPResource1"></asp:Localize>
+                                                                <asp:Localize runat="server" Text="Download Destination ICC" ID="Localize11"
+                                                                    meta:resourcekey="locDownloadDestResource1"></asp:Localize>
                                                             </span>
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
                                             </div>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section_bottom">
+                            &nbsp;
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+             <tr id="trNewBCO" visible="false" runat="server">
+                <td>
+                    <div style="display: block;" class="contantbox tabcontant">
+                        <div class="section_top">
+                            &nbsp;
+                        </div>
+                        <div class="section_middle">
+                            <div class="combopart">
+                                <div class="header">
+                                    <div class="content">
+                                        <div class="text" style="float: left">
+                                            <asp:Localize runat="server" Text="Being Brand Color Optimizer"
+                                                ID="Localize9"></asp:Localize>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="border-style: None; padding: 5px">
+                                    <table>
+                                        <tbody>
                                             <div id="Div4" runat="server">
                                                 <tr>
                                                     <td>
-                                                        <span>
-                                                            <asp:Localize Text="Download Chart and Print through DLP Workflow :"
-                                                                runat="server" ID="Localize12"
-                                                                meta:resourcekey="locDownloadChartAndPrintThroughWorkflowResource1"></asp:Localize></span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="gray_bt"
-                                                            OnClick="lbtnDownloadChart_Click">
+                                                        <asp:LinkButton ID="btnCreateBCO" runat="server" CssClass="gray_bt"
+                                                            OnClick="btnCreateBCO_Click">
                                                             <span>
-                                                                <asp:Localize runat="server" Text="Download Chart" ID="Localize13"
-                                                                    meta:resourcekey="locDownloadChartResource1"></asp:Localize>
+                                                                <asp:Localize runat="server" Text="Create New Library" ID="Localize10"/>
                                                             </span>
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
                                             </div>
+                                           
                                         </tbody>
                                     </table>
                                 </div>

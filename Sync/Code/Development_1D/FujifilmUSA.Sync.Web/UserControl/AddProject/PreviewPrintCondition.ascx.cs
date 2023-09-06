@@ -274,7 +274,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 dvOptionPreset.Visible = true;
                 Div_Spectrophotometer_Options.Visible = true;
                 Div_Alignment_Chart.Visible = true;
-                Div_OptChart.Visible = true;
+                Div_OptChart.Visible = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile ? false : true;
                 Div_ValidationChart.Visible = false;
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomBCO)
