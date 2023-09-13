@@ -233,7 +233,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile) //---If  "destination profile
+                {
+                    Utilities.PopupWindowsRedirect(this, "Analyze_DestinationProfile.aspx");
+                }
+                else
+                    Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
             }
             else
             {
