@@ -160,7 +160,7 @@
                                 <div class="header">
                                     <div class="content">
                                         <div class="text" style="float: left">
-                                            <asp:Localize runat="server" Text="Being Brand Color Optimizer"
+                                            <asp:Localize runat="server" Text="Begin Brand Color Optimizer"
                                                 ID="Localize9"></asp:Localize>
                                         </div>
                                         <div class="clear">

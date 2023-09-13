@@ -60,10 +60,6 @@
     <Folder Include="Functions" />
     <Folder Include="Table Script" />
     <Folder Include="Views" />
-    <Folder Include="Table Script\08_2022" />
-    <Folder Include="Table Script\09_2022" />
-    <Folder Include="Table Script\10_2022" />
-    <Folder Include="Table Script\11_2022" />
     <Folder Include="Table Script\01_2023" />
     <Folder Include="Table Script\02_2023" />
     <Folder Include="Table Script\03_2023" />
@@ -72,20 +68,11 @@
     <Folder Include="Table Script\06_2023" />
     <Folder Include="Table Script\07_2023" />
     <Folder Include="Table Script\08_2023" />
+    <Folder Include="Table Script\09_2023" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartList].sql" />
-    <None Include="Table Script\08_2022\08-26-2022_[CP].[CreateReferenceChart].sql" />
-    <None Include="Table Script\09_2022\09-07-2022_UpdateNPAPIPlugintoBothinLicense.sql" />
-    <None Include="Table Script\09_2022\09-12-2022_Insert-Permission-Table.sql" />
     <None Include="Table Script\03_2023\03-17-2023_Add_RefChartIsSupportCloudFlow.sql" />
     <None Include="Table Script\03_2023\03-17-2023_Add_DeviceFamIsSupportCloudFlow.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\08_2022\08-26-2022_[CP].[GetReferenceChartTypeList].sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\08_2022\08-26-2022_[CP].[UpdateReferenceChart].sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CP].[CreateReferenceChart].sql" />
@@ -94,77 +81,33 @@
     <None Include="Stored Procedures\[CP].[UpdateReferenceChart].sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Table Script\08_2022\08-26-2022_Add-Column-DeviceFamilyId-ReferenceChartType.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\09_2022\09-06-2022_CPSpot.GetSpotProjectSummaryByDeltaE.sql" />
-    <None Include="Table Script\09_2022\09-06-2022_Report.GetSpotProjectOptimizeDetails.sql" />
     <None Include="Stored Procedures\[Report].[GetSpotProjectOptimizeDetails].sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CPSpot].[GetSpotProjectSummaryByDeltaE].sql" />
     <None Include="Stored Procedures\[CPSpot].[GetPatchDetailsByOptimizeRunID_Summary].sql" />
     <None Include="Stored Procedures\[CPSpot].[GetPatchDetailsByOptimizeRunID].sql" />
-    <None Include="Table Script\09_2022\09-06-2022_CPSpot.GetPatchDetailsByOptimizeRunID.sql" />
-    <None Include="Table Script\09_2022\09-06-2022_CPSpot.GetPatchDetailsByOptimizeRunID_Summary.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CP].[GetPrintStandardType].sql" />
     <None Include="Stored Procedures\[CP].[GetPrintStandardTypeList].sql" />
     <None Include="Stored Procedures\[CP].[InsertPrintStandardType].sql" />
     <None Include="Stored Procedures\[CP].[UpdatePrintStandardType].sql" />
-    <None Include="Table Script\09_2022\09-07-2022_CP.UpdatePrintStandardType.sql" />
-    <None Include="Table Script\09_2022\09-07-2022_Add-Column-RankId-PrintStandType.sql" />
-    <None Include="Table Script\09_2022\09-07-2022_CP.GetPrintStandardType.sql" />
-    <None Include="Table Script\09_2022\09-07-2022_CP.GetPrintStandardTypeList.sql" />
-    <None Include="Table Script\09_2022\09-07-2022_CP.InsertPrintStandardType.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CP].[GetReferenceChartForMTP].sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Table Script\09_2022\09-12-2022_CP.GetReferenceChartForMTP.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Stored Procedures\[CPSyncV].[GetMetricTargetPresetForMTP].sql" />
-    <None Include="Table Script\09_2022\09-12-2022_CPSyncV.GetMetricTargetPresetForMTP.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CPSyncV].[GetReferenceChartPreset].sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Table Script\09_2022\09-12-2022_CPSyncV.GetReferenceChartPreset.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Stored Procedures\[CPSyncV].[InsertReferenceChartPreset].sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Table Script\09_2022\09-12-2022_CPSyncV.InsertReferenceChartPreset.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\09_2022\09-21-2022_Report.GetSpotProjectOptimizeDetails.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Stored Procedures\[CPSyncV].[GetMetricTargetPresetForMetricSum].sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\09_2022\09-23-2022_CPSyncV.GetMetricTargetPresetForMetricSum.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\10_2022\10-24-2022_[CPSpot].[CreateSpotTarget].sql" />
-    <None Include="Table Script\10_2022\10-24-2022_ALTER_SpotTargetChartSetting_IsCustom.sql" />
-    <None Include="Table Script\10_2022\10-28-2022_Insert_Permission.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\11_2022\11-15-2022_ALTER_SpotTargetChartSetting_IsCustom.sql" />
-    <None Include="Table Script\11_2022\11-15-2022_CPSpot.CreateSpotTarget.sql" />
-    <None Include="Table Script\11_2022\11-15-2022_CPSpot.GetSpotTargets.sql" />
-    <None Include="Table Script\11_2022\11-15-2022_CPSpot.GetSpotTargets_CustomBCO.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\11_2022\11-21-2022_[CPSpot].[DeleteSpotTargetList].sql" />
-    <None Include="Table Script\11_2022\11-21-2022_[CPSpot].[GetSpotTarget].sql" />
-    <None Include="Table Script\11_2022\11-21-2022_[CPSpot].[UpdateSpotTarget].sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\01_2023\18-01-2022_[Report].[GetSingle1DMeasurement] .sql" />
@@ -207,7 +150,6 @@
   <ItemGroup>
     <None Include="Table Script\08_2023\[CPDestProfile].[GetPatchDetailsByMeasurementID].sql" />
     <None Include="Table Script\08_2023\[CPSync4D].[CreateProject].sql" />
-    <None Include="Table Script\08_2023\[CPSync4D].[GetChartData_Gray].sql" />
     <None Include="Table Script\08_2023\[CPSync4D].[GetProjectDetail].sql" />
     <None Include="Table Script\08_2023\[CPSync4D].[GetProjectList].sql" />
     <None Include="Table Script\08_2023\New_Schema_cpdestprofile.sql" />
@@ -215,5 +157,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\08_2023\[CPSync4D].[GetAnalyzeChartMeasurement].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\08_2023\[CPDestProfile].[GetChartData_Gray].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\09_2023\[CPSync4D].[UpdateProject].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\09_2023\[CPSync4D].[GetProjectLicenseTypeLimit].sql" />
   </ItemGroup>
 </Project>
