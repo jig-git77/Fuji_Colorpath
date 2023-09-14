@@ -599,6 +599,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         break;
                     case ERegion.CA:
                     case ERegion.AN:
+                    case ERegion.AP:
                         strRegionId = "0";
                         break;
                 }
