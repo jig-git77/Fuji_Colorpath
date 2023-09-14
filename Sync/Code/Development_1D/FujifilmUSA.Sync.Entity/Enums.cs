@@ -678,6 +678,7 @@ namespace FujifilmUSA.Sync.Entity
         EU = 2,
         CA = 3,
         JP = 4,
-        AN = 5
+        AN = 5,
+        AP = 6
     }
 }
