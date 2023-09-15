@@ -194,6 +194,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
             string ChartName = "";
+
             if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0 && SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key > 0)
             {
                 //if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || SessionManager.Instance.CurrentProject.OptimizeRuns.Count <= 1) //-----For Base DLP Chart
@@ -207,6 +208,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
                     ChartName = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Value;
                 }
+                _presenterSaveWindow.GetChartPreview();
+                if (!IsErrorOccured)
+                {
+                    if (ChartPreview != null)
+                        Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", ChartName), ".pdf");
+                    else
+                        fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DestinationProfile && SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0) //----If project is Destination Profile License Type, since it doesn't have OptReferenceChartType = 0
+            {
+                ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                ChartName = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Value;
+
                 _presenterSaveWindow.GetChartPreview();
                 if (!IsErrorOccured)
                 {
