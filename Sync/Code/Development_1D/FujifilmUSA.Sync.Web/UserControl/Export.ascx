@@ -111,8 +111,8 @@
                                 <div class="header">
                                     <div class="content">
                                         <div class="text" style="float: left">
-                                            <asp:Localize runat="server" Text="Download DLP and Chart"
-                                                ID="locDownloadDest" meta:resourcekey="locDownloadDLPAndChartResource1"></asp:Localize>
+                                            <asp:Localize runat="server" Text="Download Destination Profile"
+                                                ID="locDownloadDest" meta:resourcekey="locDownloadDestResource"></asp:Localize>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -161,7 +161,7 @@
                                     <div class="content">
                                         <div class="text" style="float: left">
                                             <asp:Localize runat="server" Text="Begin Brand Color Optimizer"
-                                                ID="Localize9"></asp:Localize>
+                                                ID="locBeginBrandColorOptimizer" meta:resourcekey="locBeginBrandColorOptimizerResource"></asp:Localize>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -176,7 +176,7 @@
                                                         <asp:LinkButton ID="btnCreateBCO" runat="server" CssClass="gray_bt"
                                                             OnClick="btnCreateBCO_Click">
                                                             <span>
-                                                                <asp:Localize runat="server" Text="Create New Library" ID="Localize10"/>
+                                                                <asp:Localize runat="server" Text="Create New Library" ID="locCreateNewLibrary" meta:resourcekey="locCreateNewLibraryResource"/>
                                                             </span>
                                                         </asp:LinkButton>
                                                     </td>

@@ -433,7 +433,7 @@
     <value>a* - b* 比較</value>
   </data>
   <data name="locCreateDLPResource1.Text" xml:space="preserve">
-    <value>Create Destination</value>
+    <value>Create Destination_ja</value>
   </data>
   <data name="locDensityResource1.Text" xml:space="preserve">
     <value>濃度</value>

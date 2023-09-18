@@ -123,13 +123,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trNewBCO;
 
         /// <summary>
-        /// Localize9 control.
+        /// locBeginBrandColorOptimizer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize9;
+        protected global::System.Web.UI.WebControls.Localize locBeginBrandColorOptimizer;
 
         /// <summary>
         /// Div4 control.
@@ -150,13 +150,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.LinkButton btnCreateBCO;
 
         /// <summary>
-        /// Localize10 control.
+        /// locCreateNewLibrary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize10;
+        protected global::System.Web.UI.WebControls.Localize locCreateNewLibrary;
 
         /// <summary>
         /// trDLPDownload control.
