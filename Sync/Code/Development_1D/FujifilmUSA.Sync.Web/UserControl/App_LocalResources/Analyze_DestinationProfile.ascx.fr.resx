@@ -433,7 +433,7 @@
     <value>a* - b* Comparison</value>
   </data>
   <data name="locCreateDLPResource1.Text" xml:space="preserve">
-    <value>Create Destination</value>
+    <value>Create Destination_fr</value>
   </data>
   <data name="locFilterMetricSumResource1.Text" xml:space="preserve">
     <value>Filtrer par Metric Sum:</value>

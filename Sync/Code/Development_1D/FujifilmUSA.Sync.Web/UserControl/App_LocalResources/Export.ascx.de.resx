@@ -246,4 +246,13 @@
   <data name="locDownloadSourceProfResource1.Text" xml:space="preserve">
     <value>Source Profile Creation Complete_de</value>
   </data>
+  <data name="locBeginBrandColorOptimizerResource.Text" xml:space="preserve">
+    <value>Begin Brand Color Optimizer_de</value>
+  </data>
+  <data name="locCreateNewLibraryResource.Text" xml:space="preserve">
+    <value>Create New Library_de</value>
+  </data>
+  <data name="locDownloadDestResource.Text" xml:space="preserve">
+    <value>Download Destination Profile_de</value>
+  </data>
 </root>
