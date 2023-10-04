@@ -493,9 +493,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "CPDestProfile.GetPatchDetailsByMeasurementID";
             }
-            if (IsVerification)
+
+            if (IsSync1DType)
             {
-                storedProc = "CPSyncV.GetVPatchDetailsByMeasurementID";
+                storedProc = "CPSync.GetPatchDetailsByMeasurementID";
             }
 
             if (IsVerification)
