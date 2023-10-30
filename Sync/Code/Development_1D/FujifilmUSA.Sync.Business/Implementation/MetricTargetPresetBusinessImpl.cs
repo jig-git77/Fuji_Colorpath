@@ -36,6 +36,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             MetricTargetPreset.IsSync1D,
                                             MetricTargetPreset.Validation_1D,
                                             MetricTargetPreset.Validation_4D,
+                                            MetricTargetPreset.Weighted,
                                             MetricTargetPreset.IsUsed
                                         });
                         if (returnValue == -1)
@@ -69,6 +70,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         MetricTargetPreset.IsSync1D,
                                         MetricTargetPreset.Validation_1D,
                                         MetricTargetPreset.Validation_4D,
+                                        MetricTargetPreset.Weighted,
                                         MetricTargetPreset.IsUsed
                                     });
                     if (returnValue == -1)
@@ -119,6 +121,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Validation_1D = DataReader.ReadBoolean(x, "Validation_1D"),
                                 Validation_4D = DataReader.ReadBoolean(x, "Validation_4D"),
                                 IsPatchTolerance = DataReader.ReadBoolean(x, "IsPatchTolerance"),
+                                Weighted = DataReader.ReadBoolean(x, "Weighted"),
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed")
                             }).ToList();
                     }

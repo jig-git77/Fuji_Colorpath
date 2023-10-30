@@ -141,6 +141,9 @@
   <data name="locIsActiveResource1.Text" xml:space="preserve">
     <value>有効</value>
   </data>
+  <data name="locIsWeightedResource.Text" xml:space="preserve">
+    <value>Is Weighted?_jp</value>
+  </data>
   <data name="locPresetNameResource1.Text" xml:space="preserve">
     <value>プリセット名</value>
   </data>

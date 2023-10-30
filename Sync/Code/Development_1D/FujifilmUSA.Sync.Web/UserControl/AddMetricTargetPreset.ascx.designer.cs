@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.UserControl {
-    
-    
-    public partial class AddMetricTargetPreset {
-        
+namespace FujifilmUSA.Sync.Web.UserControl
+{
+
+
+    public partial class AddMetricTargetPreset
+    {
+
         /// <summary>
         /// locMetricTargetPreset control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locMetricTargetPreset;
-        
+
         /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// lblHeader control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblHeader;
-        
+
         /// <summary>
         /// fujiStatusbar control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.AdminStatusbar fujiStatusbar;
-        
+
         /// <summary>
         /// locRegion control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locRegion;
-        
+
         /// <summary>
         /// cmbRegion control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbRegion;
-        
+
         /// <summary>
         /// locCompanyName control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locCompanyName;
-        
+
         /// <summary>
         /// cmbCompanyName control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbCompanyName;
-        
+
         /// <summary>
         /// locPresetName control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locPresetName;
-        
+
         /// <summary>
         /// txtPresetName control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPresetName;
-        
+
         /// <summary>
         /// rfvPresetName control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPresetName;
-        
+
         /// <summary>
         /// rfvPresetContainer control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvPresetContainer;
-        
+
         /// <summary>
         /// locDescription control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locDescription;
-        
+
         /// <summary>
         /// txtDescription control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
-        
+
         /// <summary>
         /// locEType control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locEType;
-        
+
         /// <summary>
         /// cmbEType control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbEType;
-        
+
         /// <summary>
         /// locValidationType control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locValidationType;
-        
+
         /// <summary>
         /// cmbValidationType control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbValidationType;
-        
+
         /// <summary>
         /// chklist_PresetType control.
         /// </summary>
@@ -182,7 +184,25 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList chklist_PresetType;
-        
+
+        /// <summary>
+        /// locIsWeighted control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locIsWeighted;
+
+        /// <summary>
+        /// chkIsWeighted control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsWeighted;
+
         /// <summary>
         /// locIsActive control.
         /// </summary>
@@ -191,7 +211,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locIsActive;
-        
+
         /// <summary>
         /// chkIsActive control.
         /// </summary>
@@ -200,7 +220,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkIsActive;
-        
+
         /// <summary>
         /// lbtnSave control.
         /// </summary>
@@ -209,7 +229,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnSave;
-        
+
         /// <summary>
         /// locSave control.
         /// </summary>
@@ -218,7 +238,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locSave;
-        
+
         /// <summary>
         /// lbtnCancel control.
         /// </summary>
@@ -227,7 +247,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnCancel;
-        
+
         /// <summary>
         /// locCancel control.
         /// </summary>

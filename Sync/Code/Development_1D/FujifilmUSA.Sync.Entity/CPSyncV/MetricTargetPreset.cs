@@ -20,6 +20,7 @@ namespace FujifilmUSA.Sync.Entity.CPSyncV
         public bool IsSync1D { get; set; }
         public bool Validation_1D { get; set; }
         public bool Validation_4D { get; set; }
+        public bool Weighted { get; set; }
         public bool IsUsed { get; set; }
         public int ReferenceChartTypeId { get; set; }
         public List<MetricSum> MetricSumTolerances { get; set; }
