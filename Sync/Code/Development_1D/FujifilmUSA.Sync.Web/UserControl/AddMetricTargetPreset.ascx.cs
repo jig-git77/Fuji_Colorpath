@@ -136,7 +136,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 chklist_PresetType.Items[0].Selected = MetricTargetPreset.IsSync1D;
                 chklist_PresetType.Items[1].Selected = MetricTargetPreset.Validation_1D;
                 chklist_PresetType.Items[2].Selected = MetricTargetPreset.Validation_4D;
-                chkIsActive.Checked = MetricTargetPreset.IsUsed;             
+                chkIsActive.Checked = MetricTargetPreset.IsUsed;
+                chkIsWeighted.Checked = MetricTargetPreset.Weighted;
             }
         }
 
@@ -165,6 +166,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             MetricTargetPreset.Validation_1D = chklist_PresetType.Items[1].Selected;
             MetricTargetPreset.Validation_4D = chklist_PresetType.Items[2].Selected;
             MetricTargetPreset.IsUsed = chkIsActive.Checked;
+            MetricTargetPreset.Weighted = chkIsWeighted.Checked;
 
             if (BId == 0) // Add New MetricTargetPreset
             {

@@ -141,6 +141,9 @@
   <data name="locIsActiveResource1.Text" xml:space="preserve">
     <value>Is Active?</value>
   </data>
+  <data name="locIsWeightedResource.Text" xml:space="preserve">
+    <value>Is Weighted?</value>
+  </data>
   <data name="locPresetNameResource1.Text" xml:space="preserve">
     <value>Preset Name</value>
   </data>
