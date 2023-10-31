@@ -176,4 +176,7 @@
     <None Include="Table Script\10_2023\[CPSyncV].[InsertMetricTargetPreset].sql" />
     <None Include="Table Script\10_2023\[CPSyncV].[UpdateMetricTargetPreset].sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\10_2023\[CPSyncV].[GetAnalyzeChartVMeasurement].sql" />
+  </ItemGroup>
 </Project>
