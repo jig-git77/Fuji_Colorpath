@@ -31,9 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ABCpdf, Version=11.3.0.3, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL">
+    <Reference Include="ABCpdf, Version=12.5.1.0, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\ProjectBackup\FujiFlim\OrisCertifiedWeb\Upgraded_2020\Oris\OrisWeb\DLL\ABCpdf.dll</HintPath>
+      <HintPath>..\OrisWeb\DLL\ABCpdf.dll</HintPath>
     </Reference>
     <Reference Include="AjaxControlToolkit">
       <HintPath>..\OrisWeb\DLL\AjaxControlToolkit.dll</HintPath>
