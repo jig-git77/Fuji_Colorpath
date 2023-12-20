@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Common;
 using System.Globalization;
 using System.Threading;
 using System.Web.UI;
+using System.Configuration;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -13,6 +14,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected override void OnInit(EventArgs e)
         {
+            //Start: check current status of user for secure connection (To redirect all http towards https automatically) 
+            if (ConfigurationManager.AppSettings["IsHttpsUrl"].ToString() == "true") // stage and production code which supports only https
+            {
+                if (!Request.IsLocal && !Request.IsSecureConnection)
+                {
+                    // redirect the visitor to HTTPS - SSL connection  
+                    Response.Redirect(Request.Url.AbsoluteUri.Replace("http://", "https://"));
+                }
+            }
+            //End:
+
             IsErrorOccured = false;
             base.OnInit(e);
         }
