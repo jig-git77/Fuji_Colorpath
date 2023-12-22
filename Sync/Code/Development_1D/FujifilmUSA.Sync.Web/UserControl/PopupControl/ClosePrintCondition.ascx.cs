@@ -23,7 +23,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public ClosePrintCondition()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
         }
 
         #region Property
@@ -78,25 +77,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnDownloadSourceProf.Visible = true;
                     lbtnViewDetail.Visible = true;
                 }
-            }
-        }
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            if (Request.QueryString["ProjectId"] != null)
-            {
-                ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-                _presenterClosePrintCondition.GetProjectDetail();
-                if (!IsErrorOccured && Project != null)
+                //Start:--------Fill Project Session Manager details with database SP call--------//
+                if (Request.QueryString["ProjectId"] != null)
                 {
-                    ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
-                        GetResourceString(_recoptimizeCompleteText),
-                        Project.OptimizeRuns.Last().DlpName,
-                        ((Project.OptimizeRuns != null)
-                             ? Project.OptimizeRuns.Last().ReferenceChartType.Value
-                             : string.Empty));
+                    ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                    _presenterClosePrintCondition.GetProjectDetail();
+                    if (!IsErrorOccured && Project != null)
+                    {
+                        ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
+                            GetResourceString(_recoptimizeCompleteText),
+                            Project.OptimizeRuns.Last().DlpName,
+                            ((Project.OptimizeRuns != null)
+                                 ? Project.OptimizeRuns.Last().ReferenceChartType.Value
+                                 : string.Empty));
+                    }
                 }
+                //End:------------
             }
         }
+      
         protected void lbtnReOptimize_Click(object sender, EventArgs e)
         {
             if (Request.QueryString["ProjectId"] != null)
