@@ -70,6 +70,7 @@
     <Folder Include="Table Script\08_2023" />
     <Folder Include="Table Script\09_2023" />
     <Folder Include="Table Script\10_2023" />
+    <Folder Include="Table Script\01_2024" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\03_2023\03-17-2023_Add_RefChartIsSupportCloudFlow.sql" />
@@ -178,5 +179,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\10_2023\[CPSyncV].[GetAnalyzeChartVMeasurement].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\01_2024\[CP].[GetReferenceChartTypeList].sql" />
   </ItemGroup>
 </Project>
