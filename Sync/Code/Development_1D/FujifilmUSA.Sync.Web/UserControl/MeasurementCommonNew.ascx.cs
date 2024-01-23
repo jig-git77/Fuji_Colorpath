@@ -198,7 +198,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ////Devlopment/prodcuction support only HTTP.
 
                     //Stage Code support only HTTPS.
-                    if (ConfigurationManager.AppSettings["IsHttpsUrl"].ToString() == "true")
+                    if (ConfigurationManager.AppSettings["IsHttpsUrl"].ToString() == "true" && !Request.Url.ToString().Contains("https")) // Last '&&' condition is added to make it work for test 137 server location
                     {
                         Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
                     }

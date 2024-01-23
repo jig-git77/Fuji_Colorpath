@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
-using WebSupergoo.ABCpdf11;
+using WebSupergoo.ABCpdf12;
 
 namespace FujifilmUSA.Sync.Common
 {
