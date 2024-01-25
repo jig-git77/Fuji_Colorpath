@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Target Measurement Report</title>
+    <link href="#csspath#" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    
+</head>
+<body>
+    <table style="width: 100%" cellspacing="0" cellpadding="0" align="center" border="0">
+        <tr>
+            <td valign="middle" style="padding-top: 5px" align="center" colspan="3">
+                <table style="width:650px" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr style="height:10px">
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%">
+                            &nbsp;
+                        </td>
+                        <td align="center" width="40%" valign="middle" style="font-size: 14px; font-weight: bold">
+                            Measurement Report
+                        </td>
+                        <td align="right" width="30%">
+                            <img src="##IMAGES##powered-by.gif" alt="Powered By" id="imgPowered-by" />
+                        </td>
+                    </tr>
+                    <tr style="height:10px">
+                        <td colspan="3"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+                <table style="width:650px" cellspacing="0" cellpadding="0" align="center" border="0">
+                    <tr>
+                        <td style="width: 68%" valign="top" align="left">
+                            <table style="width: 100%" cellspacing="0" cellpadding="0" align="center" border="0">
+                                <tr>
+                                    <td align="center" valign="top">
+                                        <table style="width: 100%" cellspacing="0" cellpadding="0" align="center" border="0">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <table style="width: 100%" cellspacing="0" cellpadding="0" align="center" border="0">
+                                                        <tr>
+                                                            <td align="left" valign="middle" style="width:50%;font-size:14;font-weight:bold">
+                                                                Job&nbsp;:&nbsp;###JobName###
+                                                            </td>
+                                                            <td align="center" valign="middle" style="height: 27px; font-size: 13px;width:50%">###StatusImage###</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 27px; font-size: 13px;">
+                                                <td style="width: 30%">
+                                                    Location&nbsp;:
+                                                </td>
+                                                <td style="width: 70%">
+                                                    ###BranchName###
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 27px; font-size: 13px;">
+                                                <td>
+                                                    Time Stamp&nbsp;:
+                                                </td>
+                                                <td>
+                                                    ###TimeStamp###
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 27px; font-size: 13px;">
+                                                <td>
+                                                    Substrate&nbsp;:
+                                                </td>
+                                                <td>
+                                                    ###Substrate###
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 27px; font-size: 13px;">
+                                                <td>
+                                                    Device&nbsp;:
+                                                </td>
+                                                <td>
+                                                    ###Device###
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 27px; font-size: 13px;">
+                                                <td>
+                                                    &Delta; E Formula&nbsp;:
+                                                </td>
+                                                <td>
+                                                    ###DeltaEFormula###
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 2%" valign="top" align="center">
+                        </td>
+                        <td style="width: 30%" valign="top" align="right">
+                            <table width="160px" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td align="center">
+                                        <strong>ab Gamut Plot</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" valign="top">
+                                        <img src="###TargetVersusActualAB###" Height="160px" Width="160px" alt='Target Versus Actual AB' id='imgTargetVersus ActualAB' />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <table width="160px" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td>
+                                                    <strong>Target:</strong>
+                                                </td>
+                                                <td >
+                                                    <div style="background-color:Red;height:8px;width:30px">&nbsp;</div>
+                                                </td>
+                                                <td>
+                                                    &nbsp;<strong>Actual:</strong>
+                                                </td>
+                                                <td>
+                                                    <div style="background-color:Green;height:8px;width:30px">&nbsp;</div>
+                                                </td>
+                                            </tr>
+                                        </table>                
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="height:2px;">
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr style="height:1px;">
+                        <td style="background-color:#000" colspan="3"></td>
+                    </tr>
+                    <tr style="height:2px;">
+                        <td colspan="3"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3" valign="middle">
+                <table cellpadding="0" cellspacing="0" width="650px" border="0">
+                    <tr>
+                        <td style="width: 30%" align="left">
+                            &nbsp;
+                        </td>
+                        <td style="font-size: 12px; font-weight: bold" align="center">
+                            Results Summary
+                        </td>
+                        <td style="width: 30%" align="right" valign="middle">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="top" colspan="3">
+                <table cellspacing="0" cellpadding="0" width="80%" style="border: SOLID 2PX #c4c4c4" border="0">
+                    <tr>
+                        <td align="center">
+                            <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                                <tr>
+                                    <td colspan="2" style="height: 20px" class="green-title1" align="center" valign="top">
+                                        Summary &Delta;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%" valign="top">
+                                        <table cellpadding="0" cellspacing="0" width="300px">
+                                            <tr style="height:17px">
+                                                <td valign="middle" style="width: 2%" class="BottomBorder">
+                                                    &nbsp;
+                                                </td>
+                                                <td valign="middle" style="width: 50%" class="BottomBorder">
+                                                    &nbsp;
+                                                </td>
+                                                <td valign="bottom" align="center" style="width: 25%" class="BottomBorder">
+                                                    <span class="TableHeader">Actual</span>
+                                                </td>
+                                                <td valign="bottom" align="center" style="width: 25%" class="BottomBorder">
+                                                    <span class="TableHeader">Threshold</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" style="height:11px"></td>
+                                            </tr>
+                                            <tr style="height: 21px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###AverageStatus1###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Average &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualAverage###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdAverage###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 21px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###MaximumStatus1###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Maximum &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualMaximum###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdMaximum###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 21px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###PrimaryDeltaEStatus1###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Primary &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualPrimaryDeltaE###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdPrimaryDeltaE###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 21px">
+                                                <td valign="middle" class="BottomBorder" style="width: 2%; padding-right: 5px">
+                                                    ###PrimaryDeltaHStatus1###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Primary &Delta; H
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualPrimaryDeltaH###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdPrimaryDeltaH###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###GrayAverageDeltaHStatus1###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Gray Average &Delta; H
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualGrayAverageDeltaH###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdGrayAverageDeltaH###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###QuartileStatus1###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    95% Quartile &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualQuartile###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdQuartile###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###OuterStatus1###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    &Delta; E Outer &Delta; H
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualOuter###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdOuter###&nbsp;
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="width: 60%;padding-top:1px">
+                                        <img src="###SummaryDelta_2###" Width="350px" Height="206px" alt='Summary Delta' id='img3' />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="right" valign="top">
+                                         <span id='lblChartLegend' style="padding-bottom:1px;padding-top:1px" class="green-title1">
+                                            <img src="##IMAGES##Chart-Red-Image.png" alt='red img' height="4px" width="15px" id='imgError' />&nbsp;Error&nbsp;&nbsp;<img src='##IMAGES##Chart-Yellow-Image.png' height="4px" width="15px" alt='Yellow img' id='img2' />&nbsp;Caution&nbsp;&nbsp;
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                                <tr>
+                                    <td colspan="2" style="height:20px" class="green-title1" align="center" valign="top">
+                                        &Delta; E Values
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%" valign="top">
+                                        <table cellpadding="0" cellspacing="0" width="300px" border="0">
+                                            <tr style="height:22px">
+                                                <td valign="middle" style="width: 2%" class="BottomBorder">
+                                                    &nbsp;
+                                                </td>
+                                                <td valign="bottom" style="width: 50%" class="BottomBorder">
+                                                    <span class="TableHeader">Patch Type</span>
+                                                </td>
+                                                <td valign="bottom" align="center" style="width: 25%" class="BottomBorder">
+                                                    <span class="TableHeader">Actual</span>
+                                                </td>
+                                                <td valign="bottom" align="center" style="width: 25%" class="BottomBorder">
+                                                    <span class="TableHeader">Threshold</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" style="height:11px"></td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###CyanStatus2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Cyan &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualCyan###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdCyan###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###MagentaStatus2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Magenta &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualMagenta###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdMagenta###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###YellowStatus2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Yellow &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualYellow###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdYellow###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" class="BottomBorder" style="width: 2%; padding-right: 5px">
+                                                    ###RedStatus2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Red &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualRed###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdRed###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###GreenStatus2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Green &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualGreen###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdGreen###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###BlueStatus2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Blue &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualBlue###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdBlue###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###SubstrateStatus2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Substrate &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualSubstrate###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdSubstrate###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###Gray25Status2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Gray 25 &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualGray25###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdGray25###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###Gray50Status2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Gray 50 &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualGray50###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdGray50###&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 22px">
+                                                <td valign="middle" style="width: 2%; padding-right: 5px" class="BottomBorder">
+                                                    ###Gray75Status2###
+                                                </td>
+                                                <td valign="middle" style="font-size:8px" class="BottomBorder">
+                                                    Gray 75 &Delta; E
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ActualGray75###&nbsp;
+                                                </td>
+                                                <td valign="middle" align="center" class="BottomBorder">
+                                                    ###ThresholdGray75###&nbsp;
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="width: 60%;padding-top:1px">
+                                        <img src="###ChartDeltaE2000###" width="350px" height="295px" alt='Summary Delta' id='img4' />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <!--<tr>
+            <td align="right" colspan="3">
+                &nbsp;
+            </td>
+        </tr>-->
+         
+        <tr>
+            <td align="center" colspan="3">
+                ###PatchReport###
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
