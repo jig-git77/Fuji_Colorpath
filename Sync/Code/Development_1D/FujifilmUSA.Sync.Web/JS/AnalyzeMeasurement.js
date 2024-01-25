@@ -1740,7 +1740,8 @@ function BindMeasurementPatchDetailsForMultiColor() {
                                 IsDLPMultiColor: $hdnIsDlpMultiColor,
                                 Is1DMultiColor: $hdnIsSync1DMultiColor,
                                 CurrentRunName: $hdnCurrentRunName,
-                                LicenseType: $hdnCurrentDlpSubOperation
+                                LicenseType: $hdnCurrentDlpSubOperation,
+                                IsDestProfile: $hdnCurrentProjectLicenseType == 'DestinationProfile' ? 'True' : 'False'
                             },
                             dataType: "json",
                             headers: {
