@@ -1,4 +1,7 @@
-﻿using FujifilmUSA.Sync.Common;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Vml.Office;
+using DocumentFormat.OpenXml.Wordprocessing;
+using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Entity.CPSync1D;
 using FujifilmUSA.Sync.GlobalResources;
@@ -10,10 +13,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
@@ -188,7 +193,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                                     objReportPDF.PDF_NAME = string.Empty;
                                     objReportPDF.PDF_NAME = pdfName;
                                 }
-                            }                            
+                            }
                         }
                         objReportPDF.GenerateClientReportPDF();
                         string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
@@ -1172,8 +1177,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         fileName = ExportColorgateFile(listPatch, model);
                     else if (model.LibraryType == 4)
                         fileName = ExportCMYK_DBDFile(listPatch, model);
-                    else
+                    else if (model.LibraryType == 5)
                         fileName = ExportCMYK_PackZFile(listPatch, model);  //--Option 5 = PackZ file
+                    else if (model.LibraryType == 6)
+                        fileName = ExportCMYK_PackBinaryAndZipFile(listPatch, model);  //--Option 5 = PackZ file
 
 
                     if (!string.IsNullOrEmpty(fileName))
@@ -1878,7 +1885,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
         #endregion
 
-
         #region Create file and download .tcb file for PackZ CMYK type
         private string ExportCMYK_PackZFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
@@ -1929,6 +1935,91 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
         #endregion
 
+        #region Create file and download .zip file for XMF which contain .db files
+        private string ExportCMYK_PackBinaryAndZipFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+            string directoryFilePath = HostingEnvironment.MapPath($"~/UploadFiles/CMYKFile/");
+            string strMainZipFileName = detail.FileName + ".zip";
+            try
+            {
+                if (!Directory.Exists(directoryFilePath + detail.FileName + "/"))
+                    Directory.CreateDirectory(directoryFilePath + detail.FileName + "/");
+
+                byte bt0xF = 0xF;
+                byte bt0x2 = 0x2;
+                ushort usrt0105 = 0x0105;
+
+                for (int i = 0; i < listPatch.Count; i++)
+                {
+                    BinaryWriter bw;
+
+                    //TO create folder name as per ColorName
+                    string strPatchFolderPath = $"{directoryFilePath}{detail.FileName}/{listPatch[i].ColorName}/";
+                    if (!Directory.Exists(strPatchFolderPath))
+                        Directory.CreateDirectory(strPatchFolderPath);
+
+                    if (!Directory.Exists($"{strPatchFolderPath}/tint/"))
+                        Directory.CreateDirectory($"{strPatchFolderPath}/tint/");
+
+                    //File.WriteAllText($"{strPatchFolderPath}/tint/dummy", "dummy");
+
+                    bw = new BinaryWriter(new FileStream($"{strPatchFolderPath}/SpotColor.db", FileMode.Create));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes(listPatch[i].ColorName), 513));
+                    bw.Write(float.Parse(listPatch[i].Cie_L.ToString()));
+                    bw.Write(float.Parse(listPatch[i].Cie_a.ToString()));
+                    bw.Write(float.Parse(listPatch[i].Cie_b.ToString()));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 48));
+                    bw.Write(float.Parse(listPatch[i].Cmyk_C.ToString()));
+                    bw.Write(float.Parse(listPatch[i].Cmyk_M.ToString()));
+                    bw.Write(float.Parse(listPatch[i].Cmyk_Y.ToString()));
+                    bw.Write(float.Parse(listPatch[i].Cmyk_K.ToString()));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 80));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 193));
+                    bw.Write(bt0xF);
+                    bw.Write(bt0x2);
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 4));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 1));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 153));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 1));
+                    bw.Write(float.Parse(listPatch[i].Cmyk_C.ToString()));
+                    bw.Write(float.Parse(listPatch[i].Cmyk_M.ToString()));
+                    bw.Write(float.Parse(listPatch[i].Cmyk_Y.ToString()));
+                    bw.Write(float.Parse(listPatch[i].Cmyk_K.ToString()));
+                    bw.Write(float.Parse("0"));
+                    bw.Write(float.Parse("0"));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 1));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 1));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 123));
+                    bw.Write(usrt0105);
+                    bw.Close();
+
+                    File.WriteAllText($"{strPatchFolderPath}version", "[Info]\nSystemVersion = 3.4.1");
+                    ZipFile.CreateFromDirectory($"{strPatchFolderPath}", $"{directoryFilePath}{detail.FileName}/{listPatch[i].ColorName}.spc");
+
+                    if (Directory.Exists(strPatchFolderPath))
+                        Directory.Delete(strPatchFolderPath, true);
+                }
+               
+                ZipFile.CreateFromDirectory($"{directoryFilePath}{detail.FileName}/", directoryFilePath + strMainZipFileName);
+
+                if (Directory.Exists($"{directoryFilePath}{detail.FileName}/"))
+                    Directory.Delete($"{directoryFilePath}{detail.FileName}/", true);
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message + "\n Cannot create file.");
+            }
+
+            return strMainZipFileName;
+        }
+        #endregion
+
+        private byte[] ReturnByteArreyWithNullAppend(byte[] btActualValue, int intByteCount)
+        {
+            byte[] btNullReturn = new byte[intByteCount];
+            btActualValue.CopyTo(btNullReturn, 0);
+            return btNullReturn;
+        }
 
         // Converts CIELab to CIEXYZ.
         double LabtoXYZ(double l, double a, double b, string LAB)

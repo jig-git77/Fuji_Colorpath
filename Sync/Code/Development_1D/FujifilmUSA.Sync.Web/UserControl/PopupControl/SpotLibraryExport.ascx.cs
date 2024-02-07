@@ -83,6 +83,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trXMF.Visible = false;
                 trPackZ.Visible = true;
             }
+            else if (cmbCMYKLibrary.SelectedValue.ToString() == "6")//Revoria option
+            {
+                trCalderaRow1.Visible = false;
+                trCalderaRow2.Visible = false;
+                trCaldera2Row1.Visible = false;
+                trXMF.Visible = false;
+                trPackZ.Visible = false;
+            }
             else//ColorGate option
             {
                 trCalderaRow1.Visible = false;
@@ -91,9 +99,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trXMF.Visible = false;
                 trPackZ.Visible = false;
             }
-
         }
-
 
         #endregion       
 
