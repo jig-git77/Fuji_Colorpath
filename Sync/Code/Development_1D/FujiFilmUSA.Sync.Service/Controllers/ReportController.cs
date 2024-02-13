@@ -1945,8 +1945,26 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!Directory.Exists(directoryFilePath + detail.FileName + "/"))
                     Directory.CreateDirectory(directoryFilePath + detail.FileName + "/");
 
+                byte[] array1 = null;
+                array1 = new byte[48];
+                array1[0] = 0;
+
+                byte[] array2 = null;
+                array2 = new byte[80];
+                array2[0] = 0;
+
+                byte[] array3 = null;
+                array3 = new byte[4];
+                array3[0] = 0;
+
+                byte[] array4 = null;
+                array4 = new byte[153];
+                array4[0] = 0;
+
                 byte bt0xF = 0xF;
                 byte bt0x2 = 0x2;
+                byte bt0x30 = 0x01;
+
                 ushort usrt0105 = 0x0105;
 
                 for (int i = 0; i < listPatch.Count; i++)
@@ -1968,28 +1986,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     bw.Write(float.Parse(listPatch[i].Cie_L.ToString()));
                     bw.Write(float.Parse(listPatch[i].Cie_a.ToString()));
                     bw.Write(float.Parse(listPatch[i].Cie_b.ToString()));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 48));
+                    bw.Write(array1);
                     bw.Write(float.Parse(listPatch[i].Cmyk_C.ToString()));
                     bw.Write(float.Parse(listPatch[i].Cmyk_M.ToString()));
                     bw.Write(float.Parse(listPatch[i].Cmyk_Y.ToString()));
                     bw.Write(float.Parse(listPatch[i].Cmyk_K.ToString()));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 80));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 193));
+                    bw.Write(array2);
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("Default.dgc"), 193)); //---We have to change this name with current download file name for later on
                     bw.Write(bt0xF);
                     bw.Write(bt0x2);
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 4));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 1));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 153));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 1));
-                    bw.Write(float.Parse(listPatch[i].Cmyk_C.ToString()));
-                    bw.Write(float.Parse(listPatch[i].Cmyk_M.ToString()));
-                    bw.Write(float.Parse(listPatch[i].Cmyk_Y.ToString()));
-                    bw.Write(float.Parse(listPatch[i].Cmyk_K.ToString()));
-                    bw.Write(float.Parse("0"));
-                    bw.Write(float.Parse("0"));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 1));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 1));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes("0"), 123));
+                    bw.Write(array3);
+                    bw.Write(bt0x30);
+                    bw.Write(array4);
+                  
                     bw.Write(usrt0105);
                     bw.Close();
 
