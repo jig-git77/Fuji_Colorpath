@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using static CPProfilerService.Models.Entity.Enums;
 
 namespace CPProfilerService.Business
@@ -15,6 +16,12 @@ namespace CPProfilerService.Business
     {
         public static CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request)
         {
+            ////----Start: to take logs into service call
+            //string directoryFilePath = HostingEnvironment.MapPath($"~/bin/Log/");
+            //string path = directoryFilePath + "Log.txt";
+            //File.AppendAllText(path, "1");
+            ////----End: logs
+
             var response = new CreateDestinationAndDeviceLinkProfileResponse()
             {
                 DestinationProfile = new IccProfile(),
@@ -41,13 +48,19 @@ namespace CPProfilerService.Business
                 return response;
             }
 
-            TYPE_p_void profiler = CrossXColor.CLNewCLProfilerRef(); // this object referece to CroxColor Profiler object
-            TYPE_p_void prof = CrossXColor.CLNewICCProfileRef();  // this object  references an ICC profile to access its data.
-            TYPE_p_void destProf = CrossXColor.CLNewICCProfileRef();
-            TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef();
+
+            TYPE_p_void profiler; // this object referece to CroxColor Profiler object
+            TYPE_p_void prof;  // this object  references an ICC profile to access its data.
+            TYPE_p_void destProf;
+            TYPE_p_void srcProf;
 
             try
             {
+                profiler = CrossXColor.CLNewCLProfilerRef(); // this object referece to CroxColor Profiler object
+                prof = CrossXColor.CLNewICCProfileRef();  // this object  references an ICC profile to access its data.
+                destProf = CrossXColor.CLNewICCProfileRef();
+                srcProf = CrossXColor.CLNewICCProfileRef();
+
                 #region Calculate destination profile
                 var dcsDataSet = new CLVectorDataSet();
                 var pcsDataSet = new CLVectorDataSet();
@@ -77,7 +90,6 @@ namespace CPProfilerService.Business
                 err = CrossXColor.CLSetProfilerOption(profiler, "SaveProfilerData", "1");
 
                 CrossXColor.CLSetProfilerData(profiler, request.DcsData.Length / 4, dcsDataSet, pcsDataSet);
-
                 // calc profile in memory
                 err = CrossXColor.CLCalcProfile(profiler, destProf);
                 if (err != 0)
@@ -121,10 +133,10 @@ namespace CPProfilerService.Business
             finally
             {
                 //clear the unmanaged memory
-                CrossXColor.CLFreeCLProfilerRef(profiler);
-                CrossXColor.CLFreeICCProfileRef(prof);
-                CrossXColor.CLFreeICCProfileRef(srcProf);
-                CrossXColor.CLFreeICCProfileRef(destProf);
+                //CrossXColor.CLFreeCLProfilerRef(profiler);
+                //CrossXColor.CLFreeICCProfileRef(prof);
+                //CrossXColor.CLFreeICCProfileRef(srcProf);
+                //CrossXColor.CLFreeICCProfileRef(destProf);
             }
             return response;
         }
