@@ -270,44 +270,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
                 string methodUrl = "api/Chart/GenerateFiles";
 
-                string zipFilPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/ChartExports/");
-                if (!Directory.Exists(zipFilPath))
-                    Directory.CreateDirectory(zipFilPath);
+                string pdfFilPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/ChartExports/");
+                if (!Directory.Exists(pdfFilPath))
+                    Directory.CreateDirectory(pdfFilPath);
                 using (HttpClient httpClient = new HttpClient())
                 {
                     StringContent content = new StringContent(JsonConvert.SerializeObject(obj), null, "application/json");
                     var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
                     Stream contentStream = null;
-                    string zipFileName = "";
+                    string pdfFileName = "";
                     if (result.IsSuccessStatusCode)
                     {
                         string tempFileName = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName;
                         tempFileName = tempFileName.Replace(" ", "");
                         contentStream = result.Content.ReadAsStreamAsync().Result;
-                        result.Content.Headers.ContentDisposition.FileName = tempFileName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".zip";
-                        zipFileName = result.Content.Headers.ContentDisposition.FileName;
+                        result.Content.Headers.ContentDisposition.FileName = tempFileName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".pdf";
+                        pdfFileName = result.Content.Headers.ContentDisposition.FileName;
 
-                        using (var filestream = File.Create(zipFilPath + zipFileName))
+                        using (var filestream = File.Create(pdfFilPath + pdfFileName))
                         {
                             contentStream.Seek(0, SeekOrigin.Begin);
                             contentStream.CopyTo(filestream);
                         }
-                        Utilities.DownloadExportFile(zipFilPath, zipFileName, zipFileName);
-
-                        //========== Download File ==========//
-                        //System.IO.FileStream fs = System.IO.File.OpenRead(zipFilPath + zipFileName);
-                        //byte[] data = new byte[fs.Length];
-                        //fs.Read(data, 0, (int)fs.Length);
-                        //System.Web.HttpContext.Current.Response.Clear();
-                        //System.Web.HttpContext.Current.Response.ClearHeaders();
-
-                        //System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
-                        //System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=\"" + zipFileName + "\"");
-                        //System.Web.HttpContext.Current.Response.BinaryWrite(data);
-                        //System.Web.HttpContext.Current.Response.Flush();
-                        //if (File.Exists(zipFilPath + zipFileName))
-                        //    File.Delete(zipFilPath + zipFileName);
-                        //System.Web.HttpContext.Current.Response.End();                        
+                        Utilities.DownloadExportFile(pdfFilPath, pdfFileName, pdfFileName);
                     }
                 }
             }
