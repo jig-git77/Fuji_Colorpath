@@ -20,6 +20,129 @@ namespace FujiFilmUSA.Sync.Service.Controllers
     public class ChartController : ApiController
     {
         [HttpPost]
+        public async Task<HttpResponseMessage> GenerateFiles_MultiColor([FromBody] IccFileParams param)
+        {
+            IHttpActionResult result = null;
+            BaseResponse<FileResponse> response = new BaseResponse<FileResponse>();
+            FileResponse responseUpload = new FileResponse();
+            var resultFile = new FileHttpResponseMessage();
+            bool isValidParameter = false;
+            string validationMessage = "";
+            try
+            {
+                //validation for parameters
+                if (param == null || param.Patches == null || param.Configurations == null || param.Patches.Count == 0)
+                {
+                    validationMessage = "Invalid patches have been provided.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.NumberOfPatches <= 0)
+                {
+                    validationMessage = "Number of patches provided are insuffiecient ";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.ChartPages <= 0)
+                {
+                    validationMessage = "Provided chart pages are insuffiecient.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.PatchWidth <= 0)
+                {
+                    validationMessage = "Provided patch width are insuffiecient.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.PatchHeight <= 0)
+                {
+                    validationMessage = "Provided patch height are insuffiecient.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.RowsPerChart <= 0)
+                {
+                    validationMessage = "Provided rows per chart are insuffiecient.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.ColumsPerChart <= 0)
+                {
+                    validationMessage = "Provided columns per chart are insuffiecient.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.Vgap <= 0)
+                {
+                    validationMessage = "Vgap should be greater than 0.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.GapLeval <= 0)
+                {
+                    validationMessage = "GapLeval should be greater than 0.";
+                    isValidParameter = false;
+                }
+                else if (string.IsNullOrEmpty(param.Configurations.ChartName))
+                {
+                    validationMessage = "Chart name is required.";
+                    isValidParameter = false;
+                }
+                else
+                {
+                    isValidParameter = true;
+                }
+
+                //checks parmeters valid or not
+                if (!isValidParameter)
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    result = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else//if valid parameters
+                {
+                    PdfConfigurations property = new PdfConfigurations();
+                    property = param.Configurations;
+
+                    //Chart utility object
+                    ChartUtility chart = new ChartUtility(property.NumberOfPatches, property.ChartPages, property.PatchWidth,
+                        property.PatchHeight, property.ChartBorder, property.ChartSizeW, property.ChartSizeH,
+                        property.RowsPerChart, property.ColumsPerChart, property.Vgap, property.Hgap,
+                        property.GapLeval, property.PreviousL, property.ChartName, property.ProfileName);
+
+                    //Get Pdf filelocation from call
+                    string strPdfPath = await chart.GenerateColorListChart(param.Patches);
+
+                    //create the pdf
+                    if (!string.IsNullOrWhiteSpace(strPdfPath) && File.Exists(strPdfPath))
+                    {
+                        var fileName = Path.GetFileName(strPdfPath);
+                        FileStream stream = new FileStream(strPdfPath, FileMode.Open);
+                        resultFile.filePath = strPdfPath;
+                        resultFile.StatusCode = HttpStatusCode.OK;
+                        resultFile.Content = new StreamContent(stream);
+                        resultFile.Content.Headers.ContentDisposition =
+                        new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                        {
+                            FileName = fileName
+                        };
+                        resultFile.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                        return resultFile;
+                    }
+                    else
+                    {
+                        throw new Exception("There is some error while generating PDF files.");//if pdf not create then
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                ErrorLog.WriteErrorLog("From Controller : " + ex.Message);
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                result = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+
+            return resultFile;
+        }
+
+        [HttpPost]
         public async Task<HttpResponseMessage> GenerateFiles([FromBody] IccFileParams param)
         {
             IHttpActionResult result = null;
