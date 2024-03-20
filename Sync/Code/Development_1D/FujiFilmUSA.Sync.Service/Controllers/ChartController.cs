@@ -1295,6 +1295,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public string SpotProjectIDs { get; set; }
         public DataTable dtMeasurement { get; set; }
         public bool IsDestinationProfile { get; set; }
+        public DataSet dsPatchDetails { get; set; }
 
         #endregion
     }

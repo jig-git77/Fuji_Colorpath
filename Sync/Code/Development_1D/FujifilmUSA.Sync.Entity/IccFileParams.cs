@@ -13,12 +13,15 @@ namespace FujifilmUSA.Sync.Entity
         {
             Patches = new List<Patch>();
             Configurations = new PdfConfigurations();
+            MultiColorChannels = new List<MultiColorChannel>();
         }
 
         [JsonProperty("patches")]
         public List<Patch> Patches { get; set; }
         [JsonProperty("configurations")]
         public PdfConfigurations Configurations { get; set; }
+        [JsonProperty("multiColorChannels")]
+        public List<MultiColorChannel> MultiColorChannels { get; set; }
     }
 
     [Serializable]
@@ -95,5 +98,28 @@ namespace FujifilmUSA.Sync.Entity
         public double Cie_a { get; set; }
         [JsonProperty("cie_b")]
         public double Cie_b { get; set; }
+        [JsonProperty("spot2")]
+        public double Spot2 { get; set; }
+        [JsonProperty("spot3")]
+        public double Spot3 { get; set; }
+        [JsonProperty("spot4")]
+        public double Spot4 { get; set; }
+    }
+
+    [Serializable]
+    public class MultiColorChannel
+    {
+        [JsonProperty("channelID")]
+        public int ChannelID { get; set; }
+        [JsonProperty("channelName")]
+        public string ChannelName { get; set; }
+        [JsonProperty("cmyk_C")]
+        public double Cmyk_C { get; set; }
+        [JsonProperty("cmyk_M")]
+        public double Cmyk_M { get; set; }
+        [JsonProperty("cmyk_Y")]
+        public double Cmyk_Y { get; set; }
+        [JsonProperty("cmyk_K")]
+        public double Cmyk_K { get; set; }
     }
 }

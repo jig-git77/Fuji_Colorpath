@@ -101,7 +101,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Div_DLP.Visible = false; // Hide Download DLP in optimize mode of spot project
                         trDestinationProfile.Visible = true;
                         trNewBCO.Visible = true;
-                        trAdvancedDownload.Visible = false; 
+                        trAdvancedDownload.Visible = false;
                         if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                         {
                             lbtnMeasure.Visible = false;
@@ -224,9 +224,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterExport.GetSpotPatchDetailsForChart();
 
                 List<Patch> listPatch = new List<Patch>();
-                if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                if (dsPatchDetails?.Tables != null && dsPatchDetails?.Tables[0]?.Rows?.Count > 0)
                 {
-                    foreach (DataRow dr in dtPatchDetails.Rows)
+                    foreach (DataRow dr in dsPatchDetails.Tables[0].Rows)
                     {
                         Patch patch = new Patch()
                         {
@@ -241,10 +241,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             Cie_b = Convert.ToDouble(dr["CIELAB_b"]),
                             Spot1 = 0
                         };
+
+                        //added extra to support multicolor in BCO
+                        if (SessionManager.Instance.CurrentDevice.IsSupportMulticolor)
+                        {
+                            patch.Spot2 = 0;
+                            patch.Spot3 = 0;
+                            patch.Spot4 = 0;
+                        }
+
                         listPatch.Add(patch);
                     }
                 }
                 wedge.listPatch = listPatch;
+
                 IccFileParams obj = new IccFileParams();
 
                 //get spot project chart setting
@@ -267,8 +277,47 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 obj.Configurations.ProfileName = SessionManager.Instance.CurrentDevice.DeviceName + " - " + SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName;
                 obj.Patches = wedge.listPatch;
 
+                //Start : added extra to support multicolor in BCO
+                if (SessionManager.Instance.CurrentDevice.IsSupportMulticolor && (dsPatchDetails?.Tables != null && dsPatchDetails?.Tables[1]?.Rows?.Count > 0))
+                {
+                    List<MultiColorChannel> lstMultiColorChannel = new List<MultiColorChannel>();
+
+                    foreach (DataRow dr in dsPatchDetails.Tables[1].Rows)
+                    {
+                        for (int i = 5; i <= 9; i++)
+                        {
+                            if (!string.IsNullOrEmpty(dr?[$"Channel_{i}"].ToString()))
+                            {
+                                MultiColorChannel cnl = new MultiColorChannel()
+                                {
+                                    ChannelID =(i - 4),
+                                    ChannelName = dr[$"Channel_{i}"].ToString(),
+                                };
+
+                                if (!string.IsNullOrEmpty(dr?[$"Channel_{i}_CMYK"].ToString()))
+                                {
+                                    string[] strCMYK = dr?[$"Channel_{i}_CMYK"].ToString().Split(',');
+                                    cnl.Cmyk_C = Convert.ToDouble(strCMYK[0]);
+                                    cnl.Cmyk_M = Convert.ToDouble(strCMYK[1]);
+                                    cnl.Cmyk_Y = Convert.ToDouble(strCMYK[2]);
+                                    cnl.Cmyk_K = Convert.ToDouble(strCMYK[3]);
+                                }
+                                lstMultiColorChannel.Add(cnl);
+                            }
+                        }
+                    }
+                    obj.MultiColorChannels = lstMultiColorChannel;
+                }
+                //End : added extra to support multicolor in BCO
+
                 string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
                 string methodUrl = "api/Chart/GenerateFiles";
+
+                // added extra to support multicolor in BCO
+                if (SessionManager.Instance.CurrentDevice.IsSupportMulticolor)
+                {
+                    methodUrl = "api/Chart/GenerateFiles_MultiColor";
+                }
 
                 string pdfFilPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/ChartExports/");
                 if (!Directory.Exists(pdfFilPath))
@@ -371,8 +420,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-
-
         #region IViewExport Members
         public int ProjectId { get; set; }
         public int OptimizeRunId { get; set; }
@@ -387,6 +434,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public DataTable dtPatchDetails { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         public string SpotProjectIDs { get; set; }
+        public DataSet dsPatchDetails { get; set; }
 
         #endregion
 

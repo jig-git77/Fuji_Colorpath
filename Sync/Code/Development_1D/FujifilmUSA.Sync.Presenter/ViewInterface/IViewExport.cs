@@ -17,6 +17,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
         int SpotProjectId { get; set; }
         DataTable dtPatchDetails { get; set; }
+        DataSet dsPatchDetails { get; set; }
         SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         string SpotProjectIDs { get; set; }
     }

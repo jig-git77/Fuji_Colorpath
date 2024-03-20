@@ -96,7 +96,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
-            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForChart(_viewExport.OptimizeRunId);
+            _viewExport.dsPatchDetails = measurementBusiness.GetSpotPatchDetailsForChart(_viewExport.OptimizeRunId);
         }
 
         public void GetSpotDestinationProfile()

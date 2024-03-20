@@ -65,7 +65,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Measurement> GetSpotMeasurementsOnRunId(int optimizeRunId);
         int UpdateMeasurementByAnalyzeChartFromService(int MeasurementId, bool isUsedMeasurement, bool IsVerification = false, bool IsSync1DType = false);
         DataTable GetSpotPatchDetailsForCMYKExport(int OptimizeRunId);
-        DataTable GetSpotPatchDetailsForChart(int OptimizeRunId);
+        DataSet GetSpotPatchDetailsForChart(int OptimizeRunId);
         DataTable GetSpotProjectSummary(int OptimizeRunId);
         DataTable GetSpotPatchDetailsForChartBySpotProjectID(int SpotProjectId);
         SpotProjectChartSetting GetSpotTargetChartSettingDetails(int SpotProjectId);

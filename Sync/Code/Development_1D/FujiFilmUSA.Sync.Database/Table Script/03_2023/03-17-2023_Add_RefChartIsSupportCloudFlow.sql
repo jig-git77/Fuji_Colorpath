@@ -1,1 +1,0 @@
-﻿ALTER TABLE [CP].[ReferenceChartType] ADD IsSupportCloudFlow BIT

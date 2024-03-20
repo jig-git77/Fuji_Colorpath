@@ -40,6 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recPlzSelectBranch = "plzSelectBranchText";
         private const string _recPlzSelectDeviceFamily = "plzSelectDeviceFamilyText";
         private const string _recSelect = "selectText";
+        ListItem[] lstCMYK = null;
         #endregion
 
         private PresenterDeviceManagement _presenterDeviceManagement;
@@ -56,6 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public AddDeviceManagement()
         {
             Load += (sender, e) => ExceptionHandling(Page_Load, sender, e);
+            lstCMYK = Enumerable.Range(0, 100).Select(p => new ListItem() { Text = p.ToString(), Value = p.ToString() }).ToArray();
         }
         #region Page Events
         protected override void OnInit(EventArgs e)
@@ -64,6 +66,36 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Channel 5
+            drpChannel_5_C.Items.AddRange(lstCMYK);
+            drpChannel_5_M.Items.AddRange(lstCMYK);
+            drpChannel_5_Y.Items.AddRange(lstCMYK);
+            drpChannel_5_K.Items.AddRange(lstCMYK);
+
+            //Channel 6
+            drpChannel_6_C.Items.AddRange(lstCMYK);
+            drpChannel_6_M.Items.AddRange(lstCMYK);
+            drpChannel_6_Y.Items.AddRange(lstCMYK);
+            drpChannel_6_K.Items.AddRange(lstCMYK);
+
+            //Channel 7
+            drpChannel_7_C.Items.AddRange(lstCMYK);
+            drpChannel_7_M.Items.AddRange(lstCMYK);
+            drpChannel_7_Y.Items.AddRange(lstCMYK);
+            drpChannel_7_K.Items.AddRange(lstCMYK);
+
+            //Channel 8
+            drpChannel_8_C.Items.AddRange(lstCMYK);
+            drpChannel_8_M.Items.AddRange(lstCMYK);
+            drpChannel_8_Y.Items.AddRange(lstCMYK);
+            drpChannel_8_K.Items.AddRange(lstCMYK);
+
+            //Channel 9
+            drpChannel_9_C.Items.AddRange(lstCMYK);
+            drpChannel_9_M.Items.AddRange(lstCMYK);
+            drpChannel_9_Y.Items.AddRange(lstCMYK);
+            drpChannel_9_K.Items.AddRange(lstCMYK);
+
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             ELicenseSync1DText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
             ELicenseDlpText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
@@ -223,16 +255,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectCompany), false);//Please select company.
                 return;
             }
+
             if (cmbBranch.SelectedIndex == 0)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);//Please select branch.
                 return;
             }
+
             if (cmbDeviceFamily.SelectedIndex == 0)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectDeviceFamily), false);//Please select device family.
                 return;
             }
+
             if (chkIsSupportMulticolor.Checked)
             {
                 trTotalNoColor.Visible = true;
@@ -242,10 +277,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     fujiStatusbar.DisplayMessage("Please Select Total number of Color", false);
                     return;
                 }
+
                 if (Convert.ToInt16(drpTotalNoColor.SelectedValue) >= 0)
                 {
                     trChannel.Visible = true;
                 }
+
                 if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 5)
                 {
                     if (drpChannel5.SelectedValue == "0")
@@ -254,7 +291,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         return;
 
                     }
-
                 }
                 else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 6)
                 {
@@ -270,7 +306,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         fujiStatusbar.DisplayMessage("Please select channel6", false);
                         return;
                     }
-
                 }
                 else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 7)
                 {
@@ -290,7 +325,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         fujiStatusbar.DisplayMessage("Please select channel7", false);
                         return;
                     }
-
                 }
                 else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 8)
                 {
@@ -315,7 +349,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         fujiStatusbar.DisplayMessage("Please select channel8", false);
                         return;
                     }
-
                 }
                 else if (Convert.ToInt16(drpTotalNoColor.SelectedValue) == 9)
                 {
@@ -344,9 +377,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         fujiStatusbar.DisplayMessage("Please select channel9", false);
                         return;
-
                     }
-
                 }
             }
 
@@ -361,20 +392,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsValidation = chkIsValidation.Checked,
                 IsFlexo = chkIsFlexo.Checked,
                 IsSupportMulticolor = chkIsSupportMulticolor.Checked,
-
-
-
             };
+
             if (chkIsSupportMulticolor.Checked)
             {
                 Device.TotalNoColor = Convert.ToInt16(drpTotalNoColor.SelectedValue.ToString());
                 Device.Channel_5 = Convert.ToInt16(drpChannel5.SelectedValue.ToString());
+                Device.Channel_5_CMYK = $"{drpChannel_5_C.SelectedValue},{drpChannel_5_M.SelectedValue},{drpChannel_5_Y.SelectedValue},{drpChannel_5_K.SelectedValue}";
                 Device.Channel_6 = Convert.ToInt16(drpChannel6.SelectedValue.ToString());
+                Device.Channel_6_CMYK = $"{drpChannel_6_C.SelectedValue},{drpChannel_6_M.SelectedValue},{drpChannel_6_Y.SelectedValue},{drpChannel_6_K.SelectedValue}";
                 Device.Channel_7 = Convert.ToInt16(drpChannel7.SelectedValue.ToString());
+                Device.Channel_7_CMYK = $"{drpChannel_7_C.SelectedValue},{drpChannel_7_M.SelectedValue},{drpChannel_7_Y.SelectedValue},{drpChannel_7_K.SelectedValue}";
                 Device.Channel_8 = Convert.ToInt16(drpChannel8.SelectedValue.ToString());
+                Device.Channel_8_CMYK = $"{drpChannel_8_C.SelectedValue},{drpChannel_8_M.SelectedValue},{drpChannel_8_Y.SelectedValue},{drpChannel_8_K.SelectedValue}";
                 Device.Channel_9 = Convert.ToInt16(drpChannel9.SelectedValue.ToString());
-
+                Device.Channel_9_CMYK = $"{drpChannel_9_C.SelectedValue},{drpChannel_9_M.SelectedValue},{drpChannel_9_Y.SelectedValue},{drpChannel_9_K.SelectedValue}";
             }
+
             if (txtSync1D.Enabled)
             {
                 Device.LicenseTypeProject.Add(ELicenseType.Sync1D, Convert.ToInt32(txtSync1D.Text));
@@ -384,7 +418,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Device.LicenseTypeProject.Add(ELicenseType.CustomBCO, Convert.ToInt32(txtCustomBCO.Text));
             }
-
 
             if (txtDlp.Enabled)
             {
@@ -500,7 +533,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SetMultiColorChannel();
                 }
 
-
                 //-----------In Edit Device page, put MaxProjects value from DB----------------//
                 foreach (KeyValuePair<ELicenseType, int> item in Device.LicenseTypeProject)
                 {
@@ -600,65 +632,62 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     drpChannel9.DataTextField = "MultiColorChannelName";
                     drpChannel9.DataBind();
                     drpChannel9.Items.Insert(0, new ListItem("---SELECT ANY----", "0"));
-
                 }
             }
-
         }
 
         private void SetMultiColorChannel()
         {
             if (drpTotalNoColor.SelectedValue == "5")
             {
-                trChannel5.Visible = true;
-                trChannel6.Visible = false;
-                trChannel7.Visible = false;
-                trChannel8.Visible = false;
-                trChannel9.Visible = false;
+                trChannel5_CMYK.Visible = trChannel5.Visible = true;
+                trChannel6_CMYK.Visible = trChannel6.Visible = false;
+                trChannel7_CMYK.Visible = trChannel7.Visible = false;
+                trChannel8_CMYK.Visible = trChannel8.Visible = false;
+                trChannel9_CMYK.Visible = trChannel9.Visible = false;
                 drpChannel6.SelectedValue = "0";
                 drpChannel7.SelectedValue = "0";
                 drpChannel8.SelectedValue = "0";
                 drpChannel9.SelectedValue = "0";
-
             }
             else if (drpTotalNoColor.SelectedValue == "6")
             {
-                trChannel5.Visible = true;
-                trChannel6.Visible = true;
-                trChannel7.Visible = false;
-                trChannel8.Visible = false;
-                trChannel9.Visible = false;
+                trChannel5_CMYK.Visible = trChannel5.Visible = true;
+                trChannel6_CMYK.Visible = trChannel6.Visible = true;
+                trChannel7_CMYK.Visible = trChannel7.Visible = false;
+                trChannel8_CMYK.Visible = trChannel8.Visible = false;
+                trChannel9_CMYK.Visible = trChannel9.Visible = false;
                 drpChannel7.SelectedValue = "0";
                 drpChannel8.SelectedValue = "0";
                 drpChannel9.SelectedValue = "0";
             }
             else if (drpTotalNoColor.SelectedValue == "7")
             {
-                trChannel5.Visible = true;
-                trChannel6.Visible = true;
-                trChannel7.Visible = true;
-                trChannel8.Visible = false;
-                trChannel9.Visible = false;
+                trChannel5_CMYK.Visible = trChannel5.Visible = true;
+                trChannel6_CMYK.Visible = trChannel6.Visible = true;
+                trChannel7_CMYK.Visible = trChannel7.Visible = true;
+                trChannel8_CMYK.Visible = trChannel8.Visible = false;
+                trChannel9_CMYK.Visible = trChannel9.Visible = false;
 
                 drpChannel8.SelectedValue = "0";
                 drpChannel9.SelectedValue = "0";
             }
             else if (drpTotalNoColor.SelectedValue == "8")
             {
-                trChannel5.Visible = true;
-                trChannel6.Visible = true;
-                trChannel7.Visible = true;
-                trChannel8.Visible = true;
-                trChannel9.Visible = false;
+                trChannel5_CMYK.Visible = trChannel5.Visible = true;
+                trChannel6_CMYK.Visible = trChannel6.Visible = true;
+                trChannel7_CMYK.Visible = trChannel7.Visible = true;
+                trChannel8_CMYK.Visible = trChannel8.Visible = true;
+                trChannel9_CMYK.Visible = trChannel9.Visible = false;
                 drpChannel9.SelectedValue = "0";
             }
             else if (drpTotalNoColor.SelectedValue == "9")
             {
-                trChannel5.Visible = true;
-                trChannel6.Visible = true;
-                trChannel7.Visible = true;
-                trChannel8.Visible = true;
-                trChannel9.Visible = true;
+                trChannel5_CMYK.Visible = trChannel5.Visible = true;
+                trChannel6_CMYK.Visible = trChannel6.Visible = true;
+                trChannel7_CMYK.Visible = trChannel7.Visible = true;
+                trChannel8_CMYK.Visible = trChannel8.Visible = true;
+                trChannel9_CMYK.Visible = trChannel9.Visible = true;
             }
         }
         #endregion
@@ -712,19 +741,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void drpTotalNoColor_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (drpTotalNoColor.SelectedIndex > 0)
             {
                 trChannel.Visible = true;
                 trTotalNoColor.Visible = true;
                 SetMultiColorChannel();
-
             }
             else
             {
                 trChannel.Visible = false;
             }
-
         }
     }
 }

@@ -546,6 +546,34 @@
                                                 <asp:DropDownList ID="drpChannel5" runat="server" Width="370px"></asp:DropDownList>
                                             </td>
                                         </tr>
+                                        <tr id="trChannel5_CMYK" runat="server">
+                                            <td style="vertical-align: top; text-align: right;">
+                                                <span style="font-weight: bold;">CMYK<span style="color: Red;">*</span></span>&nbsp;:
+                                            </td>
+                                            <td style="vertical-align: top;">
+                                                <table>
+                                                    <tr id="trChannel5_CMYK_box" runat="server">
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_5_C" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel5_C" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_5_M" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel5_M" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_5_Y" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel5_Y" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_5_K" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel5_K" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
                                         <tr id="trChannel6" runat="server">
                                             <td style="vertical-align: top;">
                                                 <span style="font-weight: bold;">Channel_6<span style="color: Red;">*</span></span>&nbsp;:
@@ -554,6 +582,34 @@
                                                 <asp:DropDownList ID="drpChannel6" runat="server" Width="370px"></asp:DropDownList>
                                             </td>
                                         </tr>
+                                        <tr id="trChannel6_CMYK" runat="server">
+                                            <td style="vertical-align: top; text-align: right;">
+                                                <span style="font-weight: bold;">CMYK<span style="color: Red;">*</span></span>&nbsp;:
+                                            </td>
+                                            <td style="vertical-align: top;">
+                                                <table>
+                                                    <tr id="trChannel6_CMYK_box" runat="server">
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_6_C" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel6_C" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_6_M" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel6_M" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_6_Y" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel6_Y" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_6_K" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel6_K" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
                                         <tr id="trChannel7" runat="server">
                                             <td style="vertical-align: top;">
                                                 <span style="font-weight: bold;">Channel_7<span style="color: Red;">*</span></span>&nbsp;:
@@ -562,6 +618,34 @@
                                                 <asp:DropDownList ID="drpChannel7" runat="server" Width="370px"></asp:DropDownList>
                                             </td>
                                         </tr>
+                                        <tr id="trChannel7_CMYK" runat="server">
+                                            <td style="vertical-align: top; text-align: right;">
+                                                <span style="font-weight: bold;">CMYK<span style="color: Red;">*</span></span>&nbsp;:
+                                            </td>
+                                            <td style="vertical-align: top;">
+                                                <table>
+                                                    <tr id="trChannel7_box" runat="server">
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_7_C" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannelt_C" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_7_M" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel7_M" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_7_Y" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel7_Y" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_7_K" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel7_K" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
                                         <tr id="trChannel8" runat="server">
                                             <td style="vertical-align: top;">
                                                 <span style="font-weight: bold;">Channel_8<span style="color: Red;">*</span></span>&nbsp;:
@@ -570,12 +654,67 @@
                                                 <asp:DropDownList ID="drpChannel8" runat="server" Width="370px"></asp:DropDownList>
                                             </td>
                                         </tr>
+                                        <tr id="trChannel8_CMYK" runat="server">
+                                            <td style="vertical-align: top; text-align: right;">
+                                                <span style="font-weight: bold;">CMYK<span style="color: Red;">*</span></span>&nbsp;:
+                                            </td>
+                                            <td style="vertical-align: top;">
+                                                <table>
+                                                    <tr id="trChannel8_box" runat="server">
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_8_C" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel8_C" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_8_M" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel8_M" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_8_Y" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel8_Y" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_8_K" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel8_K" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
                                         <tr id="trChannel9" runat="server">
                                             <td style="vertical-align: top;">
                                                 <span style="font-weight: bold;">Channel_9<span style="color: Red;">*</span></span>&nbsp;:
                                             </td>
                                             <td style="vertical-align: top;">
                                                 <asp:DropDownList ID="drpChannel9" runat="server" Width="370px"></asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr id="trChannel9_CMYK" runat="server">
+                                            <td style="vertical-align: top; text-align: right;">
+                                                <span style="font-weight: bold;">CMYK<span style="color: Red;">*</span></span>&nbsp;:
+                                            </td>
+                                            <td style="vertical-align: top;">
+                                                <table>
+                                                    <tr id="trChannel9_box" runat="server">
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_9_C" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel9_C" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_9_M" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel9_M" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_9_Y" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel9_Y" />
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <asp:DropDownList ID="drpChannel_9_K" runat="server" MaxLength="50" Width="50px"
+                                                                Height="19px" meta:resourcekey="tdChannel9_K" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </td>
                                         </tr>
                                     </table>

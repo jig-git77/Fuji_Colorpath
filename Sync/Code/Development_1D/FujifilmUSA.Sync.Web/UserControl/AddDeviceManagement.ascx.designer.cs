@@ -735,6 +735,60 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.DropDownList drpChannel5;
 
         /// <summary>
+        /// trChannel5_CMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel5_CMYK;
+
+        /// <summary>
+        /// trChannel5_CMYK_box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel5_CMYK_box;
+
+        /// <summary>
+        /// drpChannel_5_C control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_5_C;
+
+        /// <summary>
+        /// drpChannel_5_M control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_5_M;
+
+        /// <summary>
+        /// drpChannel_5_Y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_5_Y;
+
+        /// <summary>
+        /// drpChannel_5_K control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_5_K;
+
+        /// <summary>
         /// trChannel6 control.
         /// </summary>
         /// <remarks>
@@ -751,6 +805,60 @@ namespace FujifilmUSA.Sync.Web.UserControl
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpChannel6;
+
+        /// <summary>
+        /// trChannel6_CMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel6_CMYK;
+
+        /// <summary>
+        /// trChannel6_CMYK_box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel6_CMYK_box;
+
+        /// <summary>
+        /// drpChannel_6_C control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_6_C;
+
+        /// <summary>
+        /// drpChannel_6_M control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_6_M;
+
+        /// <summary>
+        /// drpChannel_6_Y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_6_Y;
+
+        /// <summary>
+        /// drpChannel_6_K control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_6_K;
 
         /// <summary>
         /// trChannel7 control.
@@ -771,6 +879,60 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.DropDownList drpChannel7;
 
         /// <summary>
+        /// trChannel7_CMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel7_CMYK;
+
+        /// <summary>
+        /// trChannel7_box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel7_box;
+
+        /// <summary>
+        /// drpChannel_7_C control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_7_C;
+
+        /// <summary>
+        /// drpChannel_7_M control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_7_M;
+
+        /// <summary>
+        /// drpChannel_7_Y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_7_Y;
+
+        /// <summary>
+        /// drpChannel_7_K control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_7_K;
+
+        /// <summary>
         /// trChannel8 control.
         /// </summary>
         /// <remarks>
@@ -789,6 +951,60 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.DropDownList drpChannel8;
 
         /// <summary>
+        /// trChannel8_CMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel8_CMYK;
+
+        /// <summary>
+        /// trChannel8_box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel8_box;
+
+        /// <summary>
+        /// drpChannel_8_C control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_8_C;
+
+        /// <summary>
+        /// drpChannel_8_M control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_8_M;
+
+        /// <summary>
+        /// drpChannel_8_Y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_8_Y;
+
+        /// <summary>
+        /// drpChannel_8_K control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_8_K;
+
+        /// <summary>
         /// trChannel9 control.
         /// </summary>
         /// <remarks>
@@ -805,6 +1021,60 @@ namespace FujifilmUSA.Sync.Web.UserControl
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpChannel9;
+
+        /// <summary>
+        /// trChannel9_CMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel9_CMYK;
+
+        /// <summary>
+        /// trChannel9_box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trChannel9_box;
+
+        /// <summary>
+        /// drpChannel_9_C control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_9_C;
+
+        /// <summary>
+        /// drpChannel_9_M control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_9_M;
+
+        /// <summary>
+        /// drpChannel_9_Y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_9_Y;
+
+        /// <summary>
+        /// drpChannel_9_K control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpChannel_9_K;
 
         /// <summary>
         /// locIsActive control.

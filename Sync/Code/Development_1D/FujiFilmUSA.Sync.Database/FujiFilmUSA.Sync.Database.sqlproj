@@ -60,9 +60,6 @@
     <Folder Include="Functions" />
     <Folder Include="Table Script" />
     <Folder Include="Views" />
-    <Folder Include="Table Script\01_2023" />
-    <Folder Include="Table Script\02_2023" />
-    <Folder Include="Table Script\03_2023" />
     <Folder Include="Table Script\04_2023" />
     <Folder Include="Table Script\05_2023" />
     <Folder Include="Table Script\06_2023" />
@@ -71,10 +68,7 @@
     <Folder Include="Table Script\09_2023" />
     <Folder Include="Table Script\10_2023" />
     <Folder Include="Table Script\01_2024" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Table Script\03_2023\03-17-2023_Add_RefChartIsSupportCloudFlow.sql" />
-    <None Include="Table Script\03_2023\03-17-2023_Add_DeviceFamIsSupportCloudFlow.sql" />
+    <Folder Include="Table Script\03_2024" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CP].[CreateReferenceChart].sql" />
@@ -112,24 +106,14 @@
     <None Include="Stored Procedures\[CPSyncV].[GetMetricTargetPresetForMetricSum].sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Table Script\01_2023\18-01-2022_[Report].[GetSingle1DMeasurement] .sql" />
-    <None Include="Table Script\01_2023\18-01-2022_Alter_CPSyncV_IsSummary.sql" />
     <None Include="Stored Procedures\[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
-    <None Include="Table Script\02_2023\02-17-2023_[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
     <None Include="Stored Procedures\[CPSyncV].[uspInsertColorCharΔCh].sql" />
-    <None Include="Table Script\03_2023\03-07-2023_[CPSyncV].[uspInsertColorCharΔCh].sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CP].[InsertDeviceFamily].sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CPSync].[ChkCloudFlowSupport] .sql" />
-    <None Include="Table Script\03_2023\03-17-2023_[CP].[CreateReferenceChart].sql" />
-    <None Include="Table Script\03_2023\03-17-2023_[CP].[GetReferenceChartList].sql" />
-    <None Include="Table Script\03_2023\03-17-2023_[CP].[InsertDeviceFamily].sql" />
-    <None Include="Table Script\03_2023\03-17-2023_[CP].[UpdateReferenceChart].sql" />
-    <None Include="Table Script\03_2023\03-17-2023_[CPSync].[ChkCloudFlowSupport] .sql" />
-    <None Include="Table Script\03_2023\03-17-2023_[CPSync].[GetPatchDetailsByMeasurementID_DotGain].sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\04_2023\14-04-2023_Alter_SpotProjectChartSetting.sql" />
@@ -182,5 +166,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\01_2024\[CP].[GetReferenceChartTypeList].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\03_2024\[CP].[InsertDevice].sql" />
+    <None Include="Table Script\03_2024\[CP].[UpdateDevice].sql" />
+    <None Include="Table Script\03_2024\[CPSpot].[GetSpotPatchChartByOptimizeRunID] .sql" />
+    <None Include="Table Script\03_2024\Alter_[CP].[Device].sql" />
   </ItemGroup>
 </Project>
