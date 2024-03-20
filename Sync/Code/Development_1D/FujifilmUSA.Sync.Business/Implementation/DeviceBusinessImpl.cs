@@ -182,10 +182,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.IsSupportMulticolor,
                                         device.TotalNoColor,
                                         device.Channel_5,
+                                        device.Channel_5_CMYK,
                                         device.Channel_6,
+                                        device.Channel_6_CMYK,
                                         device.Channel_7,
+                                        device.Channel_7_CMYK,
                                         device.Channel_8,
-                                        device.Channel_9
+                                        device.Channel_8_CMYK,
+                                        device.Channel_9,
+                                        device.Channel_9_CMYK
                                     });
                         if (returnValue == -1)
                         {
@@ -227,10 +232,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.IsSupportMulticolor,
                                         device.TotalNoColor,
                                         device.Channel_5,
+                                        device.Channel_5_CMYK,
                                         device.Channel_6,
+                                        device.Channel_6_CMYK,
                                         device.Channel_7,
+                                        device.Channel_7_CMYK,
                                         device.Channel_8,
-                                        device.Channel_9
+                                        device.Channel_8_CMYK,
+                                        device.Channel_9,
+                                        device.Channel_9_CMYK
                                     });
                         if (returnValue == -1)
                         {

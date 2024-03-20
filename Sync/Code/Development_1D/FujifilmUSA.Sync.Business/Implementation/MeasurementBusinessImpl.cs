@@ -2104,11 +2104,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
-        public DataTable GetSpotPatchDetailsForChart(int OptimizeRunId)
+        public DataSet GetSpotPatchDetailsForChart(int OptimizeRunId)
         {
             string storedProc = "CPSpot.GetSpotPatchChartByOptimizeRunID";
 
-            DataTable dtPatchDetails = new DataTable();
+            DataSet dtPatchDetails = new DataSet();
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -2120,7 +2120,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 new object[] { OptimizeRunId });
                     if (dsMeasurements.Tables.Count > 0)
                     {
-                        dtPatchDetails = dsMeasurements.Tables[0];
+                        dtPatchDetails = dsMeasurements;
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchChartByOptimizeRunID"));

@@ -22,10 +22,15 @@ namespace FujifilmUSA.Sync.Entity
         public bool IsSupportMulticolor { get; set; }
         public short TotalNoColor { get; set; }
         public short Channel_5 { get; set; }
+        public string Channel_5_CMYK { get; set; }
         public short Channel_6 { get; set; }
+        public string Channel_6_CMYK { get; set; }
         public short Channel_7 { get; set; }
+        public string Channel_7_CMYK { get; set; }
         public short Channel_8 { get; set; }
+        public string Channel_8_CMYK { get; set; }
         public short Channel_9 { get; set; }
+        public string Channel_9_CMYK { get; set; }
 
         public string Channel_5_Name { get; set; }
         public string Channel_6_Name { get; set; }

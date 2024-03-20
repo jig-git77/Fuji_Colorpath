@@ -192,9 +192,9 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
-        public DataTable GetSpotPatchDetailsForChart(int OptimizeRunId)
+        public DataSet GetSpotPatchDetailsForChart(int OptimizeRunId)
         {
-            return new DataTable();
+            return new DataSet();
         }
 
         public DataTable GetSpotProjectSummary(int OptimizeRunId)

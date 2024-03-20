@@ -227,6 +227,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         public DataTable dtPatchDetails { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         public string SpotProjectIDs { get; set; }
+        public DataSet dsPatchDetails { get; set; }
         #endregion
     }
 }
