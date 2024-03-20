@@ -9,7 +9,6 @@ namespace FujiFilmUSA.Sync.Service.Models
     public class Patch
     {
         [JsonProperty("patchID")]
-
         public int PatchID { get; set; }
         [JsonProperty("colorName")]
         public string ColorName { get; set; }
@@ -31,5 +30,10 @@ namespace FujiFilmUSA.Sync.Service.Models
         public double Cie_b { get; set; }
         [JsonProperty("spot2")]
         public double Spot2 { get; set; }
+        [JsonProperty("spot3")]
+        public double Spot3 { get; set; }
+        [JsonProperty("spot4")]
+        public double Spot4 { get; set; }
+
     }
 }

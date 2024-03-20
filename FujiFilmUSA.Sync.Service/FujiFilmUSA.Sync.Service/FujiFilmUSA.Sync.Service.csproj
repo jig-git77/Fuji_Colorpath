@@ -127,6 +127,7 @@
     <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\FileResponse.cs" />
     <Compile Include="Models\IccFileParams.cs" />
+    <Compile Include="Models\MultiColorChannel.cs" />
     <Compile Include="Models\Patch.cs" />
     <Compile Include="Models\PdfConfigurations.cs" />
     <Compile Include="Models\Wedge.cs" />
