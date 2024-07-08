@@ -99,6 +99,7 @@ namespace FujiFilmUSA.Sync.Service.Utility
                 int TotalRows = numberOfPatches / columsPerChart;
                 int NewrowsPerChart = 0;
                 CPDF pdf = new CPDF();
+                pdf.SetLicenseKey(Convert.ToString(ConfigurationManager.AppSettings["Dynaform_license_key"]));
                 // Error messages and warnings are passed to the callback function.
                 //pdf.SetOnErrorProc(IntPtr.Zero, new DynaPDF.TErrorProc(PDFError));
                 pdf.CreateNewPDF(null); // We open the output file later if no error occurrs.
