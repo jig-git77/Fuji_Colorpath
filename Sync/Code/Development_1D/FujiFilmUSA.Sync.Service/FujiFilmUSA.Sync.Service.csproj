@@ -158,6 +158,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BinaryFunction.cs" />
     <Compile Include="Models\CustomAuthentication.cs" />
     <Compile Include="Models\FileHttpResponseMessage.cs" />
     <Compile Include="Models\GridFilters.cs" />
