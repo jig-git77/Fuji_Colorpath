@@ -1181,6 +1181,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         fileName = ExportCMYK_PackZFile(listPatch, model);  //--Option 5 = PackZ file
                     else if (model.LibraryType == 6)
                         fileName = ExportCMYK_PackBinaryAndZipFile(listPatch, model);  //--Option 5 = PackZ file
+                    else if (model.LibraryType == 7)
+                        fileName = ExportOnyxFile(listPatch, model);
 
 
                     if (!string.IsNullOrEmpty(fileName))
@@ -1779,6 +1781,31 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         #endregion
 
+        #region Create file and download .tab file for Onyx CMYK type
+        private string ExportOnyxFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
+            string fileName = detail.FileName + ".tab";
+            string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);
+
+            System.IO.StreamWriter sw;
+            sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
+
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+                sw.WriteLine("\"" + SpotName_Parameter + "\"" + " = [" + listPatch[i].Cmyk_C.ToString("N1") + " " + listPatch[i].Cmyk_M.ToString("N1") + " " + listPatch[i].Cmyk_Y.ToString("N1") + " " + listPatch[i].Cmyk_K.ToString("N1") + "]");
+            }
+            sw.Close();
+
+            return fileName;
+        }
+
+
+        #endregion
+
         #region Create file and download .xml file for Caldera2 CMYK type
         private string ExportColdera2File(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
@@ -1960,11 +1987,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         Directory.CreateDirectory($"{strPatchFolderPath}/tint/");
 
                     bw = new BinaryWriter(new FileStream($"{strPatchFolderPath}/SpotColor.db", FileMode.Create));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes(listPatch[i].ColorName), 513));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes(listPatch[i].ColorName.Replace("_"," ")), 513));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cie_L));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cie_a));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cie_b));
-                    bw.Write(bnFunction.GetBytesDetails(0,48));
+                    bw.Write(bnFunction.GetBytesDetails(0, 48));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cmyk_C));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cmyk_M));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cmyk_Y));
@@ -1980,12 +2007,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     bw.Close();
 
                     File.WriteAllText($"{strPatchFolderPath}version", "[Info]\nSystemVersion = 3.4.1");
-                    ZipFile.CreateFromDirectory($"{strPatchFolderPath}", $"{directoryFilePath}{detail.FileName}/{listPatch[i].ColorName}.spc");
+                    ZipFile.CreateFromDirectory($"{strPatchFolderPath}", $"{directoryFilePath}{detail.FileName}/{listPatch[i].ColorName.Replace("_", " ")}.spc");
 
                     if (Directory.Exists(strPatchFolderPath))
                         Directory.Delete(strPatchFolderPath, true);
                 }
-               
+
                 ZipFile.CreateFromDirectory($"{directoryFilePath}{detail.FileName}/", directoryFilePath + strMainZipFileName);
 
                 if (Directory.Exists($"{directoryFilePath}{detail.FileName}/"))
