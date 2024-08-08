@@ -177,4 +177,7 @@
   <data name="locBookNameResource1.Text" xml:space="preserve">
     <value>Book Name:_ja</value>
   </data>
+	<data name="OnyxResource1.Text" xml:space="preserve">
+    <value>Onyx_ja</value>
+  </data>
 </root>

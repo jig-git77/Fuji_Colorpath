@@ -91,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trXMF.Visible = false;
                 trPackZ.Visible = false;
             }
-            else//ColorGate option
+           else//ColorGate option
             {
                 trCalderaRow1.Visible = false;
                 trCalderaRow2.Visible = false;
