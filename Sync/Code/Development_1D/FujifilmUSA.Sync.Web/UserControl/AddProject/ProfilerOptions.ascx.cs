@@ -218,14 +218,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0) //Profiler options value set from session for existing Sync 1D projects
                     {
                         int indexLType = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 40 && item.ProfilerOptionValue == "TR015");
-                        if (indexLType > 0) //If LinearizationType is selected, then send LR015
+                        //if (indexLType > 0) //If LinearizationType is selected, then send LR015
+                        //{
+                        //    //chkLinearizationType.Checked = true;
+                        //    ddlLinearizationType.SelectedItem.Text = 
+                        //}
+                        //else //else send G7
+                        //{
+                        //    chkLinearizationType.Checked = false;
+                        //}
+                        var profilerOptionValue = SessionManager.Instance.CurrentProject.ProjectOption.FirstOrDefault(item => item.ProfilerOptionId == 40 && (item.ProfilerOptionValue == "TR015" || item.ProfilerOptionValue == "G7+ NCMY" || item.ProfilerOptionValue == "G7+ HDS"))?.ProfilerOptionValue;
+                        if (profilerOptionValue != null)
                         {
-                            chkLinearizationType.Checked = true;
+                           
+                            // Use a switch expression to set the selected value by matching the text of the dropdown item
+                            switch (profilerOptionValue)
+                            {
+                                case "TRO15":
+                                    ddlLinearizationType.SelectedValue = "0";  // Select the item with value="0"
+                                    break;
+                                case "G7+ NCMY":
+                                    ddlLinearizationType.SelectedValue = "1";  // Select the item with value="1"
+                                    break;
+                                case "G7+ HDS":
+                                    ddlLinearizationType.SelectedValue = "2";  // Select the item with value="2"
+                                    break;
+                                default:
+                                    // Handle the default case if needed (e.g., keep the previous selection)
+                                    break;
+                            }
                         }
-                        else //else send G7
-                        {
-                            chkLinearizationType.Checked = false;
-                        }
+
                         int indexMCorrection = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 7);
                         if (indexMCorrection > 0)
                         {
@@ -890,7 +913,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         ProfileTypeId = 0,
                         ProfilerOptionId = 40,
-                        ProfilerOptionValue = (chkLinearizationType.Checked) ? "TR015" : "G7",
+                        ProfilerOptionValue = ddlLinearizationType.SelectedItem.Text, //(chkLinearizationType.Checked) ? "TR015" : "G7",
                     });
 
                     //if (cmbDevice.SelectedValue.ToString() != "0")

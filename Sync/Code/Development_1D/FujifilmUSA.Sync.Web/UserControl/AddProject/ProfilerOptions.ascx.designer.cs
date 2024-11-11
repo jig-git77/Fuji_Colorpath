@@ -951,22 +951,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_LinearizationType;
 
         /// <summary>
-        /// chkLinearizationType control.
+        /// ddlLinearizationType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkLinearizationType;
-
-        /// <summary>
-        /// lblLinearizationType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLinearizationType;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLinearizationType;
 
         /// <summary>
         /// cmbMeaCorrection control.
