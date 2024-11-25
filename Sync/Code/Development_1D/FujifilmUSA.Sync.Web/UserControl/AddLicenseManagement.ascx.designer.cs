@@ -303,6 +303,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.CheckBox chkCustomDestinationProfile;
 
         /// <summary>
+        /// chkRevoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkRevoria;
+
+        /// <summary>
         /// locActivationDate control.
         /// </summary>
         /// <remarks>

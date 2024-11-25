@@ -185,6 +185,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             throw new NotImplementedException();
         }
+
+        public void CreateRevoria(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
+        {
+
+        }
         #endregion
 
         #region ITaskBase Members

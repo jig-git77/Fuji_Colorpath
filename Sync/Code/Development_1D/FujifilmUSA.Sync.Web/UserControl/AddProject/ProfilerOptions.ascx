@@ -902,9 +902,9 @@
                                                     
                                                    <%-- <asp:CheckBox ID="chkLinearizationType" runat="server" Checked="true" />&nbsp;<asp:Label ID="lblLinearizationType" runat="server" Text="Use LinearizationType TR015" meta:resourcekey="lblLinearizationTypeResource1"></asp:Label>--%>
                                                   <asp:DropDownList ID="ddlLinearizationType" runat="server">
-                                                                        <asp:ListItem Value="0" Text="TRO15" Selected ="True"></asp:ListItem>
-                                                                        <asp:ListItem Value="1" Text="G7+ NCMY" ></asp:ListItem>
-                                                                        <asp:ListItem Value="2" Text="G7+ HDS"></asp:ListItem>
+                                                                        <asp:ListItem Value="40" Text="TRO15" Selected ="True"></asp:ListItem>
+                                                                        <asp:ListItem Value="46" Text="G7+ NCMY" ></asp:ListItem>
+                                                                        <asp:ListItem Value="47" Text="G7+ HDS"></asp:ListItem>
                                                                     </asp:DropDownList>
                                                 
                                                 </div>

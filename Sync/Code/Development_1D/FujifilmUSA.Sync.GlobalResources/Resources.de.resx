@@ -1387,4 +1387,7 @@ erwünschten Format überein.</value>
   <data name="ELicenseType_Destination_Profile" xml:space="preserve">
     <value>Destination Profile_de</value>
   </data>
+ <data name="ELicenseType_Revoria" xml:space="preserve">
+    <value>Revoria_de</value>
+  </data>
 </root>

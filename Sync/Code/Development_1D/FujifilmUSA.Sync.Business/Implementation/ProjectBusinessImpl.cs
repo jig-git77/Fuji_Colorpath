@@ -220,7 +220,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     ? ECurrentProjectStatus.New
                                     : ECurrentProjectStatus.Run;
                         }
-                        if (project.LicenseType == ELicenseType.DLPPlus)
+                        if (project.LicenseType == ELicenseType.DLPPlus || project.LicenseType == ELicenseType.Revoria)
                         {
                             //----Select ProjectTargetLAB-----------//
                             if (dsProject.Tables[5].Rows.Count > 0)

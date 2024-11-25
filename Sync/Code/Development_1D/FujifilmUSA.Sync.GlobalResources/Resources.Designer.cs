@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -826,20 +826,20 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Custom Destination Profile.
-        /// </summary>
-        internal static string ELicenseType_Custom_Destination_Profile {
-            get {
-                return ResourceManager.GetString("ELicenseType_Custom_Destination_Profile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Custom Source Profile.
         /// </summary>
         internal static string ELicenseType_CustomSourceProfile {
             get {
                 return ResourceManager.GetString("ELicenseType_CustomSourceProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Destination Profile.
+        /// </summary>
+        internal static string ELicenseType_Destination_Profile {
+            get {
+                return ResourceManager.GetString("ELicenseType_Destination_Profile", resourceCulture);
             }
         }
         
@@ -930,6 +930,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string ELicenseType_ReProfileCustomSourceProfile {
             get {
                 return ResourceManager.GetString("ELicenseType_ReProfileCustomSourceProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revoria.
+        /// </summary>
+        internal static string ELicenseType_Revoria {
+            get {
+                return ResourceManager.GetString("ELicenseType_Revoria", resourceCulture);
             }
         }
         

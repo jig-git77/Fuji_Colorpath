@@ -1386,4 +1386,7 @@
   <data name="ELicenseType_Destination_Profile" xml:space="preserve">
     <value>Destination Profile_ja</value>
   </data>
+ <data name="ELicenseType_Revoria" xml:space="preserve">
+    <value>Revoria_ja</value>
+  </data>
 </root>

@@ -111,5 +111,14 @@ namespace CPProfilerService.Controllers
         {
             return ProfilerApiBusiness.CreateDestinationProfile(request);
         }
+
+        [HttpPost]
+        [Route("api/Profiler/CreateRevoria")]
+        [CustomAuthentication]
+        public CreateDestinationAndDeviceLinkProfileResponse CreateRevoria(CreateRevoriaRequest request)
+        {
+            return ProfilerApiBusiness.CreateRevoria(request);
+
+        }
     }
 }

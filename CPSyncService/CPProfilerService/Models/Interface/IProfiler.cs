@@ -16,5 +16,6 @@ namespace CPProfilerService.Models.Interface
         CreateSpotLibraryResponse CreateSpotLibraryValues(CreateSpotLibraryRequest request);
         OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(OptimizeSpotLibraryRequest request);
         CreateDestinationProfileResponse CreateDestinationProfile(CreateDestinationProfileRequest request);
+        CreateDestinationAndDeviceLinkProfileResponse CreateRevoria(CreateRevoriaRequest request);
     }
 }

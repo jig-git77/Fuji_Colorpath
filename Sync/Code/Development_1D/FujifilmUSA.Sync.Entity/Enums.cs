@@ -447,7 +447,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ELicenseType_Custom_BCO")]//Custom BCO
         CustomBCO = 14,
         [Description("ELicenseType_Destination_Profile")]//Destination Profile
-        DestinationProfile = 15
+        DestinationProfile = 15,
+        [Description("ELicenseType_Revoria")]//DLP Plus
+        Revoria = 16,
     }
 
     public enum UserType

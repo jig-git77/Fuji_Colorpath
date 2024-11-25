@@ -69,6 +69,7 @@
     <Folder Include="Table Script\10_2023" />
     <Folder Include="Table Script\01_2024" />
     <Folder Include="Table Script\03_2024" />
+    <Folder Include="Table Script\11_2024" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CP].[CreateReferenceChart].sql" />
@@ -172,5 +173,11 @@
     <None Include="Table Script\03_2024\[CP].[UpdateDevice].sql" />
     <None Include="Table Script\03_2024\[CPSpot].[GetSpotPatchChartByOptimizeRunID] .sql" />
     <None Include="Table Script\03_2024\Alter_[CP].[Device].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\11_2024\[CPSync4D].[GetProjectDetail].sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\11_2024\25-11-2024_Insert-Into-LicenseType.sql" />
   </ItemGroup>
 </Project>

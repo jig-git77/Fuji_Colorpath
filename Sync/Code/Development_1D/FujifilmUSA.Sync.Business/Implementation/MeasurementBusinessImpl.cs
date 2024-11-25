@@ -2660,7 +2660,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                         )).ToList());
                     }
 
-                    if (LicenseTypeID == 2 || LicenseTypeID == 5 || LicenseTypeID == 12 || LicenseTypeID == 11 || LicenseTypeID == 15)//dlp and Sync4DCertification project and DLPMultiColor AND DLPPLUS And Destination Profile
+                    if (LicenseTypeID == 2 || LicenseTypeID == 5 || LicenseTypeID == 12 || LicenseTypeID == 11 || LicenseTypeID == 15 || LicenseTypeID == 16)//dlp and Sync4DCertification project and DLPMultiColor AND DLPPLUS And Destination Profile And Revoria
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                          measurement.MeasurementPatches.

@@ -210,7 +210,11 @@ jQuery.browser.version = RegExp.$1;
                                            <tr>
                                                 <td>
                                                     <asp:CheckBox runat="server" ID="chkCustomDestinationProfile" CssClass="checkListBox" Visible="true"/> 
-                                                </td>       
+                                                </td>   
+                                                <td>
+                                                     <asp:CheckBox runat="server" ID="chkRevoria" CssClass="checkListBox" Visible="true"/> 
+                                                     </td>
+                                                <td >
                                             </tr>
                                         </table>
                                        

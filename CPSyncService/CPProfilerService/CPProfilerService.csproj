@@ -116,6 +116,7 @@
     <Compile Include="Models\Request\CreateDestinationProfileRequest.cs" />
     <Compile Include="Models\Request\CreateG7AlignmentCurveRequest.cs" />
     <Compile Include="Models\Request\CreateISOAlignmentCurveRequest.cs" />
+    <Compile Include="Models\Request\CreateRevoriaRequest.cs" />
     <Compile Include="Models\Request\CreateSourceProfileRequest.cs" />
     <Compile Include="Models\Request\CreateSourceToSourceDeviceLinkProfileRequest.cs" />
     <Compile Include="Models\Request\CreateSpotLibraryRequest.cs" />

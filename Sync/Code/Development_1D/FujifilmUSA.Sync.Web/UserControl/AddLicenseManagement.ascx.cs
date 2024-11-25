@@ -85,6 +85,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkSync1DMultiColor.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1DMultiColor);
             chkCustomerBCO.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomBCO);
             chkCustomDestinationProfile.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DestinationProfile);
+            chkRevoria.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Revoria);
         }
         private void Bindcompany()
         {
@@ -136,7 +137,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked 
                     && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked 
                     && !chkFullGamutCustomSource.Checked && !chkMultiColorCustomSource.Checked && !chkSpotLibrary.Checked 
-                    && !chkCustomerBCO.Checked && !chkCustomDestinationProfile.Checked)
+                    && !chkCustomerBCO.Checked && !chkCustomDestinationProfile.Checked && !chkRevoria.Checked)
                 {
                     fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                     return;
@@ -189,6 +190,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.CustomBCO);
             if (chkCustomDestinationProfile.Checked)
                 License.LicenseType.Add(ELicenseType.DestinationProfile);
+            if (chkRevoria.Checked)
+                License.LicenseType.Add(ELicenseType.Revoria);
+
 
 
             if (LId == 0) // Add New company
@@ -262,6 +266,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.DestinationProfile:
                             chkCustomDestinationProfile.Checked = true;
+                            break;
+                        case ELicenseType.Revoria:
+                            chkRevoria.Checked = true;
                             break;
                     }
                 });

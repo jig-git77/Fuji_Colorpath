@@ -358,5 +358,19 @@ namespace FujifilmUSA.Sync.Presenter
                     Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
         }
+        public void CreateRevoria()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.
+                CreateInitialDestinationAndDeviceLinkProfilesPlus(
+                    _viewAnalyze.ProjectId,
+                    _viewAnalyze.OptimizeRunId,
+                    _viewAnalyze.MeasurementIds,
+                    _viewAnalyze.DestinationProfileDescription,
+                    _viewAnalyze.DlpDescription,
+                    Convert.ToInt32(EOptimizeRunStatus.Closed),
+                    DateTime.Now);
+        }
     }
 }

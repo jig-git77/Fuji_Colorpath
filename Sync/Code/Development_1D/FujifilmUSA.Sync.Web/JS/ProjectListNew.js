@@ -177,6 +177,15 @@ $(document).ready(function () {
                         showSpotButtonEnableProject = false; //BUTTON DISABLE
                     }            
                 }
+                else if (data.LicenseType == ELicenseType.Revoria) {
+                    showSpotProject = true;//BUTON VISIBLE
+                    if (data.Status == EOptimizeRunStatus.Closed) {
+                        showSpotButtonEnableProject = true; //BUTTON ENABLE
+                    }
+                    else {
+                        showSpotButtonEnableProject = false; //BUTTON DISABLE
+                    }
+                }
                 else if (data.LicenseType != ELicenseType.DLP || data.LicenseType != ELicenseType.DLPPlus ) {
                     showSpotProject = false;//BUTON NOT VISIBLE
                     showSpotButtonEnableProject = false; //BUTTON DISABLE
@@ -246,6 +255,10 @@ $(document).ready(function () {
                             case ELicenseType.DestinationProfile:
                                 projectTypeImagePath = 'Images/DLP.png';
                                 projectTypeImageTitle = 'Destination';
+                                break;
+                            case ELicenseType.Revoria:
+                                projectTypeImagePath = 'Images/DLP.png';
+                                projectTypeImageTitle = 'Revoria';
                                 break;
                         }
                         break;
@@ -341,6 +354,9 @@ $(document).ready(function () {
                         projectTypeTooltip = "Custom BCO";
                     case ELicenseType.DestinationProfile:
                         projectTypeTooltip = 'Destination';
+                        break;
+                    case ELicenseType.Revoria:
+                        projectTypeTooltip = 'Revoria';
                         break;
                 }
 
