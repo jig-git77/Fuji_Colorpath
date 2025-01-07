@@ -3,7 +3,7 @@ name: Build .NET Framework 4.5 Application with Static DLL
 on:
   push:
     branches:
-      - feature/sonar
+      - feature/sonarbuild
 jobs:
   build:
     runs-on: windows-latest
