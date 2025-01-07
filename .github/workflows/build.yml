@@ -9,10 +9,25 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Set up JDK 17.0.10
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17.0.10
       # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
-
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Install SonarQube scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       # Step 2: Set up MSBuild
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v1
@@ -28,5 +43,7 @@ jobs:
       # Step 5: Build the solution
       - name: Build the project
         run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ secrets.SONAR_KEY }}" /d:sonar.host.url="${{ secrets.SONAR_HOST }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
           dotnet sln "Sync/Code/Development_1D/FujifilmUSA.Sync.sln" remove "Sync\Code\Development_1D\FujiFilmUSA.Sync.Database\FujiFilmUSA.Sync.Database.sqlproj"
           msbuild Sync/Code/Development_1D/FujifilmUSA.Sync.sln /p:Configuration=Release
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
