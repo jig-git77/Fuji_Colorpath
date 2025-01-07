@@ -30,7 +30,7 @@ jobs:
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.2.0
       - name: Restore NuGet packages
-        run: nuget restore Sync/Code/Development_1D/FujifilmUSA.Sync.sln -PackagesDirectory Reference_1D
+        run: nuget restore Sync/Code/Development_1D/FujifilmUSA.Sync.sln -PackagesDirectory packages
       - name: Build and analyze
         shell: powershell
         run: |
