@@ -28,5 +28,5 @@ jobs:
       # Step 5: Build the solution
       - name: Build the project
         run: |
-          dotnet sln "Sync/Code/Development_1D/FujifilmUSA.Sync.sln" remove "FujiFilmUSA.Sync.Database\FujiFilmUSA.Sync.Database.sqlproj"
+          dotnet sln "Sync/Code/Development_1D/FujifilmUSA.Sync.sln" remove "Sync\Code\Development_1D\FujiFilmUSA.Sync.Database\FujiFilmUSA.Sync.Database.sqlproj"
           msbuild Sync/Code/Development_1D/FujifilmUSA.Sync.sln /p:Configuration=Release
