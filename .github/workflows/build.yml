@@ -43,7 +43,7 @@ jobs:
       # Step 5: Build the solution
       - name: Build the project
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ secrets.SONAR_KEY }}" /d:sonar.host.url="${{ secrets.SONAR_HOST }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ secrets.SONAR_KEY }}" /d:sonar.host.url="${{ secrets.SONAR_HOST }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.projectBaseDir="Sync\Code\Development_1D"
           dotnet sln "Sync/Code/Development_1D/FujifilmUSA.Sync.sln" remove "Sync\Code\Development_1D\FujiFilmUSA.Sync.Database\FujiFilmUSA.Sync.Database.sqlproj"
           msbuild Sync/Code/Development_1D/FujifilmUSA.Sync.sln /p:Configuration=Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
