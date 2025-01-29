@@ -120,6 +120,15 @@
   <data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>Add Device Family Profiler Presets_fr</value>
   </data>
+	<data name="lblEditHeaderResource1.Text" xml:space="preserve">
+    <value>Edit Device Family Profiler Presets_fr</value>
+  </data>
+	<data name="locProfilerOptionPresetMangementResource1.Text" xml:space="preserve">
+    <value>Profiler Option Preset Management_fr</value>
+  </data>
+	<data name="locAddProfilerOptionPresetResource1.Text" xml:space="preserve">
+    <value>Add Device Family Profiler Presets_fr</value>
+  </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>Cancel_fr</value>
   </data>
@@ -149,5 +158,8 @@
   </data>
   <data name="selectProjectType" xml:space="preserve">
     <value>--Select Project Type--_fr</value>
+  </data>
+  <data name="locIsActivePresetResource1.Text" xml:space="preserve">
+    <value>Is Active_fr</value>
   </data>
 </root>

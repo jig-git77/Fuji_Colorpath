@@ -150,7 +150,7 @@
                                 <asp:Label ID="lblPresetName" runat="server" Text='<%# Eval("PresetName") %>' 
                                     meta:resourcekey="locPresetNameResource1"/>
                             </ItemTemplate>
-                            <HeaderStyle Width="150px"></HeaderStyle>
+                            <HeaderStyle Width="200px"></HeaderStyle>
                             <ItemStyle Wrap="True" CssClass="breakWord150" Width="150px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                         
@@ -166,10 +166,10 @@
                             ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" 
                             ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
                             CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource6">
-                            <ItemTemplate>
+                            <ItemTemplate >
                                 <asp:Label ID="lblProjectType" runat="server" Text='<%# Eval("ProjectType") %>' />
                             </ItemTemplate>
-                            <HeaderStyle Width="70px"></HeaderStyle>
+                            <HeaderStyle Width="150px"></HeaderStyle>
                             <ItemStyle Wrap="True" CssClass="breakWord150" Width="70px"></ItemStyle>
                         </telerik:GridTemplateColumn>
 
@@ -189,7 +189,7 @@
                                 <asp:Label ID="lblDeviceFamily" runat="server" Text='<%# Eval("DeviceFamily") %>' 
                                    meta:resourcekey="locDeviceFamilyResource1"/>
                             </ItemTemplate>
-                            <HeaderStyle Width="150px"></HeaderStyle>
+                            <HeaderStyle Width="200px"></HeaderStyle>
                             <ItemStyle Wrap="True" CssClass="breakWord150" Width="150px"></ItemStyle>
                         </telerik:GridTemplateColumn>
 

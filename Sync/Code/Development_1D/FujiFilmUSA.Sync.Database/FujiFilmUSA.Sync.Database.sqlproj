@@ -70,6 +70,8 @@
     <Folder Include="Table Script\01_2024" />
     <Folder Include="Table Script\03_2024" />
     <Folder Include="Table Script\11_2024" />
+    <Folder Include="Table Script\01_2025" />
+    <Folder Include="Stored Procedures\01_2025" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\[CP].[CreateReferenceChart].sql" />
@@ -179,5 +181,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Table Script\11_2024\25-11-2024_Insert-Into-LicenseType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Table Script\01_2025\29-01-2025_Insert-Into-DeviceFamilyProfilerOption.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\01_2025\CP.InsertDeviceFamilyProfilerOption.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\01_2025\CP.GetProfilerOptionPresetsList.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\01_2025\CP.UpdateDeviceFamilyProfilerOption.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\01_2025\CP.DeleteProfilerOptionPreset.sql" />
   </ItemGroup>
 </Project>

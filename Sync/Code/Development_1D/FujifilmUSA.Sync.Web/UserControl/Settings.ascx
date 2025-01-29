@@ -224,7 +224,7 @@
             </div>--%>
             <div id="dvProfilerSettings" runat="server" align="center" valign="bottom" style="width: 100%;">
                 <asp:LinkButton ID="lnkProfilerSettings" runat="server"
-                    PostBackUrl="~/AddDeviceProfilerSettings.aspx" Text="Device Family Profiler Settings">
+                    PostBackUrl="~/ProfilerOptionPresetsManagement.aspx" Text="Device Family Profiler Settings">
                     <div>
                         <asp:Image ID="Image_ProfilerSettings" runat="server" AlternateText="Device Family Profiler Settings"
                             ImageUrl="~/Images/Profiler-Settings.jpg" ToolTip="Device Family Profiler Settings"

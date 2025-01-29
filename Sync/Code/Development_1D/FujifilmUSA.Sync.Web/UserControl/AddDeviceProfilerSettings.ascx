@@ -149,6 +149,26 @@
                                 </div>
                             </td>
                         </tr>
+                         <tr>
+                            <td align="right">
+                                <span style="font-weight: bold;"><asp:Localize Text="Is Active" runat="server" 
+                                    ID="Localize2" meta:resourcekey="locIsActivePresetResource1"></asp:Localize></span>
+                            </td>
+                            <td>
+                                <b>&nbsp;:&nbsp;</b>
+                            </td>
+                            <td align="left">
+                                <div style="float: left;"> 
+                                                               
+                                    <asp:CheckBox ID="chkIsActive" runat="server" MaxLength="290" Width="400px" 
+                                        Height="50px" TextMode="MultiLine"  meta:resourcekey="chkIsActivePresetResource1"></asp:CheckBox>
+                                      <asp:HiddenField ID="HiddenField2" runat="server" Value="0" />
+                                     <asp:HiddenField ID="hdnDeviceFamilyProfilerOptionID" runat="server" Value="0" />
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </td>
+                        </tr>
                             <tr>
                             <td align="right">
                                 <span style="font-weight: bold;">
@@ -185,7 +205,7 @@
                                              </span>
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
-                                            PostBackUrl="~/Settings.aspx">
+                                            PostBackUrl="~/ProfilerOptionPresetsManagement.aspx">
                                                     <span> <asp:Localize runat="server" Text="Cancel" ID="locCancel" 
                                             meta:resourcekey="locCancelResource1" ></asp:Localize> 
                                             </span>
