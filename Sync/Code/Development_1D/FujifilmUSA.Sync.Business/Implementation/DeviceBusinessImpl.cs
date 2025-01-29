@@ -316,6 +316,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         deviceFamilyProfilerOption.ProfilerOptionsName,
                                         deviceFamilyProfilerOption.ProfilerOptionsDesc,
                                         deviceFamilyProfilerOption.ProjectTypeID,
+                                        deviceFamilyProfilerOption.IsActive,
                                         profilerOptionPresets.ToString()
 
                                     });
@@ -328,6 +329,45 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public int UpdateDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var profilerOptionPresets = new XElement("ProfilerOptionPresetData",
+                                                       deviceFamilyProfilerOption.ProfilerOptionPresets.
+                                                             Select(x =>
+                                                                    new XElement("ProfilerOptionPreset",
+                                                                                 new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                                 new XAttribute("ProfilerOptionID", x.ProfilerOption.ProfilerOptionId),
+                                                                                 new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
+                                                                        )).ToList());
+
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdateDeviceFamilyProfilerOption]",
+                            new object[]
+                                    {
+                                        deviceFamilyProfilerOption.DeviceFamilyId,
+                                        deviceFamilyProfilerOption.ProfilerOptionsName,
+                                        deviceFamilyProfilerOption.ProfilerOptionsDesc,
+                                        deviceFamilyProfilerOption.ProjectTypeID,
+                                        deviceFamilyProfilerOption.IsActive,
+                                        profilerOptionPresets.ToString(),
+                                        deviceFamilyProfilerOption.DeviceFamilyProfilerOptionId
+
+
+                                    });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateDeviceFamilyProfilerOption" };
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateDeviceFamilyProfilerOption"));
+            return returnValue;
+        }
         public int InsertCustomDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption, int UserID)
         {
             int returnValue = 0;
@@ -357,6 +397,50 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamilyProfilerOption"));
             return returnValue;
         }
+
+        public List<ProfilerOptionPresetsResponse> GetProfilerOptionPresetsList(int DeviceFamilyProfilerOptionID, int currentUserId)
+        {
+            var profilerOptionPresetsResponse = new List<ProfilerOptionPresetsResponse>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsprofilerOptionPresets = DataAccessFactory.Instance.GetDsResult("[CP].[GetProfilerOptionPresetsList]", new object[] { DeviceFamilyProfilerOptionID, currentUserId });
+                    if (dsprofilerOptionPresets != null && dsprofilerOptionPresets.Tables.Count > 0 && dsprofilerOptionPresets.Tables[0].Rows.Count > 0)
+                    {
+                        profilerOptionPresetsResponse = dsprofilerOptionPresets.Tables[0].AsEnumerable().
+                            Select(x => new ProfilerOptionPresetsResponse()
+                            {
+                                DeviceFamilyProfilerOptionID = DataReader.ReadShort(x, "DeviceFamilyProfilerOptionID"),
+                                DeviceFamily = DataReader.ReadString(x, "DeviceFamily"),
+                                IsActive = DataReader.ReadBoolean(x, "IsActive"),
+                                PresetName = DataReader.ReadString(x, "PresetName"),
+                                ProjectType = DataReader.ReadString(x, "ProjectType"),
+                                ProfileTypeId = DataReader.ReadShort(x, "ProjectTypeID"),
+                                DeviceFamilyID = DataReader.ReadShort(x, "DeviceFamilyID"),
+                                ProfilerOptionsDesc = DataReader.ReadString(x, "ProfilerOptionsDesc"),
+                                IsDeleted = DataReader.ReadShort(x, "IsDeleted")
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProfilerOptionPresetsList"));
+            return profilerOptionPresetsResponse;
+        }
+
+        public bool DeleteProfilerOption(int deviceFamilyProfilerOptionID)
+        {
+            Common.ImplementBusinessLogic(
+                () => DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure(
+                              "[CP].[DeleteProfilerOptionPreset]",
+                              new object[]
+                                  {
+                                      deviceFamilyProfilerOptionID
+                                  }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSourceProfile"));
+            return true;
+        }
+
         #endregion
 
         #region ITaskBase Members

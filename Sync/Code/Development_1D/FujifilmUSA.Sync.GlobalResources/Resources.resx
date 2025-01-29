@@ -1410,4 +1410,7 @@
   <data name="ELicenseType_Destination_Profile" xml:space="preserve">
     <value>Destination Profile</value>
   </data>
+  <data name="ProfilerOptionPresetsManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected Profiler Option Presets?</value>
+  </data>
 </root>

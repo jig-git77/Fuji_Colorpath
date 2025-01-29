@@ -89,6 +89,7 @@
     <Compile Include="CPSync1D\PrintStandardType.cs" />
     <Compile Include="MToolVersion.cs" />
     <Compile Include="MToolVersionUpdateList.cs" />
+    <Compile Include="ProfilerOptionPresetsResponse.cs" />
     <Compile Include="ReferenceChartApp.cs" />
     <Compile Include="ReportGrading.cs" />
     <Compile Include="Spectral.cs" />

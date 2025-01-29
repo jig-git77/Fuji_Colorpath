@@ -46,6 +46,19 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public List<ProfilerOptionPresetsResponse> GetProfilerOptionPresetsList(int DeviceFamilyProfilerOptionID, int currentUserId)
+        {
+            return new List<ProfilerOptionPresetsResponse>();
+        }
+        public int UpdateDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption)
+        {
+            return 0;
+        }
+        public bool DeleteProfilerOption(int DeviceFamilyProfilerOptionID)
+        {
+            return true;
+        }
+
         #endregion
 
         #region ITaskBase Members

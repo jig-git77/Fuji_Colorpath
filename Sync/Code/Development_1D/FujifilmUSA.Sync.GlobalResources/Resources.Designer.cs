@@ -3652,6 +3652,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected Profiler Option Presets?.
+        /// </summary>
+        internal static string ProfilerOptionPresetsManagement_DeleteSourceProfile_Confirmation {
+            get {
+                return ResourceManager.GetString("ProfilerOptionPresetsManagement_DeleteSourceProfile_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow Only Numbers.
         /// </summary>
         internal static string ProfilerOptions_JavascriptAllownumbers {
