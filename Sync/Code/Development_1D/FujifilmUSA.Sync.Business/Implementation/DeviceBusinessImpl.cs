@@ -368,6 +368,35 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateDeviceFamilyProfilerOption"));
             return returnValue;
         }
+        public int UpdateDeviceFamilyWithoutProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UPDATEDeviceFamilyProfilerOption_WithoutProfilerOption]",
+                            new object[]
+                                    {
+                                        deviceFamilyProfilerOption.DeviceFamilyId,
+                                        deviceFamilyProfilerOption.ProfilerOptionsName,
+                                        deviceFamilyProfilerOption.ProfilerOptionsDesc,
+                                        deviceFamilyProfilerOption.ProjectTypeID,
+                                        deviceFamilyProfilerOption.IsActive,
+                                         deviceFamilyProfilerOption.DeviceFamilyProfilerOptionId
+
+
+                                    });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateDeviceFamilyProfilerOption" };
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UPDATEDeviceFamilyProfilerOption_WithoutProfilerOption"));
+            return returnValue;
+        }
         public int InsertCustomDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption, int UserID)
         {
             int returnValue = 0;

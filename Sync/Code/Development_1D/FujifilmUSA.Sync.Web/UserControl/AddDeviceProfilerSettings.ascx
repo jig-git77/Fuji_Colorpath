@@ -160,7 +160,7 @@
                             <td align="left">
                                 <div style="float: left;"> 
                                                                
-                                    <asp:CheckBox ID="chkIsActive" runat="server" MaxLength="290" Width="400px" 
+                                    <asp:CheckBox ID="chkIsActive" runat="server" MaxLength="290" Width="400px" style ="margin-top:24px;"
                                         Height="50px" TextMode="MultiLine"  meta:resourcekey="chkIsActivePresetResource1"></asp:CheckBox>
                                       <asp:HiddenField ID="HiddenField2" runat="server" Value="0" />
                                      <asp:HiddenField ID="hdnDeviceFamilyProfilerOptionID" runat="server" Value="0" />

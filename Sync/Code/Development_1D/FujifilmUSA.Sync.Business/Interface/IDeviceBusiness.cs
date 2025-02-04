@@ -16,6 +16,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         int InsertCustomDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption, int UserID);
         List<ProfilerOptionPresetsResponse> GetProfilerOptionPresetsList(int DeviceFamilyProfilerOptionID, int currentUserId);
         int UpdateDeviceFamilyProfilerOption(DeviceFamilyProfilerOption DeviceFamilyProfilerOption);
+        int UpdateDeviceFamilyWithoutProfilerOption(DeviceFamilyProfilerOption DeviceFamilyProfilerOption);
         bool DeleteProfilerOption(int DeviceFamilyProfilerOptionID);
     }
 }

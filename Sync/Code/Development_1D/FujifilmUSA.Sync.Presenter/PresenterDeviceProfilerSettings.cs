@@ -28,6 +28,12 @@ namespace FujifilmUSA.Sync.Presenter
             _viewDeviceProfilerSettings.DeviceFamilyProfilerOptionID = profilerSettingsBusiness.UpdateDeviceFamilyProfilerOption(_viewDeviceProfilerSettings.DeviceFamilyProfilerOption);
         }
 
+        public void UpdateDeviceFamilyWithoutProfilerOption()
+        {
+            var profilerSettingsBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            profilerSettingsBusiness.ErrorOccured += _viewDeviceProfilerSettings.ErrorOccured;
+            _viewDeviceProfilerSettings.DeviceFamilyProfilerOptionID = profilerSettingsBusiness.UpdateDeviceFamilyWithoutProfilerOption(_viewDeviceProfilerSettings.DeviceFamilyProfilerOption);
+        }
         public void GetDeviceFamilyList()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();

@@ -151,6 +151,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     UpdateProfilerOptionSettings(lstProfilerOptionPreset);
                 }
             }
+            else if (hdnDeviceFamilyProfilerOptionID.Value != "0" && fnUploadProfileSettings.UploadedFiles.Count == 0)
+            {
+                    UpdateProfilerOptionSettingsWithoutProfilerOption();
+            }
             else
             {
                 ///-----------Missing message for Upload .csv file
@@ -244,6 +248,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (IsErrorOccured) return;
                 Response.Redirect("ProfilerOptionPresetsManagement.aspx");
             }
+        }
+        private void UpdateProfilerOptionSettingsWithoutProfilerOption()
+        {
+            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
+            DeviceFamilyProfilerOption.DeviceFamilyId = Convert.ToInt16(ddlDeviceFamily.SelectedValue.ToString());
+            DeviceFamilyProfilerOption.ProfilerOptionsName = txtPresetName.Text.Trim();
+            DeviceFamilyProfilerOption.ProfilerOptionsDesc = txtPresetDesc.Text.Trim();
+            DeviceFamilyProfilerOption.ProjectTypeID = Convert.ToInt16(ddlProjectType.SelectedValue.ToString());
+            DeviceFamilyProfilerOption.IsActive = chkIsActive.Checked;
+            DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = Convert.ToInt32(hdnDeviceFamilyProfilerOptionID.Value);
+            _presenterDeviceProfilerSettings.UpdateDeviceFamilyWithoutProfilerOption();
+            if (IsErrorOccured) return;
+           Response.Redirect("ProfilerOptionPresetsManagement.aspx");
+            
         }
 
         private void BindProjectType()
