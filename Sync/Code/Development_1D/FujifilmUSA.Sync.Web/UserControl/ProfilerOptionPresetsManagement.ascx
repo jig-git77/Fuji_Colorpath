@@ -150,7 +150,7 @@
                                 <asp:Label ID="lblPresetName" runat="server" Text='<%# Eval("PresetName") %>' 
                                     meta:resourcekey="locPresetNameResource1"/>
                             </ItemTemplate>
-                            <HeaderStyle Width="200px"></HeaderStyle>
+                            <HeaderStyle Width="250px"></HeaderStyle>
                             <ItemStyle Wrap="True" CssClass="breakWord150" Width="150px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                         
@@ -169,7 +169,7 @@
                             <ItemTemplate >
                                 <asp:Label ID="lblProjectType" runat="server" Text='<%# Eval("ProjectType") %>' />
                             </ItemTemplate>
-                            <HeaderStyle Width="150px"></HeaderStyle>
+                            <HeaderStyle Width="200px"></HeaderStyle>
                             <ItemStyle Wrap="True" CssClass="breakWord150" Width="70px"></ItemStyle>
                         </telerik:GridTemplateColumn>
 
@@ -211,7 +211,7 @@
                                         meta:resourcekey="imgIsActiveResource1" />
                                 </ItemTemplate>
 
-<HeaderStyle Width="150px"></HeaderStyle>
+<HeaderStyle Width="200px"></HeaderStyle>
 
 <ItemStyle Wrap="True" CssClass="breakWord150" Width="150px"></ItemStyle>
                         </telerik:GridTemplateColumn>

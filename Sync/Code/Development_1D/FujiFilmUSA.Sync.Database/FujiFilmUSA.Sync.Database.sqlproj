@@ -197,4 +197,10 @@
   <ItemGroup>
     <None Include="Stored Procedures\01_2025\CP.DeleteProfilerOptionPreset.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\01_2025\CPSync4D.GetDeviceFamilyProfilerOption.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\01_2025\cp.UPDATEDeviceFamilyProfilerOption_WithoutProfilerOption.sql" />
+  </ItemGroup>
 </Project>
