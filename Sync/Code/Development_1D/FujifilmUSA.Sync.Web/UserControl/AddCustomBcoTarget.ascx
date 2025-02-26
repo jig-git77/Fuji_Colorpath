@@ -37,7 +37,7 @@
         }
 
         function validateGrid() {
-            debugger;
+           
             var totalRows = document.getElementById('<%= txtNumOfRows.ClientID %>').value;
             var totalColumns = document.getElementById('<%= txtNumOfCols.ClientID %>').value;
             var gridView = document.getElementById('<%= rgChartData.ClientID %>');
