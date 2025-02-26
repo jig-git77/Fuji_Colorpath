@@ -162,7 +162,7 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn
-                                UniqueName="SpotTargetName" HeaderText="Color Name" DataField="SpotTargetName"
+                                UniqueName="SpotTargetName" HeaderText="Spot Target Name" DataField="SpotTargetName"
                                 SortExpression="SpotTargetName" FilterControlWidth="130px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
                                 FilterControlAltText="Filter Color Name column"
@@ -174,7 +174,7 @@
                                 <ItemStyle Width="130px" Wrap="True" />
                             </telerik:GridTemplateColumn>
                                <telerik:GridTemplateColumn
-                                UniqueName="CompanyName" HeaderText="Company Name" DataField="Company.CompanyName"
+                                UniqueName="CompanyName" HeaderText="Company Name" DataField="Company.CompanyName" Visible="false"
                                 SortExpression="Company.CompanyName" FilterControlWidth="130px"
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains"
                                 FilterControlAltText="Filter CompanyName column"
