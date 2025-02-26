@@ -18,6 +18,71 @@
                 return false;
             }
         }
+
+        function validateColorName(source, arguments) {
+            // This regex matches only alphanumeric characters and underscores
+            var regex = /^[A-Za-z0-9_]+$/;
+            arguments.IsValid = regex.test(arguments.Value);
+        }
+        function validateNumeric(source, arguments) {
+            // Regular expression to match only numbers (0-9)
+            var regex = /^[0-9]+$/;
+            // If the field is empty, you might want to allow that or not depending on requirements.
+            // For now, we'll treat empty as invalid.
+            if (arguments.Value === "") {
+                arguments.IsValid = false;
+            } else {
+                arguments.IsValid = regex.test(arguments.Value);
+            }
+        }
+
+        function validateGrid() {
+            debugger;
+            var totalRows = document.getElementById('<%= txtNumOfRows.ClientID %>').value;
+            var totalColumns = document.getElementById('<%= txtNumOfCols.ClientID %>').value;
+            var gridView = document.getElementById('<%= rgChartData.ClientID %>');
+          var errorMessage = "Total patches exceed chart size";
+
+    // Get the error labels (or create dynamically)
+            var rowError = document.getElementById("lblNumOfRows");
+            var colError = document.getElementById("lblNumOfCols");
+
+    if (!rowError) {
+        rowError = document.createElement("span");
+        rowError.id = "rowError";
+        rowError.style.color = "red";
+        rowError.style.marginLeft = "10px";
+        document.getElementById('<%= txtNumOfRows.ClientID %>').parentNode.appendChild(rowError);
+    }
+
+    if (!colError) {
+        colError = document.createElement("span");
+        colError.id = "colError";
+        colError.style.color = "red";
+        colError.style.marginLeft = "10px";
+                document.getElementById('<%= txtNumOfCols.ClientID %>').parentNode.appendChild(colError);
+            }
+
+            // Clear previous error messages
+            rowError.innerText = "";
+            colError.innerText = "";
+
+            if (!totalRows || !totalColumns) {
+                alert("Please enter both total rows and total columns.");
+                return false;
+            }
+
+            var expectedCount = parseInt(totalRows) * parseInt(totalColumns);
+            var actualCount = gridView.getElementsByTagName("tr").length - 1; // Exclude header row
+
+            if (expectedCount !== actualCount) {
+                rowError.innerText = errorMessage;
+                colError.innerText = errorMessage;
+                return false;
+            }
+
+            return true; // Allow form submission
+         }
     </script>
 </telerik:RadCodeBlock>
 <div class="admin_top">
@@ -43,6 +108,29 @@
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server"
                                 Visible="False" />
                             <table width="98%">
+                                <tr runat="server" id="trCompanyName">
+                                    <td align="right">
+                                        <span style="font-weight: bold;">
+                                            <asp:Localize Text="Company Name"
+                                                ID="locCompanyName" runat="server" meta:resourcekey="locCompanyNameResource1"></asp:Localize><span style="color: Red;">*</span>
+                                        </span>
+                                    </td>
+                                    <td style="width: 8px;">
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td runat="server" id="tdCompanyName">
+                                        <div style="float: left;">
+                                            <asp:DropDownList ID="cmbCompany" runat="server" Width="400px" CssClass="select"
+                                                AutoPostBack="True"
+                                                meta:resourcekey="cmbCompanyResource1">
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div style="float: left">
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td align="right" style="width: 350px;">
                                         <span style="font-weight: bold;">
@@ -62,37 +150,14 @@
                                             <asp:RequiredFieldValidator ID="rfvSpotTarget" runat="server" Display="Dynamic" ControlToValidate="txtSpotTargetName"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvSpotTargetNameContainer" runat="server"
-                                                    ValidationMsg="Please provide Target Library Name." Size="200" 
-                                                    />
+                                                    ValidationMsg="Please provide Target Library Name." Size="200" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
                                         </div>
                                     </td>
                                 </tr>
-                                <tr runat="server" id="trCompanyName">
-                                    <td align="right">
-                                        <span style="font-weight: bold;">
-                                            <asp:Localize Text="Company Name"
-                                                ID="locCompanyName" runat="server" meta:resourcekey="locCompanyNameResource1"></asp:Localize><span style="color: Red;">*</span>
-                                        </span>
-                                    </td>
-                                    <td style="width: 8px;">
-                                        <b>&nbsp;:&nbsp;</b>
-                                    </td>
-                                    <td>
-                                        <div style="float: left;">
-                                            <asp:DropDownList ID="cmbCompany" runat="server" Width="400px" CssClass="select"
-                                                AutoPostBack="True"
-                                                meta:resourcekey="cmbCompanyResource1">
-                                            </asp:DropDownList>
-                                        </div>
-                                        <div style="float: left">
-                                        </div>
-                                        <div class="clear">
-                                        </div>
-                                    </td>
-                                </tr>
+
                                 <tr>
                                     <td align="right" style="vertical-align: top;">
                                         <span style="font-weight: bold;">
@@ -129,6 +194,10 @@
                                                 MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US"
                                                 LabelWidth="" meta:resourcekey="txtNumOfRowsResource1">
                                             </telerik:RadNumericTextBox>
+                                             
+                                            <asp:label runat="server"
+                                                 ID="lblNumOfRows" Visible ="false"></asp:label>
+                                           
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvNumOfRows" runat="server" Display="Dynamic" ControlToValidate="txtNumOfRows"
@@ -147,6 +216,7 @@
                                             <asp:Localize runat="server"
                                                 Text="Total Columns" ID="locTotalColumns"
                                                 meta:resourcekey="locTotalColumnsResource1"></asp:Localize><span style="color: Red;">*</span>
+                                            
                                         </span>
                                     </td>
                                     <td>
@@ -157,6 +227,8 @@
                                             <telerik:RadNumericTextBox ID="txtNumOfCols" runat="server" Width="100px" Height="16px"
                                                 MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
+                                             <asp:label runat="server"
+                                                 ID="lblNumOfCols" Visible ="false"></asp:label>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvNumOfCols" runat="server" Display="Dynamic" ControlToValidate="txtNumOfCols"
@@ -225,7 +297,11 @@
                                         </div>
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <td align="left" colspan="3">
+                                        <asp:Localize runat="server" Text="Add brand color either by entering the information in the form below or by uploading a csv file"
+                                            ID="Localize2" meta:resourcekey="locUploadingOptionsResource1"></asp:Localize></b></label> </td>
+                                </tr>
                                 <tr id="TR_Density" runat="server">
                                     <td align="left" colspan="3">
                                         <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px Solid Gray;">
@@ -299,17 +375,150 @@
                                         </table>
                                     </td>
                                 </tr>
-                                 <tr>
-                                    <td colspan="3" style="text-align:right;">
-                                         <asp:LinkButton ID="lbtnCSVSpotTargetLAB" runat="server" CssClass="gray_bt"
-                                                    OnClick="lbtnCSVSpotTargetLAB_Click">
-                                                    <span>
-                                                        <asp:Localize runat="server" Text="Download CSV" ID="locCSVSpotTargetLAB" 
-                                                            meta:resourcekey="locCSVSpotTargetLABResource1"></asp:Localize>
-                                                    </span>
-                                                </asp:LinkButton>
-                                        </td>
-                                     </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="text-align: right;">
+                                        <asp:LinkButton ID="lbtnCSVSpotTargetLAB" runat="server" CssClass="gray_bt"
+                                            OnClick="lbtnCSVSpotTargetLAB_Click">
+                                            <span>
+                                                <asp:Localize runat="server" Text="Download CSV" ID="locCSVSpotTargetLAB"
+                                                    meta:resourcekey="locCSVSpotTargetLABResource1"></asp:Localize>
+                                            </span>
+                                        </asp:LinkButton>
+                                    </td>
+                                </tr>
+                                <%-- Add Option 2 --%>
+                                <tr id="TR3" runat="server">
+                                    <td align="left" colspan="3">
+                                        <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px Solid Gray;">
+                                            <tr>
+                                                <td valign="top" style="width: 100%;">
+                                                    <div id="Div3" style="padding-left: 5px;">
+                                                        <label>
+                                                            <b>
+                                                                <asp:Localize runat="server" Text="Option 2: Add a color manulally"
+                                                                    ID="Localize12" meta:resourcekey="locOptionTwoUploadSetOfColorResource1"></asp:Localize></b></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top" style="width: 100%; border-top: 1px Solid Gray; margin: 0;">
+                                                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height: 23px; margin-top: 5px;">
+                                                        <tr id="Tr5" runat="server">
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+                                                                <span style="font-weight: bold;">
+                                                                    <asp:Localize runat="server"
+                                                                        Text="Color Name" ID="Localize18" meta:resourcekey="locColorNameResource1"></asp:Localize><span style="color: Red;">*</span>
+                                                                </span>
+                                                            </td>
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+                                                                <span style="font-weight: bold;">
+                                                                    <asp:Localize runat="server" meta:resourcekey="locTargetLResource1"
+                                                                        Text="Target L" ID="Localize19"></asp:Localize><span style="color: Red;">*</span>
+                                                                </span>
+                                                            </td>
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+                                                                <span style="font-weight: bold;">
+                                                                    <asp:Localize runat="server" meta:resourcekey="locTargetaResource1"
+                                                                        Text="Target a" ID="Localize20"></asp:Localize><span style="color: Red;">*</span>
+                                                                </span>
+                                                            </td>
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+                                                                <span style="font-weight: bold;">
+                                                                    <asp:Localize runat="server"
+                                                                        Text="Target b" ID="Localize21" meta:resourcekey="locTargetbResource1"></asp:Localize><span style="color: Red;">*</span>
+                                                                </span>
+                                                            </td>
+                                                            <td style="vertical-align: top;"></td>
+                                                        </tr>
+                                                        <tr id="Tr4" runat="server">
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+
+                                                                <asp:TextBox runat="server"
+                                                                    ID="txtColorName"></asp:TextBox>
+                                                                <asp:CustomValidator ID="cvColorName" runat="server"
+                                                                    ControlToValidate="txtColorName"
+                                                                    ErrorMessage="Spaces and special characters are not allowed in color names!"
+                                                                    ClientValidationFunction="validateColorName"
+                                                                    Display="Dynamic"
+                                                                    ForeColor="Red">
+                                                                </asp:CustomValidator>
+
+                                                            </td>
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+
+                                                                <asp:TextBox runat="server"
+                                                                    ID="txtTargetL"></asp:TextBox>
+                                                                <asp:CustomValidator ID="cvNumber" runat="server"
+                                                                    ControlToValidate="txtTargetL"
+                                                                    ErrorMessage="Only numeric values are allowed!"
+                                                                    ClientValidationFunction="validateNumeric"
+                                                                    Display="Dynamic"
+                                                                    ForeColor="Red">
+                                                                 </asp:CustomValidator>
+
+                                                            </td>
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+
+                                                                <asp:TextBox runat="server"
+                                                                    ID="txtTargetA"></asp:TextBox>
+
+                                                                <asp:CustomValidator ID="CustomValidator1" runat="server"
+                                                                    ControlToValidate="txtTargetA"
+                                                                    ErrorMessage="Only numeric values are allowed!"
+                                                                    ClientValidationFunction="validateNumeric"
+                                                                    Display="Dynamic"
+                                                                    ForeColor="Red">
+                                                                </asp:CustomValidator>
+
+                                                            </td>
+                                                            <td align="left" style="vertical-align: top; padding-left: 5px;">
+
+                                                                <asp:TextBox runat="server"
+                                                                    ID="txtTargetB"></asp:TextBox>
+                                                                <asp:CustomValidator ID="CustomValidator2" runat="server"
+                                                                    ControlToValidate="txtTargetB"
+                                                                    ErrorMessage="Only numeric values are allowed!"
+                                                                    ClientValidationFunction="validateNumeric"
+                                                                    Display="Dynamic"
+                                                                    ForeColor="Red">
+                                                                </asp:CustomValidator>
+
+                                                            </td>
+                                                            <td style="vertical-align: top;">
+                                                                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                                                    <tr>
+
+                                                                        <td></td>
+                                                                        <td align="right" style="width: 200px;">
+                                                                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="gray_bt"
+                                                                                OnClick="lbtnUploadChartData1_Click"
+                                                                                meta:resourcekey="lbtnUploadChartDataResource1">
+                                                                                <span>
+                                                                                    <asp:Localize runat="server" Text="Submit"
+                                                                                        ID="Localize14"
+                                                                                        meta:resourcekey="locSubmitButtonResource1"></asp:Localize>
+                                                                                </span>
+                                                                            </asp:LinkButton>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <%-- End Option 2 --%>
+
                                 <tr>
                                     <td colspan="3">
                                         <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
@@ -428,7 +637,7 @@
                                                             meta:resourcekey="locCancelResource1"></asp:Localize>
                                                     </span>
                                                 </asp:LinkButton>
-                                                                                               <%--<a id="anchorDownloadCsv" runat="server">Jay</a>--%>
+                                                <%--<a id="anchorDownloadCsv" runat="server">Jay</a>--%>
                                                 <input id="Hidden_OriginalChart" type="hidden" value="0" runat="server" />
                                                 <input id="Hidden_ChartPreview" type="hidden" value="0" runat="server" />
                                             </div>

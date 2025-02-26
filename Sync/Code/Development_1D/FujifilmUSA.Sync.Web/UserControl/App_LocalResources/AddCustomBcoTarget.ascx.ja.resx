@@ -186,6 +186,24 @@
   <data name="locOptionUploadSetOfColorResource1.Text" xml:space="preserve">
     <value>Option 1: Upload a set of colors_ja</value>
   </data>
+	<data name="locOptionTwoUploadSetOfColorResource1.Text" xml:space="preserve">
+    <value>Option 2: Add a color manulally_ja</value>
+  </data>
+	<data name="locColorNameResource1.Text" xml:space="preserve">
+    <value>Color Name_ja</value>
+  </data>
+	<data name="locTargetLResource1.Text" xml:space="preserve">
+    <value>Target L_ja</value>
+  </data>
+	<data name="locTargetaResource1.Text" xml:space="preserve">
+    <value>Target a_ja</value>
+  </data>
+	<data name="locTargetbResource1.Text" xml:space="preserve">
+    <value>Target b_ja</value>
+  </data>
+	<data name="locUploadingOptionsResource1.Text" xml:space="preserve">
+    <value>Add brand color either by entering the information in the form below or by uploading a csv file_ja</value>
+  </data>
   <data name="locPagesResource1.Text" xml:space="preserve">
     <value>Pages_ja</value>
   </data>

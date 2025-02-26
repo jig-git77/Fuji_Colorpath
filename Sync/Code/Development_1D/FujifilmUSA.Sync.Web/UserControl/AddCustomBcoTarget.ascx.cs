@@ -219,6 +219,252 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void lbtnUploadChartData1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int rowId = 1;
+                //List<SpotTargetLAB>  spotTargetLABList = new List<SpotTargetLAB>();
+                List<SpotTargetLAB> refChartImportData = new List<SpotTargetLAB>();
+                if(ViewState[vsChartData] != null)
+                { 
+               
+                    refChartImportData = ((List<SpotTargetLAB>)ViewState[vsChartData]).
+                                                                        Select(x => new SpotTargetLAB()
+                                                                        {
+                                                                            SpotID = x.SpotID,
+                                                                            SpotName = x.SpotName,
+                                                                            Target_L = x.Target_L,
+                                                                            Target_a = x.Target_a,
+                                                                            Target_b = x.Target_b
+                                                                        }).ToList();
+                    if (refChartImportData.Any())
+                    {
+                        rowId = refChartImportData.Count + 1;
+                    }
+                }
+                SpotTargetLAB chartDataRow = new SpotTargetLAB();
+                Regex regexItem = new Regex("^[a-zA-Z0-9_]*$");
+
+                #region Converts row to ReferenceChart Object
+                decimal lab;
+                //SpotID
+                chartDataRow.SpotID = (short)(rowId);
+                chartDataRow.SpotName = txtColorName.Text;
+                //Target L
+                if (decimal.TryParse(txtTargetL.Text, out lab))
+                {
+                    lab = Math.Round(lab, 2);
+
+                    if (lab > 100 || lab < 0)
+                    { throw new Exception(string.Format(GetResourceString("valueofTargetLMustBeBetween0to100LineNo"), 1)); }
+                    else
+                    { chartDataRow.Target_L = lab; }
+                }
+                else
+                {
+                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), 1));
+                }
+                //Target a
+                if (decimal.TryParse(txtTargetA.Text, out lab))
+                {
+                    lab = Math.Round(lab, 2);
+
+                    if (lab > 128 || lab < -128)
+                    { throw new Exception(string.Format(GetResourceString("valueofTargetAMustBeBetween128to128Line"), 1)); }
+                    else
+                    { chartDataRow.Target_a = lab; }
+                }
+                else
+                {
+                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), 1));
+                }
+
+                //Target b
+                if (decimal.TryParse(txtTargetB.Text, out lab))
+                {
+                    lab = Math.Round(lab, 2);
+
+                    if (lab > 128 || lab < -128)
+                    { throw new Exception(string.Format(GetResourceString("valueofTargetBMustBeBetween128to128Line"), 1)); }
+                    else
+                    { chartDataRow.Target_b = lab; }
+                }
+                else
+                {
+                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), 1));
+                }
+                refChartImportData.Add(chartDataRow);
+                if (refChartImportData.Count > 0)
+                {
+                    if (refChartImportData.Count != refChartImportData.Select(O => O.SpotName).GroupBy(X => X).Count())
+                    {
+                        throw new Exception(GetResourceString("colorIDmustbeunique"));
+                    }
+
+                    ViewState[vsChartData] = refChartImportData;
+                    rgChartData.Rebind();
+                }
+                else
+                {
+                    throw new Exception(GetResourceString("pleaseselectvalidColorLibraryCsvFile"));
+                }
+                #endregion
+
+
+
+
+                //if (fucUploadChartData.UploadedFiles.Count > 0)
+                //{
+                //    StreamReader sr = new StreamReader(fucUploadChartData.UploadedFiles[0].InputStream);
+                //    List<SpotTargetLAB> refChartImportData = new List<SpotTargetLAB>();
+                //    string strAllLine = sr.ReadToEnd();
+                //    string[] lstLines = { };
+
+                //    if (!string.IsNullOrEmpty(strAllLine))
+                //    {
+                //        lstLines = strAllLine.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                //    }
+
+                //    for (int rows = 0; rows < (uint)lstLines.Count(); rows++)
+                //    {
+                //        if (rows == 0)
+                //        {
+                //            #region Check Column Names
+                //            string[] columns = lstLines[rows].Split(',');
+                //            if (columns.Length != 4)
+                //            {
+                //                throw new Exception(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatch"));
+                //            }
+                //            columns.ToList().ForEach(x => x = x.Trim());
+                //            if (!columns[0].Equals("Color_Name", StringComparison.CurrentCultureIgnoreCase) ||
+                //                !columns[1].Equals("Target_L*", StringComparison.CurrentCultureIgnoreCase) ||
+                //                !columns[2].Equals("Target_a*", StringComparison.CurrentCultureIgnoreCase) ||
+                //                !columns[3].Equals("Target_b*", StringComparison.CurrentCultureIgnoreCase))
+                //            {
+                //                throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                //            }
+                //            #endregion
+                //        }
+                //        else
+                //        {
+                //            string[] dataRow = lstLines[rows].Split(',');
+                //            dataRow.ToList().ForEach(x => x = x.Trim());
+                //            SpotTargetLAB chartDataRow = new SpotTargetLAB();
+                //            Regex regexItem = new Regex("^[a-zA-Z0-9_]*$");
+
+                //            #region Converts row to ReferenceChart Object
+                //            decimal lab;
+                //            //SpotID
+                //            chartDataRow.SpotID = (short)(rows);
+                //            if (dataRow[0].Any(x => Char.IsWhiteSpace(x)))
+                //            {
+                //                throw new Exception(string.Format(GetResourceString("spacesarenotallowedincolornames"), rows));
+                //            }
+                //            else if (regexItem.IsMatch(dataRow[0]) == false)
+                //            {
+                //                throw new Exception(string.Format(GetResourceString("colorNamemustbeallowalphanumeric"), rows));
+                //            }
+                //            else
+                //            {
+                //                chartDataRow.SpotName = dataRow[0];
+                //            }
+
+                //            //Color Name
+                //            if (string.IsNullOrEmpty(dataRow[0]))
+                //            {
+                //                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnEmptyValueOnRow"), rows));
+                //            }
+
+                //            else if (dataRow[0].Any(x => Char.IsWhiteSpace(x)))
+                //            {
+                //                throw new Exception(string.Format(GetResourceString("spacesarenotallowedincolornames"), rows));
+                //            }
+                //            else if (regexItem.IsMatch(dataRow[0]) == false)
+                //            {
+                //                throw new Exception(string.Format(GetResourceString("colorNamemustbeallowalphanumeric"), rows));
+                //            }
+                //            else
+                //            {
+                //                chartDataRow.SpotName = dataRow[0];
+                //            }
+
+                //            //Target L
+                //            if (decimal.TryParse(dataRow[1], out lab))
+                //            {
+                //                lab = Math.Round(lab, 2);
+
+                //                if (lab > 100 || lab < 0)
+                //                { throw new Exception(string.Format(GetResourceString("valueofTargetLMustBeBetween0to100LineNo"), rows)); }
+                //                else
+                //                { chartDataRow.Target_L = lab; }
+                //            }
+                //            else
+                //            {
+                //                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                //            }
+
+                //            //Target a
+                //            if (decimal.TryParse(dataRow[2], out lab))
+                //            {
+                //                lab = Math.Round(lab, 2);
+
+                //                if (lab > 128 || lab < -128)
+                //                { throw new Exception(string.Format(GetResourceString("valueofTargetAMustBeBetween128to128Line"), rows)); }
+                //                else
+                //                { chartDataRow.Target_a = lab; }
+                //            }
+                //            else
+                //            {
+                //                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                //            }
+
+                //            //Target b
+                //            if (decimal.TryParse(dataRow[3], out lab))
+                //            {
+                //                lab = Math.Round(lab, 2);
+
+                //                if (lab > 128 || lab < -128)
+                //                { throw new Exception(string.Format(GetResourceString("valueofTargetBMustBeBetween128to128Line"), rows)); }
+                //                else
+                //                { chartDataRow.Target_b = lab; }
+                //            }
+                //            else
+                //            {
+                //                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                //            }
+
+                //            #endregion
+
+                //            refChartImportData.Add(chartDataRow);
+                //        }
+                //    }
+                //    if (refChartImportData.Count > 0)
+                //    {
+                //        if (refChartImportData.Count != refChartImportData.Select(O => O.SpotName).GroupBy(X => X).Count())
+                //        {
+                //            throw new Exception(GetResourceString("colorIDmustbeunique"));
+                //        }
+
+                //        ViewState[vsChartData] = refChartImportData;
+                //        rgChartData.Rebind();
+                //    }
+                //    else
+                //    {
+                //        throw new Exception(GetResourceString("pleaseselectvalidColorLibraryCsvFile"));
+                //    }
+                //}
+                //else
+                //{
+                //    throw new Exception(GetResourceString("pleaseselectColorLibraryCsvFile"));
+                //}
+            }
+            catch (Exception ex)
+            {
+                fujiStatusbar.DisplayMessage(ex.Message, false);
+            }
+        }
+
         protected void rgChartData_OnNeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
         {
             if (ViewState[vsChartData] != null)
@@ -226,7 +472,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgChartData.DataSource = ViewState[vsChartData];
             }
         }
-
+        
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             try
@@ -237,6 +483,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
+                    if (ViewState[vsChartData] != null)
+                    {
+
+                        List<SpotTargetLAB> spotTargetLAB = ((List<SpotTargetLAB>)ViewState[vsChartData]).
+                                                                    Select(x => new SpotTargetLAB()
+                                                                    {
+                                                                        SpotID = x.SpotID,
+                                                                        SpotName = x.SpotName,
+                                                                        Target_L = x.Target_L,
+                                                                        Target_a = x.Target_a,
+                                                                        Target_b = x.Target_b
+                                                                    }).ToList();
+
+                        int totalRows = int.Parse(txtNumOfRows.Text);
+                        int totalColumns = int.Parse(txtNumOfCols.Text);
+                        int expectedCount = totalRows * totalColumns;
+                        int actualCount = spotTargetLAB.Count;
+
+                        if (expectedCount != actualCount)
+                        {
+                            lblNumOfRows.Text = "Total patches exceed chart size";
+                            lblNumOfRows.ForeColor = System.Drawing.Color.Red;
+                            lblNumOfCols.Text = "Total patches exceed chart size";
+                            lblNumOfCols.ForeColor = System.Drawing.Color.Red;
+                            lblNumOfRows.Visible = true;
+                            lblNumOfCols.Visible = true;
+                            return;
+                        }
+                        else
+                        {
+                            lblNumOfRows.Visible = false;
+                            lblNumOfCols.Visible = false;
+                        }
+                    }
+
                     SpotTarget = new SpotTarget();
                     SpotTarget.Company = new Company();
                     SpotTarget.Company.CompanyId = cmbCompany.SelectedValue == "" ? -1 : Convert.ToInt32(cmbCompany.SelectedValue);
@@ -342,7 +623,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (CompanyList.Count == 1)
                 {
                     cmbCompany.SelectedIndex = 0;
-                    trCompanyName.Visible = false;
+                    cmbCompany.Enabled = false;
                 }
                 else if (CompanyList.Count > 1)
                 {
