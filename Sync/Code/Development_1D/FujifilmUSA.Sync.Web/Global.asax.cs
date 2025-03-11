@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Presenter;
+﻿using FujifilmUSA.Sync.Presenter;
+using System;
+using System.Configuration;
 using System.Threading;
+using System.Web;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -16,20 +12,22 @@ namespace FujifilmUSA.Sync.Web
         {
             if (HttpContext.Current.Session != null)
             {
+                int sessionnTimeOutInMinutes = Convert.ToInt32(ConfigurationManager.AppSettings["SessionTimeOutInMinutes"]);
                 DateTime started = (DateTime)HttpContext.Current.Session["SessionStarted"];
                 DateTime current = DateTime.Now;
                 double totalMinutesIdle = current.Subtract(started).TotalMinutes;
-                if (totalMinutesIdle >= 90)
+                if (totalMinutesIdle >= sessionnTimeOutInMinutes)
                 {
                     Session.Abandon();
                     HttpContext.Current.Session.Abandon();
                     HttpContext.Current.Session.Contents.Abandon();
                 }
-                else {
+                else
+                {
                     Session["SessionStarted"] = DateTime.Now;
-                    Session.Timeout = 90;
-                    HttpContext.Current.Session.Timeout = 90;
-                    HttpContext.Current.Session.Contents.Timeout = 90;
+                    Session.Timeout = sessionnTimeOutInMinutes;
+                    HttpContext.Current.Session.Timeout = sessionnTimeOutInMinutes;
+                    HttpContext.Current.Session.Contents.Timeout = sessionnTimeOutInMinutes;
                 }
             }
         }
@@ -41,14 +39,15 @@ namespace FujifilmUSA.Sync.Web
         protected void Session_Start(object sender, EventArgs e)
         {
             // Code that runs when a new session is started
+            int sessionnTimeOutInMinutes = Convert.ToInt32(ConfigurationManager.AppSettings["SessionTimeOutInMinutes"]);
             Session["SessionStarted"] = DateTime.Now;
-            Session.Timeout = 90;
-            HttpContext.Current.Session.Timeout = 90;
+            Session.Timeout = sessionnTimeOutInMinutes;
+            HttpContext.Current.Session.Timeout = sessionnTimeOutInMinutes;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -70,7 +69,7 @@ namespace FujifilmUSA.Sync.Web
 
         protected void Session_End(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void Application_End(object sender, EventArgs e)
@@ -79,6 +78,6 @@ namespace FujifilmUSA.Sync.Web
         }
 
         public Exception ApplicationException { get; set; }
-        
+
     }
 }
