@@ -120,6 +120,15 @@
 	<data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>パスワード変更</value>
   </data>
+	<data name="lblEditHeaderResource1.Text" xml:space="preserve">
+    <value>Edit Device Family Profiler Presets</value>
+  </data>
+	<data name="locProfilerOptionPresetMangementResource1.Text" xml:space="preserve">
+    <value>Profiler Option Preset Management_ja</value>
+  </data>
+	<data name="locAddProfilerOptionPresetResource1.Text" xml:space="preserve">
+    <value>Add Device Family Profiler Presets_ja</value>
+  </data>
 	<data name="locCancelResource1.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>

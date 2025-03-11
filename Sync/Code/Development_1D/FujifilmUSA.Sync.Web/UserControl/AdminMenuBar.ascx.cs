@@ -103,7 +103,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnProfilerSettings_Click(object sender, EventArgs e)
         {
-            Response.RedirectPermanent("AddDeviceProfilerSettings.aspx");
+            //Response.RedirectPermanent("AddDeviceProfilerSettings.aspx");
+            Response.RedirectPermanent("ProfilerOptionPresetsManagement.aspx");
         }
 
         protected void lbtnApplicationConfiguration_Click(object sender, EventArgs e)

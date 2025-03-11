@@ -8,7 +8,7 @@ using System.IO;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
-
+using Telerik.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -18,6 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recSelectDeviceFamily = "selectDeviceFamily";
         private const string _recSelectProjectType = "selectProjectType";
         private const string _recAddDeviceProfilerOptionTitle = "lblHeaderResource1.Text";
+        private const string _recEditDeviceProfilerOptionTitle = "lblEditHeaderResource1";
 
         #region Page Events
         protected void Page_Init(object sender, EventArgs e)
@@ -33,6 +34,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Page.Form.Attributes.Add("enctype", "multipart/form-data");
             BindDeviceFamily();
             BindProjectType();
+            if (Request.QueryString["DeviceFamilyProfilerOptionID"] != null)
+            {
+                var DeviceFamilyProfilerOptionID = Request.QueryString["DeviceFamilyProfilerOptionID"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(DeviceFamilyProfilerOptionID, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _DeviceFamilyProfilerOptionID;
+                if (Int32.TryParse(id, out _DeviceFamilyProfilerOptionID))
+                {
+                    lblHeader.Text = GetResourceString(_recEditDeviceProfilerOptionTitle);//"Edit Device Family Profiler Presets";
+                    LoadProfilerOptionPreset(_DeviceFamilyProfilerOptionID);
+                }
+            }
         }      
         #endregion
 
@@ -130,7 +142,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                 }
-                AddProfilerOptionSettings(lstProfilerOptionPreset);
+                if (hdnDeviceFamilyProfilerOptionID.Value == "0")
+                {
+                    AddProfilerOptionSettings(lstProfilerOptionPreset);
+                }
+                else
+                {
+                    UpdateProfilerOptionSettings(lstProfilerOptionPreset);
+                }
+            }
+            else if (hdnDeviceFamilyProfilerOptionID.Value != "0" && fnUploadProfileSettings.UploadedFiles.Count == 0)
+            {
+                    UpdateProfilerOptionSettingsWithoutProfilerOption();
             }
             else
             {
@@ -148,7 +171,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DeviceFamilyProfilerOption.ProfilerOptionsName = txtPresetName.Text.Trim();
             DeviceFamilyProfilerOption.ProfilerOptionsDesc = txtPresetDesc.Text.Trim();
             DeviceFamilyProfilerOption.ProjectTypeID = Convert.ToInt16(ddlProjectType.SelectedValue.ToString());
-
+            DeviceFamilyProfilerOption.IsActive = chkIsActive.Checked;
             var rows = 0;
             bool bDestProfileType = false;
             bool bDevProfileType = false;
@@ -180,8 +203,65 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                             }).ToList());
                 _presenterDeviceProfilerSettings.InsertDeviceFamilyProfilerOption();
                 if (IsErrorOccured) return;
-                Response.Redirect("Settings.aspx");
+                Response.Redirect("ProfilerOptionPresetsManagement.aspx");
             }
+        }
+        private void UpdateProfilerOptionSettings(List<ProfilerOptionPreset> lstProfilerOptionPreset)
+        {
+            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
+            DeviceFamilyProfilerOption.DeviceFamilyId = Convert.ToInt16(ddlDeviceFamily.SelectedValue.ToString());
+            DeviceFamilyProfilerOption.ProfilerOptionsName = txtPresetName.Text.Trim();
+            DeviceFamilyProfilerOption.ProfilerOptionsDesc = txtPresetDesc.Text.Trim();
+            DeviceFamilyProfilerOption.ProjectTypeID = Convert.ToInt16(ddlProjectType.SelectedValue.ToString());
+            DeviceFamilyProfilerOption.IsActive = chkIsActive.Checked;
+            DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = Convert.ToInt32(hdnDeviceFamilyProfilerOptionID.Value);
+            var rows = 0;
+            bool bDestProfileType = false;
+            bool bDevProfileType = false;
+            bool bOptProfileType = false;
+
+            #region Validation for ProfileTypes
+            List<ProfilerOptionPreset> lstFilter = new List<ProfilerOptionPreset>();
+            lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.DestinationProfile);
+            if (lstFilter.Count > 0)
+                bDestProfileType = true;
+            lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.DeviceLinkProfile);
+            if (lstFilter.Count > 0)
+                bDevProfileType = true;
+            lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.OptimizeDlp);
+            if (lstFilter.Count > 0)
+                bOptProfileType = true;
+            #endregion
+
+            if (!(bDestProfileType && bDevProfileType && bOptProfileType))
+                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_CSV_ProfilerOptionsPreset"), rows));
+            else
+            {
+                DeviceFamilyProfilerOption.ProfilerOptionPresets = (lstProfilerOptionPreset.
+                                                            Select(x => new ProfilerOptionPreset()
+                                                            {
+                                                                ProfileTypeId = x.ProfileTypeId,
+                                                                ProfilerOption = x.ProfilerOption,
+                                                                ProfilerOptionValue = x.ProfilerOptionValue
+                                                            }).ToList());
+                _presenterDeviceProfilerSettings.UpdateDeviceFamilyProfilerOption();
+                if (IsErrorOccured) return;
+                Response.Redirect("ProfilerOptionPresetsManagement.aspx");
+            }
+        }
+        private void UpdateProfilerOptionSettingsWithoutProfilerOption()
+        {
+            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
+            DeviceFamilyProfilerOption.DeviceFamilyId = Convert.ToInt16(ddlDeviceFamily.SelectedValue.ToString());
+            DeviceFamilyProfilerOption.ProfilerOptionsName = txtPresetName.Text.Trim();
+            DeviceFamilyProfilerOption.ProfilerOptionsDesc = txtPresetDesc.Text.Trim();
+            DeviceFamilyProfilerOption.ProjectTypeID = Convert.ToInt16(ddlProjectType.SelectedValue.ToString());
+            DeviceFamilyProfilerOption.IsActive = chkIsActive.Checked;
+            DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = Convert.ToInt32(hdnDeviceFamilyProfilerOptionID.Value);
+            _presenterDeviceProfilerSettings.UpdateDeviceFamilyWithoutProfilerOption();
+            if (IsErrorOccured) return;
+           Response.Redirect("ProfilerOptionPresetsManagement.aspx");
+            
         }
 
         private void BindProjectType()
@@ -210,6 +290,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ddlDeviceFamily.Items.Insert(0, new ListItem(GetResourceString(_recSelectDeviceFamily), string.Empty));//--Select Device Family--
             }
         }
+        private void LoadProfilerOptionPreset(int iDeviceFamilyProfilerOptionID)
+        {
+            PresetsResponse = new ProfilerOptionPresetsResponse { DeviceFamilyProfilerOptionID = iDeviceFamilyProfilerOptionID };
+            _presenterDeviceProfilerSettings.GetProfilerOptionPreset();
+            if (!IsErrorOccured)
+            {
+
+                hdnDeviceFamilyProfilerOptionID.Value = Convert.ToString(iDeviceFamilyProfilerOptionID);
+                ddlDeviceFamily.SelectedValue = Convert.ToString(PresetsResponse.DeviceFamilyID);
+                ddlProjectType.SelectedValue = Convert.ToString(PresetsResponse.ProfileTypeId);
+                txtPresetName.Text = PresetsResponse.PresetName;
+                txtPresetDesc.Text = PresetsResponse.ProfilerOptionsDesc;
+                //cmbProfileCategory.SelectedValue = Convert.ToString(SourceProfile.Category);
+                chkIsActive.Checked = (PresetsResponse.IsActive == true ? true : false);
+            }
+        }
         #endregion
 
         #region IViewAddProfilerSettings Members
@@ -217,7 +313,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> DeviceFamilyList { get; set; }
         public Dictionary<int, string> ProjectTypeList { get; set; }
         public DeviceFamilyProfilerOption DeviceFamilyProfilerOption { get; set; }
-        public int DeviceFamilyProfilerOptionID { get; set; }       
+        public int DeviceFamilyProfilerOptionID { get; set; }
+        public ProfilerOptionPresetsResponse PresetsResponse { get; set; }
+        public List<ProfilerOptionPresetsResponse> ProfilerOptionPresetsResponse { get; set; }
         #endregion
     }
 }

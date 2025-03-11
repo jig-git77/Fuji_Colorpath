@@ -10,6 +10,7 @@ namespace FujifilmUSA.Sync.Entity
         public short DeviceFamilyId { get; set; }
         public string ProfilerOptionsName { get; set; }
         public string ProfilerOptionsDesc { get; set; }
+        public bool IsActive { get; set; }
         public List<ProfilerOptionPreset> ProfilerOptionPresets { get; set; }
         public int ProjectTypeID { get; set; }
         public int UserID { get; set; }

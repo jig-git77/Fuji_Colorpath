@@ -8,12 +8,12 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IDeviceBusiness Members
 
-        public List<Device> GetDeviceListById(int companyId, int branchId,int currentUserId)
+        public List<Device> GetDeviceListById(int companyId, int branchId, int currentUserId)
         {
             return new List<Device>();
         }
 
-        public List<Device> GetDevice(int deviceId,int currentUserId)
+        public List<Device> GetDevice(int deviceId, int currentUserId)
         {
             return new List<Device>();
         }
@@ -37,7 +37,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
-       
+
         public int InsertDeviceFamilyProfilerOption(DeviceFamilyProfilerOption DeviceFamilyProfilerOption)
         {
             return 0;
@@ -46,6 +46,23 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public List<ProfilerOptionPresetsResponse> GetProfilerOptionPresetsList(int DeviceFamilyProfilerOptionID, int currentUserId)
+        {
+            return new List<ProfilerOptionPresetsResponse>();
+        }
+        public int UpdateDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption)
+        {
+            return 0;
+        }
+        public int UpdateDeviceFamilyWithoutProfilerOption(DeviceFamilyProfilerOption DeviceFamilyProfilerOption)
+        {
+            return 0;
+        }
+        public bool DeleteProfilerOption(int DeviceFamilyProfilerOptionID)
+        {
+            return true;
+        }
+
         #endregion
 
         #region ITaskBase Members

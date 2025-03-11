@@ -12,6 +12,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Dictionary<int, string> DeviceFamilyList { get; set; }
         Dictionary<int, string> ProjectTypeList { get; set; }
         DeviceFamilyProfilerOption DeviceFamilyProfilerOption { get; set; }
-        int DeviceFamilyProfilerOptionID { get; set; }       
+        int DeviceFamilyProfilerOptionID { get; set; }
+        List<ProfilerOptionPresetsResponse> ProfilerOptionPresetsResponse { get; set; }
+        ProfilerOptionPresetsResponse PresetsResponse { get; set; }
     }
 }

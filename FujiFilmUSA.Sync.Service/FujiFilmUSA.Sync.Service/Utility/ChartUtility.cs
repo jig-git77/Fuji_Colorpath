@@ -190,13 +190,55 @@ namespace FujiFilmUSA.Sync.Service.Utility
                         }
                     }
 
-                    string pagedchartname = chartName + " page# " + Convert.ToString(thispage) + " of " + Convert.ToString(chartPages);
 
+
+                    //string pagedchartname = chartName + " page# " + Convert.ToString(thispage) + " of " + Convert.ToString(chartPages);
+                    //string pagedchartname = $"<div style='display: flex; justify-content: space-between; width: 100%;'>< div style = 'flex: 1; text-align: center; font-weight: bold;' >{ chartName}</ div >< div style = 'text-align: right; font-weight: bold;' >{ thispage} of { chartPages}</ div ></ div > ";
+
+
+                    //string dateTimeString = "Created " + DateTime.Now.ToString();
+
+                    //pdf.SetFillColor(pdf.CMYK(0, 0, 0, 255));
+                    //pdf.SetFont("Arial", DynaPDF.TFStyle.fsNormal, 10.0, true, DynaPDF.TCodepage.cp1252);  // Before printing text you must set a font
+                    //pdf.WriteText(10, 20.0, dateTimeString + pagedchartname); // Write some text
+
+                    // Date & Time at the top-left corner
                     string dateTimeString = "Created " + DateTime.Now.ToString();
 
+                    // Chart name centered
+                    string chartTitle = chartName;
+
+                    // Page number at the right corner
+                    string pageInfo = $"Page {thispage} of {chartPages}";
+
+                    // PDF page width (assuming A4 size, adjust if needed)
+                    double pageWidth = pdf.GetPageWidth();
+                    double margin = 10.0;  // Left and right margin
+
+                    // Set font and color
                     pdf.SetFillColor(pdf.CMYK(0, 0, 0, 255));
-                    pdf.SetFont("Arial", DynaPDF.TFStyle.fsNormal, 10.0, true, DynaPDF.TCodepage.cp1252);  // Before printing text you must set a font
-                    pdf.WriteText(10, 20.0, dateTimeString); // Write some text
+                    pdf.SetFont("Arial", DynaPDF.TFStyle.fsNormal, 10.0, true, DynaPDF.TCodepage.cp1252);
+
+                    // Positioning
+                    double yPosition = 20.0; // Vertical position
+
+                    // Write date/time (left-aligned)
+                    pdf.WriteText(margin, yPosition, dateTimeString);
+
+                    // Calculate text widths
+                    double titleWidth = pdf.GetTextWidth(chartTitle);
+                    double pageInfoWidth = pdf.GetTextWidth(pageInfo);
+
+                    // Calculate centered position for the title
+                    double centerX = (pageWidth - titleWidth) / 2;
+
+                    // Write chart title (centered)
+                    pdf.WriteText(centerX, yPosition, chartTitle);
+
+                    // Write page info (right-aligned)
+                    double rightX = pageWidth - pageInfoWidth - margin;
+                    pdf.WriteText(rightX, yPosition, pageInfo);
+
 
                     //For Profile details                    
                     string profileString = profileName;

@@ -1360,6 +1360,7 @@
     <Content Include="PrintPreviewNew.aspx" />
     <Content Include="PrintStandardTypeManagement.aspx" />
     <Content Include="ProfileManagement.aspx" />
+    <Content Include="ProfilerOptionPresetsManagement.aspx" />
     <Content Include="ProjectListTemplate.html" />
     <Content Include="ProjectMaxLimit.aspx" />
     <Content Include="RedirectFromProjectList.aspx" />
@@ -4064,6 +4065,7 @@
     <Content Include="UserControl\PrintPreviewNew.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
+    <Content Include="UserControl\ProfilerOptionPresetsManagement.ascx" />
     <Content Include="UserControl\ProjectListNew.ascx" />
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
     <Content Include="UserControl\RedirectFromProjectList.ascx" />
@@ -4881,6 +4883,13 @@
     <Compile Include="ProfileManagement.aspx.designer.cs">
       <DependentUpon>ProfileManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProfilerOptionPresetsManagement.aspx.cs">
+      <DependentUpon>ProfilerOptionPresetsManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProfilerOptionPresetsManagement.aspx.designer.cs">
+      <DependentUpon>ProfilerOptionPresetsManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProjectMaxLimit.aspx.cs">
       <DependentUpon>ProjectMaxLimit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5467,6 +5476,13 @@
     </Compile>
     <Compile Include="UserControl\ProfileManagement.ascx.designer.cs">
       <DependentUpon>ProfileManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ProfilerOptionPresetsManagement.ascx.cs">
+      <DependentUpon>ProfilerOptionPresetsManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ProfilerOptionPresetsManagement.ascx.designer.cs">
+      <DependentUpon>ProfilerOptionPresetsManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ProjectListNew.ascx.cs">
       <DependentUpon>ProjectListNew.ascx</DependentUpon>
@@ -6097,13 +6113,17 @@
     <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.ja.resx">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.de.resx" />
@@ -6688,11 +6708,15 @@
     <Content Include="UserControl\PopupControl\App_LocalResources\DownloadSoftware.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.ja.resx">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Download\Validation Charts.zip" />
@@ -9401,7 +9425,9 @@
     <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.fr.resx" />
@@ -9556,7 +9582,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

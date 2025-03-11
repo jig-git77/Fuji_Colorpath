@@ -1413,4 +1413,7 @@
  <data name="ELicenseType_Revoria" xml:space="preserve">
     <value>Revoria</value>
   </data>
+  <data name="ProfilerOptionPresetsManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected Profiler Option Presets?</value>
+  </data>	
 </root>
