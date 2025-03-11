@@ -467,8 +467,9 @@ namespace FujifilmUSA.Sync.Web
             //{
             //    //Do Nothing
             //}
-            Session.Timeout = 90;
-            HttpContext.Current.Session.Timeout = 90;
+            
+            //Session.Timeout = 90;
+            //HttpContext.Current.Session.Timeout = 90;
             base.OnLoad(e);
         }
         protected override void OnError(EventArgs e)
