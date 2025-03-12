@@ -81,7 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 if (SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0)
                 {
-                    rgSpotTarget.MasterTableView.GetColumn("CompanyName").Visible = false;
+                  rgSpotTarget.MasterTableView.GetColumn("CompanyName").Visible = false;
                 }
             }
         }

@@ -38,6 +38,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        public string SpotTargetManagement_AddSpot_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("SpotTargetManagement_AddSpot_Confirmation");
+            }
+        }
+
         #endregion
 
         #region Declaration
@@ -202,6 +210,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         ViewState[vsChartData] = refChartImportData;
                         rgChartData.Rebind();
+                        hfViewState.Value = refChartImportData.Count.ToString();
                     }
                     else
                     {
@@ -218,11 +227,72 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(ex.Message, false);
             }
         }
+        public static bool ValidateColorName(string value)
+        {
+            string pattern = @"^[A-Za-z0-9_]+$";
+            return Regex.IsMatch(value, pattern);
+        }
+
+        public static bool ValidateNumeric(string value)
+        {
+            string pattern = @"^[0-9]+(\.[0-9]+)?$";
+            return !string.IsNullOrEmpty(value) && Regex.IsMatch(value, pattern);
+        }
 
         protected void lbtnUploadChartData1_Click(object sender, EventArgs e)
         {
             try
             {
+               
+                if (!ValidateColorName(txtColorName.Text))
+                {
+                    UCCN.ValidationMsg = "Spaces and special characters are not allowed in color names!";
+                    lblColorName.ForeColor = System.Drawing.Color.Red;
+                    lblColorName.Visible = true;
+                    return;
+                }
+                else {
+                    lblColorName.Visible = false;
+                  
+                 }
+
+
+                if (!ValidateNumeric(txtTargetL.Text))
+                {
+                    lblTargetL.Text = "Only numeric values are allowed!";
+                    lblTargetL.ForeColor = System.Drawing.Color.Red;
+                    lblTargetL.Visible = true;
+                    return;
+                }
+                else
+                {
+                    lblTargetL.Visible = false;
+                }
+
+                if (!ValidateNumeric(txtTargetA.Text))
+                {
+                    lblTargetA.Text = "Only numeric values are allowed!";
+                    lblTargetA.ForeColor = System.Drawing.Color.Red;
+                    lblTargetA.Visible = true;
+                    return;
+                }
+                else
+                {
+                    lblTargetA.Visible = false;
+                }
+
+                if (!ValidateNumeric(txtTargetB.Text))
+                {
+                    lblTargetB.Text = "Only numeric values are allowed!";
+                    lblTargetB.ForeColor = System.Drawing.Color.Red;
+                    lblTargetB.Visible = true;
+                    return;
+                }
+                else
+                {
+                    lblTargetB.Visible = false;
+                }
+
                 int rowId = 1;
                 //List<SpotTargetLAB>  spotTargetLABList = new List<SpotTargetLAB>();
                 List<SpotTargetLAB> refChartImportData = new List<SpotTargetLAB>();
@@ -297,167 +367,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 refChartImportData.Add(chartDataRow);
                 if (refChartImportData.Count > 0)
                 {
-                    if (refChartImportData.Count != refChartImportData.Select(O => O.SpotName).GroupBy(X => X).Count())
+                    if (refChartImportData.Count != refChartImportData.Select(O => O.SpotName.ToLower()).GroupBy(X => X).Count())
                     {
                         throw new Exception(GetResourceString("colorIDmustbeunique"));
                     }
 
                     ViewState[vsChartData] = refChartImportData;
                     rgChartData.Rebind();
+                    hfViewState.Value = refChartImportData.Count.ToString();
+                    txtColorName.Text = "";
+                    txtTargetL.Text = "";
+                    txtTargetA.Text = "";
+                    txtTargetB.Text = "";
                 }
                 else
                 {
                     throw new Exception(GetResourceString("pleaseselectvalidColorLibraryCsvFile"));
                 }
                 #endregion
-
-
-
-
-                //if (fucUploadChartData.UploadedFiles.Count > 0)
-                //{
-                //    StreamReader sr = new StreamReader(fucUploadChartData.UploadedFiles[0].InputStream);
-                //    List<SpotTargetLAB> refChartImportData = new List<SpotTargetLAB>();
-                //    string strAllLine = sr.ReadToEnd();
-                //    string[] lstLines = { };
-
-                //    if (!string.IsNullOrEmpty(strAllLine))
-                //    {
-                //        lstLines = strAllLine.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                //    }
-
-                //    for (int rows = 0; rows < (uint)lstLines.Count(); rows++)
-                //    {
-                //        if (rows == 0)
-                //        {
-                //            #region Check Column Names
-                //            string[] columns = lstLines[rows].Split(',');
-                //            if (columns.Length != 4)
-                //            {
-                //                throw new Exception(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatch"));
-                //            }
-                //            columns.ToList().ForEach(x => x = x.Trim());
-                //            if (!columns[0].Equals("Color_Name", StringComparison.CurrentCultureIgnoreCase) ||
-                //                !columns[1].Equals("Target_L*", StringComparison.CurrentCultureIgnoreCase) ||
-                //                !columns[2].Equals("Target_a*", StringComparison.CurrentCultureIgnoreCase) ||
-                //                !columns[3].Equals("Target_b*", StringComparison.CurrentCultureIgnoreCase))
-                //            {
-                //                throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
-                //            }
-                //            #endregion
-                //        }
-                //        else
-                //        {
-                //            string[] dataRow = lstLines[rows].Split(',');
-                //            dataRow.ToList().ForEach(x => x = x.Trim());
-                //            SpotTargetLAB chartDataRow = new SpotTargetLAB();
-                //            Regex regexItem = new Regex("^[a-zA-Z0-9_]*$");
-
-                //            #region Converts row to ReferenceChart Object
-                //            decimal lab;
-                //            //SpotID
-                //            chartDataRow.SpotID = (short)(rows);
-                //            if (dataRow[0].Any(x => Char.IsWhiteSpace(x)))
-                //            {
-                //                throw new Exception(string.Format(GetResourceString("spacesarenotallowedincolornames"), rows));
-                //            }
-                //            else if (regexItem.IsMatch(dataRow[0]) == false)
-                //            {
-                //                throw new Exception(string.Format(GetResourceString("colorNamemustbeallowalphanumeric"), rows));
-                //            }
-                //            else
-                //            {
-                //                chartDataRow.SpotName = dataRow[0];
-                //            }
-
-                //            //Color Name
-                //            if (string.IsNullOrEmpty(dataRow[0]))
-                //            {
-                //                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnEmptyValueOnRow"), rows));
-                //            }
-
-                //            else if (dataRow[0].Any(x => Char.IsWhiteSpace(x)))
-                //            {
-                //                throw new Exception(string.Format(GetResourceString("spacesarenotallowedincolornames"), rows));
-                //            }
-                //            else if (regexItem.IsMatch(dataRow[0]) == false)
-                //            {
-                //                throw new Exception(string.Format(GetResourceString("colorNamemustbeallowalphanumeric"), rows));
-                //            }
-                //            else
-                //            {
-                //                chartDataRow.SpotName = dataRow[0];
-                //            }
-
-                //            //Target L
-                //            if (decimal.TryParse(dataRow[1], out lab))
-                //            {
-                //                lab = Math.Round(lab, 2);
-
-                //                if (lab > 100 || lab < 0)
-                //                { throw new Exception(string.Format(GetResourceString("valueofTargetLMustBeBetween0to100LineNo"), rows)); }
-                //                else
-                //                { chartDataRow.Target_L = lab; }
-                //            }
-                //            else
-                //            {
-                //                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
-                //            }
-
-                //            //Target a
-                //            if (decimal.TryParse(dataRow[2], out lab))
-                //            {
-                //                lab = Math.Round(lab, 2);
-
-                //                if (lab > 128 || lab < -128)
-                //                { throw new Exception(string.Format(GetResourceString("valueofTargetAMustBeBetween128to128Line"), rows)); }
-                //                else
-                //                { chartDataRow.Target_a = lab; }
-                //            }
-                //            else
-                //            {
-                //                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
-                //            }
-
-                //            //Target b
-                //            if (decimal.TryParse(dataRow[3], out lab))
-                //            {
-                //                lab = Math.Round(lab, 2);
-
-                //                if (lab > 128 || lab < -128)
-                //                { throw new Exception(string.Format(GetResourceString("valueofTargetBMustBeBetween128to128Line"), rows)); }
-                //                else
-                //                { chartDataRow.Target_b = lab; }
-                //            }
-                //            else
-                //            {
-                //                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
-                //            }
-
-                //            #endregion
-
-                //            refChartImportData.Add(chartDataRow);
-                //        }
-                //    }
-                //    if (refChartImportData.Count > 0)
-                //    {
-                //        if (refChartImportData.Count != refChartImportData.Select(O => O.SpotName).GroupBy(X => X).Count())
-                //        {
-                //            throw new Exception(GetResourceString("colorIDmustbeunique"));
-                //        }
-
-                //        ViewState[vsChartData] = refChartImportData;
-                //        rgChartData.Rebind();
-                //    }
-                //    else
-                //    {
-                //        throw new Exception(GetResourceString("pleaseselectvalidColorLibraryCsvFile"));
-                //    }
-                //}
-                //else
-                //{
-                //    throw new Exception(GetResourceString("pleaseselectColorLibraryCsvFile"));
-                //}
             }
             catch (Exception ex)
             {
@@ -472,7 +399,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgChartData.DataSource = ViewState[vsChartData];
             }
         }
+        protected void CalculateRowPerPage(object sender, EventArgs e)
+        {
+            int totalRows = int.Parse(txtNumOfRows.Text);
+            int totalPages = int.Parse(txtPages.Text);
+            Decimal totalRowsPerPage = totalRows/ totalPages;
+            txtRowsPerPage.Text = Math.Ceiling(totalRowsPerPage).ToString();
+            txtRowsPerPage.Enabled = false;
+            
         
+        }
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             try
@@ -503,10 +439,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         if (expectedCount != actualCount)
                         {
-                            lblNumOfRows.Text = "Total patches exceed chart size";
-                            lblNumOfRows.ForeColor = System.Drawing.Color.Red;
-                            lblNumOfCols.Text = "Total patches exceed chart size";
-                            lblNumOfCols.ForeColor = System.Drawing.Color.Red;
+                            ucNumOfRows.ValidationMsg = "Total patches exceed chart size";
+
+                            UCNumOfCols.ValidationMsg = "Total patches exceed chart size";
                             lblNumOfRows.Visible = true;
                             lblNumOfCols.Visible = true;
                             return;
@@ -516,6 +451,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lblNumOfRows.Visible = false;
                             lblNumOfCols.Visible = false;
                         }
+
+                        //int totalPages = int.Parse(txtPages.Text);
+                        //int totalRowsPerPage = int.Parse(txtRowsPerPage.Text);
+                        //int expectedCountPage = totalPages * totalRowsPerPage;
+                        //int actualCountPage = int.Parse(txtNumOfRows.Text);
+
+                        //if (expectedCountPage != actualCountPage)
+                        //{
+                        //    UCPages.ValidationMsg = "Total rows not matched";
+                        //    UCRowsPerPage.ValidationMsg = "Total rows not matched";
+                        //    lblPages.Visible = true;
+                        //    lblRowsPerPage.Visible = true;
+                        //    return;
+                        //}
+                        //else
+                        //{
+                        //    lblPages.Visible = false;
+                        //    lblRowsPerPage.Visible = false;
+                        //}
                     }
 
                     SpotTarget = new SpotTarget();

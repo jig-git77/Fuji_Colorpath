@@ -3787,6 +3787,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submitting a CSV with colors in the list will overwrite the list. Proceed?.
+        /// </summary>
+        internal static string SpotTargetManagement_AddSpot_Confirmation {
+            get {
+                return ResourceManager.GetString("SpotTargetManagement_AddSpot_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected source target?.
         /// </summary>
         internal static string SpotTargetManagement_DeleteSpot_Confirmation {
