@@ -286,7 +286,7 @@
                                     </td>
                                     <td align="left">
                                         <div style="float: left;">
-                                            <telerik:RadNumericTextBox ID="txtPages" runat="server" Width="100px" Height="16px" AutoPostBack ="true" OnTextChanged ="CalculateRowPerPage"
+                                            <telerik:RadNumericTextBox ID="txtPages" runat="server" Width="100px" Height="16px" Enabled ="false"
                                                 MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                               </div>
@@ -298,7 +298,7 @@
                                              </asp:label>
                                         </div>
                                         <div style="float: left">
-                                            <asp:RequiredFieldValidator ID="rfvPages" runat="server" Display="Dynamic" ControlToValidate="txtPages"
+                                            <asp:RequiredFieldValidator ID="rfvPages" runat="server" Display="Dynamic" ControlToValidate="txtPages" 
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcPagesContainer" runat="server"
                                                     ValidationMsg="Please provide number of pages." Size="200" ResourceValidationMsg="ChartPagesRequiredResource" />
@@ -321,7 +321,7 @@
                                     </td>
                                     <td align="left">
                                         <div style="float: left;">
-                                            <telerik:RadNumericTextBox ID="txtRowsPerPage" runat="server" Width="100px" Height="16px" Enabled ="false"
+                                            <telerik:RadNumericTextBox ID="txtRowsPerPage" runat="server" Width="100px" Height="16px"  AutoPostBack ="true" OnTextChanged ="CalculateRowPerPage"
                                                 MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                               </div>

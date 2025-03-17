@@ -402,12 +402,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void CalculateRowPerPage(object sender, EventArgs e)
         {
             int totalRows = int.Parse(txtNumOfRows.Text);
-            int totalPages = int.Parse(txtPages.Text);
-            Decimal totalRowsPerPage = totalRows/ totalPages;
-            txtRowsPerPage.Text = Math.Ceiling(totalRowsPerPage).ToString();
-            txtRowsPerPage.Enabled = false;
-            
-        
+            int totalRowsPerPage = int.Parse(txtRowsPerPage.Text);
+           
+            double result = (double)totalRows / totalRowsPerPage; // Ensure division is done in double
+
+            int rowsPerPage = (int)Math.Ceiling(result); // Round up to the next whole number
+
+            txtPages.Text = rowsPerPage.ToString(); // Assign calculated value to the textbox
+            txtPages.Enabled = false;
+
         }
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
