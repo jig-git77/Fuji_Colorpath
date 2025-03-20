@@ -682,7 +682,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor, bool? Is1DMultiColor, string CurrentRunName, int LicenseType,bool? IsDestProfile)
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID, bool? IsDLPMultiColor, bool? Is1DMultiColor, string CurrentRunName, int LicenseType, bool? IsDestProfile)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
@@ -722,7 +722,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     IsDlpMultiColor = IsDLPMultiColor == null ? false : Convert.ToBoolean(IsDLPMultiColor);
                     IsSync1DMultiColor = Is1DMultiColor == null ? false : Convert.ToBoolean(Is1DMultiColor);
-                    IsDestinationProfile = IsDestProfile  == null ?false : Convert.ToBoolean(IsDestProfile);
+                    IsDestinationProfile = IsDestProfile == null ? false : Convert.ToBoolean(IsDestProfile);
                     LicenseTypeId = LicenseType;
                     CurrentRunname = CurrentRunName;
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
@@ -1044,10 +1044,16 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         .Where(r => r.Field<byte>("PatchTypeID") == 1 || r.Field<byte>("PatchTypeID") == 2 || r.Field<byte>("PatchTypeID") == 3 || r.Field<byte>("PatchTypeID") == 4 || r.Field<byte>("PatchTypeID") == 5 || r.Field<byte>("PatchTypeID") == 6 || r.Field<byte>("PatchTypeID") == 7)
                         .CopyToDataTable();
             }
-            else if (MetricSumID == "8" || MetricSumID == "9" || MetricSumID == "36" || MetricSumID == "37")    //----For 'G7 Gray ΔCh Avg' or ----For 'G7 Gray ΔCh Max' or ----For 'wG7 Gray ΔCh Avg'  or ---_For 'wG7 Gray ΔCh Max'
+            else if (MetricSumID == "8" || MetricSumID == "9")    //----For 'G7 Gray ΔCh Avg' or ----For 'G7 Gray ΔCh Max'
             {
                 DT = dtPatchDetails.AsEnumerable()
                         .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 10 || r.Field<byte>("PatchTypeID") == 28 || r.Field<byte>("PatchTypeID") == 29 || r.Field<byte>("PatchTypeID") == 30 || r.Field<byte>("PatchTypeID") == 31 || r.Field<byte>("PatchTypeID") == 32 || r.Field<byte>("PatchTypeID") == 33 || r.Field<byte>("PatchTypeID") == 34 || r.Field<byte>("PatchTypeID") == 35 || r.Field<byte>("PatchTypeID") == 36 || r.Field<byte>("PatchTypeID") == 37 || r.Field<byte>("PatchTypeID") == 38 || r.Field<byte>("PatchTypeID") == 39 || r.Field<byte>("PatchTypeID") == 40 || r.Field<byte>("PatchTypeID") == 41 || r.Field<byte>("PatchTypeID") == 42 || r.Field<byte>("PatchTypeID") == 43 || r.Field<byte>("PatchTypeID") == 44 || r.Field<byte>("PatchTypeID") == 45 || r.Field<byte>("PatchTypeID") == 46 || r.Field<byte>("PatchTypeID") == 47 || r.Field<byte>("PatchTypeID") == 48 || r.Field<byte>("PatchTypeID") == 49 || r.Field<byte>("PatchTypeID") == 50)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "36" || MetricSumID == "37")    //----For 'wG7 Gray ΔCh Avg'  or ---_For 'wG7 Gray ΔCh Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 28 || r.Field<byte>("PatchTypeID") == 29 || r.Field<byte>("PatchTypeID") == 30 || r.Field<byte>("PatchTypeID") == 31 || r.Field<byte>("PatchTypeID") == 32 || r.Field<byte>("PatchTypeID") == 33 || r.Field<byte>("PatchTypeID") == 34 || r.Field<byte>("PatchTypeID") == 35 || r.Field<byte>("PatchTypeID") == 36 || r.Field<byte>("PatchTypeID") == 37 || r.Field<byte>("PatchTypeID") == 38 || r.Field<byte>("PatchTypeID") == 39 || r.Field<byte>("PatchTypeID") == 40 || r.Field<byte>("PatchTypeID") == 41 || r.Field<byte>("PatchTypeID") == 42 || r.Field<byte>("PatchTypeID") == 43 || r.Field<byte>("PatchTypeID") == 44 || r.Field<byte>("PatchTypeID") == 45 || r.Field<byte>("PatchTypeID") == 46 || r.Field<byte>("PatchTypeID") == 47 || r.Field<byte>("PatchTypeID") == 48 || r.Field<byte>("PatchTypeID") == 49 || r.Field<byte>("PatchTypeID") == 50)
                         .CopyToDataTable();
             }
             else if (MetricSumID == "10" || MetricSumID == "11" || MetricSumID == "38" || MetricSumID == "39")   //----For 'G7 Black ΔL Avg' or ----For 'G7 Black ΔL Max' or ----For 'wG7 Black ΔL Avg' or ----For 'wG7 Black ΔL Max'
