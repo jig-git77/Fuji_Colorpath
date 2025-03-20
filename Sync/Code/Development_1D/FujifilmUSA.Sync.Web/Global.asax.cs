@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Presenter;
-using System.Threading;
+﻿using FujifilmUSA.Sync.Presenter;
+using System;
 using System.Configuration;
+using System.Threading;
+using System.Web;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -27,9 +22,10 @@ namespace FujifilmUSA.Sync.Web
                     HttpContext.Current.Session.Abandon();
                     HttpContext.Current.Session.Contents.Abandon();
                 }
-                else {
+                else
+                {
                     Session["SessionStarted"] = DateTime.Now;
-                    Session.Timeout = 90;
+                    Session.Timeout = sessionnTimeOutInMinutes;
                     HttpContext.Current.Session.Timeout = sessionnTimeOutInMinutes;
                     HttpContext.Current.Session.Contents.Timeout = sessionnTimeOutInMinutes;
                 }
@@ -51,7 +47,7 @@ namespace FujifilmUSA.Sync.Web
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -73,7 +69,7 @@ namespace FujifilmUSA.Sync.Web
 
         protected void Session_End(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void Application_End(object sender, EventArgs e)
@@ -82,6 +78,6 @@ namespace FujifilmUSA.Sync.Web
         }
 
         public Exception ApplicationException { get; set; }
-        
+
     }
 }
