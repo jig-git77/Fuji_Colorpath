@@ -91,7 +91,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trXMF.Visible = false;
                 trPackZ.Visible = false;
             }
-           else//ColorGate option
+            else if (cmbCMYKLibrary.SelectedValue.ToString() == "8")//Revoria flow option
+            {
+                trCalderaRow1.Visible = false;
+                trCalderaRow2.Visible = false;
+                trCaldera2Row1.Visible = false;
+                trXMF.Visible = false;
+                trPackZ.Visible = false;
+            }
+            else//ColorGate option
             {
                 trCalderaRow1.Visible = false;
                 trCalderaRow2.Visible = false;

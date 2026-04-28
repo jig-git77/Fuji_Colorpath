@@ -231,8 +231,9 @@
                                                         <asp:ListItem Text="ColorGate" meta:resourcekey="ColorgateResource1" Value="3"></asp:ListItem>
                                                         <asp:ListItem Text="XMF" meta:resourcekey="XMFResource1" Value="4"></asp:ListItem>
                                                         <asp:ListItem Text="PackZ" meta:resourcekey="PackZResource1" Value="5"></asp:ListItem>
-                                                        <asp:ListItem Text="Revoria" meta:resourcekey="RevoriaResource1" Value="6"></asp:ListItem>
+                                                        <asp:ListItem Text="Revoria (Legacy)" meta:resourcekey="RevoriaResource1" Value="6"></asp:ListItem>
                                                         <asp:ListItem Text="Onyx" meta:resourcekey="OnyxResource1" Value="7"></asp:ListItem>
+                                                        <asp:ListItem Text="Revoria Flow" meta:resourcekey="RevoriaFlowResource1" Value="8"></asp:ListItem>
                                                     </asp:DropDownList>
 
 
