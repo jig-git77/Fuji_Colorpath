@@ -177,7 +177,13 @@
   <data name="locBookNameResource1.Text" xml:space="preserve">
     <value>Book Name:</value>
   </data>
-	<data name="OnyxResource1.Text" xml:space="preserve">
+  <data name="OnyxResource1.Text" xml:space="preserve">
     <value>Onyx</value>
-  </data>	
+  </data>
+  <data name="RevoriaFlowResource1.Text" xml:space="preserve">
+    <value>Revoria Flow</value>
+  </data>
+  <data name="RevoriaResource1.Text" xml:space="preserve">
+    <value>Revoria (Legacy)</value>
+  </data>
 </root>

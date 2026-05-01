@@ -180,4 +180,10 @@
   <data name="OnyxResource1.Text" xml:space="preserve">
     <value>Onyx_fr</value>
   </data>
+  <data name="RevoriaFlowResource1.Text" xml:space="preserve">
+    <value>Revoria Flow_fr</value>
+  </data>
+  <data name="RevoriaResource1.Text" xml:space="preserve">
+    <value>Revoria (Legacy)_fr</value>
+  </data>
 </root>
