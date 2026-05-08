@@ -13,6 +13,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using System.IO;
+using FujifilmUSA.Sync.Entity.CPSync1D;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -310,6 +311,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public DataTable dtMeasurement { get; set; }
         public decimal Dec_E_Value { get; set; }
         public int CurrentRefChartTypeId { get; set; }
+        public List<ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public bool EnabledPaperScaling { get; set; }
+        public int ProjectTypeId { get; set; }
+        public int PrintstandardTypeId { get; set; }
+
         #endregion
 
     }

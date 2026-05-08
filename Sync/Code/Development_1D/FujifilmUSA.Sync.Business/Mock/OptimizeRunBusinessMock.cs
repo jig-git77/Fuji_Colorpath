@@ -3,6 +3,8 @@ using FujifilmUSA.Sync.Entity;
 using System;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Messages;
+using FujifilmUSA.Sync.Entity.CPSync1D;
+
 namespace FujifilmUSA.Sync.Business.Mock
 {
     public class OptimizeRunBusinessMock : IOptimizeRunBusiness
@@ -189,6 +191,16 @@ namespace FujifilmUSA.Sync.Business.Mock
         public void CreateRevoria(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
         {
 
+        }
+
+        public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId)
+        {
+            
+        }
+
+        public Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
