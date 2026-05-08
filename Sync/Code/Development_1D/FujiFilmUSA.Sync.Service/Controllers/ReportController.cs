@@ -1895,13 +1895,13 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     sw.WriteLine(
                         name + "," +
-                        listPatch[i].Cie_L.ToString(CultureInfo.InvariantCulture) + "," +
-                        listPatch[i].Cie_a.ToString(CultureInfo.InvariantCulture) + "," +
-                        listPatch[i].Cie_b.ToString(CultureInfo.InvariantCulture) + "," +
-                        listPatch[i].Cmyk_C.ToString(CultureInfo.InvariantCulture) + "," +
-                        listPatch[i].Cmyk_M.ToString(CultureInfo.InvariantCulture) + "," +
-                        listPatch[i].Cmyk_Y.ToString(CultureInfo.InvariantCulture) + "," +
-                        listPatch[i].Cmyk_K.ToString(CultureInfo.InvariantCulture) + "," +
+                        Format(listPatch[i].Cie_L) + "," +
+                        Format(listPatch[i].Cie_a) + "," +
+                        Format(listPatch[i].Cie_b) + "," +
+                        Format(listPatch[i].Cmyk_C) + "," +
+                        Format(listPatch[i].Cmyk_M) + "," +
+                        Format(listPatch[i].Cmyk_Y) + "," +
+                        Format(listPatch[i].Cmyk_K) + "," +
                         "" + "," +   // TintCurve (EMPTY as per spec)
                         "" + "," +   // SpPosition (EMPTY)
                         "" + "," +   // SpColor (EMPTY)
@@ -1915,6 +1915,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
 
             return fileName;
+        }
+
+        private string Format(double? value)
+        {
+            return value.HasValue ? Math.Round(value.Value, 2).ToString(CultureInfo.InvariantCulture) : "";
         }
         #endregion
 

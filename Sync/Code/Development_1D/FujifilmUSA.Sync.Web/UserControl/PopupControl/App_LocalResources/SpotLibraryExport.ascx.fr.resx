@@ -163,7 +163,7 @@
     <value>Mode_fr</value>
   </data>
   <data name="XMFResource1.Text" xml:space="preserve">
-    <value>XMF_fr</value>
+    <value>Fujifilm XMF_fr</value>
   </data>
   <data name="CommentResource1.Text" xml:space="preserve">
     <value>Comment: _fr</value>
@@ -172,7 +172,7 @@
     <value>Ink Pool ID: _fr</value>
   </data>
   <data name="PackZResource1.Text" xml:space="preserve">
-    <value>PackZ_fr</value>
+    <value>Packz/Cloudflow_fr</value>
   </data>
   <data name="locBookNameResource1.Text" xml:space="preserve">
     <value>Book Name:_fr</value>
@@ -181,9 +181,9 @@
     <value>Onyx_fr</value>
   </data>
   <data name="RevoriaFlowResource1.Text" xml:space="preserve">
-    <value>Revoria Flow_fr</value>
+    <value>Fujifilm Revoria Flow_fr</value>
   </data>
   <data name="RevoriaResource1.Text" xml:space="preserve">
-    <value>Revoria (Legacy)_fr</value>
+    <value>Fujifilm Revoria (Legacy)_fr</value>
   </data>
 </root>
