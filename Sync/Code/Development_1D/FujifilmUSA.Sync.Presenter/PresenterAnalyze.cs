@@ -358,5 +358,21 @@ namespace FujifilmUSA.Sync.Presenter
                     Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
         }
+       
+
+        public void UpdateTargetLabList()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.UpdateTargetLabList(_viewAnalyze.ProjectId, _viewAnalyze.ProjectTargetLABList ,_viewAnalyze.EnabledPaperScaling , _viewAnalyze.MeasurementId, _viewAnalyze.LicenseTypeId);
+        }
+
+        public void GetTargetLABList()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.Project = optimizeRunBusiness.GetProjectTargetLAB(_viewAnalyze.PrintstandardTypeId, _viewAnalyze.ProjectTypeId, _viewAnalyze.ProjectId);
+            _viewAnalyze.ProjectTargetLABList = _viewAnalyze.Project.ProjectTargetLAB;
+        }
     }
 }

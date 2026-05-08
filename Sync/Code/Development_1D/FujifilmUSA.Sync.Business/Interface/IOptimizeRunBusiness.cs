@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.Messages;
+using FujifilmUSA.Sync.Entity.CPSync1D;
+
 namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IOptimizeRunBusiness : ITaskBase
@@ -49,5 +51,9 @@ namespace FujifilmUSA.Sync.Business.Interface
         void CreateInitialDestinationAndDeviceLinkProfilesPlus(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
         void CreateInitialDestinationAndDeviceLinkProfilesMultiColor(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
         void CreateDestinationProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, int status, DateTime endDateTime);
+
+        void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId);
+        Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId);
+
     }
 }

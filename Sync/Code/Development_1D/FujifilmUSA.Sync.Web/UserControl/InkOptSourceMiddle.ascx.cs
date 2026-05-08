@@ -14,7 +14,7 @@ using System.Drawing;
 using System.Web.UI.DataVisualization.Charting;
 using System.Text;
 using System.IO;
-
+using FujifilmUSA.Sync.Entity.CPSync1D;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -247,6 +247,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public decimal Dec_E_Value { get; set; }
         public int CurrentRefChartTypeId { get; set; }
         public bool IsDestinationProfile { get; set; }
+        public List<ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public bool EnabledPaperScaling { get; set; }
+        public int ProjectTypeId { get; set; }
+        public int PrintstandardTypeId { get; set; }
         #endregion
 
 

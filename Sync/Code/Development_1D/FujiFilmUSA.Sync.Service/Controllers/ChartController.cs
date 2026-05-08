@@ -1,4 +1,5 @@
 ﻿using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSync1D;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
@@ -1302,7 +1303,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public DataTable dtMeasurement { get; set; }
         public bool IsDestinationProfile { get; set; }
         public DataSet dsPatchDetails { get; set; }
-
+        public List<ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public bool EnabledPaperScaling { get; set; }
+        public int ProjectTypeId { get; set; }
+        public int PrintstandardTypeId { get; set; }
         #endregion
     }
 }

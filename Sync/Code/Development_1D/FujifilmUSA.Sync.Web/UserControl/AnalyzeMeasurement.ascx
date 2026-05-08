@@ -135,6 +135,33 @@
     #ContentPlaceHolder1_ucAnalyze_updateProgress {
         z-index: 100;
     }
+
+    .tooltipCheckbox:hover + .paperScalingTooltip,
+    #spn_chk_IsPaperScaling1D:hover + .paperScalingTooltip,
+    .tooltipCheckbox:hover ~ .paperScalingTooltip {
+        display: block;
+    }
+
+    .paperScalingTooltip {
+        display: none;
+        position: absolute;
+        top: 28px;
+        right: 0;
+        width: 260px;
+        white-space: normal;
+        background: #efefef;
+        border: 1px solid #bfbfbf;
+        border-radius: 4px;
+        padding: 10px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #333;
+        z-index: 999999;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        word-wrap: break-word;
+        cursor: pointer;
+        text-align:left;
+    }
 </style>
 <%--<script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>--%>
 <script src="JS/DYMO_Label_Framework_2_0_2.js"></script>
@@ -234,8 +261,8 @@
     $(document).ready(function () {
 
         if (!IsPrinterInstalled()) {
-          $('input[type="image"][id*="ibtnPrintLabel"]').hide();
-         // $('input[type="image"][id*="ibtnPrintPreview"]').hide();
+            $('input[type="image"][id*="ibtnPrintLabel"]').hide();
+            // $('input[type="image"][id*="ibtnPrintPreview"]').hide();
             var varibtnPrintPreview = document.getElementById("<%= ibtnPrintPreview.ClientID %>")
             $(varibtnPrintPreview).hide();
         }
@@ -370,6 +397,9 @@
                 <asp:HiddenField runat="server" ID="hdnIsSync1DMultiColor" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentRunName" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCloudFlowCheck" ClientIDMode="Static" />
+                <asp:HiddenField ID="hdnCielabL" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="hdnCielabA" runat="server" ClientIDMode="Static" />
+                <asp:HiddenField ID="hdnCielabB" runat="server" ClientIDMode="Static" />
 
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
@@ -415,18 +445,46 @@
     </div>
     <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
         <tr id="trRBtnListDeltaE" runat="server">
-            <td align="center">
-                <%--<asp:RadioButtonList ID="rbtnListDeltaE" runat="server" RepeatDirection="Horizontal"
-                    AutoPostBack="true" OnSelectedIndexChanged="rbtnListDeltaE_SelectedIndexChanged"
-                    CssClass="RadioList" ClientIDMode="Static">
-                    <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
-                </asp:RadioButtonList>--%>
-                <asp:RadioButtonList ID="rbtnListDeltaE" runat="server" RepeatDirection="Horizontal"
-                    CssClass="RadioList" ClientIDMode="Static">
-                    <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
-                </asp:RadioButtonList>
+            <td style="width: 100%; padding: 5px 10px;">
+                <div style="display: flex; align-items: center; width: 100%;">
+                    <!-- Left: Radio buttons -->
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <asp:RadioButtonList ID="rbtnListDeltaE" runat="server"
+                            RepeatDirection="Horizontal"
+                            CssClass="RadioList"
+                            ClientIDMode="Static">
+                            <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
+                        </asp:RadioButtonList>
+                    </div>
+                    <!-- Right: Checkbox -->
+                    <%--<div style="margin-left: auto; white-space: nowrap;">
+                        <asp:CheckBox ID="chk_IsPaperScaling4D" runat="server"
+                            CssClass="checkbox"
+                            OnCheckedChanged="chk_IsPaperScaling4D_CheckedChanged"
+                            Text="Relative Paper Scaling"
+                            AutoPostBack="True" />
+                    </div>--%>
+                    <div style="margin-left: auto; white-space: nowrap; position: relative; display: inline-block;">
+
+                        <asp:CheckBox ID="chk_IsPaperScaling4D"
+                            runat="server"
+                            CssClass="checkbox"
+                            OnCheckedChanged="chk_IsPaperScaling4D_CheckedChanged"
+                            AutoPostBack="True" />
+                        <span id="spn_chk_IsPaperScaling4D" class="tooltipCheckbox" style="vertical-align: text-top;font-size: small;">
+                                <asp:Localize runat="server" Text="Relative Paper Scaling"></asp:Localize>
+                            </span>
+                        <!-- Tooltip -->
+                        <div class="paperScalingTooltip">
+                            <b>Relative Paper Scaling</b><br />
+                            Modifies the target white point to the measured white point and
+                            scales the target profile accordingly
+   
+                        </div>
+
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -454,6 +512,20 @@
                             <span style="font-weight: bold; vertical-align: text-top;">
                                 <asp:Localize runat="server" Text="Enable output smoothing" ID="Localize2"></asp:Localize>
                             </span>
+                            <asp:CheckBox ID="chk_IsPaperScaling1D" runat="server" EnableViewState="true"
+                                CssClass="checkbox" ClientIDMode="Static"
+                                OnCheckedChanged="chk_IsPaperScaling1D_CheckedChanged"
+                                AutoPostBack="True" />
+                            <span id="spn_chk_IsPaperScaling1D" class="tooltipCheckbox" style="font-weight: bold; vertical-align: text-top;">
+                                <asp:Localize runat="server" Text="Relative Paper Scaling"></asp:Localize>
+                            </span>
+                            <div class="paperScalingTooltip">
+                                <div style="font-weight: bold; margin-bottom: 4px;">
+                                    Relative Paper Scaling
+                                </div>
+                                Modifies the target white point to the measured white point
+                                and scales the target profile accordingly.
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -494,7 +566,7 @@
                     <div class="section_middle">
                         <center>
                             <div class="chart-wrap" style="position: relative;">
-                                <div id="divAnalyzeChart" style="height: 200px;background-color:#CECECE"></div>
+                                <div id="divAnalyzeChart" style="height: 200px; background-color: #CECECE"></div>
                                 <div class="chart-loading"></div>
                             </div>
                         </center>
@@ -568,7 +640,7 @@
                                         <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px" style="display: none;">
                                             <div style="float: right; padding-top: 2px; position: absolute; top: 0; right: 0; padding-right: 4px; padding-top: 5px">
                                                 <asp:ImageButton ID="ibtnPrintPreviewNew" runat="server"
-                                                    ImageUrl="../Images/DymoPrintPreviewIcon.png" 
+                                                    ImageUrl="../Images/DymoPrintPreviewIcon.png"
                                                     OnClientClick="ShowLabelPrintPreviewNew(); return false;"
                                                     meta:resourcekey="ibtnPrintPreviewNewResource1" />
                                                 <asp:ImageButton ID="ibtnPrintPreview" runat="server"
@@ -1521,16 +1593,16 @@
                                         <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 100%;"
                                             cellpadding="0" cellspacing="0" class="TABLE1">
                                             <tr id="Tr4" runat="server">
-                                                <td  valign="top" runat="server"  style="width:35%; padding-left:10px;">
+                                                <td valign="top" runat="server" style="width: 35%; padding-left: 10px;">
                                                     <a id="btnGeneratePDF">
                                                         <img src="Images/processbar.gif" style="padding-right: 10px;" /></a>
                                                 </td>
                                                 <td>
                                                     <table style="line-height: 15px;">
                                                         <tr>
-                                                           <td style="font-family: Arial; font-size: 13px;padding-left:4px; font-weight: bold;">
-                                                               <asp:Label ID="txtReportTitle" runat="server"></asp:Label>
-                                                           </td>
+                                                            <td style="font-family: Arial; font-size: 13px; padding-left: 4px; font-weight: bold;">
+                                                                <asp:Label ID="txtReportTitle" runat="server"></asp:Label>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="padding-top: 10px;">

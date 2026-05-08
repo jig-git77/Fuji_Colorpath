@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Business.ProfilerServiceClient.Response;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSync1D;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -150,12 +151,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
-                    request.PCSDataType =(Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    request.PCSDataType = (Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
                     /* WebClient Example */
-                    var response = Utilities.GetProfilerServiceClientCall<CreateDestinationAndDeviceLinkProfileRequest,CreateDestinationAndDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.CreateDLP, Utilities.ProfilerRequestCall.HttpPost);
+                    var response = Utilities.GetProfilerServiceClientCall<CreateDestinationAndDeviceLinkProfileRequest, CreateDestinationAndDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.CreateDLP, Utilities.ProfilerRequestCall.HttpPost);
                     if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
                     {
                         //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
@@ -307,7 +308,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     request.PCSDataType = (Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
-                  
+
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
@@ -1306,10 +1307,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
 
                     //var syncClientResponse = client.OptimizeSpotLibraryValues(req);
-                    var syncClientResponse  = Utilities.GetProfilerServiceClientCall<OptimizeSpotLibraryRequest, OptimizeSpotLibraryResponse>(req, Utilities.ProfilerCallMethod.OptimizeSpotLibrary, Utilities.ProfilerRequestCall.HttpPost);
+                    var syncClientResponse = Utilities.GetProfilerServiceClientCall<OptimizeSpotLibraryRequest, OptimizeSpotLibraryResponse>(req, Utilities.ProfilerCallMethod.OptimizeSpotLibrary, Utilities.ProfilerRequestCall.HttpPost);
 
 
-                    List< ProfilerServiceClient.Patch> list = syncClientResponse.spotPatchDetail;
+                    List<ProfilerServiceClient.Patch> list = syncClientResponse.spotPatchDetail;
 
                     var spotProjectDetails = new XElement("SpotColorDetails",
                                                        list.
@@ -1392,6 +1393,95 @@ namespace FujifilmUSA.Sync.Business.Implementation
                  //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - End"), null, false);
              },
              new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationProfile"));
+        }
+
+       
+
+        public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId)
+        {
+            // Build XML like in reference code
+            var projectTargetLAB = new XElement("ProjectTargetLAB", "");
+
+            if (ProjectTargetLABList != null && ProjectTargetLABList.Count > 0)
+            {
+                projectTargetLAB = new XElement("ProjectTargetLAB",
+                    ProjectTargetLABList.Select(x =>
+                        new XElement("TargetLAB",
+                            new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                            new XAttribute("TargetL", x.TargetL),
+                            new XAttribute("TargetA", x.TargetA),
+                            new XAttribute("TargetB", x.TargetB)
+                        )
+                    )
+                );
+            }
+            Common.ImplementBusinessLogic(
+                 () =>
+                 {
+                     // Call SP
+                     DataAccessFactory
+                          .Instance
+                          .ExecuteProcedure(
+                              "CPSync.UpdateProjectTargetLAB",
+                              new object[]
+                              {
+                                ProjectId,
+                                projectTargetLAB.ToString(),
+                                EnabledPaperScaling,
+                                MeasurementId,
+                                LicenseTypeId
+                              }
+                          );
+                 },
+                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateTargetLAB")
+             );
+        }
+
+        public Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId)
+        {
+            Project project = new Project();
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectTargetLABList = DataAccessFactory.Instance
+                        .GetDsResult("[CPSync].[GetTargetLabNewPaper]",
+                            new object[] { printStandardTypeId, ProjectTypeId, ProjectId });
+
+                    if (dsProjectTargetLABList != null && dsProjectTargetLABList.Tables.Count > 0)
+                    {
+                        if (dsProjectTargetLABList.Tables[0].Rows.Count > 0)
+                        {
+                            project.ProjectTargetLAB = dsProjectTargetLABList.Tables[0]
+                                .AsEnumerable()
+                                .Select(x => new Entity.CPSync1D.ProjectTargetLAB()
+                                {
+                                    PatchType = new PatchType()
+                                    {
+                                        PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                        Type = DataReader.ReadString(x, "PatchType")
+                                    },
+                                    TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                                    TargetA = DataReader.ReadDecimal(x, "TargetA"),
+                                    TargetB = DataReader.ReadDecimal(x, "TargetB")
+                                }).ToList();
+                        }
+
+                        if (dsProjectTargetLABList.Tables.Count > 1 &&
+                                        dsProjectTargetLABList.Tables[1].Rows.Count > 0)
+                        {
+                            var row = dsProjectTargetLABList.Tables[1].Rows[0];
+
+                            project.NewPaper_White_L_Old = DataReader.ReadDecimal(row, "Old_NewPaper_White_L");
+                            project.NewPaper_White_a_Old = DataReader.ReadDecimal(row, "Old_NewPaper_White_a");
+                            project.NewPaper_White_b_Old = DataReader.ReadDecimal(row, "Old_NewPaper_White_b");
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectTargetLAB")
+            );
+
+            return project;
         }
 
         #endregion

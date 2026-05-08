@@ -68,6 +68,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             NewPaper_Black_L = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_L"),
                             NewPaper_Black_a = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_a"),
                             NewPaper_Black_b = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_b"),
+                            NewPaper_White_L_Old = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "Old_NewPaper_White_L"),
+                            NewPaper_White_a_Old = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "Old_NewPaper_White_a"),
+                            NewPaper_White_b_Old = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "Old_NewPaper_White_b"),
                             ReTargetProjectDeviceID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "RetargetProjectDeviceID")
                         };
                         if (dsProject.Tables[1].Rows.Count > 0)
@@ -830,7 +833,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
                                                      new Parameters() {ParameterName = "@IsCustomProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption},
                                                      new Parameters() {ParameterName = "@IsCustomPlugin", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomPlugin},
-                                                     new Parameters() {ParameterName = "@DestinationProfile", Type = DbType.Binary, Value = project.DestinationProfile} //This add for CustomBCO icc file store data
+                                                     new Parameters() {ParameterName = "@DestinationProfile", Type = DbType.Binary, Value = project.DestinationProfile}, //This add for CustomBCO icc file store data
+                                                     new Parameters() {ParameterName = "@NewPaper_White_L_Old", Type = DbType.Decimal, Value = project.NewPaper_White_L_Old},
+                                                     new Parameters() {ParameterName = "@NewPaper_White_a_Old", Type = DbType.Decimal, Value = project.NewPaper_White_a_Old},
+                                                     new Parameters() {ParameterName = "@NewPaper_White_b_Old", Type = DbType.Decimal, Value = project.NewPaper_White_b_Old},
 
                                                  },
                                              new List<Parameters>()
