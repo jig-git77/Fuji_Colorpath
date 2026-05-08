@@ -36,6 +36,7 @@ namespace FujifilmUSA.Sync.Entity
         public CPSync1D.PrintStandardType PrintStandardType { get; set; }
 
         public List<CPSync1D.ProjectTargetLAB> ProjectTargetLAB { get; set; }
+        public List<CPSync1D.ProjectTargetLAB> OldProjectTargetLAB { get; set; }
         public List<CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
         public List<CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle { get; set; }
 
@@ -57,6 +58,9 @@ namespace FujifilmUSA.Sync.Entity
         public decimal NewPaper_White_L { get; set; }
         public decimal NewPaper_White_a { get; set; }
         public decimal NewPaper_White_b { get; set; }
+        public decimal NewPaper_White_L_Old { get; set; }
+        public decimal NewPaper_White_a_Old { get; set; }
+        public decimal NewPaper_White_b_Old { get; set; }
         public decimal NewPaper_Black_L { get; set; }
         public decimal NewPaper_Black_a { get; set; }
         public decimal NewPaper_Black_b { get; set; }

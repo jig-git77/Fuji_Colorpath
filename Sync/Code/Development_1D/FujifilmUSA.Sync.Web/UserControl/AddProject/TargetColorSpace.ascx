@@ -167,7 +167,41 @@
                 </asp:Panel>
             </td>
         </tr>
-        <tr id="trTargetLAB" runat="server">
+        <tr id="trTargetLABMessage" runat="server">
+            <td>
+                <div style="background: #ececec; border: 1px solid #cfcfcf; border-bottom: none; padding: 5px 5px; font-weight: bold; font-size: 12px; color: #444; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+                    <asp:Localize runat="server"
+                        Text="Color Metric"
+                        ID="locTargetLABMessage">
+                    </asp:Localize>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #cfcfcf; border-top: none; background: #f7f7f7; padding: 14px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td valign="top" style="padding-right: 12px; width: 40px;">
+                            <div style="font-size: 34px; color: #27b3a8; line-height: 30px;">
+                                ⚠
+                            </div>
+                        </td>
+                        <td valign="top" style="color: #444; font-size: 13px; line-height: 20px;">
+                            <div style="font-weight: bold;">
+                                Relative Paper Scaling has changed!
+                            </div>
+                            <div>
+                                You can enable this feature from the Analyze page after your first measurement.
+                            </div>
+                            <div>
+                                ColorPath SYNC will automatically use the measured paper value rather than manual input.
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="trTargetLAB" runat="server" style="display: block;">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">
@@ -186,8 +220,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
 
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
@@ -473,7 +505,7 @@
             </td>
         </tr>
 
-        <tr id="trPaperScaling_4D" runat="server" visible="false">
+        <tr id="trPaperScaling_4D" runat="server" visible="false" style="display:none">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">

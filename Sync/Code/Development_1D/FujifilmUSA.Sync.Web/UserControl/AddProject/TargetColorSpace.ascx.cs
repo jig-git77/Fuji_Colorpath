@@ -57,11 +57,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1DMultiColor)
                 {
                     trTargetLAB.Visible = false;
+                    trTargetLABMessage.Visible = false;
                     trProjectType.Visible = false;
                 }
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
                 {
                     trPaperScaling_4D.Visible = true;
+                    trTargetLABMessage.Visible = true;
                 }
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
                 {
@@ -74,16 +76,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     BindBranches();
                     trListHeader.Visible = false;
                     trTargetLAB.Visible = false;
+                    trTargetLABMessage.Visible = false;
                     trSpotTarget.Visible = true;
                     trMeasurementMode.Visible = false;
                 }
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                 {
                     trTargetLAB.Visible = true;
+                    trTargetLABMessage.Visible = true;
                     trProjectType.Visible = true;
                     cmbProjectType.Enabled = false;
                     txtProjectTypeDesc.Enabled = false;
                 }
+                //if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
+                //{
+                //    trTargetLAB.Visible = false;
+                //}
                 LoadProjectInfoFromSession();
             }
         }
@@ -116,13 +124,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1DMultiColor)
             {
+                //ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+                //PrintstandardTypeId = Convert.ToInt16(cmbPrintStandardType.SelectedValue);
+                //_presenterTargetColorspace.GetTargetLABList();
+                //SessionManager.Instance.CurrentProject.ProjectTargetLAB = ProjectTargetLABList;
+                //SessionManager.Instance.CurrentProject.OldProjectTargetLAB = ProjectTargetLABList;
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
+                SessionManager.Instance.CurrentProject.OldProjectTargetLAB = GetTargetLAB();
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
 
                 //------If 1D project then pass NewPaperScaling LAB values--------//
                 SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(txtPaper_b.Text);
+                // save new paper value to another var to get it in analyze measurement.
+                SessionManager.Instance.CurrentProject.NewPaper_White_L_Old = Convert.ToDecimal(txtPaper_L.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_White_a_Old = Convert.ToDecimal(txtPaper_a.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_White_b_Old = Convert.ToDecimal(txtPaper_b.Text);
+
                 SessionManager.Instance.CurrentProject.NewPaper_Black_L = Convert.ToDecimal(txtPaper_Black_L.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_Black_a.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_Black_b.Text);
@@ -488,6 +507,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindTargetLAB()
         {
             trTargetLAB.Visible = true;
+            trTargetLABMessage.Visible = true;
             PrintstandardTypeId = Convert.ToInt16(cmbPrintStandardType.SelectedValue);
             ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
             _presenterTargetColorspace.GetTargetLABList();

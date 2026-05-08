@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -135,15 +136,33 @@
     <Compile Include="Models\Response\ExtractProfileValuesResponse.cs" />
     <Compile Include="Models\Response\OptimizeDeviceLinkProfileResponse.cs" />
     <Compile Include="Models\Response\OptimizeSpotLibraryResponse.cs" />
-    <Compile Include="Models\Wrappers\CLVectorDataSet.cs" />
-    <Compile Include="Models\Wrappers\CrossXColor.cs" />
-    <Compile Include="Models\Wrappers\CrossXColorPINVOKE.cs" />
-    <Compile Include="Models\Wrappers\Curve.cs" />
-    <Compile Include="Models\Wrappers\GenericListClass.cs" />
-    <Compile Include="Models\Wrappers\Profile.cs" />
-    <Compile Include="Models\Wrappers\TYPE_p_long.cs" />
-    <Compile Include="Models\Wrappers\TYPE_p_p_void.cs" />
-    <Compile Include="Models\Wrappers\TYPE_p_void.cs" />
+    <Compile Include="Models\Wrappers\CLVectorDataSet.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Wrappers\CrossXColor.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Wrappers\CrossXColorPINVOKE.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Wrappers\Curve.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Wrappers\GenericListClass.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Wrappers\Profile.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Wrappers\TYPE_p_long.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Wrappers\TYPE_p_p_void.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Models\Wrappers\TYPE_p_void.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSync1D;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
@@ -69,5 +70,9 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int LicenseTypeId { get; set; }
         decimal Dec_E_Value { get; set; }
         int CurrentRefChartTypeId { get; set; }
+        List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        bool EnabledPaperScaling { get; }
+        int ProjectTypeId { get; set; }
+        int PrintstandardTypeId { get; set; }
     }
 }

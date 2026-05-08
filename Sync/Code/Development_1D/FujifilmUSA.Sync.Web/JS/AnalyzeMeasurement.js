@@ -2624,6 +2624,19 @@ function BindInkPaperChartABComparision() {
             _Resources = response.data.GlobalResources;
         }
 
+        if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
+
+            var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
+                return item.PatchTypeId === 8;
+            });
+            if (patchType8) {
+                // Set values to hidden fields
+                $('#hdnCielabL').val(patchType8.CielabL);
+                $('#hdnCielabA').val(patchType8.CielabA);
+                $('#hdnCielabB').val(patchType8.CielabB);
+            }
+        }
+
         PopulateInkPaperChartABComparision();
         kendo.ui.progress($chartLoader, false);
     }, function (XMLHttpRequest, textStatus, errorThrown) {
