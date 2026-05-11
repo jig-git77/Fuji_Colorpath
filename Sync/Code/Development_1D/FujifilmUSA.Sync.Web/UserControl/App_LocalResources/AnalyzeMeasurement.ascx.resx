@@ -732,4 +732,10 @@
   <data name="locGrayBalanceLResource1.Text" xml:space="preserve">
     <value>Gray Balance L*</value>
   </data>
+  <data name="LocPaperScalingResource.Text" xml:space="preserve">
+    <value>Relative Paper Scaling</value>
+  </data>
+    <data name="LocPaperScalingTooltipResource.Text" xml:space="preserve">
+    <value>Modifies the target white point to the measured white point and scales the target profile accordingly.</value>
+  </data>
 </root>

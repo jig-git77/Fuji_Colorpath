@@ -142,12 +142,18 @@
         display: block;
     }
 
+    .tooltipCheckbox {
+        cursor: pointer;
+    }
+
     .paperScalingTooltip {
         display: none;
         position: absolute;
-        top: 28px;
-        right: 0;
-        width: 260px;
+        /* move tooltip to left side */
+        right: 160px; /* adjust as needed */
+        top: -10px; /* align vertically */
+
+        width: 460px;
         white-space: normal;
         background: #efefef;
         border: 1px solid #bfbfbf;
@@ -158,10 +164,19 @@
         color: #333;
         z-index: 999999;
         box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-        word-wrap: break-word;
-        cursor: pointer;
-        text-align:left;
+        text-align: left;
     }
+
+        .paperScalingTooltip::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -8px;
+            transform: translateY(-50%);
+            border-width: 8px 0 8px 8px;
+            border-style: solid;
+            border-color: transparent transparent transparent #efefef;
+        }
 </style>
 <%--<script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>--%>
 <script src="JS/DYMO_Label_Framework_2_0_2.js"></script>
@@ -472,17 +487,27 @@
                             CssClass="checkbox"
                             OnCheckedChanged="chk_IsPaperScaling4D_CheckedChanged"
                             AutoPostBack="True" />
-                        <span id="spn_chk_IsPaperScaling4D" class="tooltipCheckbox" style="vertical-align: text-top;font-size: small;">
-                                <asp:Localize runat="server" Text="Relative Paper Scaling"></asp:Localize>
-                            </span>
+                        <span id="spn_chk_IsPaperScaling4D" class="tooltipCheckbox" style="vertical-align: text-top; font-size: small;">
+                            <asp:Localize runat="server" Text="Relative Paper Scaling"></asp:Localize>
+                        </span>
                         <!-- Tooltip -->
-                        <div class="paperScalingTooltip">
-                            <b>Relative Paper Scaling</b><br />
-                            Modifies the target white point to the measured white point and
-                            scales the target profile accordingly
-   
-                        </div>
+                         <div class="paperScalingTooltip">
+                                <b>
+                                    <asp:Localize
+                                        ID="Localize12"
+                                        runat="server"
+                                        Text="Relative Paper Scaling"
+                                        meta:resourcekey="LocPaperScalingResource">
+                                    </asp:Localize>
+                                </b>
 
+                                <asp:Localize
+                                    ID="Localize13"
+                                    runat="server"
+                                    Text="Modifies the target white point to the measured white point and scales the target profile accordingly"
+                                    meta:resourcekey="LocPaperScalingTooltipResource">
+                                </asp:Localize>
+                            </div>
                     </div>
                 </div>
             </td>
@@ -491,40 +516,71 @@
             <td>
                 <table cellpadding="0" cellspacing="0" style="width: 100%;">
                     <tr>
-                        <td id="tdAverageOfMeasurements" runat="server" style="display: none;">
-                            <%--<asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true"
-                                Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click"></asp:CheckBox>--%>
-                            <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true" ClientIDMode="Static"
-                                Font-Bold="true"></asp:CheckBox>
+                        <!-- 1st td -->
+                        <td id="tdAverageOfMeasurements" runat="server" style="display: none; white-space: nowrap;">
+                            <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server"
+                                Checked="false" EnableViewState="true"
+                                ClientIDMode="Static" Font-Bold="true"></asp:CheckBox>
+
                             <span style="font-weight: bold; vertical-align: text-top;">
-                                <asp:Localize runat="server" Text="Analyze Average Of Measurements" ID="LocAvgMesurment"
-                                    meta:resourcekey="LocAvgMesurmentResource1"></asp:Localize>
+                                <asp:Localize runat="server"
+                                    ID="LocAvgMesurment"
+                                    Text="Analyze Average Of Measurements"
+                                    meta:resourcekey="LocAvgMesurmentResource1">
+                                </asp:Localize>
                             </span>
+
                             <asp:Label ID="lblCompError" runat="server" Text="" ForeColor="Red"></asp:Label>
                             <input id="hd_CompError" type="hidden" runat="server" value="5" />
                         </td>
-                        <td id="td1DSmoothing" runat="server" align="right" visible="false">
-                            <%--<asp:CheckBox ID="chk1DMeasurementSmoothing" runat="server" Checked="false" EnableViewState="true"
-                                Font-Bold="true" AutoPostBack="true"
-                                OnCheckedChanged="chk1DMeasurementSmoothing_CheckedChanged"></asp:CheckBox>--%>
-                            <asp:CheckBox ID="chk1DMeasurementSmoothing" runat="server" Checked="false" EnableViewState="true"
-                                Font-Bold="true" ClientIDMode="Static"></asp:CheckBox>
+
+                        <!-- 2nd td -->
+                        <td id="td1DSmoothing" runat="server" align="right" visible="false" style="text-align: left; padding-left: 20px; white-space: nowrap;">
+                            <asp:CheckBox ID="chk1DMeasurementSmoothing" runat="server"
+                                Checked="false"
+                                EnableViewState="true"
+                                Font-Bold="true"
+                                ClientIDMode="Static"></asp:CheckBox>
+
                             <span style="font-weight: bold; vertical-align: text-top;">
-                                <asp:Localize runat="server" Text="Enable output smoothing" ID="Localize2"></asp:Localize>
+                                <asp:Localize runat="server"
+                                    ID="Localize2"
+                                    Text="Enable output smoothing">
+                                </asp:Localize>
                             </span>
-                            <asp:CheckBox ID="chk_IsPaperScaling1D" runat="server" EnableViewState="true"
-                                CssClass="checkbox" ClientIDMode="Static"
-                                OnCheckedChanged="chk_IsPaperScaling1D_CheckedChanged"
-                                AutoPostBack="True" />
-                            <span id="spn_chk_IsPaperScaling1D" class="tooltipCheckbox" style="font-weight: bold; vertical-align: text-top;">
-                                <asp:Localize runat="server" Text="Relative Paper Scaling"></asp:Localize>
+                        </td>
+
+                        <!-- 3rd td -->
+                        <td id="tdPaperScaling" runat="server" align="right" visible="false" style="text-align: right; width: 100%; position: relative;">
+                            <asp:CheckBox ID="chk_IsPaperScaling1D" runat="server"
+                                EnableViewState="true"
+                                CssClass="checkbox"
+                                ClientIDMode="Static"
+                                AutoPostBack="True"
+                                OnCheckedChanged="chk_IsPaperScaling1D_CheckedChanged" />
+
+                            <span id="spn_chk_IsPaperScaling1D"
+                                class="tooltipCheckbox"
+                                style="font-weight: bold; vertical-align: text-top;">
+                                <asp:Localize runat="server" Text="Relative Paper Scaling" meta:resourcekey="LocPaperScalingResource"></asp:Localize>
                             </span>
+
                             <div class="paperScalingTooltip">
-                                <div style="font-weight: bold; margin-bottom: 4px;">
-                                    Relative Paper Scaling
-                                </div>
-                                Modifies the target white point to the measured white point
-                                and scales the target profile accordingly.
+                                <b>
+                                    <asp:Localize
+                                        ID="LocPaperScalingHeader"
+                                        runat="server"
+                                        Text="Relative Paper Scaling"
+                                        meta:resourcekey="LocPaperScalingResource">
+                                    </asp:Localize>
+                                </b>
+
+                                <asp:Localize
+                                    ID="LocPaperScalingBody"
+                                    runat="server"
+                                    Text="Modifies the target white point to the measured white point and scales the target profile accordingly"
+                                    meta:resourcekey="LocPaperScalingTooltipResource">
+                                </asp:Localize>
                             </div>
                         </td>
                     </tr>

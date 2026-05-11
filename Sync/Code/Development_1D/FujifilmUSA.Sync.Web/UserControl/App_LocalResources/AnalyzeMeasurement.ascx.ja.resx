@@ -729,4 +729,10 @@
   <data name="locGrayBalanceLResource1.Text" xml:space="preserve">
     <value>グレーバランスL*</value>
   </data>
+  <data name="LocPaperScalingResource.Text" xml:space="preserve">
+    <value>相対的な用紙サイズ調整</value>
+  </data>
+	<data name="LocPaperScalingTooltipResource.Text" xml:space="preserve">
+    <value>目標の白色点を測定された白色点に変更し、それに応じて目標プロファイルをスケーリングします。</value>
+  </data>
 </root>
