@@ -15,6 +15,53 @@
     .textwidth40 {
         width: 40px;
     }
+
+  .colorMetricHeader {
+        background: #ececec;
+        border: 1px solid #cfcfcf;
+        border-bottom: 1px solid #cfcfcf;
+        padding: 10px 8px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #000;
+        line-height: normal;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+
+    .colorMetricMessageBox {
+        border: 1px solid #cfcfcf;
+        border-top: none;
+        background: #ececec;
+        padding: 14px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+
+    .colorMetricIconCell {
+        padding-right: 12px;
+        width: 40px;
+        vertical-align: top;
+    }
+
+    .colorMetricIcon {
+        font-size: 34px;
+        color: #27b3a8;
+        line-height: 30px;
+    }
+
+    .colorMetricText {
+        color: #444;
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: normal;
+        vertical-align: top;
+    }
+
+    .colorMetricTitle {
+        font-weight: bold;
+    }
 </style>
 
 <div class="head">
@@ -169,6 +216,38 @@
         </tr>
         <tr id="trTargetLABMessage" runat="server">
             <td>
+                <div class="colorMetricHeader">
+                    <asp:Localize ID="locTargetLABMessage"
+                        runat="server"
+                        Text="Color Metric" />
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="colorMetricMessageBox">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td class="colorMetricIconCell">
+                            <div class="colorMetricIcon">⚠</div>
+                        </td>
+                        <td class="colorMetricText">
+                            <div class="colorMetricTitle">
+                                Relative Paper Scaling has changed!
+                            </div>
+                            <div>
+                                You can enable this feature from the Analyze page after your first measurement.
+                            </div>
+                            <div>
+                                ColorPath SYNC will automatically use the measured paper value rather than manual input.
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <%-- <tr id="trTargetLABMessage" runat="server">
+            <td>
                 <div style="background: #ececec; border: 1px solid #cfcfcf; border-bottom: none; padding: 5px 5px; font-weight: bold; font-size: 12px; color: #444; border-top-left-radius: 4px; border-top-right-radius: 4px;">
                     <asp:Localize runat="server"
                         Text="Color Metric"
@@ -200,8 +279,8 @@
                     </tr>
                 </table>
             </td>
-        </tr>
-        <tr id="trTargetLAB" runat="server" style="display: block;">
+        </tr>--%>
+        <tr id="trTargetLAB" runat="server" style="display: none;">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">
@@ -505,7 +584,7 @@
             </td>
         </tr>
 
-        <tr id="trPaperScaling_4D" runat="server" visible="false" style="display:none">
+        <tr id="trPaperScaling_4D" runat="server" visible="false" style="display: none">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">

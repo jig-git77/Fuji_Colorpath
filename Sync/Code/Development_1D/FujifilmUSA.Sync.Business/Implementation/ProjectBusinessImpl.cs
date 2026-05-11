@@ -698,7 +698,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.NewPaper_Black_a,
                                                      project.NewPaper_Black_b,
                                                      project.PrintCondition.IsCustomProfilerOption,
-                                                     project.PrintCondition.IsCustomPlugin
+                                                     project.PrintCondition.IsCustomPlugin,
+                                                     project.NewPaper_White_L_Old,
+                                                     project.NewPaper_White_a_Old,
+                                                     project.NewPaper_White_b_Old
                                                  });
                         savedProjectId = project.ProjectId;
                     },
