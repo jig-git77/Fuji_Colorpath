@@ -301,7 +301,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     || licenseType == ELicenseType.Sync4DCertification
                     || licenseType == ELicenseType.DLPMultiColor;
 
-                chk_IsPaperScaling1D.Visible = licenseType == ELicenseType.Sync1D
+                tdPaperScaling.Visible = licenseType == ELicenseType.Sync1D
                     || licenseType == ELicenseType.Sync1DMultiColor;
 
                 // Sync1D / SpotLibrary hidden
