@@ -207,4 +207,7 @@
   <data name="TargetPrintConditionNotAvailableMessage" xml:space="preserve">
     <value>No Target Print Condition_ja</value>
   </data>
+	<data name="locPaperScalingMessage.Text" xml:space="preserve">
+    <value>用紙サイズ調整機能が変更されました！この機能は、最初の測定後、「分析」ページから有効にできます。カラーパス同期では、手動入力ではなく、測定された用紙サイズ値が自動的に使用されます。</value>
+  </data>
 </root>

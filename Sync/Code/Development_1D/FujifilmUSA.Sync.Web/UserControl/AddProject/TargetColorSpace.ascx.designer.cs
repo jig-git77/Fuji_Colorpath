@@ -321,6 +321,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.WebControls.Localize locTargetLABMessage;
 
         /// <summary>
+        /// locPaperScalingMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locPaperScalingMessage;
+
+        /// <summary>
         /// trTargetLAB control.
         /// </summary>
         /// <remarks>
