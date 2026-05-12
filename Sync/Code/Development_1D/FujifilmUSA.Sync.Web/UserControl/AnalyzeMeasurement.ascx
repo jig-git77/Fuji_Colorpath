@@ -455,15 +455,15 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <div class="listDevice" style="margin-left: 10px;">
+    <div class="listDevice" style="        margin-left: 10px;">
         <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     </div>
-    <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
+    <table cellpadding="0" cellspacing="10" border="0" width="97%" style="        margin-left: 10px;">
         <tr id="trRBtnListDeltaE" runat="server">
-            <td style="width: 100%; padding: 5px 10px;">
-                <div style="display: flex; align-items: center; width: 100%;">
+            <td         style ="width: 100%; padding: 5px 10px;">
+                <div         style ="display: flex; align-items: center; width: 100%;">
                     <!-- Left: Radio buttons -->
-                    <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
                         <asp:RadioButtonList ID="rbtnListDeltaE" runat="server"
                             RepeatDirection="Horizontal"
                             CssClass="RadioList"
@@ -488,41 +488,36 @@
                             OnCheckedChanged="chk_IsPaperScaling4D_CheckedChanged"
                             AutoPostBack="True" />
                         <span id="spn_chk_IsPaperScaling4D" class="tooltipCheckbox" style="vertical-align: text-top; font-size: small;">
-                            <asp:Localize runat="server" Text="Relative Paper Scaling"></asp:Localize>
+                            <asp:Localize runat="server" Text="Relative Paper Scaling" ID="LocPaperScalingResource" meta:resourcekey="LocPaperScalingResource"></asp:Localize>
                         </span>
                         <!-- Tooltip -->
-                         <div class="paperScalingTooltip">
-                                <b>
-                                    <asp:Localize
-                                        ID="Localize12"
-                                        runat="server"
-                                        Text="Relative Paper Scaling"
-                                        meta:resourcekey="LocPaperScalingResource">
-                                    </asp:Localize>
-                                </b>
-
+                        <div class="paperScalingTooltip">
+                            <b>
                                 <asp:Localize
-                                    ID="Localize13"
+                                    ID="Localize12"
                                     runat="server"
-                                    Text="Modifies the target white point to the measured white point and scales the target profile accordingly"
-                                    meta:resourcekey="LocPaperScalingTooltipResource">
+                                    Text="Relative Paper Scaling"
+                                    meta:resourcekey="LocPaperScalingResource">
                                 </asp:Localize>
-                            </div>
-                    </div>
+                            </b>
+
+                            <asp:Localize
+                                        ID ="Localize13" runat="server" Text="Modifies the target white point to the measured white point and scales the target profile accordingly" meta:resourcekey="LocPaperScalingTooltipResource"> </asp:Localize> </div> </div>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                <table cellpadding="0" cellspacing="0" style="        width: 100%;">
                     <tr>
                         <!-- 1st td -->
-                        <td id="tdAverageOfMeasurements" runat="server" style="display: none; white-space: nowrap;">
+                        <td id="tdAverageOfMeasurements" runat="server"         style ="display: none; white-space: nowrap;">
                             <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server"
                                 Checked="false" EnableViewState="true"
                                 ClientIDMode="Static" Font-Bold="true"></asp:CheckBox>
 
-                            <span style="font-weight: bold; vertical-align: text-top;">
+                            <span style="        font-weight: bold;
+        vertical-align: text-top;">
                                 <asp:Localize runat="server"
                                     ID="LocAvgMesurment"
                                     Text="Analyze Average Of Measurements"
@@ -535,14 +530,15 @@
                         </td>
 
                         <!-- 2nd td -->
-                        <td id="td1DSmoothing" runat="server" align="right" visible="false" style="text-align: left; padding-left: 20px; white-space: nowrap;">
+                        <td id="td1DSmoothing" runat="server" align="right" visible="false"         style ="text-align: left; padding-left: 20px; white-space: nowrap;">
                             <asp:CheckBox ID="chk1DMeasurementSmoothing" runat="server"
                                 Checked="false"
                                 EnableViewState="true"
                                 Font-Bold="true"
                                 ClientIDMode="Static"></asp:CheckBox>
 
-                            <span style="font-weight: bold; vertical-align: text-top;">
+                            <span style="        font-weight: bold;
+        vertical-align: text-top;">
                                 <asp:Localize runat="server"
                                     ID="Localize2"
                                     Text="Enable output smoothing">
@@ -562,7 +558,7 @@
                             <span id="spn_chk_IsPaperScaling1D"
                                 class="tooltipCheckbox"
                                 style="font-weight: bold; vertical-align: text-top;">
-                                <asp:Localize runat="server" Text="Relative Paper Scaling" meta:resourcekey="LocPaperScalingResource"></asp:Localize>
+                                   <asp:Localize ID="LocPaperScaling" runat="server" Text="Relative Paper Scaling" meta:resourcekey="LocPaperScalingResource"> </asp:Localize>
                             </span>
 
                             <div class="paperScalingTooltip">
@@ -589,20 +585,23 @@
         </tr>
         <tr id="trListHeader" runat="server">
             <td id="Td1" runat="server">
-                <div style="display: block;" class="contantbox tabcontant1">
+                <div style="        display: block;" class="contantbox tabcontant1">
                     <div class="Analyze_head">
                         <div id="divAnalyzeHeader" class="Analyze_head_text"
-                            style="font-weight: bold; font-size: 14px; float: left; display: none;">
+                            style="        font-weight: bold;
+        font-size: 14px;
+        float: left;
+        display: none;">
                             <asp:Localize runat="server" Text="Analyze Measurement :" ID="Localize21"
                                 meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
-                            <asp:Label ID="lblNewAnalyzeLabel" Style="font-size: 12px !important;" runat="server" ClientIDMode="Static"></asp:Label>
+                            <asp:Label ID="lblNewAnalyzeLabel" Style="        font-size: 12px !important;" runat="server" ClientIDMode="Static"></asp:Label>
                         </div>
-                        <div id="divAnalyzePagingSection" style="display: none;">
+                        <div id="divAnalyzePagingSection" style="        display: none;">
                             <asp:Label ID="lblPagingMsg" runat="server" ClientIDMode="Static" Text="Record(s) {start} to {end} of {total}"></asp:Label>
                             &nbsp;|&nbsp;<asp:ImageButton
                                 ID="btnFirst" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif" ClientIDMode="Static" />&nbsp;
                                 <asp:ImageButton ID="btnPrevious" runat="server" ClientIDMode="Static"
-                                    ImageUrl="~/Images/Nav_PreviousPage_off.gif" Style="height: 13px" />&nbsp;
+                                    ImageUrl="~/Images/Nav_PreviousPage_off.gif" Style="        height: 13px" />&nbsp;
                                     <asp:ImageButton ID="btnNext" runat="server" ImageUrl="~/Images/Nav_NextPage_off.gif" ClientIDMode="Static" />&nbsp;
                                         <asp:ImageButton ID="btnLast" runat="server" ImageUrl="~/Images/Nav_LastPage_off.gif" ClientIDMode="Static" />&nbsp;|&nbsp;
                                         <asp:Localize runat="server" ID="Localize22" Text="Records" meta:resourcekey="locRecordsResource1"></asp:Localize>&nbsp;
@@ -621,7 +620,7 @@
                     </div>
                     <div class="section_middle">
                         <center>
-                            <div class="chart-wrap" style="position: relative;">
+                            <div class="chart-wrap" style="        position: relative;">
                                 <div id="divAnalyzeChart" style="height: 200px; background-color: #CECECE"></div>
                                 <div class="chart-loading"></div>
                             </div>
@@ -639,20 +638,23 @@
                 VerticalSide="Middle" TargetControlID="updateProgress" HorizontalOffset="325"
                 VerticalOffset="210" runat="server" Enabled="True">
             </AjaxToolkit:AlwaysVisibleControlExtender>
-            <div style="background: #CCC !important;">
+            <div style="        background: #CCC !important;">
                 <uc:CreateDLP runat="server" ID="ucCreateDLP" />
             </div>
-            <div class="UpdateProgressBackgroundLessOptimize" style="position: fixed; z-index: 1000; width: 100%; height: 100%;"
+            <div class="UpdateProgressBackgroundLessOptimize" style="        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        height: 100%;"
                 unselectable="on">
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
 
-    <div class="listDevice" style="margin-left: 10px;">
+    <div class="listDevice" style="        margin-left: 10px;">
         <div id="divTabContainerLoading" class="analyze-loader-container">
-            <img src="Images/analyze-loader.gif" style="margin-top: 50px;" />
+            <img src="Images/analyze-loader.gif" style="        margin-top: 50px;" />
         </div>
-        <div id="divToRender" style="display: none;">
+        <div id="divToRender" style="        display: none;">
             <table cellpadding="0" cellspacing="10" border="0" width="101%">
                 <tr>
                     <td>
@@ -693,8 +695,14 @@
                                 <div>
                                     <div>
 
-                                        <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px" style="display: none;">
-                                            <div style="float: right; padding-top: 2px; position: absolute; top: 0; right: 0; padding-right: 4px; padding-top: 5px">
+                                        <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px" style="        display: none;">
+                                            <div style="        float: right;
+        padding-top: 2px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-right: 4px;
+        padding-top: 5px">
                                                 <asp:ImageButton ID="ibtnPrintPreviewNew" runat="server"
                                                     ImageUrl="../Images/DymoPrintPreviewIcon.png"
                                                     OnClientClick="ShowLabelPrintPreviewNew(); return false;"
@@ -708,15 +716,17 @@
                                                     OnClientClick="PrintLabel(false); return false;"
                                                     meta:resourcekey="ibtnPrintLabelResource1" />
                                             </div>
-                                            <table style="width: 100%; border-collapse: collapse;">
+                                            <table style="        width: 100%;
+        border-collapse: collapse;">
                                                 <tr>
-                                                    <td valign="top" style="width: 63%; border: 1px Solid Gray;">
+                                                    <td valign="top" style="        width: 63%;
+        border: 1px Solid Gray;">
                                                         <table id="tblValidationSummary" class="Validation_Summary">
                                                             <tr class="Gray">
-                                                                <td class="Summary_Left" style="width: 35%;">
+                                                                <td class="Summary_Left" style="        width: 35%;">
                                                                     <asp:Localize ID="Localize25" runat="server" meta:resourcekey="ValidationSummaryMeasurementName"></asp:Localize>
                                                                 </td>
-                                                                <td class="Summary_Right" style="width: 65%;">
+                                                                <td class="Summary_Right" style="        width: 65%;">
                                                                     <span data-bind="text: MeasurementName"></span>
                                                                 </td>
                                                             </tr>
@@ -801,19 +811,20 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                        <table id="tblAverageMeasurementSummary" class="Validation_Summary" style="width: 100%; display: none;">
+                                                        <table id="tblAverageMeasurementSummary" class="Validation_Summary" style="        width: 100%;
+        display: none;">
                                                             <tr class="Gray">
-                                                                <td style="width: 100%;">
+                                                                <td style="        width: 100%;">
                                                                     <span>Averaging all measurements!</span>
                                                                 </td>
                                                             </tr>
                                                         </table>
                                                     </td>
-                                                    <td style="width: 2%;"></td>
+                                                    <td style="        width: 2%;"></td>
                                                     <td valign="top">
-                                                        <table class="summaryMetricTable k-grid k-widget k-display-block" style="width: 100%">
+                                                        <table class="summaryMetricTable k-grid k-widget k-display-block" style="        width: 100%">
                                                             <thead class="k-grid-header">
-                                                                <tr style="line-height: 25px;">
+                                                                <tr style="        line-height: 25px;">
                                                                     <th>
                                                                         <asp:Localize ID="locGridMetricSumName" runat="server" meta:resourcekey="GridMetricSumName" Text=""></asp:Localize></th>
                                                                     <th>
@@ -825,9 +836,9 @@
                                                             <tbody data-template="validation-metrics-template" data-bind="source: ValidationMetrics"></tbody>
                                                         </table>
                                                         <br />
-                                                        <table id="tblPatchTolerance" class="summaryMetricTable k-grid k-widget k-display-block" style="width: 100%">
+                                                        <table id="tblPatchTolerance" class="summaryMetricTable k-grid k-widget k-display-block" style="        width: 100%">
                                                             <thead class="k-grid-header">
-                                                                <tr style="line-height: 25px;">
+                                                                <tr style="        line-height: 25px;">
                                                                     <th>
                                                                         <asp:Localize ID="Localize36" runat="server" meta:resourcekey="GridPatchTolSampleName" Text="SampleName"></asp:Localize></th>
                                                                     <th>
@@ -842,13 +853,15 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div id="divMeasurementSummary" style="display: none;">
-                                            <table id="tblMeasurementSummary" cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0; width: 100%">
+                                        <div id="divMeasurementSummary" style="        display: none;">
+                                            <table id="tblMeasurementSummary" cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="        margin: 0;
+        width: 100%">
                                                 <tr>
                                                     <td>
-                                                        <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0">
+                                                        <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="        margin: 0">
                                                             <tr class="Gray">
-                                                                <td style="font-size: 13px; width: 200px;">
+                                                                <td style="        font-size: 13px;
+        width: 200px;">
                                                                     <asp:Localize ID="locMeasurementName" runat="server" meta:resourcekey="locMeasurementNameResource1" Text=""></asp:Localize>
                                                                 </td>
                                                                 <td>
@@ -856,7 +869,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="White">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="MeasurementID:" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
                                                                 </td>
                                                                 <td>
@@ -864,7 +877,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="Gray">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="Upload Date:" ID="locUploadDate" runat="server" meta:resourcekey="locUploadDateResource1"></asp:Localize>
                                                                 </td>
                                                                 <td>
@@ -872,14 +885,14 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="White">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="Average Δ" ID="locAverageDelta" runat="server" meta:resourcekey="locAverageDeltaResource1"></asp:Localize>
                                                                 <td>
                                                                     <span data-bind="text: Avg_ΔE"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr class="Gray">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="Maximum Δ" ID="locMaximumDelta"
                                                                         runat="server" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
                                                                     <asp:Label ID="lblMaxΔE" runat="server"></asp:Label></td>
@@ -889,7 +902,7 @@
                                                             </tr>
 
                                                             <tr class="White">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="Maximum Primary Δ" runat="server"
                                                                         ID="locMaxPrimaryDelta" meta:resourcekey="locMaxPrimaryDeltaResource1"></asp:Localize>
                                                                 <td>
@@ -897,7 +910,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="Gray">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="Maximum Primary ΔH:"
                                                                         ID="locMaxPrimaryDeltaH" runat="server" meta:resourcekey="locMaxPrimaryDeltaHResource1"></asp:Localize></td>
                                                                 <td>
@@ -905,7 +918,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="White">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="Gray Average Δ"
                                                                         ID="locGrayAvgDelta" runat="server" meta:resourcekey="locGrayAvgDeltaResource1"></asp:Localize>
                                                                 <td>
@@ -914,7 +927,7 @@
                                                             </tr>
 
                                                             <tr class="Gray">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="10th Percentile Δ"
                                                                         ID="loc10PercentileDelta" runat="server"
                                                                         meta:resourcekey="loc10PercentileDeltaResource1"></asp:Localize>
@@ -924,7 +937,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="White">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="90th Percentile Δ"
                                                                         ID="loc90PercentileDelta" runat="server"
                                                                         meta:resourcekey="loc90PercentileDeltaResource1"></asp:Localize>
@@ -934,7 +947,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="Gray">
-                                                                <td style="font-size: 13px;">
+                                                                <td style="        font-size: 13px;">
                                                                     <asp:Localize Text="95th Percentile Δ"
                                                                         ID="loc95PercentileDelta" runat="server"
                                                                         meta:resourcekey="loc95PercentileDeltaResource1"></asp:Localize>
@@ -955,9 +968,9 @@
                                 <div>
                                     <div>
                                         <div>
-                                            <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color: White;">
+                                            <table border="1" cellpadding="0" cellspacing="0" width="100%" style="        background-color: White;">
                                                 <tr>
-                                                    <td style="width: 50%;" valign="top" class="CHARTTABLE">
+                                                    <td style="        width: 50%;" valign="top" class="CHARTTABLE">
                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                             <tr>
                                                                 <td class="green-title">&nbsp; &Delta;<asp:Label ID="Label6" runat="server"></asp:Label>
@@ -966,14 +979,15 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td style="width: 60%; vertical-align: bottom;" id="TD9" runat="server">
+                                                                <td style="        width: 60%;
+        vertical-align: bottom;" id="TD9" runat="server">
                                                                     <div id="divChartInkPaperABComparision"></div>
 
                                                                 </td>
                                                             </tr>
                                                         </table>
                                                     </td>
-                                                    <td style="width: 50%;" valign="top" class="CHARTTABLE">
+                                                    <td style="        width: 50%;" valign="top" class="CHARTTABLE">
                                                         <table id="tblDensityChart" border="0" cellpadding="0" cellspacing="0" width="100%">
                                                             <tr>
                                                                 <td class="green-title">&nbsp;
@@ -1003,15 +1017,15 @@
                                                             </tr>--%>
                                                             <tr>
                                                                 <td>
-                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 1px;">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="        border-spacing: 1px;">
                                                                         <tr>
                                                                             <td class="green-title">
                                                                                 <span id="spanlocPaperAB">
                                                                                     <asp:Localize Text="Paper a* b*" runat="server" ID="locPaperAB"
                                                                                         meta:resourcekey="locPaperABResource1"></asp:Localize>
                                                                                 </span>
-                                                                                <a id="lnkPaperPaperLab1LargeChart" style="float: right">
-                                                                                    <asp:Image ID="imgPaperPaperLab1LargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" />
+                                                                                <a id="lnkPaperPaperLab1LargeChart" style="        float: right">
+                                                                                    <asp:Image ID="imgPaperPaperLab1LargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" />
                                                                                 </a>
                                                                             </td>
                                                                             <td class="green-title">
@@ -1019,8 +1033,8 @@
                                                                                     <asp:Localize Text="Paper L*" runat="server" ID="locPaperL"
                                                                                         meta:resourcekey="locPaperLResource1"></asp:Localize>
                                                                                 </span>
-                                                                                <a id="lnkPaperPaperLab2LargeChart" style="float: right">
-                                                                                    <asp:Image ID="imgPaperPaperLab2LargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" />
+                                                                                <a id="lnkPaperPaperLab2LargeChart" style="        float: right">
+                                                                                    <asp:Image ID="imgPaperPaperLab2LargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" />
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
@@ -1043,7 +1057,7 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <div style="display: none;">
+                                            <div style="        display: none;">
                                                 <table>
                                                     <tr>
                                                         <td>
@@ -1061,7 +1075,7 @@
                                     <div>
                                         <table cellpadding="0" cellspacing="0" width="650px">
                                             <tr>
-                                                <td valign="top" style="width: 59%">
+                                                <td valign="top" style="        width: 59%">
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                         <tr>
                                                             <td class="green-title">&nbsp;
@@ -1069,8 +1083,9 @@
                                                                         <asp:Localize Text="Gray Balance ΔCh" runat="server"
                                                                             ID="locGrayBalanceDeltaCH" meta:resourcekey="locGrayBalanceDeltaCHResource1"></asp:Localize>
                                                                     </span>
-                                                                <a id="lnkGrayBalanceDeltaCHLargeChart" style="float: right; margin-right: 5px;">
-                                                                    <asp:Image ID="imgGrayBalanceDeltaCHLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" />
+                                                                <a id="lnkGrayBalanceDeltaCHLargeChart" style="        float: right;
+        margin-right: 5px;">
+                                                                    <asp:Image ID="imgGrayBalanceDeltaCHLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" />
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -1081,8 +1096,8 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td style="width: 2%;"></td>
-                                                <td style="width: 39%" valign="top">
+                                                <td style="        width: 2%;"></td>
+                                                <td style="        width: 39%" valign="top">
                                                     <div id="divGraySummaryList">
                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                             <tr>
@@ -1092,10 +1107,10 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td valign="top" style="padding: 2px">
-                                                                    <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                                <td valign="top" style="        padding: 2px">
+                                                                    <table class="k-grid k-widget k-display-block" style="        width: 100%">
                                                                         <thead class="k-grid-header">
-                                                                            <tr style="line-height: 25px;">
+                                                                            <tr style="        line-height: 25px;">
                                                                                 <th>
                                                                                     <asp:Localize Text="Metric" runat="server"
                                                                                         ID="localGrayHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
@@ -1119,7 +1134,7 @@
 
                                         <table cellpadding="0" cellspacing="0" width="650px">
                                             <tr>
-                                                <td valign="top" style="width: 59%">
+                                                <td valign="top" style="        width: 59%">
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                         <tr>
                                                             <td class="green-title">&nbsp;
@@ -1127,8 +1142,9 @@
                                                                     <asp:Localize Text="Black ΔL" runat="server" ID="locBlackDeltaL"
                                                                         meta:resourcekey="locBlackDeltaLResource1"></asp:Localize>
                                                                 </span>
-                                                                <a id="lnkBlackDeltaLLargeChart" style="float: right; margin-right: 5px;">
-                                                                    <asp:Image ID="imgBlackDeltaLLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" />
+                                                                <a id="lnkBlackDeltaLLargeChart" style="        float: right;
+        margin-right: 5px;">
+                                                                    <asp:Image ID="imgBlackDeltaLLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" />
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -1139,8 +1155,8 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td style="width: 2%;"></td>
-                                                <td style="width: 39%" valign="top">
+                                                <td style="        width: 2%;"></td>
+                                                <td style="        width: 39%" valign="top">
                                                     <div id="divBlackSummaryList">
                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                             <tr>
@@ -1150,10 +1166,10 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td valign="top" style="padding: 2px">
-                                                                    <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                                <td valign="top" style="        padding: 2px">
+                                                                    <table class="k-grid k-widget k-display-block" style="        width: 100%">
                                                                         <thead class="k-grid-header">
-                                                                            <tr style="line-height: 25px;">
+                                                                            <tr style="        line-height: 25px;">
                                                                                 <th>
                                                                                     <asp:Localize Text="Metric" runat="server"
                                                                                         ID="localBlackHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
@@ -1177,7 +1193,7 @@
 
                                         <table cellpadding="0" cellspacing="0" width="650px">
                                             <tr>
-                                                <td valign="top" style="width: 59%">
+                                                <td valign="top" style="        width: 59%">
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                         <tr>
                                                             <td class="green-title">&nbsp;
@@ -1185,8 +1201,9 @@
                                                                     <asp:Localize runat="server" Text="Gray ΔL" ID="locGrayDeltaL"
                                                                         meta:resourcekey="locGrayDeltaLResource1"></asp:Localize>
                                                                 </span>
-                                                                <a id="lnkGrayDeltaLLargeChart" style="float: right; margin-right: 5px;">
-                                                                    <asp:Image ID="imgGrayDeltaLLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" />
+                                                                <a id="lnkGrayDeltaLLargeChart" style="        float: right;
+        margin-right: 5px;">
+                                                                    <asp:Image ID="imgGrayDeltaLLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" />
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -1197,8 +1214,8 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td style="width: 2%;"></td>
-                                                <td style="width: 39%" valign="top">
+                                                <td style="        width: 2%;"></td>
+                                                <td style="        width: 39%" valign="top">
                                                     <div id="divGrayLDeltaSummaryList">
                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                             <tr>
@@ -1208,10 +1225,10 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td valign="top" style="padding: 2px">
-                                                                    <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                                <td valign="top" style="        padding: 2px">
+                                                                    <table class="k-grid k-widget k-display-block" style="        width: 100%">
                                                                         <thead class="k-grid-header">
-                                                                            <tr style="line-height: 25px;">
+                                                                            <tr style="        line-height: 25px;">
                                                                                 <th>
                                                                                     <asp:Localize Text="Metric" runat="server"
                                                                                         ID="localGrayLHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
@@ -1235,7 +1252,7 @@
 
                                         <table cellpadding="0" cellspacing="0" width="650px">
                                             <tr>
-                                                <td style="width: 49%">
+                                                <td style="        width: 49%">
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                         <tr>
                                                             <td class="green-title">&nbsp; Black NPD
@@ -1248,8 +1265,8 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td style="width: 2%;"></td>
-                                                <td style="width: 49%;">
+                                                <td style="        width: 2%;"></td>
+                                                <td style="        width: 49%;">
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                         <tr>
                                                             <td class="green-title">&nbsp; Gray NPD
@@ -1270,9 +1287,9 @@
                                 <%--Gamut or gray chart tab--%>
                                 <div>
                                     <div>
-                                        <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
+                                        <table border="1" cellpadding="0" cellspacing="0" width="200px" style="        background-color: White;">
                                             <tr>
-                                                <td style="width: 45%;" valign="top" class="CHARTTABLE">
+                                                <td style="        width: 45%;" valign="top" class="CHARTTABLE">
 
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                         <tr>
@@ -1289,8 +1306,9 @@
                                                                             <asp:Localize ID="Localize5" runat="server" Text="a* - b* Comparison"
                                                                                 meta:resourcekey="locComparisonResource1"></asp:Localize>
                                                                             <%--<img style="height: 22px;" src="../Images/eye_blue.png" />--%>
-                                                                            <a id="lnkABComparisionLargeChart" style="float: right; margin-right: 5px;">
-                                                                                <asp:Image ID="imgABComparisionLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                            <a id="lnkABComparisionLargeChart" style="        float: right;
+        margin-right: 5px;">
+                                                                                <asp:Image ID="imgABComparisionLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" /></a>
                                                                         </td>
                                                                     </tr>
 
@@ -1303,16 +1321,16 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td>
-                                                                            <div style="padding-left: -5px;" class="green-title">
+                                                                            <div style="        padding-left: -5px;" class="green-title">
                                                                                 <table>
                                                                                     <tr>
-                                                                                        <td style="width: 93%">
+                                                                                        <td style="        width: 93%">
                                                                                             <div id="accordionNew" class="header collapsibleContainerTitle">
                                                                                                 <div>
                                                                                                     <div>
-                                                                                                        <div style="float: left">
+                                                                                                        <div style="        float: left">
                                                                                                         </div>
-                                                                                                        <div style="float: left;">
+                                                                                                        <div style="        float: left;">
                                                                                                             <div id="imgHeaderNew" class="expanded">
                                                                                                                 &nbsp;
                                                                                                             </div>
@@ -1329,7 +1347,7 @@
                                                                                         <td>
                                                                                             <div>
                                                                                                 <a id="lnkAB_ComparisionLargeChart">
-                                                                                                    <asp:Image ID="imgAB_ComparisionLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" />
+                                                                                                    <asp:Image ID="imgAB_ComparisionLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" />
                                                                                                 </a>
                                                                                             </div>
                                                                                         </td>
@@ -1339,7 +1357,8 @@
                                                                             </div>
                                                                             <asp:Panel ID="panelabGamutComparisonNew" runat="server" BorderStyle="None"
                                                                                 Width="100%" meta:resourcekey="panelabGamutComparisonResource1">
-                                                                                <div id="kendoChartGamut_ABComparison" style="min-height: 250px; min-width: 300px;" class="gamutChart"></div>
+                                                                                <div id="kendoChartGamut_ABComparison" style="        min-height: 250px;
+        min-width: 300px;" class="gamutChart"></div>
                                                                             </asp:Panel>
 
                                                                         </td>
@@ -1348,14 +1367,16 @@
                                                                         <td id="Td7" class="green-title" runat="server">
                                                                             <asp:Localize runat="server" Text="L* Comparison" ID="Localize7"
                                                                                 meta:resourcekey="locLComparisonResource1"></asp:Localize>
-                                                                            <a id="lnkLComparisionLargeChart" style="float: right; margin-right: 5px">
-                                                                                <asp:Image ID="imgLComparisionLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" />
+                                                                            <a id="lnkLComparisionLargeChart" style="        float: right;
+        margin-right: 5px">
+                                                                                <asp:Image ID="imgLComparisionLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" />
                                                                             </a>
                                                                         </td>
                                                                     </tr>
                                                                     <tr id="Tr7" runat="server">
                                                                         <td id="Td8" align="center" valign="top" runat="server">
-                                                                            <div id="kendoChartLComaparision" style="min-height: 80px; min-width: 300px;"></div>
+                                                                            <div id="kendoChartLComaparision" style="        min-height: 80px;
+        min-width: 300px;"></div>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -1364,7 +1385,7 @@
                                                     </table>
                                                 </td>
 
-                                                <td style="width: 55%;" valign="top">
+                                                <td style="        width: 55%;" valign="top">
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                         <tr>
                                                             <td>
@@ -1377,15 +1398,16 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td>
-                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 350px;">
+                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="        min-width: 350px;">
                                                                                 <tr>
                                                                                     <td class="green-title">
                                                                                         <span id="spanGrayBalanceL">
                                                                                             <asp:Localize runat="server" Text="Gray Balance L*"
                                                                                                 ID="locGrayBalanceL" meta:resourcekey="locGrayBalanceLResource1"></asp:Localize>
                                                                                         </span>
-                                                                                        <a id="lnk_L_GrayBalanceLargeChart" style="float: right; margin-right: 5px;">
-                                                                                            <asp:Image ID="imgLGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                                        <a id="lnk_L_GrayBalanceLargeChart" style="        float: right;
+        margin-right: 5px;">
+                                                                                            <asp:Image ID="imgLGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" /></a>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -1399,8 +1421,9 @@
                                                                                             <asp:Localize runat="server" Text="Gray Balance a*"
                                                                                                 ID="locGrayBalanceA" meta:resourcekey="locGrayBalanceAResource1"></asp:Localize>
                                                                                         </span>
-                                                                                        <a id="lnk_A_GrayBalanceLargeChart" style="float: right; margin-right: 5px;">
-                                                                                            <asp:Image ID="imgAGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                                        <a id="lnk_A_GrayBalanceLargeChart" style="        float: right;
+        margin-right: 5px;">
+                                                                                            <asp:Image ID="imgAGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" /></a>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -1414,8 +1437,9 @@
                                                                                             <asp:Localize runat="server" Text="Gray Balance b*"
                                                                                                 ID="locGrayBalanceB" meta:resourcekey="locGrayBalanceBResource1"></asp:Localize>
                                                                                         </span>
-                                                                                        <a id="lnk_B_GrayBalanceLargeChart" style="float: right; margin-right: 5px;">
-                                                                                            <asp:Image ID="imgBGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                                        <a id="lnk_B_GrayBalanceLargeChart" style="        float: right;
+        margin-right: 5px;">
+                                                                                            <asp:Image ID="imgBGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="        height: 22px;" /></a>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -1425,7 +1449,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <div style="display: none;">
+                                                                                        <div style="        display: none;">
                                                                                             <div id="kendoChartDummy">
                                                                                             </div>
                                                                                             <div id="kendoChartDummyBalanceL"></div>
@@ -1541,7 +1565,7 @@
                                                         <div id="divTVI_Spread">
                                                             <table cellpadding="0" cellspacing="0" width="650px">
                                                                 <tr>
-                                                                    <td valign="top" style="width: 59%">
+                                                                    <td valign="top" style="        width: 59%">
                                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                                             <tr>
                                                                                 <td valign="top">
@@ -1549,17 +1573,18 @@
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td style="padding-left: 60px; padding-right: 60px;">
+                                                                                <td style="        padding-left: 60px;
+        padding-right: 60px;">
                                                                                     <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
-                                                                                        <tr class="TRTABLEBOX" style="line-height: 30px;">
-                                                                                            <td class="TDTABLEBOXLEFT" style="text-align: left;">
+                                                                                        <tr class="TRTABLEBOX" style="        line-height: 30px;">
+                                                                                            <td class="TDTABLEBOXLEFT" style="        text-align: left;">
                                                                                                 <b>
                                                                                                     <asp:Localize ID="locChromVariation" Text="Chromatic Variation" runat="server" meta:resourcekey="locChromaticVariationResource1"></asp:Localize></b>
                                                                                             </td>
                                                                                         </tr>
-                                                                                        <tr style="text-align: center;">
-                                                                                            <td style="padding-left: 40px;">
-                                                                                                <table id="chromVariationTable" width="100%" style="line-height: 20px;">
+                                                                                        <tr style="        text-align: center;">
+                                                                                            <td style="        padding-left: 40px;">
+                                                                                                <table id="chromVariationTable" width="100%" style="        line-height: 20px;">
                                                                                                     <tr>
                                                                                                         <th data-bind="visible: Tone20 != 0">20</th>
                                                                                                         <th data-bind="visible: Tone25 != 0">25</th>
@@ -1601,7 +1626,7 @@
                                         <div id="divTVI_G7">
                                             <table cellpadding="0" cellspacing="0" width="650px">
                                                 <tr>
-                                                    <td valign="top" style="width: 59%">
+                                                    <td valign="top" style="        width: 59%">
                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
 
                                                             <tr>
@@ -1646,34 +1671,39 @@
                                 <%--report generation tab--%>
                                 <div>
                                     <div id="divReport">
-                                        <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 100%;"
+                                        <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="        height: 100%;"
                                             cellpadding="0" cellspacing="0" class="TABLE1">
                                             <tr id="Tr4" runat="server">
                                                 <td valign="top" runat="server" style="width: 35%; padding-left: 10px;">
                                                     <a id="btnGeneratePDF">
-                                                        <img src="Images/processbar.gif" style="padding-right: 10px;" /></a>
+                                                        <img src="Images/processbar.gif" style="        padding-right: 10px;" /></a>
                                                 </td>
                                                 <td>
-                                                    <table style="line-height: 15px;">
+                                                    <table style="        line-height: 15px;">
                                                         <tr>
-                                                            <td style="font-family: Arial; font-size: 13px; padding-left: 4px; font-weight: bold;">
+                                                            <td style="        font-family: Arial;
+        font-size: 13px;
+        padding-left: 4px;
+        font-weight: bold;">
                                                                 <asp:Label ID="txtReportTitle" runat="server"></asp:Label>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="padding-top: 10px;">
+                                                            <td style="        padding-top: 10px;">
                                                                 <a id="lnkDownloadReport" class="gray_bt">
-                                                                    <span style="border-style: none;">Download Report</span>
+                                                                    <span style="        border-style: none;">Download Report</span>
                                                                 </a>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
                                                 <td valign="top">
-                                                    <div id="Div_ReportGrading" runat="server" visible="false" style="float: right; padding-right: 10px;">
+                                                    <div id="Div_ReportGrading" runat="server" visible="false" style="        float: right;
+        padding-right: 10px;">
                                                         <asp:ImageButton ID="btnReportGrading" runat="server" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="Scoring Report" OnClientClick="javascript:return ShowReportGradingWindow();"></asp:ImageButton>
                                                     </div>
-                                                    <div id="Div_ReportCMYKDensity" runat="server" visible="false" style="float: right; padding-right: 10px;">
+                                                    <div id="Div_ReportCMYKDensity" runat="server" visible="false" style="        float: right;
+        padding-right: 10px;">
                                                         <asp:ImageButton ID="btnReportCMYKDensity" runat="server" ImageUrl="../Images/Sync1D CMYK Density Report_preview.jpg" ToolTip="CMYK Density Report" OnClientClick="javascript:return ShowReportCMYKDensityWindow();"></asp:ImageButton>
                                                     </div>
                                                 </td>

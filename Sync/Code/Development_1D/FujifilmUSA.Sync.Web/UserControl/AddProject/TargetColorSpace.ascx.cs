@@ -68,6 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
                 {
                     trPaperScaling_4D.Visible = true;
+                    trTargetLABMessage.Visible = true;
                 }
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)

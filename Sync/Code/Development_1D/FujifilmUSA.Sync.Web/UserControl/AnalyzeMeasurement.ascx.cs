@@ -330,11 +330,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
-                _presenterAnalyze.GetTargetLABList();
-                SessionManager.Instance.CurrentProject.ProjectTargetLAB = ProjectTargetLABList;
-                SessionManager.Instance.CurrentProject.NewPaper_White_L_Old = Project.NewPaper_White_L_Old;
-                SessionManager.Instance.CurrentProject.NewPaper_White_a_Old = Project.NewPaper_White_a_Old;
-                SessionManager.Instance.CurrentProject.NewPaper_White_b_Old = Project.NewPaper_White_b_Old;
+                if (SessionManager.Instance.CurrentProject.ProjectTargetLAB == null || !SessionManager.Instance.CurrentProject.ProjectTargetLAB.Any())
+                {
+                    _presenterAnalyze.GetTargetLABList();
+                    SessionManager.Instance.CurrentProject.ProjectTargetLAB = ProjectTargetLABList;
+                    SessionManager.Instance.CurrentProject.NewPaper_White_L_Old = Project.NewPaper_White_L_Old;
+                    SessionManager.Instance.CurrentProject.NewPaper_White_a_Old = Project.NewPaper_White_a_Old;
+                    SessionManager.Instance.CurrentProject.NewPaper_White_b_Old = Project.NewPaper_White_b_Old;
+                }
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
