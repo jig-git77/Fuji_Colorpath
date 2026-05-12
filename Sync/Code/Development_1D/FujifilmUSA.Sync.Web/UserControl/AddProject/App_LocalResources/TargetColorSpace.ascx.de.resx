@@ -207,4 +207,8 @@
   <data name="TargetPrintConditionNotAvailableMessage" xml:space="preserve">
     <value>No Target Print Condition_de</value>
   </data>
+	<data name="locPaperScalingMessage.Text" xml:space="preserve">
+    <value>Relative Paper Scaling has changed! You can enable this feature from the Analyze page after your first measurement. 
+        ColorPath SYNC will automatically use the measured paper value rather than manual input. _de</value>
+  </data>
 </root>
