@@ -9,6 +9,7 @@ namespace FujifilmUSA.Sync.Entity.CPSync1D
     public class PrintStandardType
     {
         public short PrintStandardTypeID { get; set; }
+        public short PrintStandardTypeIDOld { get; set; }
         public string PrintStandard { get; set; }
         public bool IsSync1DType { get; set; }
         public short RankId { get; set; }
