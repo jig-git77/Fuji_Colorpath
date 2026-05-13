@@ -106,6 +106,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld = Project.PrintStandardType.PrintStandardTypeID;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
                     {

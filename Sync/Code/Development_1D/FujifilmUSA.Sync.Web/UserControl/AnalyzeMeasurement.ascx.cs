@@ -329,7 +329,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-                PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+                if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
+                    PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
+                else
+                    PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
                 if (SessionManager.Instance.CurrentProject.ProjectTargetLAB == null || !SessionManager.Instance.CurrentProject.ProjectTargetLAB.Any())
                 {
                     _presenterAnalyze.GetTargetLABList();
@@ -458,7 +461,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+            if(SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
+                PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
+            else
+                PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+
             EnabledPaperScaling = chk_IsPaperScaling1D.Checked;
             if(EnabledPaperScaling)
                 ProjectTargetLABList = SessionManager.Instance.CurrentProject.ProjectTargetLAB;

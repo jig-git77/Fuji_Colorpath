@@ -171,6 +171,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                     //bool isCustomPlugin = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin;
                     SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld = Project.PrintStandardType.PrintStandardTypeID;
                     //  SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin = isCustomPlugin;
                     //Disable links if project is already certified 
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification && SessionManager.Instance.CurrentProject.Status == EOptimizeRunStatus.Certify)
