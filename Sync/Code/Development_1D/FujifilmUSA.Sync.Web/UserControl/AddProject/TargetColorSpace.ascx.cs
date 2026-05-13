@@ -107,9 +107,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
         {
+            //if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld == 0)
+            //{
+            //    SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld = Convert.ToInt16(cmbPrintStandardType.SelectedValue);
+            //}
+
+            // If old value is 0, set it from current selected value; otherwise keep existing value
+            short oldPrintStandardTypeId = (short)(Convert.ToInt16(SessionManager.Instance.CurrentProject.PrintStandardType?.PrintStandardTypeIDOld) == 0
+                ? Convert.ToInt16(cmbPrintStandardType.SelectedValue)
+                : SessionManager.Instance.CurrentProject.PrintStandardType?.PrintStandardTypeIDOld);
+
             SessionManager.Instance.CurrentProject.PrintStandardType = new Entity.CPSync1D.PrintStandardType()
             {
                 PrintStandardTypeID = Convert.ToInt16(cmbPrintStandardType.SelectedValue),
+                PrintStandardTypeIDOld = oldPrintStandardTypeId,
                 PrintStandard = cmbPrintStandardType.SelectedItem.Text,
                 SourceProfile = new SourceProfile()
                 {
