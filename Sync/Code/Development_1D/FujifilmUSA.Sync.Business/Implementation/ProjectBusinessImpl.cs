@@ -704,6 +704,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.NewPaper_White_b_Old
                                                  });
                         savedProjectId = project.ProjectId;
+
+                        // check if old and new print standard type id is same? if same then do not update.
+                        if (project.PrintStandardType.PrintStandardTypeID != project.PrintStandardType.PrintStandardTypeIDOld)
+                        {
+                            DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure("CPSync.UpdateDeltaValuesByMeasurementId",
+                                             new object[]
+                                                 {
+                                                     project.ProjectId,
+                                                     project.DeviceId,
+                                                     (int)project.LicenseType
+                                                 });
+                        }
                     },
                     new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveProject"));
                 #endregion
