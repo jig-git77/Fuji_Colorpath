@@ -1397,7 +1397,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
        
 
-        public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId)
+        public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId, decimal NewPaper_White_L, decimal NewPaper_White_a, decimal NewPaper_White_b)
         {
             // Build XML like in reference code
             var projectTargetLAB = new XElement("ProjectTargetLAB", "");
@@ -1429,7 +1429,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 projectTargetLAB.ToString(),
                                 EnabledPaperScaling,
                                 MeasurementId,
-                                LicenseTypeId
+                                LicenseTypeId,
+                                NewPaper_White_L,
+                                NewPaper_White_a,
+                                NewPaper_White_b
                               }
                           );
                  },
@@ -1437,7 +1440,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
              );
         }
 
-        public Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId)
+        public Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId, int LicenseTypeId)
         {
             Project project = new Project();
 
@@ -1445,12 +1448,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 () =>
                 {
                     var dsProjectTargetLABList = DataAccessFactory.Instance
-                        .GetDsResult("[CPSync].[GetTargetLabNewPaper]",
-                            new object[] { printStandardTypeId, ProjectTypeId, ProjectId });
+                    .GetDsResult("[CPSync].[GetTargetLabNewPaper]",
+                      new object[] { printStandardTypeId, ProjectTypeId, ProjectId, LicenseTypeId });
 
                     if (dsProjectTargetLABList != null && dsProjectTargetLABList.Tables.Count > 0)
                     {
-                        if (dsProjectTargetLABList.Tables[0].Rows.Count > 0)
+                        bool includeTargetLab = (LicenseTypeId == 1 || LicenseTypeId == 13);
+
+                        // Load Target LAB only for specific license types
+                        if (includeTargetLab && dsProjectTargetLABList.Tables[0].Rows.Count > 0)
                         {
                             project.ProjectTargetLAB = dsProjectTargetLABList.Tables[0]
                                 .AsEnumerable()
@@ -1467,10 +1473,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 }).ToList();
                         }
 
-                        if (dsProjectTargetLABList.Tables.Count > 1 &&
-                                        dsProjectTargetLABList.Tables[1].Rows.Count > 0)
+                        // Decide which table contains NewPaper values
+                        int newPaperTableIndex = includeTargetLab ? 1 : 0;
+
+                        if (dsProjectTargetLABList.Tables.Count > newPaperTableIndex &&
+                            dsProjectTargetLABList.Tables[newPaperTableIndex].Rows.Count > 0)
                         {
-                            var row = dsProjectTargetLABList.Tables[1].Rows[0];
+                            var row = dsProjectTargetLABList.Tables[newPaperTableIndex].Rows[0];
 
                             project.NewPaper_White_L_Old = DataReader.ReadDecimal(row, "Old_NewPaper_White_L");
                             project.NewPaper_White_a_Old = DataReader.ReadDecimal(row, "Old_NewPaper_White_a");

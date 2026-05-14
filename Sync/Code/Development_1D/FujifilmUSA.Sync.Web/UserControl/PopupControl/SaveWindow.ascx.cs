@@ -57,6 +57,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             CompanyId = SessionManager.Instance.SelectedCompany;
+            if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID)
+                SessionManager.Instance.CurrentProject.EnabledPaperScaling = false;
+
             Project = SessionManager.Instance.CurrentProject;
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type
             {

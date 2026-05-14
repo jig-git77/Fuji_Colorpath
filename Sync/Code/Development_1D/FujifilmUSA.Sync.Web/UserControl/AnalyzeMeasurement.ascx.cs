@@ -169,6 +169,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             lbtnMeasurement.Visible = IsXMFUser;
+            Project = SessionManager.Instance.CurrentProject;
             if (!Page.IsPostBack)
             {
                 hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
@@ -461,7 +462,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            if(SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
+            LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
+            if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
                 PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
             else
                 PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;

@@ -52,8 +52,8 @@ namespace FujifilmUSA.Sync.Business.Interface
         void CreateInitialDestinationAndDeviceLinkProfilesMultiColor(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
         void CreateDestinationProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, int status, DateTime endDateTime);
 
-        void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId);
-        Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId);
+        void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId, decimal NewPaper_White_L, decimal NewPaper_White_a, decimal NewPaper_White_b);
+        Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId, int LicenseTypeId);
 
     }
 }
