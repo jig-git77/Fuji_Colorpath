@@ -377,14 +377,15 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            optimizeRunBusiness.UpdateTargetLabList(_viewAnalyze.ProjectId, _viewAnalyze.ProjectTargetLABList ,_viewAnalyze.EnabledPaperScaling , _viewAnalyze.MeasurementId, _viewAnalyze.LicenseTypeId);
+            optimizeRunBusiness.UpdateTargetLabList(_viewAnalyze.ProjectId, _viewAnalyze.ProjectTargetLABList, _viewAnalyze.EnabledPaperScaling, _viewAnalyze.MeasurementId, _viewAnalyze.LicenseTypeId, _viewAnalyze.Project.NewPaper_White_L,
+                 _viewAnalyze.Project.NewPaper_White_a, _viewAnalyze.Project.NewPaper_White_b);
         }
 
         public void GetTargetLABList()
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.Project = optimizeRunBusiness.GetProjectTargetLAB(_viewAnalyze.PrintstandardTypeId, _viewAnalyze.ProjectTypeId, _viewAnalyze.ProjectId);
+            _viewAnalyze.Project = optimizeRunBusiness.GetProjectTargetLAB(_viewAnalyze.PrintstandardTypeId, _viewAnalyze.ProjectTypeId, _viewAnalyze.ProjectId, _viewAnalyze.LicenseTypeId);
             _viewAnalyze.ProjectTargetLABList = _viewAnalyze.Project.ProjectTargetLAB;
         }
     }
