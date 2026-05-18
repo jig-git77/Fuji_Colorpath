@@ -60,6 +60,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID)
                 SessionManager.Instance.CurrentProject.EnabledPaperScaling = false;
 
+            SessionManager.Instance.CurrentProject.NewPaper_White_L_Old = Convert.ToDecimal(SessionManager.Instance.CurrentProject.NewPaper_White_L);
+            SessionManager.Instance.CurrentProject.NewPaper_White_a_Old = Convert.ToDecimal(SessionManager.Instance.CurrentProject.NewPaper_White_a);
+            SessionManager.Instance.CurrentProject.NewPaper_White_b_Old = Convert.ToDecimal(SessionManager.Instance.CurrentProject.NewPaper_White_b);
+
             Project = SessionManager.Instance.CurrentProject;
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type
             {
