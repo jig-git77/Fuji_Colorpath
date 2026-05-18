@@ -334,6 +334,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
                 else
                     PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+
                 if (SessionManager.Instance.CurrentProject.ProjectTargetLAB == null || !SessionManager.Instance.CurrentProject.ProjectTargetLAB.Any())
                 {
                     _presenterAnalyze.GetTargetLABList();
@@ -342,6 +343,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject.NewPaper_White_a_Old = Project.NewPaper_White_a_Old;
                     SessionManager.Instance.CurrentProject.NewPaper_White_b_Old = Project.NewPaper_White_b_Old;
                 }
+
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
@@ -379,7 +381,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
 
-            if(SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
+            if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
             {
                 if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
                         SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
@@ -390,28 +392,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     chk_IsPaperScaling1D.Enabled = chk_IsPaperScaling4D.Enabled = true;
                 }
             }
-            
-            // Enabled / Disabled
-            //if (licenseType == ELicenseType.Sync1D ||
-            //    licenseType == ELicenseType.Sync1DMultiColor ||
-            //    licenseType == ELicenseType.DLPPlus)
-            //{
-            //    if (currentProject.ProjectTargetLAB != null &&
-            //        currentProject.ProjectTargetLAB.Count > 0)
-            //    {
-            //        chk_IsPaperScaling4D.Enabled = false;
-            //    }
-            //}
-            //else if (licenseType == ELicenseType.DLP ||
-            //         licenseType == ELicenseType.Sync4DCertification ||
-            //         licenseType == ELicenseType.DLPMultiColor)
-            //{
-            //    if (currentProject.OptimizeRuns != null &&
-            //        currentProject.OptimizeRuns.Count > 0)
-            //    {
-            //        chk_IsPaperScaling4D.Enabled = false;
-            //    }
-            //}
         }
 
         #region Check Average Measurement Compatibility Mode
@@ -469,8 +449,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
 
             EnabledPaperScaling = chk_IsPaperScaling1D.Checked;
-            if(EnabledPaperScaling)
-                ProjectTargetLABList = SessionManager.Instance.CurrentProject.ProjectTargetLAB;
+            if (EnabledPaperScaling)
+            {
+                if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID)
+                {
+                    _presenterAnalyze.GetTargetLABList();
+                    SessionManager.Instance.CurrentProject.ProjectTargetLAB = ProjectTargetLABList;
+                    SessionManager.Instance.CurrentProject.NewPaper_White_L_Old = Project.NewPaper_White_L_Old;
+                    SessionManager.Instance.CurrentProject.NewPaper_White_a_Old = Project.NewPaper_White_a_Old;
+                    SessionManager.Instance.CurrentProject.NewPaper_White_b_Old = Project.NewPaper_White_b_Old;
+                }
+                else
+                    ProjectTargetLABList = SessionManager.Instance.CurrentProject.ProjectTargetLAB;
+            }
             else
             {
                 if (SessionManager.Instance.CurrentProject.OldProjectTargetLAB == null || !SessionManager.Instance.CurrentProject.OldProjectTargetLAB.Any())
@@ -519,7 +510,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     NewPaper_White_b = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_b_Old.ToString());
                 }
 
-                NewPaperxyz = ColorMath.LabtoXYZ(NewPaper_White_L, NewPaper_White_a , NewPaper_White_b);
+                NewPaperxyz = ColorMath.LabtoXYZ(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b);
                 NewMinxyz = ColorMath.LabtoXYZ(Black_L, Black_a, Black_b);
 
                 //convert current Paper's LAB to XYZ
