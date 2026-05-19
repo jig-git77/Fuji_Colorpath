@@ -1474,25 +1474,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId, decimal NewPaper_White_L, decimal NewPaper_White_a, decimal NewPaper_White_b)
         {
-            // Build XML like in reference code
-            var projectTargetLAB = new XElement("ProjectTargetLAB", "");
-
-            if (ProjectTargetLABList != null && ProjectTargetLABList.Count > 0)
-            {
-                projectTargetLAB = new XElement("ProjectTargetLAB",
-                    ProjectTargetLABList.Select(x =>
-                        new XElement("TargetLAB",
-                            new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
-                            new XAttribute("TargetL", x.TargetL),
-                            new XAttribute("TargetA", x.TargetA),
-                            new XAttribute("TargetB", x.TargetB)
-                        )
-                    )
-                );
-            }
             Common.ImplementBusinessLogic(
                  () =>
                  {
+                     // Build XML like in reference code
+                     var projectTargetLAB = new XElement("ProjectTargetLAB", "");
+
+                     if (ProjectTargetLABList != null && ProjectTargetLABList.Count > 0)
+                     {
+                         projectTargetLAB = new XElement("ProjectTargetLAB",
+                             ProjectTargetLABList.Select(x =>
+                                 new XElement("TargetLAB",
+                                     new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                     new XAttribute("TargetL", x.TargetL),
+                                     new XAttribute("TargetA", x.TargetA),
+                                     new XAttribute("TargetB", x.TargetB)
+                                 )
+                             )
+                         );
+                     }
+
                      // Call SP
                      DataAccessFactory
                           .Instance
@@ -1528,7 +1529,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     if (dsProjectTargetLABList != null && dsProjectTargetLABList.Tables.Count > 0)
                     {
-                        bool includeTargetLab = (LicenseTypeId == 1 || LicenseTypeId == 13);
+                        bool includeTargetLab = (LicenseTypeId == (int)ELicenseType.Sync1D || LicenseTypeId == (int)ELicenseType.Sync1DMultiColor);
 
                         // Load Target LAB only for specific license types
                         if (includeTargetLab && dsProjectTargetLABList.Tables[0].Rows.Count > 0)
