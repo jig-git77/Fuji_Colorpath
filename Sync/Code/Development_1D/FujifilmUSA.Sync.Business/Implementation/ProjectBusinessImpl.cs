@@ -715,7 +715,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  {
                                                      project.ProjectId,
                                                      project.DeviceId,
-                                                     (int)project.LicenseType
+                                                     (int)project.LicenseType,
+                                                     project.EnabledPaperScaling
                                                  });
                         }
                     },
