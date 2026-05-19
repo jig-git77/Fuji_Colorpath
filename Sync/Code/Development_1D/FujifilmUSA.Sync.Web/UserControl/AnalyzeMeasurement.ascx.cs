@@ -330,6 +330,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
                 if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
                     PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
                 else
@@ -435,7 +436,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void chk_IsPaperScaling4D_CheckedChanged(object sender, EventArgs e)
         {
-            //chk_IsPaperScaling4D.Enabled = chk_IsPaperScaling4D.Checked;
+            ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
+            EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
+            double NewPaper_White_L = 0.0;
+            double NewPaper_White_a = 0.0;
+            double NewPaper_White_b = 0.0;
+
+            if (EnabledPaperScaling)
+            {
+                NewPaper_White_L = Convert.ToDouble(hdnCielabL.Value);
+                NewPaper_White_a = Convert.ToDouble(hdnCielabA.Value);
+                NewPaper_White_b = Convert.ToDouble(hdnCielabB.Value);
+            }
+            else
+            {
+                NewPaper_White_L = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_L_Old.ToString());
+                NewPaper_White_a = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_a_Old.ToString());
+                NewPaper_White_b = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_b_Old.ToString());
+            }
+            SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
+            Project.NewPaper_White_L = SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
+            Project.NewPaper_White_a = SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
+            Project.NewPaper_White_b = SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
+            MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
+            _presenterAnalyze.UpdateTargetLabList();
         }
 
         protected void chk_IsPaperScaling1D_CheckedChanged(object sender, EventArgs e)
@@ -536,7 +562,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
                 SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
                 SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
-                LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
                 MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
                 _presenterAnalyze.UpdateTargetLabList();
             }
