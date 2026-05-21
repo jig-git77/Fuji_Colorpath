@@ -23,6 +23,7 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using System.Globalization;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
@@ -1183,6 +1184,68 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         fileName = ExportCMYK_PackBinaryAndZipFile(listPatch, model);  //--Option 5 = PackZ file
                     else if (model.LibraryType == 7)
                         fileName = ExportOnyxFile(listPatch, model);
+                    else if (model.LibraryType == 8)
+                    {
+                        // 1. No data
+                        if (listPatch == null || listPatch.Count == 0)
+                        {
+                            httpResponse.Data = "-1"; // No data
+                            return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                        }
+
+                        // 2. Row-level validation
+                        foreach (var p in listPatch)
+                        {
+                            // --- Name validation ---
+                            if (string.IsNullOrWhiteSpace(p.ColorName))
+                            {
+                                httpResponse.Data = "-1"; // Name missing
+                                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                            }
+
+                            string trimmedName = p.ColorName.Trim();
+
+                            if (trimmedName.Length > 48)
+                            {
+                                httpResponse.Data = "-1"; // Name too long
+                                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                            }
+
+                            if (p.ColorName != trimmedName)
+                            {
+                                httpResponse.Data = "-1"; // Leading/trailing spaces not allowed
+                                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                            }
+
+                            // --- CMYK validation (you are using CMYK mode) ---
+                            bool isCMYKValid =
+                                p.Cmyk_C >= 0 && p.Cmyk_C <= 100 &&
+                                p.Cmyk_M >= 0 && p.Cmyk_M <= 100 &&
+                                p.Cmyk_Y >= 0 && p.Cmyk_Y <= 100 &&
+                                p.Cmyk_K >= 0 && p.Cmyk_K <= 100;
+
+                            // --- LAB validation ---
+                            bool isLABValid =
+                                p.Cie_L >= 0 && p.Cie_L <= 100 &&
+                                p.Cie_a >= -128 && p.Cie_a <= 127 &&
+                                p.Cie_b >= -128 && p.Cie_b <= 127;
+
+                            // Rule: Either LAB OR CMYK must be valid
+                            if (!isCMYKValid && !isLABValid)
+                            {
+                                httpResponse.Data = "-1"; // No valid color definition
+                                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                            }
+
+                            // If CMYK is used → all must be valid
+                            if (isCMYKValid == false)
+                            {
+                                httpResponse.Data = "-1"; // Invalid CMYK values
+                                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                            }
+                        }
+                        fileName = ExportCSVFile(listPatch, model);
+                    }
 
 
                     if (!string.IsNullOrEmpty(fileName))
@@ -1806,6 +1869,60 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         #endregion
 
+        #region Create file and download .csv file for CMYK type
+        private string ExportCSVFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
+            string fileName = detail.FileName + ".csv";
+
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);
+
+            using (System.IO.StreamWriter sw = System.IO.File.CreateText(directoryFilePath + fileName))
+            {
+                //--------Start: Header------------//
+                sw.WriteLine("Name,L*,a*,b*,C,M,Y,K,TintCurve,SpPosition,SpColor,SpValue,SpC,SpM,SpY,SpK");
+                //--------End: Header--------------//
+
+                for (int i = 0; i < listPatch.Count; i++)
+                {
+                    // Replace "_" with space and make CSV safe
+                    string name = listPatch[i].ColorName?
+                        .Replace("_", " ")
+                        .Replace("\"", "\"\"");
+
+                    name = $"\"{name}\""; // Wrap in quotes (important for CSV safety)
+
+                    sw.WriteLine(
+                        name + "," +
+                        Format(listPatch[i].Cie_L) + "," +
+                        Format(listPatch[i].Cie_a) + "," +
+                        Format(listPatch[i].Cie_b) + "," +
+                        Format(listPatch[i].Cmyk_C) + "," +
+                        Format(listPatch[i].Cmyk_M) + "," +
+                        Format(listPatch[i].Cmyk_Y) + "," +
+                        Format(listPatch[i].Cmyk_K) + "," +
+                        "" + "," +   // TintCurve (EMPTY as per spec)
+                        "" + "," +   // SpPosition (EMPTY)
+                        "" + "," +   // SpColor (EMPTY)
+                        "" + "," +   // SpValue (EMPTY)
+                        "" + "," +   // SpC (EMPTY)
+                        "" + "," +   // SpM (EMPTY)
+                        "" + "," +   // SpY (EMPTY)
+                        ""           // SpK (EMPTY)
+                    );
+                }
+            }
+
+            return fileName;
+        }
+
+        private string Format(double? value)
+        {
+            return value.HasValue ? Math.Round(value.Value, 2).ToString(CultureInfo.InvariantCulture) : "";
+        }
+        #endregion
+
         #region Create file and download .xml file for Caldera2 CMYK type
         private string ExportColdera2File(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
@@ -1987,7 +2104,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         Directory.CreateDirectory($"{strPatchFolderPath}/tint/");
 
                     bw = new BinaryWriter(new FileStream($"{strPatchFolderPath}/SpotColor.db", FileMode.Create));
-                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes(listPatch[i].ColorName.Replace("_"," ")), 513));
+                    bw.Write(ReturnByteArreyWithNullAppend(Encoding.ASCII.GetBytes(listPatch[i].ColorName.Replace("_", " ")), 513));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cie_L));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cie_a));
                     bw.Write(bnFunction.ConvertToFloat(listPatch[i].Cie_b));
