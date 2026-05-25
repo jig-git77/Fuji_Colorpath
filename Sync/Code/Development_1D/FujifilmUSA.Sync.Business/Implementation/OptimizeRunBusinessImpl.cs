@@ -1482,9 +1482,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             var row = dsProjectTargetLABList.Tables[newPaperTableIndex].Rows[0];
 
-                            project.NewPaper_White_L_Old = DataReader.ReadDecimal(row, "Old_NewPaper_White_L");
-                            project.NewPaper_White_a_Old = DataReader.ReadDecimal(row, "Old_NewPaper_White_a");
-                            project.NewPaper_White_b_Old = DataReader.ReadDecimal(row, "Old_NewPaper_White_b");
+                            project.NewPaper_White_L_Old = row["Old_NewPaper_White_L"] == DBNull.Value ? 0 : Convert.ToDecimal(row["Old_NewPaper_White_L"]);
+                            project.NewPaper_White_a_Old = row["Old_NewPaper_White_a"] == DBNull.Value ? 0 : Convert.ToDecimal(row["Old_NewPaper_White_a"]);
+                            project.NewPaper_White_b_Old = row["Old_NewPaper_White_b"] == DBNull.Value ? 0 : Convert.ToDecimal(row["Old_NewPaper_White_b"]);
                         }
                     }
                 },
