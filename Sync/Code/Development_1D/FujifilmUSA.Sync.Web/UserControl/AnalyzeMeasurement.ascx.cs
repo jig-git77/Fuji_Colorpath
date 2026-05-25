@@ -296,30 +296,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 var licenseType = SessionManager.Instance.CurrentProject.LicenseType;
 
                 // Show / Hide checkbox
-                chk_IsPaperScaling4D.Visible =
-                       licenseType == ELicenseType.DLPPlus
-                    || licenseType == ELicenseType.DLP
-                    || licenseType == ELicenseType.Sync4DCertification
-                    || licenseType == ELicenseType.DLPMultiColor;
+                //chk_IsPaperScaling4D.Visible =
+                //       licenseType == ELicenseType.DLPPlus
+                //    || licenseType == ELicenseType.DLP
+                //    || licenseType == ELicenseType.Sync4DCertification
+                //    || licenseType == ELicenseType.DLPMultiColor;
 
                 tdPaperScaling.Visible = licenseType == ELicenseType.Sync1D
                     || licenseType == ELicenseType.Sync1DMultiColor;
 
                 // Sync1D / SpotLibrary hidden
-                if (licenseType == ELicenseType.SpotLibrary)
-                {
-                    chk_IsPaperScaling4D.Visible = false;
-                }
+                //if (licenseType == ELicenseType.SpotLibrary)
+                //{
+                //    chk_IsPaperScaling4D.Visible = false;
+                //}
 
 
                 // Checked State (common for supported licenses)
-                if (licenseType == ELicenseType.DLP ||
-                    licenseType == ELicenseType.Sync4DCertification ||
-                    licenseType == ELicenseType.DLPMultiColor ||
-                    licenseType == ELicenseType.DLPPlus)
-                {
-                    chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
-                }
+                //if (licenseType == ELicenseType.DLP ||
+                //    licenseType == ELicenseType.Sync4DCertification ||
+                //    licenseType == ELicenseType.DLPMultiColor ||
+                //    licenseType == ELicenseType.DLPPlus)
+                //{
+                //    chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                //}
 
                 if (
                     licenseType == ELicenseType.Sync1D ||
@@ -378,7 +378,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             chk_IsPaperScaling1D.Enabled = false;
-            chk_IsPaperScaling4D.Enabled = false;
+            //chk_IsPaperScaling4D.Enabled = false;
 
             bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
 
@@ -390,7 +390,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
                         || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
                 {
-                    chk_IsPaperScaling1D.Enabled = chk_IsPaperScaling4D.Enabled = true;
+                    //chk_IsPaperScaling1D.Enabled = chk_IsPaperScaling4D.Enabled = true;
+                    chk_IsPaperScaling1D.Enabled =  true;
                 }
             }
         }
