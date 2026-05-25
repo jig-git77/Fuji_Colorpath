@@ -3,13 +3,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 {
@@ -91,7 +85,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trXMF.Visible = false;
                 trPackZ.Visible = false;
             }
-           else//ColorGate option
+            else if (cmbCMYKLibrary.SelectedValue.ToString() == "8")//Revoria flow option
+            {
+                trCalderaRow1.Visible = false;
+                trCalderaRow2.Visible = false;
+                trCaldera2Row1.Visible = false;
+                trXMF.Visible = false;
+                trPackZ.Visible = false;
+            }
+            else//ColorGate option
             {
                 trCalderaRow1.Visible = false;
                 trCalderaRow2.Visible = false;
