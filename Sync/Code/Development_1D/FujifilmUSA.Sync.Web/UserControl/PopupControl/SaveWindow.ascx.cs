@@ -58,8 +58,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             CompanyId = SessionManager.Instance.SelectedCompany;
             // commented for testing existing DLP.
-            //if (SessionManager.Instance.CurrentProject.PrintStandardType?.PrintStandardTypeIDOld != SessionManager.Instance.CurrentProject.PrintStandardType?.PrintStandardTypeID)
-            //    SessionManager.Instance.CurrentProject.EnabledPaperScaling = false;
+            if (SessionManager.Instance.CurrentProject.PrintStandardType?.PrintStandardTypeIDOld != SessionManager.Instance.CurrentProject.PrintStandardType?.PrintStandardTypeID)
+                SessionManager.Instance.CurrentProject.EnabledPaperScaling = false;
 
             SessionManager.Instance.CurrentProject.NewPaper_White_L_Old = Convert.ToDecimal(SessionManager.Instance.CurrentProject.NewPaper_White_L);
             SessionManager.Instance.CurrentProject.NewPaper_White_a_Old = Convert.ToDecimal(SessionManager.Instance.CurrentProject.NewPaper_White_a);

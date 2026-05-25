@@ -577,7 +577,7 @@
             </td>
         </tr>
 
-        <tr id="trPaperScaling_4D" runat="server" visible="false" style="display: block;">
+        <tr id="trPaperScaling_4D" runat="server" visible="false" style="display: none;">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">
