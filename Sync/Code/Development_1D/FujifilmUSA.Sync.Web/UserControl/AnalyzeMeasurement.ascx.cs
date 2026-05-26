@@ -568,6 +568,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Project.NewPaper_White_L = SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
                 Project.NewPaper_White_a = SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
                 Project.NewPaper_White_b = SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
+                LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
                 MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
                 _presenterAnalyze.UpdateTargetLabList();
             }
