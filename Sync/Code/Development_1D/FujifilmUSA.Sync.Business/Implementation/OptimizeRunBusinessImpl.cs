@@ -1529,7 +1529,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     if (dsProjectTargetLABList != null && dsProjectTargetLABList.Tables.Count > 0)
                     {
-                        bool includeTargetLab = (LicenseTypeId == (int)ELicenseType.Sync1D || LicenseTypeId == (int)ELicenseType.Sync1DMultiColor);
+                        bool includeTargetLab = (LicenseTypeId == (int)ELicenseType.Sync1D || LicenseTypeId == (int)ELicenseType.Sync1DMultiColor || LicenseTypeId == (int)ELicenseType.DLPPlus);
 
                         // Load Target LAB only for specific license types
                         if (includeTargetLab && dsProjectTargetLABList.Tables[0].Rows.Count > 0)

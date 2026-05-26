@@ -297,13 +297,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 // Show / Hide checkbox
                 chk_IsPaperScaling4D.Visible =
-                       licenseType == ELicenseType.DLPPlus
-                    || licenseType == ELicenseType.DLP
+                     licenseType == ELicenseType.DLP
                     || licenseType == ELicenseType.Sync4DCertification
                     || licenseType == ELicenseType.DLPMultiColor;
 
                 tdPaperScaling.Visible = licenseType == ELicenseType.Sync1D
-                    || licenseType == ELicenseType.Sync1DMultiColor;
+                    || licenseType == ELicenseType.Sync1DMultiColor
+                    || licenseType == ELicenseType.DLPPlus;
 
                 // Sync1D / SpotLibrary hidden
                 if (licenseType == ELicenseType.SpotLibrary)
@@ -315,15 +315,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // Checked State (common for supported licenses)
                 if (licenseType == ELicenseType.DLP ||
                     licenseType == ELicenseType.Sync4DCertification ||
-                    licenseType == ELicenseType.DLPMultiColor ||
-                    licenseType == ELicenseType.DLPPlus)
+                    licenseType == ELicenseType.DLPMultiColor)
                 {
                     chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                 }
 
                 if (
                     licenseType == ELicenseType.Sync1D ||
-                    licenseType == ELicenseType.Sync1DMultiColor)
+                    licenseType == ELicenseType.Sync1DMultiColor ||
+                    licenseType == ELicenseType.DLPPlus)
                 {
                     chk_IsPaperScaling1D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                 }
@@ -633,9 +633,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = NewProjectTargetList;
                 ProjectTargetLABList = NewProjectTargetList;
                 SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling1D.Checked;
-                SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
-                SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
-                SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
+                Project.NewPaper_White_L = SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
+                Project.NewPaper_White_a = SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
+                Project.NewPaper_White_b = SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
                 MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
                 _presenterAnalyze.UpdateTargetLabList();
             }
