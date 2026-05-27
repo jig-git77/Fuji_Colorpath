@@ -130,6 +130,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (!IsErrorOccured)
                         {
                             SessionManager.Instance.CurrentProject = Project;
+                            SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld = Project.PrintStandardType.PrintStandardTypeID;
                             SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                             SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
 
@@ -160,6 +161,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld = Project.PrintStandardType.PrintStandardTypeID;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
@@ -198,6 +200,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld = Project.PrintStandardType.PrintStandardTypeID;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
 
