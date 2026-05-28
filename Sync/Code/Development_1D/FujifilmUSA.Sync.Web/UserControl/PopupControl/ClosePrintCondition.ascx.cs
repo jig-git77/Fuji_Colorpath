@@ -130,7 +130,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (!IsErrorOccured)
                         {
                             SessionManager.Instance.CurrentProject = Project;
-                            /// CSS - 36 : For solving issue while importing measurement from Re-Optimize.
                             SessionManager.Instance.CurrentDlpSubOperation = SessionManager.Instance.CurrentProject.LicenseType;
                             SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld = Project.PrintStandardType.PrintStandardTypeID;
                             SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
