@@ -365,15 +365,30 @@ namespace FujifilmUSA.Sync.Presenter
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             optimizeRunBusiness.UpdateTargetLabList(_viewAnalyze.ProjectId, _viewAnalyze.ProjectTargetLABList, _viewAnalyze.EnabledPaperScaling, _viewAnalyze.MeasurementId, _viewAnalyze.LicenseTypeId, _viewAnalyze.Project.NewPaper_White_L,
-                 _viewAnalyze.Project.NewPaper_White_a, _viewAnalyze.Project.NewPaper_White_b);
+                 _viewAnalyze.Project.NewPaper_White_a, _viewAnalyze.Project.NewPaper_White_b, _viewAnalyze.IsUpdateNewPaper,_viewAnalyze.IsUpdateDelta);
         }
 
         public void GetTargetLABList()
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.Project = optimizeRunBusiness.GetProjectTargetLAB(_viewAnalyze.PrintstandardTypeId, _viewAnalyze.ProjectTypeId, _viewAnalyze.ProjectId, _viewAnalyze.LicenseTypeId);
-            _viewAnalyze.ProjectTargetLABList = _viewAnalyze.Project.ProjectTargetLAB;
+            var projectData = optimizeRunBusiness.GetProjectTargetLAB(_viewAnalyze.PrintstandardTypeId, _viewAnalyze.ProjectTypeId, _viewAnalyze.ProjectId, _viewAnalyze.LicenseTypeId);
+            _viewAnalyze.Project.NewPaper_White_L_Old = projectData.NewPaper_White_L_Old;
+            _viewAnalyze.Project.NewPaper_White_a_Old = projectData.NewPaper_White_a_Old;
+            _viewAnalyze.Project.NewPaper_White_b_Old = projectData.NewPaper_White_b_Old;
+            _viewAnalyze.ProjectTargetLABList = projectData.ProjectTargetLAB;
+        }
+        public void GetMeasurementIDs_RPS()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.MeasurementIds = optimizeRunBusiness.GetMeasurementIDs_RPS(_viewAnalyze.ProjectId,_viewAnalyze.Project.DeviceId , _viewAnalyze.LicenseTypeId);
+        }
+        public void GetActualValuesByMeasurementId()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.measurementPatchDetails = optimizeRunBusiness.GetActualValuesByMeasurementId(_viewAnalyze.MeasurementId);
         }
     }
 }

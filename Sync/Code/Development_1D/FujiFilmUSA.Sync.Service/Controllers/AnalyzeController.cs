@@ -1376,6 +1376,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool EnabledPaperScaling { get; set; }
         public int ProjectTypeId { get; set; }
         public int PrintstandardTypeId { get; set; }
+        public MeasurementPatchDetails measurementPatchDetails { get; set; }
+        public bool IsUpdateNewPaper { get; set; }
+        public bool IsUpdateDelta { get; set; }
         #endregion
     }
 }

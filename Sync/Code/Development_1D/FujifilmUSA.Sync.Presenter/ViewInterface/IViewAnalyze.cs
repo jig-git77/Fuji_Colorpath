@@ -74,5 +74,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool EnabledPaperScaling { get; }
         int ProjectTypeId { get; set; }
         int PrintstandardTypeId { get; set; }
+        MeasurementPatchDetails measurementPatchDetails { get; set; }
+        bool IsUpdateNewPaper { get; set; }
+        bool IsUpdateDelta { get; set; }
     }
 }

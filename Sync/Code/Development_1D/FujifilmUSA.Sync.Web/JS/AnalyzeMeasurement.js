@@ -3231,8 +3231,8 @@ function PopulateAnalyzeChart() {
                         alert(errorThrown);
                     }
                 });
-
             }
+            UpdateNewPaperValues1D(currentObj);
         },
         seriesClick: function (e) {
             if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
@@ -3261,9 +3261,64 @@ function PopulateAnalyzeChart() {
             }
         }
     });
-
     BindAllTabs();
 }
+
+function UpdateNewPaperValues1D(currentObj) {
+    // 1. if RPS is on then get latest cielab data and set to hidden.
+    if ($("#chk_IsPaperScaling1D").is(':checked') || $("#chk_IsPaperScaling4D").is(':checked')) {
+        var measurementID = currentObj.MeasurementId;
+        var apiParameters = {
+            MeasurementId: measurementID,
+            IsAverageOfMeasurements: $isAverageOfMeasurements,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            licenseTypeId: $hdnCurrentDlpSubOperation,
+            fromDeltaE: $selectedDeltaE,
+        };
+
+        var ajaxParameter = {
+            type: "GET",
+            url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
+            data: apiParameters,
+            dataType: "json",
+            headers: {
+                'Accept-Language': $CurrentCulture,
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        kendo.ui.progress($chartLoader, true);
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
+                    $tblDensityChart.css('display', 'none');
+                }
+                jsonDensityList = response.data.DensityList;
+                jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
+                _Resources = response.data.GlobalResources;
+            }
+
+            if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
+                var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
+                    return item.PatchTypeId === 8;
+                });
+                if (patchType8) {
+                    // Set values to hidden fields
+                    $('#hdnCielabL').val(patchType8.CielabL);
+                    $('#hdnCielabA').val(patchType8.CielabA);
+                    $('#hdnCielabB').val(patchType8.CielabB);
+                }
+            }
+            // 2. trigger 1D chk checkbox and update in db.
+            if ($("#chk_IsPaperScaling1D").is(':checked')) {
+                $("#btnRPSPostBack1D").click();
+            }
+        })
+    }
+}
+
 
 function PopulateAnalyzeDestinationChart() {
 

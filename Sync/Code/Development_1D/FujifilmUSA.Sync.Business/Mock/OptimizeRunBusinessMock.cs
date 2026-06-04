@@ -190,12 +190,22 @@ namespace FujifilmUSA.Sync.Business.Mock
 
     
 
-        public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId, decimal NewPaper_White_L, decimal NewPaper_White_a, decimal NewPaper_White_b)
+        public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId, decimal NewPaper_White_L, decimal NewPaper_White_a, decimal NewPaper_White_b, bool IsUpdateNewPaper, bool IsUpdateDelta)
         {
 
         }
 
         public Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId, int LicenseTypeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<int> GetMeasurementIDs_RPS(int ProjectId, int DeviceId, int LicenseTypeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public MeasurementPatchDetails GetActualValuesByMeasurementId(int MeasurementID)
         {
             throw new NotImplementedException();
         }

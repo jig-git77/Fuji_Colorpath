@@ -540,10 +540,11 @@
 
                         <!-- 3rd td -->
                         <td id="tdPaperScaling" runat="server" align="right" visible="false" style="text-align: right; width: 100%; position: relative;">
+                            <asp:Button ID="btnRPSPostBack1D" runat="server" style="display:none;" Text="RPS PostBack" ClientIDMode="Static" OnClick="btnRPSPostBack1D_click"/>
                             <asp:CheckBox ID="chk_IsPaperScaling1D" runat="server"
                                 EnableViewState="true"
                                 CssClass="checkbox"
-                                ClientIDMode="Static"
+                                ClientIDMode="Static"   
                                 AutoPostBack="True"
                                 OnCheckedChanged="chk_IsPaperScaling1D_CheckedChanged" />
 
