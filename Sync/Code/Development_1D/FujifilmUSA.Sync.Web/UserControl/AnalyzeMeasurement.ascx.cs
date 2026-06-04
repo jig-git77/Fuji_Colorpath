@@ -578,7 +578,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
             else
                 PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
-
+            EnabledPaperScaling = chk_IsPaperScaling1D.Checked;
             // last highlighted measurement id.
             int MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
 
