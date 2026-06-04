@@ -1472,7 +1472,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "CreateRevoria"));
         }
 
-        public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId, decimal NewPaper_White_L, decimal NewPaper_White_a, decimal NewPaper_White_b)
+        public void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId, decimal NewPaper_White_L, decimal NewPaper_White_a, decimal NewPaper_White_b, bool IsUpdateNewPaper, bool IsUpdateDelta)
         {
             // Build XML like in reference code
             var projectTargetLAB = new XElement("ProjectTargetLAB", "");
@@ -1507,7 +1507,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 LicenseTypeId,
                                 NewPaper_White_L,
                                 NewPaper_White_a,
-                                NewPaper_White_b
+                                NewPaper_White_b,
+                                IsUpdateNewPaper,
+                                IsUpdateDelta
                               }
                           );
                  },
@@ -1566,6 +1568,63 @@ namespace FujifilmUSA.Sync.Business.Implementation
             );
 
             return project;
+        }
+
+        public List<int> GetMeasurementIDs_RPS(int ProjectID, int deviceId, int LicenseTypeID)
+        {
+            var objMeasurementIDList = new List<int>();
+            string storedProecdure = "CPSync.GetMeasurementIDsByProjectID_RPS";
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectList =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                               storedProecdure,
+                                new object[]
+                                        {
+                                            ProjectID, deviceId, LicenseTypeID
+                                        });
+                    if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dsProjectList.Tables[0].Rows.Count; i++)
+                        {
+                            objMeasurementIDList.Add(Convert.ToInt32(dsProjectList.Tables[0].Rows[i]["MeasurementID"].ToString()));
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementIDsbyProjectID"));
+            return objMeasurementIDList;
+        }
+
+        public MeasurementPatchDetails GetActualValuesByMeasurementId(int MeasurementID)
+        {
+            MeasurementPatchDetails measurementPatchDetails = new MeasurementPatchDetails();
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsActualValues = DataAccessFactory.Instance
+                        .GetDsResult(
+                            "[CPSync].[GetActualValuesByMeasurementID]",
+                            new object[] { MeasurementID });
+
+                    if (dsActualValues != null &&
+                        dsActualValues.Tables[0].Rows.Count > 0)
+                    {
+                        DataRow row = dsActualValues.Tables[0].Rows[0];
+
+                        measurementPatchDetails.CielabL = DataReader.ReadDecimal(row, "CIELAB_L");
+                        measurementPatchDetails.CielabA = DataReader.ReadDecimal(row, "CIELAB_a");
+                        measurementPatchDetails.CielabB = DataReader.ReadDecimal(row, "CIELAB_b");
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetActualValues")
+            );
+
+            return measurementPatchDetails;
         }
 
         #endregion
