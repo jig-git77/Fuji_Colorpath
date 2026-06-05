@@ -793,6 +793,7 @@ function BindAllTabs() {
 
     $('#divToRender').css('display', 'block');
     $('#divTabContainerLoading').css('display', 'none');
+    UpdateAvgMeasurementSummary();
 }
 
 ////**************** Bind the measurement summary details ****************////
@@ -7671,12 +7672,25 @@ function Get_DeltaSummaryChartImage() {
 function CheckAvgCompability() {
     var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
     if (answer == "0") {
-        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-
-        $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
         //BindMeasurementSummary();
         BindAllTabs();
+        UpdateAvgMeasurementSummary();
+        return true;
+    }
+    else if (answer == "1") {
+        jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
+    }
+    else if (answer == "2") {
+        jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
+    }
+    return false;
+}
 
+function UpdateAvgMeasurementSummary() {
+    var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
+    if (answer == "0") {
+        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+        $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
         if ($isAverageOfMeasurements) {
 
             if (tabStrip.select().index() == 5) {
@@ -7688,14 +7702,15 @@ function CheckAvgCompability() {
             //show average measurement summary tab
             $('#tblValidationSummary').css('display', 'none');
             $('#tblAverageMeasurementSummary').css('display', 'block');
-        } else {
-            //Show default tabs patch details
-            //$(tabStrip.items()[5]).show();
-            $(tabStrip.items()[5]).css('display', 'inline-block');
-            $('#tblAverageMeasurementSummary').css('display', 'none');
-            //$('#tblValidationSummary').css('display', 'block');
-            $('#tblValidationSummary').css('display', 'block');
         }
+        //else {
+        //    //Show default tabs patch details
+        //    //$(tabStrip.items()[5]).show();
+        //    $(tabStrip.items()[5]).css('display', 'inline-block');
+        //    $('#tblAverageMeasurementSummary').css('display', 'none');
+        //    //$('#tblValidationSummary').css('display', 'block');
+        //    $('#tblValidationSummary').css('display', 'block');
+        //}
 
         //freez the all markers of kendo chart
         var chart = $divAnalyzeChart.data('kendoChart');
@@ -7706,17 +7721,7 @@ function CheckAvgCompability() {
             });
             chart.refresh();
         }
-
-
-        return true;
     }
-    else if (answer == "1") {
-        jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
-    }
-    else if (answer == "2") {
-        jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
-    }
-    return false;
 }
 
 //removes duplicate values from array
