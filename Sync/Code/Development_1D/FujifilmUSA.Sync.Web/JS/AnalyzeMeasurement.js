@@ -753,6 +753,7 @@ function magnifyLpaperCharts(chartOptions, chartHeight, chartWidth, heightSize, 
 function BindAllTabs() {
 
     var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
 
     $(tabStrip.items()[0]).css('display', 'inline-block');
     $(tabStrip.items()[1]).css('display', 'inline-block');
@@ -815,7 +816,7 @@ function BindMeasurementSummary() {
             fromDeltaE: $selectedDeltaE,
             IsSyncDlpPlusTypeProject: $hdnSyncDlpPlusType
         }
-
+        
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
             data: apiParameter,
@@ -4643,7 +4644,6 @@ function PopulateChartTargetVersusActualABMultiColor() {
 
         kendoSeriseObj.tooltip = {
             visible: true, template: function (d) {
-                debugger;
                 var seriesData = d.series.data;
                 var lastItem = seriesData[seriesData.length - 1];
 
