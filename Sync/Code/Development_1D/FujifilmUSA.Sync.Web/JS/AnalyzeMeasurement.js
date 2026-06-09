@@ -753,6 +753,7 @@ function magnifyLpaperCharts(chartOptions, chartHeight, chartWidth, heightSize, 
 function BindAllTabs() {
 
     var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
 
     $(tabStrip.items()[0]).css('display', 'inline-block');
     $(tabStrip.items()[1]).css('display', 'inline-block');
@@ -793,6 +794,7 @@ function BindAllTabs() {
 
     $('#divToRender').css('display', 'block');
     $('#divTabContainerLoading').css('display', 'none');
+    UpdateAvgMeasurementSummary();
 }
 
 ////**************** Bind the measurement summary details ****************////
@@ -814,7 +816,7 @@ function BindMeasurementSummary() {
             fromDeltaE: $selectedDeltaE,
             IsSyncDlpPlusTypeProject: $hdnSyncDlpPlusType
         }
-
+        
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
             data: apiParameter,
@@ -3054,7 +3056,7 @@ function PopulateAnalyzeChart() {
         },
         series: patchArray,
         valueAxis: {
-            
+
             title: {
                 text: 'Δ' + $selectedDeltaE,
                 font: "12px Arial,Helvetica,sans-serif",
@@ -3231,8 +3233,8 @@ function PopulateAnalyzeChart() {
                         alert(errorThrown);
                     }
                 });
-
             }
+            UpdateNewPaperValues1D(currentObj);
         },
         seriesClick: function (e) {
             if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
@@ -3261,9 +3263,64 @@ function PopulateAnalyzeChart() {
             }
         }
     });
-
     BindAllTabs();
 }
+
+function UpdateNewPaperValues1D(currentObj) {
+    // 1. if RPS is on then get latest cielab data and set to hidden.
+    if ($("#chk_IsPaperScaling1D").is(':checked') || $("#chk_IsPaperScaling4D").is(':checked')) {
+        var measurementID = currentObj.MeasurementId;
+        var apiParameters = {
+            MeasurementId: measurementID,
+            IsAverageOfMeasurements: $isAverageOfMeasurements,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            licenseTypeId: $hdnCurrentDlpSubOperation,
+            fromDeltaE: $selectedDeltaE,
+        };
+
+        var ajaxParameter = {
+            type: "GET",
+            url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
+            data: apiParameters,
+            dataType: "json",
+            headers: {
+                'Accept-Language': $CurrentCulture,
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        kendo.ui.progress($chartLoader, true);
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
+                    $tblDensityChart.css('display', 'none');
+                }
+                jsonDensityList = response.data.DensityList;
+                jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
+                _Resources = response.data.GlobalResources;
+            }
+
+            if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
+                var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
+                    return item.PatchTypeId === 8;
+                });
+                if (patchType8) {
+                    // Set values to hidden fields
+                    $('#hdnCielabL').val(patchType8.CielabL);
+                    $('#hdnCielabA').val(patchType8.CielabA);
+                    $('#hdnCielabB').val(patchType8.CielabB);
+                }
+            }
+            // 2. trigger 1D chk checkbox and update in db.
+            if ($("#chk_IsPaperScaling1D").is(':checked')) {
+                $("#btnRPSPostBack1D").click();
+            }
+        })
+    }
+}
+
 
 function PopulateAnalyzeDestinationChart() {
 
@@ -3275,7 +3332,7 @@ function PopulateAnalyzeDestinationChart() {
 
     indexEnd = jsonAnalyzeList.Measurements.length;
     indexStart = 0;
-   
+
 
     $('#lblPagingMsg').html('Record(s) ' + (indexStart + 1) + ' to ' + (indexEnd) + ' of ' + jsonAnalyzeList.Measurements.length + '');
 
@@ -3373,7 +3430,7 @@ function PopulateAnalyzeDestinationChart() {
                         }
                     }
                 },
-           
+
             }
         },
         series: patchArray,
@@ -3386,7 +3443,7 @@ function PopulateAnalyzeDestinationChart() {
             },
             axisCrossingValue: 0,
             majorUnit: -1,
-          
+
         },
         categoryAxis: {
             name: "categoryAxis",
@@ -3409,7 +3466,7 @@ function PopulateAnalyzeDestinationChart() {
                     var arr = catValue.MeasurementName.toString();
 
                     //set checked or not
-                    var catText = '<div style="text-align:center;"><div>' + arr +'<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
+                    var catText = '<div style="text-align:center;"><div>' + arr + '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
 
                     var html = $(catText).appendTo(document.body);
                     // Store a reference to the target rectangle, see below
@@ -4179,7 +4236,7 @@ function PopulateChartTargetVersusActualAB() {
 
         kendoSeriseObj.tooltip = {
             visible: true, template: function (d) {
-             
+
                 var seriesData = d.series.data;
                 var lastItem = seriesData[seriesData.length - 1];
 
@@ -4416,7 +4473,6 @@ function PopulateChartTargetVersusActualABMultiColor() {
 
         kendoSeriseObj.tooltip = {
             visible: true, template: function (d) {
-                debugger;
                 var seriesData = d.series.data;
                 var lastItem = seriesData[seriesData.length - 1];
 
@@ -4949,7 +5005,7 @@ function PopulateChartLComparision() {
 ////**************** START BIND THE GRAY BALANCE L*  (GMAUT) CHART  ****************////
 function PopulateChartLGrayBalance() {
 
-     // if project is destination profile then display actual lab value in tooltip .
+    // if project is destination profile then display actual lab value in tooltip .
     var tooltipString = '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr>';
     tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr>';
 
@@ -7572,12 +7628,25 @@ function Get_DeltaSummaryChartImage() {
 function CheckAvgCompability() {
     var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
     if (answer == "0") {
-        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-
-        $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
         //BindMeasurementSummary();
         BindAllTabs();
+        UpdateAvgMeasurementSummary();
+        return true;
+    }
+    else if (answer == "1") {
+        jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
+    }
+    else if (answer == "2") {
+        jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
+    }
+    return false;
+}
 
+function UpdateAvgMeasurementSummary() {
+    var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
+    if (answer == "0") {
+        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+        $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
         if ($isAverageOfMeasurements) {
 
             if (tabStrip.select().index() == 5) {
@@ -7589,13 +7658,14 @@ function CheckAvgCompability() {
             //show average measurement summary tab
             $('#tblValidationSummary').css('display', 'none');
             $('#tblAverageMeasurementSummary').css('display', 'block');
-        } else {
+        }
+        else {
             //Show default tabs patch details
             //$(tabStrip.items()[5]).show();
             $(tabStrip.items()[5]).css('display', 'inline-block');
             $('#tblAverageMeasurementSummary').css('display', 'none');
             //$('#tblValidationSummary').css('display', 'block');
-            $('#tblValidationSummary').css('display', 'block');
+            $('#tblValidationSummary').show();
         }
 
         //freez the all markers of kendo chart
@@ -7607,17 +7677,7 @@ function CheckAvgCompability() {
             });
             chart.refresh();
         }
-
-
-        return true;
     }
-    else if (answer == "1") {
-        jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
-    }
-    else if (answer == "2") {
-        jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
-    }
-    return false;
 }
 
 //removes duplicate values from array
