@@ -7703,14 +7703,14 @@ function UpdateAvgMeasurementSummary() {
             $('#tblValidationSummary').css('display', 'none');
             $('#tblAverageMeasurementSummary').css('display', 'block');
         }
-        //else {
-        //    //Show default tabs patch details
-        //    //$(tabStrip.items()[5]).show();
-        //    $(tabStrip.items()[5]).css('display', 'inline-block');
-        //    $('#tblAverageMeasurementSummary').css('display', 'none');
-        //    //$('#tblValidationSummary').css('display', 'block');
-        //    $('#tblValidationSummary').css('display', 'block');
-        //}
+        else {
+            //Show default tabs patch details
+            //$(tabStrip.items()[5]).show();
+            $(tabStrip.items()[5]).css('display', 'inline-block');
+            $('#tblAverageMeasurementSummary').css('display', 'none');
+            //$('#tblValidationSummary').css('display', 'block');
+            $('#tblValidationSummary').show();
+        }
 
         //freez the all markers of kendo chart
         var chart = $divAnalyzeChart.data('kendoChart');
