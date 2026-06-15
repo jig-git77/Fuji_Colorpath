@@ -1571,7 +1571,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return project;
         }
 
-        public List<int> GetMeasurementIDs_RPS(int ProjectID, int deviceId, int LicenseTypeID)
+        public List<int> GetMeasurementIDs_RPS(int ProjectID, int deviceId, int LicenseTypeID , int OptimizeRunId)
         {
             var objMeasurementIDList = new List<int>();
             string storedProecdure = "CPSync.GetMeasurementIDsByProjectID_RPS";
@@ -1586,7 +1586,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                storedProecdure,
                                 new object[]
                                         {
-                                            ProjectID, deviceId, LicenseTypeID
+                                            ProjectID, deviceId, LicenseTypeID, OptimizeRunId
                                         });
                     if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
                     {
@@ -1600,7 +1600,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objMeasurementIDList;
         }
 
-        public MeasurementPatchDetails GetActualValuesByMeasurementId(int MeasurementID)
+        public MeasurementPatchDetails GetActualValuesByMeasurementId(int MeasurementID, int LicenseTypeID)
         {
             MeasurementPatchDetails measurementPatchDetails = new MeasurementPatchDetails();
 
@@ -1610,7 +1610,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     var dsActualValues = DataAccessFactory.Instance
                         .GetDsResult(
                             "[CPSync].[GetActualValuesByMeasurementID]",
-                            new object[] { MeasurementID });
+                            new object[] { MeasurementID , LicenseTypeID });
 
                     if (dsActualValues != null &&
                         dsActualValues.Tables[0].Rows.Count > 0)
