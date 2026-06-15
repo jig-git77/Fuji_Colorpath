@@ -345,6 +345,53 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject.NewPaper_White_b_Old = Project.NewPaper_White_b_Old;
                 }
 
+                bool isSpotLibraryProject_ = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
+
+                // update current highlighted measurement if not created DLP.
+                //if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
+                //{
+                //    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
+                //            SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
+                //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
+                //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
+                //            || (isSpotLibraryProject_ && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
+                //    {
+                if(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
+                {
+                    if(SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
+                    {
+                        if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
+                        {
+                            _presenterAnalyze.GetMeasurementIDs_RPS();
+                            MeasurementId = MeasurementIds.Any() ? MeasurementIds.Max() : 0;
+                            _presenterAnalyze.GetActualValuesByMeasurementId();
+                            if (licenseType == ELicenseType.DLP
+                            || licenseType == ELicenseType.Sync4DCertification
+                            || licenseType == ELicenseType.DLPMultiColor)
+                            {
+                                Project.NewPaper_White_L = Convert.ToDecimal(measurementPatchDetails.CielabL);
+                                Project.NewPaper_White_a = Convert.ToDecimal(measurementPatchDetails.CielabA);
+                                Project.NewPaper_White_b = Convert.ToDecimal(measurementPatchDetails.CielabB);
+                                EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                                IsUpdateNewPaper = true;
+                                _presenterAnalyze.UpdateTargetLabList();
+                            }
+                            else if (licenseType == ELicenseType.Sync1D ||
+                            licenseType == ELicenseType.Sync1DMultiColor ||
+                            licenseType == ELicenseType.DLPPlus)
+                            {
+                                _presenterAnalyze.GetTargetLABList();
+                                double NewPaper_White_L = Convert.ToDouble(measurementPatchDetails.CielabL);
+                                double NewPaper_White_a = Convert.ToDouble(measurementPatchDetails.CielabA);
+                                double NewPaper_White_b = Convert.ToDouble(measurementPatchDetails.CielabB);
+                                EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                                CalculateTargetLAB(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b, true, false);
+                            }
+                        }
+                    }
+                }
+                //    }
+                //}
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
@@ -378,7 +425,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             chk_IsPaperScaling1D.Enabled = false;
-            //chk_IsPaperScaling4D.Enabled = false;
+            chk_IsPaperScaling4D.Enabled = false;
 
             bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
 
@@ -390,8 +437,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
                         || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
                 {
-                    //chk_IsPaperScaling1D.Enabled = chk_IsPaperScaling4D.Enabled = true;
-                    chk_IsPaperScaling1D.Enabled = true;
+                    chk_IsPaperScaling1D.Enabled = chk_IsPaperScaling4D.Enabled = true;
                 }
             }
         }
@@ -440,6 +486,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
+            int HighlightedMeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
             EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
             if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
                 PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
@@ -450,24 +497,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
             double NewPaper_White_a = 0.0;
             double NewPaper_White_b = 0.0;
 
-            if (EnabledPaperScaling)
+            _presenterAnalyze.GetMeasurementIDs_RPS();
+
+            foreach (var measurementId in MeasurementIds.OrderBy(x => x == HighlightedMeasurementId ? 1 : 0))
             {
-                NewPaper_White_L = Convert.ToDouble(hdnCielabL.Value);
-                NewPaper_White_a = Convert.ToDouble(hdnCielabA.Value);
-                NewPaper_White_b = Convert.ToDouble(hdnCielabB.Value);
-            }
-            else
-            {
-                NewPaper_White_L = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_L_Old.ToString());
-                NewPaper_White_a = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_a_Old.ToString());
-                NewPaper_White_b = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_b_Old.ToString());
+                MeasurementId = measurementId;
+                _presenterAnalyze.GetActualValuesByMeasurementId();
+                if (EnabledPaperScaling)
+                {
+                    NewPaper_White_L = Convert.ToDouble(measurementPatchDetails.CielabL);
+                    NewPaper_White_a = Convert.ToDouble(measurementPatchDetails.CielabA);
+                    NewPaper_White_b = Convert.ToDouble(measurementPatchDetails.CielabB);
+                }
+                else
+                {
+                    NewPaper_White_L = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_L_Old.ToString());
+                    NewPaper_White_a = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_a_Old.ToString());
+                    NewPaper_White_b = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_b_Old.ToString());
+                }
+                IsUpdateNewPaper = true;
+                IsUpdateDelta = true;
+                Project.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
+                Project.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
+                Project.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
+                _presenterAnalyze.UpdateTargetLabList();
             }
             SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
-            Project.NewPaper_White_L = SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
-            Project.NewPaper_White_a = SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
-            Project.NewPaper_White_b = SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
-            MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
-            _presenterAnalyze.UpdateTargetLabList();
+            SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
+            SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
+            SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
         }
 
         protected void chk_IsPaperScaling1D_CheckedChanged(object sender, EventArgs e)
@@ -494,9 +552,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (EnabledPaperScaling)
             {
-                //NewPaper_White_L = Convert.ToDouble(hdnCielabL.Value);
-                //NewPaper_White_a = Convert.ToDouble(hdnCielabA.Value);
-                //NewPaper_White_b = Convert.ToDouble(hdnCielabB.Value);
                 if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID)
                 {
                     _presenterAnalyze.GetTargetLABList();
@@ -510,9 +565,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                //NewPaper_White_L = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_L_Old.ToString());
-                //NewPaper_White_a = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_a_Old.ToString());
-                //NewPaper_White_b = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_White_b_Old.ToString());
                 if (SessionManager.Instance.CurrentProject.OldProjectTargetLAB == null || !SessionManager.Instance.CurrentProject.OldProjectTargetLAB.Any())
                 {
                     _presenterAnalyze.GetTargetLABList();
@@ -548,52 +600,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
 
                 // get actual values by measurement id.
-
-                if (ProjectTargetLABList != null && ProjectTargetLABList.Count > 0)
-                {
-                    NewProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
-                    CIELab Finallab = new CIELab(0, 0, 0);
-                    CIEXYZ CurrentPaperxyz = new CIEXYZ(0, 0, 0);
-                    CIEXYZ NewPaperxyz = new CIEXYZ(0, 0, 0);
-                    CIEXYZ NewMinxyz = new CIEXYZ(0, 0, 0);
-
-                    //Create list for Paper Patch
-                    List<Entity.CPSync1D.ProjectTargetLAB> PaperProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
-                    PaperProjectTargetList = ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList();
-
-                    double Black_L = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString());
-                    double Black_a = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString());
-                    double Black_b = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
-
-                    NewPaperxyz = ColorMath.LabtoXYZ(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b);
-                    NewMinxyz = ColorMath.LabtoXYZ(Black_L, Black_a, Black_b);
-
-                    //convert current Paper's LAB to XYZ
-                    CurrentPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(PaperProjectTargetList[0].TargetL), Convert.ToDouble(PaperProjectTargetList[0].TargetA), Convert.ToDouble(PaperProjectTargetList[0].TargetB));
-
-                    for (int i = 0; i < ProjectTargetLABList.Count; i++)
-                    {
-                        Finallab = ColorMath.CalcPaperScaleLAB(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, NewMinxyz.X, NewMinxyz.Y, NewMinxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
-                        NewProjectTargetList.Add(new Entity.CPSync1D.ProjectTargetLAB() { PatchType = ProjectTargetLABList[i].PatchType, TargetL = (decimal)Finallab.L, TargetA = (decimal)Finallab.A, TargetB = (decimal)Finallab.B });
-                    }
-                    int index = NewProjectTargetList.FindIndex(x => x.PatchType.PatchTypeId == 8);
-
-                    if (index != -1)
-                    {
-                        NewProjectTargetList[index].TargetL = Convert.ToDecimal(NewPaper_White_L);
-                        NewProjectTargetList[index].TargetA = Convert.ToDecimal(NewPaper_White_a);
-                        NewProjectTargetList[index].TargetB = Convert.ToDecimal(NewPaper_White_b);
-                    }
-                    ProjectTargetLABList = NewProjectTargetList;
-                    Project.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
-                    Project.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
-                    Project.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
-                    IsUpdateNewPaper = (measurementId == HighlightedMeasurementId);
-                    IsUpdateDelta = true;
-                    _presenterAnalyze.UpdateTargetLabList();
-                }
+                //IsUpdateNewPaper = (measurementId == HighlightedMeasurementId);
+                IsUpdateNewPaper = LicenseTypeId == (int)ELicenseType.DLPPlus ? true : (measurementId == HighlightedMeasurementId);
+                IsUpdateDelta = true;
+                CalculateTargetLAB(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b, IsUpdateNewPaper, IsUpdateDelta);
             }
-            SessionManager.Instance.CurrentProject.ProjectTargetLAB = NewProjectTargetList;
+            SessionManager.Instance.CurrentProject.ProjectTargetLAB = ProjectTargetLABList;
             SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling1D.Checked;
             SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
             SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
@@ -602,33 +614,53 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnRPSPostBack1D_click(object sender, EventArgs e)
         {
-            ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
-            if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
-                PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
-            else
-                PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
-            EnabledPaperScaling = chk_IsPaperScaling1D.Checked;
-            // last highlighted measurement id.
-            int MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
-
-            double NewPaper_White_L = Convert.ToDouble(hdnCielabL.Value);
-            double NewPaper_White_a = Convert.ToDouble(hdnCielabA.Value);
-            double NewPaper_White_b = Convert.ToDouble(hdnCielabB.Value);
-            if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID)
+            bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
+            //if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
+            //{
+            //    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
+            //            SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
+            //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
+            //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
+            //            || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
+            //    {
+            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
             {
-                _presenterAnalyze.GetTargetLABList();
+                if (SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
+                {
+                    ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
+                    ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                    LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
+                    MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
+                    if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
+                        PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
+                    else
+                        PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+                    EnabledPaperScaling = chk_IsPaperScaling1D.Checked;
+
+                    double NewPaper_White_L = Convert.ToDouble(hdnCielabL.Value);
+                    double NewPaper_White_a = Convert.ToDouble(hdnCielabA.Value);
+                    double NewPaper_White_b = Convert.ToDouble(hdnCielabB.Value);
+                    if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID)
+                    {
+                        _presenterAnalyze.GetTargetLABList();
+                    }
+                    else
+                        ProjectTargetLABList = SessionManager.Instance.CurrentProject.ProjectTargetLAB;
+                    CalculateTargetLAB(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b, true, false);
+                }
             }
-            else
-                ProjectTargetLABList = SessionManager.Instance.CurrentProject.ProjectTargetLAB;
+            //    }
+            //}
+        }
+
+        protected void CalculateTargetLAB(double NewPaper_White_L, double NewPaper_White_a, double NewPaper_White_b, bool IsUpdateNewPaper_, bool IsUpdateDelta_)
+        {
             if (ProjectTargetLABList != null && ProjectTargetLABList.Count > 0)
             {
                 CIELab Finallab = new CIELab(0, 0, 0);
                 CIEXYZ CurrentPaperxyz = new CIEXYZ(0, 0, 0);
                 CIEXYZ NewPaperxyz = new CIEXYZ(0, 0, 0);
                 CIEXYZ NewMinxyz = new CIEXYZ(0, 0, 0);
-
 
                 //Create list for Paper Patch
                 List<Entity.CPSync1D.ProjectTargetLAB> PaperProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
@@ -653,16 +685,53 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Finallab = ColorMath.CalcPaperScaleLAB(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, NewMinxyz.X, NewMinxyz.Y, NewMinxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
                     NewProjectTargetList.Add(new Entity.CPSync1D.ProjectTargetLAB() { PatchType = ProjectTargetLABList[i].PatchType, TargetL = (decimal)Finallab.L, TargetA = (decimal)Finallab.A, TargetB = (decimal)Finallab.B });
                 }
+                int index = NewProjectTargetList.FindIndex(x => x.PatchType.PatchTypeId == 8);
+
+                if (index != -1)
+                {
+                    NewProjectTargetList[index].TargetL = Convert.ToDecimal(NewPaper_White_L);
+                    NewProjectTargetList[index].TargetA = Convert.ToDecimal(NewPaper_White_a);
+                    NewProjectTargetList[index].TargetB = Convert.ToDecimal(NewPaper_White_b);
+                }
                 ProjectTargetLABList = NewProjectTargetList;
                 Project.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
                 Project.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
                 Project.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
-                IsUpdateNewPaper = true;
-                IsUpdateDelta = false;
+                IsUpdateNewPaper = IsUpdateNewPaper_;
+                IsUpdateDelta = IsUpdateDelta_;
                 _presenterAnalyze.UpdateTargetLabList();
             }
         }
 
+        protected void btnRPSPostBack4D_click(object sender, EventArgs e)
+        {
+            bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
+            if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
+            {
+                if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
+                        SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
+                        SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
+                        SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
+                        || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
+                {
+                    ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
+                    ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                    LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
+                    EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
+                    MeasurementId = Convert.ToInt32(hdnCurrentMeasurement.Value);
+
+                    double NewPaper_White_L = Convert.ToDouble(hdnCielabL.Value);
+                    double NewPaper_White_a = Convert.ToDouble(hdnCielabA.Value);
+                    double NewPaper_White_b = Convert.ToDouble(hdnCielabB.Value);
+                    IsUpdateNewPaper = true;
+                    IsUpdateDelta = false;
+                    Project.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
+                    Project.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
+                    Project.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
+                    _presenterAnalyze.UpdateTargetLabList();
+                }
+            }
+        }
         protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)
         {
             Response.Redirect("Measurement.aspx");

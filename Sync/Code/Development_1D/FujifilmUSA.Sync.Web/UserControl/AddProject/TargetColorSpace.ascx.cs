@@ -63,12 +63,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
                 {
                     trPaperScaling_4D.Visible = true;
-                    //trTargetLABMessage.Visible = true;
+                    trTargetLABMessage.Visible = true;
                 }
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPMultiColor)
                 {
                     trPaperScaling_4D.Visible = true;
-                    //trTargetLABMessage.Visible = true;
+                    trTargetLABMessage.Visible = true;
                 }
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)

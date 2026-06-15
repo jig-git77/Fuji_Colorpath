@@ -3260,6 +3260,7 @@ function PopulateAnalyzeChart() {
                     $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
                 }
             }
+            UpdateNewPaperValues1D(e.category);
         }
     });
     BindAllTabs();
@@ -3267,7 +3268,7 @@ function PopulateAnalyzeChart() {
 
 function UpdateNewPaperValues1D(currentObj) {
     // 1. if RPS is on then get latest cielab data and set to hidden.
-    if ($("#chk_IsPaperScaling1D").is(':checked') || $("#chk_IsPaperScaling4D").is(':checked')) {
+    if ($("#chk_IsPaperScaling1D").is(':checked') || $("[id*='chk_IsPaperScaling4D']").is(':checked')) {
         var measurementID = currentObj.MeasurementId;
         var apiParameters = {
             MeasurementId: measurementID,
@@ -3315,6 +3316,8 @@ function UpdateNewPaperValues1D(currentObj) {
             // 2. trigger 1D chk checkbox and update in db.
             if ($("#chk_IsPaperScaling1D").is(':checked')) {
                 $("#btnRPSPostBack1D").click();
+            } else if ($("[id*='chk_IsPaperScaling4D']").is(':checked')) {
+                $("#btnRPSPostBack4D").click();
             }
         })
     }
@@ -7692,7 +7695,6 @@ function UpdateAvgMeasurementSummary() {
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
         $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
         if ($isAverageOfMeasurements) {
-
             if (tabStrip.select().index() == 5) {
                 tabStrip.select(0);
             }

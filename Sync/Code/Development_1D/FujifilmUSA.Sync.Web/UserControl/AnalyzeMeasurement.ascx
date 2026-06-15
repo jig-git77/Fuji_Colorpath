@@ -472,8 +472,8 @@
                             <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
                         </asp:RadioButtonList>
                     </div>
-                    <%--<div style="margin-left: auto; white-space: nowrap; position: relative; display: inline-block;">
-
+                    <div style="margin-left: auto; white-space: nowrap; position: relative; display: inline-block;">
+                        <asp:Button ID="btnRPSPostBack4D" runat="server" style="display:none;" Text="RPS PostBack 4D" ClientIDMode="Static" OnClick="btnRPSPostBack4D_click"/>
                         <asp:CheckBox ID="chk_IsPaperScaling4D"
                             runat="server"
                             CssClass="checkbox"
