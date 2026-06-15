@@ -395,13 +395,13 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.MeasurementIds = optimizeRunBusiness.GetMeasurementIDs_RPS(_viewAnalyze.ProjectId,_viewAnalyze.Project.DeviceId , _viewAnalyze.LicenseTypeId);
+            _viewAnalyze.MeasurementIds = optimizeRunBusiness.GetMeasurementIDs_RPS(_viewAnalyze.ProjectId,_viewAnalyze.Project.DeviceId , _viewAnalyze.LicenseTypeId, _viewAnalyze.Project.OptimizeRuns.Select(x => x.OptimizeRunId).First());
         }
         public void GetActualValuesByMeasurementId()
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.measurementPatchDetails = optimizeRunBusiness.GetActualValuesByMeasurementId(_viewAnalyze.MeasurementId);
+            _viewAnalyze.measurementPatchDetails = optimizeRunBusiness.GetActualValuesByMeasurementId(_viewAnalyze.MeasurementId, _viewAnalyze.LicenseTypeId);
         }
     }
 }

@@ -203,12 +203,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             throw new NotImplementedException();
         }
 
-        public List<int> GetMeasurementIDs_RPS(int ProjectId, int DeviceId, int LicenseTypeId)
+        public List<int> GetMeasurementIDs_RPS(int ProjectId, int DeviceId, int LicenseTypeId, int OptimizeRunId)
         {
             throw new NotImplementedException();
         }
 
-        public MeasurementPatchDetails GetActualValuesByMeasurementId(int MeasurementID)
+        public MeasurementPatchDetails GetActualValuesByMeasurementId(int MeasurementID, int LicenseTypeID)
         {
             throw new NotImplementedException();
         }

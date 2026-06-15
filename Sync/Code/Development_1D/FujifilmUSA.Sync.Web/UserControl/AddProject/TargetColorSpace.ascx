@@ -214,38 +214,7 @@
                 </asp:Panel>
             </td>
         </tr>
-        <%--<tr id="trTargetLABMessage" runat="server">
-            <td>
-                <div class="colorMetricHeader">
-                    <asp:Localize ID="locTargetLABMessage"
-                        runat="server"
-                        Text="Color Metric" />
-                </div>
-            </td>
         </tr>
-
-        <tr>
-            <td class="colorMetricMessageBox">
-                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                    <tr>
-                        <td class="colorMetricIconCell">
-                            <div class="colorMetricIcon">⚠</div>
-                        </td>
-                        <td class="colorMetricText">
-                            <div class="colorMetricTitle">
-                                Relative Paper Scaling has changed!
-                            </div>
-                            <div>
-                                You can enable this feature from the Analyze page after your first measurement.
-                            </div>
-                            <div>
-                                ColorPath SYNC will automatically use the measured paper value rather than manual input.
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>--%>
         <tr id="trTargetLABMessage" runat="server">
             <td>
                 <div class="colorMetricHeader">
@@ -577,7 +546,7 @@
             </td>
         </tr>
 
-        <tr id="trPaperScaling_4D" runat="server" visible="false" style="display: block;">
+        <tr id="trPaperScaling_4D" runat="server" visible="false" style="display: none;">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">

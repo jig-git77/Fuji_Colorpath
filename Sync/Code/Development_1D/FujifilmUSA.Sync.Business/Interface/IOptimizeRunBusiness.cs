@@ -55,8 +55,8 @@ namespace FujifilmUSA.Sync.Business.Interface
 
         void UpdateTargetLabList(int ProjectId, List<ProjectTargetLAB> ProjectTargetLABList, bool EnabledPaperScaling, int MeasurementId, int LicenseTypeId, decimal NewPaper_White_L, decimal NewPaper_White_a, decimal NewPaper_White_b, bool IsUpdateNewPaper, bool IsUpdateDelta);
         Project GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId, int ProjectId, int LicenseTypeId);
-        List<int> GetMeasurementIDs_RPS(int ProjectId, int DeviceId, int LicenseTypeId);
-        MeasurementPatchDetails GetActualValuesByMeasurementId(int MeasurementID);
+        List<int> GetMeasurementIDs_RPS(int ProjectId, int DeviceId, int LicenseTypeId, int OptimizeRunId);
+        MeasurementPatchDetails GetActualValuesByMeasurementId(int MeasurementID, int LicenseTypeID);
 
     }
 }
