@@ -3807,6 +3807,9 @@ function PopulateInkPaperChartABComparision() {
                 }
             },
             color: "#C8D6E3"
+            //color: function (point) {
+            //    return point.dataItem.patchData.color;
+            //},
         }],
         panes: [{
             clip: false
@@ -3863,7 +3866,6 @@ function PopulateInkPaperChartABComparision() {
             }
         }
     });
-
 
     var formattedDensityList = [];
     $.each(jsonDensityList, function (index, obj) {
