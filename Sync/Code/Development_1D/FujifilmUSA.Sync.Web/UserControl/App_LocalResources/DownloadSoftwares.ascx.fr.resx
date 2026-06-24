@@ -141,4 +141,7 @@
   <data name="MToolRefGuide" xml:space="preserve">
     <value>Measure App Reference Guide_fr</value>
   </data>
+	<data name="locDownloadResource2.Text" xml:space="preserve">
+    <value>Downloads_fr</value>
+  </data>
 </root>
