@@ -182,12 +182,6 @@
 
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    <telerik:RadGrid ID="rgDownload"
-                        runat="server"
-                        Visible="false"
-                        AutoGenerateColumns="False"
-                        OnNeedDataSource="rgDownload_NeedDataSource">
-                    </telerik:RadGrid>
 
                     <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar"
                         runat="server"
@@ -214,12 +208,20 @@
                                             <div>
 
                                                 <div class="download_list_head">
-                                                    Measure 3
+                                                    <asp:Localize ID="locMeasure3Title"
+                                                        runat="server"
+                                                        Text="Measure 3"
+                                                        meta:resourcekey="locMeasure3TitleResource1" />
+
                                                 </div>
 
                                                 <div class="download_list_detail">
-                                                    For i1Pro3 and i1iO3<br />
-                                                    Released May 2026
+                                                    <asp:Localize
+                                                        ID="locMeasure3Detail"
+                                                        runat="server"
+                                                        Mode="PassThrough"
+                                                        meta:resourcekey="locMeasure3Detail"
+                                                        Text="For i1Pro3 and i1iO3<br />Released May 2026" />
                                                 </div>
 
                                             </div>
@@ -230,7 +232,7 @@
 
                                             <!-- Mac Download -->
                                             <a class="download_list_linkbutton"
-                                                href="Download/Measure3 Mac Installer.zip"
+                                                href="Download/Measure 3 Mac 1.0.dmg”"
                                                 target="_blank">
 
                                                 <img src="Images/mac.png"
@@ -238,11 +240,17 @@
 
                                                 <div>
                                                     <div class="dl_text">
-                                                        Download for Mac
+                                                        <asp:Localize ID="locMeasure3ForMac"
+                                                            runat="server"
+                                                            Text="Download for Mac"
+                                                            meta:resourcekey="locMeasureForMac" />
                                                     </div>
 
                                                     <div class="dl_detail">
-                                                        v1.0 (Apple Silicon)
+                                                        <asp:Localize ID="locMeasure3ForMacDetail"
+                                                            runat="server"
+                                                            Text="v1.0 (Apple Silicon)"
+                                                            meta:resourcekey="locMeasure3ForMacDetail" />
                                                     </div>
                                                 </div>
 
@@ -250,7 +258,7 @@
 
                                             <!-- PC Download -->
                                             <a class="download_list_linkbutton"
-                                                href="Download/Measure3 PC Installer.zip"
+                                                href="Download/Measure 3 PC 1.0.zip”"
                                                 target="_blank">
 
                                                 <img src="Images/pc.png"
@@ -258,11 +266,17 @@
 
                                                 <div>
                                                     <div class="dl_text">
-                                                        Download for PC
+                                                        <asp:Localize ID="locMeasure3ForPC"
+                                                            runat="server"
+                                                            Text="Download for PC"
+                                                            meta:resourcekey="locMeasureForPC" />
                                                     </div>
 
                                                     <div class="dl_detail">
-                                                        v1.0 (64-bit)
+                                                        <asp:Localize ID="locMeasure3ForPCDetail"
+                                                            runat="server"
+                                                            Text="v1.0 (64-bit)"
+                                                            meta:resourcekey="locMeasure3ForPCDetail" />
                                                     </div>
                                                 </div>
 
@@ -271,14 +285,21 @@
                                             <!-- PDF -->
                                             <%-- change path before commit--%>
                                             <a class="download_list_linkbutton"
-                                                href="Download/ColorPath SYNC Measure Guide.pdf"
+                                                href="Download/ColorPath SYNC Measure 3 Guide.pdf”"
                                                 target="_blank">
 
                                                 <img src="Images/pdficon.png"
                                                     alt="PDF" />
 
                                                 <div class="dl_detail">
-                                                    Measure 3 Reference Guide (PDF)
+                                                    <asp:Localize ID="Measure3TitleReferencePdf"
+                                                        runat="server"
+                                                        Text="Measure 3"
+                                                        meta:resourcekey="locMeasure3TitleResource1" />
+                                                    <asp:Localize ID="LocMeasure3ReferenceGuidePdf"
+                                                        runat="server"
+                                                        Text="Reference Guide (PDF)"
+                                                        meta:resourcekey="LocMeasureReferenceGuidePdf" />
                                                 </div>
 
                                             </a>
@@ -303,13 +324,19 @@
                                             <div>
 
                                                 <div class="download_list_head">
-                                                    Measure (Legacy)
+                                                    <asp:Localize ID="locMeasureLegacyTitle"
+                                                        runat="server"
+                                                        Text="Measure (Legacy)"
+                                                        meta:resourcekey="locMeasureLegacyTitleResource" />
                                                 </div>
 
                                                 <div class="download_list_detail">
-                                                    For i1Pro2, i1iO2 and i1iSis2<br />
-                                                    For i1Pro3 and i1iO3<br />
-                                                    Legacy Support
+                                                    <asp:Localize
+                                                        ID="locMeasureLegacyDetail"
+                                                        runat="server"
+                                                        Mode="PassThrough"
+                                                        meta:resourcekey="locMeasureLegacyDetail"
+                                                        Text="For i1Pro2, i1iO2 and i1iSis2 <br /> For i1Pro3 and i1iO3 <br /> Legacy Support" />
                                                 </div>
 
                                             </div>
@@ -329,13 +356,17 @@
                                                 <div>
 
                                                     <div class="dl_text">
-                                                        Download for Mac
+                                                        <asp:Localize ID="locMeasureLegacyForMac"
+                                                            runat="server"
+                                                            Text="Download for Mac"
+                                                            meta:resourcekey="locMeasureForMac" />
                                                     </div>
 
                                                     <div class="dl_detail">
-                                                        <asp:Literal ID="litMacVersion"
+                                                         <asp:Localize ID="locMeasureLegacyForMacDetail"
                                                             runat="server"
-                                                            Text="v1.0.61 (Intel Chips)" />
+                                                            Text="v1.0.61 (Intel Chips)"
+                                                            meta:resourcekey="locMeasureLegacyForMacDetail" />
                                                     </div>
 
                                                 </div>
@@ -353,13 +384,17 @@
                                                 <div>
 
                                                     <div class="dl_text">
-                                                        Download for PC
+                                                        <asp:Localize ID="locMeasureLegacyForPC"
+                                                            runat="server"
+                                                            Text="Download for PC"
+                                                            meta:resourcekey="locMeasureForPC" />
                                                     </div>
 
                                                     <div class="dl_detail">
-                                                        <asp:Literal ID="litPCVersion"
+                                                        <asp:Localize ID="locMeasureLegacyForPCDetail"
                                                             runat="server"
-                                                            Text="v1.0.60 (64-bit)" />
+                                                            Text="v1.0.60 (64-bit)"
+                                                            meta:resourcekey="locMeasureLegacyForPCDetail" />
                                                     </div>
 
                                                 </div>
@@ -375,7 +410,14 @@
                                                     alt="PDF" />
 
                                                 <div class="dl_detail">
-                                                    Measure (Legacy) Reference Guide (PDF)
+                                                    <asp:Localize ID="locMeasureLegacyReferencePdf"
+                                                        runat="server"
+                                                        Text="Measure (Legacy)"
+                                                        meta:resourcekey="locMeasureLegacyTitleResource" />
+                                                    <asp:Localize ID="LocMeasureLegacyReferenceGuidePdf"
+                                                        runat="server"
+                                                        Text="Reference Guide (PDF)"
+                                                        meta:resourcekey="LocMeasureReferenceGuidePdf" />
                                                 </div>
 
                                             </a>
