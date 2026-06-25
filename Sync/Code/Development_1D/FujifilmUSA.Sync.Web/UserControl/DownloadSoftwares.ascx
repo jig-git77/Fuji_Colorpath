@@ -96,13 +96,15 @@
     .download_list_row_left {
         display: flex;
         align-items: center;
-        width: 45%;
+        width: 43%;
         border-right: solid 1px #999;
         margin-right: 10px;
+        margin-left: 5%;
     }
 
     .download_list_row_right {
         width: 55%;
+        margin-right:6%;
     }
 
     .download_list_linkbutton {
@@ -159,6 +161,9 @@
     .download_list_icon {
         width: 64px;
         margin-right: 16px;
+    }
+    .rgMasterTable{
+        margin-top:4%;
     }
 </style>
 
