@@ -7,20 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.UserControl {
-    
-    
-    public partial class DownloadSoftwares {
-        
+namespace FujifilmUSA.Sync.Web.UserControl
+{
+
+
+    public partial class DownloadSoftwares
+    {
+
         /// <summary>
-        /// locDownload control.
+        /// locDownloadResource2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locDownload;
-        
+        protected global::System.Web.UI.WebControls.Localize locDownloadResource2;
+
         /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// fujiStatusbar control.
         /// </summary>
@@ -38,14 +40,149 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.AdminStatusbar fujiStatusbar;
-        
+
         /// <summary>
-        /// rgDownload control.
+        /// locMeasure3Title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rgDownload;
+        protected global::System.Web.UI.WebControls.Localize locMeasure3Title;
+
+        /// <summary>
+        /// locMeasure3Detail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasure3Detail;
+
+        /// <summary>
+        /// locMeasure3ForMac control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasure3ForMac;
+
+        /// <summary>
+        /// locMeasure3ForMacDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasure3ForMacDetail;
+
+        /// <summary>
+        /// locMeasure3ForPC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasure3ForPC;
+
+        /// <summary>
+        /// locMeasure3ForPCDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasure3ForPCDetail;
+
+        /// <summary>
+        /// Measure3TitleReferencePdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Measure3TitleReferencePdf;
+
+        /// <summary>
+        /// LocMeasure3ReferenceGuidePdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize LocMeasure3ReferenceGuidePdf;
+
+        /// <summary>
+        /// locMeasureLegacyTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasureLegacyTitle;
+
+        /// <summary>
+        /// locMeasureLegacyDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasureLegacyDetail;
+
+        /// <summary>
+        /// locMeasureLegacyForMac control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasureLegacyForMac;
+
+        /// <summary>
+        /// locMeasureLegacyForMacDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasureLegacyForMacDetail;
+
+        /// <summary>
+        /// locMeasureLegacyForPC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasureLegacyForPC;
+
+        /// <summary>
+        /// locMeasureLegacyForPCDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasureLegacyForPCDetail;
+
+        /// <summary>
+        /// locMeasureLegacyReferencePdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasureLegacyReferencePdf;
+
+        /// <summary>
+        /// LocMeasureLegacyReferenceGuidePdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize LocMeasureLegacyReferenceGuidePdf;
     }
 }

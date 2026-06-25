@@ -141,4 +141,40 @@
   <data name="MToolRefGuide" xml:space="preserve">
     <value>Measure App Reference Guide_ja</value>
   </data>
+	<data name="locDownloadResource2.Text" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+	<data name="locMeasure3TitleResource1.Text" xml:space="preserve">
+    <value>第3小節</value>
+  </data>
+  <data name="locMeasure3Detail.Text" xml:space="preserve">
+    <value>i1Pro3 および i1iO3 対応&lt;br /&gt;2026年5月リリース</value>
+  </data>
+ <data name="locMeasureLegacyTitleResource.Text" xml:space="preserve">
+    <value>メジャー (レガシー)</value>
+  </data>
+  <data name="locMeasureLegacyDetail.Text" xml:space="preserve">
+    <value>i1Pro2、i1iO2、および i1iSis2 用&lt;br /&gt;i1Pro3 および i1iO3 用&lt;br /&gt;レガシーサポート</value>
+  </data>
+  <data name="locMeasureForMac.Text" xml:space="preserve">
+    <value>Mac用をダウンロード</value>
+  </data>
+	<data name="locMeasureForPC.Text" xml:space="preserve">
+    <value>PC版をダウンロード</value>
+  </data>
+	<data name="locMeasure3ForPCDetail.Text" xml:space="preserve">
+    <value>v1.0 (64ビット)</value>
+  </data>
+	<data name="locMeasure3ForMacDetail.Text" xml:space="preserve">
+    <value>v1.0 (Appleシリコン)</value>
+  </data>
+	<data name="LocMeasureReferenceGuidePdf.Text" xml:space="preserve">
+    <value>リファレンスガイド (PDF)</value>
+  </data>
+	<data name="locMeasureLegacyForMacDetail.Text" xml:space="preserve">
+    <value>v1.0.61 (Intelチップ)</value>
+  </data>
+	<data name="locMeasureLegacyForPCDetail.Text" xml:space="preserve">
+    <value>v1.0.60 (64ビット)</value>
+  </data>
 </root>

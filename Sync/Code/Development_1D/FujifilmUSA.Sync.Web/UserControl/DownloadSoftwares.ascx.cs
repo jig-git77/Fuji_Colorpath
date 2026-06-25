@@ -33,12 +33,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            rgDownload.PageSize = Common.Utilities.PageSize;
+            //rgDownload.PageSize = Common.Utilities.PageSize;
         }
 
         protected void rgDownload_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            rgDownload.DataSource = DTable();
+            //rgDownload.DataSource = DTable();
         }
 
         #region Methods       

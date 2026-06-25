@@ -141,4 +141,41 @@
   <data name="MToolRefGuide" xml:space="preserve">
     <value>Measure App Reference Guide_de</value>
   </data>
+	<data name="locDownloadResource2.Text" xml:space="preserve">
+    <value>Downloads_de</value>
+  </data>
+    <data name="locMeasure3TitleResource1.Text" xml:space="preserve">
+    <value>Measure 3_de</value>
+  </data>
+  <data name="locMeasure3Detail.Text" xml:space="preserve">
+    <value>For i1Pro3 and i1iO3 
+	    Released May 2026 _de</value>
+  </data>
+  <data name="locMeasureLegacyTitleResource.Text" xml:space="preserve">
+    <value>Measure (Legacy) _de</value>
+  </data>
+  <data name="locMeasureLegacyDetail.Text" xml:space="preserve">
+    <value>For i1Pro2, i1iO2 and i1iSis2&lt;br /&gt;For i1Pro3 and i1iO3&lt;br /&gt;Legacy Support _de</value>
+  </data>
+	<data name="locMeasureForMac.Text" xml:space="preserve">
+    <value>Download for Mac _de</value>
+  </data>
+	<data name="locMeasureForPC.Text" xml:space="preserve">
+    <value>Download for PC _de</value>
+  </data>
+	<data name="locMeasure3ForPCDetail.Text" xml:space="preserve">
+    <value>v1.0 (64-bit) _de</value>
+  </data>
+	<data name="locMeasure3ForMacDetail.Text" xml:space="preserve">
+    <value>v1.0 (Apple Silicon) _de</value>
+  </data>
+	<data name="LocMeasureReferenceGuidePdf.Text" xml:space="preserve">
+    <value>Reference Guide (PDF) _de</value>
+  </data>
+	<data name="locMeasureLegacyForMacDetail.Text" xml:space="preserve">
+    <value>v1.0.61 (Intel Chips) _de</value>
+  </data>
+	<data name="locMeasureLegacyForPCDetail.Text" xml:space="preserve">
+    <value>v1.0.60 (64-bit) _de</value>
+  </data>
 </root>
