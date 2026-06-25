@@ -1211,7 +1211,11 @@
     <Content Include="Images\LabBackdrop.jpg" />
     <Content Include="Images\large-loader.gif" />
     <Content Include="Images\Logo-report.png" />
+    <Content Include="Images\mac.png" />
+    <Content Include="Images\measure3.png" />
     <Content Include="Images\open_folder_yellow.png" />
+    <Content Include="Images\pc.png" />
+    <Content Include="Images\pdficon.png" />
     <Content Include="Images\purpledot.png" />
     <Content Include="Images\Red.png" />
     <Content Include="Images\refresh-button.png" />
