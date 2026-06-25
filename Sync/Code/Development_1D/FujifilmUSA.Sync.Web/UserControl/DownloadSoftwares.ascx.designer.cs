@@ -33,15 +33,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// rgDownload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rgDownload;
-
-        /// <summary>
         /// fujiStatusbar control.
         /// </summary>
         /// <remarks>
