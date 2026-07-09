@@ -686,7 +686,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnRPSPostBack1D_click(object sender, EventArgs e)
         {
-            bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
+            //bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
             //if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
             //{
             //    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
@@ -777,14 +777,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnRPSPostBack4D_click(object sender, EventArgs e)
         {
-            bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
-            if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
+            //bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
+            //if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
+            //{
+            //    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
+            //            SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
+            //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
+            //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
+            //            || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
+            //    {
+            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
             {
-                if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
-                        SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
-                        SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
-                        SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
-                        || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
+                if (SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
                 {
                     ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
                     ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
@@ -803,6 +807,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterAnalyze.UpdateTargetLabList();
                 }
             }
+            //    }
+            //}
         }
 
         #endregion
