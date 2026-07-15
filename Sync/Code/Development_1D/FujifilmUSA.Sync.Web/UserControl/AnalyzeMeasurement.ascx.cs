@@ -351,10 +351,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // update current highlighted measurement if not created DLP,  CSS - 36.
                 if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                 {
-                    if(SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
+                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
                     {
-                        if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
+                        if (SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
                         {
+                            OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
                             _presenterAnalyze.GetMeasurementIDs_RPS();
                             MeasurementId = MeasurementIds.Any() ? MeasurementIds.Max() : 0;
                             _presenterAnalyze.GetActualValuesByMeasurementId();
@@ -569,6 +570,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             double NewPaper_White_a = 0.0;
             double NewPaper_White_b = 0.0;
 
+            OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
             _presenterAnalyze.GetMeasurementIDs_RPS();
 
             foreach (var measurementId in MeasurementIds.OrderBy(x => x == HighlightedMeasurementId ? 1 : 0))
@@ -651,7 +653,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //2. in loop get actual values by measurement id, except the highlighted one
             //3. calculate matrix and delta values update in db
             //4. the last highlighted id proccess at last and update new paper value in it.
-
+            OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
             _presenterAnalyze.GetMeasurementIDs_RPS();
 
             foreach (var measurementId in MeasurementIds.OrderBy(x => x == HighlightedMeasurementId ? 1 : 0))
@@ -777,15 +779,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnRPSPostBack4D_click(object sender, EventArgs e)
         {
-            //bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
-            //if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
-            //{
-            //    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
-            //            SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
-            //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
-            //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
-            //            || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
-            //    {
             if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
             {
                 if (SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
@@ -807,8 +800,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterAnalyze.UpdateTargetLabList();
                 }
             }
-            //    }
-            //}
         }
 
         #endregion

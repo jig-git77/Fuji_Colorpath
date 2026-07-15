@@ -450,9 +450,15 @@
                             <asp:Localize runat="server" Text="Optimize" ID="locOptimize" meta:resourcekey="locOptimizeResource1"></asp:Localize>
                         </span>
                     </asp:LinkButton>
+                    <asp:Button ID="btnRPSPostBack4D" runat="server" style="display:none;" Text="RPS PostBack 4D" ClientIDMode="Static" OnClick="btnRPSPostBack4D_click"/>
+                    <asp:Button ID="btnRPSPostBack1D" runat="server" style="display:none;" Text="RPS PostBack" ClientIDMode="Static" OnClick="btnRPSPostBack1D_click"/>
                 </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+             <asp:AsyncPostBackTrigger ControlID="btnRPSPostBack4D" EventName="Click" />
+             <asp:AsyncPostBackTrigger ControlID="btnRPSPostBack1D" EventName="Click" />
+        </Triggers>
     </asp:UpdatePanel>
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -484,7 +490,7 @@
                         </asp:RadioButtonList>
                     </div>
                     <div style="margin-left: auto; white-space: nowrap; position: relative; display: inline-block;">
-                        <asp:Button ID="btnRPSPostBack4D" runat="server" style="display:none;" Text="RPS PostBack 4D" ClientIDMode="Static" OnClick="btnRPSPostBack4D_click"/>
+                        <%--<asp:Button ID="btnRPSPostBack4D" runat="server" style="display:none;" Text="RPS PostBack 4D" ClientIDMode="Static" OnClick="btnRPSPostBack4D_click"/>--%>
                         <asp:CheckBox ID="chk_IsPaperScaling4D"
                             runat="server"
                             CssClass="checkbox"
@@ -551,7 +557,7 @@
 
                         <!-- 3rd td -->
                         <td id="tdPaperScaling" runat="server" align="right" visible="false" style="text-align: right; width: 100%; position: relative;">
-                            <asp:Button ID="btnRPSPostBack1D" runat="server" style="display:none;" Text="RPS PostBack" ClientIDMode="Static" OnClick="btnRPSPostBack1D_click"/>
+                            <%--<asp:Button ID="btnRPSPostBack1D" runat="server" style="display:none;" Text="RPS PostBack" ClientIDMode="Static" OnClick="btnRPSPostBack1D_click"/>--%>
                             <asp:CheckBox ID="chk_IsPaperScaling1D" runat="server"
                                 EnableViewState="true"
                                 CssClass="checkbox"
