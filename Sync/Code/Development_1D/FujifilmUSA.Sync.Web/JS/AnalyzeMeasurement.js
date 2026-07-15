@@ -3167,184 +3167,245 @@ function PopulateAnalyzeChart() {
 
         axisLabelClick: function (e) {
             if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
-                var isChecked = $(e.element).text() != '☑' ? true : false;
-                //get the current clicked category data
-                var currentObj = e.value;
+                UpdateNewPaperValues1D(e.value, function () {
+                    var isChecked = $(e.element).text() != '☑' ? true : false;
+                    //get the current clicked category data
+                    var currentObj = e.value;
+                    //check only one category available or not
+                    if (measurementNamesList.length <= 1 && currentObj.IsUsed) {
+                        alert(_Resources.selectMeasurementMsg);
+                        return false;
+                    }
 
-                var selectedMeasurement = currentObj;
-
-                if (isChecked) {
-                    selectedMeasurement = currentObj;
-                }
-                else {
-                    var otherMeasurements = $.grep(measurementNamesList, function (m) {
-                        return m.MeasurementId != currentObj.MeasurementId && m.IsUsed;
+                    //check in multiple category
+                    var otherMeasurements = $.grep(measurementNamesList, function (elem) {
+                        return elem.MeasurementId != currentObj.MeasurementId && (elem.IsUsed || !currentObj.IsUsed)
                     });
 
-                    if (otherMeasurements.length > 0) {
+                    //check atleast one category should checked
+                    if (otherMeasurements.length == 0) {
+                        alert(_Resources.selectMeasurementMsg);
+                        return false;
+                    }
+                    //api call to update the measurement
+                    var apiParameters = {
+                        MeasurementId: currentObj.MeasurementId,
+                        isMeasurementUsed: !currentObj.IsUsed,
+                        IsVerificationProject: $hdnVerification,
+                        IsSync1DTypeProject: $hdnSync1DType,
+                    };
 
-                        selectedMeasurement = otherMeasurements.reduce(function (max, item) {
-                            return item.MeasurementId > max.MeasurementId ? item : max;
+                    var ajaxParameter = {
+                        type: "GET",
+                        url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
+                        data: apiParameters,
+                        dataType: "json",
+                        headers: {
+                            'Authorization': 'Basic ' + AUTH_TOKEN
+                        }
+                    };
+
+                    commonAjaxCall(ajaxParameter, function (response) {
+                        $hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                        $hdMeasurement.val(currentObj.MeasurementId);
+
+
+                        //update the average measurement value 
+                        $.ajax({
+                            url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
+                            data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function (response) {
+                                $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
+                                $("[id*='lblCompError']").html('');
+
+                            },
+                            error: function (xhr, errorType, exception) {
+                            }
                         });
-                    }
-                }
 
-                //check only one category available or not
-                if (measurementNamesList.length <= 1 && currentObj.IsUsed) {
-                    alert(_Resources.selectMeasurementMsg);
-                    return false;
-                }
-
-                //check in multiple category
-                var otherMeasurements = $.grep(measurementNamesList, function (elem) {
-                    return elem.MeasurementId != currentObj.MeasurementId && (elem.IsUsed || !currentObj.IsUsed)
-                });
-
-                //check atleast one category should checked
-                if (otherMeasurements.length == 0) {
-                    alert(_Resources.selectMeasurementMsg);
-                    return false;
-                }
-                //api call to update the measurement
-                var apiParameters = {
-                    MeasurementId: currentObj.MeasurementId,
-                    isMeasurementUsed: !currentObj.IsUsed,
-                    IsVerificationProject: $hdnVerification,
-                    IsSync1DTypeProject: $hdnSync1DType,
-                };
-
-                var ajaxParameter = {
-                    type: "GET",
-                    url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
-                    data: apiParameters,
-                    dataType: "json",
-                    headers: {
-                        'Authorization': 'Basic ' + AUTH_TOKEN
-                    }
-                };
-
-                commonAjaxCall(ajaxParameter, function (response) {
-                    $hdnCurrentMeasurement.val(selectedMeasurement.MeasurementId);
-                    $hdMeasurement.val(selectedMeasurement.MeasurementId);
-
-
-                    //update the average measurement value 
-                    $.ajax({
-                        url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
-                        data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (response) {
-                            $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
-                            $("[id*='lblCompError']").html('');
-
-                        },
-                        error: function (xhr, errorType, exception) {
+                        BindAnalyzeChart();
+                    }, function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.status == 401) {
+                            ShowDialog("You are not authorized user. Please login again.", "Message");
+                        } else {
+                            alert(errorThrown);
                         }
                     });
-
-                    BindAnalyzeChart();
-                }, function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.status == 401) {
-                        ShowDialog("You are not authorized user. Please login again.", "Message");
-                    } else {
-                        alert(errorThrown);
-                    }
                 });
-                if (isChecked) {
-                    UpdateNewPaperValues1D(currentObj);
-                } else {
-                    UpdateNewPaperValues1D(selectedMeasurement);
-                }
             }
         },
         seriesClick: function (e) {
             if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                    var dMethod = e.category.dEMethod;
-                    dMethod = dMethod.substring(1, dMethod.length);
-                    $('#hdnDefaultSelectedDelta').val(dMethod);
-                    $selectedDeltaE = dMethod;
-
-                    $hdnCurrentMeasurement.val(e.category.MeasurementId);
-                    $hdMeasurement.val($hdnCurrentMeasurement.val());
-                    BindAllTabs();
-
-                    var analyzeChart = $divAnalyzeChart.data('kendoChart');
-                    analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
-                    analyzeChart.refresh();
-                }
-                else {
-                    $hdnCurrentMeasurement.val(e.category.MeasurementId);
-                    $hdMeasurement.val($hdnCurrentMeasurement.val());
-                    BindAllTabs();
-
-                    $divAnalyzeChart.data('kendoChart').refresh();
-                    $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
-                }
+                UpdateNewPaperValues1D(e.category, function () {
+                    // This runs ONLY after DB update (postback) has completed
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                        var dMethod = e.category.dEMethod;
+                        dMethod = dMethod.substring(1, dMethod.length);
+                        $('#hdnDefaultSelectedDelta').val(dMethod);
+                        $selectedDeltaE = dMethod;
+                        $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                        $hdMeasurement.val($hdnCurrentMeasurement.val());
+                        BindAllTabs();
+                        var analyzeChart = $divAnalyzeChart.data('kendoChart');
+                        analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
+                        analyzeChart.refresh();
+                    }
+                    else {
+                        $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                        $hdMeasurement.val($hdnCurrentMeasurement.val());
+                        BindAllTabs();
+                        $divAnalyzeChart.data('kendoChart').refresh();
+                        $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
+                    }
+                });
             }
-            UpdateNewPaperValues1D(e.category);
         }
     });
     BindAllTabs();
 }
 
-function UpdateNewPaperValues1D(currentObj) {
-    // 1. if RPS is on then get latest cielab data and set to hidden.
-    if ($("#chk_IsPaperScaling1D").is(':checked') || $("[id*='chk_IsPaperScaling4D']").is(':checked')) {
-        var measurementID = currentObj.MeasurementId;
-        var apiParameters = {
-            MeasurementId: measurementID,
-            IsAverageOfMeasurements: $isAverageOfMeasurements,
-            IsVerificationProject: $hdnVerification,
-            IsSync1DTypeProject: $hdnSync1DType,
-            licenseTypeId: $hdnCurrentDlpSubOperation,
-            fromDeltaE: $selectedDeltaE,
-        };
+function UpdateNewPaperValues1D(currentObj, callback) {
+    var needsPaperScaling = $("#chk_IsPaperScaling1D").is(':checked') ||
+        $("[id*='chk_IsPaperScaling4D']").is(':checked');
 
-        var ajaxParameter = {
-            type: "GET",
-            url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
-            data: apiParameters,
-            dataType: "json",
-            headers: {
-                'Accept-Language': $CurrentCulture,
-                'Authorization': 'Basic ' + AUTH_TOKEN
-            }
-        };
-
-        kendo.ui.progress($chartLoader, true);
-        commonAjaxCall(ajaxParameter, function (response) {
-            if (response.data != null) {
-                jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
-                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
-                    $tblDensityChart.css('display', 'none');
-                }
-                jsonDensityList = response.data.DensityList;
-                jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
-                _Resources = response.data.GlobalResources;
-            }
-
-            if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
-                var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
-                    return item.PatchTypeId === 8;
-                });
-                if (patchType8) {
-                    // Set values to hidden fields
-                    $('#hdnCielabL').val(patchType8.CielabL);
-                    $('#hdnCielabA').val(patchType8.CielabA);
-                    $('#hdnCielabB').val(patchType8.CielabB);
-                }
-            }
-            // 2. trigger 1D chk checkbox and update in db.
-            if ($("#chk_IsPaperScaling1D").is(':checked')) {
-                $("#btnRPSPostBack1D").click();
-            } else if ($("[id*='chk_IsPaperScaling4D']").is(':checked')) {
-                $("#btnRPSPostBack4D").click();
-            }
-        })
+    if (!needsPaperScaling) {
+        // Nothing to update in DB, proceed immediately
+        if (typeof callback === 'function') callback();
+        return;
     }
+
+    var measurementID = currentObj.MeasurementId;
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType,
+        licenseTypeId: $hdnCurrentDlpSubOperation,
+        fromDeltaE: $selectedDeltaE,
+    };
+    var ajaxParameter = {
+        type: "GET",
+        url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
+        data: apiParameters,
+        dataType: "json",
+        headers: {
+            'Accept-Language': $CurrentCulture,
+            'Authorization': 'Basic ' + AUTH_TOKEN
+        }
+    };
+
+    kendo.ui.progress($chartLoader, true);
+
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response.data != null) {
+            jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+            if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
+                $tblDensityChart.css('display', 'none');
+            }
+            jsonDensityList = response.data.DensityList;
+            jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
+            _Resources = response.data.GlobalResources;
+        }
+
+        if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
+            var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
+                return item.PatchTypeId === 8;
+            });
+            if (patchType8) {
+                $('#hdnCielabL').val(patchType8.CielabL);
+                $('#hdnCielabA').val(patchType8.CielabA);
+                $('#hdnCielabB').val(patchType8.CielabB);
+            }
+        }
+
+        // --- Hook into the async postback completion before triggering it ---
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+        var endRequestHandler = function (sender, args) {
+            prm.remove_endRequest(endRequestHandler); // cleanup, avoid stacking handlers
+
+            if (args.get_error()) {
+                // Handle postback failure - don't proceed with UI updates
+                args.set_errorHandled(true);
+                kendo.ui.progress($chartLoader, false);
+                console.error('RPS postback failed: ' + args.get_error().message);
+                return;
+            }
+
+            kendo.ui.progress($chartLoader, false);
+
+            // DB update is now confirmed complete - safe to proceed
+            if (typeof callback === 'function') callback();
+        };
+
+        prm.add_endRequest(endRequestHandler);
+
+        if ($("#chk_IsPaperScaling1D").is(':checked')) {
+            $("#btnRPSPostBack1D").click();
+        } else if ($("[id*='chk_IsPaperScaling4D']").is(':checked')) {
+            $("#btnRPSPostBack4D").click();
+        }
+    });
 }
+
+//function UpdateNewPaperValues1D(currentObj) {
+//    // 1. if RPS is on then get latest cielab data and set to hidden.
+//    if ($("#chk_IsPaperScaling1D").is(':checked') || $("[id*='chk_IsPaperScaling4D']").is(':checked')) {
+//        var measurementID = currentObj.MeasurementId;
+//        var apiParameters = {
+//            MeasurementId: measurementID,
+//            IsAverageOfMeasurements: $isAverageOfMeasurements,
+//            IsVerificationProject: $hdnVerification,
+//            IsSync1DTypeProject: $hdnSync1DType,
+//            licenseTypeId: $hdnCurrentDlpSubOperation,
+//            fromDeltaE: $selectedDeltaE,
+//        };
+
+//        var ajaxParameter = {
+//            type: "GET",
+//            url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
+//            data: apiParameters,
+//            dataType: "json",
+//            headers: {
+//                'Accept-Language': $CurrentCulture,
+//                'Authorization': 'Basic ' + AUTH_TOKEN
+//            }
+//        };
+
+//        kendo.ui.progress($chartLoader, true);
+//        commonAjaxCall(ajaxParameter, function (response) {
+//            if (response.data != null) {
+//                jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+//                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
+//                    $tblDensityChart.css('display', 'none');
+//                }
+//                jsonDensityList = response.data.DensityList;
+//                jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
+//                _Resources = response.data.GlobalResources;
+//            }
+
+//            if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
+//                var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
+//                    return item.PatchTypeId === 8;
+//                });
+//                if (patchType8) {
+//                    // Set values to hidden fields
+//                    $('#hdnCielabL').val(patchType8.CielabL);
+//                    $('#hdnCielabA').val(patchType8.CielabA);
+//                    $('#hdnCielabB').val(patchType8.CielabB);
+//                }
+//            }
+//            // 2. trigger 1D chk checkbox and update in db.
+//            if ($("#chk_IsPaperScaling1D").is(':checked')) {
+//                $("#btnRPSPostBack1D").click();
+//            } else if ($("[id*='chk_IsPaperScaling4D']").is(':checked')) {
+//                $("#btnRPSPostBack4D").click();
+//            }
+//        })
+//    }
+//}
 
 
 function PopulateAnalyzeDestinationChart() {
