@@ -237,7 +237,7 @@
 
                                             <!-- Mac Download -->
                                             <a class="download_list_linkbutton"
-                                                href="Download/Measure 3 Mac 1.0.dmg”"
+                                                href="Download/Measure 3 Mac 1.0.dmg"
                                                 target="_blank">
 
                                                 <img src="Images/mac.png"
@@ -263,7 +263,7 @@
 
                                             <!-- PC Download -->
                                             <a class="download_list_linkbutton"
-                                                href="Download/Measure 3 PC 1.0.zip”"
+                                                href="Download/Measure 3 PC 1.0.zip"
                                                 target="_blank">
 
                                                 <img src="Images/pc.png"
@@ -290,7 +290,7 @@
                                             <!-- PDF -->
                                             <%-- change path before commit--%>
                                             <a class="download_list_linkbutton"
-                                                href="Download/ColorPath SYNC Measure 3 Guide.pdf”"
+                                                href="Download/ColorPath SYNC Measure 3 Guide.pdf"
                                                 target="_blank">
 
                                                 <img src="Images/pdficon.png"
