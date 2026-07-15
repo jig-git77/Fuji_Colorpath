@@ -3166,10 +3166,31 @@ function PopulateAnalyzeChart() {
 
         axisLabelClick: function (e) {
             if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
-                UpdateNewPaperValues1D(e.value, function () {
-                    var isChecked = $(e.element).text() != '☑' ? true : false;
-                    //get the current clicked category data
-                    var currentObj = e.value;
+                var isChecked = $(e.element).text() != '☑' ? true : false;
+                //get the current clicked category data
+                var currentObj = e.value;
+                var selectedMeasurement = currentObj;
+
+                if (isChecked) {
+                    selectedMeasurement = currentObj;
+                }
+                else {
+                    var otherMeasurements = $.grep(measurementNamesList, function (m) {
+                        return m.MeasurementId != currentObj.MeasurementId && m.IsUsed;
+                    });
+
+                    if (otherMeasurements.length > 0) {
+
+                        selectedMeasurement = otherMeasurements.reduce(function (max, item) {
+                            return item.MeasurementId > max.MeasurementId ? item : max;
+                        });
+                    }
+                }
+
+                // Pass currentObj when checking, selectedMeasurement when unchecking
+                var measurementForNewPaper = isChecked ? currentObj : selectedMeasurement;
+
+                UpdateNewPaperValues1D(measurementForNewPaper, function () {
                     //check only one category available or not
                     if (measurementNamesList.length <= 1 && currentObj.IsUsed) {
                         alert(_Resources.selectMeasurementMsg);
@@ -3205,8 +3226,8 @@ function PopulateAnalyzeChart() {
                     };
 
                     commonAjaxCall(ajaxParameter, function (response) {
-                        $hdnCurrentMeasurement.val(currentObj.MeasurementId);
-                        $hdMeasurement.val(currentObj.MeasurementId);
+                        $hdnCurrentMeasurement.val(selectedMeasurement.MeasurementId);
+                        $hdMeasurement.val(selectedMeasurement.MeasurementId);
 
 
                         //update the average measurement value 
