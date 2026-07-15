@@ -348,20 +348,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 bool isSpotLibraryProject_ = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
 
                 // update current highlighted measurement if not created DLP.
-                //if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
-                //{
-                //    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
-                //            SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
-                //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
-                //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
-                //            || (isSpotLibraryProject_ && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
-                //    {
-                if(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
+                if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                 {
-                    if(SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
+                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
                     {
-                        if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
+                        if (SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
                         {
+                            OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
                             _presenterAnalyze.GetMeasurementIDs_RPS();
                             MeasurementId = MeasurementIds.Any() ? MeasurementIds.Max() : 0;
                             _presenterAnalyze.GetActualValuesByMeasurementId();
@@ -388,10 +381,84 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 CalculateTargetLAB(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b, true, false);
                             }
                         }
+                        else
+                        {
+                            // 1. take current optimize run id's before one.
+                            // 2. based on previous optimize run id get measurement ids and get it's cielab values and take avg.
+                            // 3. by avg values calculate target LAB / update new paper based on condition 4d or 1d.
+                            // Current optimize run
+                            var currentRun = SessionManager.Instance.CurrentOptimizeRun;
+
+                            // Get previous optimize run
+                            var previousRun = SessionManager.Instance.CurrentProject.OptimizeRuns
+                                                .Where(x => x.OptimizeRunId < currentRun.OptimizeRunId)
+                                                .OrderByDescending(x => x.OptimizeRunId)
+                                                .FirstOrDefault();
+
+                            if (previousRun != null)
+                            {
+                                OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
+                                // Get all measurement ids for previous run
+                                _presenterAnalyze.GetMeasurementIDs_RPS();
+
+                                if (MeasurementIds != null && MeasurementIds.Any())
+                                {
+                                    decimal avgL = 0;
+                                    decimal avgA = 0;
+                                    decimal avgB = 0;
+                                    int count = 0;
+
+                                    foreach (int measurementId in MeasurementIds)
+                                    {
+                                        MeasurementId = measurementId;
+
+                                        _presenterAnalyze.GetActualValuesByMeasurementId();
+
+                                        if (measurementPatchDetails != null)
+                                        {
+                                            avgL += Convert.ToDecimal(measurementPatchDetails.CielabL);
+                                            avgA += Convert.ToDecimal(measurementPatchDetails.CielabA);
+                                            avgB += Convert.ToDecimal(measurementPatchDetails.CielabB);
+                                            count++;
+                                        }
+                                    }
+
+                                    if (count > 0)
+                                    {
+                                        avgL /= count;
+                                        avgA /= count;
+                                        avgB /= count;
+
+                                        if (licenseType == ELicenseType.DLP
+                                            || licenseType == ELicenseType.Sync4DCertification
+                                            || licenseType == ELicenseType.DLPMultiColor)
+                                        {
+                                            Project.NewPaper_White_L = avgL;
+                                            Project.NewPaper_White_a = avgA;
+                                            Project.NewPaper_White_b = avgB;
+
+                                            EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                                            IsUpdateNewPaper = true;
+                                            IsUpdateDelta = true;
+
+                                            _presenterAnalyze.UpdateTargetLabList();
+                                        }
+                                        else if (licenseType == ELicenseType.Sync1D
+                                              || licenseType == ELicenseType.Sync1DMultiColor
+                                              || licenseType == ELicenseType.DLPPlus)
+                                        {
+                                            _presenterAnalyze.GetTargetLABList();
+
+                                            EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+
+                                            CalculateTargetLAB(Convert.ToDouble(avgL),Convert.ToDouble(avgA),Convert.ToDouble(avgB),true,true);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-                //    }
-                //}
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
@@ -497,6 +564,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             double NewPaper_White_a = 0.0;
             double NewPaper_White_b = 0.0;
 
+            OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
             _presenterAnalyze.GetMeasurementIDs_RPS();
 
             foreach (var measurementId in MeasurementIds.OrderBy(x => x == HighlightedMeasurementId ? 1 : 0))
@@ -579,7 +647,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //2. in loop get actual values by measurement id, except the highlighted one
             //3. calculate matrix and delta values update in db
             //4. the last highlighted id proccess at last and update new paper value in it.
-
+            OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
             _presenterAnalyze.GetMeasurementIDs_RPS();
 
             foreach (var measurementId in MeasurementIds.OrderBy(x => x == HighlightedMeasurementId ? 1 : 0))
@@ -705,15 +773,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnRPSPostBack4D_click(object sender, EventArgs e)
         {
-            //bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
-            //if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
-            //{
-            //    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
-            //            SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
-            //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
-            //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
-            //            || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
-            //    {
             if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
             {
                 if (SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
@@ -735,8 +794,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterAnalyze.UpdateTargetLabList();
                 }
             }
-            //    }
-            //}
         }
         protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)
         {
