@@ -3697,6 +3697,7 @@ function PopulateAnalyzeDestinationChart() {
 }
 ////**************** POPULATE THE INK PAPER AB COMPARISION (GMAUT) CHART  ****************////
 
+
 function BuildPatchTooltip(item) {
 
     var toolTipString = "";
@@ -3707,7 +3708,7 @@ function BuildPatchTooltip(item) {
         var color = item.color.toUpperCase();
 
         // Light colors need dark text
-        if (color == "#FFEC00" ||      // Yellow
+        if (color == "#FFEC00" || color == "#FFF000" ||     // Yellow
             color == "#D4CBC5") {      // Paper
             textColor = "#000000";
         }
@@ -3740,7 +3741,19 @@ function BuildPatchTooltip(item) {
 
     toolTipString += "<tr><td><b>" + _Resources._recDeltaE + "</b></td><td>";
     toolTipString += item.value.toFixed(2);
+
+    //-----For Sync1D projects or validation projects
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+        toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
+    }
     toolTipString += "</td></tr>";
+
+    //-----For Sync1D projects, display Previous ΔE in tooltip also
+    if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.PreAvgΔE > 0) {
+        toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
+        toolTipString += item.PreAvgΔE.toFixed(2);
+        toolTipString += "</td></tr>";
+    }
 
     toolTipString += "</table></td></tr>";
     toolTipString += "</table>";
@@ -3931,43 +3944,8 @@ function PopulateInkPaperChartABComparision() {
         },
         tooltip: {
             visible: true,
-            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
             template: function (dataItem) {
                 return BuildPatchTooltip(dataItem.dataItem);
-                //var item = dataItem.dataItem;
-                //var toolTipString = "<table>";
-                //toolTipString += "<tr><td><b>" + item.title + "</b></td></tr>";
-                //toolTipString += "<tr><td><table>";
-                //toolTipString += "<tr><td><b>" + _Resources._recActual + "</b></td><td>";
-                //toolTipString += _Resources._recL + ": " + item.CielabL.toFixed(2);
-                //toolTipString += " " + _Resources._recA + ": " + item.CielabA.toFixed(2);
-                //toolTipString += " " + _Resources._recB + ": " + item.CielabB.toFixed(2);
-                //toolTipString += "</td></tr>";
-                //toolTipString += "<tr><td><b>" + _Resources._recTarget + "</b></td><td>";
-                //toolTipString += _Resources._recL + ": " + item.TargetL.toFixed(2);
-                //toolTipString += " " + _Resources._recA + ": " + item.Targeta.toFixed(2);
-                //toolTipString += " " + _Resources._recB + ": " + item.Targetb.toFixed(2);
-                //toolTipString += "</td></tr>";
-                //toolTipString += "<tr><td><b>" + _Resources._recDeltaE + "</b></td><td>";
-                //toolTipString += item.value.toFixed(2);
-
-                ////-----For Sync1D projects or validation projects
-                //if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
-                //    toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
-                //}
-
-                ////-----For Sync1D projects, display Previous ΔE in tooltip also
-                //if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.PreAvgΔE > 0) {
-                //    toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
-                //    toolTipString += item.PreAvgΔE.toFixed(2);
-                //    toolTipString += "</td></tr>";
-                //}
-
-                //toolTipString += "</table></td></tr>";
-                //toolTipString += "</table>";
-                ////var toolTipString = "<b>#= item.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= item.CielabL # " + _Resources._recA + ": #= item.CielabA # " + _Resources._recB + ": #= item.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= item.TargetL # " + _Resources._recA + ": #= item.Targeta # " + _Resources._recB + ": #= item.Targetb # <br/>" + _Resources._recDeltaE + ":  #= item.value #";
-                //return toolTipString;
             }
         },
         chartArea: {
