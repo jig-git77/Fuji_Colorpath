@@ -3041,7 +3041,7 @@ function PopulateAnalyzeChart() {
         },
         series: patchArray,
         valueAxis: {
-            
+
             title: {
                 text: 'Δ' + $selectedDeltaE,
                 font: "12px Arial,Helvetica,sans-serif",
@@ -3262,7 +3262,7 @@ function PopulateAnalyzeDestinationChart() {
 
     indexEnd = jsonAnalyzeList.Measurements.length;
     indexStart = 0;
-   
+
 
     $('#lblPagingMsg').html('Record(s) ' + (indexStart + 1) + ' to ' + (indexEnd) + ' of ' + jsonAnalyzeList.Measurements.length + '');
 
@@ -3360,7 +3360,7 @@ function PopulateAnalyzeDestinationChart() {
                         }
                     }
                 },
-           
+
             }
         },
         series: patchArray,
@@ -3373,7 +3373,7 @@ function PopulateAnalyzeDestinationChart() {
             },
             axisCrossingValue: 0,
             majorUnit: -1,
-          
+
         },
         categoryAxis: {
             name: "categoryAxis",
@@ -3396,7 +3396,7 @@ function PopulateAnalyzeDestinationChart() {
                     var arr = catValue.MeasurementName.toString();
 
                     //set checked or not
-                    var catText = '<div style="text-align:center;"><div>' + arr +'<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
+                    var catText = '<div style="text-align:center;"><div>' + arr + '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
 
                     var html = $(catText).appendTo(document.body);
                     // Store a reference to the target rectangle, see below
@@ -3519,6 +3519,73 @@ function PopulateAnalyzeDestinationChart() {
     BindAllTabs();
 }
 ////**************** POPULATE THE INK PAPER AB COMPARISION (GMAUT) CHART  ****************////
+
+
+function BuildPatchTooltip(item) {
+
+    var toolTipString = "";
+    var textColor = "#FFFFFF";
+
+    if (item.color) {
+
+        var color = item.color.toUpperCase();
+
+        // Light colors need dark text
+        if (color == "#FFEC00" || color == "#FFF000" ||     // Yellow
+            color == "#D4CBC5") {      // Paper
+            textColor = "#000000";
+        }
+    }
+    toolTipString += "<div style='";
+    toolTipString += "background-color:" + item.color + ";";
+    toolTipString += "color:" + textColor + ";";
+    toolTipString += "margin:-8px;";
+    toolTipString += "padding:8px;";
+    toolTipString += "border:none;";
+    toolTipString += "border-radius:5px;";
+    toolTipString += "'>";
+
+    toolTipString += "<table>";
+    toolTipString += "<tr><td><b>" + item.title + "</b></td></tr>";
+
+    toolTipString += "<tr><td><table>";
+
+    toolTipString += "<tr><td><b>" + _Resources._recActual + "</b></td><td>";
+    toolTipString += _Resources._recL + ": " + item.CielabL.toFixed(2);
+    toolTipString += " " + _Resources._recA + ": " + item.CielabA.toFixed(2);
+    toolTipString += " " + _Resources._recB + ": " + item.CielabB.toFixed(2);
+    toolTipString += "</td></tr>";
+
+    toolTipString += "<tr><td><b>" + _Resources._recTarget + "</b></td><td>";
+    toolTipString += _Resources._recL + ": " + item.TargetL.toFixed(2);
+    toolTipString += " " + _Resources._recA + ": " + item.Targeta.toFixed(2);
+    toolTipString += " " + _Resources._recB + ": " + item.Targetb.toFixed(2);
+    toolTipString += "</td></tr>";
+
+    toolTipString += "<tr><td><b>" + _Resources._recDeltaE + "</b></td><td>";
+    toolTipString += item.value.toFixed(2);
+
+    //-----For Sync1D projects or validation projects
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+        toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
+    }
+    toolTipString += "</td></tr>";
+
+    //-----For Sync1D projects, display Previous ΔE in tooltip also
+    if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.PreAvgΔE > 0) {
+        toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
+        toolTipString += item.PreAvgΔE.toFixed(2);
+        toolTipString += "</td></tr>";
+    }
+
+    toolTipString += "</table></td></tr>";
+    toolTipString += "</table>";
+
+    toolTipString += "</div>";
+
+    return toolTipString;
+}
+
 function PopulateInkPaperChartABComparision() {
 
     var maxNum = 0;
@@ -3576,7 +3643,8 @@ function PopulateInkPaperChartABComparision() {
     var stackedChart = [];
     $.each(axis, function (index, num) {
         var stack = {
-            value: maxDeltaLimit - num
+            value: maxDeltaLimit - num,
+            patchData: formattedDeltaEPrimaryPatchList[index]
         };
         stackedChart.push(stack);
     });
@@ -3653,8 +3721,18 @@ function PopulateInkPaperChartABComparision() {
             overlay: {
                 gradient: "glass",
             },
+            //tooltip: {
+            //    visible: false
+            //},
             tooltip: {
-                visible: false
+                visible: true,
+                template: function (e) {
+
+                    var item = e.dataItem.patchData;
+                    if (!item)
+                        return "";
+                    return BuildPatchTooltip(item);
+                }
             },
             color: "#C8D6E3"
         }],
@@ -3686,42 +3764,8 @@ function PopulateInkPaperChartABComparision() {
         },
         tooltip: {
             visible: true,
-            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
             template: function (dataItem) {
-                var item = dataItem.dataItem;
-                var toolTipString = "<table>";
-                toolTipString += "<tr><td><b>" + item.title + "</b></td></tr>";
-                toolTipString += "<tr><td><table>";
-                toolTipString += "<tr><td><b>" + _Resources._recActual + "</b></td><td>";
-                toolTipString += _Resources._recL + ": " + item.CielabL.toFixed(2);
-                toolTipString += " " + _Resources._recA + ": " + item.CielabA.toFixed(2);
-                toolTipString += " " + _Resources._recB + ": " + item.CielabB.toFixed(2);
-                toolTipString += "</td></tr>";
-                toolTipString += "<tr><td><b>" + _Resources._recTarget + "</b></td><td>";
-                toolTipString += _Resources._recL + ": " + item.TargetL.toFixed(2);
-                toolTipString += " " + _Resources._recA + ": " + item.Targeta.toFixed(2);
-                toolTipString += " " + _Resources._recB + ": " + item.Targetb.toFixed(2);
-                toolTipString += "</td></tr>";
-                toolTipString += "<tr><td><b>" + _Resources._recDeltaE + "</b></td><td>";
-                toolTipString += item.value.toFixed(2);
-
-                //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
-                    toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
-                }
-
-                //-----For Sync1D projects, display Previous ΔE in tooltip also
-                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Sync1DMultiColor || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) && item.PreAvgΔE > 0) {
-                    toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
-                    toolTipString += item.PreAvgΔE.toFixed(2);
-                    toolTipString += "</td></tr>";
-                }
-
-                toolTipString += "</table></td></tr>";
-                toolTipString += "</table>";
-                //var toolTipString = "<b>#= item.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= item.CielabL # " + _Resources._recA + ": #= item.CielabA # " + _Resources._recB + ": #= item.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= item.TargetL # " + _Resources._recA + ": #= item.Targeta # " + _Resources._recB + ": #= item.Targetb # <br/>" + _Resources._recDeltaE + ":  #= item.value #";
-                return toolTipString;
+                return BuildPatchTooltip(dataItem.dataItem);
             }
         },
         chartArea: {
@@ -4166,7 +4210,7 @@ function PopulateChartTargetVersusActualAB() {
 
         kendoSeriseObj.tooltip = {
             visible: true, template: function (d) {
-             
+
                 var seriesData = d.series.data;
                 var lastItem = seriesData[seriesData.length - 1];
 
@@ -4936,7 +4980,7 @@ function PopulateChartLComparision() {
 ////**************** START BIND THE GRAY BALANCE L*  (GMAUT) CHART  ****************////
 function PopulateChartLGrayBalance() {
 
-     // if project is destination profile then display actual lab value in tooltip .
+    // if project is destination profile then display actual lab value in tooltip .
     var tooltipString = '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr>';
     tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr>';
 
