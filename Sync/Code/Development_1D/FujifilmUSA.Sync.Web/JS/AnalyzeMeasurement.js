@@ -3317,7 +3317,7 @@ function UpdateNewPaperValues1D(currentObj, callback) {
         }
     };
 
-    kendo.ui.progress($chartLoader, true);
+    //kendo.ui.progress($chartLoader, true);
 
     commonAjaxCall(ajaxParameter, function (response) {
         if (response.data != null) {
@@ -3365,12 +3365,12 @@ function UpdateNewPaperValues1D(currentObj, callback) {
 
             if (args.get_error()) {
                 args.set_errorHandled(true);
-                kendo.ui.progress($chartLoader, false);
+               // kendo.ui.progress($chartLoader, false);
                 console.error('RPS postback failed: ' + args.get_error().message);
                 return;
             }
 
-            kendo.ui.progress($chartLoader, false);
+            //kendo.ui.progress($chartLoader, false);
             if (typeof callback === 'function') callback();
         };
 
