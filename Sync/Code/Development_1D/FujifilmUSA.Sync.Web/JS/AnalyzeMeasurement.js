@@ -3313,17 +3313,18 @@ function UpdateNewPaperValues1D(currentObj) {
             }
         };
 
-        kendo.ui.progress($chartLoader, true);
-        commonAjaxCall(ajaxParameter, function (response) {
-            if (response.data != null) {
-                jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
-                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
-                    $tblDensityChart.css('display', 'none');
-                }
-                jsonDensityList = response.data.DensityList;
-                jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
-                _Resources = response.data.GlobalResources;
+    //kendo.ui.progress($chartLoader, true);
+
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response.data != null) {
+            jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+            if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
+                $tblDensityChart.css('display', 'none');
             }
+            jsonDensityList = response.data.DensityList;
+            jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
+            _Resources = response.data.GlobalResources;
+        }
 
         if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
             var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
@@ -3360,12 +3361,12 @@ function UpdateNewPaperValues1D(currentObj) {
 
             if (args.get_error()) {
                 args.set_errorHandled(true);
-                kendo.ui.progress($chartLoader, false);
+               // kendo.ui.progress($chartLoader, false);
                 console.error('RPS postback failed: ' + args.get_error().message);
                 return;
             }
 
-            kendo.ui.progress($chartLoader, false);
+            //kendo.ui.progress($chartLoader, false);
             if (typeof callback === 'function') callback();
         };
 
