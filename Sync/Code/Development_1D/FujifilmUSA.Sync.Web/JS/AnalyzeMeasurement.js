@@ -3342,14 +3342,29 @@ function UpdateNewPaperValues1D(currentObj, callback) {
             }
         }
 
+        var expectedButtonId = $("#chk_IsPaperScaling1D").is(':checked')
+            ? 'btnRPSPostBack1D'
+            : 'btnRPSPostBack4D';
+
         // --- Hook into the async postback completion before triggering it ---
         var prm = Sys.WebForms.PageRequestManager.getInstance();
 
         var endRequestHandler = function (sender, args) {
-            prm.remove_endRequest(endRequestHandler); // cleanup, avoid stacking handlers
+            // Identify which control actually triggered this async postback
+            var sourceId = (sender._postBackSettings &&
+                sender._postBackSettings.sourceElement)
+                ? sender._postBackSettings.sourceElement.id
+                : null;
+
+            // Not our button's postback -> ignore completely, keep listening
+            if (sourceId !== expectedButtonId) {
+                return;
+            }
+
+            // It IS our postback -> now safe to unsubscribe and proceed
+            prm.remove_endRequest(endRequestHandler);
 
             if (args.get_error()) {
-                // Handle postback failure - don't proceed with UI updates
                 args.set_errorHandled(true);
                 kendo.ui.progress($chartLoader, false);
                 console.error('RPS postback failed: ' + args.get_error().message);
@@ -3357,8 +3372,6 @@ function UpdateNewPaperValues1D(currentObj, callback) {
             }
 
             kendo.ui.progress($chartLoader, false);
-
-            // DB update is now confirmed complete - safe to proceed
             if (typeof callback === 'function') callback();
         };
 
