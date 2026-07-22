@@ -3325,25 +3325,62 @@ function UpdateNewPaperValues1D(currentObj) {
                 _Resources = response.data.GlobalResources;
             }
 
-            if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
-                var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
-                    return item.PatchTypeId === 8;
-                });
-                if (patchType8) {
-                    // Set values to hidden fields
-                    $('#hdnCielabL').val(patchType8.CielabL);
-                    $('#hdnCielabA').val(patchType8.CielabA);
-                    $('#hdnCielabB').val(patchType8.CielabB);
-                }
+        if (jsonDeltaEPrimaryPatchList && jsonDeltaEPrimaryPatchList.length > 0) {
+            var patchType8 = jsonDeltaEPrimaryPatchList.find(function (item) {
+                return item.PatchTypeId === 8;
+            });
+            if (patchType8) {
+                $('#hdnCielabL').val(patchType8.CielabL);
+                $('#hdnCielabA').val(patchType8.CielabA);
+                $('#hdnCielabB').val(patchType8.CielabB);
             }
-            // 2. trigger 1D chk checkbox and update in db.
-            if ($("#chk_IsPaperScaling1D").is(':checked')) {
-                $("#btnRPSPostBack1D").click();
-            } else if ($("[id*='chk_IsPaperScaling4D']").is(':checked')) {
-                $("#btnRPSPostBack4D").click();
+        }
+
+        var expectedButtonId = $("#chk_IsPaperScaling1D").is(':checked')
+            ? 'btnRPSPostBack1D'
+            : 'btnRPSPostBack4D';
+
+        // --- Hook into the async postback completion before triggering it ---
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+        var endRequestHandler = function (sender, args) {
+            // Identify which control actually triggered this async postback
+            var sourceId = (sender._postBackSettings &&
+                sender._postBackSettings.sourceElement)
+                ? sender._postBackSettings.sourceElement.id
+                : null;
+
+            // Not our button's postback -> ignore completely, keep listening
+            if (sourceId !== expectedButtonId) {
+                return;
             }
-        })
-    }
+
+            // It IS our postback -> now safe to unsubscribe and proceed
+            prm.remove_endRequest(endRequestHandler);
+
+            if (args.get_error()) {
+                args.set_errorHandled(true);
+                kendo.ui.progress($chartLoader, false);
+                console.error('RPS postback failed: ' + args.get_error().message);
+                return;
+            }
+
+            kendo.ui.progress($chartLoader, false);
+            if (typeof callback === 'function') callback();
+        };
+
+        prm.add_endRequest(endRequestHandler);
+
+        if ($("#chk_IsPaperScaling1D").is(':checked')) {
+            $("#btnRPSPostBack1D").click();
+        } else if ($("[id*='chk_IsPaperScaling4D']").is(':checked')) {
+            $("#btnRPSPostBack4D").click();
+        }
+    });
+        }
+    });
+        }
+    });
 }
 
 
