@@ -367,6 +367,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 Project.NewPaper_White_b = Convert.ToDecimal(measurementPatchDetails.CielabB);
                                 EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                                 IsUpdateNewPaper = true;
+                                IsUpdateDelta = true;
                                 _presenterAnalyze.UpdateTargetLabList();
                             }
                             else if (licenseType == ELicenseType.Sync1D ||
@@ -378,7 +379,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 double NewPaper_White_a = Convert.ToDouble(measurementPatchDetails.CielabA);
                                 double NewPaper_White_b = Convert.ToDouble(measurementPatchDetails.CielabB);
                                 EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
-                                CalculateTargetLAB(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b, true, false);
+                                CalculateTargetLAB(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b, true, true);
                             }
                         }
                         else
@@ -428,6 +429,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                         avgL /= count;
                                         avgA /= count;
                                         avgB /= count;
+
+                                        avgL = Math.Round(avgL, 2, MidpointRounding.AwayFromZero);
+                                        avgA = Math.Round(avgA, 2, MidpointRounding.AwayFromZero);
+                                        avgB = Math.Round(avgB, 2, MidpointRounding.AwayFromZero);
 
                                         if (licenseType == ELicenseType.DLP
                                             || licenseType == ELicenseType.Sync4DCertification
