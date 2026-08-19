@@ -16,5 +16,16 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string DeviceSerialNo { get; set; }
         short InstrumentTypeID { get; set; }
         List<MeasurementLog> MeasurementLogs { get; set; }
+        Project Project { get; set; }
+        List<int> MeasurementIds { get; set; }
+        int MeasurementId { get; set; }
+        bool EnabledPaperScaling { get; set; }
+        bool IsUpdateNewPaper { get; set; }
+        MeasurementPatchDetails measurementPatchDetails { get; set; }
+        bool IsUpdateDelta { get; set; }
+        int LicenseTypeId { get; set; }
+        List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        int ProjectTypeId { get; set; }
+        int PrintstandardTypeId { get; set; }
     }
 }
