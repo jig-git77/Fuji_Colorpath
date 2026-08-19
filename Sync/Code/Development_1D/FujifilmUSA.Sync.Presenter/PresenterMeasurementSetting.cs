@@ -163,5 +163,38 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewMeasurement.ErrorOccured;
             return projectBusiness.CheckMeasurementPluginStatus(_viewMeasurement.ProjectId, _viewMeasurement.OptimizeRunId, _viewMeasurement.DeviceSerialNo);
         }
+
+        public void GetMeasurementIDs_RPS()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewMeasurement.ErrorOccured;
+            _viewMeasurement.MeasurementIds = optimizeRunBusiness.GetMeasurementIDs_RPS(_viewMeasurement.ProjectId, _viewMeasurement.Project.DeviceId, _viewMeasurement.LicenseTypeId, _viewMeasurement.OptimizeRunId);
+        }
+
+        public void GetActualValuesByMeasurementId()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewMeasurement.ErrorOccured;
+            _viewMeasurement.measurementPatchDetails = optimizeRunBusiness.GetActualValuesByMeasurementId(_viewMeasurement.MeasurementId, _viewMeasurement.LicenseTypeId);
+        }
+
+        public void UpdateTargetLabList()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewMeasurement.ErrorOccured;
+            optimizeRunBusiness.UpdateTargetLabList(_viewMeasurement.ProjectId, _viewMeasurement.ProjectTargetLABList, _viewMeasurement.EnabledPaperScaling, _viewMeasurement.MeasurementId, _viewMeasurement.LicenseTypeId, _viewMeasurement.Project.NewPaper_White_L,
+                 _viewMeasurement.Project.NewPaper_White_a, _viewMeasurement.Project.NewPaper_White_b, _viewMeasurement.IsUpdateNewPaper, _viewMeasurement.IsUpdateDelta);
+        }
+
+        public void GetTargetLABList()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewMeasurement.ErrorOccured;
+            var projectData = optimizeRunBusiness.GetProjectTargetLAB(_viewMeasurement.PrintstandardTypeId, _viewMeasurement.ProjectTypeId, _viewMeasurement.ProjectId, _viewMeasurement.LicenseTypeId);
+            _viewMeasurement.Project.NewPaper_White_L_Old = projectData.NewPaper_White_L_Old;
+            _viewMeasurement.Project.NewPaper_White_a_Old = projectData.NewPaper_White_a_Old;
+            _viewMeasurement.Project.NewPaper_White_b_Old = projectData.NewPaper_White_b_Old;
+            _viewMeasurement.ProjectTargetLABList = projectData.ProjectTargetLAB;
+        }
     }
 }

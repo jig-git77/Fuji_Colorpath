@@ -374,6 +374,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 Project.NewPaper_White_b = Convert.ToDecimal(measurementPatchDetails.CielabB);
                                 EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                                 IsUpdateNewPaper = true;
+                                IsUpdateDelta = true;
                                 _presenterAnalyze.UpdateTargetLabList();
                             }
                             else if (licenseType == ELicenseType.Sync1D ||
@@ -385,13 +386,91 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 double NewPaper_White_a = Convert.ToDouble(measurementPatchDetails.CielabA);
                                 double NewPaper_White_b = Convert.ToDouble(measurementPatchDetails.CielabB);
                                 EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
-                                CalculateTargetLAB(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b, true, false);
+                                CalculateTargetLAB(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b, true, true);
+                            }
+                        }
+                        else
+                        {
+                            // 1. take current optimize run id's before one.
+                            // 2. based on previous optimize run id get measurement ids and get it's cielab values and take avg.
+                            // 3. by avg values calculate target LAB / update new paper based on condition 4d or 1d.
+                            // Current optimize run
+                            var currentRun = SessionManager.Instance.CurrentOptimizeRun;
+
+                            // Get previous optimize run
+                            var previousRun = SessionManager.Instance.CurrentProject.OptimizeRuns
+                                                .Where(x => x.OptimizeRunId < currentRun.OptimizeRunId)
+                                                .OrderByDescending(x => x.OptimizeRunId)
+                                                .FirstOrDefault();
+
+                            if (previousRun != null)
+                            {
+                                OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
+                                // Get all measurement ids for previous run
+                                _presenterAnalyze.GetMeasurementIDs_RPS();
+
+                                if (MeasurementIds != null && MeasurementIds.Any())
+                                {
+                                    decimal avgL = 0;
+                                    decimal avgA = 0;
+                                    decimal avgB = 0;
+                                    int count = 0;
+
+                                    foreach (int measurementId in MeasurementIds)
+                                    {
+                                        MeasurementId = measurementId;
+
+                                        _presenterAnalyze.GetActualValuesByMeasurementId();
+
+                                        if (measurementPatchDetails != null)
+                                        {
+                                            avgL += Convert.ToDecimal(measurementPatchDetails.CielabL);
+                                            avgA += Convert.ToDecimal(measurementPatchDetails.CielabA);
+                                            avgB += Convert.ToDecimal(measurementPatchDetails.CielabB);
+                                            count++;
+                                        }
+                                    }
+
+                                    if (count > 0)
+                                    {
+                                        avgL /= count;
+                                        avgA /= count;
+                                        avgB /= count;
+
+                                        avgL = Math.Round(avgL, 2, MidpointRounding.AwayFromZero);
+                                        avgA = Math.Round(avgA, 2, MidpointRounding.AwayFromZero);
+                                        avgB = Math.Round(avgB, 2, MidpointRounding.AwayFromZero);
+
+                                        if (licenseType == ELicenseType.DLP
+                                            || licenseType == ELicenseType.Sync4DCertification
+                                            || licenseType == ELicenseType.DLPMultiColor)
+                                        {
+                                            Project.NewPaper_White_L = avgL;
+                                            Project.NewPaper_White_a = avgA;
+                                            Project.NewPaper_White_b = avgB;
+
+                                            EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                                            IsUpdateNewPaper = true;
+                                            IsUpdateDelta = true;
+
+                                            _presenterAnalyze.UpdateTargetLabList();
+                                        }
+                                        else if (licenseType == ELicenseType.Sync1D
+                                              || licenseType == ELicenseType.Sync1DMultiColor
+                                              || licenseType == ELicenseType.DLPPlus)
+                                        {
+                                            _presenterAnalyze.GetTargetLABList();
+
+                                            EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+
+                                            CalculateTargetLAB(Convert.ToDouble(avgL),Convert.ToDouble(avgA),Convert.ToDouble(avgB),true,true);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                //    }
-                //}
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {

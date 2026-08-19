@@ -1,4 +1,5 @@
 ﻿using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSync1D;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
@@ -79,6 +80,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string DeviceSerialNo { get; set; }
         public short InstrumentTypeID { get; set; }
         public List<Entity.MeasurementLog> MeasurementLogs { get; set; }
+        public Project Project { get; set; }
+        public List<int> MeasurementIds { get; set; }
+        public int MeasurementId { get; set; }
+        public bool EnabledPaperScaling { get; set; }
+        public bool IsUpdateNewPaper { get; set; }
+        public MeasurementPatchDetails measurementPatchDetails { get; set; }
+        public bool IsUpdateDelta { get; set; }
+        public int LicenseTypeId { get; set; }
+        public List<ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public int ProjectTypeId { get; set; }
+        public int PrintstandardTypeId { get; set; }
         #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSync1D;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
@@ -109,6 +110,105 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
                 hdSpotProjectType.Value = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary).ToString().ToLower();
+
+                Project = SessionManager.Instance.CurrentProject;
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
+                LicenseTypeId = (int)SessionManager.Instance.CurrentProject.LicenseType;
+
+                if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
+                {
+                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
+                    {
+                        if (SessionManager.Instance.CurrentOptimizeRun.MasterRunId != -1)
+                        {
+                            // 1. take current optimize run id's before one.
+                            // 2. based on previous optimize run id get measurement ids and get it's cielab values and take avg.
+                            // 3. by avg values calculate target LAB / update new paper based on condition 4d or 1d.
+                            // Current optimize run
+                            var currentRun = SessionManager.Instance.CurrentOptimizeRun;
+
+                            // Get previous optimize run
+                            var previousRun = SessionManager.Instance.CurrentProject.OptimizeRuns
+                                                .Where(x => x.OptimizeRunId < currentRun.OptimizeRunId)
+                                                .OrderByDescending(x => x.OptimizeRunId)
+                                                .FirstOrDefault();
+
+                            if (previousRun != null)
+                            {
+                                OptimizeRunId = Project.OptimizeRuns.Select(x => x.OptimizeRunId).First();
+                                // Get all measurement ids for previous run
+                                _presenterMeasurementSetting.GetMeasurementIDs_RPS();
+
+                                if (MeasurementIds != null && MeasurementIds.Any())
+                                {
+                                    decimal avgL = 0;
+                                    decimal avgA = 0;
+                                    decimal avgB = 0;
+                                    int count = 0;
+
+                                    foreach (int measurementId in MeasurementIds)
+                                    {
+                                        MeasurementId = measurementId;
+
+                                        _presenterMeasurementSetting.GetActualValuesByMeasurementId();
+
+                                        if (measurementPatchDetails != null)
+                                        {
+                                            avgL += Convert.ToDecimal(measurementPatchDetails.CielabL);
+                                            avgA += Convert.ToDecimal(measurementPatchDetails.CielabA);
+                                            avgB += Convert.ToDecimal(measurementPatchDetails.CielabB);
+                                            count++;
+                                        }
+                                    }
+
+                                    if (count > 0)
+                                    {
+                                        avgL /= count;
+                                        avgA /= count;
+                                        avgB /= count;
+
+                                        avgL = Math.Round(avgL, 2, MidpointRounding.AwayFromZero);
+                                        avgA = Math.Round(avgA, 2, MidpointRounding.AwayFromZero);
+                                        avgB = Math.Round(avgB, 2, MidpointRounding.AwayFromZero);
+
+                                        if (LicenseType == ELicenseType.DLP
+                                            || LicenseType == ELicenseType.Sync4DCertification
+                                            || LicenseType == ELicenseType.DLPMultiColor)
+                                        {
+                                            Project.NewPaper_White_a = avgA ;
+                                            Project.NewPaper_White_b = avgB ;
+                                            Project.NewPaper_White_L = avgL ;
+
+                                            EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                                            IsUpdateNewPaper = true;
+                                            IsUpdateDelta = false;
+
+                                            _presenterMeasurementSetting.UpdateTargetLabList();
+                                        }
+                                        else if (LicenseType == ELicenseType.Sync1D
+                                              || LicenseType == ELicenseType.Sync1DMultiColor
+                                              || LicenseType == ELicenseType.DLPPlus)
+                                        {
+                                            if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld != 0)
+                                                PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeIDOld;
+                                            else
+                                                PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+
+                                            ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
+                                            _presenterMeasurementSetting.GetTargetLABList();
+
+                                            EnabledPaperScaling = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+
+                                            CalculateTargetLAB(Convert.ToDouble(avgL), Convert.ToDouble(avgA), Convert.ToDouble(avgB), true,false);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
             //SetVerificationControlVisibility();
 
@@ -219,6 +319,55 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void CalculateTargetLAB(double NewPaper_White_L, double NewPaper_White_a, double NewPaper_White_b, bool IsUpdateNewPaper_, bool IsUpdateDelta_)
+        {
+            if (ProjectTargetLABList != null && ProjectTargetLABList.Count > 0)
+            {
+                CIELab Finallab = new CIELab(0, 0, 0);
+                CIEXYZ CurrentPaperxyz = new CIEXYZ(0, 0, 0);
+                CIEXYZ NewPaperxyz = new CIEXYZ(0, 0, 0);
+                CIEXYZ NewMinxyz = new CIEXYZ(0, 0, 0);
+
+                //Create list for Paper Patch
+                List<Entity.CPSync1D.ProjectTargetLAB> PaperProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
+                PaperProjectTargetList = ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList();
+
+                //Create list for new lab values
+                List<Entity.CPSync1D.ProjectTargetLAB> NewProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
+
+                double Black_L = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString());
+                double Black_a = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString());
+                double Black_b = Convert.ToDouble(SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
+
+                //convert new Paper's LAB to XYZ
+                NewPaperxyz = ColorMath.LabtoXYZ(NewPaper_White_L, NewPaper_White_a, NewPaper_White_b);
+                NewMinxyz = ColorMath.LabtoXYZ(Black_L, Black_a, Black_b);
+
+                //convert current Paper's LAB to XYZ
+                CurrentPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(PaperProjectTargetList[0].TargetL), Convert.ToDouble(PaperProjectTargetList[0].TargetA), Convert.ToDouble(PaperProjectTargetList[0].TargetB));
+
+                for (int i = 0; i < ProjectTargetLABList.Count; i++)
+                {
+                    Finallab = ColorMath.CalcPaperScaleLAB(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, NewMinxyz.X, NewMinxyz.Y, NewMinxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
+                    NewProjectTargetList.Add(new Entity.CPSync1D.ProjectTargetLAB() { PatchType = ProjectTargetLABList[i].PatchType, TargetL = (decimal)Finallab.L, TargetA = (decimal)Finallab.A, TargetB = (decimal)Finallab.B });
+                }
+                int index = NewProjectTargetList.FindIndex(x => x.PatchType.PatchTypeId == 8);
+
+                if (index != -1)
+                {
+                    NewProjectTargetList[index].TargetL = Convert.ToDecimal(NewPaper_White_L);
+                    NewProjectTargetList[index].TargetA = Convert.ToDecimal(NewPaper_White_a);
+                    NewProjectTargetList[index].TargetB = Convert.ToDecimal(NewPaper_White_b);
+                }
+                ProjectTargetLABList = NewProjectTargetList;
+                Project.NewPaper_White_L = Convert.ToDecimal(NewPaper_White_L);
+                Project.NewPaper_White_a = Convert.ToDecimal(NewPaper_White_a);
+                Project.NewPaper_White_b = Convert.ToDecimal(NewPaper_White_b);
+                IsUpdateNewPaper = IsUpdateNewPaper_;
+                IsUpdateDelta = IsUpdateDelta_;
+                _presenterMeasurementSetting.UpdateTargetLabList();
+            }
+        }
 
         //private void FillValidationDetailsFromXMF()
         //{
@@ -278,7 +427,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string DeviceSerialNo { get; set; }
         public short InstrumentTypeID { get; set; }
         public List<Entity.MeasurementLog> MeasurementLogs { get; set; }
-
+        public Project Project { get; set; }
+        public List<int> MeasurementIds { get; set; }
+        public int MeasurementId { get; set; }
+        public bool EnabledPaperScaling { get; set; }
+        public bool IsUpdateNewPaper { get; set; }
+        public MeasurementPatchDetails measurementPatchDetails { get; set; }
+        public bool IsUpdateDelta { get; set; }
+        public int LicenseTypeId { get; set; }
+        public List<ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public int ProjectTypeId { get; set; }
+        public int PrintstandardTypeId { get; set; }
         #endregion
 
 
