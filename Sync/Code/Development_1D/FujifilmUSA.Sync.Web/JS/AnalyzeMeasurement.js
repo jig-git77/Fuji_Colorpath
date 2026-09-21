@@ -830,7 +830,6 @@ function BindMeasurementSummary() {
             success: function (response) {
                 if (response.data != null) {
                     if (response.data.length > 0) {
-
                         var measurements = response.data;
                         var measurement = measurements[0];
 
@@ -3289,29 +3288,36 @@ function PopulateAnalyzeChart() {
     BindAllTabs();
 }
 
-function UpdateNewPaperValues1D(currentObj) {
-    // 1. if RPS is on then get latest cielab data and set to hidden.
-    if ($("#chk_IsPaperScaling1D").is(':checked') || $("[id*='chk_IsPaperScaling4D']").is(':checked')) {
-        var measurementID = currentObj.MeasurementId;
-        var apiParameters = {
-            MeasurementId: measurementID,
-            IsAverageOfMeasurements: $isAverageOfMeasurements,
-            IsVerificationProject: $hdnVerification,
-            IsSync1DTypeProject: $hdnSync1DType,
-            licenseTypeId: $hdnCurrentDlpSubOperation,
-            fromDeltaE: $selectedDeltaE,
-        };
+//CSS - 36
+function UpdateNewPaperValues1D(currentObj, callback) {
+    var needsPaperScaling = $("#chk_IsPaperScaling1D").is(':checked') ||
+        $("[id*='chk_IsPaperScaling4D']").is(':checked');
 
-        var ajaxParameter = {
-            type: "GET",
-            url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
-            data: apiParameters,
-            dataType: "json",
-            headers: {
-                'Accept-Language': $CurrentCulture,
-                'Authorization': 'Basic ' + AUTH_TOKEN
-            }
-        };
+    if (!needsPaperScaling) {
+        // Nothing to update in DB, proceed immediately
+        if (typeof callback === 'function') callback();
+        return;
+    }
+
+    var measurementID = currentObj.MeasurementId;
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType,
+        licenseTypeId: $hdnCurrentDlpSubOperation,
+        fromDeltaE: $selectedDeltaE,
+    };
+    var ajaxParameter = {
+        type: "GET",
+        url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
+        data: apiParameters,
+        dataType: "json",
+        headers: {
+            'Accept-Language': $CurrentCulture,
+            'Authorization': 'Basic ' + AUTH_TOKEN
+        }
+    };
 
     //kendo.ui.progress($chartLoader, true);
 

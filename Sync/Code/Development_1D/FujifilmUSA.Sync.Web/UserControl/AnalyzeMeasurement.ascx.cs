@@ -295,6 +295,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 var licenseType = SessionManager.Instance.CurrentProject.LicenseType;
 
+                // CSS - 36
                 // Show / Hide checkbox
                 chk_IsPaperScaling4D.Visible =
                      licenseType == ELicenseType.DLP
@@ -347,16 +348,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 bool isSpotLibraryProject_ = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
 
-                // update current highlighted measurement if not created DLP.
-                //if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
-                //{
-                //    if ((SessionManager.Instance.CurrentProject.SourceProfile != null &&
-                //            SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 &&
-                //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
-                //            SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DestinationProfile) //No Target ColorSpace for Custom Source Profile project type
-                //            || (isSpotLibraryProject_ && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
-                //    {
-                if(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
+                // update current highlighted measurement if not created DLP,  CSS - 36.
+                if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                 {
                     if(SessionManager.Instance.CurrentOptimizeRun.MasterRunId == -1)
                     {
@@ -559,7 +552,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-
+        #region CSS - 36
         protected void chk_IsPaperScaling4D_CheckedChanged(object sender, EventArgs e)
         {
             ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
@@ -811,6 +804,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
+
+        #endregion
         protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)
         {
             Response.Redirect("Measurement.aspx");
