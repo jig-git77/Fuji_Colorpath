@@ -295,6 +295,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 var licenseType = SessionManager.Instance.CurrentProject.LicenseType;
 
+                // CSS - 36
                 // Show / Hide checkbox
                 chk_IsPaperScaling4D.Visible =
                      licenseType == ELicenseType.DLP
@@ -347,7 +348,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 bool isSpotLibraryProject_ = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
 
-                // update current highlighted measurement if not created DLP.
+                // update current highlighted measurement if not created DLP,  CSS - 36.
                 if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                 {
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId != 0)
@@ -552,7 +553,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-
+        #region CSS - 36
         protected void chk_IsPaperScaling4D_CheckedChanged(object sender, EventArgs e)
         {
             ProjectTypeId = SessionManager.Instance.CurrentProject.ProjectTypeId;
@@ -800,6 +801,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
+
+        #endregion
         protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)
         {
             Response.Redirect("Measurement.aspx");

@@ -831,7 +831,6 @@ function BindMeasurementSummary() {
             success: function (response) {
                 if (response.data != null) {
                     if (response.data.length > 0) {
-
                         var measurements = response.data;
                         var measurement = measurements[0];
 
@@ -3288,6 +3287,7 @@ function PopulateAnalyzeChart() {
     BindAllTabs();
 }
 
+//CSS - 36
 function UpdateNewPaperValues1D(currentObj, callback) {
     var needsPaperScaling = $("#chk_IsPaperScaling1D").is(':checked') ||
         $("[id*='chk_IsPaperScaling4D']").is(':checked');
