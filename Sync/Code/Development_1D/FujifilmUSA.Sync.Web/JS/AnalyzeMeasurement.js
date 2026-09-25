@@ -816,7 +816,7 @@ function BindMeasurementSummary() {
             fromDeltaE: $selectedDeltaE,
             IsSyncDlpPlusTypeProject: $hdnSyncDlpPlusType
         }
-        
+
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
             data: apiParameter,
@@ -3366,7 +3366,7 @@ function UpdateNewPaperValues1D(currentObj, callback) {
 
             if (args.get_error()) {
                 args.set_errorHandled(true);
-               // kendo.ui.progress($chartLoader, false);
+                // kendo.ui.progress($chartLoader, false);
                 console.error('RPS postback failed: ' + args.get_error().message);
                 return;
             }
@@ -3381,10 +3381,6 @@ function UpdateNewPaperValues1D(currentObj, callback) {
             $("#btnRPSPostBack1D").click();
         } else if ($("[id*='chk_IsPaperScaling4D']").is(':checked')) {
             $("#btnRPSPostBack4D").click();
-        }
-    });
-        }
-    });
         }
     });
 }

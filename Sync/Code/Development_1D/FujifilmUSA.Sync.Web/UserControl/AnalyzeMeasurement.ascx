@@ -466,17 +466,6 @@
         </Triggers>
     </asp:UpdatePanel>
 
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
-            <asp:Button ID="btnRPSPostBack4D" runat="server" Style="display: none;" Text="RPS PostBack 4D" ClientIDMode="Static" OnClick="btnRPSPostBack4D_click" />
-            <asp:Button ID="btnRPSPostBack1D" runat="server" Style="display: none;" Text="RPS PostBack" ClientIDMode="Static" OnClick="btnRPSPostBack1D_click" />
-        </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="btnRPSPostBack4D" EventName="Click" />
-            <asp:AsyncPostBackTrigger ControlID="btnRPSPostBack1D" EventName="Click" />
-        </Triggers>
-    </asp:UpdatePanel>
-
     <div class="listDevice" style="margin-left: 10px;">
         <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     </div>
