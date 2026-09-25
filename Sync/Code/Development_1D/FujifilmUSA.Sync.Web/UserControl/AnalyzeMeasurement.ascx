@@ -508,7 +508,7 @@
                             <asp:Localize
                                 ID="Localize13" runat="server" Text="Modifies the target white point to the measured white point and scales the target profile accordingly" meta:resourcekey="LocPaperScalingTooltipResource"> </asp:Localize>
                         </div>
-                    </div>--%>
+                    </div>
                 </div>
             </td>
         </tr>
